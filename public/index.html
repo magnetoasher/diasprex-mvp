@@ -20,5 +20,25 @@
       <span>Loading ...</span>
     </div>
     <div id="root-modals"></div>
+    
+    <!-- begin::Javascript-->
+    <script>var hostUrl = "%PUBLIC_URL%/";</script>
+    <!--begin::Global Javascript Bundle(used by all pages)-->
+    <script src="%PUBLIC_URL%/plugins/global/plugins.bundle.js"></script>
+    <script src="%PUBLIC_URL%/js/scripts.bundle.js"></script>
+    <!--end::Global Javascript Bundle-->
+    <!--begin::Page Vendors Javascript(used by this page)-->
+    <script src="%PUBLIC_URL%/plugins/custom/fslightbox/fslightbox.bundle.js"></script>
+    <script src="%PUBLIC_URL%/plugins/custom/datatables/datatables.bundle.js"></script>
+    <!--end::Page Vendors Javascript-->
+    <!--begin::Page Custom Javascript(used by this page)-->
+    <script src="%PUBLIC_URL%/js/widgets.bundle.js"></script>
+    <script src="%PUBLIC_URL%/js/custom/widgets.js"></script>
+    <script src="%PUBLIC_URL%/js/custom/apps/chat/chat.js"></script>
+    <script src="%PUBLIC_URL%/js/custom/utilities/modals/upgrade-plan.js"></script>
+    <script src="%PUBLIC_URL%/js/custom/utilities/modals/create-app.js"></script>
+    <script src="%PUBLIC_URL%/js/custom/utilities/modals/users-search.js"></script>
+    <!--end::Page Custom Javascript-->
+    <!--end::Javascript -->
   </body>
 </html>

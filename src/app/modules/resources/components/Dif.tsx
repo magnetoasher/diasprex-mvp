@@ -280,25 +280,25 @@ const Dif: FC = () => {
           <div className="card mb-4 bg-light text-center">	
               <div className="card-body py-12">
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/facebook-4.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/facebook-4.svg" className="h-30px my-2" alt="" />
                 </a>	
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/instagram-2-1.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/instagram-2-1.svg" className="h-30px my-2" alt="" />
                 </a>
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/github.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/github.svg" className="h-30px my-2" alt="" />
                 </a>
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/behance.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/behance.svg" className="h-30px my-2" alt="" />
                 </a>
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/pinterest-p.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/pinterest-p.svg" className="h-30px my-2" alt="" />
                 </a>
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/twitter.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/twitter.svg" className="h-30px my-2" alt="" />
                 </a>
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/dribbble-icon-1.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/dribbble-icon-1.svg" className="h-30px my-2" alt="" />
                 </a>
               </div>
             </div>

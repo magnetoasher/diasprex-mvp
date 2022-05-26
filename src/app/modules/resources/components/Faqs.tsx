@@ -630,8 +630,8 @@ const Faqs: FC = () => {
               <div className="row g-10">
                 <div className="col-md-4">
                   <div className="card-xl-stretch me-md-6">
-                    <a className="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style={{backgroundImage:"url('assets/media/stock/600x400/img-73.jpg')"}} data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">
-                      <img src="assets/media/svg/misc/video-play.svg" className="position-absolute top-50 start-50 translate-middle" alt="" />
+                    <a className="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style={{backgroundImage:"url('media/stock/600x400/img-73.jpg')"}} data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">
+                      <img src="media/svg/misc/video-play.svg" className="position-absolute top-50 start-50 translate-middle" alt="" />
                     </a>
                     <div className="m-0">
                       <a href="../../demo1/dist/pages/user-profile/overview.html" className="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base">Admin Panel - How To Started the Dashboard Tutorial</a>
@@ -645,8 +645,8 @@ const Faqs: FC = () => {
                 </div>
                 <div className="col-md-4">
                   <div className="card-xl-stretch mx-md-3">
-                    <a className="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style={{backgroundImage:"url('assets/media/stock/600x400/img-74.jpg')"}} data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">
-                      <img src="assets/media/svg/misc/video-play.svg" className="position-absolute top-50 start-50 translate-middle" alt="" />
+                    <a className="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style={{backgroundImage:"url('media/stock/600x400/img-74.jpg')"}} data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/btornGtLwIo">
+                      <img src="media/svg/misc/video-play.svg" className="position-absolute top-50 start-50 translate-middle" alt="" />
                     </a>
                     <div className="m-0">
                       <a href="../../demo1/dist/pages/user-profile/overview.html" className="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base">Admin Panel - How To Started the Dashboard Tutorial</a>
@@ -660,8 +660,8 @@ const Faqs: FC = () => {
                 </div>
                 <div className="col-md-4">
                   <div className="card-xl-stretch ms-md-6">
-                    <a className="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style={{backgroundImage:"url('assets/media/stock/600x400/img-47.jpg')"}} data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/TWdDZYNqlg4">
-                      <img src="assets/media/svg/misc/video-play.svg" className="position-absolute top-50 start-50 translate-middle" alt="" />
+                    <a className="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style={{backgroundImage:"url('media/stock/600x400/img-47.jpg')"}} data-fslightbox="lightbox-video-tutorials" href="https://www.youtube.com/embed/TWdDZYNqlg4">
+                      <img src="media/svg/misc/video-play.svg" className="position-absolute top-50 start-50 translate-middle" alt="" />
                     </a>
                     <div className="m-0">
                       <a href="../../demo1/dist/pages/user-profile/overview.html" className="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base">Admin Panel - How To Started the Dashboard Tutorial</a>
@@ -678,25 +678,25 @@ const Faqs: FC = () => {
             <div className="card mb-4 bg-light text-center">	
               <div className="card-body py-12">
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/facebook-4.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/facebook-4.svg" className="h-30px my-2" alt="" />
                 </a>	
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/instagram-2-1.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/instagram-2-1.svg" className="h-30px my-2" alt="" />
                 </a>
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/github.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/github.svg" className="h-30px my-2" alt="" />
                 </a>
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/behance.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/behance.svg" className="h-30px my-2" alt="" />
                 </a>
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/pinterest-p.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/pinterest-p.svg" className="h-30px my-2" alt="" />
                 </a>
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/twitter.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/twitter.svg" className="h-30px my-2" alt="" />
                 </a>
                 <a href="#" className="mx-4">
-                  <img src="assets/media/svg/brand-logos/dribbble-icon-1.svg" className="h-30px my-2" alt="" />
+                  <img src="media/svg/brand-logos/dribbble-icon-1.svg" className="h-30px my-2" alt="" />
                 </a>
               </div>
             </div>

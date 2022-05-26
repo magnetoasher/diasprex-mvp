@@ -12,6 +12,7 @@ import {PrivateRoutes} from './PrivateRoutes'
 import {ErrorsPage} from '../modules/errors/ErrorsPage'
 import {Faqs} from '../modules/resources/components/Faqs'
 import {Dif} from '../modules/resources/components/Dif'
+import {About} from '../modules/resources/components/About'
 import {Logout, AuthPage} from '../modules/auth'
 import {RootState} from '../../setup'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
@@ -46,6 +47,14 @@ const AppRoutes: FC = () => {
           element={
             <SuspensedView>
               <Dif />
+            </SuspensedView>
+          } 
+        />
+        <Route 
+          path='about' 
+          element={
+            <SuspensedView>
+              <About />
             </SuspensedView>
           } 
         />
