@@ -19,3 +19,13 @@ body {
   margin-left: calc(100vw - 100%);
   margin-bottom: 30px;
 }
+
+.tns.tns-default #kt_team_slider_prev {
+  position: absolute;
+  transform: translateY(-400%);
+}
+.tns.tns-default #kt_team_slider_next {
+  right: 0;
+  position: absolute;
+  transform: translateY(-400%) translateX(-100%);
+}
