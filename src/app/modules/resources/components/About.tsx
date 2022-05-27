@@ -1,4 +1,12 @@
 import React, {FC} from 'react'
+import TinySlider from "tiny-slider-react";
+import 'tiny-slider/dist/tiny-slider.css';
+
+const settings = {
+  lazyload: true,
+  nav: false,
+  mouseDrag: true
+};
 
 const About: FC = () => {
   return (
@@ -9,13 +17,7 @@ const About: FC = () => {
             <div className='mb-18'>
               <div className='mb-10'>
                 <div className='text-center mb-15'>
-                  <h3 className='fs-2hx text-dark mb-5'>About Us</h3>
-                  <div className='fs-5 text-muted fw-bold'>
-                    Within the last 10 years, we have sold over 100,000 admin theme copies that have
-                    been
-                    <br />
-                    successfully deployed by small businesses to global enterprises
-                  </div>
+                  <h3 className='fs-2hx text-dark mb-5'>About Us</h3> 
                 </div>
                 <div className='overlay'>
                   <img className='w-100 card-rounded' src='media/stock/1600x800/img-1.jpg' alt='' />
@@ -37,48 +39,21 @@ const About: FC = () => {
               </div>
               <div className='fs-5 fw-bold text-gray-600'>
                 <p className='mb-8'>
-                  First, a disclaimer – the entire process of writing a blog post often takes more
-                  than a couple of hours, even if you can type eighty words per minute and your
-                  writing skills are sharp. From the seed of the idea to finally hitting “Publish,”
-                  you might spend several days or maybe even a week “writing” a blog post, but it’s
-                  important to spend those vital hours planning your post and even thinking about
-                  <a href='../../demo1/dist/pages/blog/post.html' className='link-primary pe-1'>
-                    Your Post
-                  </a>
-                  (yes, thinking counts as working if you’re a blogger) before you actually write
-                  it.
+                  Who we are
                 </p>
                 <p className='mb-8'>
-                  There’s an old maxim that states,
-                  <span className='text-gray-800 pe-1'>
-                    “No fun for the writer, no fun for the reader.”
-                  </span>
-                  No matter what industry you’re working in, as a blogger, you should live and die
-                  by this statement.
+                  What we do
                 </p>
                 <p className='mb-8'>
-                  Before you do any of the following steps, be sure to pick a topic that actually
-                  interests you. Nothing – and
-                  <a href='../../demo1/dist/pages/blog/home.html' className='link-primary pe-1'>
-                    I mean NOTHING
-                  </a>
-                  – will kill a blog post more effectively than a lack of enthusiasm from the
-                  writer. You can tell when a writer is bored by their subject, and it’s so
-                  cringe-worthy it’s a little embarrassing.
-                </p>
-                <p className='mb-17'>
-                  I can hear your objections already. “But Dan, I have to blog for a cardboard box
-                  manufacturing company.” I feel your pain, I really do. During the course of my
-                  career, I’ve written content for dozens of clients in some less-than-thrilling
-                  industries (such as financial regulatory compliance and corporate housing), but
-                  the hallmark of a professional blogger is the ability to write well about any
-                  topic, no matter how dry it may be. Blogging is a lot easier, however, if you can
-                  muster at least a little enthusiasm for the topic at hand.
+                  Our aim 
                 </p>
               </div>
             </div>
             <div className='card bg-light mb-18'>
               <div className='card-body py-15'>
+                <div className='fs-2 fw-bold text-muted text-center mb-3'>
+                  <span className='text-gray-700 me-1'>Our Wins</span>
+                </div>
                 <div className='d-flex flex-center'>
                   <div className='d-flex justify-content-between mb-10 mx-auto w-xl-900px'>
                     <div className='octagon d-flex flex-center h-200px w-200px bg-body mx-2'>
@@ -130,9 +105,9 @@ const About: FC = () => {
                             >
                               0
                             </div>
-                            +
+                            K+
                           </div>
-                          <span className='text-gray-600 fw-bold fs-5 lh-0'>Businesses</span>
+                          <span className='text-gray-600 fw-bold fs-5 lh-0'>Project 1</span>
                         </div>
                       </div>
                     </div>
@@ -173,7 +148,7 @@ const About: FC = () => {
                             </div>
                             K+
                           </div>
-                          <span className='text-gray-600 fw-bold fs-5 lh-0'>Quick Reports</span>
+                          <span className='text-gray-600 fw-bold fs-5 lh-0'>Project 2</span>
                         </div>
                       </div>
                     </div>
@@ -212,36 +187,19 @@ const About: FC = () => {
                             >
                               0
                             </div>
-                            M+
+                            K+
                           </div>
-                          <span className='text-gray-600 fw-bold fs-5 lh-0'>Payments</span>
+                          <span className='text-gray-600 fw-bold fs-5 lh-0'>Project 3</span>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className='fs-2 fw-bold text-muted text-center mb-3'>
-                  <span className='fs-1 lh-1 text-gray-700'>“</span>When you care about your topic,
-                  you’ll write about it in a
-                  <br />
-                  <span className='text-gray-700 me-1'>more powerful</span>, emotionally expressive
-                  way
-                  <span className='fs-1 lh-1 text-gray-700'>“</span>
-                </div>
-                <div className='fs-2 fw-bold text-muted text-center'>
-                  <a
-                    href='../../demo1/dist/account/security.html'
-                    className='link-primary fs-4 fw-bolder'
-                  >
-                    Marcus Levy
-                  </a>
-                  <span className='fs-4 fw-bolder text-gray-600'>,KeenThemes CEO</span>
-                </div>
               </div>
             </div>
             <div className='mb-16'>
               <div className='text-center mb-12'>
-                <h3 className='fs-2hx text-dark mb-5'>Publications</h3>
+                <h3 className='fs-2hx text-dark mb-5'>LATEST NEWS</h3>
                 <div className='fs-5 text-muted fw-bold'>
                   Our goal is to provide a complete and robust theme solution
                   <br />
@@ -367,7 +325,7 @@ const About: FC = () => {
             </div>
             <div className='mb-18'>
               <div className='text-center mb-12'>
-                <h3 className='fs-2hx text-dark mb-5'>Our Great Team</h3>
+                <h3 className='fs-2hx text-dark mb-5'>MEET THE TEAM</h3>
                 <div className='fs-5 text-muted fw-bold'>
                   It’s no doubt that when a development takes longer to complete, additional costs
                   to
@@ -376,7 +334,7 @@ const About: FC = () => {
                 </div>
               </div>
               <div className='tns tns-default mb-10'>
-                <div
+                {/* <div
                   data-tns='true'
                   data-tns-loop='true'
                   data-tns-swipe-angle='false'
@@ -391,7 +349,8 @@ const About: FC = () => {
                   data-tns-prev-button='#kt_team_slider_prev'
                   data-tns-next-button='#kt_team_slider_next'
                   data-tns-responsive='{1200: {items: 3}, 992: {items: 2}}'
-                >
+                > */}
+                <TinySlider settings={settings}>
                   <div className='text-center'>
                     <div
                       className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
@@ -476,7 +435,8 @@ const About: FC = () => {
                       <div className='text-muted fs-6 fw-bold mt-1'>QA Managers</div>
                     </div>
                   </div>
-                </div>
+                </TinySlider>
+                {/* </div> */}
                 <button className='btn btn-icon btn-active-color-primary' id='kt_team_slider_prev'>
                   <span className='svg-icon svg-icon-3x'>
                     <svg
