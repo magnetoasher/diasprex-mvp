@@ -239,28 +239,51 @@ const About: FC = () => {
                 </div>
               </div>
             </div>
-        </div>
-        <div className="mb-16">
-            <div className="text-center mb-12">
-                <h3 className="fs-2hx text-dark mb-5">OUR WINS</h3>
-            </div>
-            <div className="row g-10">
-                <div className="col-md-4">
-                    <div className="card-xl-stretch me-md-6">
-                        <a className="d-block overlay mb-4" data-fslightbox="lightbox-hot-sales" href="media/stock/600x400/img-73.jpg">
-                            <div className="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px" style={{backgroundImage:"url('media/stock/600x400/img-73.jpg')"}}></div>
-                            <div className="overlay-layer bg-dark card-rounded bg-opacity-25">
-                                <i className="bi bi-eye-fill fs-2x text-white"></i>
-                            </div>
+            <div className='mb-16'>
+              <div className='text-center mb-12'>
+                <h3 className='fs-2hx text-dark mb-5'>Publications</h3>
+                <div className='fs-5 text-muted fw-bold'>
+                  Our goal is to provide a complete and robust theme solution
+                  <br />
+                  to boost all of our customer’s project deployments
+                </div>
+              </div>
+              <div className='row g-10'>
+                <div className='col-md-4'>
+                  <div className='card-xl-stretch me-md-6'>
+                    <a
+                      className='d-block overlay mb-4'
+                      data-fslightbox='lightbox-hot-sales'
+                      href='media/stock/600x400/img-73.jpg'
+                    >
+                      <div
+                        className='overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px'
+                        style={{backgroundImage: "url('media/stock/600x400/img-73.jpg')"}}
+                      ></div>
+                      <div className='overlay-layer bg-dark card-rounded bg-opacity-25'>
+                        <i className='bi bi-eye-fill fs-2x text-white'></i>
+                      </div>
+                    </a>
+                    <div className='m-0'>
+                      <a
+                        href='../../demo1/dist/pages/user-profile/overview.html'
+                        className='fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base'
+                      >
+                        Admin Panel - How To Started the Dashboard Tutorial
+                      </a>
+                      <div className='fw-bold fs-5 text-gray-600 text-dark mt-3 mb-5'>
+                        We’ve been focused on making a the from also not been afraid to and step
+                        away been focused create eye
+                      </div>
+                      <div className='fs-6 fw-bolder'>
+                        <a
+                          href='../../demo1/dist/apps/projects/users.html'
+                          className='text-gray-700 text-hover-primary'
+                        >
+                          Jane Miller
                         </a>
-                        <div className="m-0">
-                            <a href="../../demo1/dist/pages/user-profile/overview.html" className="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base">Project 1</a>
-                            <div className="fw-bold fs-5 text-gray-600 text-dark mt-3 mb-5">We’ve been focused on making a the from also not been afraid to and step away been focused create eye</div>
-                            <div className="fs-6 fw-bolder">
-                                <a href="../../demo1/dist/apps/projects/users.html" className="text-gray-700 text-hover-primary">Jane Miller</a>
-                                <span className="text-muted">on Mar 21 2021</span>
-                            </div>
-                        </div>
+                        <span className='text-muted'>on Mar 21 2021</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -297,14 +320,8 @@ const About: FC = () => {
                         >
                           Cris Morgan
                         </a>
-                        <div className="m-0">
-                            <a href="../../demo1/dist/pages/user-profile/overview.html" className="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base">Project 2</a>
-                            <div className="fw-bold fs-5 text-gray-600 text-dark mt-3 mb-5">We’ve been focused on making the from v4 to v5 but we have also not been afraid to step away been focused</div>
-                            <div className="fs-6 fw-bolder">
-                                <a href="../../demo1/dist/apps/projects/users.html" className="text-gray-700 text-hover-primary">Cris Morgan</a>
-                                <span className="text-muted">on Apr 14 2021</span>
-                            </div>
-                        </div>
+                        <span className='text-muted'>on Apr 14 2021</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -341,34 +358,50 @@ const About: FC = () => {
                         >
                           Carles Nilson
                         </a>
-                        <div className="m-0">
-                            <a href="../../demo1/dist/pages/user-profile/overview.html" className="fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base">Project 3</a>
-                            <div className="fw-bold fs-5 text-gray-600 text-dark mt-3 mb-5">We’ve been focused on making the from v4 to v5 but we’ve also not been afraid to step away been focused</div>
-                            <div className="fs-6 fw-bolder">
-                                <a href="../../demo1/dist/apps/projects/users.html" className="text-gray-700 text-hover-primary">Carles Nilson</a>
-                                <span className="text-muted">on May 14 2021</span>
-                            </div>
-                        </div>
+                        <span className='text-muted'>on May 14 2021</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-        </div>
-        <div className="mb-18">
-            <div className="text-center mb-12">
-                <h3 className="fs-2hx text-dark mb-5">Meet the Team</h3>
-                <div className="fs-5 text-muted fw-bold">It’s no doubt that when a development takes longer to complete, additional costs to
-                <br />integrate and test each extra feature creeps up and haunts most of us.</div>
-            </div>
-            <div className="tns tns-default mb-10">
-                <div data-tns="true" data-tns-loop="true" data-tns-swipe-angle="false" data-tns-speed="2000" data-tns-autoplay="true" data-tns-autoplay-timeout="18000" data-tns-controls="true" data-tns-nav="false" data-tns-items="1" data-tns-center="false" data-tns-dots="false" data-tns-prev-button="#kt_team_slider_prev" data-tns-next-button="#kt_team_slider_next" data-tns-responsive="{1200: {items: 3}, 992: {items: 2}}">
-                    <div className="text-center">
-                        <div className="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style={{backgroundImage:"url('media/avatars/300-1.jpg')"}}></div>
-                        <div className="mb-0">
-                            <a href="#" className="text-dark fw-bolder text-hover-primary fs-3">Paul Miles</a>
-                            <div className="text-muted fs-6 fw-bold mt-1">Development Lead</div>
-                        </div>
+            <div className='mb-18'>
+              <div className='text-center mb-12'>
+                <h3 className='fs-2hx text-dark mb-5'>Our Great Team</h3>
+                <div className='fs-5 text-muted fw-bold'>
+                  It’s no doubt that when a development takes longer to complete, additional costs
+                  to
+                  <br />
+                  integrate and test each extra feature creeps up and haunts most of us.
+                </div>
+              </div>
+              <div className='tns tns-default mb-10'>
+                <div
+                  data-tns='true'
+                  data-tns-loop='true'
+                  data-tns-swipe-angle='false'
+                  data-tns-speed='2000'
+                  data-tns-autoplay='true'
+                  data-tns-autoplay-timeout='18000'
+                  data-tns-controls='true'
+                  data-tns-nav='false'
+                  data-tns-items='1'
+                  data-tns-center='false'
+                  data-tns-dots='false'
+                  data-tns-prev-button='#kt_team_slider_prev'
+                  data-tns-next-button='#kt_team_slider_next'
+                  data-tns-responsive='{1200: {items: 3}, 992: {items: 2}}'
+                >
+                  <div className='text-center'>
+                    <div
+                      className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
+                      style={{backgroundImage: "url('media/avatars/300-1.jpg')"}}
+                    ></div>
+                    <div className='mb-0'>
+                      <a href='#' className='text-dark fw-bolder text-hover-primary fs-3'>
+                        Paul Miles
+                      </a>
+                      <div className='text-muted fs-6 fw-bold mt-1'>Development Lead</div>
                     </div>
                   </div>
                   <div className='text-center'>
