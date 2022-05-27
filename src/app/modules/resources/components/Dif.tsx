@@ -939,6 +939,20 @@ const Dif: FC = () => {
                   </div>
                 </div>
               </div>
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '50px'
+              }}>
+                  Ready to have a DIF account? {' '}
+                  <a
+                    href='#'
+                    className='btn btn-sm btn-primary'
+                  >
+                    Sign up here
+                  </a>
+              </div>
               <div className='card mb-4 bg-light text-center'>
                 <div className='card-body py-12'>
                   <a href='#' className='mx-4'>
