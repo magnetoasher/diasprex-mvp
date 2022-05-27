@@ -9,7 +9,7 @@ import store, {persistor} from './setup/redux/Store'
 import axios from 'axios'
 import {Chart, registerables} from 'chart.js'
 import {QueryClient, QueryClientProvider} from 'react-query'
-import {ReactQueryDevtools} from 'react-query/devtools'
+// import {ReactQueryDevtools} from 'react-query/devtools'
 
 // Apps
 import {MetronicI18nProvider} from './_metronic/i18n/Metronici18n'
@@ -53,7 +53,7 @@ ReactDOM.render(
         </PersistGate>
       </Provider>
     </MetronicI18nProvider>
-    <ReactQueryDevtools initialIsOpen={false} />
+    {/* <ReactQueryDevtools initialIsOpen={false} /> */}
   </QueryClientProvider>,
   document.getElementById('root')
 )

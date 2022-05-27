@@ -43,21 +43,21 @@ const AppRoutes: FC = () => {
             } 
           />
           <Route 
-          path='dif-resources' 
-          element={
-            <SuspensedView>
-              <Dif />
-            </SuspensedView>
-          } 
-        />
-        <Route 
-          path='about' 
-          element={
-            <SuspensedView>
-              <About />
-            </SuspensedView>
-          } 
-        />
+            path='dif-resources' 
+            element={
+              <SuspensedView>
+                <Dif />
+              </SuspensedView>
+            }
+          />
+          <Route 
+            path='about' 
+            element={
+              <SuspensedView>
+                <About />
+              </SuspensedView>
+            } 
+          />
           {isAuthorized ? (
             <>
               <Route path='/*' element={<PrivateRoutes />} />
