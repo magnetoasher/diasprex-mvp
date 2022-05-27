@@ -1796,7 +1796,7 @@ const Faqs: FC = () => {
                       <div
                         className='d-flex align-items-center collapsible py-3 toggle collapsed mb-0'
                         data-bs-toggle='collapse'
-                        data-bs-target='#kt_job_7_4'
+                        data-bs-target='#kt_job_7_6'
                       >
                         <div className='btn btn-sm btn-icon mw-20px btn-active-color-primary me-5'>
                           <span className='svg-icon toggle-on svg-icon-primary svg-icon-1'>
@@ -1868,7 +1868,7 @@ const Faqs: FC = () => {
                           Diasprex’s CrowdInnovation Marketplace?
                         </h4>
                       </div>
-                      <div id='kt_job_7_4' className='collapse fs-6 ms-1'>
+                      <div id='kt_job_7_6' className='collapse fs-6 ms-1'>
                         <div className='mb-4 text-gray-600 fw-bold fs-6 ps-10'>
                           First, a disclaimer – the entire process of writing a blog post often
                           takes more than a couple of hours, even if you can type eighty words as
@@ -1881,7 +1881,7 @@ const Faqs: FC = () => {
                       <div
                         className='d-flex align-items-center collapsible py-3 toggle collapsed mb-0'
                         data-bs-toggle='collapse'
-                        data-bs-target='#kt_job_7_3'
+                        data-bs-target='#kt_job_7_5'
                       >
                         <div className='btn btn-sm btn-icon mw-20px btn-active-color-primary me-5'>
                           <span className='svg-icon toggle-on svg-icon-primary svg-icon-1'>
@@ -1952,7 +1952,7 @@ const Faqs: FC = () => {
                           I live in Africa. Can I register as an Enabler?
                         </h4>
                       </div>
-                      <div id='kt_job_7_3' className='collapse fs-6 ms-1'>
+                      <div id='kt_job_7_5' className='collapse fs-6 ms-1'>
                         <div className='mb-4 text-gray-600 fw-bold fs-6 ps-10'>
                           First, a disclaimer – the entire process of writing a blog post often
                           takes more than a couple of hours, even if you can type eighty words as
