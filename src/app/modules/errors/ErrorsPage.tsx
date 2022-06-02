@@ -15,7 +15,7 @@ const ErrorsLayout = () => {
           <a href='/dashboard' className='mb-10 pt-lg-20'>
             <img
               alt='Logo'
-              src={toAbsoluteUrl('/media/logos/logo-1.svg')}
+              src={toAbsoluteUrl('/media/logos/diasprex-logo.png')}
               className='h-50px mb-5'
             />
           </a>
