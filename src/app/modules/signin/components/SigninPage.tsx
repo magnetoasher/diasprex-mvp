@@ -1,7 +1,53 @@
 import React, {FC} from 'react'
 import './signin-page.css'
+import {useState} from 'react'
+import {useDispatch} from 'react-redux'
+import * as Yup from 'yup'
+import clsx from 'clsx'
+import {Link} from 'react-router-dom'
+import {useFormik} from 'formik'
+import * as auth from '../redux/AuthRedux'
+import {login} from '../redux/AuthCRUD'
+
+const loginSchema = Yup.object().shape({
+  email: Yup.string()
+    .email('Wrong email format')
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
+    .required('Email is required'),
+  password: Yup.string()
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
+    .required('Password is required'),
+})
+
+const initialValues = {
+  email: '',
+  password: '',
+}
 
 const SigninPage: FC = () => {
+  const [loading, setLoading] = useState(false)
+  const dispatch = useDispatch()
+  const formik = useFormik({
+    initialValues,
+    validationSchema: loginSchema,
+    onSubmit: (values, {setStatus, setSubmitting}) => {
+      setLoading(true)
+      setTimeout(() => {
+        login(values.email, values.password)
+          .then(({data: {api_token}}) => {
+            setLoading(false)
+            dispatch(auth.actions.login(api_token))
+          })
+          .catch(() => {
+            setLoading(false)
+            setSubmitting(false)
+            setStatus('The login detail is incorrect')
+          })
+      }, 1000)
+    },
+  })
   return (
     <div className='d-flex flex-column flex-root'>
       <div
@@ -21,30 +67,50 @@ const SigninPage: FC = () => {
                 <form
                   className='form fv-plugins-bootstrap fv-plugins-framework'
                   id='kt_login_signin_form'
-                  data-bitwarden-watching='1'
+                  // data-bitwarden-watching='1'
+                  onSubmit={formik.handleSubmit}
+                  noValidate
                 >
                   <div className='text-center pb-8'>
                     <h2 className='font-weight-bolder text-dark font-size-h2 font-size-h1-lg'>
                       Sign In
                     </h2>
                     <span className='text-muted font-weight-bold font-size-h4'>
-                      Or
-                      <a
-                        href='https://preview.keenthemes.com/metronic/demo1/custom/pages/login/login-2.html'
-                        className='text-primary font-weight-bolder'
-                        id='kt_login_signup'
-                      >
-                        Create An Account
-                      </a>
+                      Or <br />
+                      <Link to='/auth/registration' className='link-primary fw-bolder'>
+                        Create an Account
+                      </Link>
                     </span>
                   </div>
+                  {formik.status ? (
+                    <div className='mb-lg-15 alert alert-danger'>
+                      <div className='alert-text font-weight-bold'>{formik.status}</div>
+                    </div>
+                  ) : (
+                    <div className='text-info'></div>
+                  )}
                   <div className='form-group fv-plugins-icon-container'>
                     <label className='font-size-h6 font-weight-bolder text-dark'>Email</label>
                     <input
-                      className='form-control form-control-solid h-auto py-7 px-6 rounded-lg'
-                      type='text'
-                      name='username'
+                      placeholder='Email'
+                      // className='form-control form-control-solid h-auto py-7 px-6 rounded-lg'
+                      {...formik.getFieldProps('email')}
+                      className={clsx(
+                        'form-control form-control-solid h-auto py-7 px-6 rounded-lg',
+                        {'is-invalid': formik.touched.email && formik.errors.email},
+                        {
+                          'is-valid': formik.touched.email && !formik.errors.email,
+                        }
+                      )}
+                      type='email'
+                      name='email'
+                      // autoComplete='off'
                     />
+                    {formik.touched.email && formik.errors.email && (
+                      <div className='fv-plugins-message-container'>
+                        <span role='alert'>{formik.errors.email}</span>
+                      </div>
+                    )}
                     <div className='fv-plugins-message-container' />
                   </div>
                   <div className='form-group fv-plugins-icon-container'>
@@ -52,30 +118,55 @@ const SigninPage: FC = () => {
                       <label className='font-size-h6 font-weight-bolder text-dark pt-5'>
                         Password
                       </label>
-                      <a
-                        href='javascript:;'
-                        className='text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5'
-                        id='kt_login_forgot'
+                      <Link
+                        to='/auth/forgot-password'
+                        className='text-primary font-size-h6 fw-bolder text-hover-primary pt-5'
+                        style={{marginLeft: '5px'}}
                       >
                         Forgot Password ?
-                      </a>
+                      </Link>
                     </div>
                     <input
-                      className='form-control form-control-solid h-auto py-7 px-6 rounded-lg'
+                      // className='form-control form-control-solid h-auto py-7 px-6 rounded-lg'
                       type='password'
-                      name='password'
+                      // autoComplete='off'
+                      {...formik.getFieldProps('password')}
+                      className={clsx(
+                        'form-control form-control-solid h-auto py-7 px-6 rounded-lg',
+                        {
+                          'is-invalid': formik.touched.password && formik.errors.password,
+                        },
+                        {
+                          'is-valid': formik.touched.password && !formik.errors.password,
+                        }
+                      )}
                     />
+                    {formik.touched.password && formik.errors.password && (
+                      <div className='fv-plugins-message-container'>
+                        <div className='fv-help-block'>
+                          <span role='alert'>{formik.errors.password}</span>
+                        </div>
+                      </div>
+                    )}
                     <div className='fv-plugins-message-container' />
                   </div>
                   <div className='text-center pt-2'>
                     <button
+                      type='submit'
                       id='kt_login_signin_submit'
                       className='btn btn-dark font-weight-bolder font-size-h6 px-8 py-4 my-3'
+                      disabled={formik.isSubmitting || !formik.isValid}
                     >
-                      Sign In
+                      {!loading && <span className='indicator-label'>Sign In</span>}
+                      {loading && (
+                        <span className='indicator-progress' style={{display: 'block'}}>
+                          Please wait...
+                          <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+                        </span>
+                      )}
                     </button>
                   </div>
-                  <input type='hidden' />
+                  {/* <input type='hidden' /> */}
                 </form>
               </div>
               {/* <div className='login-form login-forgot pt-11'>
@@ -138,8 +229,7 @@ const SigninPage: FC = () => {
           <div
             className='content-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center'
             style={{
-              backgroundImage:
-                'url(media/svg/illustrations/login-visual-2.svg)',
+              backgroundImage: 'url(media/svg/illustrations/login-visual-2.svg)',
             }}
           ></div>
         </div>

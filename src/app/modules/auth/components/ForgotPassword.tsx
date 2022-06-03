@@ -6,7 +6,7 @@ import {useFormik} from 'formik'
 import {requestPassword} from '../redux/AuthCRUD'
 
 const initialValues = {
-  email: 'admin@demo.com',
+  email: '',
 }
 
 const forgotPasswordSchema = Yup.object().shape({
@@ -81,7 +81,7 @@ export function ForgotPassword() {
           <label className='form-label fw-bolder text-gray-900 fs-6'>Email</label>
           <input
             type='email'
-            placeholder=''
+            placeholder='Email'
             autoComplete='off'
             {...formik.getFieldProps('email')}
             className={clsx(
@@ -117,7 +117,7 @@ export function ForgotPassword() {
               </span>
             )}
           </button>
-          <Link to='/auth/login'>
+          <Link to='/login'>
             <button
               type='button'
               id='kt_login_password_reset_form_cancel_button'

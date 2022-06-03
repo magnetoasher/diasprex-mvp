@@ -4,6 +4,7 @@ import {Outlet, Route, Routes} from 'react-router-dom'
 import {Registration} from './components/Registration'
 import {ForgotPassword} from './components/ForgotPassword'
 import {Login} from './components/Login'
+import {SigninPage} from '../../modules/signin/components/SigninPage'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 
 const AuthLayout = () => {
@@ -25,7 +26,11 @@ const AuthLayout = () => {
       <div className='d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20'>
         {/* begin::Logo */}
         <a href='#' className='mb-12'>
-          <img alt='Logo' src={toAbsoluteUrl('/media/logos/diasprex-logo.png')} className='h-45px' />
+          <img
+            alt='Logo'
+            src={toAbsoluteUrl('/media/logos/diasprex-logo.png')}
+            className='h-45px'
+          />
         </a>
         {/* end::Logo */}
         {/* begin::Wrapper */}
@@ -58,11 +63,12 @@ const AuthLayout = () => {
 
 const AuthPage = () => (
   <Routes>
+    <Route index element={<SigninPage />} />
     <Route element={<AuthLayout />}>
-      <Route path='login' element={<Login />} />
+      {/* <Route path='login' element={<Login />} /> */}
       <Route path='registration' element={<Registration />} />
       <Route path='forgot-password' element={<ForgotPassword />} />
-      <Route index element={<Login />} />
+      {/* <Route index element={<Login />} /> */}
     </Route>
   </Routes>
 )

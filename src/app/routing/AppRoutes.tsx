@@ -36,46 +36,39 @@ const AppRoutes: FC = () => {
         <Route element={<App />}>
           <Route path='error/*' element={<ErrorsPage />} />
           <Route path='logout' element={<Logout />} />
-          <Route 
-            path='faqs' 
+          <Route
+            path='faqs'
             element={
               <SuspensedView>
                 <Faqs />
               </SuspensedView>
-            } 
+            }
           />
-          <Route 
-            path='dif-resources' 
+          <Route
+            path='dif-resources'
             element={
               <SuspensedView>
                 <Dif />
               </SuspensedView>
             }
           />
-          <Route 
-            path='about' 
+          <Route
+            path='about'
             element={
               <SuspensedView>
                 <About />
               </SuspensedView>
-            } 
+            }
           />
-          <Route 
-            path='remittance' 
+          <Route
+            path='remittance'
             element={
               <SuspensedView>
                 <Remittance />
               </SuspensedView>
-            } 
+            }
           />
-          <Route 
-            path='login' 
-            element={
-              <SuspensedView>
-                <SigninPage />
-              </SuspensedView>
-            } 
-          />
+
           {isAuthorized ? (
             <>
               <Route path='/*' element={<PrivateRoutes />} />
@@ -83,6 +76,7 @@ const AppRoutes: FC = () => {
             </>
           ) : (
             <>
+              <Route path='login' element={<SigninPage />} />
               <Route path='auth/*' element={<AuthPage />} />
               <Route path='*' element={<Navigate to='/auth' />} />
             </>
