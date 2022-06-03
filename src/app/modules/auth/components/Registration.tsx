@@ -114,11 +114,11 @@ export function Registration() {
       </button> */}
       {/* end::Action */}
 
-      {/* <div className='d-flex align-items-center mb-10'>
+      <div className='d-flex align-items-center mb-10'>
         <div className='border-bottom border-gray-300 mw-50 w-100'></div>
-        <span className='fw-bold text-gray-400 fs-7 mx-2'>OR</span>
+        {/* <span className='fw-bold text-gray-400 fs-7 mx-2'>OR</span> */}
         <div className='border-bottom border-gray-300 mw-50 w-100'></div>
-      </div> */}
+      </div>
 
       {formik.status && (
         <div className='mb-lg-15 alert alert-danger'>
