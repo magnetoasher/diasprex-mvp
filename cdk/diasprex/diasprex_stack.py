@@ -41,14 +41,7 @@ class DiasprexMVP(core.Stack):
             resources=[f"{web_app_bucket.bucket_arn}/*"],
         ))
 
-        _s3_deployment.BucketDeployment(
-            self, f"DiasprexMVPS3Deployment",
-            sources=[_s3_deployment.Source.asset("../build")],
-            destination_bucket=web_app_bucket,
-            memory_limit=512
-        )
-
-        _cloudfront.CloudFrontWebDistribution(
+        distribution = _cloudfront.CloudFrontWebDistribution(
             self, f"DiasprexMVPCFDistribution",
             origin_configs=[_cloudfront.SourceConfiguration(
                 s3_origin_source=_cloudfront.S3OriginConfig(
@@ -70,4 +63,14 @@ class DiasprexMVP(core.Stack):
                     response_page_path="/index.html"
                 )
             ]
+        )
+
+        _s3_deployment.BucketDeployment(
+            self, f"DiasprexMVPS3Deployment",
+            sources=[_s3_deployment.Source.asset("../build")],
+            destination_bucket=web_app_bucket,
+            access_control=_s3.BucketAccessControl.PUBLIC_READ,
+            memory_limit=512,
+            distribution=distribution,
+            distribution_paths=["/*"]
         )
