@@ -43,18 +43,18 @@ const ProfileHeader: React.FC = () => {
                       path='/media/icons/duotune/communication/com006.svg'
                       className='svg-icon-4 me-1'
                     />
-                    Developer
+                    Sponsor
                   </a>
-                  <a
+                  {/* <a
                     href='#'
                     className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
                   >
-                    <KTSVG
+                    <KTSVG                                                                
                       path='/media/icons/duotune/general/gen018.svg'
                       className='svg-icon-4 me-1'
                     />
                     SF, Bay Area
-                  </a>
+                  </a> */}
                   <a
                     href='#'
                     className='d-flex align-items-center text-gray-400 text-hover-primary mb-2'
@@ -69,7 +69,7 @@ const ProfileHeader: React.FC = () => {
               </div>
 
               <div className='d-flex my-4'>
-                <a href='#' className='btn btn-sm btn-light me-2' id='kt_user_follow_button'>
+                {/* <a href='#' className='btn btn-sm btn-light me-2' id='kt_user_follow_button'>
                   <KTSVG
                     path='/media/icons/duotune/arrows/arr012.svg'
                     className='svg-icon-3 d-none'
@@ -88,7 +88,7 @@ const ProfileHeader: React.FC = () => {
                   data-bs-target='#kt_modal_offer_a_deal'
                 >
                   Hire Me
-                </a>
+                </a> */}
                 <div className='me-0'>
                   <button
                     className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
@@ -106,7 +106,7 @@ const ProfileHeader: React.FC = () => {
             <div className='d-flex flex-wrap flex-stack'>
               <div className='d-flex flex-column flex-grow-1 pe-8'>
                 <div className='d-flex flex-wrap'>
-                  <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                  {/* <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
                       <KTSVG
                         path='/media/icons/duotune/arrows/arr066.svg'
@@ -116,9 +116,9 @@ const ProfileHeader: React.FC = () => {
                     </div>
 
                     <div className='fw-bold fs-6 text-gray-400'>Earnings</div>
-                  </div>
+                  </div> */}
 
-                  <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                  {/* <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
                       <KTSVG
                         path='/media/icons/duotune/arrows/arr065.svg'
@@ -128,9 +128,9 @@ const ProfileHeader: React.FC = () => {
                     </div>
 
                     <div className='fw-bold fs-6 text-gray-400'>Projects</div>
-                  </div>
+                  </div> */}
 
-                  <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                  {/* <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
                       <KTSVG
                         path='/media/icons/duotune/arrows/arr066.svg'
@@ -140,11 +140,11 @@ const ProfileHeader: React.FC = () => {
                     </div>
 
                     <div className='fw-bold fs-6 text-gray-400'>Success Rate</div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
-              <div className='d-flex align-items-center w-200px w-sm-300px flex-column mt-3'>
+              {/* <div className='d-flex align-items-center w-200px w-sm-300px flex-column mt-3'>
                 <div className='d-flex justify-content-between w-100 mt-auto mb-2'>
                   <span className='fw-bold fs-6 text-gray-400'>Profile Compleation</span>
                   <span className='fw-bolder fs-6'>50%</span>
@@ -156,7 +156,7 @@ const ProfileHeader: React.FC = () => {
                     style={{width: '50%'}}
                   ></div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -189,33 +189,11 @@ const ProfileHeader: React.FC = () => {
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/pages/profile/campaigns' && 'active')
+                  (location.pathname === '/crafted/account/settings' && 'active')
                 }
-                to='/crafted/pages/profile/campaigns'
+                to='/crafted/account/settings'
               >
-                Campaigns
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/pages/profile/documents' && 'active')
-                }
-                to='/crafted/pages/profile/documents'
-              >
-                Documents
-              </Link>
-            </li>
-            <li className='nav-item'>
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/pages/profile/connections' && 'active')
-                }
-                to='/crafted/pages/profile/connections'
-              >
-                Connections
+                Settings
               </Link>
             </li>
           </ul>
