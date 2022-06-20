@@ -25,7 +25,7 @@ export function MenuInner() {
           menuPlacement='right-start'
           menuTrigger={`{default:'click', lg: 'hover'}`}
         >
-          <MenuInnerWithSub
+          {/* <MenuInnerWithSub
             title='Profile'
             to='/crafted/pages/profile'
             hasArrow={true}
@@ -42,7 +42,7 @@ export function MenuInner() {
               title='Connections'
               hasBullet={true}
             />
-          </MenuInnerWithSub>
+          </MenuInnerWithSub> */}
           <MenuInnerWithSub
             title='Wizards'
             to='/crafted/pages/wizards'

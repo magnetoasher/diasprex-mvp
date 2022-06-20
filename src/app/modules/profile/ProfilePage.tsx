@@ -10,7 +10,7 @@ import {ProfileHeader} from './ProfileHeader'
 const profileBreadCrumbs: Array<PageLink> = [
   {
     title: 'Profile',
-    path: '/crafted/account/overview',
+    path: '/crafted/pages/profile/overview',
     isSeparator: false,
     isActive: false,
   },
@@ -50,7 +50,34 @@ const ProfilePage = () => (
           </>
         }
       />
-      <Route index element={<Navigate to='/crafted/account/overview' />} />
+      <Route
+        path='campaigns'
+        element={
+          <>
+            <PageTitle breadcrumbs={profileBreadCrumbs}>Campaigns</PageTitle>
+            <Campaigns />
+          </>
+        }
+      />
+      <Route
+        path='documents'
+        element={
+          <>
+            <PageTitle breadcrumbs={profileBreadCrumbs}>Documents</PageTitle>
+            <Documents />
+          </>
+        }
+      />
+      <Route
+        path='connections'
+        element={
+          <>
+            <PageTitle breadcrumbs={profileBreadCrumbs}>Connections</PageTitle>
+            <Connections />
+          </>
+        }
+      />
+      <Route index element={<Navigate to='/crafted/pages/profile/overview' />} />
     </Route>
   </Routes>
 )

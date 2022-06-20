@@ -21,7 +21,6 @@ export function Overview() {
           <Link to='/crafted/account/settings' className='btn btn-primary align-self-center'>
             Edit Profile
           </Link>
-          
         </div>
 
         <div className='card-body p-9'>
