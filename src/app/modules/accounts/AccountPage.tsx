@@ -2,6 +2,7 @@ import React from 'react'
 import {Navigate, Route, Routes, Outlet} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../_metronic/layout/core'
 import {Overview} from './components/Overview'
+import {Campaigns} from './components/Campaigns'
 import {Settings} from './components/settings/Settings'
 import {AccountHeader} from './AccountHeader'
 
@@ -40,6 +41,15 @@ const AccountPage: React.FC = () => {
             </>
           }
         />
+        <Route
+        path='campaigns'
+        element={
+          <>
+            <PageTitle breadcrumbs={accountBreadCrumbs}>Campaigns</PageTitle>
+            <Campaigns />
+          </>
+        }
+      />
         <Route
           path='settings'
           element={

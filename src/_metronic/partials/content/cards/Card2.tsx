@@ -32,7 +32,7 @@ const Card2: FC<Props> = ({
 }) => {
   return (
     <Link
-      to='/crafted/pages/profile/overview'
+      to='/crafted/account/overview'
       className='card border border-2 border-gray-300 border-hover'
     >
       <div className='card-header border-0 pt-9'>
