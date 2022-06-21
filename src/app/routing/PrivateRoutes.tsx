@@ -8,7 +8,7 @@ import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 
 const PrivateRoutes = () => {
   const BuilderPageWrapper = lazy(() => import('../pages/layout-builder/BuilderPageWrapper'))
-  const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
+  // const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
   // const RegistrationStepsPage = lazy(() => import('../modules/registration/RegistrationStepsPage'))
   const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
   const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
@@ -19,20 +19,20 @@ const PrivateRoutes = () => {
     <Routes>
       <Route element={<MasterLayout />}>
         {/* Redirect to Dashboard after success login/registartion */}
-        <Route path='auth/*' element={<Navigate to='/dashboard' />} />
+        <Route path='auth/*' element={<Navigate to='/crafted/account/overview' />} />
         {/* Pages */}
         <Route path='dashboard' element={<DashboardWrapper />} />
         <Route path='builder' element={<BuilderPageWrapper />} />
         <Route path='menu-test' element={<MenuTestPage />} />
         {/* Lazy Modules */}
-        <Route
+        {/* <Route
           path='crafted/pages/profile/*'
           element={
             <SuspensedView>
               <ProfilePage />
             </SuspensedView>
           }
-        />
+        /> */}
         {/* <Route
           path='account/*'
           element={

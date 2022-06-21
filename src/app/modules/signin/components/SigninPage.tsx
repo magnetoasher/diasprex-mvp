@@ -214,7 +214,7 @@ const SigninPage: FC = () => {
         </div>
         <div
           className='content order-1 d-flex flex-column w-100 pb-0'
-          style={{backgroundColor: '#B1DCED'}}
+          style={{backgroundColor: '#f3f4f6'}}
         >
           <div className='d-flex flex-column justify-content-center text-center pt-lg-40 pt-md-5 pt-sm-5 px-lg-0 pt-5 px-7'>
             <h3 className='display4 font-weight-bolder my-7 text-dark' style={{color: '#986923'}}>

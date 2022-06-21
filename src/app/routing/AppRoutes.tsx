@@ -72,7 +72,7 @@ const AppRoutes: FC = () => {
           {isAuthorized ? (
             <>
               <Route path='/*' element={<PrivateRoutes />} />
-              <Route index element={<Navigate to='/dashboard' />} />
+              <Route index element={<Navigate to='/crafted/account/overview' />} />
             </>
           ) : (
             <>

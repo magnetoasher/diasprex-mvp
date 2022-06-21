@@ -17,7 +17,7 @@ export function MenuInner() {
         menuTrigger='click'
       >
         {/* PAGES */}
-        <MenuInnerWithSub
+        {/* <MenuInnerWithSub
           title='Pages'
           to='/crafted/pages'
           fontIcon='bi-archive'
@@ -25,7 +25,7 @@ export function MenuInner() {
           menuPlacement='right-start'
           menuTrigger={`{default:'click', lg: 'hover'}`}
         >
-          {/* <MenuInnerWithSub
+          <MenuInnerWithSub
             title='Profile'
             to='/crafted/pages/profile'
             hasArrow={true}
@@ -42,7 +42,7 @@ export function MenuInner() {
               title='Connections'
               hasBullet={true}
             />
-          </MenuInnerWithSub> */}
+          </MenuInnerWithSub>
           <MenuInnerWithSub
             title='Wizards'
             to='/crafted/pages/wizards'
@@ -54,7 +54,7 @@ export function MenuInner() {
             <MenuItem to='/crafted/pages/wizards/horizontal' title='Horizontal' hasBullet={true} />
             <MenuItem to='/crafted/pages/wizards/vertical' title='Vertical' hasBullet={true} />
           </MenuInnerWithSub>
-        </MenuInnerWithSub>
+        </MenuInnerWithSub> */}
 
         {/* ACCOUNT */}
         <MenuInnerWithSub
@@ -66,6 +66,7 @@ export function MenuInner() {
           menuTrigger={`{default:'click', lg: 'hover'}`}
         >
           <MenuItem to='/crafted/account/overview' title='Overview' hasBullet={true} />
+          <MenuItem to='/crafted/account/campaigns' title='Campaigns' hasBullet={true} />
           <MenuItem to='/crafted/account/settings' title='Settings' hasBullet={true} />
         </MenuInnerWithSub>
 
