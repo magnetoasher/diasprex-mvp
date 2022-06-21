@@ -9,7 +9,7 @@ import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 const PrivateRoutes = () => {
   const BuilderPageWrapper = lazy(() => import('../pages/layout-builder/BuilderPageWrapper'))
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
-  const WizardsPage = lazy(() => import('../modules/wizards/WizardsPage'))
+  // const RegistrationStepsPage = lazy(() => import('../modules/registration/RegistrationStepsPage'))
   const AccountPage = lazy(() => import('../modules/accounts/AccountPage'))
   const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
@@ -33,14 +33,14 @@ const PrivateRoutes = () => {
             </SuspensedView>
           }
         />
-        <Route
-          path='crafted/pages/wizards/*'
+        {/* <Route
+          path='account/*'
           element={
             <SuspensedView>
-              <WizardsPage />
+              <RegistrationStepsPage />
             </SuspensedView>
           }
-        />
+        /> */}
         <Route
           path='crafted/widgets/*'
           element={

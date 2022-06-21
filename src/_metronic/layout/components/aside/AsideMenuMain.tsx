@@ -45,14 +45,14 @@ export function AsideMenuMain() {
           />
         </AsideMenuItemWithSub>
 
-        <AsideMenuItemWithSub to='/crafted/pages/wizards' title='Wizards' hasBullet={true}>
+        {/* <AsideMenuItemWithSub to='/crafted/pages/wizards' title='Wizards' hasBullet={true}>
           <AsideMenuItem
             to='/crafted/pages/wizards/horizontal'
             title='Horizontal'
             hasBullet={true}
           />
           <AsideMenuItem to='/crafted/pages/wizards/vertical' title='Vertical' hasBullet={true} />
-        </AsideMenuItemWithSub>
+        </AsideMenuItemWithSub> */}
       </AsideMenuItemWithSub>
       <AsideMenuItemWithSub
         to='/crafted/accounts'
@@ -63,7 +63,7 @@ export function AsideMenuMain() {
         <AsideMenuItem to='/crafted/account/overview' title='Overview' hasBullet={true} />
         <AsideMenuItem to='/crafted/account/settings' title='Settings' hasBullet={true} />
       </AsideMenuItemWithSub>
-      <AsideMenuItemWithSub
+      {/* <AsideMenuItemWithSub
         to='/error'
         title='Errors'
         fontIcon='bi-sticky'
@@ -71,7 +71,7 @@ export function AsideMenuMain() {
       >
         <AsideMenuItem to='/error/404' title='Error 404' hasBullet={true} />
         <AsideMenuItem to='/error/500' title='Error 500' hasBullet={true} />
-      </AsideMenuItemWithSub>
+      </AsideMenuItemWithSub> */}
       <AsideMenuItemWithSub
         to='/crafted/widgets'
         title='Widgets'
@@ -111,7 +111,7 @@ export function AsideMenuMain() {
           <div className='separator mx-1 my-4'></div>
         </div>
       </div>
-      <div className='menu-item'>
+      {/* <div className='menu-item'>
         <a
           target='_blank'
           className='menu-link'
@@ -122,7 +122,7 @@ export function AsideMenuMain() {
           </span>
           <span className='menu-title'>Changelog {process.env.REACT_APP_VERSION}</span>
         </a>
-      </div>
+      </div> */}
     </>
   )
 }

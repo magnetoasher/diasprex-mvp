@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import clsx from 'clsx'
 import * as auth from '../redux/AuthRedux'
 import {register} from '../redux/AuthCRUD'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {PasswordMeterComponent} from '../../../../_metronic/assets/ts/components'
 
@@ -49,6 +49,7 @@ const registrationSchema = Yup.object().shape({
 export function Registration() {
   const [loading, setLoading] = useState(false)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues,
     validationSchema: registrationSchema,
@@ -64,7 +65,8 @@ export function Registration() {
         )
           .then(({data: {api_token}}) => {
             setLoading(false)
-            dispatch(auth.actions.register(api_token))
+            sessionStorage.setItem('apiToken', api_token)
+            navigate('/auth/account/create')
           })
           .catch(() => {
             setLoading(false)

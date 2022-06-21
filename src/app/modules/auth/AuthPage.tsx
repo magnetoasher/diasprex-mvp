@@ -3,8 +3,8 @@ import {useEffect} from 'react'
 import {Outlet, Route, Routes} from 'react-router-dom'
 import {Registration} from './components/Registration'
 import {ForgotPassword} from './components/ForgotPassword'
-import {Login} from './components/Login'
 import {SigninPage} from '../../modules/signin/components/SigninPage'
+import {RegistrationStepsPage} from './registration/RegistrationStepsPage'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 
 const AuthLayout = () => {
@@ -64,6 +64,7 @@ const AuthLayout = () => {
 const AuthPage = () => (
   <Routes>
     <Route index element={<SigninPage />} />
+    <Route path='account/*' element={<RegistrationStepsPage />} />
     <Route element={<AuthLayout />}>
       {/* <Route path='login' element={<Login />} /> */}
       <Route path='registration' element={<Registration />} />

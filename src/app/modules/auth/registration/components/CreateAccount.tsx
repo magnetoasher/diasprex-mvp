@@ -1,19 +1,22 @@
 import React, {FC, useEffect, useRef, useState} from 'react'
-import {KTSVG} from '../../../../_metronic/helpers'
+import {useDispatch} from 'react-redux'
+import * as auth from '../../redux/AuthRedux'
+import {KTSVG} from '../../../../../_metronic/helpers'
 import {Step1} from './steps/Step1'
 import {Step2} from './steps/Step2'
 import {Step3} from './steps/Step3'
 import {Step4} from './steps/Step4'
 import {Step5} from './steps/Step5'
-import {StepperComponent} from '../../../../_metronic/assets/ts/components'
+import {StepperComponent} from '../../../../../_metronic/assets/ts/components'
 import {Formik, Form, FormikValues} from 'formik'
 import {ICreateAccount, createAccountSchemas, inits} from './CreateAccountWizardHelper'
 
-const Vertical: FC = () => {
+const CreateAccount: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
   const [initValues] = useState<ICreateAccount>(inits)
+  const dispatch = useDispatch()
 
   const loadStepper = () => {
     stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement)
@@ -39,8 +42,10 @@ const Vertical: FC = () => {
     if (stepper.current.currentStepIndex !== stepper.current.totatStepsNumber) {
       stepper.current.goNext()
     } else {
-      stepper.current.goto(1)
-      actions.resetForm()
+      // stepper.current.goto(1)
+      // actions.resetForm()
+      const api_token: string = sessionStorage.getItem('apiToken') || ''
+      dispatch(auth.actions.register(api_token))
     }
   }
 
@@ -85,8 +90,8 @@ const Vertical: FC = () => {
               </div>
 
               <div className='stepper-label'>
-                <h3 className='stepper-title'>Account Settings</h3>
-                <div className='stepper-desc fw-bold'>Setup Your Account Settings</div>
+                <h3 className='stepper-title'>Account Info</h3>
+                <div className='stepper-desc fw-bold'>Setup Your Account Info</div>
               </div>
             </div>
 
@@ -99,12 +104,12 @@ const Vertical: FC = () => {
               </div>
 
               <div className='stepper-label'>
-                <h3 className='stepper-title'>Business Info</h3>
-                <div className='stepper-desc fw-bold'>Your Business Related Info</div>
+                <h3 className='stepper-title'>Completed</h3>
+                <div className='stepper-desc fw-bold'>Final Step</div>
               </div>
             </div>
 
-            <div className='stepper-item' data-kt-stepper-element='nav'>
+            {/* <div className='stepper-item' data-kt-stepper-element='nav'>
               <div className='stepper-line w-40px'></div>
 
               <div className='stepper-icon w-40px h-40px'>
@@ -130,7 +135,7 @@ const Vertical: FC = () => {
                 <h3 className='stepper-title'>Completed</h3>
                 <div className='stepper-desc fw-bold'>Woah, we are here</div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -143,17 +148,17 @@ const Vertical: FC = () => {
                 <Step1 />
               </div>
 
-              <div data-kt-stepper-element='content'>
+              {/* <div data-kt-stepper-element='content'>
                 <Step2 />
-              </div>
+              </div> */}
 
               <div data-kt-stepper-element='content'>
                 <Step3 />
               </div>
 
-              <div data-kt-stepper-element='content'>
+              {/* <div data-kt-stepper-element='content'>
                 <Step4 />
-              </div>
+              </div> */}
 
               <div data-kt-stepper-element='content'>
                 <Step5 />
@@ -198,4 +203,4 @@ const Vertical: FC = () => {
   )
 }
 
-export {Vertical}
+export {CreateAccount}

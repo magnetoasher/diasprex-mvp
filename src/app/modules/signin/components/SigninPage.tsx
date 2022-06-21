@@ -229,7 +229,7 @@ const SigninPage: FC = () => {
           <div
             className='content-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center'
             style={{
-              backgroundImage: 'url(media/svg/illustrations/login-visual-2.svg)',
+              backgroundImage: 'url(media/login_visual_dx.jpg)',
             }}
           ></div>
         </div>

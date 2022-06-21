@@ -22,26 +22,26 @@ const createAccountSchemas = [
   Yup.object({
     accountType: Yup.string().required().label('Account Type'),
   }),
-  Yup.object({
-    accountName: Yup.string().required().label('Account Name'),
-  }),
+  // Yup.object({
+  //   accountName: Yup.string().required().label('Account Name'),
+  // }),
   Yup.object({
     businessName: Yup.string().required().label('Business Name'),
     businessDescriptor: Yup.string().required().label('Shortened Descriptor'),
     businessType: Yup.string().required().label('Corporation Type'),
     businessEmail: Yup.string().required().label('Contact Email'),
   }),
-  Yup.object({
-    nameOnCard: Yup.string().required().label('Name On Card'),
-    cardNumber: Yup.string().required().label('Card Number'),
-    cardExpiryMonth: Yup.string().required().label('Expiration Month'),
-    cardExpiryYear: Yup.string().required().label('Expiration Year'),
-    cardCvv: Yup.string().required().label('CVV'),
-  }),
+  // Yup.object({
+  //   nameOnCard: Yup.string().required().label('Name On Card'),
+  //   cardNumber: Yup.string().required().label('Card Number'),
+  //   cardExpiryMonth: Yup.string().required().label('Expiration Month'),
+  //   cardExpiryYear: Yup.string().required().label('Expiration Year'),
+  //   cardCvv: Yup.string().required().label('CVV'),
+  // }),
 ]
 
 const inits: ICreateAccount = {
-  accountType: 'personal',
+  accountType: 'basic',
   accountTeamSize: '50+',
   accountName: '',
   accountPlan: '1',
