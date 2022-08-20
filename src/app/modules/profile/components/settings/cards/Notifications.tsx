@@ -24,16 +24,16 @@ const Notifications: React.FC = () => {
         className='card-header border-0 cursor-pointer'
         role='button'
         data-bs-toggle='collapse'
-        data-bs-target='#kt_account_notifications'
+        data-bs-target='#kt_profile_notifications'
         aria-expanded='true'
-        aria-controls='kt_account_notifications'
+        aria-controls='kt_profile_notifications'
       >
         <div className='card-title m-0'>
           <h3 className='fw-bolder m-0'>Notifications</h3>
         </div>
       </div>
 
-      <div id='kt_account_notifications' className='collapse show'>
+      <div id='kt_profile_notifications' className='collapse show'>
         <form className='form'>
           <div className='card-body border-top px-9 pt-3 pb-4'>
             <div className='table-responsive'>

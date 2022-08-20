@@ -1,5 +1,7 @@
 #! /bin/bash
 
+nvm install 14.19.3
+npm install -g aws-cdk
 npm run build
 
 cd cdk

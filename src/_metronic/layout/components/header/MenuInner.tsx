@@ -1,14 +1,14 @@
 import React from 'react'
-import {MenuItem} from './MenuItem'
-import {MenuInnerWithSub} from './MenuInnerWithSub'
-import {MegaMenu} from './MegaMenu'
-import {useIntl} from 'react-intl'
+import { MenuItem } from './MenuItem'
+import { MenuInnerWithSub } from './MenuInnerWithSub'
+import { MegaMenu } from './MegaMenu'
+import { useIntl } from 'react-intl'
 
 export function MenuInner() {
   const intl = useIntl()
   return (
     <>
-      <MenuItem title={intl.formatMessage({id: 'MENU.DASHBOARD'})} to='/dashboard' />
+      <MenuItem title={intl.formatMessage({ id: 'MENU.DASHBOARD' })} to='/dashboard' />
       <MenuItem title='Layout Builder' to='/builder' />
       <MenuInnerWithSub
         title='Crafted'
@@ -58,16 +58,16 @@ export function MenuInner() {
 
         {/* ACCOUNT */}
         <MenuInnerWithSub
-          title='Accounts'
-          to='/crafted/accounts'
+          title='Profile'
+          to='/crafted/profile'
           fontIcon='bi-person'
           hasArrow={true}
           menuPlacement='right-start'
           menuTrigger={`{default:'click', lg: 'hover'}`}
         >
-          <MenuItem to='/crafted/account/overview' title='Overview' hasBullet={true} />
-          <MenuItem to='/crafted/account/campaigns' title='Campaigns' hasBullet={true} />
-          <MenuItem to='/crafted/account/settings' title='Settings' hasBullet={true} />
+          <MenuItem to='/crafted/profile/overview' title='Overview' hasBullet={true} />
+          <MenuItem to='/crafted/profile/campaigns' title='Campaigns' hasBullet={true} />
+          <MenuItem to='/crafted/profile/settings' title='Settings' hasBullet={true} />
         </MenuInnerWithSub>
 
         {/* ERRORS */}

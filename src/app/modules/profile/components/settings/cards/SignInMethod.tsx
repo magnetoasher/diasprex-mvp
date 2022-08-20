@@ -80,14 +80,14 @@ const SignInMethod: React.FC = () => {
         className='card-header border-0 cursor-pointer'
         role='button'
         data-bs-toggle='collapse'
-        data-bs-target='#kt_account_signin_method'
+        data-bs-target='#kt_profile_signin_method'
       >
         <div className='card-title m-0'>
           <h3 className='fw-bolder m-0'>Sign-in Method</h3>
         </div>
       </div>
 
-      <div id='kt_account_signin_method' className='collapse show'>
+      <div id='kt_profile_signin_method' className='collapse show'>
         <div className='card-body border-top p-9'>
           <div className='d-flex flex-wrap align-items-center'>
             <div id='kt_signin_email' className={' ' + (showEmailForm && 'd-none')}>
@@ -318,9 +318,9 @@ const SignInMethod: React.FC = () => {
             />
             <div className='d-flex flex-stack flex-grow-1 flex-wrap flex-md-nowrap'>
               <div className='mb-3 mb-md-0 fw-bold'>
-                <h4 className='text-gray-800 fw-bolder'>Secure Your Account</h4>
+                <h4 className='text-gray-800 fw-bolder'>Secure Your Profile</h4>
                 <div className='fs-6 text-gray-600 pe-7'>
-                  Two-factor authentication adds an extra layer of security to your account. To log
+                  Two-factor authentication adds an extra layer of security to your profile. To log
                   in, in addition you'll need to provide a 6 digit code
                 </div>
               </div>

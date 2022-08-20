@@ -1,16 +1,15 @@
-import {Navigate, Routes, Route, Outlet} from 'react-router-dom'
-import {PageLink, PageTitle} from '../../../_metronic/layout/core'
-import {Overview} from './components/Overview'
-import {Projects} from './components/Projects'
-import {Campaigns} from './components/Campaigns'
-import {Documents} from './components/Documents'
-import {Connections} from './components/Connections'
-import {ProfileHeader} from './ProfileHeader'
+import React from 'react'
+import { Navigate, Route, Routes, Outlet } from 'react-router-dom'
+import { PageLink, PageTitle } from '../../../_metronic/layout/core'
+import { Overview } from './components/Overview'
+import { Campaigns } from './components/Campaigns'
+import { Settings } from './components/settings/Settings'
+import { ProfileHeader } from './ProfileHeader'
 
 const profileBreadCrumbs: Array<PageLink> = [
   {
     title: 'Profile',
-    path: '/crafted/pages/profile/overview',
+    path: '/crafted/profile/overview',
     isSeparator: false,
     isActive: false,
   },
@@ -22,64 +21,48 @@ const profileBreadCrumbs: Array<PageLink> = [
   },
 ]
 
-const ProfilePage = () => (
-  <Routes>
-    <Route
-      element={
-        <>
-          <ProfileHeader />
-          <Outlet />
-        </>
-      }
-    >
+const ProfilePage: React.FC = () => {
+  return (
+    <Routes>
       <Route
-        path='overview'
         element={
           <>
-            <PageTitle breadcrumbs={profileBreadCrumbs}>Overview</PageTitle>
-            <Overview />
+            <ProfileHeader />
+            <Outlet />
           </>
         }
-      />
-      <Route
-        path='projects'
-        element={
-          <>
-            <PageTitle breadcrumbs={profileBreadCrumbs}>Projects</PageTitle>
-            <Projects />
-          </>
-        }
-      />
-      <Route
-        path='campaigns'
-        element={
-          <>
-            <PageTitle breadcrumbs={profileBreadCrumbs}>Campaigns</PageTitle>
-            <Campaigns />
-          </>
-        }
-      />
-      <Route
-        path='documents'
-        element={
-          <>
-            <PageTitle breadcrumbs={profileBreadCrumbs}>Documents</PageTitle>
-            <Documents />
-          </>
-        }
-      />
-      <Route
-        path='connections'
-        element={
-          <>
-            <PageTitle breadcrumbs={profileBreadCrumbs}>Connections</PageTitle>
-            <Connections />
-          </>
-        }
-      />
-      <Route index element={<Navigate to='/crafted/pages/profile/overview' />} />
-    </Route>
-  </Routes>
-)
+      >
+        <Route
+          path='overview'
+          element={
+            <>
+              <PageTitle breadcrumbs={profileBreadCrumbs}>Overview</PageTitle>
+              <Overview />
+            </>
+          }
+        />
+        <Route
+          path='campaigns'
+          element={
+            <>
+              <PageTitle breadcrumbs={profileBreadCrumbs}>Campaigns</PageTitle>
+              <Campaigns />
+            </>
+          }
+        />
+        <Route
+          path='settings'
+          element={
+            <>
+              <PageTitle breadcrumbs={profileBreadCrumbs}>Settings</PageTitle>
+              <Settings />
+            </>
+          }
+        />
+        <Route index element={<Navigate to='/crafted/profile/overview' />} />
+      </Route>
+    </Routes>
+  )
+}
 
 export default ProfilePage

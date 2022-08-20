@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC} from 'react'
 import {Link} from 'react-router-dom'
-import {IconUserModel} from '../../../../app/modules/profile/ProfileModels'
-import {UsersList} from '../../../../app/modules/profile/components/UsersList'
+import {IconUserModel} from '../../../../app/modules/profile-ignore/ProfileModels'
+import {UsersList} from '../../../../app/modules/profile-ignore/components/UsersList'
 import {toAbsoluteUrl} from '../../../helpers'
 
 type Props = {
@@ -32,7 +32,7 @@ const Card2: FC<Props> = ({
 }) => {
   return (
     <Link
-      to='/crafted/account/overview'
+      to='/crafted/profile/overview'
       className='card border border-2 border-gray-300 border-hover'
     >
       <div className='card-header border-0 pt-9'>

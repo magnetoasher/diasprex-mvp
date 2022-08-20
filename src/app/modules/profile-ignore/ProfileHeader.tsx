@@ -3,9 +3,9 @@ import React from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
 import {Link} from 'react-router-dom'
 import {Dropdown1} from '../../../_metronic/partials'
-import {useLocation} from 'react-router'
+import {useLocation} from 'react-router-dom'
 
-const AccountHeader: React.FC = () => {
+const ProfileHeader: React.FC = () => {
   const location = useLocation()
 
   return (
@@ -14,7 +14,7 @@ const AccountHeader: React.FC = () => {
         <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
           <div className='me-7 mb-4'>
             <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
-              <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} alt='Metronic' />
+              <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} alt='Metornic' />
               <div className='position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px'></div>
             </div>
           </div>
@@ -49,7 +49,7 @@ const AccountHeader: React.FC = () => {
                     href='#'
                     className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
                   >
-                    <KTSVG
+                    <KTSVG                                                                
                       path='/media/icons/duotune/general/gen018.svg'
                       className='svg-icon-4 me-1'
                     />
@@ -129,8 +129,8 @@ const AccountHeader: React.FC = () => {
 
                     <div className='fw-bold fs-6 text-gray-400'>Projects</div>
                   </div> */}
-                  {/* 
-                  <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+
+                  {/* <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
                       <KTSVG
                         path='/media/icons/duotune/arrows/arr066.svg'
@@ -167,31 +167,31 @@ const AccountHeader: React.FC = () => {
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/account/overview' && 'active')
+                  (location.pathname === '/crafted/profile/overview' && 'active')
                 }
-                to='/crafted/account/overview'
+                to='/crafted/profile/overview'
               >
-                Profile Details
+                Overview
               </Link>
             </li>
             <li className='nav-item'>
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/account/campaigns' && 'active')
+                  (location.pathname === '/crafted/profile/campaigns' && 'active')
                 }
-                to='/crafted/account/campaigns'
+                to='/crafted/profile/campaigns'
               >
-                Campaigns
+                Projects
               </Link>
             </li>
             <li className='nav-item'>
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/account/settings' && 'active')
+                  (location.pathname === '/crafted/profile/settings' && 'active')
                 }
-                to='/crafted/account/settings'
+                to='/crafted/profile/settings'
               >
                 Settings
               </Link>
@@ -203,4 +203,4 @@ const AccountHeader: React.FC = () => {
   )
 }
 
-export {AccountHeader}
+export {ProfileHeader}
