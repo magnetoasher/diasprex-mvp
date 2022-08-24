@@ -46,16 +46,16 @@ const ProfileDetails: React.FC = () => {
         className='card-header border-0 cursor-pointer'
         role='button'
         data-bs-toggle='collapse'
-        data-bs-target='#kt_account_profile_details'
+        data-bs-target='#kt_profile_profile_details'
         aria-expanded='true'
-        aria-controls='kt_account_profile_details'
+        aria-controls='kt_profile_profile_details'
       >
         <div className='card-title m-0'>
           <h3 className='fw-bolder m-0'>Profile Details</h3>
         </div>
       </div>
 
-      <div id='kt_account_profile_details' className='collapse show'>
+      <div id='kt_profile_profile_details' className='collapse show'>
         <form onSubmit={formik.handleSubmit} noValidate className='form'>
           <div className='card-body border-top p-9'>
             <div className='row mb-6'>

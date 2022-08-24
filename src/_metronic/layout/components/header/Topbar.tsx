@@ -1,8 +1,8 @@
 import clsx from 'clsx'
-import React, {FC} from 'react'
-import {KTSVG, toAbsoluteUrl} from '../../../helpers'
-import {HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search} from '../../../partials'
-import {useLayout} from '../../core'
+import React, { FC } from 'react'
+import { KTSVG, toAbsoluteUrl } from '../../../helpers'
+import { HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search } from '../../../partials'
+import { useLayout } from '../../core'
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
   toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px',
@@ -10,51 +10,10 @@ const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
   toolbarButtonIconSizeClass = 'svg-icon-1'
 
 const Topbar: FC = () => {
-  const {config} = useLayout()
+  const { config } = useLayout()
 
   return (
     <div className='d-flex align-items-stretch flex-shrink-0'>
-      {/* Search */}
-      <div className={clsx('d-flex align-items-stretch', toolbarButtonMarginClass)}>
-        <Search />
-      </div>
-      {/* Activities */}
-      <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
-        {/* begin::Drawer toggle */}
-        <div
-          className={clsx('btn btn-icon btn-active-light-primary btn-custom', toolbarButtonHeightClass)}
-          id='kt_activities_toggle'
-        >
-          <KTSVG
-            path='/media/icons/duotune/general/gen032.svg'
-            className={toolbarButtonIconSizeClass}
-          />
-        </div>
-        {/* end::Drawer toggle */}
-      </div>
-
-        {/* NOTIFICATIONS */}
-        <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
-            {/* begin::Menu- wrapper */}
-            <div
-                className={clsx(
-                    'btn btn-icon btn-active-light-primary btn-custom',
-                    toolbarButtonHeightClass
-                )}
-                data-kt-menu-trigger='click'
-                data-kt-menu-attach='parent'
-                data-kt-menu-placement='bottom-end'
-                data-kt-menu-flip='bottom'
-            >
-                <KTSVG
-                    path='/media/icons/duotune/general/gen022.svg'
-                    className={toolbarButtonIconSizeClass}
-                />
-            </div>
-            <HeaderNotificationsMenu />
-            {/* end::Menu wrapper */}
-        </div>
-
       {/* CHAT */}
       <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
         {/* begin::Menu wrapper */}
@@ -72,28 +31,28 @@ const Topbar: FC = () => {
 
           <span className='bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink'></span>
         </div>
+        <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
+          {/* begin::Menu- wrapper */}
+          <div
+            className={clsx(
+              'btn btn-icon btn-active-light-primary btn-custom',
+              toolbarButtonHeightClass
+            )}
+            data-kt-menu-trigger='click'
+            data-kt-menu-attach='parent'
+            data-kt-menu-placement='bottom-end'
+            data-kt-menu-flip='bottom'
+          >
+            <KTSVG
+              path='/media/icons/duotune/general/gen022.svg'
+              className={toolbarButtonIconSizeClass}
+            />
+          </div>
+          <HeaderNotificationsMenu />
+          {/* end::Menu wrapper */}
+        </div>
         {/* end::Menu wrapper */}
       </div>
-
-        {/* Quick links */}
-        <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
-            {/* begin::Menu wrapper */}
-            <div
-                className={clsx('btn btn-icon btn-active-light-primary btn-custom', toolbarButtonHeightClass)}
-                data-kt-menu-trigger='click'
-                data-kt-menu-attach='parent'
-                data-kt-menu-placement='bottom-end'
-                data-kt-menu-flip='bottom'
-            >
-                <KTSVG
-                    path='/media/icons/duotune/general/gen025.svg'
-                    className={toolbarButtonIconSizeClass}
-                />
-            </div>
-            <QuickLinks />
-            {/* end::Menu wrapper */}
-        </div>
-
       {/* begin::User */}
       <div
         className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}
@@ -110,6 +69,7 @@ const Topbar: FC = () => {
           <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} alt='metronic' />
         </div>
         <HeaderUserMenu />
+
         {/* end::Toggle */}
       </div>
       {/* end::User */}
@@ -125,8 +85,74 @@ const Topbar: FC = () => {
           </div>
         </div>
       )}
+
     </div>
+
+    // <div className='d-flex align-items-stretch flex-shrink-0'>
+    //   Search
+    //   <div className={clsx('d-flex align-items-stretch', toolbarButtonMarginClass)}>
+    //     <Search />
+    //   </div>
+    //   {/* Activities */}
+    //   <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
+    //     {/* begin::Drawer toggle */}
+    //     <div
+    //       className={clsx('btn btn-icon btn-active-light-primary btn-custom', toolbarButtonHeightClass)}
+    //       id='kt_activities_toggle'
+    //     >
+    //       <KTSVG
+    //         path='/media/icons/duotune/general/gen032.svg'
+    //         className={toolbarButtonIconSizeClass}
+    //       />
+    //     </div>
+    //     {/* end::Drawer toggle */}
+    //   </div>
+
+    //   {/* NOTIFICATIONS */}
+    //   <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
+    //     {/* begin::Menu- wrapper */}
+    //     <div
+    //       className={clsx(
+    //         'btn btn-icon btn-active-light-primary btn-custom',
+    //         toolbarButtonHeightClass
+    //       )}
+    //       data-kt-menu-trigger='click'
+    //       data-kt-menu-attach='parent'
+    //       data-kt-menu-placement='bottom-end'
+    //       data-kt-menu-flip='bottom'
+    //     >
+    //       <KTSVG
+    //         path='/media/icons/duotune/general/gen022.svg'
+    //         className={toolbarButtonIconSizeClass}
+    //       />
+    //     </div>
+    //     <HeaderNotificationsMenu />
+    //     {/* end::Menu wrapper */}
+    //   </div>
+
+
+
+    //   {/* Quick links */}
+    //   <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
+    //     {/* begin::Menu wrapper */}
+    //     <div
+    //       className={clsx('btn btn-icon btn-active-light-primary btn-custom', toolbarButtonHeightClass)}
+    //       data-kt-menu-trigger='click'
+    //       data-kt-menu-attach='parent'
+    //       data-kt-menu-placement='bottom-end'
+    //       data-kt-menu-flip='bottom'
+    //     >
+    //       <KTSVG
+    //         path='/media/icons/duotune/general/gen025.svg'
+    //         className={toolbarButtonIconSizeClass}
+    //       />
+    //     </div>
+    //     <QuickLinks />
+    //     {/* end::Menu wrapper */}
+    //   </div>
+
+    // </div>
   )
 }
 
-export {Topbar}
+export { Topbar }

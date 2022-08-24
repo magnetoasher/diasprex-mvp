@@ -1,13 +1,13 @@
-import React, {FC} from 'react'
+import { FC } from 'react'
 import './signin-page.css'
-import {useState} from 'react'
-import {useDispatch} from 'react-redux'
+import { useState } from 'react'
+import { useOktaAuth } from "@okta/okta-react"
 import * as Yup from 'yup'
 import clsx from 'clsx'
-import {Link} from 'react-router-dom'
-import {useFormik} from 'formik'
-import * as auth from '../redux/AuthRedux'
-import {login} from '../redux/AuthCRUD'
+import { Link } from 'react-router-dom'
+import { useFormik } from 'formik'
+import { useLottie } from "lottie-react"
+import groovyWalkAnimation from "../../../../lf20_xvgg1zca.json"
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -28,19 +28,23 @@ const initialValues = {
 
 const SigninPage: FC = () => {
   const [loading, setLoading] = useState(false)
-  const dispatch = useDispatch()
+  const { oktaAuth } = useOktaAuth()
+
   const formik = useFormik({
     initialValues,
     validationSchema: loginSchema,
-    onSubmit: (values, {setStatus, setSubmitting}) => {
+    onSubmit: (values, { setStatus, setSubmitting }) => {
       setLoading(true)
       setTimeout(() => {
-        login(values.email, values.password)
-          .then(({data: {api_token}}) => {
+        oktaAuth
+          .signInWithCredentials({ username: values.email, password: values.password })
+          .then((res: any) => {
+            const sessionToken: string = res.sessionToken
+            // sessionToken is a one-use token, so make sure this is only called once
+            oktaAuth.signInWithRedirect({ sessionToken })
             setLoading(false)
-            dispatch(auth.actions.login(api_token))
           })
-          .catch(() => {
+          .catch((err) => {
             setLoading(false)
             setSubmitting(false)
             setStatus('The login detail is incorrect')
@@ -48,6 +52,14 @@ const SigninPage: FC = () => {
       }, 1000)
     },
   })
+
+  const options = {
+    animationData: groovyWalkAnimation,
+    loop: true
+  };
+
+  const { View } = useLottie(options);
+
   return (
     <div className='d-flex flex-column flex-root'>
       <div
@@ -97,14 +109,14 @@ const SigninPage: FC = () => {
                       {...formik.getFieldProps('email')}
                       className={clsx(
                         'form-control form-control-solid h-auto py-7 px-6 rounded-lg',
-                        {'is-invalid': formik.touched.email && formik.errors.email},
+                        { 'is-invalid': formik.touched.email && formik.errors.email },
                         {
                           'is-valid': formik.touched.email && !formik.errors.email,
                         }
                       )}
                       type='email'
                       name='email'
-                      // autoComplete='off'
+                    // autoComplete='off'
                     />
                     {formik.touched.email && formik.errors.email && (
                       <div className='fv-plugins-message-container'>
@@ -121,7 +133,7 @@ const SigninPage: FC = () => {
                       <Link
                         to='/auth/forgot-password'
                         className='text-primary font-size-h6 fw-bolder text-hover-primary pt-5'
-                        style={{marginLeft: '5px'}}
+                        style={{ marginLeft: '5px' }}
                       >
                         Forgot Password ?
                       </Link>
@@ -159,7 +171,7 @@ const SigninPage: FC = () => {
                     >
                       {!loading && <span className='indicator-label'>Sign In</span>}
                       {loading && (
-                        <span className='indicator-progress' style={{display: 'block'}}>
+                        <span className='indicator-progress' style={{ display: 'block' }}>
                           Please wait...
                           <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
                         </span>
@@ -214,28 +226,30 @@ const SigninPage: FC = () => {
         </div>
         <div
           className='content order-1 d-flex flex-column w-100 pb-0'
-          style={{backgroundColor: '#f3f4f6'}}
+          style={{ backgroundColor: '#f3f4f6' }}
         >
           <div className='d-flex flex-column justify-content-center text-center pt-lg-40 pt-md-5 pt-sm-5 px-lg-0 pt-5 px-7'>
-            <h3 className='display4 font-weight-bolder my-7 text-dark' style={{color: '#986923'}}>
-              Amazing Wireframes
+            <h3 className='display4 font-weight-bolder my-7 text-dark' style={{ color: '#986923' }}>
+              The Journey Starts Here
             </h3>
             <p className='font-weight-bolder font-size-h2-md font-size-lg text-dark opacity-70'>
-              User Experience &amp; Interface Design, Product Strategy
+              Join Diasprex to build a prosperous future and leave
               <br />
-              Web Application SaaS Solutions
+              a legacy for the next generation of Africans
             </p>
           </div>
           <div
             className='content-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center'
-            style={{
-              backgroundImage: 'url(media/login_visual_dx.jpg)',
-            }}
-          ></div>
+          // style={{
+          //   backgroundImage: 'url(media/svg/illustrations/login-visual-africa_final-01.svg)',
+          // }}
+          >
+            <>{View}</>
+          </div>
         </div>
       </div>
     </div>
   )
 }
 
-export {SigninPage}
+export { SigninPage }

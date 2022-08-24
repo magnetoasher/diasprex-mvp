@@ -1,49 +1,143 @@
-export interface ISettings {
-  setupEmailNotifications: {
-    emailNotifications: boolean
-    sendCopyToPersonalEmail: boolean
+export interface IProfileDetails {
+  avatar: string
+  fName: string
+  lName: string
+  company: string
+  contactPhone: string
+  companySite: string
+  country: string
+  language: string
+  timeZone: string
+  currency: string
+  communications: {
+    email: boolean
+    phone: boolean
   }
-  activityRelatedEmail: {
-    whenToEmail: {
-      youHaveNewNotifications: boolean
-      youAreADirectMessage: boolean
-      someoneAddsYouAsAConnection: boolean
-    }
-    whenToEscalateEmails: {
-      uponNewOrder: boolean
-      newMembershipApproval: boolean
-      memberRegistration: boolean
-    }
+  allowMarketing: boolean
+}
+
+export interface IUpdateEmail {
+  newEmail: string
+  confirmPassword: string
+}
+
+export interface IUpdatePassword {
+  currentPassword: string
+  newPassword: string
+  passwordConfirmation: string
+}
+
+export interface IConnectedProfiles {
+  google: boolean
+  github: boolean
+  stack: boolean
+}
+
+export interface IEmailPreferences {
+  successfulPayments: boolean
+  payouts: boolean
+  freeCollections: boolean
+  customerPaymentDispute: boolean
+  refundAlert: boolean
+  invoicePayments: boolean
+  webhookAPIEndpoints: boolean
+}
+
+export interface INotifications {
+  notifications: {
+    email: boolean
+    phone: boolean
   }
-  updatesFromKeenthemes: {
-    newsAboutKTProducts: boolean
-    tipsOnGettingMore: boolean
-    thingsYouMissed: boolean
-    newsAboutKTPartners: boolean
+  billingUpdates: {
+    email: boolean
+    phone: boolean
+  }
+  newTeamMembers: {
+    email: boolean
+    phone: boolean
+  }
+  completeProjects: {
+    email: boolean
+    phone: boolean
+  }
+  newsletters: {
+    email: boolean
+    phone: boolean
   }
 }
 
-export const defaultSettings: ISettings = {
-  setupEmailNotifications: {
-    emailNotifications: true,
-    sendCopyToPersonalEmail: false,
+export interface IDeactivateProfile {
+  confirm: boolean
+}
+
+export const profileDetailsInitValues: IProfileDetails = {
+  avatar: '/media/avatars/300-1.jpg',
+  fName: 'Max',
+  lName: 'Smith',
+  company: 'Keenthemes',
+  contactPhone: '044 3276 454 935',
+  companySite: 'keenthemes.com',
+  country: '',
+  language: '',
+  timeZone: '',
+  currency: '',
+  communications: {
+    email: false,
+    phone: false,
   },
-  activityRelatedEmail: {
-    whenToEmail: {
-      youHaveNewNotifications: true,
-      youAreADirectMessage: false,
-      someoneAddsYouAsAConnection: false,
-    },
-    whenToEscalateEmails: {
-      uponNewOrder: true,
-      newMembershipApproval: false,
-      memberRegistration: false,
-    },
+  allowMarketing: false,
+}
+
+export const updateEmail: IUpdateEmail = {
+  newEmail: 'support@keenthemes.com',
+  confirmPassword: '',
+}
+
+export const updatePassword: IUpdatePassword = {
+  currentPassword: '',
+  newPassword: '',
+  passwordConfirmation: '',
+}
+
+export const connectedProfiles: IConnectedProfiles = {
+  google: true,
+  github: true,
+  stack: false,
+}
+
+export const emailPreferences: IEmailPreferences = {
+  successfulPayments: false,
+  payouts: true,
+  freeCollections: false,
+  customerPaymentDispute: true,
+  refundAlert: false,
+  invoicePayments: true,
+  webhookAPIEndpoints: false,
+}
+
+export const notifications: INotifications = {
+  notifications: {
+    email: true,
+    phone: true,
   },
-  updatesFromKeenthemes: {
-    newsAboutKTProducts: false,
-    tipsOnGettingMore: false,
-    thingsYouMissed: false,
-    newsAboutKTPartners: false,
+  billingUpdates: {
+    email: true,
+    phone: true,
   },
+  newTeamMembers: {
+    email: true,
+    phone: false,
+  },
+  completeProjects: {
+    email: false,
+    phone: true,
+  },
+  newsletters: {
+    email: false,
+    phone: false,
+  },
+}
+
+export const deactivateProfile: IDeactivateProfile = {
+  confirm: false,
 }

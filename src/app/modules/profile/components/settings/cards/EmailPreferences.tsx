@@ -24,16 +24,16 @@ const EmailPreferences: React.FC = () => {
         className='card-header border-0 cursor-pointer'
         role='button'
         data-bs-toggle='collapse'
-        data-bs-target='#kt_account_email_preferences'
+        data-bs-target='#kt_profile_email_preferences'
         aria-expanded='true'
-        aria-controls='kt_account_email_preferences'
+        aria-controls='kt_profile_email_preferences'
       >
         <div className='card-title m-0'>
           <h3 className='fw-bolder m-0'>Email Preferences</h3>
         </div>
       </div>
 
-      <div id='kt_account_email_preferences' className='collapse show'>
+      <div id='kt_profile_email_preferences' className='collapse show'>
         <form className='form'>
           <div className='card-body border-top px-9 py-9'>
             <label className='form-check form-check-custom form-check-solid align-items-start'>

@@ -29,3 +29,7 @@ body {
   position: absolute;
   transform: translateY(-400%) translateX(-100%);
 }
+
+.custom-disappear {
+  display: none !important;
+}

@@ -1,10 +1,11 @@
-import React, {FC} from 'react'
-import {KTSVG, toAbsoluteUrl} from '../../../../../../_metronic/helpers'
-import {Field, ErrorMessage} from 'formik'
+import React, { FC } from 'react'
+import { KTSVG, toAbsoluteUrl } from '../../../../../../_metronic/helpers'
+import { Field, ErrorMessage } from 'formik'
 
 const Step4: FC = () => {
   return (
     <div className='w-100'>
+
       <div className='pb-10 pb-lg-15'>
         <h2 className='fw-bolder text-dark'>Billing Details</h2>
 
@@ -164,4 +165,4 @@ const Step4: FC = () => {
   )
 }
 
-export {Step4}
+export { Step4 }

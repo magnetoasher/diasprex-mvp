@@ -4,7 +4,6 @@ import {Outlet, Route, Routes} from 'react-router-dom'
 import {Registration} from './components/Registration'
 import {ForgotPassword} from './components/ForgotPassword'
 import {SigninPage} from '../../modules/signin/components/SigninPage'
-import {RegistrationStepsPage} from './registration/RegistrationStepsPage'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 
 const AuthLayout = () => {
@@ -19,7 +18,7 @@ const AuthLayout = () => {
     <div
       className='d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed'
       style={{
-        backgroundImage: `url(${toAbsoluteUrl('/media/illustrations/sketchy-1/14.png')})`,
+        backgroundImage: `url(${toAbsoluteUrl('/media/illustrations/sketchy-1/signup-banner.jpg')})`,
       }}
     >
       {/* begin::Content */}
@@ -64,7 +63,6 @@ const AuthLayout = () => {
 const AuthPage = () => (
   <Routes>
     <Route index element={<SigninPage />} />
-    <Route path='account/*' element={<RegistrationStepsPage />} />
     <Route element={<AuthLayout />}>
       {/* <Route path='login' element={<Login />} /> */}
       <Route path='registration' element={<Registration />} />

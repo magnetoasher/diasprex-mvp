@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../../../../_metronic/helpers'
-import {IConnectedAccounts, connectedAccounts} from '../SettingsModel'
+import {IConnectedProfiles, connectedProfiles} from '../SettingsModel'
 
-const ConnectedAccounts: React.FC = () => {
-  const [data, setData] = useState<IConnectedAccounts>(connectedAccounts)
+const ConnectedProfiles: React.FC = () => {
+  const [data, setData] = useState<IConnectedProfiles>(connectedProfiles)
 
-  const updateData = (fieldsToUpdate: Partial<IConnectedAccounts>) => {
+  const updateData = (fieldsToUpdate: Partial<IConnectedProfiles>) => {
     const updatedData = {...data, ...fieldsToUpdate}
     setData(updatedData)
   }
@@ -26,16 +26,16 @@ const ConnectedAccounts: React.FC = () => {
         className='card-header border-0 cursor-pointer'
         role='button'
         data-bs-toggle='collapse'
-        data-bs-target='#kt_account_connected_accounts'
+        data-bs-target='#kt_profile_connected_profiles'
         aria-expanded='true'
-        aria-controls='kt_account_connected_accounts'
+        aria-controls='kt_profile_connected_profiles'
       >
         <div className='card-title m-0'>
-          <h3 className='fw-bolder m-0'>Connected Accounts</h3>
+          <h3 className='fw-bolder m-0'>Connected Profiles</h3>
         </div>
       </div>
 
-      <div id='kt_account_connected_accounts' className='collapse show'>
+      <div id='kt_profile_connected_profiles' className='collapse show'>
         <div className='card-body border-top p-9'>
           <div className='notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6'>
             <KTSVG
@@ -45,7 +45,7 @@ const ConnectedAccounts: React.FC = () => {
             <div className='d-flex flex-stack flex-grow-1'>
               <div className='fw-bold'>
                 <div className='fs-6 text-gray-600'>
-                  Two-factor authentication adds an extra layer of security to your account. To log
+                  Two-factor authentication adds an extra layer of security to your profile. To log
                   in, in you'll need to provide a 4 digit amazing code.
                   <a href='#' className='fw-bolder'>
                     Learn More
@@ -177,4 +177,4 @@ const ConnectedAccounts: React.FC = () => {
   )
 }
 
-export {ConnectedAccounts}
+export {ConnectedProfiles}
