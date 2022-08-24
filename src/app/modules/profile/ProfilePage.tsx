@@ -5,6 +5,7 @@ import { Overview } from './components/Overview'
 import { Campaigns } from './components/Campaigns'
 import { Settings } from './components/settings/Settings'
 import { ProfileHeader } from './ProfileHeader'
+import Billing from './Billing'
 
 const profileBreadCrumbs: Array<PageLink> = [
   {
@@ -47,6 +48,15 @@ const ProfilePage: React.FC = () => {
             <>
               <PageTitle breadcrumbs={profileBreadCrumbs}>Campaigns</PageTitle>
               <Campaigns />
+            </>
+          }
+        />
+        <Route
+          path='billing'
+          element={
+            <>
+              <PageTitle breadcrumbs={profileBreadCrumbs}>Billing</PageTitle>
+              <Billing />
             </>
           }
         />

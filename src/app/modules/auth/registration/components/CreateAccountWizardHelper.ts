@@ -16,6 +16,8 @@ export interface ICreateAccount {
   cardExpiryYear: string
   cardCvv: string
   saveCard: string
+  accountNumber: string
+  routingNumber: string
 }
 
 const createAccountSchemas = [
@@ -56,6 +58,9 @@ const inits: ICreateAccount = {
   cardExpiryYear: '2025',
   cardCvv: '123',
   saveCard: '1',
+  accountNumber:'000123456789',
+  routingNumber:'110000000'
+
 }
 
 export {createAccountSchemas, inits}
