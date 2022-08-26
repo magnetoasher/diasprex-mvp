@@ -15,7 +15,6 @@ const Business = () => {
         setCountryValue(e)
     }
     const handleChange = (type: any, value: any) => {
-        debugger
         setDataObj({
             ...dataObj,
             [type]: value,

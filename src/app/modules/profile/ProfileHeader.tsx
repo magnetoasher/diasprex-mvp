@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
+
+import React, { useEffect, useState } from 'react'
 import { KTSVG, toAbsoluteUrl } from '../../../_metronic/helpers'
 import { Link } from 'react-router-dom'
 import { Dropdown1 } from '../../../_metronic/partials'
@@ -10,45 +11,62 @@ const ProfileHeader: React.FC = () => {
   const location = useLocation()
   const [searchParams, setSearchParams] = useSearchParams()
   let user = localStorage.getItem('userType')
-
+  const fullUserType = localStorage.getItem('userTypeFull')
+  const [userTypeFull, setUserTypeFull] = useState<any>(fullUserType && fullUserType.replace("_", " "))
+  useEffect(() => {
+    setUserTypeFull(fullUserType && fullUserType.replace("_", " "))
+  }, [fullUserType])
 
   return (
-    <div className='card mb-5 mb-xl-10'>
-      <div className='card-body pt-9 pb-0'>
-        <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
-          <div className='me-7 mb-4'>
-            <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
-              <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} alt='Metronic' />
-              <div className='position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px'></div>
+    <div className="card mb-5 mb-xl-10">
+      <div className="card-body pt-9 pb-0">
+        <div className="d-flex flex-wrap flex-sm-nowrap mb-3">
+          <div className="me-7 mb-4">
+            <div className="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+              <img
+                src={toAbsoluteUrl("/media/avatars/300-1.jpg")}
+                alt="Metronic"
+              />
+              <div className="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
             </div>
           </div>
 
-          <div className='flex-grow-1'>
-            <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
-              <div className='d-flex flex-column'>
-                <div className='d-flex align-items-center mb-2'>
-                  <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
+          <div className="flex-grow-1">
+            <div className="d-flex justify-content-between align-items-start flex-wrap mb-2">
+              <div className="d-flex flex-column">
+                <div className="d-flex align-items-center mb-2">
+                  <a
+                    href="#"
+                    className="text-gray-800 text-hover-primary fs-2 fw-bolder me-1"
+                  >
                     Max Smith
                   </a>
-                  {user !== "basic" &&
-                    <a href='#' data-toggle="tooltip" data-placement="top" title="Verified account">
+                  {user !== "basic" && (
+                    <a
+                      href="#"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Verified account"
+                    >
                       <KTSVG
-                        path='/media/icons/duotune/general/gen026.svg'
-                        className='svg-icon-1 svg-icon-primary'
+                        path="/media/icons/duotune/general/gen026.svg"
+                        className="svg-icon-1 svg-icon-primary"
                       />
-                    </a>}
+                    </a>
+                  )}
                 </div>
 
-                <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
+                <div className="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
                   <a
-                    href='#'
-                    className='d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2'
+                    href="#"
+                    className="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2"
                   >
                     <KTSVG
-                      path='/media/icons/duotune/communication/com006.svg'
-                      className='svg-icon-4 me-1'
+                      path="/media/icons/duotune/communication/com006.svg"
+                      className="svg-icon-4 me-1"
                     />
-                    <span style={{ textTransform: 'capitalize' }}>{user || 'Basic'}</span>
+
+                    <span style={{ textTransform: 'capitalize' }}>{userTypeFull || 'Generic'}</span>
                   </a>
                   {/* <a
                     href='#'
@@ -61,19 +79,19 @@ const ProfileHeader: React.FC = () => {
                     SF, Bay Area
                   </a> */}
                   <a
-                    href='#'
-                    className='d-flex align-items-center text-gray-400 text-hover-primary mb-2'
+                    href="#"
+                    className="d-flex align-items-center text-gray-400 text-hover-primary mb-2"
                   >
                     <KTSVG
-                      path='/media/icons/duotune/communication/com011.svg'
-                      className='svg-icon-4 me-1'
+                      path="/media/icons/duotune/communication/com011.svg"
+                      className="svg-icon-4 me-1"
                     />
                     max@kt.com
                   </a>
                 </div>
               </div>
 
-              <div className='d-flex my-4'>
+              <div className="d-flex my-4">
                 {/* <a href='#' className='btn btn-sm btn-light me-2' id='kt_user_follow_button'>
                   <KTSVG
                     path='/media/icons/duotune/arrows/arr012.svg'
@@ -94,23 +112,23 @@ const ProfileHeader: React.FC = () => {
                 >
                   Hire Me
                 </a> */}
-                <div className='me-0'>
+                <div className="me-0">
                   <button
-                    className='btn btn-sm btn-icon btn-bg-light btn-active-color-primary'
-                    data-kt-menu-trigger='click'
-                    data-kt-menu-placement='bottom-end'
-                    data-kt-menu-flip='top-end'
+                    className="btn btn-sm btn-icon btn-bg-light btn-active-color-primary"
+                    data-kt-menu-trigger="click"
+                    data-kt-menu-placement="bottom-end"
+                    data-kt-menu-flip="top-end"
                   >
-                    <i className='bi bi-three-dots fs-3'></i>
+                    <i className="bi bi-three-dots fs-3"></i>
                   </button>
                   <Dropdown1 />
                 </div>
               </div>
             </div>
 
-            <div className='d-flex flex-wrap flex-stack'>
-              <div className='d-flex flex-column flex-grow-1 pe-8'>
-                <div className='d-flex flex-wrap'>
+            <div className="d-flex flex-wrap flex-stack">
+              <div className="d-flex flex-column flex-grow-1 pe-8">
+                <div className="d-flex flex-wrap">
                   {/* <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                     <div className='d-flex align-items-center'>
                       <KTSVG
@@ -166,50 +184,62 @@ const ProfileHeader: React.FC = () => {
           </div>
         </div>
 
-        <div className='d-flex overflow-auto h-55px'>
-
-          <ul className='nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap'>
-            <li className='nav-item'>
+        <div className="d-flex overflow-auto h-55px">
+          <ul className="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
+            <li className="nav-item">
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/profile/overview' && 'active')
+                  (location.pathname === "/crafted/profile/overview" &&
+                    "active")
                 }
                 to={`/crafted/profile/overview?userType=${user}`}
               >
                 Overview
               </Link>
             </li>
-            {
-              user !== "basic" && <li className='nav-item'>
+            {user !== "basic" && (
+              <li className="nav-item">
                 <Link
                   className={
                     `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/crafted/profile/billing' && 'active')
+                    (location.pathname === "/crafted/profile/billing" &&
+                      "active")
                   }
                   to={`/crafted/profile/billing?userType=${user}`}
                 >
                   Billing
                 </Link>
               </li>
-            }
-            <li className='nav-item'>
+            )}
+            <li className="nav-item">
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === '/crafted/profile/settings' && 'active')
+                  (location.pathname === "/crafted/profile/settings" &&
+                    "active")
                 }
                 to={`/crafted/profile/settings?userType=${user}`}
               >
                 Setting
               </Link>
             </li>
-
+            <li className="nav-item">
+              <Link
+                className={
+                  `nav-link text-active-primary me-6 ` +
+                  (location.pathname === "/crafted/profile/account" && "active")
+                }
+                to={`/crafted/profile/account?userType=${user}`}
+              >
+                Account
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
-export { ProfileHeader }
+export { ProfileHeader };
