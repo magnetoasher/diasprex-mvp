@@ -45,12 +45,7 @@ export function BasicMenu() {
         fontIcon='bi-layers'
       />
 
-      <AsideMenuItem
-        to='#'
-        icon='/media/icons/duotune/art/art005.svg'
-        title='Send Money'
-        fontIcon='bi-layers'
-      />
+
 
       <AsideMenuItem
         to='#'
@@ -77,6 +72,12 @@ export function BasicMenu() {
         icon='/media/icons/duotune/art/art008.svg'
         title="My Account"
         fontIcon='bi-app-indicator'
+      />
+      <AsideMenuItem
+        to='#'
+        icon='/media/icons/duotune/art/art005.svg'
+        title='Send Money'
+        fontIcon='bi-layers'
       />
       <AsideMenuItem
         to='/crafted/profile/settings'

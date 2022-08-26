@@ -20,6 +20,7 @@ const CreateAccount: FC = () => {
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
   const [userType, setUserType] = useState<string>("basic")
+  const [userTypeFull, setUserTypeFull] = useState('')
   const [initValues] = useState<ICreateAccount>(inits)
 
   const [isShowAlert, setIsShowAlert] = useState(false)
@@ -102,7 +103,7 @@ const CreateAccount: FC = () => {
       else
         navigate({
           pathname: '/dashboard',
-          search: `?userType=${userType}`,
+          search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
         })
 
     }
@@ -119,7 +120,7 @@ const CreateAccount: FC = () => {
     if (stepper.current.currentStepIndex == 3) {
       navigate({
         pathname: '/dashboard',
-        search: `?userType=${userType}`,
+        search: `?userType=${userType}&setUserTypeFull=${userTypeFull}`,
       })
     }
     else {
@@ -132,7 +133,7 @@ const CreateAccount: FC = () => {
   }
   useEffect(() => {
     localStorage.setItem("userType", 'basic');
-
+    localStorage.setItem("userTypeFull", 'generic');
   }, [])
 
   return (
@@ -249,7 +250,7 @@ const CreateAccount: FC = () => {
                 {/* w-xl-700px */}
                 <div className='d-flex justify-content-center align-items-center'>
                   <div className='current' data-kt-stepper-element='content'>
-                    <SubscriptionPlans userType={userType} setUserType={setUserType} submitStep={submitStep} />
+                    <SubscriptionPlans userType={userType} setUserType={setUserType} submitStep={submitStep} setUserTypeFull={setUserTypeFull} userTypeFull={userTypeFull} />
                   </div>
                 </div>
 

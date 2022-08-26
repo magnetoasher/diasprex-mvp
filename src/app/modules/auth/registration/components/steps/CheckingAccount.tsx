@@ -4,7 +4,10 @@ import { Field, ErrorMessage } from 'formik'
 
 const CheckingAccount = () => {
     return (
-        <>
+        <div className='card mb-5 mb-xl-10' style={{
+            paddingInline: '49px',
+            paddingTop: '28px'
+        }}>
             <div className='pb-10 pb-lg-15'>
                 <h2 className='fw-bolder text-dark'>Billing Details</h2>
 
@@ -80,8 +83,20 @@ const CheckingAccount = () => {
                     <ErrorMessage name='nameOnCard' />
                 </div>
             </div>
+            <button
 
-        </>
+                type="button"
+                className="btn btn-primary mb-5"
+                style={{
+                    width: "fit-content",
+                    alignSelf: "end",
+                }}
+
+            >
+                Save Account
+            </button>
+
+        </div>
     )
 }
 

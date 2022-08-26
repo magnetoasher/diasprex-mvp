@@ -10,7 +10,7 @@ import { HeaderNotificationsMenu, QuickLinks, Search } from '../../../../../../_
 import clsx from 'clsx'
 
 
-const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
+const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull, userTypeFull }) => {
     const [currentState, setCurrentState] = useState<'month' | 'annual'>('month')
     const [generic] = useState([
         {
@@ -113,6 +113,7 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
             default: false,
             custom: false,
             value1: 'individual',
+            valueType: 'Basic_Enabler individual',
             pricing: true,
             features: [
                 {
@@ -154,6 +155,8 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
             default: false,
             custom: false,
             value1: 'individual',
+            valueType: 'Super_Enabler individual',
+
             pricing: true,
             features: [
                 {
@@ -195,6 +198,8 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
             default: false,
             custom: false,
             value1: 'business',
+            valueType: 'Business_Enabler business',
+
             pricing: false,
             features: [
                 {
@@ -238,6 +243,8 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
             label: 'Most popular',
             default: false,
             value1: 'sponsor',
+            valueType: 'Basic_Sponsor sponsor',
+
             pricing: false,
             custom: false,
             features: [
@@ -280,6 +287,8 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
             label: 'Most popular',
             default: false,
             value1: 'sponsor',
+            valueType: 'Silver_Sponsor sponsor',
+
             pricing: true,
 
             custom: false,
@@ -323,6 +332,8 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
             label: 'Most popular',
             default: false,
             value1: 'sponsor',
+            valueType: 'Gold_Sponsor sponsor',
+
             pricing: true,
 
             custom: false,
@@ -366,6 +377,8 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
             label: 'Most popular',
             default: false,
             value1: 'sponsor',
+            valueType: 'Diamond_Sponsor sponsor',
+
             pricing: false,
 
             custom: false,
@@ -402,15 +415,28 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
         }
     ])
     const handleFormSubmit = (value: any) => {
+        let tempUser = ""
         let e = value.target.value.toLowerCase()
-        if (e !== "month" && e !== "annual") {
-            localStorage.setItem("userType", e);
-            setUserType(e)
+        if (e.split(" ").length > 1) {
+            let stringValue = e.split(" ")
+            tempUser = stringValue[1]
+            setUserTypeFull(stringValue[0])
+            localStorage.setItem("userTypeFull", stringValue[0]);
+
+
+        }
+        else {
+            tempUser = e
+        }
+        if (tempUser !== "month" && tempUser !== "annual") {
+            setUserType(tempUser)
+            localStorage.setItem("userType", tempUser);
         }
     }
     useEffect(() => {
         localStorage.setItem("userType", userType);
-    }, [userType])
+        localStorage.setItem("userTypeFull", userTypeFull);
+    }, [userType, userTypeFull])
 
     console.log(userType)
     return (
@@ -424,7 +450,8 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
                             return (
                                 <div
                                     onClick={() => {
-                                        setUserType(plan.value1)
+                                        setUserType(plan.value1.toLocaleLowerCase())
+                                        userTypeFull(plan.valueType)
                                     }}
                                     className={
                                         `cnav-link btn btn-outline btn-outline-dashed btn-color-dark d-flex flex-stack text-start p-6  col-lg-4` +
@@ -596,7 +623,7 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
                                                 </>
                                             )}
                                             <div className='d-flex align-items-center justify-content-center mt-5' style={{ visibility: 'hidden' }}>
-                                                <Field checked type='radio' value={`${plan.value1}`} name='accountTypeEnabler' required className="m-1" />
+                                                <Field checked type='radio' value={`${plan.valueType}`} name='accountTypeEnabler' required className="m-1" />
                                                 Choose &emsp;
                                             </div>
                                         </div>
@@ -607,7 +634,7 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
                     }
 
                     {
-                        (userType === "Enabler" || userType === "business" || userType === "individual") && <div className=' mt-5'>
+                        (userType === "Enabler" || userType === "business" || userType === "individual" || userType === "enabler") && <div className=' mt-5'>
                             <div className='tab-content rounded h-100 bg-light p-10 d-flex justify-content-between' >
                                 {enabler.map((plan, index) => {
                                     return (
@@ -677,7 +704,7 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
                                                 </>
                                             )}
                                             <div className='d-flex align-items-center justify-content-center mt-5' >
-                                                <Field type='radio' value={`${plan.value1}`} name='accountTypeEnabler' required className="m-1" />
+                                                <Field type='radio' value={`${plan.valueType}`} name='accountTypeEnabler' required className="m-1" />
                                                 Choose &emsp;
                                             </div>
 
@@ -757,7 +784,7 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep }) => {
                                                                 )
                                                             })}
                                                             <div className='d-flex align-items-center justify-content-center mt-5' >
-                                                                <Field type='radio' value={`${plan.value1}`} name='accountTypeEnabler' required className="m-1" />
+                                                                <Field type='radio' value={`${plan.valueType}`} name='accountTypeEnabler' required className="m-1" />
                                                                 Choose &emsp;
                                                             </div>
                                                         </div>
