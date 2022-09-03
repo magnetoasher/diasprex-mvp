@@ -24,13 +24,13 @@ export function Sponsor() {
                 </div>
             </div>
             <AsideMenuItem
-                to='#'
+                to='createopportunities'
                 icon='/media/icons/duotune/art/art001.svg'
                 title="Create Opportunities"
                 fontIcon='bi-app-indicator'
             />
             <AsideMenuItem
-                to='#'
+                to='/proposals'
                 icon='/media/icons/duotune/art/art002.svg'
                 title='Proposals'
                 fontIcon='bi-layers'

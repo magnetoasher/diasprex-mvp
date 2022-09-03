@@ -9,6 +9,10 @@ import { getCSSVariableValue } from '../../_metronic/assets/ts/_utils'
 import { SigninPage } from '../modules/signin/components/SigninPage'
 import { RegistrationStepsPage } from '../modules/auth/registration/RegistrationStepsPage'
 import { AuthPage } from '../modules/auth'
+import CreateOpportunities from '../pages/dashboard/CreateOpportunities'
+import Proposals from '../pages/dashboard/Proposals'
+import MyOpportunity from '../pages/dashboard/MyOpportunity'
+import GeneralOpportunityCard from '../pages/dashboard/GeneralOpportunityCard'
 
 const PrivateRoutes = () => {
   const BuilderPageWrapper = lazy(() => import('../pages/layout-builder/BuilderPageWrapper'))
@@ -32,6 +36,11 @@ const PrivateRoutes = () => {
             <Route path='dashboard' element={<DashboardWrapper />} />
             <Route path='builder' element={<BuilderPageWrapper />} />
             <Route path='menu-test' element={<MenuTestPage />} />
+            <Route path='createopportunities' element={<CreateOpportunities />} />
+            <Route path='proposals' element={<Proposals />} />
+            <Route path='my_opportunities' element={<MyOpportunity />} />
+            <Route path='opportunities' element={<GeneralOpportunityCard />} />
+
             {/* Lazy Modules */}
             {/* <Route
               path='crafted/pages/profile/*'

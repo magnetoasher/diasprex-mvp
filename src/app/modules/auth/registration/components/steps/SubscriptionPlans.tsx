@@ -12,6 +12,7 @@ import clsx from 'clsx'
 
 const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull, userTypeFull }) => {
     const [currentState, setCurrentState] = useState<'month' | 'annual'>('month')
+    const [packagePrice, setPackagePrice] = useState()
     const [generic] = useState([
         {
             title: 'Generic',
@@ -436,9 +437,11 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
     useEffect(() => {
         localStorage.setItem("userType", userType);
         localStorage.setItem("userTypeFull", userTypeFull);
-    }, [userType, userTypeFull])
+        localStorage.setItem("packageDuration", currentState);
+        localStorage.setItem("packagePrice", packagePrice);
+    }, [userType, userTypeFull, currentState])
 
-    console.log(userType)
+    console.log(userType, userTypeFull, currentState, packagePrice)
     return (
         <>
 
@@ -451,7 +454,7 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
                                 <div
                                     onClick={() => {
                                         setUserType(plan.value1.toLocaleLowerCase())
-                                        userTypeFull(plan.valueType)
+                                        setUserTypeFull(plan.valueType)
                                     }}
                                     className={
                                         `cnav-link btn btn-outline btn-outline-dashed btn-color-dark d-flex flex-stack text-start p-6  col-lg-4` +
@@ -500,7 +503,7 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
 
 
                     <div className='nav flex justify-content-center align-items-center'>
-                        {types.map((plan, index) => {
+                        {userType !== "basic" && types.map((plan, index) => {
                             return (
                                 <div
                                     onClick={() => {
@@ -569,7 +572,7 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
                                                                 {plan.pricing && <span className='mb-2'>$</span>}
 
                                                                 <h4 style={{ color: '#429FF7', margin: '2px' }}>
-                                                                    {currentState === 'month' ? `${plan.priceMonth}` : plan.priceAnnual}
+                                                                    {currentState === 'month' ? (`${plan.priceMonth}`) : (plan.priceAnnual)}
                                                                 </h4>
 
 
@@ -647,9 +650,9 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
                                                         key={index}
                                                     >
                                                         <div className='pb-5'>
-                                                            <h2 className='fw-bolder text-dark'>{plan.title}</h2>
+                                                            <h2 className='fw-bolder text-dark h-40px'>{plan.title}</h2>
 
-                                                            <div className='text-gray-400 fw-bold h-40px'>{plan.description}</div>
+                                                            <div className='text-gray-400 fw-bold h-40px' >{plan.description}</div>
                                                             <div className='d-flex m-5'>
                                                                 {plan.pricing && <span className='mb-2'>$</span>}
 

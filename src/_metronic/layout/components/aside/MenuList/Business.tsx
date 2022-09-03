@@ -20,7 +20,7 @@ export function Business() {
 
 
             <AsideMenuItem
-                to='#'
+                to='/opportunities'
                 icon='/media/icons/duotune/art/art001.svg'
                 title="Opportunities"
                 fontIcon='bi-app-indicator'
@@ -51,7 +51,7 @@ export function Business() {
                 fontIcon='bi-app-indicator'
             />
             <AsideMenuItem
-                to='/builder'
+                to='my_opportunities'
                 icon='/media/icons/duotune/art/art002.svg'
                 title='My Opportunities'
                 fontIcon='bi-brightness-alt-high'

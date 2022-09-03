@@ -9,6 +9,12 @@ export interface IProfileDetails {
   language: string
   timeZone: string
   currency: string
+  role:string
+  organization:string
+  oecd:string
+  address:string
+  profession:string
+  degree:string
   communications: {
     email: boolean
     phone: boolean
@@ -77,10 +83,16 @@ export const profileDetailsInitValues: IProfileDetails = {
   company: 'Keenthemes',
   contactPhone: '044 3276 454 935',
   companySite: 'keenthemes.com',
-  country: '',
+  country: 'South Africa',
   language: '',
   timeZone: '',
   currency: '',
+  role:'',
+  organization:'',
+  oecd:'',
+  address:'1750 Gemsbok St',
+  profession:'',
+  degree:'',
   communications: {
     email: false,
     phone: false,

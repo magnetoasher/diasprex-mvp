@@ -25,7 +25,7 @@ export function BasicMenu() {
         </div>
       </div>
       <AsideMenuItem
-        to='#'
+        to='/opportunities'
         icon='/media/icons/duotune/art/art001.svg'
         title="Opportunities"
         fontIcon='bi-app-indicator'

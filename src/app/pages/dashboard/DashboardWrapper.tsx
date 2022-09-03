@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC} from 'react'
-import {useIntl} from 'react-intl'
-import {PageTitle} from '../../../_metronic/layout/core'
+import React, { FC } from 'react'
+import { useIntl } from 'react-intl'
+import { PageTitle } from '../../../_metronic/layout/core'
 import {
   MixedWidget2,
   MixedWidget10,
@@ -15,6 +15,7 @@ import {
   TablesWidget10,
   MixedWidget8,
 } from '../../../_metronic/partials/widgets'
+import NewDashboardPage from './NewDashboardPage'
 
 const DashboardPage: FC = () => (
   <>
@@ -91,10 +92,12 @@ const DashboardWrapper: FC = () => {
   const intl = useIntl()
   return (
     <>
-      <PageTitle breadcrumbs={[]}>{intl.formatMessage({id: 'MENU.DASHBOARD'})}</PageTitle>
-      <DashboardPage />
+      <PageTitle breadcrumbs={[]}>{intl.formatMessage({ id: 'MENU.DASHBOARD' })}</PageTitle>
+      {/* <DashboardPage /> */}
+      <NewDashboardPage />
+
     </>
   )
 }
 
-export {DashboardWrapper}
+export { DashboardWrapper }
