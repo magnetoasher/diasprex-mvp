@@ -12,6 +12,7 @@
     "@popperjs/core": "~2.10.1",
     "@reduxjs/toolkit": "^1.6.0",
     "animate.css": "^4.1.1",
+    "antd": "^4.22.8",
     "apexcharts": "^3.27.1",
     "axios": "^0.21.1",
     "axios-mock-adapter": "^1.19.0",

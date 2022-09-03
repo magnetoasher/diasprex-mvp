@@ -25,7 +25,7 @@ export function Individual() {
                 </div>
             </div>
             <AsideMenuItem
-                to='#'
+                to='/opportunities'
                 icon='/media/icons/duotune/art/art001.svg'
                 title="Opportunities"
                 fontIcon='bi-app-indicator'
@@ -44,8 +44,6 @@ export function Individual() {
                 title='Remittance'
                 fontIcon='bi-layers'
             />
-
-
 
             <AsideMenuItem
                 to='#'
@@ -92,7 +90,7 @@ export function Individual() {
                 fontIcon='bi-layers'
             />
             <AsideMenuItem
-                to='#'
+                to='my_opportunities'
                 icon='/media/icons/duotune/art/art002.svg'
                 title='My Opportunities'
                 fontIcon='bi-layers'
