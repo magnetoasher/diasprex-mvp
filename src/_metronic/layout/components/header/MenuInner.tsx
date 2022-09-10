@@ -14,7 +14,7 @@ export function MenuInner() {
 
   return (
     <>
-      {user === "sponsor" ? <Sponsor /> : user == "business" ? <Business /> : user == "individual" ? <Individual /> : <Generic />}
+      {user === "sponsor" ? <Sponsor /> : (user == "individual" || user == "business") ? <Individual /> : <Generic />}
     </>
 
   )

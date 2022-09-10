@@ -33,6 +33,7 @@ const Basic = () => {
         { value: 'sales', label: 'Sales' },
         { value: 'technology', label: 'Technology' },
         { value: 'underwriting', label: 'Underwriting' },
+        { value: 'other', label: 'Other' }
     ]
 
     const handleCountryChange = (e: any) => {
@@ -110,6 +111,19 @@ const Basic = () => {
                 <Field name='businessName' className='form-control form-control-lg form-control-solid' />
                 <div className='text-danger mt-2'>
                     <ErrorMessage name='businessName' />
+                </div>
+            </div>
+            <div className='fv-row mb-10'>
+                <label className='form-label required'>Country of Origin</label>
+                <AsyncSelect
+                    name='businessType'
+                    className='form-select form-select-lg form-select-solid'
+                    options={countryOptions}
+                    value={countryValue}
+                    onChange={handleCountryChange}
+                />
+                <div className='text-danger mt-2'>
+                    <ErrorMessage name='businessType' />
                 </div>
             </div>
             <div className='fv-row mb-10'>

@@ -40,7 +40,9 @@ const Sponsor = () => {
                     <Field type='radio' value='government' name='type' className="m-3" />
                     Government &emsp;
                     <Field type='radio' value='nonProfit' name='type' className="m-3" />
-                    Not-for-Profit
+                    Not-for-Profit &emsp;
+                    <Field type='radio' value='business' name='type' className="m-3" />
+                    Business
                 </div>
                 <div className='text-danger mt-2'>
                     <ErrorMessage name='businessName' />

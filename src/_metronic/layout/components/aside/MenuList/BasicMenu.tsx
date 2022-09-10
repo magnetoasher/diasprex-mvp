@@ -74,19 +74,43 @@ export function BasicMenu() {
         fontIcon='bi-app-indicator'
       />
       <AsideMenuItem
-        to='#'
-        icon='/media/icons/duotune/art/art005.svg'
-        title='Send Money'
-        fontIcon='bi-layers'
-      />
-      <AsideMenuItem
         to='/crafted/profile/settings'
         icon='/media/icons/duotune/art/art009.svg'
         title='Settings'
         fontIcon='bi-layers'
       />
+      <AsideMenuItem
+        to='#'
+        icon='/media/icons/duotune/art/art003.svg'
+        title='My Opportunities'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='#'
+        icon='/media/icons/duotune/art/art005.svg'
+        title='Send Money'
+        fontIcon='bi-layers'
+      />
 
 
+      <AsideMenuItem
+        to='#'
+        icon='/media/icons/duotune/art/art004.svg'
+        title='My Investment'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='#'
+        icon='/media/icons/duotune/art/art001.svg'
+        title='Referrals'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='#'
+        icon='/media/icons/duotune/art/art002.svg'
+        title='Messages'
+        fontIcon='bi-layers'
+      />
     </>
 
   )

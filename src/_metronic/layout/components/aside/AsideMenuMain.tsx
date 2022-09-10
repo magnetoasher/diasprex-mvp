@@ -21,7 +21,7 @@ export function AsideMenuMain() {
 
   return (
     <>
-      {user == "sponsor" ? <Sponsor /> : user == "business" ? <Business /> : user == "individual" ? <Individual /> : <BasicMenu />}
+      {user == "sponsor" ? <Sponsor /> : (user == "individual" || user == "business") ? <Individual /> : <BasicMenu />}
     </>
   )
 }

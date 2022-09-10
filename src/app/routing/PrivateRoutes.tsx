@@ -13,6 +13,7 @@ import CreateOpportunities from '../pages/dashboard/CreateOpportunities'
 import Proposals from '../pages/dashboard/Proposals'
 import MyOpportunity from '../pages/dashboard/MyOpportunity'
 import GeneralOpportunityCard from '../pages/dashboard/GeneralOpportunityCard'
+import SponsorProposals from '../pages/dashboard/SponsorPrposals'
 
 const PrivateRoutes = () => {
   const BuilderPageWrapper = lazy(() => import('../pages/layout-builder/BuilderPageWrapper'))
@@ -38,6 +39,7 @@ const PrivateRoutes = () => {
             <Route path='menu-test' element={<MenuTestPage />} />
             <Route path='createopportunities' element={<CreateOpportunities />} />
             <Route path='proposals' element={<Proposals />} />
+            <Route path='sponsor_proposals' element={<SponsorProposals />} />
             <Route path='my_opportunities' element={<MyOpportunity />} />
             <Route path='opportunities' element={<GeneralOpportunityCard />} />
 

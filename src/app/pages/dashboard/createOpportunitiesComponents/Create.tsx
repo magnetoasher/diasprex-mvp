@@ -48,7 +48,7 @@ export const Create = () => {
 
         <Col xs={12} sm={12} md={5} lg={5}>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <h5><b>Select Category</b></h5>
+            <h5><b>Due Date</b></h5>
             <DatePicker
               style={{ borderRadius: "10px" }} defaultValue={moment('01/01/2015', dateFormatList[0])} format={dateFormatList} />
           </div>
@@ -92,7 +92,7 @@ export const Create = () => {
             <Upload >
               <Button
                 className='d-flex justify-content-center align-items-center'
-                icon={<UploadOutlined />}>Upload Image</Button>
+                icon={<UploadOutlined />}>Upload File</Button>
             </Upload>
           </div>
           <div>

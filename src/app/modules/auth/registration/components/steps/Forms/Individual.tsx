@@ -131,24 +131,8 @@ const Individual = () => {
                     <ErrorMessage name='businessName' />
                 </div>
             </div>
-
             <div className='fv-row mb-10'>
-                <label className='form-label required'>African Home Country</label>
-                <Field name='african_home' className='form-control form-control-lg form-control-solid' onChange={(e: any) => handleChange("african_home", e.target.value)} />
-                <div className='text-danger mt-2'>
-                    <ErrorMessage name='businessName' />
-                </div>
-            </div>
-
-            <div className='fv-row mb-10'>
-                <label className='form-label required'>OECD Host Country</label>
-                <Field name='degree' className='form-control form-control-lg form-control-solid' onChange={(e: any) => handleChange("OECD", e.target.value)} />
-                <div className='text-danger mt-2'>
-                    <ErrorMessage name='businessName' />
-                </div>
-            </div>
-            <div className='fv-row mb-10'>
-                <label className='form-label required'>Areas of Interest</label>
+                <label className='form-label required'>Professional Field (choose most related)</label>
                 <AsyncSelect
                     name='areaOptions'
                     className='form-select form-select-lg form-select-solid'
@@ -172,6 +156,19 @@ const Individual = () => {
                     cacheOptions
                     isMulti
                     onChange={(e: any) => handleChange("professional_interest", e)}
+                />
+                <div className='text-danger mt-2'>
+                    <ErrorMessage name='businessType' />
+                </div>
+            </div>
+            <div className='fv-row mb-10'>
+                <label className='form-label required'>Country of Origin</label>
+                <AsyncSelect
+                    name='businessType'
+                    className='form-select form-select-lg form-select-solid'
+                    options={countryOptions}
+                    // value={countryValue}
+                    onChange={(e: any) => handleChange("origin", e)}
                 />
                 <div className='text-danger mt-2'>
                     <ErrorMessage name='businessType' />

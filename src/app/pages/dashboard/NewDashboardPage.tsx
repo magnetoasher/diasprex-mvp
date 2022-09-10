@@ -3,12 +3,15 @@ import { KTSVG, toAbsoluteUrl } from '../../../_metronic/helpers'
 import Opportunity from './Opportunity'
 import Oppurtunity from './Opportunity'
 import { Card, Row } from 'antd';
+import BillingHistory from './BillingHistory';
 const NewDashboardPage = () => {
-    var userType = localStorage.getItem("userTypeFull")
+    var userTypeFull = localStorage.getItem("userTypeFull")
+    var userType = localStorage.getItem("userType")
+
     const [dataObj] = useState([
         {
             name: 'Demo1',
-            userType: 'enabler',
+            userTypeFull: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
             src: "https://picsum.photos/180/140"
@@ -16,7 +19,7 @@ const NewDashboardPage = () => {
         },
         {
             name: 'Demo2',
-            userType: 'enabler',
+            userTypeFull: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
             src: "https://picsum.photos/181/140"
@@ -24,7 +27,7 @@ const NewDashboardPage = () => {
         },
         {
             name: 'Demo3',
-            userType: 'enabler',
+            userTypeFull: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
             src: "https://picsum.photos/182/140"
@@ -58,9 +61,9 @@ const NewDashboardPage = () => {
                             <div className="d-flex align-items-center mb-2">
                                 <a
                                     href="#"
-                                    className="text-gray-800 text-hover-primary  me-1"
+                                    className="text-gray-800 text-hover-primary  me-1 text-capitalize"
                                 >
-                                    {userType?.replace("_", " ")}
+                                    {userTypeFull?.replace("_", " ")}
                                 </a>
 
                             </div>
@@ -194,12 +197,58 @@ const NewDashboardPage = () => {
                     <div className='card-body p-2 overflow-auto' style={{ height: '245px' }}>
                         {
                             dataObj.map((e) =>
-                                <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={4} badgeColor="blue" badgeText="New" picSrc={e.src} />
+                                <Opportunity name={e.name} userTypeFull={e.userTypeFull} title={e.title} detail={e.details} column={4} badgeColor="blue" badgeText="New" picSrc={e.src} />
                             )
                         }
 
                     </div>
                 </div>
+                {/* <div className="d-flex align-items-center mb-2">
+                    <a
+                        href="my_opportunity"
+                        className="text-gray-800 text-hover-primary fs-2 fw-bolder me-1"
+                    >
+
+                        Followed Opportunities,
+                    </a>
+
+                </div> */}
+
+                {
+                    userType !== "sponsor" &&
+                    <>
+                        <div className="d-flex align-items-center mb-2">
+                            <a
+                                role="button"
+                                href="/my_opportunities"
+                                className="btn btn-primary text-hover-white fw-bolder"
+                            >
+
+                                Followed Opportunities
+                            </a>
+
+                        </div>
+                        <div className=' overflow-auto mt-5' style={{ height: '345px' }}>
+                            <BillingHistory />
+
+                        </div>
+                    </>
+                }
+
+                {/* <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>
+                    <div className='card-header cursor-pointer'>
+                        <div className='card-title m-0'>
+                            <h3 className='fw-bolder m-0'>Recent Remittance Activities</h3>
+                        </div>
+
+
+                    </div>
+
+                    <div className=' overflow-auto' style={{ height: '245px' }}>
+                        <BillingHistory />
+
+                    </div>
+                </div> */}
             </Card>
         </Row>
 

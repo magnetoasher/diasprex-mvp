@@ -58,8 +58,6 @@ export function Individual() {
                 fontIcon='bi-layers'
             />
 
-
-
             <div className='menu-item'>
                 <div className='menu-content pt-8 pb-2'>
                     <span className='menu-section text-muted text-uppercase fs-8 ls-1'>User</span>
@@ -72,27 +70,42 @@ export function Individual() {
                 fontIcon='bi-app-indicator'
             />
             <AsideMenuItem
-                to='#'
-                icon='/media/icons/duotune/art/art005.svg'
-                title='Send Money'
-                fontIcon='bi-layers'
-            />
-            <AsideMenuItem
                 to='/crafted/profile/settings'
                 icon='/media/icons/duotune/art/art009.svg'
                 title='Settings'
                 fontIcon='bi-layers'
             />
             <AsideMenuItem
+                to='my_opportunities'
+                icon='/media/icons/duotune/art/art002.svg'
+                title='My Opportunities'
+                fontIcon='bi-layers'
+            />
+            <AsideMenuItem
+                to='#'
+                icon='/media/icons/duotune/art/art005.svg'
+                title='Send Money'
+                fontIcon='bi-layers'
+            />
+
+            <AsideMenuItem
                 to='#'
                 icon='/media/icons/duotune/general/gen019.svg'
                 title='My Investment'
                 fontIcon='bi-layers'
             />
+
+
             <AsideMenuItem
-                to='my_opportunities'
+                to='#'
+                icon='/media/icons/duotune/general/gen019.svg'
+                title='Referrals'
+                fontIcon='bi-layers'
+            />
+            <AsideMenuItem
+                to='#'
                 icon='/media/icons/duotune/art/art002.svg'
-                title='My Opportunities'
+                title='Messages'
                 fontIcon='bi-layers'
             />
 

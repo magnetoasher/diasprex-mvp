@@ -12,6 +12,8 @@ const Generic = () => {
             <MenuItem title='My Opportunities' to='my_opportunities' />
             <MenuItem title='DIF Investment' to='#' />
             <MenuItem title='Remittance' to='#' />
+            <MenuItem title='Diaspora' to='#' />
+            <MenuItem title='Resources' to='#' />
         </>
     )
 }
