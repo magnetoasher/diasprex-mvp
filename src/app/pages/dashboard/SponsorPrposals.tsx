@@ -1,11 +1,17 @@
 import React, { useState } from 'react'
 import { PageTitle } from '../../../_metronic/layout/core'
-
-import { EyeOutlined, SaveOutlined, FileAddOutlined, CheckOutlined, DashboardOutlined } from '@ant-design/icons';
 import Opportunity from './Opportunity'
-import { Tabs, Card, Tooltip } from 'antd';
+import {
+    SendOutlined,
+    DashboardOutlined,
+    CheckOutlined,
+    LaptopOutlined,
+    StopOutlined
 
-const MyOpportunity = () => {
+} from '@ant-design/icons';
+import { Tabs, Card } from 'antd';
+
+const SponsorProposals = () => {
     const { TabPane } = Tabs;
     const onChange = (key: string) => {
         console.log(key);
@@ -16,33 +22,28 @@ const MyOpportunity = () => {
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/190/140"
-
-
+            src: "https://picsum.photos/192/140"
         },
         {
             name: 'completed2',
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/191/140"
-
+            src: "https://picsum.photos/193/140"
         },
         {
             name: 'completed3',
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/192/140"
-
+            src: "https://picsum.photos/194/140"
         },
         {
             name: 'completed4',
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/193/140"
-
+            src: "https://picsum.photos/195/140"
         }
 
     ])
@@ -51,39 +52,36 @@ const MyOpportunity = () => {
             name: 'demo1',
             userType: 'enabler',
             title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/200/110"
+            details: 'this is detail, lorem ispum'
         },
         {
             name: 'demo2',
             userType: 'enabler',
             title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/200/140"
+            details: 'this is detail, lorem ispum'
         },
         {
             name: 'demo3',
             userType: 'enabler',
             title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/200/180"
+            details: 'this is detail, lorem ispum'
         }
 
     ])
-    const [saved] = useState([
+    const [declined] = useState([
         {
             name: 'demo4',
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/200/121"
+            src: "https://picsum.photos/196/140"
         },
         {
             name: 'demo5',
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/200/140"
+            src: "https://picsum.photos/197/141"
         },
 
 
@@ -95,35 +93,35 @@ const MyOpportunity = () => {
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/200/101"
+            src: "https://picsum.photos/192/140"
         },
         {
             name: 'demo7',
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/200/102"
+            src: "https://picsum.photos/192/145"
         },
         {
             name: 'demo8',
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/200/103"
+            src: "https://picsum.photos/192/147"
         },
         {
             name: 'demo9',
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/200/104"
+            src: "https://picsum.photos/192/148"
         },
         {
             name: 'demo10',
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/200/105"
+            src: "https://picsum.photos/192/149"
         },
 
 
@@ -134,122 +132,120 @@ const MyOpportunity = () => {
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/200/130"
+            src: "https://picsum.photos/172/140"
         },
         {
             name: 'demo12',
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/200/110"
+            src: "https://picsum.photos/173/140"
         },
         {
             name: 'demo13',
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/100/130"
+            src: "https://picsum.photos/174/140"
         },
         {
             name: 'demo14',
             userType: 'enabler',
             title: 'This is title',
-            details: 'this is detail, lorem ispum'
+            details: 'this is detail, lorem ispum',
+            src: "https://picsum.photos/175/140"
+
         },
         {
             name: 'demo15',
             userType: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/400/130"
+            src: "https://picsum.photos/176/140"
+
         },
 
 
     ])
     return (
         <>
-            <PageTitle breadcrumbs={[]}>My Opportunities</PageTitle>
+            <PageTitle breadcrumbs={[]}>Proposals</PageTitle>
             <Tabs defaultActiveKey="1" onChange={onChange}>
                 <TabPane
                     tab={
                         <span className='d-flex justify-content-center align-items-center'>
-                            <EyeOutlined />
-                            Followed
+                            <SendOutlined />
+                            Submissions
                         </span>
                     }
                     key="1">
                     <div className=' overflow-auto p-3' >
                         {
-                            watching.map((e) =>
-                                <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="cyan" badgeText="New" picSrc={e.src} />
+                            submissions.map((e) =>
+                                <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="cyan" badgeText="Submitted" picSrc={e.src} />
                             )
                         }
 
                     </div>
                 </TabPane>
                 <TabPane
-
                     tab={
                         <span className='d-flex justify-content-center align-items-center'>
-                            <SaveOutlined />
-                            Draft Proposals
+                            <LaptopOutlined />
+                            Selected
                         </span>
-                    }
-                    key="2">
-                    <div className=' overflow-auto p-3' >
-                        {
-                            saved.map((e) =>
-                                <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="cyan" badgeText="Saved" picSrc={e.src} />
-                            )
-                        }
-
-                    </div>
-                </TabPane>
-                <TabPane
-
-                    tab={
-                        <span className='d-flex justify-content-center align-items-center'>
-                            <FileAddOutlined />
-                            Submitted Proposals
-                        </span>
-                    }
-                    key="3">
+                    } key="4">
                     <div className=' overflow-auto p-3' >
                         {
                             submissions.map((e) =>
-                                <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="blue" badgeText="Submitted" picSrc={e.src} />
+                                <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="green" badgeText="Selected" picSrc={e.src} />
                             )
                         }
 
                     </div>
                 </TabPane>
                 <TabPane
+                    tab={
+                        <span className='d-flex justify-content-center align-items-center'>
+                            <StopOutlined />
+                            Declined
+                        </span>
+                    }
+                    key="5">
+                    <div className=' overflow-auto p-3' >
+                        {
+                            declined.map((e) =>
+                                <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="red" badgeText="Declined" picSrc={e.src} />
+                            )
+                        }
 
+                    </div>
+                </TabPane>
+                <TabPane
                     tab={
                         <span className='d-flex justify-content-center align-items-center'>
                             <DashboardOutlined />
                             Active
                         </span>
                     }
-                    key="4">
+                    key="2">
                     <div className=' overflow-auto p-3' >
                         {
                             active.map((e) =>
-                                <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="green" badgeText="Active" picSrc={e.src} />
+                                <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="blue" badgeText="Active" picSrc={e.src} />
                             )
                         }
 
                     </div>
                 </TabPane>
                 <TabPane
-
                     tab={
                         <span className='d-flex justify-content-center align-items-center'>
                             <CheckOutlined />
                             Completed
                         </span>
                     }
-                    key="5">
+                    key="3">
                     <div className=' overflow-auto p-3' >
                         {
                             dataObj.map((e) =>
@@ -265,4 +261,4 @@ const MyOpportunity = () => {
     )
 }
 
-export default MyOpportunity
+export default SponsorProposals

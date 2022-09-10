@@ -9,7 +9,7 @@ const Sponsor = () => {
         <>
             <MenuItem title={intl.formatMessage({ id: 'MENU.DASHBOARD' })} to='/dashboard' />
             <MenuItem title='Create Opportunities' to='createopportunities' />
-            <MenuItem title='Proposals' to='/proposals' />
+            <MenuItem title='Proposals' to='/sponsor_proposals' />
 
         </>)
 }

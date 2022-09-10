@@ -61,35 +61,45 @@ const CreateOpportunities = () => {
       userType: 'enabler',
       title: 'This is title',
       details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/192/140"
+      src: "https://picsum.photos/192/140",
+      badgeColor: 'red',
+      badgeText: 'In Review'
     },
     {
       name: 'demo7',
       userType: 'enabler',
       title: 'This is title',
       details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/192/145"
+      src: "https://picsum.photos/192/145",
+      badgeColor: 'red',
+      badgeText: 'Accepted'
     },
     {
       name: 'demo8',
       userType: 'enabler',
       title: 'This is title',
       details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/192/147"
+      src: "https://picsum.photos/192/147",
+      badgeColor: 'red',
+      badgeText: 'Accepted with Revision'
     },
     {
       name: 'demo9',
       userType: 'enabler',
       title: 'This is title',
       details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/192/148"
+      src: "https://picsum.photos/192/148",
+      badgeColor: 'red',
+      badgeText: 'Not Accepted'
     },
     {
       name: 'demo10',
       userType: 'enabler',
       title: 'This is title',
       details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/192/149"
+      src: "https://picsum.photos/192/149",
+      badgeColor: 'red',
+      badgeText: 'Expired'
     },
 
 
@@ -152,14 +162,14 @@ const CreateOpportunities = () => {
         tab={
           <span className='d-flex justify-content-center align-items-center'>
             <SaveOutlined />
-            Saved
+            Draft
           </span>
         }
         key="2">
         <div className=' overflow-auto p-3' >
           {
             saved.map((e) =>
-              <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="cyan" badgeText="Saved" picSrc={e.src} />
+              <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="cyan" badgeText="Draft" picSrc={e.src} />
             )
           }
 
@@ -176,24 +186,7 @@ const CreateOpportunities = () => {
         <div className=' overflow-auto p-3' >
           {
             submitted.map((e: any) =>
-              <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="blue" badgeText="Submitted" picSrc={e.src} />
-            )
-          }
-
-        </div>
-      </TabPane>
-      <TabPane
-        tab={
-          <span className='d-flex justify-content-center align-items-center'>
-            <RetweetOutlined />
-            Recent Opportunities
-          </span>
-        }
-        key="4">
-        <div className=' overflow-auto p-3' >
-          {
-            recent.map((e) =>
-              <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="cyan" badgeText="New" picSrc={e.src} />
+              <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor={e.badgeColor} badgeText={e.badgeText} picSrc={e.src} />
             )
           }
 

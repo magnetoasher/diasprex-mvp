@@ -1,12 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react'
-import {Link} from 'react-router-dom'
-import {Languages} from './Languages'
-import {useOktaAuth} from "@okta/okta-react"
-import {toAbsoluteUrl} from '../../../helpers'
+import { FC } from 'react'
+import { Link } from 'react-router-dom'
+import { Languages } from './Languages'
+import { useOktaAuth } from "@okta/okta-react"
+import { toAbsoluteUrl } from '../../../helpers'
 
 const HeaderUserMenu: FC = () => {
-  const {oktaAuth} = useOktaAuth()
+
+  var userTypeFull = localStorage.getItem("userTypeFull")
+  var userType = localStorage.getItem("userType")
+
+  console.log(userTypeFull, userType)
+  debugger
+  const { oktaAuth } = useOktaAuth()
 
   const logout = () => {
     oktaAuth.signOut()
@@ -26,12 +32,12 @@ const HeaderUserMenu: FC = () => {
           <div className='d-flex flex-column'>
             <div className='fw-bolder d-flex align-items-center fs-5'>
               {/* {user.first_name} {user.first_name} */}
-              First Last
-              <span className='badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2'>Pro</span>
+              Max Smith
+              <span className='badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2 text-capitalize'>{userTypeFull}</span>
             </div>
             <a href='#' className='fw-bold text-muted text-hover-primary fs-7'>
               {/* {user.email} */}
-              test@user.com
+              admin@dasprex.com
             </a>
           </div>
         </div>
@@ -41,92 +47,46 @@ const HeaderUserMenu: FC = () => {
 
       <div className='menu-item px-5'>
         <Link to={'/crafted/profile/overview'} className='menu-link px-5'>
-          My Profile
+          My Account
         </Link>
       </div>
 
-      <div className='menu-item px-5'>
-        <a href='#' className='menu-link px-5'>
-          <span className='menu-text'>My Projects</span>
-          <span className='menu-badge'>
-            <span className='badge badge-light-danger badge-circle fw-bolder fs-7'>3</span>
-          </span>
-        </a>
-      </div>
-
-      <div
-        className='menu-item px-5'
-        data-kt-menu-trigger='hover'
-        data-kt-menu-placement='left-start'
-        data-kt-menu-flip='bottom'
-      >
-        <a href='#' className='menu-link px-5'>
-          <span className='menu-title'>My Subscription</span>
-          <span className='menu-arrow'></span>
-        </a>
-
-        <div className='menu-sub menu-sub-dropdown w-175px py-4'>
-          <div className='menu-item px-3'>
-            <a href='#' className='menu-link px-5'>
-              Referrals
-            </a>
-          </div>
-
-          <div className='menu-item px-3'>
-            <a href='#' className='menu-link px-5'>
-              Billing
-            </a>
-          </div>
-
-          <div className='menu-item px-3'>
-            <a href='#' className='menu-link px-5'>
-              Payments
-            </a>
-          </div>
-
-          <div className='menu-item px-3'>
-            <a href='#' className='menu-link d-flex flex-stack px-5'>
-              Statements
-              <i
-                className='fas fa-exclamation-circle ms-2 fs-7'
-                data-bs-toggle='tooltip'
-                title='View your statements'
-              ></i>
-            </a>
-          </div>
-
-          <div className='separator my-2'></div>
-
-          <div className='menu-item px-3'>
-            <div className='menu-content px-3'>
-              <label className='form-check form-switch form-check-custom form-check-solid'>
-                <input
-                  className='form-check-input w-30px h-20px'
-                  type='checkbox'
-                  value='1'
-                  defaultChecked={true}
-                  name='notifications'
-                />
-                <span className='form-check-label text-muted fs-7'>Notifications</span>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className='menu-item px-5'>
-        <a href='#' className='menu-link px-5'>
-          My Statements
-        </a>
-      </div>
-
-      <div className='separator my-2'></div>
-
-      <Languages />
-
       <div className='menu-item px-5 my-1'>
         <Link to='/crafted/profile/settings' className='menu-link px-5'>
-          Account Settings
+          Settings
+        </Link>
+      </div>
+
+      {
+        userType !== "sponsor" && <>
+          <div className='menu-item px-5'>
+            <Link to={'/my_opportunities'} className='menu-link px-5'>
+              My Opportunities
+            </Link>
+          </div>
+
+          <div className='menu-item px-5 my-1'>
+            <Link to='#' className='menu-link px-5'>
+              Send Money
+            </Link>
+          </div>
+
+          <div className='menu-item px-5'>
+            <Link to={'#'} className='menu-link px-5'>
+              My Investments
+            </Link>
+          </div>
+
+          <div className='menu-item px-5 my-1'>
+            <Link to='#' className='menu-link px-5'>
+              Referrals
+            </Link>
+          </div>
+        </>
+      }
+      <div className='menu-item px-5 my-1'>
+        <Link to='/crafted/profile/settings' className='menu-link px-5'>
+          Messages
         </Link>
       </div>
 
@@ -139,4 +99,86 @@ const HeaderUserMenu: FC = () => {
   )
 }
 
-export {HeaderUserMenu}
+export { HeaderUserMenu }
+
+
+
+
+{/* <div className='menu-item px-5'>
+<a href='#' className='menu-link px-5'>
+  <span className='menu-text'>My Projects</span>
+  <span className='menu-badge'>
+    <span className='badge badge-light-danger badge-circle fw-bolder fs-7'>3</span>
+  </span>
+</a>
+</div>
+
+<div
+className='menu-item px-5'
+data-kt-menu-trigger='hover'
+data-kt-menu-placement='left-start'
+data-kt-menu-flip='bottom'
+>
+<a href='#' className='menu-link px-5'>
+  <span className='menu-title'>My Subscription</span>
+  <span className='menu-arrow'></span>
+</a>
+
+<div className='menu-sub menu-sub-dropdown w-175px py-4'>
+  <div className='menu-item px-3'>
+    <a href='#' className='menu-link px-5'>
+      Referrals
+    </a>
+  </div>
+
+  <div className='menu-item px-3'>
+    <a href='#' className='menu-link px-5'>
+      Billing
+    </a>
+  </div>
+
+  <div className='menu-item px-3'>
+    <a href='#' className='menu-link px-5'>
+      Payments
+    </a>
+  </div>
+
+  <div className='menu-item px-3'>
+    <a href='#' className='menu-link d-flex flex-stack px-5'>
+      Statements
+      <i
+        className='fas fa-exclamation-circle ms-2 fs-7'
+        data-bs-toggle='tooltip'
+        title='View your statements'
+      ></i>
+    </a>
+  </div>
+
+  <div className='separator my-2'></div>
+
+  <div className='menu-item px-3'>
+    <div className='menu-content px-3'>
+      <label className='form-check form-switch form-check-custom form-check-solid'>
+        <input
+          className='form-check-input w-30px h-20px'
+          type='checkbox'
+          value='1'
+          defaultChecked={true}
+          name='notifications'
+        />
+        <span className='form-check-label text-muted fs-7'>Notifications</span>
+      </label>
+    </div>
+  </div>
+</div>
+</div>
+
+<div className='menu-item px-5'>
+<a href='#' className='menu-link px-5'>
+  My Statements
+</a>
+</div>
+
+<div className='separator my-2'></div>
+
+<Languages /> */}
