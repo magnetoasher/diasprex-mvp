@@ -11,6 +11,8 @@
     "@okta/okta-react": "^6.5.0",
     "@popperjs/core": "~2.10.1",
     "@reduxjs/toolkit": "^1.6.0",
+    "@stripe/react-stripe-js": "^1.10.0",
+    "@stripe/stripe-js": "^1.35.0",
     "animate.css": "^4.1.1",
     "antd": "^4.22.8",
     "apexcharts": "^3.27.1",
