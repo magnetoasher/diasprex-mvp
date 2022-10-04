@@ -3,29 +3,37 @@
     "id": 1,
     "title": "Fitness App",
     "description": "Manages your fitness",
-    "dueDate": "November 18, 2022",
+    "dueDate": "Nov 18, 2022",
     "budget": "$234,2444.00",
     "avatar": "A",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/240/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 2,
     "title": "Grocery App",
     "description": "Manages your grocery",
-    "dueDate": "September 15, 2022",
+    "dueDate": "Sep 15, 2022",
     "budget": "$134,2200.00",
     "avatar": "F",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/300/200/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "45",
+    "interest": "67"
   },
-
   {
     "id": 3,
     "title": "Demo App",
     "description": "This is demo app",
-    "dueDate": "December 10, 2022",
+    "dueDate": "Dec 10, 2022",
     "budget": "$334,2078.00",
     "avatar": "N",
-    "img": "https://picsum.photos/200/100"
+    "img": "https://loremflickr.com/g/320/140/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "144",
+    "interest": "24"
   },
 
   {
@@ -35,7 +43,10 @@
     "dueDate": "Jan 20, 2023",
     "budget": "$753,523.00",
     "avatar": "G",
-    "img": "https://picsum.photos/200/150"
+    "img": "https://loremflickr.com/g/320/245/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "799",
+    "interest": "400"
   },
   {
     "id": 5,
@@ -44,45 +55,60 @@
     "dueDate": "Nov 20, 2022",
     "budget": "$222,3334.00",
     "avatar": "H",
-    "img": "https://picsum.photos/200/50"
+    "img": "https://loremflickr.com/g/320/246/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "345",
+    "interest": "26"
   },
 
   {
     "id": 6,
     "title": "Media App",
     "description": "Manages your media",
-    "dueDate": "October 20, 2022",
+    "dueDate": "Oct 20, 2022",
     "budget": "$207,9856.00",
     "avatar": "L",
-    "img": "https://picsum.photos/200/130"
+    "img": "https://loremflickr.com/g/320/247/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "129",
+    "interest": "11"
   },
   {
     "id": 7,
     "title": "Test App",
     "description": "Manages your fitness",
-    "dueDate": "November 18, 2022",
+    "dueDate": "Nov 18, 2022",
     "budget": "$234,2444.00",
     "avatar": "A",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/248/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "456",
+    "interest": "450"
   },
   {
     "id": 8,
     "title": "Game App",
     "description": "Manages your grocery",
-    "dueDate": "September 15, 2022",
+    "dueDate": "Sep 15, 2022",
     "budget": "$134,2200.00",
     "avatar": "F",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/249/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "567",
+    "interest": "345"
   },
 
   {
     "id": 9,
     "title": "Food App",
     "description": "This is demo app",
-    "dueDate": "December 10, 2022",
+    "dueDate": "Dec 10, 2022",
     "budget": "$334,2078.00",
     "avatar": "N",
-    "img": "https://picsum.photos/200/100"
+    "img": "https://loremflickr.com/g/320/250/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
@@ -92,7 +118,10 @@
     "dueDate": "Jan 20, 2023",
     "budget": "$753,523.00",
     "avatar": "G",
-    "img": "https://picsum.photos/200/150"
+    "img": "https://loremflickr.com/g/320/251/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 11,
@@ -101,45 +130,60 @@
     "dueDate": "Nov 20, 2022",
     "budget": "$222,3334.00",
     "avatar": "H",
-    "img": "https://picsum.photos/200/50"
+    "img": "https://loremflickr.com/g/320/252/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
     "id": 12,
     "title": "Pink App",
     "description": "Manages your media",
-    "dueDate": "October 20, 2022",
+    "dueDate": "Oct 20, 2022",
     "budget": "$207,9856.00",
     "avatar": "L",
-    "img": "https://picsum.photos/200/130"
+    "img": "https://loremflickr.com/g/320/253/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 13,
     "title": "Connection App",
     "description": "Manages your fitness",
-    "dueDate": "November 18, 2022",
+    "dueDate": "Nov 18, 2022",
     "budget": "$234,2444.00",
     "avatar": "A",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/254/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 14,
     "title": "Relation App",
     "description": "Manages your grocery",
-    "dueDate": "September 15, 2022",
+    "dueDate": "Sep 15, 2022",
     "budget": "$134,2200.00",
     "avatar": "F",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/255/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
     "id": 15,
     "title": "Yellow App",
     "description": "This is demo app",
-    "dueDate": "December 10, 2022",
+    "dueDate": "Dec 10, 2022",
     "budget": "$334,2078.00",
     "avatar": "N",
-    "img": "https://picsum.photos/200/100"
+    "img": "https://loremflickr.com/g/320/256/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
@@ -149,7 +193,10 @@
     "dueDate": "Jan 20, 2023",
     "budget": "$753,523.00",
     "avatar": "G",
-    "img": "https://picsum.photos/200/150"
+    "img": "https://loremflickr.com/g/320/257/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 17,
@@ -158,35 +205,47 @@
     "dueDate": "Nov 20, 2022",
     "budget": "$222,3334.00",
     "avatar": "H",
-    "img": "https://picsum.photos/200/50"
+    "img": "https://loremflickr.com/g/320/258/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
     "id": 18,
     "title": "InFocus App",
     "description": "Manages your media",
-    "dueDate": "October 20, 2022",
+    "dueDate": "Oct 20, 2022",
     "budget": "$207,9856.00",
     "avatar": "L",
-    "img": "https://picsum.photos/200/130"
+    "img": "https://loremflickr.com/g/320/259/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 19,
     "title": "Toll App",
     "description": "Manages your fitness",
-    "dueDate": "November 18, 2022",
+    "dueDate": "Nov 18, 2022",
     "budget": "$234,2444.00",
     "avatar": "A",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/260/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 20,
     "title": "Direction App",
     "description": "Manages your grocery",
-    "dueDate": "September 15, 2022",
+    "dueDate": "Sep 15, 2022",
     "budget": "$134,2200.00",
     "avatar": "F",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/261/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
@@ -196,7 +255,10 @@
     "dueDate": "December 10, 2022",
     "budget": "$334,2078.00",
     "avatar": "N",
-    "img": "https://picsum.photos/200/100"
+    "img": "https://loremflickr.com/g/320/262/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
@@ -206,7 +268,10 @@
     "dueDate": "Jan 20, 2023",
     "budget": "$753,523.00",
     "avatar": "G",
-    "img": "https://picsum.photos/200/150"
+    "img": "https://loremflickr.com/g/320/263/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 23,
@@ -215,45 +280,60 @@
     "dueDate": "Nov 20, 2022",
     "budget": "$222,3334.00",
     "avatar": "H",
-    "img": "https://picsum.photos/200/50"
+    "img": "https://loremflickr.com/g/320/264/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
     "id": 24,
     "title": "Practivce App",
     "description": "Manages your media",
-    "dueDate": "October 20, 2022",
+    "dueDate": "Oct 20, 2022",
     "budget": "$207,9856.00",
     "avatar": "L",
-    "img": "https://picsum.photos/200/130"
+    "img": "https://loremflickr.com/g/320/265/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 25,
     "title": "Go App",
     "description": "Manages your fitness",
-    "dueDate": "November 18, 2022",
+    "dueDate": "Nov 18, 2022",
     "budget": "$234,2444.00",
     "avatar": "A",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/266/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 26,
     "title": "Start App",
     "description": "Manages your grocery",
-    "dueDate": "September 15, 2022",
+    "dueDate": "Sep 15, 2022",
     "budget": "$134,2200.00",
     "avatar": "F",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/267/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
     "id": 27,
     "title": "Game App",
     "description": "This is demo app",
-    "dueDate": "December 10, 2022",
+    "dueDate": "Dec10, 2022",
     "budget": "$334,2078.00",
     "avatar": "N",
-    "img": "https://picsum.photos/200/100"
+    "img": "https://loremflickr.com/g/320/268/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
@@ -263,7 +343,10 @@
     "dueDate": "Jan 20, 2023",
     "budget": "$753,523.00",
     "avatar": "G",
-    "img": "https://picsum.photos/200/150"
+    "img": "https://loremflickr.com/g/320/269/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 29,
@@ -272,45 +355,60 @@
     "dueDate": "Nov 20, 2022",
     "budget": "$222,3334.00",
     "avatar": "H",
-    "img": "https://picsum.photos/200/50"
+    "img": "https://loremflickr.com/g/320/270/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
     "id": 30,
     "title": "Hp App",
     "description": "Manages your media",
-    "dueDate": "October 20, 2022",
+    "dueDate": "Oct 20, 2022",
     "budget": "$207,9856.00",
     "avatar": "L",
-    "img": "https://picsum.photos/200/130"
+    "img": "https://loremflickr.com/g/320/271/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 31,
     "title": "Computer App",
     "description": "Manages your fitness",
-    "dueDate": "November 18, 2022",
+    "dueDate": "Nov 18, 2022",
     "budget": "$234,2444.00",
     "avatar": "A",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/272/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 32,
     "title": "Sale App",
     "description": "Manages your grocery",
-    "dueDate": "September 15, 2022",
+    "dueDate": "Sep 15, 2022",
     "budget": "$134,2200.00",
     "avatar": "F",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/273/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
     "id": 33,
     "title": "Buy App",
     "description": "This is demo app",
-    "dueDate": "December 10, 2022",
+    "dueDate": "Dec 10, 2022",
     "budget": "$334,2078.00",
     "avatar": "N",
-    "img": "https://picsum.photos/200/100"
+    "img": "https://loremflickr.com/g/320/274/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
@@ -320,7 +418,10 @@
     "dueDate": "Jan 20, 2023",
     "budget": "$753,523.00",
     "avatar": "G",
-    "img": "https://picsum.photos/200/150"
+    "img": "https://loremflickr.com/g/320/274/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 35,
@@ -329,45 +430,60 @@
     "dueDate": "Nov 20, 2022",
     "budget": "$222,3334.00",
     "avatar": "H",
-    "img": "https://picsum.photos/200/50"
+    "img": "https://loremflickr.com/g/320/275/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
     "id": 36,
     "title": "Water App",
     "description": "Manages your media",
-    "dueDate": "October 20, 2022",
+    "dueDate": "Oct 20, 2022",
     "budget": "$207,9856.00",
     "avatar": "L",
-    "img": "https://picsum.photos/200/130"
+    "img": "https://loremflickr.com/g/320/276/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 37,
     "title": "Car App",
     "description": "Manages your fitness",
-    "dueDate": "November 18, 2022",
+    "dueDate": "Nov 18, 2022",
     "budget": "$234,2444.00",
     "avatar": "A",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/277/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
   {
     "id": 38,
     "title": "Cycle App",
     "description": "Manages your grocery",
-    "dueDate": "September 15, 2022",
+    "dueDate": "Sep 15, 2022",
     "budget": "$134,2200.00",
     "avatar": "F",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/278/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "12",
+    "interest": "20"
   },
 
   {
     "id": 39,
     "title": "Foodie App",
     "description": "This is demo app",
-    "dueDate": "December 10, 2022",
+    "dueDate": "Dec 10, 2022",
     "budget": "$334,2078.00",
     "avatar": "N",
-    "img": "https://picsum.photos/200/100"
+    "img": "https://loremflickr.com/g/320/279/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "600",
+    "interest": "70"
   },
 
   {
@@ -377,7 +493,10 @@
     "dueDate": "Jan 20, 2023",
     "budget": "$753,523.00",
     "avatar": "G",
-    "img": "https://picsum.photos/200/150"
+    "img": "https://loremflickr.com/g/320/280/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "145",
+    "interest": "67"
   },
   {
     "id": 41,
@@ -386,45 +505,60 @@
     "dueDate": "Nov 20, 2022",
     "budget": "$222,3334.00",
     "avatar": "H",
-    "img": "https://picsum.photos/200/50"
+    "img": "https://loremflickr.com/g/320/281/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "121",
+    "interest": "24"
   },
 
   {
     "id": 42,
     "title": "Latest App",
     "description": "Manages your media",
-    "dueDate": "October 20, 2022",
+    "dueDate": "Oct 20, 2022",
     "budget": "$207,9856.00",
     "avatar": "L",
-    "img": "https://picsum.photos/200/130"
+    "img": "https://loremflickr.com/g/320/282/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "100",
+    "interest": "11"
   },
   {
     "id": 43,
     "title": "Roll App",
     "description": "Manages your fitness",
-    "dueDate": "November 18, 2022",
+    "dueDate": "Nov 18, 2022",
     "budget": "$234,2444.00",
     "avatar": "A",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/283/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "1200",
+    "interest": "110"
   },
   {
     "id": 44,
     "title": "Lion App",
     "description": "Manages your grocery",
-    "dueDate": "September 15, 2022",
+    "dueDate": "Sep 15, 2022",
     "budget": "$134,2200.00",
     "avatar": "F",
-    "img": "https://picsum.photos/200/300"
+    "img": "https://loremflickr.com/g/320/284/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "79",
+    "interest": "68"
   },
 
   {
     "id": 45,
     "title": "Tiger App",
     "description": "This is demo app",
-    "dueDate": "December 10, 2022",
+    "dueDate": "Dec 10, 2022",
     "budget": "$334,2078.00",
     "avatar": "N",
-    "img": "https://picsum.photos/200/100"
+    "img": "https://loremflickr.com/g/320/285/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "70",
+    "interest": "40"
   },
 
   {
@@ -434,7 +568,10 @@
     "dueDate": "Jan 20, 2023",
     "budget": "$753,523.00",
     "avatar": "G",
-    "img": "https://picsum.photos/200/150"
+    "img": "https://loremflickr.com/g/320/286/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "11",
+    "interest": "10"
   },
   {
     "id": 47,
@@ -443,16 +580,22 @@
     "dueDate": "Nov 20, 2022",
     "budget": "$222,3334.00",
     "avatar": "H",
-    "img": "https://picsum.photos/200/50"
+    "img": "https://loremflickr.com/g/320/287/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "120",
+    "interest": "21"
   },
 
   {
     "id": 48,
     "title": "Fridge App",
     "description": "Manages your media",
-    "dueDate": "October 20, 2022",
+    "dueDate": "Oct 20, 2022",
     "budget": "$207,9856.00",
     "avatar": "L",
-    "img": "https://picsum.photos/200/130"
+    "img": "https://loremflickr.com/g/320/288/paris",
+    "summary": "A summary begins with an introductory sentence that states the text's title, author and main point of the text as you see it. A summary is written in your own words. A summary contains only the ideas of the original text. Do not insert any of your own opinions, interpretations, deductions or comments into a summary",
+    "following": "100",
+    "interest": "80"
   }
 ]

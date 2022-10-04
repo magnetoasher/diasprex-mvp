@@ -9,11 +9,14 @@ import { getCSSVariableValue } from '../../_metronic/assets/ts/_utils'
 import { SigninPage } from '../modules/signin/components/SigninPage'
 import { RegistrationStepsPage } from '../modules/auth/registration/RegistrationStepsPage'
 import { AuthPage } from '../modules/auth'
+import { ReferralsForm } from '../modules/profile/components/ReferralsForm'
 import CreateOpportunities from '../pages/dashboard/CreateOpportunities'
 import Proposals from '../pages/dashboard/Proposals'
 import MyOpportunity from '../pages/dashboard/MyOpportunity'
 import GeneralOpportunityCard from '../pages/dashboard/GeneralOpportunityCard'
 import SponsorProposals from '../pages/dashboard/SponsorPrposals'
+import SendProposals from '../pages/dashboard/SendProposals'
+import ViewOpportunity from '../pages/dashboard/ViewOpportunity'
 
 const PrivateRoutes = () => {
   const BuilderPageWrapper = lazy(() => import('../pages/layout-builder/BuilderPageWrapper'))
@@ -42,6 +45,9 @@ const PrivateRoutes = () => {
             <Route path='sponsor_proposals' element={<SponsorProposals />} />
             <Route path='my_opportunities' element={<MyOpportunity />} />
             <Route path='opportunities' element={<GeneralOpportunityCard />} />
+            <Route path='send_proposals' element={<SendProposals />} />
+            <Route path="referrals" element={<ReferralsForm />} />
+            <Route path="view_opportunity" element={<ViewOpportunity />} />
 
             {/* Lazy Modules */}
             {/* <Route

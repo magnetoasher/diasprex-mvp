@@ -4,6 +4,8 @@ import Opportunity from './Opportunity'
 import Oppurtunity from './Opportunity'
 import { Card, Row } from 'antd';
 import BillingHistory from './BillingHistory';
+import { EditText, EditTextarea } from 'react-edit-text';
+import 'react-edit-text/dist/index.css';
 const NewDashboardPage = () => {
     var userTypeFull = localStorage.getItem("userTypeFull")
     var userType = localStorage.getItem("userType")
@@ -14,7 +16,7 @@ const NewDashboardPage = () => {
             userTypeFull: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/180/140"
+            src: "https://loremflickr.com/g/320/240/things"
 
         },
         {
@@ -22,7 +24,7 @@ const NewDashboardPage = () => {
             userTypeFull: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/181/140"
+            src: "https://loremflickr.com/g/320/241/things"
 
         },
         {
@@ -30,7 +32,7 @@ const NewDashboardPage = () => {
             userTypeFull: 'enabler',
             title: 'This is title',
             details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/182/140"
+            src: "https://loremflickr.com/g/320/242/things"
 
         },
 
@@ -145,7 +147,7 @@ const NewDashboardPage = () => {
             </Card>
 
             <Card className='col-7 '>
-                <div className='card mb-5 mb-xl-10' id='kt_profile_details_view'>
+                <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>
                     <div className='card-header cursor-pointer'>
                         <div className='card-title m-0'>
                             <h3 className='fw-bolder m-0'>Overview</h3>
@@ -155,31 +157,28 @@ const NewDashboardPage = () => {
                     </div>
 
                     <div className=' p-4'>
-                        <div className='row mb-7'>
-                            <label className='col-lg-12 fw-bolder  mb-5'>About</label>
-                            <span className='fs-6 h-50px text-dark'>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book
-                            </span>
-
+                        <div className='row mb-2'>
+                            <label className='col-lg-12 fw-bolder  '>About</label>
+                            <EditTextarea rows={5} defaultValue="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book" />
                         </div>
-                        <div className='row mb-7'>
+                        <div className='row mb-2 align-items-center'>
                             <label className='col-lg-3 fw-bolder '>
                                 Industry
 
                             </label>
 
                             <div className='col-lg-7 d-flex align-items-start'>
-                                <span className='fw-bold fs-6 me-2'>Computer Software</span>
+                                <EditText defaultValue="Computer Software" />
                             </div>
                         </div>
-                        <div className='row mb-7'>
+                        <div className='row mb-7 align-items-center'>
                             <label className='col-lg-3 fw-bolder  '>
                                 Specialties
 
                             </label>
 
                             <div className='col-lg-7 d-flex align-items-center'>
-                                <span className='fw-bold fs-6 me-2'>Web Development</span>
+                                <EditText defaultValue="Web Development" />
                             </div>
                         </div>
                     </div>
@@ -217,7 +216,7 @@ const NewDashboardPage = () => {
                 {
                     userType !== "sponsor" &&
                     <>
-                        <div className="d-flex align-items-center mb-2">
+                        <div className="d-flex align-items-center mb-2 justify-content-end">
                             <a
                                 role="button"
                                 href="/my_opportunities"

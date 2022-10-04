@@ -28,9 +28,9 @@ function GeneralOpportunityCard() {
                         </p>
                     }
                 >
-                    <Row gutter={16} justify="space-evenly">
+                    <Row gutter={8} justify="space-evenly">
                         {object1.map((element) => (
-                            <Col xs={24} sm={24} md={7} lg={7} style={{ margin: "10px" }}
+                            <Col xs={24} sm={24} md={6} lg={6} style={{ margin: "5px" }}
                                 className="box-shadow-style bg-white"
                             >
                                 <GeneralCardComponent
@@ -40,6 +40,9 @@ function GeneralOpportunityCard() {
                                     budget={element.budget}
                                     src={element.img}
                                     avatar={element.avatar}
+                                    summary={element.summary}
+                                    following={element.following}
+                                    interest={element.interest}
                                 />
                             </Col>
                         ))}

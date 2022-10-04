@@ -100,7 +100,7 @@ export function BasicMenu() {
         fontIcon='bi-layers'
       />
       <AsideMenuItem
-        to='#'
+        to='/referrals'
         icon='/media/icons/duotune/art/art001.svg'
         title='Referrals'
         fontIcon='bi-layers'

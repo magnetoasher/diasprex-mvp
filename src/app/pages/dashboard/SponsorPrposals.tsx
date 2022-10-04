@@ -1,176 +1,47 @@
 import React, { useState } from 'react'
 import { PageTitle } from '../../../_metronic/layout/core'
-import Opportunity from './Opportunity'
-import {
-    SendOutlined,
-    DashboardOutlined,
-    CheckOutlined,
-    LaptopOutlined,
-    StopOutlined
-
-} from '@ant-design/icons';
-import { Tabs, Card } from 'antd';
-
+import { Card } from 'antd';
+import { CreateTable } from './CreateTables';
+import { TableFilters } from './TableFilters';
+import { proposalsTabColumns, proposalsData } from './TableObjects/TableObjects';
 const SponsorProposals = () => {
-    const { TabPane } = Tabs;
-    const onChange = (key: string) => {
-        console.log(key);
-    };
-    const [dataObj] = useState([
-        {
-            name: 'completed1',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/192/140"
-        },
-        {
-            name: 'completed2',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/193/140"
-        },
-        {
-            name: 'completed3',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/194/140"
-        },
-        {
-            name: 'completed4',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/195/140"
+
+
+    const filterStatus = ["All", "Achieved", "Selected", "Declined", "Awarded"]
+    const [data, setData] = useState(proposalsData)
+    const handleChange = (value: any) => {
+
+        if (value.toLocaleLowerCase() === "all") {
+            setData(proposalsData)
         }
-
-    ])
-    const [watching] = useState([
-        {
-            name: 'demo1',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum'
-        },
-        {
-            name: 'demo2',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum'
-        },
-        {
-            name: 'demo3',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum'
+        else {
+            let dataTemp = proposalsData
+            let temp = dataTemp.filter((e) => e.status.toLocaleLowerCase() === value.toLocaleLowerCase())
+            setData(temp)
         }
-
-    ])
-    const [declined] = useState([
-        {
-            name: 'demo4',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/196/140"
-        },
-        {
-            name: 'demo5',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/197/141"
-        },
-
-
-    ])
-
-    const [submissions] = useState([
-        {
-            name: 'demo6',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/192/140"
-        },
-        {
-            name: 'demo7',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/192/145"
-        },
-        {
-            name: 'demo8',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/192/147"
-        },
-        {
-            name: 'demo9',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/192/148"
-        },
-        {
-            name: 'demo10',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/192/149"
-        },
-
-
-    ])
-    const [active] = useState([
-        {
-            name: 'demo11',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/172/140"
-        },
-        {
-            name: 'demo12',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/173/140"
-        },
-        {
-            name: 'demo13',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/174/140"
-        },
-        {
-            name: 'demo14',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/175/140"
-
-        },
-        {
-            name: 'demo15',
-            userType: 'enabler',
-            title: 'This is title',
-            details: 'this is detail, lorem ispum',
-            src: "https://picsum.photos/176/140"
-
-        },
-
-
-    ])
+    }
     return (
         <>
             <PageTitle breadcrumbs={[]}>Proposals</PageTitle>
-            <Tabs defaultActiveKey="1" onChange={onChange}>
+
+            <Card style={{
+                boxShadow:
+                    "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+                borderRadius: "8px",
+            }}>
+                <div>
+                    <TableFilters filterStatus={filterStatus} handleChange={handleChange} />
+                    <div>
+                        <CreateTable
+                            myOppTabColumns={proposalsTabColumns}
+                            myOpportunitiesData={data}
+                            scrollAxis={{ x: 900, y: 700 }}
+                        />
+                    </div>
+                </div>
+            </Card>
+
+            {/* <Tabs defaultActiveKey="1" onChange={onChange}>
                 <TabPane
                     tab={
                         <span className='d-flex justify-content-center align-items-center'>
@@ -180,17 +51,17 @@ const SponsorProposals = () => {
                     }
                     key="1">
                     <div className=' overflow-auto p-3' >
-                        {
-                            submissions.map((e) =>
+                    {
+                        submissions.map((e) =>
                                 <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="cyan" badgeText="Submitted" picSrc={e.src} />
                             )
                         }
-
-                    </div>
-                </TabPane>
-                <TabPane
-                    tab={
-                        <span className='d-flex justify-content-center align-items-center'>
+                        
+                        </div>
+                        </TabPane>
+                        <TabPane
+                        tab={
+                            <span className='d-flex justify-content-center align-items-center'>
                             <LaptopOutlined />
                             Selected
                         </span>
@@ -255,7 +126,7 @@ const SponsorProposals = () => {
 
                     </div>
                 </TabPane>
-            </Tabs>
+            </Tabs> */}
 
         </>
     )

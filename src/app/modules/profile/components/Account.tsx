@@ -1,8 +1,18 @@
 import React from "react";
 import { useState } from "react";
+import SweetAlert from "react-bootstrap-sweetalert";
+import { Button } from "antd";
 export const Account = () => {
   const [changeEmail, setChangeEmail] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
+  const [accountType, setAccountType] = useState(localStorage.getItem("userType"));
+  const [openSweetAlert, setOpenSweetAlert] = useState(false);
+  const onConfirm = () => {
+
+  }
+  const onCancel = () => {
+    setOpenSweetAlert(false)
+  }
 
   return (
     <div className="card mb-5 mb-xl-10">
@@ -27,7 +37,7 @@ export const Account = () => {
               <div className="flex-row-fluid">
                 <form
                   className="form"
-                  // novalidate="novalidate"
+                // novalidate="novalidate"
                 >
                   <div className="row mb-6">
                     <div className="col-lg-6 mb-4 mb-lg-0">
@@ -71,7 +81,7 @@ export const Account = () => {
                     <button
                       id="kt_signin_cancel"
                       type="button"
-                      className="btn btn-color-gray-400 btn-active-light-primary px-6"
+                      className="btn btn-color-gray-700 btn-active-light-primary px-6"
                       onClick={() => {
                         setChangeEmail(false);
                       }}
@@ -109,7 +119,7 @@ export const Account = () => {
               <form
                 id="kt_signin_change_password"
                 className="form"
-                // novalidate="novalidate"
+              // novalidate="novalidate"
               >
                 {changePassword && (
                   <div className="row mb-1">
@@ -172,7 +182,7 @@ export const Account = () => {
                     </button>
                     <button
                       type="button"
-                      className="btn btn-color-gray-400 btn-active-light-primary px-6"
+                      className="btn btn-color-gray-700 btn-active-light-primary px-6"
                       onClick={() => {
                         setChangePassword(false);
                       }}
@@ -196,8 +206,59 @@ export const Account = () => {
               </div>
             )}
           </div>
+
+
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div>
+              <label style={{
+                fontWeight: 600,
+                fontSize: "14px"
+              }}>
+                Deactivate Account
+              </label>
+            </div>
+            <div>
+              <button
+                type="button"
+                className="btn btn-color-gray-700 btn-active-light-primary px-6"
+                onClick={() => {
+                  setOpenSweetAlert(true)
+                }}
+
+              >
+                Deactivate Account
+              </button>
+            </div>
+
+          </div>
         </div>
       </div>
-    </div>
+      <SweetAlert
+        title={"Account Deactivation"}
+        onConfirm={onConfirm}
+        onCancel={onCancel}
+        showCancel={true}
+        show={openSweetAlert}
+      >
+
+        <div>
+          {accountType !== "basic" ? (
+            <h3>
+              Please contact the admin at{" "}
+              <a className='btn btn-link' href='#'>admin@diasprex.com </a>{" "}
+              to deactivate your account.
+            </h3>
+          ) : (
+            <h3>
+              Are you sure to permanently delete your account?
+            </h3>
+
+          )
+
+          }
+
+        </div>
+      </SweetAlert>
+    </div >
   );
 };

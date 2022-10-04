@@ -2,8 +2,13 @@ import React, { FC, useMemo, useState } from 'react'
 import { Field, ErrorMessage } from 'formik'
 // @ts-ignore
 import PaymentForm from '../../../../components/CreditCard'
+// @ts-ignore
+import AsyncSelect from 'react-select'
+import countryList from 'react-select-country-list'
+
 const Sponsor = () => {
     const [dataObj, setDataObj] = useState({})
+    const countryOptions = useMemo(() => countryList().getData(), [])
 
     const handleChange = (type: any, value: any) => {
         setDataObj({
@@ -37,12 +42,13 @@ const Sponsor = () => {
             <div className='fv-row mb-10'>
                 <label className='form-label required'>Organization Type</label>
                 <div role="group" aria-labelledby="my-radio-group">
+                    <Field type='radio' value='business' name='type' className="m-3" />
+                    Business
                     <Field type='radio' value='government' name='type' className="m-3" />
                     Government &emsp;
                     <Field type='radio' value='nonProfit' name='type' className="m-3" />
                     Not-for-Profit &emsp;
-                    <Field type='radio' value='business' name='type' className="m-3" />
-                    Business
+
                 </div>
                 <div className='text-danger mt-2'>
                     <ErrorMessage name='businessName' />
@@ -68,9 +74,16 @@ const Sponsor = () => {
             {/* <PaymentForm /> */}
 
             <div className='fv-row mb-10'>
-                <label className='form-label '> Verification Status:</label>
+                <label className='form-label required'>Country</label>
+                <AsyncSelect
+                    name='businessType'
+                    className='form-select form-select-lg form-select-solid'
+                    options={countryOptions}
+                    // value={countryValue}
+                    onChange={(e: any) => handleChange("country", e)}
+                />
                 <div className='text-danger mt-2'>
-                    <ErrorMessage name='businessName' />
+                    <ErrorMessage name='businessType' />
                 </div>
             </div>
 

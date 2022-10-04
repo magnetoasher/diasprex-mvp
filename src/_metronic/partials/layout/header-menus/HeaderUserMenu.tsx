@@ -10,8 +10,6 @@ const HeaderUserMenu: FC = () => {
   var userTypeFull = localStorage.getItem("userTypeFull")
   var userType = localStorage.getItem("userType")
 
-  console.log(userTypeFull, userType)
-  debugger
   const { oktaAuth } = useOktaAuth()
 
   const logout = () => {
@@ -78,7 +76,7 @@ const HeaderUserMenu: FC = () => {
           </div>
 
           <div className='menu-item px-5 my-1'>
-            <Link to='#' className='menu-link px-5'>
+            <Link to='referrals' className='menu-link px-5'>
               Referrals
             </Link>
           </div>

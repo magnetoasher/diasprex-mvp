@@ -97,7 +97,7 @@ export function Individual() {
 
 
             <AsideMenuItem
-                to='#'
+                to='/referrals'
                 icon='/media/icons/duotune/general/gen019.svg'
                 title='Referrals'
                 fontIcon='bi-layers'

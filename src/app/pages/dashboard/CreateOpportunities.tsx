@@ -1,12 +1,16 @@
 
 import React, { useState } from 'react'
-import { Tabs, Row, Col } from 'antd';
+import { Tabs, Card } from 'antd';
 import {
   SendOutlined,
   SaveOutlined,
   FileDoneOutlined,
   RetweetOutlined
 } from '@ant-design/icons';
+import { CreateTable } from './CreateTables';
+import { myOppTabColumns, myOpportunitiesData, proposalsData, proposalsTabColumns } from "./TableObjects/TableObjects"
+import { TableFilters } from './TableFilters';
+import { PageTitle } from '../../../_metronic/layout/core'
 
 import { Create } from './createOpportunitiesComponents/Create';
 import Opportunity from './Opportunity';
@@ -15,136 +19,7 @@ const CreateOpportunities = () => {
   const onChange = (key: string) => {
     console.log(key);
   };
-  const [dataObj] = useState([
-    {
-      name: 'name',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum'
-    },
-    {
-      name: 'name',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum'
-    },
-    {
-      name: 'name',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum'
-    }
 
-  ])
-  const [recent] = useState([
-    {
-      name: 'demo4',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/196/140"
-    },
-    {
-      name: 'demo5',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/197/141"
-    },
-
-
-  ])
-
-  const [submitted] = useState([
-    {
-      name: 'demo6',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/192/140",
-      badgeColor: 'red',
-      badgeText: 'In Review'
-    },
-    {
-      name: 'demo7',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/192/145",
-      badgeColor: 'red',
-      badgeText: 'Accepted'
-    },
-    {
-      name: 'demo8',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/192/147",
-      badgeColor: 'red',
-      badgeText: 'Accepted with Revision'
-    },
-    {
-      name: 'demo9',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/192/148",
-      badgeColor: 'red',
-      badgeText: 'Not Accepted'
-    },
-    {
-      name: 'demo10',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/192/149",
-      badgeColor: 'red',
-      badgeText: 'Expired'
-    },
-
-
-  ])
-  const [saved] = useState([
-    {
-      name: 'demo11',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/172/140"
-    },
-    {
-      name: 'demo12',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/173/140"
-    },
-    {
-      name: 'demo13',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/174/140"
-    },
-    {
-      name: 'demo14',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/175/140"
-
-    },
-    {
-      name: 'demo15',
-      userType: 'enabler',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: "https://picsum.photos/176/140"
-
-    },
-
-
-  ])
   return (
 
     <Tabs defaultActiveKey="1" onChange={onChange}>
@@ -167,11 +42,34 @@ const CreateOpportunities = () => {
         }
         key="2">
         <div className=' overflow-auto p-3' >
-          {
+          {/* {
             saved.map((e) =>
               <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="cyan" badgeText="Draft" picSrc={e.src} />
             )
-          }
+          } */}
+
+          <Card style={{
+            boxShadow:
+              "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            borderRadius: "8px",
+          }}>
+
+            <PageTitle breadcrumbs={[]}>My Opportunities</PageTitle>
+            <div>
+
+              <div className=' mx-5'>
+                <TableFilters />
+              </div>
+
+              <CreateTable
+                myOppTabColumns={myOppTabColumns}
+                myOpportunitiesData={myOpportunitiesData}
+                scrollAxis={{ x: 900, y: 700 }}
+              />
+
+            </div>
+
+          </Card>
 
         </div>
       </TabPane>
@@ -184,11 +82,33 @@ const CreateOpportunities = () => {
         }
         key="3">
         <div className=' overflow-auto p-3' >
-          {
+          {/* {
             submitted.map((e: any) =>
               <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor={e.badgeColor} badgeText={e.badgeText} picSrc={e.src} />
             )
-          }
+          } */}
+          <Card style={{
+            boxShadow:
+              "rgba(0, 0, 0, 0.35) 0px 5px 15px",
+            borderRadius: "8px",
+          }}>
+
+            <PageTitle breadcrumbs={[]}>My Opportunities</PageTitle>
+            <div>
+
+              <div className=' mx-5'>
+                <TableFilters />
+              </div>
+
+              <CreateTable
+                myOppTabColumns={proposalsTabColumns}
+                myOpportunitiesData={proposalsData}
+                scrollAxis={{ x: 900, y: 700 }}
+              />
+
+            </div>
+
+          </Card>
 
         </div>
       </TabPane>
@@ -197,3 +117,6 @@ const CreateOpportunities = () => {
   )
 };
 export default CreateOpportunities;
+
+
+
