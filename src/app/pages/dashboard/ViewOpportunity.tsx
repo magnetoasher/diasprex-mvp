@@ -5,6 +5,7 @@ import { Row, Col, Button, Card } from "antd"
 import { StarOutlined, ShareAltOutlined } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom"
 import { notification, Tooltip } from 'antd';
+import {OppsDA} from './../../modules/opportunities/component/oda'
 
 
 function ViewOpportunity() {
@@ -66,23 +67,40 @@ function ViewOpportunity() {
             display: "flex",
             justifyContent: "space-between"
           }}>
-
             <div >
-              <Button
-                onClick={
-                  () => {
-                    userType === "basic" ? openNotificationWarning('bottomRight', "It requires paid subscription and ODA agreement") : navigate('/send_proposals')
-                  }
-                }
-                style={{
-                  "background": "#4eacff",
-                  "color": "white",
-                  "fontWeight": "600",
-                  "borderRadius": "6px"
-                }}>
-                Send Proposal
-              </Button>
+            <Button
+              onClick={
+                () =>
+                  handleDetails()
+
+              }
+              style={{
+                "background": "#4eacff",
+                "color": "white",
+                "fontWeight": "600",
+                "borderRadius": "6px"
+              }}>
+              {isShowDetail ? "Hide Opportunity Details" : "View Opportunity Details"}
+            </Button>
             </div>
+            <div>
+              <button type="button"
+                id='view_detail'
+                className="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target='#kt_oda_modal'
+              >
+                {isShowDetail? "Hide Opportunity Details" : "View Opportunity Details"}
+              </button>
+              
+            
+               <OppsDA
+                classname="btn btn-primary"
+                ConfirmHandler={ () => handleDetails()} />
+              </div>
+
+
+
             <div style={{
               display: "flex",
             }}>
@@ -135,7 +153,7 @@ function ViewOpportunity() {
                   "fontWeight": "600",
                   "borderRadius": "6px"
 
-                }} >Add to Favourtite</Button>
+                }} >Add to Favourite</Button>
               </div>
             </div>
           </div>
@@ -172,23 +190,8 @@ function ViewOpportunity() {
 
 
           </Col>
-          <div >
-            <Button
-              onClick={
-                () =>
-                  handleDetails()
-
-              }
-              style={{
-                "background": "#4eacff",
-                "color": "white",
-                "fontWeight": "600",
-                "borderRadius": "6px"
-              }}>
-              {isShowDetail ? "Hide Opportunity Details" : "View Opportunity Details"}
-            </Button>
-          </div>
-          {isShowDetail && <Col xs={24} sm={24} md={24} lg={24} style={{
+          
+          <Col xs={24} sm={24} md={24} lg={24} style={{
             "backgroundColor": "#f1f1f1",
             "borderRadius": "8px"
           }}>
@@ -222,7 +225,7 @@ function ViewOpportunity() {
                   , textAlign: "center",
                   width: "120px"
                 }
-              }>interest <br />{historyObject.interest} </label>
+              }>Interest <br />{historyObject.interest} </label>
               <label style={
                 {
                   boxShadow: "rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px",
@@ -236,6 +239,70 @@ function ViewOpportunity() {
                   width: "120px"
                 }
               } >Due Date <br /> {historyObject.due_date}</label>
+            </div>
+          </Col>
+
+          {isShowDetail && <Col xs={24} sm={24} md={24} lg={24} style={{
+            padding: "30px 40px",
+            paddingTop: '30px',
+            paddingBottom: '30px',
+            borderRadius: "8px"
+          }}>
+            <div className='row'>
+              <div className = 'col-xl-6'>
+              <label style={{
+                "fontWeight": "600",
+                "fontSize": "20px"
+              }}>
+                Opportunity Details
+              </label>
+            </div>
+
+            <div className = 'border m-3'>
+              <label style={{
+                textAlign: "justify",
+                fontSize: "14px"
+              }}>
+                {historyObject.summary}
+              </label>
+              </div>
+            </div>
+            
+            <div className='row'>
+              <div className = 'col-xl-6'>
+              <label style={{
+                "fontWeight": "600",
+                "fontSize": "20px"
+              }}>
+                Sponsor's Details
+              </label>
+            </div>
+
+            <div className = 'border m-3'>
+              <label style={{
+                textAlign: "justify",
+                fontSize: "14px"
+              }}>
+                {historyObject.summary}
+              </label>
+              </div>
+              </div>
+        
+            <div className = 'col text-center' >
+              <Button
+                onClick={
+                  () => {
+                    userType === "basic" ? openNotificationWarning('bottomRight', "It requires paid subscription and ODA agreement") : navigate('/send_proposals')
+                  }
+                }
+                style={{
+                  "background": "#4eacff",
+                  "color": "white",
+                  "fontWeight": "600",
+                  "borderRadius": "6px"
+                }}>
+                Submit Proposal
+              </Button>
             </div>
           </Col>}
         </Row>

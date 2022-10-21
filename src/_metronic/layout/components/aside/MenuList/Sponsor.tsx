@@ -50,27 +50,26 @@ export function Sponsor() {
                 fontIcon='bi-layers'
             />
 
-
-
             <div className='menu-item'>
                 <div className='menu-content pt-8 pb-2'>
                     <span className='menu-section text-muted text-uppercase fs-8 ls-1'>User</span>
                 </div>
             </div>
-            <AsideMenuItem
-                to='/crafted/profile/overview'
-                icon='/media/icons/duotune/art/art005.svg'
-                title="My Account"
+
+            <AsideMenuItemWithSub
+                to='profile'
+                icon='/media/icons/duotune/art/art008.svg'
+                title="My Profile"
                 fontIcon='bi-app-indicator'
-            />
+            >
+                <AsideMenuItem to='profile/overview' title='Overview' hasBullet={true} />
+                <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
+                <AsideMenuItem to='profile/billing' title='Billing' hasBullet={true} />
+                <AsideMenuItem to='profile/account' title='Account' hasBullet={true} />
+            </AsideMenuItemWithSub>
+
             <AsideMenuItem
-                to='/crafted/profile/settings'
-                icon='/media/icons/duotune/art/art006.svg'
-                title='Settings'
-                fontIcon='bi-layers'
-            />
-            <AsideMenuItem
-                to='/builder'
+                to='/chat/private-chat'
                 icon='/media/icons/duotune/art/art007.svg'
                 title='Messages'
                 fontIcon='bi-layers'

@@ -190,47 +190,50 @@ const ProfileHeader: React.FC = () => {
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === "/crafted/profile/overview" &&
+                  (location.pathname === "/profile/overview" &&
                     "active")
                 }
-                to={`/crafted/profile/overview?userType=${user}`}
+                to={`/profile/overview?userType=${user}`}
               >
                 Overview
               </Link>
             </li>
+            
+            <li className="nav-item">
+              <Link
+                className={
+                  `nav-link text-active-primary me-6 ` +
+                  (location.pathname === "/profile/settings" &&
+                    "active")
+                }
+                to={`/profile/settings?userType=${user}`}
+              >
+                Setting
+              </Link>
+            </li>
+
             {user !== "basic" && (
               <li className="nav-item">
                 <Link
                   className={
                     `nav-link text-active-primary me-6 ` +
-                    (location.pathname === "/crafted/profile/billing" &&
+                    (location.pathname === "/profile/billing" &&
                       "active")
                   }
-                  to={`/crafted/profile/billing?userType=${user}`}
+                  to={`/profile/billing?userType=${user}`}
                 >
                   Billing
                 </Link>
               </li>
             )}
+            
             <li className="nav-item">
               <Link
                 className={
                   `nav-link text-active-primary me-6 ` +
-                  (location.pathname === "/crafted/profile/settings" &&
-                    "active")
+                  (location.pathname === "/profile/account" && "active")
                 }
-                to={`/crafted/profile/settings?userType=${user}`}
-              >
-                Setting
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className={
-                  `nav-link text-active-primary me-6 ` +
-                  (location.pathname === "/crafted/profile/account" && "active")
-                }
-                to={`/crafted/profile/account?userType=${user}`}
+                to={`/profile/account?userType=${user}`}
               >
                 Account
               </Link>

@@ -14,11 +14,12 @@ import CreateOpportunities from '../pages/dashboard/CreateOpportunities'
 import Proposals from '../pages/dashboard/Proposals'
 import MyOpportunity from '../pages/dashboard/MyOpportunity'
 import GeneralOpportunityCard from '../pages/dashboard/GeneralOpportunityCard'
-import SponsorProposals from '../pages/dashboard/SponsorPrposals'
+import SponsorProposals from '../pages/dashboard/SponsorProposals'
 import SendProposals from '../pages/dashboard/SendProposals'
 import ViewOpportunity from '../pages/dashboard/ViewOpportunity'
 
 const PrivateRoutes = () => {
+  const RemittancePage = lazy(() => import('./../modules/Remittance/RemittancePage'))
   const BuilderPageWrapper = lazy(() => import('../pages/layout-builder/BuilderPageWrapper'))
   // const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
   // const RegistrationStepsPage = lazy(() => import('../modules/registration/RegistrationStepsPage'))
@@ -48,6 +49,7 @@ const PrivateRoutes = () => {
             <Route path='send_proposals' element={<SendProposals />} />
             <Route path="referrals" element={<ReferralsForm />} />
             <Route path="view_opportunity" element={<ViewOpportunity />} />
+            {/* <Route path='chat' element={<ChatPage />}/> */}
 
             {/* Lazy Modules */}
             {/* <Route
@@ -75,15 +77,24 @@ const PrivateRoutes = () => {
               }
             />
             <Route
-              path='crafted/profile/*'
+              path='profile/*'
               element={
                 <SuspensedView>
                   <ProfilePage />
                 </SuspensedView>
               }
             />
+
+                    <Route
+          path='remittance/*'
+          element={
+            <SuspensedView>
+              <RemittancePage />
+            </SuspensedView>
+          }
+        />
             <Route
-              path='apps/chat/*'
+              path='chat/*'
               element={
                 <SuspensedView>
                   <ChatPage />

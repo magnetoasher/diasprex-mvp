@@ -33,26 +33,26 @@ export function Individual() {
 
 
             <AsideMenuItem
-                to='#'
+                to='dif_resources'
                 icon='/media/icons/duotune/art/art003.svg'
                 title="DIF Investment"
                 fontIcon='bi-app-indicator'
             />
             <AsideMenuItem
-                to='/builder'
+                to='/remittance'
                 icon='/media/icons/duotune/art/art004.svg'
                 title='Remittance'
                 fontIcon='bi-layers'
             />
 
             <AsideMenuItem
-                to='#'
+                to='/diasporas'
                 icon='/media/icons/duotune/art/art006.svg'
                 title="Diasporas"
                 fontIcon='bi-app-indicator'
             />
             <AsideMenuItem
-                to='#'
+                to='/faqs'
                 icon='/media/icons/duotune/art/art007.svg'
                 title='Resources'
                 fontIcon='bi-layers'
@@ -63,37 +63,43 @@ export function Individual() {
                     <span className='menu-section text-muted text-uppercase fs-8 ls-1'>User</span>
                 </div>
             </div>
+    
             <AsideMenuItem
-                to='/crafted/profile/overview'
-                icon='/media/icons/duotune/art/art008.svg'
-                title="My Account"
-                fontIcon='bi-app-indicator'
-            />
-            <AsideMenuItem
-                to='/crafted/profile/settings'
-                icon='/media/icons/duotune/art/art009.svg'
-                title='Settings'
-                fontIcon='bi-layers'
-            />
-            <AsideMenuItem
-                to='my_opportunities'
+                to='/my_opportunities'
                 icon='/media/icons/duotune/art/art002.svg'
                 title='My Opportunities'
                 fontIcon='bi-layers'
             />
-            <AsideMenuItem
-                to='#'
-                icon='/media/icons/duotune/art/art005.svg'
-                title='Send Money'
-                fontIcon='bi-layers'
-            />
 
-            <AsideMenuItem
-                to='#'
-                icon='/media/icons/duotune/general/gen019.svg'
-                title='My Investment'
-                fontIcon='bi-layers'
-            />
+            <AsideMenuItemWithSub
+                to='profile'
+                icon='/media/icons/duotune/art/art008.svg'
+                title="My Profile"
+                fontIcon='bi-app-indicator'
+            >
+                <AsideMenuItem to='profile/overview' title='Overview' hasBullet={true} />
+                <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
+                <AsideMenuItem to='profile/billing' title='Billing' hasBullet={true} />
+                <AsideMenuItem to='profile/account' title='Account' hasBullet={true} />
+            </AsideMenuItemWithSub>
+
+
+
+      <AsideMenuItemWithSub
+        to='remittance'
+        icon='/media/icons/duotune/art/art003.svg'
+        title="My Remittances"
+        fontIcon='bi-archive'
+      >
+
+        <AsideMenuItem to='remittance/summary' title='Summary' hasBullet={true} />
+        <AsideMenuItem to='remittance/preferences' title='Preferences' hasBullet={true} />
+        <AsideMenuItem to='remittance/sendmoney' title='Send Money' hasBullet={true} />
+        <AsideMenuItem to='remittance/retainer' title='Remittance Retainer' hasBullet={true} />
+        <AsideMenuItem to='remittance/loans' title='Loans' hasBullet={true} />
+        <AsideMenuItem to= 'remittance/statements' title = 'Statements' hasBullet = {true}/>
+
+      </AsideMenuItemWithSub>
 
 
             <AsideMenuItem
@@ -103,7 +109,7 @@ export function Individual() {
                 fontIcon='bi-layers'
             />
             <AsideMenuItem
-                to='#'
+                to='/chat/private-chat'
                 icon='/media/icons/duotune/art/art002.svg'
                 title='Messages'
                 fontIcon='bi-layers'

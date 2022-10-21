@@ -28,7 +28,7 @@ export const Create = () => {
     console.log('search:', value);
   };
   const options = [
-    { label: "Equality", value: 1 },
+    { label: "Equity", value: 1 },
     { label: "Contract", value: 2 },
     { label: "Stock", value: 3 },
     { label: "Cash", value: 4 },

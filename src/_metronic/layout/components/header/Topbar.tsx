@@ -4,6 +4,7 @@ import { KTSVG, toAbsoluteUrl } from '../../../helpers'
 import { HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search } from '../../../partials'
 import { useLayout } from '../../core'
 
+
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
   toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px',
   toolbarUserAvatarHeightClass = 'symbol-30px symbol-md-40px',
@@ -14,6 +15,14 @@ const Topbar: FC = () => {
 
   return (
     <div className='d-flex align-items-stretch flex-shrink-0'>
+
+      <div className='d-flex align-items-stretch flex-shrink-0'>
+           {/* Begin: Search */}
+          <div className={clsx('d-flex align-items-stretch', toolbarButtonMarginClass)}>
+          <Search />
+          </div>
+            </div>
+
       {/* CHAT */}
       <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
         {/* begin::Menu wrapper */}
@@ -31,8 +40,11 @@ const Topbar: FC = () => {
 
           <span className='bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink'></span>
         </div>
+         </div>
         <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
           {/* begin::Menu- wrapper */}
+
+
           <div
             className={clsx(
               'btn btn-icon btn-active-light-primary btn-custom',
@@ -50,9 +62,11 @@ const Topbar: FC = () => {
           </div>
           <HeaderNotificationsMenu />
           {/* end::Menu wrapper */}
-        </div>
+       
         {/* end::Menu wrapper */}
       </div>
+
+
       {/* begin::User */}
       <div
         className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}
@@ -74,6 +88,8 @@ const Topbar: FC = () => {
       </div>
       {/* end::User */}
 
+
+
       {/* begin::Aside Toggler */}
       {config.header.left === 'menu' && (
         <div className='d-flex align-items-center d-lg-none ms-2 me-n3' title='Show header menu'>
@@ -93,6 +109,7 @@ const Topbar: FC = () => {
     //   <div className={clsx('d-flex align-items-stretch', toolbarButtonMarginClass)}>
     //     <Search />
     //   </div>
+    
     //   {/* Activities */}
     //   <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
     //     {/* begin::Drawer toggle */}

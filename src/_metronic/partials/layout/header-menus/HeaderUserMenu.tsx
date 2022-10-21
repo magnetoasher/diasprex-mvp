@@ -44,34 +44,46 @@ const HeaderUserMenu: FC = () => {
       <div className='separator my-2'></div>
 
       <div className='menu-item px-5'>
-        <Link to={'/crafted/profile/overview'} className='menu-link px-5'>
-          My Account
+        <Link to={'/profile/overview'} className='menu-link px-5'>
+          My Profile
         </Link>
       </div>
 
       <div className='menu-item px-5 my-1'>
-        <Link to='/crafted/profile/settings' className='menu-link px-5'>
+        <Link to='/profile/settings' className='menu-link px-5'>
           Settings
         </Link>
       </div>
 
       {
         userType !== "sponsor" && <>
+          {userType !== 'basic' && <>
+            <div className='menu-item px-5'>
+              <Link to={'/my_opportunities'} className='menu-link px-5'>
+                My Opportunities
+              </Link>
+            </div>
+            </>
+          }
+
+          {userType === 'basic' && <>
+            <div className='menu-item px-5'>
+              <Link to={'#'} className='menu-link px-5'>
+                My Opportunities
+              </Link>
+            </div>
+            </>
+          }
+
           <div className='menu-item px-5'>
-            <Link to={'/my_opportunities'} className='menu-link px-5'>
-              My Opportunities
+            <Link to={'/remittance/summary'} className='menu-link px-5'>
+              My Remittances
             </Link>
           </div>
 
-          <div className='menu-item px-5 my-1'>
-            <Link to='#' className='menu-link px-5'>
+                    <div className='menu-item px-5 my-1'>
+            <Link to='/remittance/sendmoney' className='menu-link px-5'>
               Send Money
-            </Link>
-          </div>
-
-          <div className='menu-item px-5'>
-            <Link to={'#'} className='menu-link px-5'>
-              My Investments
             </Link>
           </div>
 
@@ -80,10 +92,11 @@ const HeaderUserMenu: FC = () => {
               Referrals
             </Link>
           </div>
-        </>
+          
+          </>
       }
       <div className='menu-item px-5 my-1'>
-        <Link to='/crafted/profile/settings' className='menu-link px-5'>
+        <Link to='/chat/private-chat' className='menu-link px-5'>
           Messages
         </Link>
       </div>

@@ -26,15 +26,22 @@ export function Business() {
                 fontIcon='bi-app-indicator'
             />
 
+                        <AsideMenuItem
+                to='/remittance'
+                icon='/media/icons/duotune/art/art005.svg'
+                title="Remittance"
+                fontIcon='bi-app-indicator'
+            />
+
 
             <AsideMenuItem
-                to='#'
+                to='/diasporas'
                 icon='/media/icons/duotune/art/art005.svg'
                 title="Diasporas"
                 fontIcon='bi-app-indicator'
             />
             <AsideMenuItem
-                to='#'
+                to='/faqs'
                 icon='/media/icons/duotune/art/art006.svg'
                 title='Resources'
                 fontIcon='bi-layers'
@@ -44,22 +51,36 @@ export function Business() {
                     <span className='menu-section text-muted text-uppercase fs-8 ls-1'>User</span>
                 </div>
             </div>
-            <AsideMenuItem
-                to='/crafted/profile/overview'
-                icon='/media/icons/duotune/art/art003.svg'
-                title="My Account"
+
+            <AsideMenuItemWithSub
+                to='profile'
+                icon='/media/icons/duotune/art/art008.svg'
+                title="My Profile"
                 fontIcon='bi-app-indicator'
-            />
-            <AsideMenuItem
+            >
+        <AsideMenuItem
                 to='my_opportunities'
                 icon='/media/icons/duotune/art/art002.svg'
                 title='My Opportunities'
-                fontIcon='bi-brightness-alt-high'
+                fontIcon='bi-layers'
             />
+            <AsideMenuItem to='profile/overview' title='Overview' hasBullet={true} />
+                <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
+                <AsideMenuItem to='profile/billing' title='Billing' hasBullet={true} />
+                <AsideMenuItem to='profile/account' title='Account' hasBullet={true} />
+            </AsideMenuItemWithSub>
+
+
             <AsideMenuItem
                 to='/crafted/profile/settings'
                 icon='/media/icons/duotune/art/art004.svg'
                 title='Settings'
+                fontIcon='bi-layers'
+            />
+                <AsideMenuItem
+                to='/chat/private-chat'
+                icon='/media/icons/duotune/art/art007.svg'
+                title='Messages'
                 fontIcon='bi-layers'
             />
 

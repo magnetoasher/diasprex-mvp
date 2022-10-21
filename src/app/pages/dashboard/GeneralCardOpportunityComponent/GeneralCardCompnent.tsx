@@ -10,7 +10,10 @@ const GeneralOpportunityCard = (props: any) => {
     };
 
     return (
-        <div className="card-body " >
+        <div className="card-body card-rounded mb-3 " >
+                 {/* <div className='card-header border-0 d-flex justify-content-end p-0'>
+                    <span className="badge badge-success">Open</span>
+            </div> */}
             <div style={{
                 display: "flex",
                 alignItems: "center"

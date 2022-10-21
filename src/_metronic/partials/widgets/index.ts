@@ -37,6 +37,7 @@ export * from './statistics/StatisticsWidget5'
 export * from './statistics/StatisticsWidget6'
 
 // charts
+export * from './charts/ChartsWidget1New'
 export * from './charts/ChartsWidget1'
 export * from './charts/ChartsWidget2'
 export * from './charts/ChartsWidget3'

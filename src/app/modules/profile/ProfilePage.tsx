@@ -81,7 +81,7 @@ const ProfilePage: React.FC = () => {
         />
 
 
-        <Route index element={<Navigate to="/crafted/profile/overview" />} />
+        <Route index element={<Navigate to="/profile/overview" />} />
       </Route>
     </Routes>
   );

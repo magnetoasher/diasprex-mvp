@@ -358,7 +358,7 @@ export const proposalsData = [
         enabler: "Muhammad",
         country: "Pakistan",
         date_submitted: "01/12/2022",
-        enabler_type: "Silver",
+        enabler_type: "Super Enabler",
         status: "Achieved",
         action: "View",
 
@@ -368,7 +368,7 @@ export const proposalsData = [
         enabler: "Ali",
         country: "London",
         date_submitted: "01/12/2022",
-        enabler_type: "Basic",
+        enabler_type: "Basic Enabler",
         status: "Selected",
         action: "Select",
 
@@ -378,7 +378,7 @@ export const proposalsData = [
         enabler: "Daniela",
         country: "Chicago",
         date_submitted: "01/12/2022",
-        enabler_type: "Gold",
+        enabler_type: "Business",
         status: "Declined",
         action: "Decline",
 
@@ -388,7 +388,7 @@ export const proposalsData = [
         enabler: "Dessa",
         country: "San fransisco",
         date_submitted: "01/12/2022",
-        enabler_type: "Gold",
+        enabler_type: "Business",
         status: "Declined",
         action: "Decline",
 
@@ -398,7 +398,7 @@ export const proposalsData = [
         enabler: "Josh",
         country: "California",
         date_submitted: "01/12/2022",
-        enabler_type: "Gold",
+        enabler_type: "Super Enabler",
         status: "Awarded",
         action: "Archive",
 
@@ -408,7 +408,7 @@ export const proposalsData = [
         enabler: "Allen",
         country: "Lusiana",
         date_submitted: "01/12/2022",
-        enabler_type: "Silver",
+        enabler_type: "Basic Enabler",
         action: "View",
         status: "Awarded"
     },
@@ -417,7 +417,7 @@ export const proposalsData = [
         enabler: "Jake",
         country: "London",
         date_submitted: "01/12/2022",
-        enabler_type: "Basic",
+        enabler_type: "Basic Enabler",
         status: "Selected",
         action: "Select",
 
@@ -427,7 +427,7 @@ export const proposalsData = [
         enabler: "Daniela",
         country: "Chicago",
         date_submitted: "01/12/2022",
-        enabler_type: "Gold",
+        enabler_type: "Super Enabler",
         status: "Declined",
         action: "Decline",
 
@@ -437,7 +437,7 @@ export const proposalsData = [
         enabler: "Josh",
         country: "California",
         date_submitted: "01/12/2022",
-        enabler_type: "Gold",
+        enabler_type: "Business",
         status: "Awarded",
         action: "Archive",
 

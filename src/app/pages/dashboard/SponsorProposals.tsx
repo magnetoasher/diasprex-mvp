@@ -4,10 +4,12 @@ import { Card } from 'antd';
 import { CreateTable } from './CreateTables';
 import { TableFilters } from './TableFilters';
 import { proposalsTabColumns, proposalsData } from './TableObjects/TableObjects';
+
 const SponsorProposals = () => {
 
 
-    const filterStatus = ["All", "Achieved", "Selected", "Declined", "Awarded"]
+    const filter1 = ["All", "Achieved", "Selected", "Declined", "Awarded"]
+    const filter2 = ["All", "Basic Enabler", "Super Enabler", "Business"]
     const [data, setData] = useState(proposalsData)
     const handleChange = (value: any) => {
 
@@ -30,7 +32,7 @@ const SponsorProposals = () => {
                 borderRadius: "8px",
             }}>
                 <div>
-                    <TableFilters filterStatus={filterStatus} handleChange={handleChange} />
+                    <TableFilters filter1={filter1} filter2={filter2} filterparam2 = 'Enabler Type' handleChange={handleChange} />
                     <div>
                         <CreateTable
                             myOppTabColumns={proposalsTabColumns}
