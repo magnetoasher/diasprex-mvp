@@ -7,7 +7,7 @@ import {Drawer} from './components/Drawer'
 const chatBreadCrumbs: Array<PageLink> = [
   {
     title: 'Chat',
-    path: '/apps/chat/private-chat',
+    path: '/chat/private-chat',
     isSeparator: false,
     isActive: false,
   },
@@ -27,7 +27,7 @@ const ChatPage = () => {
           path='private-chat'
           element={
             <>
-              <PageTitle breadcrumbs={chatBreadCrumbs}>Private chat</PageTitle>
+              <PageTitle breadcrumbs={chatBreadCrumbs}>Private Chat</PageTitle>
               <Private />
             </>
           }
@@ -50,7 +50,7 @@ const ChatPage = () => {
             </>
           }
         />
-        <Route index element={<Navigate to='/apps/chat/private-chat' />} />
+        <Route index element={<Navigate to='/chat/private-chat' />} />
       </Route>
     </Routes>
   )

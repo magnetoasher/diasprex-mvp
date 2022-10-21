@@ -191,7 +191,7 @@ const ProfileHeader: React.FC = () => {
                   `nav-link text-active-primary me-6 ` +
                   (location.pathname === '/crafted/profile/settings' && 'active')
                 }
-                to='/crafted/profile/settings'
+                to='/profile/settings'
               >
                 Settings
               </Link>

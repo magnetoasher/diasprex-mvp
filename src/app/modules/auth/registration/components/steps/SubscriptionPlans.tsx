@@ -25,34 +25,55 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
             value1: 'basic',
             pricing: false,
             features: [
-                {
-                    title: 'Up to 10 Active Users',
+                 {
+                    title: 'View Opportunities',
                     supported: true,
                 },
                 {
-                    title: 'Up to 30 Project Integrations',
+                    title: 'Remittance retainer program',
                     supported: true,
                 },
                 {
-                    title: 'Analytics Module',
-                    supported: true,
-                },
-                {
-                    title: 'Finance Module',
+                    title: 'Remittance fee waiver',
                     supported: false,
                 },
                 {
-                    title: 'Accounting Module',
+                    title: 'View oportunity details and submit proposal',
+                    supported: false,
+
+                },
+                {
+                    title: 'Discounted third party products and services',
                     supported: false,
                 },
                 {
-                    title: 'Network Platform',
+                    title: "Diasprex's financing services",
                     supported: false,
                 },
                 {
-                    title: 'Unlimited Cloud Space',
+                    title: 'Unlimited business and financing support services',
                     supported: false,
                 },
+                {
+                    title: 'Unlimited network with Diasprex Sponsors and Enablers',
+                    supported: false,
+                },
+                {
+                    title: 'Participation in Diasprex-seeded Opportunities',
+                    supported: false
+                },
+                {
+                    title: 'Access to customized opportunity services',
+                    supported: false
+                },
+                {
+                    title: 'Services or product advertisement',
+                    supported: false
+                },
+                {
+                    title: 'Loyalty program reward provider',
+                    supported: false
+                }
             ],
         },
 
@@ -107,7 +128,7 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
     const [enabler] = useState([
         {
             title: 'Basic Enabler (BE)',
-            subTitle: 'Best for 100+ team size',
+            subTitle: 'Ideal for individuals and startups',
             description: 'Ideal for individuals and startups',
             priceMonth: '4.99',
             priceAnnual: '54.00',
@@ -118,38 +139,58 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
             pricing: true,
             features: [
                 {
-                    title: 'Up to 10 Active Users',
+                    title: 'View Opportunities',
                     supported: true,
                 },
                 {
-                    title: 'Up to 30 Project Integrations',
+                    title: 'Remittance retainer program',
                     supported: true,
                 },
                 {
-                    title: 'Analytics Module',
+                    title: 'Remittance fee waiver',
                     supported: true,
                 },
                 {
-                    title: 'Finance Module',
+                    title: 'View oportunity details and submit proposal',
+                    supported: true,
+                },
+                {
+                    title: 'Discounted third party products and services',
+                    supported: true,
+                },
+                {
+                    title: "Diasprex's financing services",
+                    supported: true,
+                },
+                {
+                    title: 'Unlimited business and financing support services',
                     supported: false,
                 },
                 {
-                    title: 'Accounting Module',
+                    title: 'Unlimited network with Diasprex Sponsors and Enablers',
                     supported: false,
                 },
                 {
-                    title: 'Network Platform',
-                    supported: false,
+                    title: 'Participation in Diasprex-seeded Opportunities',
+                    supported: false
                 },
                 {
-                    title: 'Unlimited Cloud Space',
-                    supported: false,
+                    title: 'Access to customized opportunity services',
+                    supported: false
                 },
+                {
+                    title: 'Services or product advertisement',
+                    supported: false
+                },
+                {
+                    title: 'Loyalty program reward provider',
+                    supported: false
+                }
             ],
         },
         {
-            title: 'Super Enabler (BE)',
-            subTitle: 'Best for 100+ team size',
+            title: 'Super Enabler (SE)',
+            subTitle: 'Ideal for individuals, startups & small businesses',
             description: 'Ideal for individuals, startups & small businesses',
             priceMonth: '9.99',
             priceAnnual: '114.00',
@@ -161,38 +202,59 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
             pricing: true,
             features: [
                 {
-                    title: 'Up to 10 Active Users',
+                    title: 'View Opportunities',
                     supported: true,
                 },
                 {
-                    title: 'Up to 30 Project Integrations',
+                    title: 'Remittance retainer program',
                     supported: true,
                 },
                 {
-                    title: 'Analytics Module',
+                    title: 'Remittance fee waiver',
                     supported: true,
                 },
                 {
-                    title: 'Finance Module',
+                    title: 'View oportunity details and submit proposal',
+                    supported: true,
+
+                },
+                {
+                    title: 'Discounted third party products and services',
                     supported: true,
                 },
                 {
-                    title: 'Accounting Module',
+                    title: "Diasprex's financing services",
                     supported: true,
                 },
                 {
-                    title: 'Network Platform',
-                    supported: false,
+                    title: 'Unlimited business and financing support services',
+                    supported: true,
                 },
                 {
-                    title: 'Unlimited Cloud Space',
-                    supported: false,
+                    title: 'Unlimited network with Diasprex Sponsors and Enablers',
+                    supported: true,
                 },
+                {
+                    title: 'Participation in Diasprex-seeded Opportunities',
+                    supported: true
+                },
+                {
+                    title: 'Access to customized opportunity services',
+                    supported: false
+                },
+                {
+                    title: 'Services or product advertisement',
+                    supported: false
+                },
+                {
+                    title: 'Loyalty program reward provider',
+                    supported: false
+                }
             ],
         },
         {
-            title: 'Business Enabler (BE)',
-            subTitle: 'Best for 100+ team size',
+            title: 'Enterprise Enabler (EE)',
+            subTitle: 'Ideal for medium enterprises',
             description: 'Ideal for medium enterprises',
             priceMonth: 'Call customer service',
             priceAnnual: 'Call customer service',
@@ -203,42 +265,63 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
 
             pricing: false,
             features: [
-                {
-                    title: 'Up to 10 Active Users',
+               {
+                    title: 'View Opportunities',
                     supported: true,
                 },
                 {
-                    title: 'Up to 30 Project Integrations',
+                    title: 'Remittance retainer program',
                     supported: true,
                 },
                 {
-                    title: 'Analytics Module',
+                    title: 'Remittance fee waiver',
                     supported: true,
                 },
                 {
-                    title: 'Finance Module',
+                    title: 'View oportunity details and submit proposal',
+                    supported: true,
+
+                },
+                {
+                    title: 'Discounted third party products and services',
                     supported: true,
                 },
                 {
-                    title: 'Accounting Module',
+                    title: "Diasprex's financing services",
                     supported: true,
                 },
                 {
-                    title: 'Network Platform',
+                    title: 'Unlimited business and financing support services',
                     supported: true,
                 },
                 {
-                    title: 'Unlimited Cloud Space',
+                    title: 'Unlimited network with Diasprex Sponsors and Enablers',
                     supported: true,
                 },
+                {
+                    title: 'Participation in Diasprex-seeded Opportunities',
+                    supported: true
+                },
+                {
+                    title: 'Access to customized opportunity services',
+                    supported: true
+                },
+                {
+                    title: 'Services or product advertisement',
+                    supported: true
+                },
+                {
+                    title: 'Loyalty program reward provider',
+                    supported: true
+                }
             ],
         },
     ])
     const [sponsor] = useState([
         {
             title: 'Basic (BS)',
-            subTitle: 'Best value for 1000+ team',
-            description: 'Ideal for new & startup businesses',
+            subTitle: 'Best for startup businesses',
+            description: '$100 one time setup fee',
             priceMonth: 'Free',
             priceAnnual: 'Free',
             label: 'Most popular',
@@ -250,39 +333,47 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
             custom: false,
             features: [
                 {
-                    title: 'Up to 10 Active Users',
+                    title: 'Opportunity submission',
                     supported: true,
                 },
                 {
-                    title: 'Up to 30 Project Integrations',
+                    title: 'Receives show of interest',
                     supported: true,
                 },
                 {
-                    title: 'Analytics Module',
+                    title: 'Diasprex financing services',
                     supported: true,
                 },
                 {
-                    title: 'Finance Module',
+                    title: 'Opportunity submission support',
                     supported: false,
                 },
                 {
-                    title: 'Accounting Module',
+                    title: 'Network with Diasprex Sponsors and Enablers',
                     supported: false,
                 },
                 {
-                    title: 'Network Platform',
+                    title: 'Individual Enabler partnership',
                     supported: false,
                 },
                 {
-                    title: 'Unlimited Cloud Space',
+                    title: 'Enterprise Enabler partnership',
                     supported: false,
                 },
+                {
+                    title: 'Show of interest review support',
+                    supported: false
+                },
+                {
+                    title: 'External private investment support',
+                    supported: false
+                }
             ],
         },
         {
             title: 'Silver (SS)',
-            subTitle: 'Best value for 1000+ team',
-            description: 'Ideal for startup businesses',
+            subTitle: 'Ideal for startup and early growth businesses',
+            description: '$100 one time setup fee',
             priceMonth: '14.99',
             priceAnnual: '174.00',
             label: 'Most popular',
@@ -295,39 +386,47 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
             custom: false,
             features: [
                 {
-                    title: 'Up to 10 Active Users',
+                    title: 'Opportunity submission',
                     supported: true,
                 },
                 {
-                    title: 'Up to 30 Project Integrations',
+                    title: 'Receives show of interest',
                     supported: true,
                 },
                 {
-                    title: 'Analytics Module',
+                    title: 'Diasprex financing services',
                     supported: true,
                 },
                 {
-                    title: 'Finance Module',
+                    title: 'Opportunity submission support',
+                    supported: true,
+                },
+                {
+                    title: 'Network with Diasprex Sponsors and Enablers',
+                    supported: true,
+                },
+                {
+                    title: 'Individual Enabler partnership',
+                    supported: true,
+                },
+                {
+                    title: 'Enterprise Enabler partnership',
                     supported: false,
                 },
                 {
-                    title: 'Accounting Module',
-                    supported: false,
+                    title: 'Show of interest review support',
+                    supported: false
                 },
                 {
-                    title: 'Network Platform',
-                    supported: false,
-                },
-                {
-                    title: 'Unlimited Cloud Space',
-                    supported: false,
-                },
+                    title: 'External private investment support',
+                    supported: false
+                }
             ],
         },
         {
             title: 'Gold (GS)',
-            subTitle: 'Best value for 1000+ team',
-            description: 'Ideal for growth stage businesses',
+            subTitle: 'Ideal for growth stage businesses',
+            description: '$100 one time setup fee',
             priceMonth: '49.99',
             priceAnnual: '594.00',
             label: 'Most popular',
@@ -340,39 +439,47 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
             custom: false,
             features: [
                 {
-                    title: 'Up to 10 Active Users',
+                    title: 'Opportunity submission',
                     supported: true,
                 },
                 {
-                    title: 'Up to 30 Project Integrations',
+                    title: 'Receives show of interest',
                     supported: true,
                 },
                 {
-                    title: 'Analytics Module',
+                    title: 'Diasprex financing services',
                     supported: true,
                 },
                 {
-                    title: 'Finance Module',
+                    title: 'Opportunity submission support',
                     supported: true,
                 },
                 {
-                    title: 'Accounting Module',
+                    title: 'Network with Diasprex Sponsors and Enablers',
                     supported: true,
                 },
                 {
-                    title: 'Network Platform',
-                    supported: false,
+                    title: 'Individual Enabler partnership',
+                    supported: true,
                 },
                 {
-                    title: 'Unlimited Cloud Space',
-                    supported: false,
+                    title: 'Enterprise Enabler partnership',
+                    supported: true,
                 },
+                {
+                    title: 'Show of interest review support',
+                    supported: true
+                },
+                {
+                    title: 'External private investment support',
+                    supported: true
+                }
             ],
         },
         {
             title: 'Diamond (DS)',
-            subTitle: 'Best value for 1000+ team',
-            description: 'ideal for enterprises and institutions',
+            subTitle: 'ideal for enterprises and institutions',
+            description: 'Call customer service',
             priceMonth: 'Call customer service',
             priceAnnual: 'Call customer service',
             label: 'Most popular',
@@ -385,33 +492,41 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
             custom: false,
             features: [
                 {
-                    title: 'Up to 10 Active Users',
+                    title: 'Opportunity submission',
                     supported: true,
                 },
                 {
-                    title: 'Up to 30 Project Integrations',
+                    title: 'Receives show of interest',
                     supported: true,
                 },
                 {
-                    title: 'Analytics Module',
+                    title: 'Diasprex financing services',
                     supported: true,
                 },
                 {
-                    title: 'Finance Module',
+                    title: 'Opportunity submission support',
                     supported: true,
                 },
                 {
-                    title: 'Accounting Module',
+                    title: 'Network with Diasprex Sponsors and Enablers',
                     supported: true,
                 },
                 {
-                    title: 'Network Platform',
+                    title: 'Individual Enabler partnership',
                     supported: true,
                 },
                 {
-                    title: 'Unlimited Cloud Space',
+                    title: 'Enterprise Enabler partnership',
                     supported: true,
                 },
+                {
+                    title: 'Show of interest review support',
+                    supported: true
+                },
+                {
+                    title: 'External private investment support',
+                    supported: true
+                }
             ],
         }
     ])
@@ -651,8 +766,10 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
                                                     >
                                                         <div className='pb-5'>
                                                             <h2 className='fw-bolder text-dark h-40px'>{plan.title}</h2>
+                                                            <h6 className='fw-bolder text-info h-40px '>{plan.subTitle}</h6>
 
-                                                            <div className='text-gray-400 fw-bold h-40px' >{plan.description}</div>
+
+                                                            {/* <div className='text-gray-400 fw-bold h-40px' >{plan.description}</div> */}
                                                             <div className='d-flex m-5'>
                                                                 {plan.pricing && <span className='mb-2'>$</span>}
 
@@ -734,6 +851,7 @@ const SubscriptionPlans = ({ userType, setUserType, submitStep, setUserTypeFull,
                                                     >
                                                         <div className='pb-5'>
                                                             <h2 className='fw-bolder text-dark '>{plan.title}</h2>
+                                                            <h6 className='fw-bolder text-info h-40px'>{plan.subTitle}</h6>
 
                                                             <div className='text-gray-400 fw-bold h-40px'>{plan.description}</div>
                                                             <div className='d-flex m-5'>

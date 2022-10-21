@@ -65,7 +65,7 @@ const NewDashboardPage = () => {
                                     href="#"
                                     className="text-gray-800 text-hover-primary  me-1 text-capitalize"
                                 >
-                                    {userTypeFull?.replace("_", " ")}
+                                    <span className = 'badge badge-success'>{userTypeFull?.replace("_", " ")} </span>
                                 </a>
 
                             </div>

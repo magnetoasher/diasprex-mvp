@@ -19,6 +19,60 @@ const CreateOpportunities = () => {
   const onChange = (key: string) => {
     console.log(key);
   };
+  var userTypeFull = localStorage.getItem("userTypeFull")
+var userType = localStorage.getItem("userType")
+  const [saved] = useState([
+        {
+            name: 'Demo1',
+            userTypeFull: 'sponsor',
+            title: 'This is title',
+            details: 'this is detail, lorem ispum',
+            src: "https://loremflickr.com/g/320/240/things"
+
+        },
+        {
+            name: 'Demo2',
+            userTypeFull: 'sponsor',
+            title: 'This is title',
+            details: 'this is detail, lorem ispum',
+            src: "https://loremflickr.com/g/320/241/things"
+
+        },
+        {
+            name: 'Demo3',
+            userTypeFull: 'sponsor',
+            title: 'This is title',
+            details: 'this is detail, lorem ispum',
+            src: "https://loremflickr.com/g/320/243/things"
+
+    },
+    {
+            name: 'Demo4',
+            userTypeFull: 'sponsor',
+            title: 'This is title',
+            details: 'this is detail, lorem ispum',
+            src: "https://loremflickr.com/g/320/244/things"
+
+    },
+    {
+            name: 'Demo5',
+            userTypeFull: 'sponsor',
+            title: 'This is title',
+            details: 'this is detail, lorem ispum',
+            src: "https://loremflickr.com/g/320/245/things"
+
+    },
+    {
+            name: 'Demo6',
+            userTypeFull: 'sponsor',
+            title: 'This is title',
+            details: 'this is detail, lorem ispum',
+            src: "https://loremflickr.com/g/320/246/things"
+
+        },
+
+
+    ])
 
   return (
 
@@ -42,34 +96,25 @@ const CreateOpportunities = () => {
         }
         key="2">
         <div className=' overflow-auto p-3' >
-          {/* {
-            saved.map((e) =>
-              <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor="cyan" badgeText="Draft" picSrc={e.src} />
-            )
-          } */}
+            <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>
+                    <div className='card-header cursor-pointer'>
+                        <div className='card-title m-0'>
+                            <h3 className='fw-bolder m-0'>Draft Opprtunities</h3>
+                        </div>
 
-          <Card style={{
-            boxShadow:
-              "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-            borderRadius: "8px",
-          }}>
 
-            <PageTitle breadcrumbs={[]}>My Opportunities</PageTitle>
-            <div>
+                    </div>
 
-              <div className=' mx-5'>
-                <TableFilters />
-              </div>
+                    <div className='card-body p-2 overflow-auto' style={{ height: '600px' }}>
+                        {
+                            saved.map((e) =>
+                                <Opportunity name={e.name} userTypeFull={e.userTypeFull} title={e.title} detail={e.details} column={4} badgeColor="blue" badgeText="Draft" picSrc={e.src} />
+                            )
+                        }
 
-              <CreateTable
-                myOppTabColumns={myOppTabColumns}
-                myOpportunitiesData={myOpportunitiesData}
-                scrollAxis={{ x: 900, y: 700 }}
-              />
+                    </div>
+                </div>
 
-            </div>
-
-          </Card>
 
         </div>
       </TabPane>
@@ -82,33 +127,25 @@ const CreateOpportunities = () => {
         }
         key="3">
         <div className=' overflow-auto p-3' >
-          {/* {
-            submitted.map((e: any) =>
-              <Opportunity name={e.name} userType={e.userType} title={e.title} detail={e.details} column={2} badgeColor={e.badgeColor} badgeText={e.badgeText} picSrc={e.src} />
-            )
-          } */}
-          <Card style={{
-            boxShadow:
-              "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-            borderRadius: "8px",
-          }}>
+           <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>
+                    <div className='card-header cursor-pointer'>
+                        <div className='card-title m-0'>
+                            <h3 className='fw-bolder m-0'>Submitted Opprtunities</h3>
+                        </div>
 
-            <PageTitle breadcrumbs={[]}>My Opportunities</PageTitle>
-            <div>
 
-              <div className=' mx-5'>
-                <TableFilters />
-              </div>
+                    </div>
 
-              <CreateTable
-                myOppTabColumns={proposalsTabColumns}
-                myOpportunitiesData={proposalsData}
-                scrollAxis={{ x: 900, y: 700 }}
-              />
+                    <div className='card-body p-2 overflow-auto' style={{ height: '600px' }}>
+                        {
+                            saved.map((e) =>
+                                <Opportunity name={e.name} userTypeFull={e.userTypeFull} title={e.title} detail={e.details} column={4} badgeColor="green" badgeText="Submitted" picSrc={e.src} />
+                            )
+                        }
 
-            </div>
+                    </div>
+                </div>
 
-          </Card>
 
         </div>
       </TabPane>

@@ -15,6 +15,7 @@ import { Faqs } from '../modules/resources/components/Faqs'
 import { Dif } from '../modules/resources/components/Dif'
 import { About } from '../modules/resources/components/About'
 import { Remittance } from '../modules/resources/components/Remittance'
+import { DiasporasPageWrapper } from '../modules/Diasporas/DiasporasPageWrapper'
 import { getCSSVariableValue } from '../../_metronic/assets/ts/_utils'
 import TopBarProgress from 'react-topbar-progress-indicator'
 import { App } from '../App'
@@ -55,7 +56,7 @@ const HasAccessToRouter = () => {
             }
           />
           <Route
-            path='dif-resources'
+            path='dif_resources'
             element={
               <SuspensedView>
                 <Dif />
@@ -79,10 +80,10 @@ const HasAccessToRouter = () => {
             }
           />
           <Route
-            path='create-opportunities'
+            path='diasporas'
             element={
               <SuspensedView>
-                test
+                <DiasporasPageWrapper />
               </SuspensedView>
             }
           />

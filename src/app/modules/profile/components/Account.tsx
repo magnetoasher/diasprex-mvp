@@ -220,7 +220,7 @@ export const Account = () => {
             <div>
               <button
                 type="button"
-                className="btn btn-color-gray-700 btn-active-light-primary px-6"
+                className="btn btn-danger btn-active-light-primary px-6"
                 onClick={() => {
                   setOpenSweetAlert(true)
                 }}
