@@ -83,3 +83,7 @@ export * from './stats/StatsWidget9'
 export * from './feeds/FeedsWidget2'
 export * from './feeds/FeedsWidget3'
 export * from './feeds/FeedsWidget4'
+
+// cards
+export * from './cards/CardsWidget7'
+export * from './cards/CardsWidget20'

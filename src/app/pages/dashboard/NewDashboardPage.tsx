@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { KTSVG, toAbsoluteUrl } from '../../../_metronic/helpers'
 import Opportunity from './Opportunity'
 import Oppurtunity from './Opportunity'
@@ -44,7 +45,8 @@ const NewDashboardPage = () => {
                 <div
                     className='card-body p-4'>
                     <div className="d-flex justify-content-center align-items-center mb-2">
-                        <div className="d-flex flex-column ">
+                        <div className=" row d-flex flex-column ">
+                            <div className = 'col'>
                             <div className='me-7 mb-4'>
                                 <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
                                     <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} alt='Metornic' />
@@ -129,14 +131,49 @@ const NewDashboardPage = () => {
                                             </a>
                                         </div>
                                     </div>
-
-
-
-
-
-
                                 </div>
                             </div>
+                            </div>
+
+                            {userType !== 'sponsor' && <div className='col d-flex d-flex-end'>
+                
+                                <div className=' flex-row  '>
+                                    <div className='border border-grey-300 rounded min-w-125px shadow-sm me-6 mb-3'>
+
+                                        <Link to="/remittance/sendmoney" className="btn btn-flex btn-primary px-6">
+                                            <span className="svg-icon svg-icon-2x">
+                                                <KTSVG
+                                                    path='/media/icons/duotune/general/gen016.svg'
+                                                    className=' svg-icon-success me-2'
+                                                />
+                                            </span>
+                                            <span className="d-flex flex-column align-items-start ms-2">
+                                                <span className="fs-3 fw-bolder">Send Money</span>
+                                                <span className="fs-7">Build Legacy</span>
+                                            </span>
+                                        </Link>
+                                    </div>
+                
+
+
+                                    <div className='border border-grey-300 rounded min-w-125px shadow-sm me-6 mb-3'>
+
+                                        <Link to="#" className="btn btn-flex btn-normal px-6">
+                                            <span className="svg-icon svg-icon-2x">
+                                                <KTSVG
+                                                    path='/media/icons/duotune/general/gen017.svg'
+                                                    className=' svg-icon-success me-2'
+                                                />
+                                            </span>
+                                            <span className="d-flex flex-column align-items-start ms-2">
+                                                <span className="fs-3 fw-bolder">Add Fund</span>
+                                                <span className="fs-7">Build Futures</span>
+                                            </span>
+                                        </Link>
+                                    </div>
+                                </div>
+              
+                            </div>}
 
                         </div>
 

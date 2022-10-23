@@ -5,10 +5,11 @@ type Props = {
   className?: string
   scroll?: boolean
   height?: number
+  width?: number
 }
 
 const KTCardBody: FC<Props> = (props) => {
-  const {className, scroll, height, children} = props
+  const {className, scroll, height, width, children} = props
   return (
     <div
       className={clsx(
@@ -17,8 +18,10 @@ const KTCardBody: FC<Props> = (props) => {
         {
           'card-scroll': scroll,
         },
-        height && `h-${height}px`
+        height && `h-${height}px`,
+        width && `w-${width}px`
       )}
+      style = {{margin: 'auto'}}
     >
       {children}
     </div>

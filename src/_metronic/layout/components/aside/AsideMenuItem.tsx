@@ -11,6 +11,7 @@ type Props = {
   icon?: string
   fontIcon?: string
   hasBullet?: boolean
+  onClick?: ()=>{}
 }
 
 const AsideMenuItem: React.FC<Props> = ({

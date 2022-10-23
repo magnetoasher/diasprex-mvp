@@ -12,7 +12,7 @@ export function Individual() {
     return (
         <>
             <AsideMenuItem
-                to='/dashboard'
+                to='dashboard'
                 icon='/media/icons/duotune/art/art002.svg'
                 title={intl.formatMessage({ id: 'MENU.DASHBOARD' })}
                 fontIcon='bi-app-indicator'
@@ -39,20 +39,20 @@ export function Individual() {
                 fontIcon='bi-app-indicator'
             />
             <AsideMenuItem
-                to='/remittance'
+                to='remittance'
                 icon='/media/icons/duotune/art/art004.svg'
                 title='Remittance'
                 fontIcon='bi-layers'
             />
 
             <AsideMenuItem
-                to='/diasporas'
+                to='diasporas'
                 icon='/media/icons/duotune/art/art006.svg'
                 title="Diasporas"
                 fontIcon='bi-app-indicator'
             />
             <AsideMenuItem
-                to='/faqs'
+                to='faqs'
                 icon='/media/icons/duotune/art/art007.svg'
                 title='Resources'
                 fontIcon='bi-layers'
@@ -65,7 +65,7 @@ export function Individual() {
             </div>
     
             <AsideMenuItem
-                to='/my_opportunities'
+                to='my_opportunities'
                 icon='/media/icons/duotune/art/art002.svg'
                 title='My Opportunities'
                 fontIcon='bi-layers'

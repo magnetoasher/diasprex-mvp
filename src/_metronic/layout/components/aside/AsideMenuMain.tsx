@@ -3,6 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSearchParams } from 'react-router-dom'
 import { Sponsor } from './MenuList/Sponsor'
+import { AdminMenu } from './MenuList/AdminMenu'
 import { Individual } from './MenuList/Individual'
 import { BasicMenu } from './MenuList/BasicMenu'
 
@@ -17,7 +18,8 @@ export function AsideMenuMain() {
 
   return (
     <>
-      {user == "sponsor" ? <Sponsor /> : (user == "individual" || user == "business") ? <Individual /> : <BasicMenu />}
+      {user == "admin" ? <AdminMenu /> : user == "sponsor" ? <Sponsor /> : (user == "individual" || user == "business") ? <Individual /> : <BasicMenu />}
     </>
   )
 }
+// localStorage.setItem("userType", "admin")

@@ -16,33 +16,14 @@ const SendProposals = () => {
 
                 <Row justify="space-between">
                     <Col xs={24} sm={24} md={17} lg={17} >
-                        <div style={{ display: "flex" }}>
-                            <Upload>
-                                <Button
-                                    className="buttonOne"
-                                    style={{
-                                        backgroundColor: "#008ef8", color: "white", fontWeight: 600
-                                        , display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "8px 0px 0px 8px"
-                                    }} icon={<CameraOutlined />}>Banner Image</Button>
-                            </Upload>
-                            <Upload>
-
-                                <Button
-                                    className="buttonTwo"
-                                    style={{
-                                        backgroundColor: "#008ef8", color: "white", fontWeight: 600
-                                        , display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "0px 8px 8px 0px"
-                                    }} icon={<CameraOutlined />}>Card Image</Button>
-                            </Upload>
-
-                        </div>
+                        
                         <div style={{
                             display: 'block'
                         }}>
 
                             <label><i style={{
                                 color: "black", fontSize: "15px",
-                            }}>Add images to your content to make it more engaging</i></label>
+                            }}>Upload Files and images as supporting information to your content to make it more engaging</i></label>
                         </div>
                         <div style={{ marginTop: "40px" }}>
 
@@ -54,7 +35,7 @@ const SendProposals = () => {
                                     label={<label style={{
                                         fontWeight: 600,
                                         fontSize: "17px"
-                                    }}>Solution Name</label>}
+                                    }}>Proposal Name</label>}
                                     name="solution"
                                     rules={[
                                         {
@@ -81,7 +62,7 @@ const SendProposals = () => {
                                     label={<label style={{
                                         fontWeight: 600,
                                         fontSize: "17px"
-                                    }}>Solution Abstract</label>}
+                                    }}>Proposal Details</label>}
                                     name="solution"
                                     rules={[
                                         {
@@ -109,6 +90,40 @@ const SendProposals = () => {
                                     />
 
                                 </Form.Item>
+                                    <Col xs={12} sm={12} md={24} lg={24} style={{
+                                    marginTop: "5px", display: "flex-column", justifyContent: "flex-start"
+
+                                }}>
+                                <div style={{ display: "flex" }}>
+                            <Upload>
+                                <Button
+                                    className="buttonOne"
+                                    style={{
+                                        backgroundColor: "#008ef8", color: "white", fontWeight: 600
+                                        , display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "8px 0px 0px 8px"
+                                    }} icon={<CameraOutlined />}>Upload File</Button>
+                            </Upload>
+                            <Upload>
+
+                                <Button
+                                    className="buttonTwo"
+                                    style={{
+                                        backgroundColor: "#008ef8", color: "white", fontWeight: 600
+                                        , display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "0px 8px 8px 0px"
+                                    }} icon={<CameraOutlined />}>Upload Image</Button>
+                            </Upload>
+                                    </div>
+                                    <div style={{
+                            display: 'block'
+                        }}>
+
+                            <label><i style={{
+                                color: "black", fontSize: "15px",
+                                        }}>(Upload files and images as supporting information.
+                                            File must be a single PDF or WORD document. Image
+                                            must be in jpg or png format)</i></label>
+                        </div>
+                                </Col>
 
                                 <Col xs={12} sm={12} md={24} lg={24} style={{
                                     marginTop: "5px", display: "flex", justifyContent: "flex-end"

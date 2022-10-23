@@ -1,6 +1,6 @@
 import {Navigate, Routes, Route, Outlet} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../_metronic/layout/core'
-import { RemittancePageHeader } from "./Components/RemittancePageHeader"
+import { UserProfileHeader } from "../profile/UserProfileHeader"
 import { SendMoneyFormWrapper } from './Components/SendMoneyFormWrapper'
 import { Summary } from './Components/Summary'
 import { RemittanceRetainer } from './Components/remittanceretainer'
@@ -29,7 +29,7 @@ const RemittancePage = () => (
     <Route
       element={
         <>
-          <RemittancePageHeader />
+          <UserProfileHeader />
           <Outlet />
         </>
       }

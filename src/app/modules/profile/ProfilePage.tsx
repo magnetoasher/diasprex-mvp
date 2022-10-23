@@ -4,7 +4,7 @@ import { PageLink, PageTitle } from "../../../_metronic/layout/core";
 import { Overview } from "./components/Overview";
 import { Campaigns } from "./components/Campaigns";
 import { Settings } from "./components/settings/Settings";
-import { ProfileHeader } from "./ProfileHeader";
+import { UserProfileHeader } from "./UserProfileHeader";
 import { Account } from "./components/Account";
 import Billing from "./Billing";
 
@@ -29,7 +29,7 @@ const ProfilePage: React.FC = () => {
       <Route
         element={
           <>
-            <ProfileHeader />
+            <UserProfileHeader />
             <Outlet />
           </>
         }

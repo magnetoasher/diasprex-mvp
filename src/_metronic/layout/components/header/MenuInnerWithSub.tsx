@@ -13,6 +13,7 @@ type Props = {
   hasArrow?: boolean
   hasBullet?: boolean
   isMega?: boolean
+  onClick?: ()=>{}
 }
 
 const MenuInnerWithSub: React.FC<Props> = ({

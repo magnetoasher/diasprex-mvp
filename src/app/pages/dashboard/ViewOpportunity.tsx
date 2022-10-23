@@ -5,7 +5,8 @@ import { Row, Col, Button, Card } from "antd"
 import { StarOutlined, ShareAltOutlined } from "@ant-design/icons";
 import { useLocation, useNavigate } from "react-router-dom"
 import { notification, Tooltip } from 'antd';
-import {OppsDA} from './../../modules/opportunities/component/oda'
+import { OppsDA } from './../../modules/opportunities/component/oda'
+import {SubscriptionRequired} from '../../modules/opportunities/component/subscription-error-modal'
 
 
 function ViewOpportunity() {
@@ -14,6 +15,8 @@ function ViewOpportunity() {
   const [historyObject, setHistoryObject] = useState(location.state)
   const [api, contextHolder] = notification.useNotification();
   const [isShowDetail, setIsShowDetail] = useState(false)
+ 
+  
   const userType = localStorage.getItem('userType')
   const openNotification = (placement, message) => {
     api.info({
@@ -39,10 +42,19 @@ function ViewOpportunity() {
     }
     else {
       setIsShowDetail(!isShowDetail)
+      
     }
   }
+
+  const closeModalHandler = () => {
+    setModalOpen(false)
+    setIsShowDetail(!isShowDetail)
+  }
+
+  
   return (
     <>
+      
       <Row gutter={[8, 16]}>
         <Col xs={24} sm={24} md={24} lg={24} >
           <div style={{ position: "relative" }}>
@@ -67,40 +79,35 @@ function ViewOpportunity() {
             display: "flex",
             justifyContent: "space-between"
           }}>
-            <div >
-            <Button
-              onClick={
-                () =>
-                  handleDetails()
 
-              }
-              style={{
-                "background": "#4eacff",
-                "color": "white",
-                "fontWeight": "600",
-                "borderRadius": "6px"
-              }}>
-              {isShowDetail ? "Hide Opportunity Details" : "View Opportunity Details"}
-            </Button>
-            </div>
-            <div>
+            {isShowDetail && <div className='actions'>
               <button type="button"
-                id='view_detail'
+                className="btn btn-primary"
+                onClick={handleDetails}
+              >
+                
+                Hide Opportunity Details
+              </button>
+            </div>}
+        
+            { !isShowDetail && <div className='actions'>
+              <button type="button"
                 className="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target='#kt_oda_modal'
+                data-bs-target={userType == 'basic'? '#kt_subs_modal': '#kt_oda_modal'}
+                data-bs-tooltips = 'Requires Enbaler subscription'
               >
-                {isShowDetail? "Hide Opportunity Details" : "View Opportunity Details"}
+                View Opportunity Details
               </button>
-              
+            </div>}
+              {userType === 'basic' && <SubscriptionRequired/> }
+              {userType !== 'basic' && <OppsDA OnDetails={handleDetails}/> }
             
-               <OppsDA
-                classname="btn btn-primary"
-                ConfirmHandler={ () => handleDetails()} />
-              </div>
 
+            
 
-
+            
+          
             <div style={{
               display: "flex",
             }}>
@@ -305,8 +312,11 @@ function ViewOpportunity() {
               </Button>
             </div>
           </Col>}
+             
         </Row>
       </Card>
+      
+
       <Context.Provider
       >
         {contextHolder}

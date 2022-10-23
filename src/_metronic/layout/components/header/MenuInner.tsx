@@ -7,6 +7,7 @@ import Sponsor from './User_Menu/Sponsor'
 import Business from './User_Menu/Business'
 import Generic from './User_Menu/Generic'
 import Individual from './User_Menu/Individual'
+import { AdminMenu } from './User_Menu/AdminMenu'
 
 export function MenuInner() {
   const intl = useIntl()
@@ -14,7 +15,7 @@ export function MenuInner() {
 
   return (
     <>
-      {user === "sponsor" ? <Sponsor /> : (user == "individual" || user == "business") ? <Individual /> : <Generic />}
+      {user === "admin" ? <AdminMenu /> : user === "sponsor" ? <Sponsor /> : (user == "individual" || user == "business") ? <Individual /> : <Generic />}
     </>
 
   )

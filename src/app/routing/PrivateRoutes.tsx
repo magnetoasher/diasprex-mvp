@@ -4,7 +4,7 @@ import { useOktaAuth } from "@okta/okta-react"
 import { MasterLayout } from '../../_metronic/layout/MasterLayout'
 import TopBarProgress from 'react-topbar-progress-indicator'
 import { DashboardWrapper } from '../pages/dashboard/DashboardWrapper'
-import { MenuTestPage } from '../pages/MenuTestPage'
+import { AdminDashboardWrapper } from '../modules/apps/admin-mgt-apps/dashboard/AdminDashboardWrapper'
 import { getCSSVariableValue } from '../../_metronic/assets/ts/_utils'
 import { SigninPage } from '../modules/signin/components/SigninPage'
 import { RegistrationStepsPage } from '../modules/auth/registration/RegistrationStepsPage'
@@ -17,6 +17,7 @@ import GeneralOpportunityCard from '../pages/dashboard/GeneralOpportunityCard'
 import SponsorProposals from '../pages/dashboard/SponsorProposals'
 import SendProposals from '../pages/dashboard/SendProposals'
 import ViewOpportunity from '../pages/dashboard/ViewOpportunity'
+import AdminSettings from '../modules/apps/admin-mgt-apps/settings/AdminSettingsPage'
 
 const PrivateRoutes = () => {
   const RemittancePage = lazy(() => import('./../modules/Remittance/RemittancePage'))
@@ -26,7 +27,12 @@ const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
   const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
-  const UsersPage = lazy(() => import('../modules/apps/user-management/UsersPage'))
+  const UsersPage = lazy(() => import('../modules/apps/admin-mgt-apps/user-management/UsersPage'))
+  const OppsPage = lazy(() => import('../modules/apps/admin-mgt-apps/opp-management/OppsPage'))
+  const ProposalPage = lazy(() => import('../modules/apps/admin-mgt-apps/proposal-management/ProposalPage'))
+ 
+  
+  // const RemitPage = lazy(() => import('../modules/apps/admin-mgt-apps/remittance-management/RemitPage'))
   const { authState } = useOktaAuth()
 
   if (authState !== null) {
@@ -39,8 +45,8 @@ const PrivateRoutes = () => {
             <Route path='auth/*' element={<Navigate to='/account/create' />} />
             {/* Pages */}
             <Route path='dashboard' element={<DashboardWrapper />} />
+            <Route path='admindashboard' element={<AdminDashboardWrapper />} />
             <Route path='builder' element={<BuilderPageWrapper />} />
-            <Route path='menu-test' element={<MenuTestPage />} />
             <Route path='createopportunities' element={<CreateOpportunities />} />
             <Route path='proposals' element={<Proposals />} />
             <Route path='sponsor_proposals' element={<SponsorProposals />} />
@@ -49,6 +55,12 @@ const PrivateRoutes = () => {
             <Route path='send_proposals' element={<SendProposals />} />
             <Route path="referrals" element={<ReferralsForm />} />
             <Route path="view_opportunity" element={<ViewOpportunity />} />
+            <Route path="user_management/*" element={<UsersPage />} />
+            <Route path="opp_management/*" element={<OppsPage />} />
+            <Route path="prop_management/*" element={<ProposalPage />} />
+            <Route path="admin/*" element={<AdminSettings />} />
+            {/* <Route path="rr_management/*" element={<RemitPage />} /> */}
+
             {/* <Route path='chat' element={<ChatPage />}/> */}
 
             {/* Lazy Modules */}
@@ -101,15 +113,15 @@ const PrivateRoutes = () => {
                 </SuspensedView>
               }
             />
-            <Route
+            {/* <Route
 
-              path='apps/user-management/*'
+              path='/user-management/*'
               element={
                 <SuspensedView>
                   <UsersPage />
                 </SuspensedView>
               }
-            />
+            /> */}
             {/* Page Not Found */}
             <Route path='*' element={<Navigate to='/error/404' />} />
           </Route>

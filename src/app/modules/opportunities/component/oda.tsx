@@ -1,14 +1,12 @@
-import React from 'react'
+import {useState } from 'react'
 import { KTSVG, } from './../../../../_metronic/helpers'
 
-type Props = {
-        ConfirmHandler: () => {}
-}
 
 
-export const OppsDA = (props:Props) => {
+
+export const OppsDA = (props: any) => {
+   
     return (
-
 <div className="modal fade" tabIndex={-1} id='kt_oda_modal'>
             <div className="modal-dialog">
                 <div className="modal-content">
@@ -47,9 +45,9 @@ data-kt-scroll-dependencies="#kt_js_header, #kt_oda_modal, #kt_header"
                         >
                             Cancel
                         </button>
-                        <button type="button"
+                        <button type="submit"
                             className= "btn btn-primary"
-                            onClick={props.ConfirmHandler}
+                            onClick = {props.OnDetails}
                             data-bs-dismiss="modal"
                         >
                             Agree
@@ -57,6 +55,6 @@ data-kt-scroll-dependencies="#kt_js_header, #kt_oda_modal, #kt_header"
                     </div>
                 </div>
             </div>
-        </div>
+            </div>
   )
 }
