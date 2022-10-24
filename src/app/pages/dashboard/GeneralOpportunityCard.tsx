@@ -5,10 +5,14 @@ import React, { useState, useEffect } from 'react'
 import GeneralCardComponent from "./GeneralCardOpportunityComponent/GeneralCardCompnent";
 import { Row, Col, Card, Typography, Pagination } from "antd"
 import { PageTitle, PageLink } from "../../../_metronic/layout/core"
+import { toAbsoluteUrl } from '../../../_metronic/helpers';
 import "./opportunity.css"
 import InfiniteScroll from 'react-infinite-scroll-component';
 import object1 from "./GeneralOpportunityCardObject1.json"
+
+
 function GeneralOpportunityCard() {
+
     const fetchData = async () => {
     };
     return (
@@ -34,7 +38,12 @@ function GeneralOpportunityCard() {
                                 className="box-shadow-style bg-white"
                             >
                                 <GeneralCardComponent
+                                    sponsor = {element.sponsor}
+                                    badgeColor={element.status == 'Open' ? 'success' : 'danger'}
                                     title={element.title}
+                                    country={element.country}
+                                    flag={toAbsoluteUrl(`/media/flags/${element.country}.svg`)}
+                                    status = {element.status}
                                     description={element.description}
                                     dueDate={element.dueDate}
                                     budget={element.budget}

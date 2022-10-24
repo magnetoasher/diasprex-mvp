@@ -1,6 +1,25 @@
 import { Button, Tooltip } from "antd";
 import { useNavigate, Link } from "react-router-dom";
-const GeneralOpportunityCard = (props: any) => {
+
+type Props = {
+    sponsor: string
+    src?: string
+    flag: string
+  badgeColor?: string
+  status?: string
+  statusColor?: string
+    title: string
+  country: string
+  summary?: string
+  dueDate: string
+  reward?: string
+    following?: number
+  interest?: number
+}
+
+const GeneralOpportunityCard = (props: Props) => {
+
+    
     console.log(props.src);
     const history = useNavigate();
     const TruncateText = (truncateText: any, stringLength: any) => {
@@ -10,11 +29,43 @@ const GeneralOpportunityCard = (props: any) => {
     };
 
     return (
-        <div className="card-body card-rounded mb-3 " >
-                 {/* <div className='card-header border-0 d-flex justify-content-end p-0'>
-                    <span className="badge badge-success">Open</span>
-            </div> */}
-            <div style={{
+
+        <div className='card row-lg border border-2 border-gray-300 border-hover p-3'>
+            <div className='col-xs g-1'>
+                <div className = 'row-xs d-flex flex-row'>
+                <div className='col flex-start'>
+                    <p className='fs-3 fw-bolder text-dark'>{props.sponsor}</p>
+                </div>
+                <div className='col text-end'>
+                    <span className='symbol symbol-30px w-30px bg-light me-2'>
+                        <img src={props.flag}
+                            className = 'fs-6 fw-bold'
+                            alt='oppscard'
+                            data-toggle='tooltips'
+                            title={props.country}
+                            data-bs-placement="bottom" />
+                    </span>
+                    
+          <span className={`badge badge-light-${props.badgeColor} fw-bolder me-auto py-3`}>
+            {props.status}
+          </span>
+                    </div>
+                </div>
+                <div className="separator mb-0"></div>
+            </div>
+            
+
+            {/* <div className = 'card-body'> */}
+            <div className=" col py-1 px-3 mb-1" >
+                <p className='text-gray-400 fw-bold fs-9 mt-1 mb-2'>{props.title}</p>
+                </div>
+                <div className="col text-center text-center py-1 mb-3 " >
+                <img className='d-block mw-100 rounded' src={props.src} alt='oppsthumb' />
+                </div>
+            
+                
+
+            {/* <div style={{
                 display: "flex",
                 alignItems: "center"
             }}>
@@ -32,9 +83,9 @@ const GeneralOpportunityCard = (props: any) => {
                     marginLeft: "20px",
                     fontWeight: "600"
                 }}>{props.title}</label>
-            </div>
+            </div> */}
 
-            <div className="text-gray-400 fw-bold fs-5 mt-1 mb-7">
+            {/* <div className="text-gray-400 fw-bold fs-5 mt-1 mb-7">
                 <label style={{
                     color: "black",
                     fontWeight: 600
@@ -48,8 +99,8 @@ const GeneralOpportunityCard = (props: any) => {
 
                     </Tooltip>
                 </label>
-            </div>
-
+            </div> */}
+            <div className="col-md py-1 px-3 mb-3" >
             <div className="d-flex justify-content-center flex-wrap mb-5">
                 <div
                     className="border border-gray-300 border-dashed rounded py-1 px-1 me-7 mb-3"
@@ -89,7 +140,7 @@ const GeneralOpportunityCard = (props: any) => {
             </div>
 
             <div
-                className="h-4px w-100 mb-5"
+                className="h-4px w-100 mb-3"
                 data-bs-toggle="tooltip"
                 title="This project 50% completed"
                 style={{
@@ -137,7 +188,8 @@ const GeneralOpportunityCard = (props: any) => {
                     </label>
                 </div>
             </div>
-
+                </div>
+               
             <div style={{
                 display: "flex",
                 justifyContent: "center",
@@ -172,10 +224,9 @@ const GeneralOpportunityCard = (props: any) => {
 
                     View Opportunity
                 </Button>
-            </div>
-
-
-        </div>
+                    </div>
+                    {/* </div> */}
+                </div>
     )
 }
 export default GeneralOpportunityCard;

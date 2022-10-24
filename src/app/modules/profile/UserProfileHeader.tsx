@@ -6,7 +6,7 @@ import { useLocation } from 'react-router'
 
 export const UserProfileHeader: React.FC = () => {
   const location = useLocation()
-   let user = localStorage.getItem('userType')
+  let user = localStorage.getItem('userType')
   const fullUserType = localStorage.getItem('userTypeFull')
   const [userTypeFull, setUserTypeFull] = useState<any>(fullUserType && fullUserType.replace("_", " "))
   useEffect(() => {
@@ -15,37 +15,73 @@ export const UserProfileHeader: React.FC = () => {
     setUserTypeFull(fullUserType && fullUserType.replace("_", " "))
   }, [fullUserType])
 
+  // const blankImg = toAbsoluteUrl('/media/svg/avatars/blank.svg')
+  // const userAvatarImg = toAbsoluteUrl('/media/avatars/300-1.jpg')
+
   return (
-    <div className='card mb-5 shadow-2 mb-xl-10'>
-      <div className='row-g-4 d-flex flex-row'>
-        <div className='col-lg-10'>
-      <div className='card-body pt-9 pb-0'>
+    <div className='container card  px-0'>
+      <div className='row-g-1 shadow-sm d-flex flex-row'>
+      <div className='card-body pt-0 px-0 pb-0'>
         <div className='d-flex flex-wrap flex-sm-nowrap mb-3'>
-          <div className='me-7 mb-4'>
-            <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
-              <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} alt='Metronic' />
+            <div className='col-2 d-flex align-items-center justify-content-center'>
+          <div className='me-7 mb-4 d-flex text-center'>
+                <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
+                  <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} className = 'mw-100' alt='Diasrex' />
+                  {/* <div
+              className='image-input image-input-outline'
+              data-kt-image-input='true'
+              style={{backgroundImage: `url('${blankImg}')`}}
+            >
+            
+              <div
+                className='image-input-wrapper w-175px h-175px'
+                style={{backgroundImage: `url('${userAvatarImg}')`}}
+                            ></div>
+                                </div> */}
               <div className='position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px'></div>
             </div>
-          </div>
-
-          <div className='flex-grow-1'>
+              </div>
+            </div>
+            
+            <div className='col py-5'>
+          <div className='flex-grow-1 mw-100'>
             <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
               <div className='d-flex flex-column'>
-                <div className='d-flex align-items-center mb-2'>
+                    <div className='d-flex align-items-center mb-2'>
+                      <span className = 'me-2'>
                   <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
                     Max Smith
                   </a>
-                      {user !== "basic" && <a
-                      href="#"
-                      data-toggle="tooltip"
-                      data-placement="top"
-                      title="Verified account"
-                    >
-                        <KTSVG
-                          path='/media/icons/duotune/general/gen026.svg'
-                          className='svg-icon-1 svg-icon-success'
-                        />
-                      </a>}
+                        {user !== "basic" && <a
+                          href="#"
+                          data-toggle="tooltip"
+                          data-placement="top"
+                          title="Verified account"
+                        >
+                          <KTSVG
+                            path='/media/icons/duotune/general/gen026.svg'
+                            className='svg-icon-1 svg-icon-success'
+                          />
+                        </a>}
+                        </span>
+
+                      <span className='symbol symbol-30px w-30px bg-light me-2'>
+                        <img src={toAbsoluteUrl("/media/flags/ghana.svg")}
+                            className = 'fs-6 fw-bold'
+                            alt='oppscard'
+                            data-toggle='tooltips'
+                            title= 'Ghana'
+                            data-bs-placement="bottom" />
+                      </span>
+                      
+                      {user !== "sponsor" && <span className='symbol symbol-30px w-30px bg-light me-2'>
+                        <img src={toAbsoluteUrl("/media/flags/united-states.svg")}
+                          className='fs-6 fw-bold'
+                          alt='oppscard'
+                          data-toggle='tooltips'
+                          title='United States'
+                          data-bs-placement="bottom" />
+                      </span>}
                 </div>
 
                 <div className='d-flex flex-wrap fw-bold fs-6 mb-4 pe-2'>
@@ -136,10 +172,29 @@ export const UserProfileHeader: React.FC = () => {
                 </div>
               </div>
               </div>
-              
               </div>
-          </div>
+              </div>
+          
+          <div className = 'col-lg-3 px-10 py-5 d-flex align-items-center justify-content-center'>
+          <div className='d-flex align-items-center w-200px w-sm-300px flex-column mt-3'>
+                <div className='d-flex justify-content-between w-100 mt-auto mb-2'>
+                  <span className='fw-bold fs-6 text-gray-400'>Profile Compleation</span>
+                  <span className='fw-bolder fs-6'>50%</span>
+                </div>
+                <div className='h-5px mx-3 w-100 bg-light mb-3'>
+                  <div
+                    className='bg-success rounded h-5px'
+                    role='progressbar'
+                    style={{width: '50%'}}
+                  ></div>
+                </div>
+              </div>
+              </div>
+            </div>
         </div>
+        </div>
+          <div className = 'row-g-1 px-10 bg-light'>
+
           {location.pathname.includes("remittance") &&
             <div className='d-flex overflow-auto h-55px'>
               <ul className='nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap'>
@@ -272,46 +327,7 @@ export const UserProfileHeader: React.FC = () => {
           
 
         </div>
-              
-
-        <div className='col-lg-2 align-middle'>
-          <div className = ' flex-row  '>
-                 <div className = 'border border-grey-300 rounded min-w-125px shadow-sm me-6 mb-3'>
-
-                <Link to="/remittance/sendmoney" className="btn btn-flex btn-primary px-6">
-                  <span className="svg-icon svg-icon-2x">
-                                   <KTSVG
-                        path='/media/icons/duotune/general/gen016.svg'
-                        className=' svg-icon-success me-2'
-                      />
-                </span>
-  <span className="d-flex flex-column align-items-start ms-2">
-      <span className="fs-3 fw-bolder">Send Money</span>
-      <span className="fs-7">Build Legacy</span>
-  </span>
-                  </Link>
-                  </div>
-                
-
-
-              <div className = 'border border-grey-300 rounded min-w-125px shadow-sm me-6 mb-3'>
-
-                <Link to="#" className="btn btn-flex btn-normal px-6">
-                  <span className="svg-icon svg-icon-2x">
-                                   <KTSVG
-                        path='/media/icons/duotune/general/gen017.svg'
-                        className=' svg-icon-success me-2'
-                      />
-                </span>
-  <span className="d-flex flex-column align-items-start ms-2">
-      <span className="fs-3 fw-bolder">Add Fund</span>
-      <span className="fs-7">Build Futures</span>
-  </span>
-                  </Link>
-            </div>
-            </div>
-              </div>
+            
       </div>
-    </div>
   )
 }

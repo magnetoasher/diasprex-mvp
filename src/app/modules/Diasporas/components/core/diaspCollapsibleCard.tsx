@@ -1,11 +1,11 @@
 import { FC } from "react"
-import { toAbsoluteUrl } from "../../../../_metronic/helpers"
-import { Diasp } from "./core/_model"
+import { toAbsoluteUrl } from "../../../../../_metronic/helpers"
+import { Diasp } from "./_model"
 
 export const DiasporasCard: FC<Diasp> = (props:Diasp) => {
      return (
 
-               <div className="card border border-2 mw-100">
+               <div className="card border border-2">
                     <div className = 'row'>
                     <div className='card-header g-5 align-middle'>
                     <div className='row d-flex flex-row align-middle'>
@@ -73,19 +73,8 @@ export const DiasporasCard: FC<Diasp> = (props:Diasp) => {
                          </div>
                           <div className = 'separator mb-3'></div>
                    
-                     <div className="scroll pe-5"
-data-kt-scroll="true"
-data-kt-scroll-height="15rem"
-data-kt-scroll-wrappers="#kt_oda_modal"
-data-kt-scroll-dependencies="#kt_js_header, #kt_oda_modal, #kt_header"
-              data-kt-scroll-offset="100px"
-                         >
-                              <div><p className="mb-2 fw-light">{props.summary}</p></div>
-    {/* <div id="kt_oda_modal_content">
-        ODA content goes here...
-    </div> */}
-</div>
-                    
+                     
+                    <div><p className="mb-2 fw-light">{props.summary}</p></div>
                          </div>
                          <div className='row'>
                               <div className='menu-content pt-4 pb-2'>

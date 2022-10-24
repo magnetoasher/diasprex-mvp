@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import {useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { KTSVG, toAbsoluteUrl } from '../../../_metronic/helpers'
 import Opportunity from './Opportunity'
@@ -8,8 +8,15 @@ import BillingHistory from './BillingHistory';
 import { EditText, EditTextarea } from 'react-edit-text';
 import 'react-edit-text/dist/index.css';
 const NewDashboardPage = () => {
-    var userTypeFull = localStorage.getItem("userTypeFull")
-    var userType = localStorage.getItem("userType")
+       var user = localStorage.getItem("userType")
+  const fullUserType = localStorage.getItem('userTypeFull')
+    const [userTypeFull, setUserTypeFull] = useState<any>(fullUserType && fullUserType.replace("_", " "))
+    
+  useEffect(() => {
+    (user === 'admin')?
+      setUserTypeFull('Admin'): //Temporary placeholder for admin user type
+    setUserTypeFull(fullUserType && fullUserType.replace("_", " "))
+  }, [fullUserType])
 
     const [dataObj] = useState([
         {
@@ -39,58 +46,207 @@ const NewDashboardPage = () => {
 
 
     ])
+    const blankImg = toAbsoluteUrl('/media/svg/avatars/blank.svg')
+  const userAvatarImg = toAbsoluteUrl('/media/avatars/300-1.jpg')
+
+
     return (
-        <Row justify='space-evenly'>
-            <Card className='col-4'>
-                <div
-                    className='card-body p-4'>
-                    <div className="d-flex justify-content-center align-items-center mb-2">
-                        <div className=" row d-flex flex-column ">
-                            <div className = 'col'>
-                            <div className='me-7 mb-4'>
-                                <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
-                                    <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} alt='Metornic' />
-                                    <div className='position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px'></div>
-                                </div>
-                            </div>
-                            <div className="d-flex align-items-center mb-2">
+        
+        <div className='row g-0'>
+            <div className='col-3'>
+            <div className="card card-flush shadow me-2 mb-2 px-5 py-5">
+                    <div className=" row d-flex flex-column flex-wrap">
+                        <div className='col-xs-1 d-flex align-items-center justify-content-center g-3 px-5'>
+                         <div className = 'd-flex mw-75 image-input-wrapper image-input-outline'>  
+                                <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} className='rounded mw-100' alt='Diaspreex' />
+                                </div> 
+                        </div>
+                        
+                        {/* <div
+              className='image-input image-input-outline'
+              data-kt-image-input='true'
+              style={{backgroundImage: `url('${blankImg}')`}}
+            >
+            
+              <div
+                className='image-input-wrapper w-175px h-175px'
+                style={{backgroundImage: `url('${userAvatarImg}')`}}
+                            ></div>
+                                </div> */}
+
+                        <div className='col-xs-1 d-flex align-items-center justify-content-center'>
+                            <div className = 'justify-content-center'>
+                            <div className="d-flex mb-2">
                                 <a
                                     href="#"
-                                    className="text-gray-800 text-hover-primary fs-2 fw-bolder me-1"
+                                    className="text-gray-800 text-hover-primary fs-4 fw-bolder me-1"
                                 >
                                     Max Smith
                                 </a>
+                                {user !== "basic" && <a
+                      href="#"
+                      data-toggle="tooltip"
+                      data-placement="top"
+                      title="Verified"
+                    >
+                        <KTSVG
+                          path='/media/icons/duotune/general/gen026.svg'
+                          className='svg-icon-1 svg-icon-success'
+                        />
+                      </a>}
 
-                            </div>
+                                </div>
+                                
                             <div className="d-flex align-items-center mb-2">
                                 <a
                                     href="#"
                                     className="text-gray-800 text-hover-primary  me-1 text-capitalize"
                                 >
-                                    <span className = 'badge badge-success'>{userTypeFull?.replace("_", " ")} </span>
+                                    <span className = 'badge badge-light-success'>{userTypeFull?.replace("_", " ")} </span>
                                 </a>
 
+                                </div>
+                                <span className='symbol symbol-30px w-30px bg-light me-2'>
+                        <img src={toAbsoluteUrl("/media/flags/ghana.svg")}
+                            className = 'fs-6 fw-bold'
+                            alt='oppscard'
+                            data-toggle='tooltips'
+                            title= 'Ghana'
+                            data-bs-placement="bottom" />
+                      </span>
+                      
+                                {user !== "sponsor" && <span className='symbol symbol-30px w-30px bg-light me-2'>
+                                    <img src={toAbsoluteUrl("/media/flags/united-states.svg")}
+                                        className='fs-6 fw-bold'
+                                        alt='oppscard'
+                                        data-toggle='tooltips'
+                                        title='United States'
+                                        data-bs-placement="bottom" />
+                                </span>}
                             </div>
+                            </div>
+                    </div>
 
-                            <br />
-                            <div className="d-flex align-items-center mb-2">
+                    
+                    {user !== "sponsor" && <> <div className=" row d-flex g-5">
+                        <div className='separator me-0 mb-3'></div>
+                        <div className='d-flex flex-wrap flex-stack'>
+                            <div className='col-sm-6'>
+                                <div className='border border-gray-300 border-dashed rounded min-w-100px p-2 me-3 mb-3'>
+                                    <div className='d-flex align-items-center'>
+                                        <KTSVG
+                                            path='/media/icons/duotune/arrows/arr066.svg'
+                                            className='svg-icon-3 svg-icon-success me-2'
+                                        />
+                                        <div className='fs-4 fw-bolder'>$10,500</div>
+                                    </div>
+
+                                    <div className='fw-bold fs-6 text-gray-400'>Total Transfer</div>
+                                </div>
+
+                                <div className='border border-gray-300 border-dashed rounded min-w-100px p-2 me-3 mb-3'>
+                                    <div className='d-flex align-items-center'>
+                                        <KTSVG
+                                            path='/media/icons/duotune/arrows/arr065.svg'
+                                            className='svg-icon-3 svg-icon-danger me-2'
+                                        />
+                                        <div className='fs-4 fw-bolder'>5%</div>
+                                    </div>
+
+                                    <div className='fw-bold fs-6 text-gray-400'>Annual Change</div>
+                                </div>
+                            </div>
+                            <div className='col-sm-6'>
+
+                                <div className='border border-gray-300 border-dashed rounded min-w-100px p-2 me-3 mb-3'>
+                                    <div className='d-flex align-items-center'>
+                                        <KTSVG
+                                            path='/media/icons/duotune/arrows/arr066.svg'
+                                            className='svg-icon-3 svg-icon-success me-2'
+                                        />
+                                        <div className='fs-4 fw-bolder'>$60,500</div>
+                                    </div>
+
+                                    <div className='fw-bold fs-6 text-gray-400'>Total Retainer</div>
+                                </div>
+
+                                <div className='border border-gray-300 border-dashed rounded min-w-100px p-2 me-3 mb-3'>
+                                    <div className='d-flex align-items-center'>
+                                        <KTSVG
+                                            path='/media/icons/duotune/arrows/arr066.svg'
+                                            className='svg-icon-3 svg-icon-success me-2'
+                                        />
+                                        <div className='fs-4 fw-bolder'>60%</div>
+                                    </div>
+
+                                    <div className='fw-bold fs-6 text-gray-400'>Retainer Change</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    </>}
+                
+                
+                <div className='row'>
+                    <div className="d-flex align-items-center mb-2">
                                 <a
                                     href="#"
-                                    className="text-gray-800 text-hover-primary fs-2 fw-bolder me-1"
+                                    className="text-gray-800 text-hover-primary fs-6 fw-bolder me-1"
                                 >
-                                    Contact
-                                </a>
+                                    Overview
+                            </a>
+                            
 
-                            </div>
-                            <div className=' mb-5 mb-xl-10' id='kt_profile_details_view'>
-
-
+                        </div>
+                        <div className = 'separator me-0 mb-3'></div>
+                                    <div className='mb-0' id='kt_profile_details_view'>
+                                        
                                 <div >
+                                    <div className='row mb-2 d-flex align-items-center'>
+                                        <label className='col-lg-5 fw-bolder '>
+                                            Industry
+                                            <i
+                                                className='fas fa-exclamation-circle ms-1 fs-7'
+                                                data-bs-toggle='tooltip'
+                                                title='Phone number must be active'
+                                            ></i>
+                                        </label>
 
+                                        <div className='col-lg-7'>
+                                            <EditText defaultValue="Computer Software" />
+                                        </div>
+                                    </div>
+                                    <div className='row mb-2 d-flex align-items-center'>
+                                        <label className='col-lg-5 fw-bolder '>Interests</label>
 
+                                        <div className='col-lg-7'>
+                                             
+                                            <EditText defaultValue="Web Development" />
+                            
+                                        </div>
+                                    </div>                                  
+                                </div>
+                            </div>
+                    </div>
 
+                    <div className='row gy-3 py-3'>
+                         <label className='col-lg-12 fw-bolder  '>About</label>
+                            <EditTextarea rows={5} defaultValue="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book" />
+                    </div>
 
-                                    <div className='row mb-7'>
+                    
+                <div className='row gy-3 py-3'>
+                    <div className="d-flex align-items-center mb-0">
+                                <label className="text-gray-800 text-hover-primary fs-6 fw-bolder">
+                                    Contact
+                                </label>
+
+                            </div><div className = 'separator me-0 mb-3'></div>
+                                    <div className=' mb-5 mb-xl-10' id='kt_profile_details_view'>
+                                        
+                                <div >
+                                    <div className='row mb-2'>
                                         <label className='col-lg-5 fw-bolder '>
                                             Phone
                                             <i
@@ -101,157 +257,72 @@ const NewDashboardPage = () => {
                                         </label>
 
                                         <div className='col-lg-7 d-flex align-items-center'>
-                                            <span className='fw-bold fs-6 me-2'>044 3276 454 935</span>
+                                            <span className='fs-6 me-2 text-muted'>044 3276 454 935</span>
                                         </div>
                                     </div>
-                                    <div className='row mb-7'>
+                                    <div className='row mb-2'>
                                         <label className='col-lg-5 fw-bolder '>Address</label>
 
                                         <div className='col-lg-7'>
-                                            <a href='#' className='fw-bold fs-6 text-dark'>
+                                            <a href='#' className='fs-6 text-muted'>
                                                 2777 Vera Cruz Ln N
                                             </a>
                                         </div>
                                     </div>
-                                    <div className='row mb-7'>
-                                        <label className='col-lg-5 fw-bolder '>Email</label>
+                                    <div className='row mb-2'>
+                                    <label className='col-lg-5 fw-bolder '>Email
+                                     <i
+                                                className='fas fa-exclamation-circle ms-1 fs-7'
+                                                data-bs-toggle='tooltip'
+                                                title='Email address must be current'
+                                            ></i></label>
 
                                         <div className='col-lg-7'>
-                                            <a href='#' className='fw-bold fs-6 text-dark'>
+                                            <a href='#' className='fs-6 text-muted'>
                                                 admin@dasprex.com
                                             </a>
                                         </div>
                                     </div>
-                                    <div className='row mb-7'>
-                                        <label className='col-lg-5 fw-bolder '>Website</label>
+                                    <div className='row mb-2'>
+                                        <label className='col-lg-5 fw-bolder '>Diasprex</label>
 
                                         <div className='col-lg-7'>
-                                            <a href='#' className='fw-bold fs-6 text-dark'>
-                                                keenthemes.com
+                                            <a href='#' className='fs-6 text-muted'>
+                                                diasprex.com
                                             </a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            </div>
-
-                            {userType !== 'sponsor' && <div className='col d-flex d-flex-end'>
-                
-                                <div className=' flex-row  '>
-                                    <div className='border border-grey-300 rounded min-w-125px shadow-sm me-6 mb-3'>
-
-                                        <Link to="/remittance/sendmoney" className="btn btn-flex btn-primary px-6">
-                                            <span className="svg-icon svg-icon-2x">
-                                                <KTSVG
-                                                    path='/media/icons/duotune/general/gen016.svg'
-                                                    className=' svg-icon-success me-2'
-                                                />
-                                            </span>
-                                            <span className="d-flex flex-column align-items-start ms-2">
-                                                <span className="fs-3 fw-bolder">Send Money</span>
-                                                <span className="fs-7">Build Legacy</span>
-                                            </span>
-                                        </Link>
-                                    </div>
-                
-
-
-                                    <div className='border border-grey-300 rounded min-w-125px shadow-sm me-6 mb-3'>
-
-                                        <Link to="#" className="btn btn-flex btn-normal px-6">
-                                            <span className="svg-icon svg-icon-2x">
-                                                <KTSVG
-                                                    path='/media/icons/duotune/general/gen017.svg'
-                                                    className=' svg-icon-success me-2'
-                                                />
-                                            </span>
-                                            <span className="d-flex flex-column align-items-start ms-2">
-                                                <span className="fs-3 fw-bolder">Add Fund</span>
-                                                <span className="fs-7">Build Futures</span>
-                                            </span>
-                                        </Link>
-                                    </div>
-                                </div>
-              
-                            </div>}
-
-                        </div>
-
-
-
                     </div>
-                </div>
-            </Card>
+                    </div>
 
-            <Card className='col-7 '>
+            </div>
+
+            <Card className='col-9 shadow'>
                 <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>
                     <div className='card-header cursor-pointer'>
                         <div className='card-title m-0'>
-                            <h3 className='fw-bolder m-0'>Overview</h3>
+                            <h3 className='fw-bolder m-0'>Your Recent Opportunity Posts</h3>
                         </div>
 
 
                     </div>
 
-                    <div className=' p-4'>
-                        <div className='row mb-2'>
-                            <label className='col-lg-12 fw-bolder  '>About</label>
-                            <EditTextarea rows={5} defaultValue="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book" />
-                        </div>
-                        <div className='row mb-2 align-items-center'>
-                            <label className='col-lg-3 fw-bolder '>
-                                Industry
-
-                            </label>
-
-                            <div className='col-lg-7 d-flex align-items-start'>
-                                <EditText defaultValue="Computer Software" />
-                            </div>
-                        </div>
-                        <div className='row mb-7 align-items-center'>
-                            <label className='col-lg-3 fw-bolder  '>
-                                Specialties
-
-                            </label>
-
-                            <div className='col-lg-7 d-flex align-items-center'>
-                                <EditText defaultValue="Web Development" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>
-                    <div className='card-header cursor-pointer'>
-                        <div className='card-title m-0'>
-                            <h3 className='fw-bolder m-0'>Recent Opportunity Posts</h3>
-                        </div>
-
-
-                    </div>
-
-                    <div className='card-body p-2 overflow-auto' style={{ height: '245px' }}>
+                    <div className='card-body p-2 overflow-auto' style={{ height: '350px' }}>
                         {
                             dataObj.map((e) =>
-                                <Opportunity name={e.name} userTypeFull={e.userTypeFull} title={e.title} detail={e.details} column={4} badgeColor="blue" badgeText="New" picSrc={e.src} />
+                                <Opportunity name={e.name} userTypeFull={e.userTypeFull} title={e.title} detail={e.details} column={4} badgeColor="blue" badgeText="New Opportunity" picSrc={e.src} />
                             )
                         }
 
                     </div>
                 </div>
-                {/* <div className="d-flex align-items-center mb-2">
-                    <a
-                        href="my_opportunity"
-                        className="text-gray-800 text-hover-primary fs-2 fw-bolder me-1"
-                    >
+                  <div className = 'separator me-0 mb-3'></div>
 
-                        Followed Opportunities,
-                    </a>
-
-                </div> */}
 
                 {
-                    userType !== "sponsor" &&
+                    (user !== "sponsor")?
                     <>
                         <div className="d-flex align-items-center mb-2 justify-content-end">
                             <a
@@ -268,8 +339,44 @@ const NewDashboardPage = () => {
                             <BillingHistory />
 
                         </div>
-                    </>
+                        </>:
+                        
+                        <>
+                            <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>
+                    <div className='card-header cursor-pointer'>
+                        <div className='card-title m-0'>
+                            <h3 className='fw-bolder m-0'>New Show of Interest</h3>
+                        </div>
+
+
+                    </div>
+
+                    <div className='card-body p-2 overflow-auto' style={{ height: '350px' }}>
+                        {
+                            dataObj.map((e) =>
+                                <Opportunity name={e.name} userTypeFull={e.userTypeFull} title={e.title} detail={e.details} column={4} badgeColor="green" badgeText="New proposal" picSrc={e.src} />
+                            )
+                        }
+
+                    </div>
+                </div>
+                        </>
                 }
+
+              
+
+
+                
+                {/* <div className="d-flex align-items-center mb-2">
+                    <a
+                        href="my_opportunity"
+                        className="text-gray-800 text-hover-primary fs-2 fw-bolder me-1"
+                    >
+
+                        Followed Opportunities,
+                    </a>
+
+                </div> */}
 
                 {/* <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>
                     <div className='card-header cursor-pointer'>
@@ -285,8 +392,8 @@ const NewDashboardPage = () => {
 
                     </div>
                 </div> */}
-            </Card>
-        </Row>
+                </Card>
+           </div>
 
     )
 }

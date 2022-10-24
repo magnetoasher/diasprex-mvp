@@ -1,9 +1,31 @@
-import { ConfirmModal } from "../../../../_metronic/partials/modals/confirm-action/ConfirmAction";
-export const SendMoneyForm = () => {
+import { FC } from "react";
+import { ConfirmModal } from "../confirm-action/ConfirmAction";
+import { KTSVG } from "../../../helpers";
+
+
+export const SendMoneyForm:FC = () => {
     const sendMoney = () => {
-    return (1+2)
+    return
 }
   return (
+    <div
+      className='modal fade d-block'
+        id='kt_send_money_modal'
+        role='dialog'
+        tabIndex={-1}
+        aria-modal='true'
+    >
+      <div className='modal-dialog modal-dialog-centered'>
+        <div className='modal-content'>
+
+          <div className='modal-header'>
+            <h2>Send Money</h2>
+
+            <div className='btn btn-sm btn-icon btn-active-color-primary' data-bs-dismiss='modal'>
+              <KTSVG path='/media/icons/duotune/arrows/arr061.svg' className='svg-icon-1' />
+            </div>
+          </div>
+
     <form  className='form'>
     
 <div className="mw-900px">
@@ -88,5 +110,8 @@ export const SendMoneyForm = () => {
                 </div>
                 </div>
       </form>
+      </div>
+      </div>
+      </div>
     )
 }

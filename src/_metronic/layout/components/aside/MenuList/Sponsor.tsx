@@ -38,13 +38,13 @@ export function Sponsor() {
 
 
             <AsideMenuItem
-                to='#'
+                to='/diasporas'
                 icon='/media/icons/duotune/art/art003.svg'
                 title="Diasporas"
                 fontIcon='bi-app-indicator'
             />
             <AsideMenuItem
-                to='#'
+                to='/faqs'
                 icon='/media/icons/duotune/art/art004.svg'
                 title='Resources'
                 fontIcon='bi-layers'

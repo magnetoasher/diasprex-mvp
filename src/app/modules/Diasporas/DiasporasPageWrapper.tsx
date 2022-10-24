@@ -6,7 +6,8 @@ import { Diasp, InitialDiasp } from './components/core/_model'
 
 export const DiasporasPageWrapper: FC = () => {
   const diasp:Diasp = {
-    name: InitialDiasp.title + InitialDiasp.name,
+    title: InitialDiasp.title,
+    name: InitialDiasp.name,
     profession: InitialDiasp.profession,
     afdinsight: InitialDiasp.afdinsight,
     rcountry: InitialDiasp.rcountry,
@@ -21,10 +22,12 @@ export const DiasporasPageWrapper: FC = () => {
       <PageTitle breadcrumbs={[]}>Diasporas</PageTitle>
       <DiasporasPage
         name={diasp.name}
+        title = {diasp.title}
         profession={diasp.profession}
         rcountry={diasp.rcountry}
         afdinsight={diasp.afdinsight}
-        afcountry={diasp.afcountry }
+        afcountry={diasp.afcountry}
+        flag = {diasp.flag}
         interest={ diasp.interest}
         undergrad={ diasp.undergrad}
         grad={ diasp.grad}

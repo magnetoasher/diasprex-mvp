@@ -1,33 +1,22 @@
-import { FC } from 'react'
-import {Diasp} from './_model'
+import { FC } from "react"
+import { Diasp } from "./core/_model"
 
-// type Props = {
-//     title?: string
-//     name: string
-//     proftitle: string
-//     afdinsight: string
-//     rcountry: string
-// }
-type Props = Partial<Diasp>
-
-export const SideCard:FC<Props> = (props:Props) => {
+export const diaspSideCard:FC<Diasp> = (props:Diasp) => {
   return (
-      
-
-      
-          <div className="card mw-100 card-flush bg-light shadow-sm">
+      <div>
+          <div className="card card-flush shadow-sm">
     <div className="card-header">
+        <h3 className="card-title">props.name</h3>
 <div className='row gx-3 d-flex flex-column'>
                             <div className='menu-content pt-8 pb-2'>
                               <span className="menu-section text-dark text-uppercase fw-bolder fs-1 ls-1">{props.title} {props.name}</span>
                               </div>
                                    <h6>
-                                   <p className="fs-6 mb-2 text-dark me-3">Resident Country</p >
-                                   <p className="fs-6 mb-2 text-muted">{props.rcountry} </p>
+                                   <span className="fs-6 mb-2 text-dark me-3">Resident Country:</span >
+                                   <span className="fs-6 mb-2 text-muted">{props.rcountry} </span>
                               </h6>
                               <h6>
-                <p className=" fs-6 mb-2 text-dark me-3">Country of Origin</p>
-                <p> 
+                                                       <span className=" fs-6 mb-2 text-dark me-3">Country of Origin:</span >
                                                        <span className=" fs-6 mb-2 text-muted me-3">{props.afcountry} </span>
                                                        <span className='symbol symbol-30px w-30px bg-light me-2'>
                         <img src={props.flag}
@@ -36,24 +25,18 @@ export const SideCard:FC<Props> = (props:Props) => {
                             data-toggle='tooltips'
                             title={props.afcountry}
                             data-bs-placement="bottom" />
-                  </span>
-                  </p>
+                    </span>
 
                                                   </h6>
                      </div>
     </div>
-    <div className="card-body mw-100 py-5">
-            <i>{props.afdinsight}</i>
-            <i>{props.afdinsight}</i>
-            <i>{props.afdinsight}</i>
+    <div className="card-body py-5">
+        Lorem Ipsum is simply dummy text...
     </div>
-    <div className="card-footer text-center">
-                        <a href="#" className="card-link">Learn more</a>
+    <div className="card-footer">
+       props.insight
     </div>
 </div>
-      
-      
-
- 
-    )
+    </div>
+  )
 }

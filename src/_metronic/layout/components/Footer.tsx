@@ -14,7 +14,7 @@ const Footer: FC = () => {
         <div className='text-dark order-2 order-md-1'>
           <span className='text-muted fw-bold me-2'>{new Date().getFullYear()} &copy;</span>
           <a href='#' className='text-gray-800 text-hover-primary'>
-            Keenthemes
+            Diasprex
           </a>
         </div>
         {/* end::Copyright */}
@@ -33,7 +33,7 @@ const Footer: FC = () => {
           </li>
           <li className='menu-item'>
             <a href='#' className='menu-link pe-0'>
-              Purchase
+              Team
             </a>
           </li>
         </ul>
