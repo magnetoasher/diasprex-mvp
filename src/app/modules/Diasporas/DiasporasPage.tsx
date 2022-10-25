@@ -10,9 +10,9 @@ import { Diasp } from "./components/core/_model"
 
 export const DiasporasPage: FC<Diasp> = (diasp:Diasp) => {
 
-    const img1 = toAbsoluteUrl('./media/stock/1600x800/img-1.jpg')
-    const img2 = toAbsoluteUrl('./media/stock/1600x800/img-3.jpg')
-    const img3 = toAbsoluteUrl('./media/stock/1600x800/img-4.jpg')
+    const img1 = toAbsoluteUrl('./media/stock/diasprex/img-2.jpg')
+    const img2 = toAbsoluteUrl('./media/stock/diasprex/img-1.jpg')
+    const img3 = toAbsoluteUrl('./media/stock/diasprex/img-3.jpg')
     return (
     <div className='post d-flex flex-column-fluid' id='kt_diasporas'>
     <div className = 'container-xxl' style={{ margin: 'auto' }}>

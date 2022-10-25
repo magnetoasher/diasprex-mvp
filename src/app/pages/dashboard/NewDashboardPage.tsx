@@ -58,7 +58,7 @@ const NewDashboardPage = () => {
                     <div className=" row d-flex flex-column flex-wrap">
                         <div className='col-xs-1 d-flex align-items-center justify-content-center g-3 px-5'>
                          <div className = 'd-flex mw-75 image-input-wrapper image-input-outline'>  
-                                <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} className='rounded mw-100' alt='Diaspreex' />
+                                <img src={toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')} className='rounded mw-100' alt='Diaspreex' />
                                 </div> 
                         </div>
                         

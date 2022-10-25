@@ -11,7 +11,7 @@ export const DiasporasCard: FC<Diasp> = (props:Diasp) => {
                     <div className='row d-flex flex-row align-middle'>
                     
                     <div className = 'col-4 g-6 text-center'>
-                    <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')}  className = 'mw-100 rounded-circle' alt='profile image' />
+                    <img src={toAbsoluteUrl('/media/avatars/diasprex/dxp-1.jpg')}  className = 'mw-100 rounded-circle' alt='profile image' />
                     </div>
                     <div className='col-8 gx-6 '>
                     <div className='row gx-3 d-flex flex-column'>

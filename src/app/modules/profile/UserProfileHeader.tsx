@@ -26,7 +26,7 @@ export const UserProfileHeader: React.FC = () => {
             <div className='col-2 d-flex align-items-center justify-content-center'>
           <div className='me-7 mb-4 d-flex text-center'>
                 <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
-                  <img src={toAbsoluteUrl('/media/avatars/300-1.jpg')} className = 'mw-100' alt='Diasrex' />
+                  <img src={toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')} className = 'mw-100' alt='Diasrex' />
                   {/* <div
               className='image-input image-input-outline'
               data-kt-image-input='true'
