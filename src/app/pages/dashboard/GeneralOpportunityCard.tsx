@@ -42,7 +42,7 @@ function GeneralOpportunityCard() {
                                     badgeColor={element.status == 'Open' ? 'success' : 'danger'}
                                     title={element.title}
                                     country={element.country}
-                                    flag={toAbsoluteUrl(`/media/flags/${element.country}.svg`)}
+                                    flag={toAbsoluteUrl(element.flag)}
                                     status = {element.status}
                                     description={element.description}
                                     dueDate={element.dueDate}

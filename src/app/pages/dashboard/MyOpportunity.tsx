@@ -14,6 +14,7 @@ const MyOpportunity = () => {
     const [activeprop] = useState(active);
     const [submittedprop] = useState(submitted);
     const [declinedprop] = useState(declined);
+    let user = localStorage.getItem('userType')
 
     const { TabPane } = Tabs;
   const onChange = (key: string) => {
@@ -32,7 +33,7 @@ const MyOpportunity = () => {
         key="1">
          <MyOpportunityTable />
             </TabPane>
-        
+        {user!== 'basic' && <>
     <TabPane
                     tab={
                         <span className='d-flex justify-content-center align-items-center'>
@@ -103,6 +104,8 @@ const MyOpportunity = () => {
 
                     </div>
                 </TabPane>
+        </>
+        }
             </Tabs>
     )
 }

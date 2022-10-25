@@ -9,11 +9,11 @@ const Generic = () => {
         <>
             <MenuItem title={intl.formatMessage({ id: 'MENU.DASHBOARD' })} to='/dashboard' />
             <MenuItem title='Opportunities' to='/opportunities' />
-            <MenuItem title='My Opportunities' to='#' />
+            <MenuItem title='My Opportunities' to='/my_opportunities' />
             <MenuItem title='DIF Investment' to='dif_resources' />
             <MenuItem title='Remittance' to='remittance' />
             <MenuItem title='Diaspora' to='/diasporas' />
-            <MenuItem title='Resources' to='faqs' />
+            <MenuItem title='FAQs' to='faqs' />
         </>
     )
 }

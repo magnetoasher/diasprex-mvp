@@ -8,6 +8,7 @@ export const DiasporasPageWrapper: FC = () => {
   const diasp:Diasp = {
     title: InitialDiasp.title,
     name: InitialDiasp.name,
+    flag: InitialDiasp.flag,
     profession: InitialDiasp.profession,
     afdinsight: InitialDiasp.afdinsight,
     rcountry: InitialDiasp.rcountry,
@@ -20,6 +21,7 @@ export const DiasporasPageWrapper: FC = () => {
   return (
     <>
       <PageTitle breadcrumbs={[]}>Diasporas</PageTitle>
+
       <DiasporasPage
         name={diasp.name}
         title = {diasp.title}

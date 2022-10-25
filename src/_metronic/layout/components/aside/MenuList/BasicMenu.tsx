@@ -59,7 +59,7 @@ export function BasicMenu() {
       <AsideMenuItem
         to='/faqs'
         icon='/media/icons/duotune/art/art007.svg'
-        title='Resources'
+        title='FAQs'
         fontIcon='bi-layers'
       />
 
@@ -72,7 +72,7 @@ export function BasicMenu() {
       </div>
 
       <AsideMenuItem
-        to='#'
+        to='my_opportunities'
         icon='/media/icons/duotune/art/art003.svg'
         title='My Opportunities'
         fontIcon='bi-layers'

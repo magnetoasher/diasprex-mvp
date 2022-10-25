@@ -49,7 +49,7 @@ export const DiasporasPage: FC<Diasp> = (diasp:Diasp) => {
                                         rcountry={diasp.rcountry}
                                         afdinsight={diasp.afdinsight}
                                         afcountry={diasp.afcountry}
-                                         flag={toAbsoluteUrl(`/media/flags/${diasp.afcountry}.svg`)}
+                                         flag={toAbsoluteUrl(diasp.flag)}
                                         interest={ diasp.interest}
                                         undergrad={ diasp.undergrad}
                                         grad={ diasp.grad}

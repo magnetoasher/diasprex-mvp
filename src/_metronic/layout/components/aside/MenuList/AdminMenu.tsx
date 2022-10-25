@@ -76,7 +76,7 @@ export function AdminMenu() {
             <AsideMenuItem
                 to='/faqs'
                 icon='/media/icons/duotune/art/art009.svg'
-                title='Resources'
+                title='FAQs'
                 fontIcon='bi-layers'
             />
 

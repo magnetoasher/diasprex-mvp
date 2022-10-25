@@ -43,7 +43,7 @@ export function Business() {
             <AsideMenuItem
                 to='/faqs'
                 icon='/media/icons/duotune/art/art006.svg'
-                title='Resources'
+                title='FAQs'
                 fontIcon='bi-layers'
             />
             <div className='menu-item'>

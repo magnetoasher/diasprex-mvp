@@ -5,7 +5,7 @@ export type Diasp = {
     profession?: string
     rcountry: string
     afcountry: string
-    flag?: string
+    flag: string
     undergrad?: {
         institution: string
         field: string
@@ -28,6 +28,7 @@ export const InitialDiasp = {
     profession: 'Analytical Chemist',
     rcountry: 'United States',
     afcountry: 'Nigeria',
+    flag: "/media/flags/nigeria.svg",
     undergrad: {
         institution: 'Olabisi Onabanjo University, Ogun State, Nigeria',
         field: 'Industrial Chemistry',

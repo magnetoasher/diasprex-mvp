@@ -12,7 +12,7 @@ const Sponsor = () => {
             <MenuItem title='Proposals' to='/sponsor_proposals' />
             <MenuItem title='DIF Investment' to='dif_resources' />
             <MenuItem title='Diaspora' to='/diasporas' />
-            <MenuItem title='Resources' to='faqs' />
+            <MenuItem title='FAQs' to='faqs' />
 
         </>)
 }

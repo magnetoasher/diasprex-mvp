@@ -1,0 +1,5 @@
+export * from './components/About'
+export * from './components/Dif'
+export * from './components/Faqs'
+export * from './components/Remittance'
+export * from './PublicPagesWrapper'

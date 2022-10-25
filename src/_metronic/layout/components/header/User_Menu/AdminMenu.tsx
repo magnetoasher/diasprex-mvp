@@ -16,7 +16,7 @@ export const AdminMenu = () => {
             <MenuItem title='Proposal Management' to='/prop_management' />
             {/* <MenuItem title='Remittance Management' to='/rr_management' /> */}
             <MenuItem title='Diaspora' to='/diasporas' />
-            <MenuItem title='Resources' to='/faqs' />
+            <MenuItem title='FAQs' to='/faqs' />
         </>
     )
 }

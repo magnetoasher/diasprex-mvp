@@ -13,7 +13,7 @@ const Individual = () => {
             <MenuItem title='DIF Investment' to='dif_resources' />
             <MenuItem title='Remittance' to='remittance' />
             <MenuItem title='Diaspora' to='diasporas' />
-            <MenuItem title='Resources' to='faqs' />
+            <MenuItem title='FAQs' to='faqs' />
         </>
     )
 }
