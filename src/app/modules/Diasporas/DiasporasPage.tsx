@@ -6,6 +6,8 @@ import { YearCollapsible } from "../../../_metronic/partials/content/collapsible
 import { MonthCollapsible } from "../../../_metronic/partials/content/collapsibles/MonthCollapsible"
 import { DiasporasCard } from "./components/DiasporasCard"
 import { Diasp } from "./components/core/_model"
+import { InviteUADFriends } from "../../../_metronic/partials"
+import { UadForm } from "./components/uadform"
 
 
 export const DiasporasPage: FC<Diasp> = (diasp:Diasp) => {
@@ -15,8 +17,8 @@ export const DiasporasPage: FC<Diasp> = (diasp:Diasp) => {
     const img3 = toAbsoluteUrl('./media/stock/diasprex/img-3.jpg')
     return (
     <div className='post d-flex flex-column-fluid' id='kt_diasporas'>
-    <div className = 'container-xxl' style={{ margin: 'auto' }}>
-        <div className='d-flex  mb-9'>
+    <div className = ' container-xxl' style={{ margin: 'auto' }}>
+        <div className='mb-9'>
         <h1 >
             <p className = 'fs-2hx text-dark text-center  mb-5'>African Diasporas</p>
         </h1>
@@ -24,7 +26,42 @@ export const DiasporasPage: FC<Diasp> = (diasp:Diasp) => {
 
             <div className = 'mb-9' style={{ margin: 'auto' }}>
                 <Carousel2 img1url={img1} img2url={img2} img3url={img3}/>
-        </div>
+                </div>
+                
+                <div className='row g-5 d-flex'>
+                            <div className = 'd-flex flex-column align-items-center'>
+                                <div className = 'menu-section text-gray-600 text-capitalize fw-bolder fs-1 ls-1 me-5'>
+                                    <label>Submit your profile for monthly UAD Featuring</label>
+                                </div>
+                                <div className = 'btn-menu me-5'>
+                            <button
+                                className='btn btn-light text-dark'
+                                data-bs-toggle='modal'
+                                data-bs-target='#kt_modal_submit_profile'
+                            >
+                                Submit Profile
+                            </button>
+                            <UadForm />
+                        </div>
+                        
+                        </div>
+                            <div className = 'd-flex flex-column align-items-center'>
+                            <div className = 'menu-section text-gray-600 text-capitalize fw-bolder fs-1 ls-1 me-5'>
+                                <label>Invite a friend to submit profiles for monthly UAD Featuring</label>
+                                </div>
+                                <div className = 'btn-menu me-5'>
+                            <button className = 'btn btn-light text-dark'
+                                data-bs-target = '#kt_modal_invite_uad_friends'
+                                data-bs-toggle = 'modal'
+                            >
+                                Invite Friends
+                            </button>
+                            <InviteUADFriends />
+                                    </div>
+                        </div>
+                </div>
+                
+                <div className = 'separator, m-10'></div>
 
                 <div className='row g-5'>
                      <div className="col-lg-8">
@@ -61,18 +98,30 @@ export const DiasporasPage: FC<Diasp> = (diasp:Diasp) => {
 
 
                     <div className='col-lg-4'>
-                        <h2 className='text-gray-800 fw-bolder mb-4'>NEWS FEED</h2>
+                        <h2 className='text-gray-800 fw-bolder mb-4'>BLOGS/NEWS</h2>
         <FeedsWidget2 className='mb-5 mb-xl-8' />
 
-        <FeedsWidget3 className='mb-5 mb-xl-8' />
+                        <FeedsWidget3 className='mb-5 mb-xl-8' />
+                        <FeedsWidget4 className='mb-5 mb-xl-8' />
+                    </div>
+                    
 
-        <FeedsWidget4 className='mb-5 mb-xl-8' />
-        <FeedsWidget5 className='mb-5 mb-xl-8' />
+        <div className='row bg-light gy-5 gx-xl-8'>
+      <div className='col-xxl-4'>
+                            <FeedsWidget6 className='mb-5 mb-xl-8' />
+                        </div>
+                        <div className='col-xxl-4'>
 
-        <FeedsWidget6 className='mb-5 mb-xl-8' />
+                            <FeedsWidget6 className='mb-5 mb-xl-8' />
+                        </div>
+                        <div className='col-xxl-4'>
+
+                            <FeedsWidget6 className='mb-5 mb-xl-8' />
+                            </div>
       </div>
-            </div>
-            </div>
+            
+                </div>
+                </div>
             </div>
 
         

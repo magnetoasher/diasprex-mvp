@@ -1,6 +1,7 @@
 import { PageTitle } from "../../../../_metronic/layout/core"
 import { Row, Col, Card, Divider, Input, Form, Button } from "antd"
-import moment from 'moment';
+import { KTSVG } from "../../../../_metronic/helpers";
+import { Country } from "../../../../_metronic/partials/content/countryselection/countryselection";
 import { EditorComp } from "../../../../_metronic/partials/content/editor/editor";
 
 
@@ -23,145 +24,144 @@ export const UadForm = () => {
         });
     };
     return (
-        <div>
-            <PageTitle breadcrumbs={[]}>Diaspora Feature Form</PageTitle>
-            <Row justify="center">
-                <Col xs={24} sm={24} md={18} lg={18}>
-                    <Card style={{
-                        boxShadow: "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px"
-                    }}>
-                        <label
-                            style={{
-                                fontSize: "17px",
-                                fontWeight: 600
-                            }}
-                        >Unfound Diaspora Registration Form</label>
-                        <Divider />
+        <div className='modal fade' id='kt_modal_submit_profile' aria-hidden='true'>
+      <div className='modal-dialog mw-650px'>
+        <div className='modal-content'>
+          <div className='modal-header pb-0 border-0 justify-content-end'>
+            <div className='btn btn-sm btn-icon btn-active-color-primary' data-bs-dismiss='modal'>
+              <KTSVG path='/media/icons/duotune/arrows/arr061.svg' className='svg-icon-1' />
+            </div>
+          </div>
 
-                        <Form
-                            form={form}
-                            colon={false}
-                            layout="horizontal"
-                            onFinish={onSubmit}
+          <div className='modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15'>
+            <div className='text-center mb-13'>
+              <h1 className='mb-3'>Submit Your Profile</h1>
 
-                        >
-                            <Row justify="center">
-                                <div className = 'row d-flex flex-row'>
-                                <div className = 'col-xl-6'>
-                                    <label className = 'text-left'> First Name </label>
-                                    </div>
-                                    <div className = 'col-xl-6'>
-                                <Form.Item
-                                        label={true}
-                                        rules={[{ required: true, message: 'Please Enter Your First Name' }]}
-                                        name="first_name"
-                                    >
-                                        <Input
+              <div className='text-muted fw-bold fs-5'>
+                You are submitting your profile for Diasprex's monthly Feature
+                {/* <a href='#' className='link-primary fw-bolder'>
+                  {' '}
+                  FAQ Page
+                </a> */}
+                .
+              </div>
+            </div>
 
-                                            size={"middle"}
-                                            type="text"
-                                        />
-                                        </Form.Item>
-                                        </div>
+                        <form  className='form'>
+    
+<div className="mw-900px">
+    {/* <!--begin::Input group--> */}
+  
+<div className="mb-10">
+  <label className="form-label">Enter your firstname</label>
+  <input
+    type="text"
+    className="form-control"
+    placeholder="Recipient's Firstname"
+  />
+            </div>
+            
+            <div className="mb-10">
+  <label className="form-label">Enter your lastname</label>
+  <input
+    type="text"
+    className="form-control"
+    placeholder="Recipient's Lastname"
+  />
+            </div>
+            
+             <div className="mb-10">
+  <label className="form-label">Enter Diasprex ID if you are a member</label>
+  <input
+    type="text"
+    className="form-control"
+    placeholder="Recipient's Lastname"
+  />
+                </div>
+                
+            <div className=" mb-10">
+                <label className="form-label">Please select your country of residence</label>
+<select className="form-select form-select-white" aria-label="country">
+  <Country />
+</select>
                                 </div>
-                                <Col xs={24} md={24} xl={4} lg={4}>
-                                    <label style={styleslabel}>
-                                        Last Name
-                                    </label>
-                                </Col>
-                                <Col xs={24} md={24} xl={19} lg={19}>
-
-                                    <Form.Item
-                                        name="last_name"
-                                        label={true}
-                                        rules={[{ required: true, message: 'Please Enter Your Last Name' }]}
-                                    >
-                                        <Input
-
-                                            type="text"
-                                        />
-                                    </Form.Item>
-                                </Col>
                                 
-                                <Col xs={24} md={24} xl={4} lg={4}>
-                                    <label style={styleslabel}>
-                                        Email Address
-                                    </label>
-                                </Col>
-                                <Col xs={24} md={24} xl={19} lg={19}>
+                                <div className=" mb-10">
+                <label className="form-label">Please select your country of origin</label>
+<select className="form-select form-select-white" aria-label="country">
+  <Country />
+</select>
+</div>
+            
+<div className="mb-10">
+                <label className="form-label">Please enter your undergraduate information</label>
+                <div className = 'input-group'>
+    
+                    <input type="text" className="form-control me-2" placeholder="Institution" />
+                                        <input type="text" className="form-control me-2" placeholder="Field of study" />
+                                        <select className="form-select form-select-white me-2" aria-label="country" defaultValue='Degree'>
+                                            <option> B.S</option>
+                                            <option> B.A</option>
+                                            <option> HND</option>
+                                            <option> OND</option>
+                                            <option> Associate</option>
+                                            
+                                        </select>
+                    </div>
+            </div>
+            
+            <div className="mb-10">
+                <label className="form-label">Please enetr your graduate school information if applicable</label>
+                                    <div className='input-group'>
+                                        <input type="text" className="form-control me-2" placeholder="Institution" />
+                                        <input type="text" className="form-control me-2" placeholder="Field of study" />
+                                        <select className="form-select form-select-white me-2" aria-label="country" defaultValue='Degree'>
+                                            <option> Ph.D</option>
+                                            <option> MS</option>
+                                            <option> MD</option>
+                                            <option> J.D</option>
+                                            <option> MBA</option>
+                                        </select>
+   
+                    
+                    </div>
+                     </div>
+              
+                     <div className='separator d-flex flex-center mb-8'>
+              <label className="form-label text-primary">Your Insight on Africa's Furture</label>
+            </div>
 
-                                    <Form.Item
-                                        name="Email_name"
-                                        label={true}
-                                        rules={[{ required: true, message: 'Please Enter Your Email' }]}
-                                    >
-                                        <Input
+            <textarea
+              className='form-control form-control-solid mb-8'
+              rows={3}
+              placeholder='Type your comment here'
+                                ></textarea>
+                                
+{/* <!--end::Input group--> */}
+                </div>
+                <div className='form-footer'>
+                     <div className='text-center pt-15'>
+          <button className = 'btn btn-light me-2'>
+            Discard
+          </button>
+        <button type="button"
+        className="btn btn-primary"
+                                        
 
-                                            type="text"
-                                        />
-                                    </Form.Item>
-                                </Col>
-                                <h4> Undergraduate Education</h4>
-                                <Col xs={24} md={24} xl={4} lg={4}>
-                                    <label style={styleslabel}>
-                                        Undergraduate Institution
-                                    </label>
-                                </Col>
-                                <Col xs={24} md={24} xl={19} lg={19}>
-
-                                    <Form.Item
-                                        name="Company_name"
-                                        label={true}
-                                        rules={[{ required: false, message: 'Please Enter Your Company Name' }]}
-                                    >
-                                        <Input
-
-                                            type="text"
-                                        />
-                                    </Form.Item>
-                                </Col>
-
-                            <Col xs={12} sm={12} md={20} lg={20} style={{ marginTop: "10px" }}>
-                                <label style={styleslabel}>
-                                        Professional Summary
-                                    </label>
-                                <TextArea
-                                        showCount maxLength={500} style={{ height: 120, borderRadius: "10px" }} onChange={onChange} placeholder={"Please enter your professional summary"} />
-                                </Col>
-                               
-
-                                <Divider />
-
-                                <Col xs={24} md={24} xl={17} lg={17} style={{
-                                    display: "flex",
-                                    justifyContent: "center"
-                                }} >
-                                    <Button
-                                        htmlType="submit"
-                                        block
-                                        style={{
-                                            backgroundColor: "#7197c1",
-                                            color: "white",
-                                            fontWeight: "900",
-                                            borderRadius: 10,
-                                            borderWidth: 1,
-                                            borderStyle: "solid",
-                                            width: "170px"
-                                        }}
-                                    >
-                                        Submit
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </Form>
-
-
+>
+         Submit
+        </button>
+                </div>
+                   </div>
+      </form>
+                    </div>
+                </div>
+                </div>
 
 
-                    </Card>
 
-                </Col>
-            </Row>
+
+                    
         </div >
 
     )

@@ -32,6 +32,7 @@ export * from './content/portal/Portal'
 // models
 export * from './modals/create-app/Main'
 export * from './modals/invite-users/InviteUsers'
+export * from './modals/invite-users/InviteUADFriends'
 export * from './modals/upgrade-plan/UpgradePlan'
 
 // chat

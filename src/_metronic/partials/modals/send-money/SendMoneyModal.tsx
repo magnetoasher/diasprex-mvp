@@ -1,32 +1,39 @@
 import { FC } from "react";
 import { ConfirmModal } from "../confirm-action/ConfirmAction";
+import { toAbsoluteUrl } from "../../../helpers";
 import { KTSVG } from "../../../helpers";
+import {Modal} from 'react-bootstrap'
 
 
-export const SendMoneyForm:FC = () => {
-    const sendMoney = () => {
-    return
-}
-  return (
-    <div
-      className='modal fade d-block'
-        id='kt_send_money_modal'
-        role='dialog'
-        tabIndex={-1}
-        aria-modal='true'
-    >
-      <div className='modal-dialog modal-dialog-centered'>
+
+export const SendMoneyModal:FC = () => {
+  const sendMoney = () => { }
+     return (
+       <div className='modal fade' id='kt_send_money_modal' aria-hidden='true'>
+      <div className='modal-dialog mw-650px'>
         <div className='modal-content'>
-
-          <div className='modal-header'>
-            <h2>Send Money</h2>
-
+          <div className='modal-header pb-0 border-0 justify-content-end'>
             <div className='btn btn-sm btn-icon btn-active-color-primary' data-bs-dismiss='modal'>
               <KTSVG path='/media/icons/duotune/arrows/arr061.svg' className='svg-icon-1' />
             </div>
           </div>
 
-    <form  className='form'>
+          <div className='modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15'>
+            <div className='text-center mb-13'>
+              <h1 className='mb-3'>Send Money</h1>
+
+              <div className='text-muted fw-bold fs-5'>
+                You are sending money through a third party MTO partner
+                {/* <a href='#' className='link-primary fw-bolder'>
+                  {' '}
+                  FAQ Page
+                </a> */}
+                .
+              </div>
+            </div>
+
+               <>
+                 <form  className='form'>
     
 <div className="mw-900px">
     {/* <!--begin::Input group--> */}
@@ -84,7 +91,17 @@ export const SendMoneyForm:FC = () => {
     <input type="text" className="form-control" placeholder="Percent to retain"/>
                     <span className="input-group-text">%</span>
                     </div>
-</div>
+                     </div>
+              
+                     <div className='separator d-flex flex-center mb-8'>
+              <label className="form-label">Comments</label>
+            </div>
+
+            <textarea
+              className='form-control form-control-solid mb-8'
+              rows={3}
+              placeholder='Type your comment here'
+            ></textarea>
 {/* <!--end::Input group--> */}
                 </div>
                 <div className='form-footer'>
@@ -108,10 +125,15 @@ export const SendMoneyForm:FC = () => {
         classname = "btn btn-primary"
                     ConfirmHandler={async () => await sendMoney()} />
                 </div>
-                </div>
+                   </div>
       </form>
-      </div>
-      </div>
-      </div>
-    )
+               </>
+
+          </div>
+        </div>
+         </div>
+    </div>
+  )
+
+               
 }
