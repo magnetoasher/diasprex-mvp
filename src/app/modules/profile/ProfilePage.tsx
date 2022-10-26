@@ -1,27 +1,26 @@
-import React from "react";
-import { Navigate, Route, Routes, Outlet } from "react-router-dom";
-import { PageLink, PageTitle } from "../../../_metronic/layout/core";
-import { Overview } from "./components/Overview";
-import { Campaigns } from "./components/Campaigns";
-import { Settings } from "./components/settings/Settings";
-import { UserProfileHeader } from "./UserProfileHeader";
-import { Account } from "./components/Account";
-import Billing from "./Billing";
+import React from 'react'
+import {Navigate, Route, Routes, Outlet} from 'react-router-dom'
+import {PageLink, PageTitle} from '../../../_metronic/layout/core'
+import {Overview} from './components/Overview'
+import {Settings} from './components/settings/Settings'
+import {ProfileHeader} from './ProfileHeader'
+import {Account} from './components/Account'
+import Billing from './Billing'
 
 const profileBreadCrumbs: Array<PageLink> = [
   {
-    title: "Profile",
-    path: "/crafted/profile/overview",
+    title: 'Profile',
+    path: '/crafted/profile/overview',
     isSeparator: false,
     isActive: false,
   },
   {
-    title: "",
-    path: "",
+    title: '',
+    path: '',
     isSeparator: true,
     isActive: false,
   },
-];
+]
 
 const ProfilePage: React.FC = () => {
   return (
@@ -29,13 +28,13 @@ const ProfilePage: React.FC = () => {
       <Route
         element={
           <>
-            <UserProfileHeader />
+            <ProfileHeader />
             <Outlet />
           </>
         }
       >
         <Route
-          path="overview"
+          path='overview'
           element={
             <>
               <PageTitle breadcrumbs={profileBreadCrumbs}>Overview</PageTitle>
@@ -43,17 +42,17 @@ const ProfilePage: React.FC = () => {
             </>
           }
         />
-        <Route
-          path="campaigns"
+        {/* <Route
+          path='campaigns'
           element={
             <>
               <PageTitle breadcrumbs={profileBreadCrumbs}>Campaigns</PageTitle>
               <Campaigns />
             </>
           }
-        />
+        /> */}
         <Route
-          path="billing"
+          path='billing'
           element={
             <>
               <PageTitle breadcrumbs={profileBreadCrumbs}>Billing</PageTitle>
@@ -62,7 +61,7 @@ const ProfilePage: React.FC = () => {
           }
         />
         <Route
-          path="settings"
+          path='settings'
           element={
             <>
               <PageTitle breadcrumbs={profileBreadCrumbs}>Settings</PageTitle>
@@ -71,7 +70,7 @@ const ProfilePage: React.FC = () => {
           }
         />
         <Route
-          path="account"
+          path='account'
           element={
             <>
               <PageTitle breadcrumbs={profileBreadCrumbs}>Account</PageTitle>
@@ -80,11 +79,10 @@ const ProfilePage: React.FC = () => {
           }
         />
 
-
-        <Route index element={<Navigate to="/profile/overview" />} />
+        <Route index element={<Navigate to='/profile/overview' />} />
       </Route>
     </Routes>
-  );
-};
+  )
+}
 
-export default ProfilePage;
+export default ProfilePage

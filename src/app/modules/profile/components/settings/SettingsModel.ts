@@ -9,12 +9,12 @@ export interface IProfileDetails {
   language: string
   timeZone: string
   currency: string
-  role:string
-  organization:string
-  oecd:string
-  address:string
-  profession:string
-  degree:string
+  role: string
+  organization: string
+  oecd: string
+  address: string
+  profession: string
+  degree: string
   communications: {
     email: boolean
     phone: boolean
@@ -77,7 +77,7 @@ export interface IDeactivateProfile {
 }
 
 export const profileDetailsInitValues: IProfileDetails = {
-  avatar: '/media/avatars/300-1.jpg',
+  avatar: '/media/avatars/diasprex/dxp-6.jpg',
   fName: 'Max',
   lName: 'Smith',
   company: 'Keenthemes',
@@ -87,12 +87,12 @@ export const profileDetailsInitValues: IProfileDetails = {
   language: '',
   timeZone: '',
   currency: '',
-  role:'',
-  organization:'',
-  oecd:'',
-  address:'1750 Gemsbok St',
-  profession:'',
-  degree:'',
+  role: '',
+  organization: '',
+  oecd: '',
+  address: '1750 Gemsbok St',
+  profession: '',
+  degree: '',
   communications: {
     email: false,
     phone: false,

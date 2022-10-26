@@ -1,13 +1,13 @@
 import {Navigate, Routes, Route, Outlet} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../_metronic/layout/core'
-import { UserProfileHeader } from "../profile/UserProfileHeader"
-import { SendMoneyFormWrapper } from './Components/SendMoneyFormWrapper'
-import { Summary } from './Components/Summary'
-import { RemittanceRetainer } from './Components/remittanceretainer'
-import { Preferences } from './Components/Preferences/Preferences'
+import {ProfileHeader} from '../profile/ProfileHeader'
+import {SendMoneyFormWrapper} from './Components/SendMoneyFormWrapper'
+import {Summary} from './Components/Summary'
+import {RemittanceRetainer} from './Components/remittanceretainer'
+import {Preferences} from './Components/Preferences/Preferences'
 import {Loans} from './Components/Loans/Loans'
 
-import { Statements } from './Components/Statements'
+import {Statements} from './Components/Statements'
 
 const remittanceBreadCrumbs: Array<PageLink> = [
   {
@@ -29,7 +29,7 @@ const RemittancePage = () => (
     <Route
       element={
         <>
-          <UserProfileHeader />
+          <ProfileHeader />
           <Outlet />
         </>
       }
@@ -61,7 +61,7 @@ const RemittancePage = () => (
           </>
         }
       />
-            <Route
+      <Route
         path='retainer'
         element={
           <>
@@ -70,7 +70,7 @@ const RemittancePage = () => (
           </>
         }
       />
-            <Route
+      <Route
         path='loans'
         element={
           <>
@@ -79,7 +79,7 @@ const RemittancePage = () => (
           </>
         }
       />
-            <Route
+      <Route
         path='statements'
         element={
           <>
