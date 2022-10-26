@@ -1,15 +1,15 @@
-import { lazy, FC, Suspense } from 'react'
-import { Route, Routes, Navigate } from 'react-router-dom'
-import { useOktaAuth } from "@okta/okta-react"
-import { MasterLayout } from '../../_metronic/layout/MasterLayout'
+import {lazy, FC, Suspense} from 'react'
+import {Route, Routes, Navigate} from 'react-router-dom'
+import {useOktaAuth} from '@okta/okta-react'
+import {MasterLayout} from '../../_metronic/layout/MasterLayout'
 import TopBarProgress from 'react-topbar-progress-indicator'
-import { DashboardWrapper } from '../pages/dashboard/DashboardWrapper'
-import { AdminDashboardWrapper } from '../modules/apps/admin-mgt-apps/dashboard/AdminDashboardWrapper'
-import { getCSSVariableValue } from '../../_metronic/assets/ts/_utils'
-import { SigninPage } from '../modules/signin/components/SigninPage'
-import { RegistrationStepsPage } from '../modules/auth/registration/RegistrationStepsPage'
-import { AuthPage } from '../modules/auth'
-import { ReferralsForm } from '../modules/profile/components/ReferralsForm'
+import {DashboardWrapper} from '../pages/dashboard/DashboardWrapper'
+import {AdminDashboardWrapper} from '../modules/apps/admin-mgt-apps/dashboard/AdminDashboardWrapper'
+import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
+import {SigninPage} from '../modules/signin/components/SigninPage'
+import {RegistrationStepsPage} from '../modules/auth/registration/RegistrationStepsPage'
+import {AuthPage} from '../modules/auth'
+import {ReferralsForm} from '../modules/profile/components/ReferralsForm'
 import CreateOpportunities from '../pages/dashboard/CreateOpportunities'
 import Proposals from '../pages/dashboard/Proposals'
 import MyOpportunity from '../pages/dashboard/MyOpportunity'
@@ -29,11 +29,12 @@ const PrivateRoutes = () => {
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
   const UsersPage = lazy(() => import('../modules/apps/admin-mgt-apps/user-management/UsersPage'))
   const OppsPage = lazy(() => import('../modules/apps/admin-mgt-apps/opp-management/OppsPage'))
-  const ProposalPage = lazy(() => import('../modules/apps/admin-mgt-apps/proposal-management/ProposalPage'))
- 
-  
+  const ProposalPage = lazy(
+    () => import('../modules/apps/admin-mgt-apps/proposal-management/ProposalPage')
+  )
+
   // const RemitPage = lazy(() => import('../modules/apps/admin-mgt-apps/remittance-management/RemitPage'))
-  const { authState } = useOktaAuth()
+  const {authState} = useOktaAuth()
 
   if (authState !== null) {
     if (authState.isAuthenticated) {
@@ -46,19 +47,19 @@ const PrivateRoutes = () => {
             {/* Pages */}
             <Route path='dashboard' element={<DashboardWrapper />} />
             <Route path='admindashboard' element={<AdminDashboardWrapper />} />
-            <Route path='builder' element={<BuilderPageWrapper />} />
+            {/* <Route path='builder' element={<BuilderPageWrapper />} /> */}
             <Route path='createopportunities' element={<CreateOpportunities />} />
             <Route path='proposals' element={<Proposals />} />
             <Route path='sponsor_proposals' element={<SponsorProposals />} />
             <Route path='my_opportunities' element={<MyOpportunity />} />
             <Route path='opportunities' element={<GeneralOpportunityCard />} />
             <Route path='send_proposals' element={<SendProposals />} />
-            <Route path="referrals" element={<ReferralsForm />} />
-            <Route path="view_opportunity" element={<ViewOpportunity />} />
-            <Route path="user_management/*" element={<UsersPage />} />
-            <Route path="opp_management/*" element={<OppsPage />} />
-            <Route path="prop_management/*" element={<ProposalPage />} />
-            <Route path="admin/*" element={<AdminSettings />} />
+            <Route path='referrals' element={<ReferralsForm />} />
+            <Route path='view_opportunity' element={<ViewOpportunity />} />
+            <Route path='user_management/*' element={<UsersPage />} />
+            <Route path='opp_management/*' element={<OppsPage />} />
+            <Route path='prop_management/*' element={<ProposalPage />} />
+            <Route path='admin/*' element={<AdminSettings />} />
             {/* <Route path="rr_management/*" element={<RemitPage />} /> */}
 
             {/* <Route path='chat' element={<ChatPage />}/> */}
@@ -97,14 +98,14 @@ const PrivateRoutes = () => {
               }
             />
 
-                    <Route
-          path='remittance/*'
-          element={
-            <SuspensedView>
-              <RemittancePage />
-            </SuspensedView>
-          }
-        />
+            <Route
+              path='remittance/*'
+              element={
+                <SuspensedView>
+                  <RemittancePage />
+                </SuspensedView>
+              }
+            />
             <Route
               path='chat/*'
               element={
@@ -142,7 +143,7 @@ const PrivateRoutes = () => {
   }
 }
 
-const SuspensedView: FC = ({ children }) => {
+const SuspensedView: FC = ({children}) => {
   const baseColor = getCSSVariableValue('--bs-primary')
   TopBarProgress.config({
     barColors: {
@@ -154,4 +155,4 @@ const SuspensedView: FC = ({ children }) => {
   return <Suspense fallback={<TopBarProgress />}>{children}</Suspense>
 }
 
-export { PrivateRoutes }
+export {PrivateRoutes}

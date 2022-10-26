@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {FC, useEffect, useRef, useState} from 'react'
+import {FC, useEffect, useRef, useState} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {Formik, Form, FormikValues, Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
