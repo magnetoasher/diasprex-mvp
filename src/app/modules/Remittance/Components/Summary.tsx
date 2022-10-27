@@ -2,11 +2,14 @@
 import {Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {
-  ChartsWidget1New,
+  ChartsWidget1,
   TablesWidget1,
-  ListsWidget5,
+  // ListsWidget5,
+  ListsWidget6,
   ChartsWidget3,
-} from '../../../../_metronic/partials/widgets'
+} from '../../../pages/dashboard/clientswidgets'
+
+import {ITransArrayModel} from './Preferences/PreferencesModel'
 
 export function Summary() {
   return (
@@ -136,7 +139,7 @@ export function Summary() {
 
       <div className='row gy-10 gx-xl-10'>
         <div className='col-xl-6'>
-          <ChartsWidget1New
+          <ChartsWidget1
             className='card-xxl-stretch mb-5 mb-xl-10'
             title='Recent Transactions'
             subtitle='Monthly remittance savings in the last six months'
@@ -154,10 +157,22 @@ export function Summary() {
 
       <div className='row g-5 g-xl-8'>
         <div className='col-xl-6'>
-          <ChartsWidget3 className='card-xl-stretch mb-xl-8' />
+          <ChartsWidget3
+            className='card-xl-stretch mb-xl-8'
+            title='Remittance Savings Trend'
+            subtitle='Average $100 per month'
+            freq='Month'
+            savings={[30, 40, 40, 90, 90, 70, 70]}
+            chartheight={350}
+            chartcategories={['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
+          />
         </div>
         <div className='col-xl-6'>
-          <ListsWidget5 className='card-xl-stretch mb-xl-8' />
+          <ListsWidget6
+            className='card-xl-stretch mb-xl-8'
+            title='Recent Remittance Transactions'
+            trans={ITransArrayModel}
+          />
         </div>
       </div>
     </>

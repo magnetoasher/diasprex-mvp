@@ -2,11 +2,13 @@ import {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
 import Opportunity from './Opportunity'
+import {ListsWidget6, ChartsWidget3} from '../dashboard/clientswidgets'
 import Oppurtunity from './Opportunity'
 import {Card, Row} from 'antd'
-import BillingHistory from './BillingHistory'
 import {EditText, EditTextarea} from 'react-edit-text'
 import 'react-edit-text/dist/index.css'
+import {ITransArrayModel} from '../../modules/Remittance/Components/Preferences/PreferencesModel'
+
 const NewDashboardPage = () => {
   var user = localStorage.getItem('userType')
   const fullUserType = localStorage.getItem('userTypeFull')
@@ -43,8 +45,6 @@ const NewDashboardPage = () => {
       src: 'https://loremflickr.com/g/320/242/things',
     },
   ])
-  const blankImg = toAbsoluteUrl('/media/svg/avatars/blank.svg')
-  const userAvatarImg = toAbsoluteUrl('/media/avatars/300-1.jpg')
 
   return (
     <div className='row d-flex flex-column-fluid g-0'>
@@ -327,11 +327,28 @@ const NewDashboardPage = () => {
                 </a>
               </div>
             </Card>
-            <Card className='shadow-sm mb-3'>
-              <div className=' overflow-auto mt-5' style={{height: '345px'}}>
-                <BillingHistory />
+            <div className=' card d-flex gb-gray-200 shadow-sm mb-3'>
+              <div className='row d-flex mt-5 g-xl-5'>
+                <div className='col-xl-6 d-flex justify-content-center '>
+                  <ChartsWidget3
+                    className='card-xl-stretch mb-xl-8'
+                    title='Remittance Savings Trend'
+                    subtitle='Average $100 per month'
+                    freq='Month'
+                    savings={[30, 40, 40, 90, 90, 70, 70]}
+                    chartheight={350}
+                    chartcategories={['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug']}
+                  />
+                </div>
+                <div className='col-xl-6 d-flex justify-content-center'>
+                  <ListsWidget6
+                    className='card-xl-stretch mb-xl-8'
+                    title='Recent Remittance Transactions'
+                    trans={ITransArrayModel}
+                  />
+                </div>
               </div>
-            </Card>
+            </div>
           </>
         ) : (
           <>
