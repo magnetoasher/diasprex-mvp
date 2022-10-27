@@ -1,30 +1,27 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState} from 'react'
 import {KTSVG} from '../../../../../../_metronic/helpers'
-import {IDeactivateRemittance, deactivateRemittance} from '../PreferencesModel'
+import {IDeactivateProfile, deactivateProfile} from '../SettingsModel'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 
-const deactivateAccountSchema = Yup.object().shape({
-  confirm: Yup.boolean().oneOf(
-    [true],
-    'Please check the box to deactivate your remiitance account'
-  ),
+const deactivateProfileSchema = Yup.object().shape({
+  confirm: Yup.boolean().oneOf([true], 'Please check the box to deactivate your profile'),
 })
 
-const DeactivateAccount: React.FC = () => {
+const DeactivateProfile: React.FC = () => {
   const [loading, setLoading] = useState(false)
-  const formik = useFormik<IDeactivateRemittance>({
+  const formik = useFormik<IDeactivateProfile>({
     initialValues: {
-      ...deactivateRemittance,
+      ...deactivateProfile,
     },
-    validationSchema: deactivateAccountSchema,
+    validationSchema: deactivateProfileSchema,
     onSubmit: () => {
       setLoading(true)
       setTimeout(() => {
         setLoading(false)
       }, 1000)
-      alert('Thank you. We have received your request to close your remittance account')
+      alert('Profile has been successfully deleted!')
     },
   })
 
@@ -34,17 +31,17 @@ const DeactivateAccount: React.FC = () => {
         className='card-header border-0 cursor-pointer'
         role='button'
         data-bs-toggle='collapse'
-        data-bs-target='#kt_account_deactivate'
+        data-bs-target='#kt_profile_deactivate'
         aria-expanded='true'
-        aria-controls='kt_account_deactivate'
+        aria-controls='kt_profile_deactivate'
       >
         <div className='card-title m-0'>
-          <h3 className='fw-bolder m-0'>Cancel Remittance Account</h3>
+          <h3 className='fw-bolder m-0'>Deactivate Profile</h3>
         </div>
       </div>
 
-      <div id='kt_account_deactivate' className='collapse show'>
-        <form onSubmit={formik.handleSubmit} id='kt_account_deactivate_form' className='form'>
+      <div id='kt_profile_deactivate' className='collapse show'>
+        <form onSubmit={formik.handleSubmit} id='kt_profile_deactivate_form' className='form'>
           <div className='card-body border-top p-9'>
             <div className='notice d-flex bg-light-warning rounded border-warning border border-dashed mb-9 p-6'>
               <KTSVG
@@ -54,12 +51,10 @@ const DeactivateAccount: React.FC = () => {
 
               <div className='d-flex flex-stack flex-grow-1'>
                 <div className='fw-bold'>
-                  <h4 className='text-gray-800 fw-bolder'>
-                    You Are Deactivating Your Remittance Account
-                  </h4>
+                  <h4 className='text-gray-800 fw-bolder'>You Are Deactivating Your Profile</h4>
                   <div className='fs-6 text-gray-600'>
-                    For extra security, this requires you to contact the admin for any future
-                    remittance-related requests
+                    For extra security, this requires you to confirm your email or phone number when
+                    you reset yousignr password.
                     <br />
                     <a className='fw-bolder' href='#'>
                       Learn more
@@ -76,7 +71,7 @@ const DeactivateAccount: React.FC = () => {
                 {...formik.getFieldProps('confirm')}
               />
               <label className='form-check-label fw-bold ps-2 fs-6' htmlFor='deactivate'>
-                I confirm my account deactivation
+                I confirm my profile deactivation
               </label>
             </div>
             {formik.touched.confirm && formik.errors.confirm && (
@@ -88,11 +83,11 @@ const DeactivateAccount: React.FC = () => {
 
           <div className='card-footer d-flex justify-content-end py-6 px-9'>
             <button
-              id='kt_account_deactivate_account_submit'
+              id='kt_profile_deactivate_profile_submit'
               type='submit'
               className='btn btn-danger fw-bold'
             >
-              {!loading && 'Cancel Remittance Account'}
+              {!loading && 'Deactivate Profile'}
               {loading && (
                 <span className='indicator-progress' style={{display: 'block'}}>
                   Please wait...{' '}
@@ -107,4 +102,4 @@ const DeactivateAccount: React.FC = () => {
   )
 }
 
-export {DeactivateAccount}
+export {DeactivateProfile}

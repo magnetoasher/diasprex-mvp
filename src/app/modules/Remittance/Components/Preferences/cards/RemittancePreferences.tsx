@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {toAbsoluteUrl} from '../../../../../../_metronic/helpers'
-import {IProfileDetails, profileDetailsInitValues as initialValues} from '../PreferencesModel'
+import {IRemittanceDetails, remittanceDetailsInitValues as initialValues} from '../PreferencesModel'
 import * as Yup from 'yup'
-import { useFormik } from 'formik'
-import { Country } from '../../../../../../_metronic/partials/content/countryselection/countryselection'
+import {useFormik} from 'formik'
+import {Country} from '../../../../../../_metronic/partials/content/countryselection/countryselection'
 
 const preferencesSchema = Yup.object().shape({
   fName: Yup.string().required('First name is required'),
@@ -17,14 +17,14 @@ const preferencesSchema = Yup.object().shape({
 })
 
 const RemittancePreferences: React.FC = () => {
-  const [data, setData] = useState<IProfileDetails>(initialValues)
-  const updateData = (fieldsToUpdate: Partial<IProfileDetails>): void => {
+  const [data, setData] = useState<IRemittanceDetails>(initialValues)
+  const updateData = (fieldsToUpdate: Partial<IRemittanceDetails>): void => {
     const updatedData = Object.assign(data, fieldsToUpdate)
     setData(updatedData)
   }
 
   const [loading, setLoading] = useState(false)
-  const formik = useFormik<IProfileDetails>({
+  const formik = useFormik<IRemittanceDetails>({
     initialValues,
     validationSchema: preferencesSchema,
     onSubmit: (values) => {
@@ -32,7 +32,7 @@ const RemittancePreferences: React.FC = () => {
       setTimeout(() => {
         values.communications.email = data.communications.email
         values.communications.phone = data.communications.phone
-        values.allowMarketing = data.allowMarketing
+        values.autoretain = data.autoretain
         const updatedData = Object.assign(data, values)
         setData(updatedData)
         setLoading(false)
@@ -54,14 +54,14 @@ const RemittancePreferences: React.FC = () => {
           <h3 className='fw-bolder m-0'>Remittance Preferences</h3>
         </div>
       </div>
-            
+
       <div id='kt_account_profile_details' className='collapse show'>
         <form onSubmit={formik.handleSubmit} noValidate className='form'>
           <div className='card-body border-top p-9'>
             <div className='row mb-6'>
-             <div className='card-title m-0'>
-          <h3 className='fw-bolder m-0'>Sender's Information</h3>
-            </div>
+              <div className='card-title m-0'>
+                <h3 className='fw-bolder m-0'>Sender's Information</h3>
+              </div>
             </div>
 
             <div className='row mb-6'>
@@ -122,17 +122,17 @@ const RemittancePreferences: React.FC = () => {
                 )}
               </div>
             </div>
-        <div className='row mb-6'>
+            <div className='row mb-6'>
               <label className='col-lg-4 col-form-label fw-bold fs-6'>
                 <span className='required'>Sender's Country</span>
               </label>
-            <div className='col-lg-8 fv-row'>
-                 {/* <label className="form-label">Select your country of residence</label> */}
+              <div className='col-lg-8 fv-row'>
+                {/* <label className="form-label">Select your country of residence</label> */}
                 <select
                   className='form-select form-select-solid form-select-lg fw-bold'
                   {...formik.getFieldProps('country')}
                 >
-                          <Country />
+                  <Country />
                 </select>
                 {formik.touched.country && formik.errors.country && (
                   <div className='fv-plugins-message-container'>
@@ -141,13 +141,12 @@ const RemittancePreferences: React.FC = () => {
                 )}
               </div>
             </div>
-            
+
             <div className='row mb-6 mt-6 content-align-center'>
-             <div className='card-title m-0'>
-          <h3 className='fw-bolder m-0'>Preffered Recipient's Information</h3>
+              <div className='card-title m-0'>
+                <h3 className='fw-bolder m-0'>Preffered Recipient's Information</h3>
+              </div>
             </div>
-            </div>
-     
 
             <div className='row mb-6'>
               <label className='col-lg-4 col-form-label fw-bold fs-6'>
@@ -157,16 +156,15 @@ const RemittancePreferences: React.FC = () => {
               <div className='col-lg-8 fv-row'>
                 <div className='row'>
                   <div className='col-lg-6 fv-row'>
-
                     <input
                       type='text'
                       className='form-control form-control-lg form-control-solid mb-3 mb-lg-0'
                       placeholder=" Recipient's first name"
                       {...formik.getFieldProps('rfName')}
                     />
-                    {formik.touched.fName && formik.errors.fName && (
+                    {formik.touched.fNamerecpt && formik.errors.fNamerecpt && (
                       <div className='fv-plugins-message-container'>
-                        <div className='fv-help-block'>{formik.errors.fName}</div>
+                        <div className='fv-help-block'>{formik.errors.fNamerecpt}</div>
                       </div>
                     )}
                   </div>
@@ -179,9 +177,9 @@ const RemittancePreferences: React.FC = () => {
                       placeholder=" Recipient's last name"
                       {...formik.getFieldProps('rlName')}
                     />
-                    {formik.touched.lName && formik.errors.lName && (
+                    {formik.touched.lNamerecpt && formik.errors.fNamerecpt && (
                       <div className='fv-plugins-message-container'>
-                        <div className='fv-help-block'>{formik.errors.lName}</div>
+                        <div className='fv-help-block'>{formik.errors.lNamerecpt}</div>
                       </div>
                     )}
                   </div>
@@ -199,18 +197,16 @@ const RemittancePreferences: React.FC = () => {
                   className='form-select form-select-solid form-select-lg fw-bold'
                   {...formik.getFieldProps('country')}
                 >
-                          <Country />
+                  <Country />
                 </select>
-                {formik.touched.country && formik.errors.country && (
+                {formik.touched.recipientctr && formik.errors.recipientctr && (
                   <div className='fv-plugins-message-container'>
-                    <div className='fv-help-block'>{formik.errors.country}</div>
+                    <div className='fv-help-block'>{formik.errors.recipientctr}</div>
                   </div>
                 )}
-                <div className='form-text'>
-                  Please select your country of residence.
-                </div>
+                <div className='form-text'>Please select recipient's country.</div>
               </div>
-              </div>
+            </div>
 
             <div className='row mb-6'>
               <label className='col-lg-4 col-form-label required fw-bold fs-6'>Currency</label>
@@ -293,20 +289,38 @@ const RemittancePreferences: React.FC = () => {
                     className='form-check-input w-45px h-30px'
                     type='checkbox'
                     id='autoretainer'
-                    defaultChecked={data.allowMarketing}
+                    defaultChecked={data.autoretain}
                     onChange={() => {
-                      updateData({allowMarketing: !data.allowMarketing})
+                      updateData({autoretain: !data.autoretain})
                     }}
                   />
                   <label className='form-check-label'></label>
                 </div>
               </div>
-              <div className='row mb-0'>
-            <label className='col-lg-4 col-form-label fw-bold fs-6'>Preferred MTO</label>
-            </div>
+              <div className='row mb-6'>
+                <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                  Preferred MTO
+                </label>
+
+                <div className='col-lg-8 fv-row'>
+                  <select
+                    className='form-select form-select-solid form-select-lg'
+                    {...formik.getFieldProps('prefmto')}
+                  >
+                    <option value=''>Select your preferred MTO..</option>
+                    <option value='USD'>Money Gram</option>
+                    <option value='GBP'>Nala Pay</option>
+                    <option value='AUD'>Remitly</option>
+                  </select>
+                  {formik.touched.currency && formik.errors.currency && (
+                    <div className='fv-plugins-message-container'>
+                      <div className='fv-help-block'>{formik.errors.currency}</div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-
 
           <div className='card-footer d-flex justify-content-end py-6 px-9'>
             <button type='submit' className='btn btn-primary' disabled={loading}>

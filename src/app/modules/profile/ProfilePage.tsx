@@ -69,7 +69,7 @@ const ProfilePage: React.FC = () => {
             </>
           }
         />
-        <Route
+        {/* <Route
           path='account'
           element={
             <>
@@ -77,7 +77,7 @@ const ProfilePage: React.FC = () => {
               <Account />
             </>
           }
-        />
+        /> */}
 
         <Route index element={<Navigate to='/profile/overview' />} />
       </Route>

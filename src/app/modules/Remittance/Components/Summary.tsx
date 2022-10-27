@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {Link} from 'react-router-dom'
+import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {
   ChartsWidget1New,
   TablesWidget1,
   ListsWidget5,
-  ChartsWidget3
+  ChartsWidget3,
 } from '../../../../_metronic/partials/widgets'
 
 export function Summary() {
@@ -22,7 +23,7 @@ export function Summary() {
         </div>
 
         <div className='card-body p-9'>
-          <div className='row mb-7'>
+          <div className='row mb-7 d-flex align-items-center'>
             <label className='col-lg-4 fw-bold text-muted'>Full Name</label>
 
             <div className='col-lg-8'>
@@ -30,15 +31,7 @@ export function Summary() {
             </div>
           </div>
 
-          <div className='row mb-7'>
-            <label className='col-lg-4 fw-bold text-muted'>Country</label>
-
-            <div className='col-lg-8 fv-row'>
-              <span className='fw-bold fs-6'>United States</span>
-            </div>
-          </div>
-
-          <div className='row mb-7'>
+          <div className='row mb-7 d-flex align-items-center'>
             <label className='col-lg-4 fw-bold text-muted'>
               Primary Phone
               <i
@@ -55,7 +48,15 @@ export function Summary() {
             </div>
           </div>
 
-          <div className='row mb-7'>
+          <div className='row mb-7 d-flex align-items-center'>
+            <label className='col-lg-4 fw-bold text-muted'>Country</label>
+
+            <div className='col-lg-8 fv-row'>
+              <span className='fw-bold fs-6'>United States</span>
+            </div>
+          </div>
+
+          <div className='row mb-7 d-flex align-items-center'>
             <label className='col-lg-4 fw-bold text-muted'>Primary Recipient</label>
 
             <div className='col-lg-8'>
@@ -66,9 +67,9 @@ export function Summary() {
             </div>
           </div>
 
-          <div className='row mb-7'>
+          <div className='row mb-7 d-flex align-items-center'>
             <label className='col-lg-4 fw-bold text-muted'>
-              Default recipient country
+              Recipient's country
               <i
                 className='fas fa-exclamation-circle ms-1 fs-7'
                 data-bs-toggle='tooltip'
@@ -81,7 +82,22 @@ export function Summary() {
             </div>
           </div>
 
-          <div className='row mb-7'>
+          <div className='row mb-7 d-flex align-items-center'>
+            <label className='col-lg-4 fw-bold text-muted'>
+              Currency
+              <i
+                className='fas fa-exclamation-circle ms-1 fs-7'
+                data-bs-toggle='tooltip'
+                title='Country of origination'
+              ></i>
+            </label>
+
+            <div className='col-lg-8'>
+              <span className='fw-bolder fs-6 text-dark'>USD - US Dollar</span>
+            </div>
+          </div>
+
+          <div className='row mb-7 d-flex align-items-center'>
             <label className='col-lg-4 fw-bold text-muted'>Communication</label>
 
             <div className='col-lg-8'>
@@ -89,25 +105,32 @@ export function Summary() {
             </div>
           </div>
 
-          <div className='row mb-10'>
+          <div className='row mb-7 d-flex align-items-center'>
             <label className='col-lg-4 fw-bold text-muted'>Auto Retainer</label>
 
             <div className='col-lg-8'>
-              <span className='fw-bold fs-6'>Enabled</span>
+              <span className='badge badge-success fw-bold fs-6'>Enabled</span>
             </div>
           </div>
 
-           <div className='row mb-7'>
+          <div className='row mb-7 d-flex align-items-center'>
             <label className='col-lg-4 fw-bold text-muted'>Preferred MTO</label>
 
             <div className='col-lg-8'>
-              <a href='#' className='fw-bold fs-6 me-2 text-dark text-hover-primary'>
-                Money Gram
-              </a>
-              <span className='badge badge-success'>Verified</span>
+              <div className='border border-2 border-gray-300 border-hover mw-125px'>
+                <div className='input-group align-items-center'>
+                  <span className='input-group-text'>
+                    {' '}
+                    <img
+                      src={toAbsoluteUrl('/media/logos/moneygram-logo.png')}
+                      alt='mto2_logo'
+                      className='mw-100'
+                    />
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -119,11 +142,9 @@ export function Summary() {
             subtitle='Monthly remittance savings in the last six months'
             data={{
               netprofit: [100, 55, 57, 56, 61, 58],
-              revenue: [76, 85, 101, 98, 87, 105]
-            }
-              
-            }
-             />
+              revenue: [76, 85, 101, 98, 87, 105],
+            }}
+          />
         </div>
 
         <div className='col-xl-6'>
@@ -131,14 +152,14 @@ export function Summary() {
         </div>
       </div>
 
-     <div className='row g-5 g-xl-8'>
+      <div className='row g-5 g-xl-8'>
         <div className='col-xl-6'>
           <ChartsWidget3 className='card-xl-stretch mb-xl-8' />
         </div>
         <div className='col-xl-6'>
           <ListsWidget5 className='card-xl-stretch mb-xl-8' />
         </div>
-        </div>
+      </div>
     </>
   )
 }

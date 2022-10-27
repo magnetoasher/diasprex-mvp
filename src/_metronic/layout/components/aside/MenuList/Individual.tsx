@@ -78,7 +78,7 @@ export function Individual() {
         <AsideMenuItem to='profile/overview' title='Overview' hasBullet={true} />
         <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
         <AsideMenuItem to='profile/billing' title='Billing' hasBullet={true} />
-        <AsideMenuItem to='profile/account' title='Account' hasBullet={true} />
+        {/* <AsideMenuItem to='profile/account' title='Account' hasBullet={true} /> */}
       </AsideMenuItemWithSub>
 
       <AsideMenuItemWithSub

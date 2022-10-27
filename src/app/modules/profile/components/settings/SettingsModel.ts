@@ -8,7 +8,6 @@ export interface IProfileDetails {
   country: string
   language: string
   timeZone: string
-  currency: string
   role: string
   organization: string
   oecd: string
@@ -20,6 +19,13 @@ export interface IProfileDetails {
     phone: boolean
   }
   allowMarketing: boolean
+  fNamerecpt?: string
+  lNamerecpt?: string
+  recipientctr?: string
+  currency?: string
+  retainerstatus?: boolean
+  autoretain?: boolean
+  prefmto?: string
 }
 
 export interface IUpdateEmail {
@@ -86,7 +92,6 @@ export const profileDetailsInitValues: IProfileDetails = {
   country: 'South Africa',
   language: '',
   timeZone: '',
-  currency: '',
   role: '',
   organization: '',
   oecd: '',

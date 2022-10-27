@@ -139,7 +139,7 @@ const ProfileHeader: React.FC = () => {
         </div>
 
         {location.pathname.includes('remittance') && (
-          <div className='d-flex overflow-auto bg-light h-55px'>
+          <div className='d-flex overflow-auto bg-light h-55px px-10'>
             <ul className='nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap'>
               <li className='nav-item'>
                 <Link
@@ -212,7 +212,7 @@ const ProfileHeader: React.FC = () => {
         )}
 
         {location.pathname.includes('profile') && (
-          <div className='d-flex overflow-auto bg-light h-55px'>
+          <div className='d-flex overflow-auto bg-light h-55px px-10'>
             <ul className='nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap'>
               <li className='nav-item'>
                 <Link
@@ -252,7 +252,7 @@ const ProfileHeader: React.FC = () => {
                 </li>
               )}
 
-              <li className='nav-item'>
+              {/* <li className='nav-item'>
                 <Link
                   className={
                     `nav-link text-active-primary me-6 ` +
@@ -262,7 +262,7 @@ const ProfileHeader: React.FC = () => {
                 >
                   Account
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
         )}

@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
 import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
-import {IProfileDetails, profileDetailsInitValues as initialValues} from '../Preferences/PreferencesModel'
+import {
+  IRemittanceDetails,
+  remittanceDetailsInitValues as initialValues,
+} from '../Preferences/PreferencesModel'
 import * as Yup from 'yup'
-import { useFormik } from 'formik'
-import { Country } from '../../../../../_metronic/partials/content/countryselection/countryselection'
+import {useFormik} from 'formik'
+import {Country} from '../../../../../_metronic/partials/content/countryselection/countryselection'
 
 const loanrequestSchema = Yup.object().shape({
   fName: Yup.string().required('First name is required'),
@@ -11,21 +14,21 @@ const loanrequestSchema = Yup.object().shape({
   address: Yup.string().required('Address is required'),
   contactPhone: Yup.string().required('Contact phone is required'),
   companySite: Yup.string().required('Company site is required'),
-  country: Yup.string().required("Country is required"),
-  state: Yup.string().required("State is required"),
+  country: Yup.string().required('Country is required'),
+  state: Yup.string().required('State is required'),
   rcountry: Yup.string().required("Reciepient's country is required"),
   currency: Yup.string().required('Currency is required'),
 })
 
 export const LoanRequest: React.FC = () => {
-  const [data, setData] = useState<IProfileDetails>(initialValues)
-  const updateData = (fieldsToUpdate: Partial<IProfileDetails>): void => {
+  const [data, setData] = useState<IRemittanceDetails>(initialValues)
+  const updateData = (fieldsToUpdate: Partial<IRemittanceDetails>): void => {
     const updatedData = Object.assign(data, fieldsToUpdate)
     setData(updatedData)
   }
 
   const [loading, setLoading] = useState(false)
-  const formik = useFormik<IProfileDetails>({
+  const formik = useFormik<IRemittanceDetails>({
     initialValues,
     validationSchema: loanrequestSchema,
     onSubmit: (values) => {
@@ -55,17 +58,20 @@ export const LoanRequest: React.FC = () => {
           <h3 className='fw-bolder m-0'>Request a Loan Application</h3>
         </div>
       </div>
-            
+
       <div id='kt_request_loan_form' className='collapse show'>
         <form onSubmit={formik.handleSubmit} noValidate className='form'>
           <div className='card-body border-top p-9'>
             <div className='row mb-6'>
               <div className='card-title m-0'>
-          <h3 className='fw-bolder mb-6 text-muted'>Please Note: This form is to request for loan application. Not for loan determining loan eligibility </h3>
-            </div>
-             <div className='card-title m-0'>
-          <h3 className='fw-bolder m-0'>Borrowers Information</h3>
-            </div>
+                <h3 className='fw-bolder mb-6 text-muted'>
+                  Please Note: This form is to request for loan application. Not for loan
+                  determining loan eligibility{' '}
+                </h3>
+              </div>
+              <div className='card-title m-0'>
+                <h3 className='fw-bolder m-0'>Borrowers Information</h3>
+              </div>
             </div>
 
             <div className='row mb-6'>
@@ -105,10 +111,10 @@ export const LoanRequest: React.FC = () => {
                 </div>
               </div>
             </div>
-                        <div className='row mb-6 mt-6 content-align-center'>
-             <div className='card-title m-0'>
-          <h3 className='fw-bolder m-0'>Address</h3>
-            </div>
+            <div className='row mb-6 mt-6 content-align-center'>
+              <div className='card-title m-0'>
+                <h3 className='fw-bolder m-0'>Address</h3>
+              </div>
             </div>
 
             <div className='row mb-6 mt-6'>
@@ -130,9 +136,8 @@ export const LoanRequest: React.FC = () => {
                   </div>
                 )}
               </div>
-
             </div>
-             <div className='row mb-6 mt-6'>
+            <div className='row mb-6 mt-6'>
               <label className='col-lg-4 col-form-label fw-bold fs-6'>
                 <span className='required'>City</span>
               </label>
@@ -152,7 +157,7 @@ export const LoanRequest: React.FC = () => {
               </div>
             </div>
 
-              <div className='row mb-6 mt-6'>
+            <div className='row mb-6 mt-6'>
               <label className='col-lg-4 col-form-label fw-bold fs-6'>
                 <span className='required'>Zip Code/Postal Code</span>
               </label>
@@ -171,17 +176,17 @@ export const LoanRequest: React.FC = () => {
                 )}
               </div>
             </div>
-             
-        <div className='row mb-6'>
+
+            <div className='row mb-6'>
               <label className='col-lg-4 col-form-label fw-bold fs-6'>
                 <span className='required'>Country</span>
               </label>
-            <div className='col-lg-8 fv-row'>
-                                <select
+              <div className='col-lg-8 fv-row'>
+                <select
                   className='form-select form-select-solid form-select-lg fw-bold'
                   {...formik.getFieldProps('country')}
                 >
-                          <Country />
+                  <Country />
                 </select>
                 {formik.touched.country && formik.errors.country && (
                   <div className='fv-plugins-message-container'>
@@ -191,17 +196,16 @@ export const LoanRequest: React.FC = () => {
               </div>
             </div>
 
-              <div className='row mb-6'>
+            <div className='row mb-6'>
               <label className='col-lg-4 col-form-label fw-bold fs-6'>
                 <span className='required'>State</span>
               </label>
-            <div className='col-lg-8 fv-row'>
-                
+              <div className='col-lg-8 fv-row'>
                 <select
                   className='form-select form-select-solid form-select-lg fw-bold'
                   {...formik.getFieldProps('state')}
                 >
-                          <Country />
+                  <Country />
                 </select>
                 {formik.touched.country && formik.errors.country && (
                   <div className='fv-plugins-message-container'>
@@ -211,7 +215,7 @@ export const LoanRequest: React.FC = () => {
               </div>
             </div>
 
-             <div className='row mb-6 mt-6'>
+            <div className='row mb-6 mt-6'>
               <label className='col-lg-4 col-form-label fw-bold fs-6'>
                 <span className='required'>Primary Phone</span>
               </label>
@@ -250,11 +254,7 @@ export const LoanRequest: React.FC = () => {
                 )}
               </div>
             </div>
-
           </div>
-
-
-
 
           <div className='card-footer d-flex justify-content-end py-6 px-9'>
             <button type='reset' className='btn btn-light me-2' disabled={loading}>
@@ -266,7 +266,6 @@ export const LoanRequest: React.FC = () => {
                 </span>
               )}
             </button>
-
 
             <button type='submit' className='btn btn-primary' disabled={loading}>
               {!loading && 'Submit'}
