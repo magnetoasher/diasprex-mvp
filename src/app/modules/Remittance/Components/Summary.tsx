@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {remittanceDetailsInitValues} from './Preferences/PreferencesModel'
 import {
   ChartsWidget1,
   TablesWidget1,
@@ -12,6 +13,8 @@ import {
 import {ITransArrayModel} from './Preferences/PreferencesModel'
 
 export function Summary() {
+  const SummaryData = remittanceDetailsInitValues
+
   return (
     <>
       <div className='card mb-5 mb-xl-10' id='kt_profile_details_view'>
@@ -30,7 +33,9 @@ export function Summary() {
             <label className='col-lg-4 fw-bold text-muted'>Full Name</label>
 
             <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-dark'>Max Smith</span>
+              <span className='fw-bolder fs-6 text-dark'>
+                {SummaryData.fName} {SummaryData.mInitial}. {SummaryData.lName}
+              </span>
             </div>
           </div>
 
@@ -45,7 +50,7 @@ export function Summary() {
             </label>
 
             <div className='col-lg-8 d-flex align-items-center'>
-              <span className='fw-bolder fs-6 me-2'>+1 276 454 935</span>
+              <span className='fw-bolder fs-6 me-2'>{SummaryData.contactPhone}</span>
 
               <span className='badge badge-success'>Verified</span>
             </div>
@@ -55,7 +60,7 @@ export function Summary() {
             <label className='col-lg-4 fw-bold text-muted'>Country</label>
 
             <div className='col-lg-8 fv-row'>
-              <span className='fw-bold fs-6'>United States</span>
+              <span className='fw-bold fs-6'>{SummaryData.country}</span>
             </div>
           </div>
 
@@ -64,7 +69,7 @@ export function Summary() {
 
             <div className='col-lg-8'>
               <a href='#' className='fw-bold fs-6 me-2 text-dark text-hover-primary'>
-                Adebolu Olaniyi
+                {SummaryData.fNamerecpt} {SummaryData.lNamerecpt}
               </a>
               <span className='badge badge-success'>Verified</span>
             </div>
@@ -81,7 +86,7 @@ export function Summary() {
             </label>
 
             <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-dark'>Nigeria</span>
+              <span className='fw-bolder fs-6 text-dark'>{SummaryData.recipientctr}</span>
             </div>
           </div>
 
@@ -96,7 +101,7 @@ export function Summary() {
             </label>
 
             <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-dark'>USD - US Dollar</span>
+              <span className='fw-bolder fs-6 text-dark'>{SummaryData.currency}</span>
             </div>
           </div>
 
@@ -104,7 +109,10 @@ export function Summary() {
             <label className='col-lg-4 fw-bold text-muted'>Communication</label>
 
             <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-dark'>Email, Phone</span>
+              <span className='fw-bolder fs-6 text-dark'>
+                {SummaryData.communications.email && 'Email'}
+                {SummaryData.communications.phone && 'Phone'}
+              </span>
             </div>
           </div>
 
@@ -112,7 +120,9 @@ export function Summary() {
             <label className='col-lg-4 fw-bold text-muted'>Auto Retainer</label>
 
             <div className='col-lg-8'>
-              <span className='badge badge-success fw-bold fs-6'>Enabled</span>
+              <span className='badge badge-success fw-bold fs-6'>
+                {SummaryData.autoretain ? 'Enabled' : 'Disabled'}
+              </span>
             </div>
           </div>
 

@@ -10,11 +10,11 @@ type Props = {
 
 export const ListWidgetTimeLine: FC<Props> = (props: Props) => {
   return (
-    <div>
-      <div className='timeline-item mb-5'>
+    <div className='d-flex text-center'>
+      <div className='timeline-item text-center'>
         {/* begin::Label */}
 
-        <div className='timeline-label fw-bolder text-gray-800 fs-6'>{props.tDate}</div>
+        <div className='timeline-label fw-bolder text-gray-800 fs-8'>{props.tDate}</div>
 
         {/* end::Label */}
         {/* begin::Badge */}

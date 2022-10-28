@@ -6,7 +6,7 @@ import {
 } from '../Preferences/PreferencesModel'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
-import {Country} from '../../../../../_metronic/partials/content/countryselection/countryselection'
+import {CountryList} from '../../../../../_metronic/partials/content/selectionlists'
 
 const loanrequestSchema = Yup.object().shape({
   fName: Yup.string().required('First name is required'),
@@ -186,7 +186,7 @@ export const LoanRequest: React.FC = () => {
                   className='form-select form-select-solid form-select-lg fw-bold'
                   {...formik.getFieldProps('country')}
                 >
-                  <Country />
+                  <CountryList />
                 </select>
                 {formik.touched.country && formik.errors.country && (
                   <div className='fv-plugins-message-container'>
@@ -205,7 +205,7 @@ export const LoanRequest: React.FC = () => {
                   className='form-select form-select-solid form-select-lg fw-bold'
                   {...formik.getFieldProps('state')}
                 >
-                  <Country />
+                  <CountryList />
                 </select>
                 {formik.touched.country && formik.errors.country && (
                   <div className='fv-plugins-message-container'>

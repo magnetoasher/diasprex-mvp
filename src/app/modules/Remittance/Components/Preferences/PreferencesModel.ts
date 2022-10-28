@@ -4,13 +4,16 @@ import {
 } from '../../../profile/components/settings/SettingsModel'
 
 export interface IRemittanceDetails extends IProfileDetails {
-  fNamerecpt: string
-  lNamerecpt: string
-  recipientctr: string
-  currency: string
-  retainerstatus: boolean
-  autoretain: boolean
-  prefmto: string
+  fNamerecpt?: string
+  lNamerecpt?: string
+  recipientctr?: string
+  currency?: string
+  retainerstatus?: boolean
+  autoretain?: boolean
+  prefmto?: string
+}
+export interface RemittanceRetainerAccount extends IRemittanceDetails {
+  lTrans: string
 }
 
 export const remittanceDetailsInitValues: IRemittanceDetails = {
@@ -32,44 +35,16 @@ export const deactivateRemittance: IDeactivateRemittance = {
   confirm: false,
 }
 
-export interface ITransModel {
-  tDate: string[]
-  tType: string[]
-  tAmount: number[]
-}
-
-export const RemittanceTransModel: ITransModel = {
-  tDate: [
-    '02 May 2022',
-    '09 May 2022',
-    '15 May 2022',
-    '03 June 2022',
-    '22 June 2022',
-    '29 June 2022',
-    '15 Aug 2022',
-    '03 Sept 2022',
-  ],
-  tType: [
-    'Money transfer to Nigeria',
-    'Add funds to RR',
-    'Remittance retainer',
-    'Money transfer to Ghana',
-    'Money transfer Nigeria',
-    'Fund withdrawal',
-    'Add funds to RR',
-    'Adds funds to RR',
-  ],
-  tAmount: [45.23, 100.0, 340.5, 45.01, 100.0, 467.65, 35.0, 500.01],
-}
-
-export interface ITransModel2 {
+export interface IRemittanceTransModel {
   transDate: string
   transType: string
   transAmount: number
   transdescr: string
+  totalRetainer?: string
+  lastRetainer?: string
 }
 
-export const ITransArrayModel: ITransModel2[] = [
+export const ITransArrayModel: IRemittanceTransModel[] = [
   {
     transDate: '02 May 2022',
     transType: 'transfer',

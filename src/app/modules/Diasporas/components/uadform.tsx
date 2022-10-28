@@ -1,6 +1,6 @@
 import {Input, Form} from 'antd'
 import {KTSVG} from '../../../../_metronic/helpers'
-import {Country} from '../../../../_metronic/partials/content/countryselection/countryselection'
+import {CountryList} from '../../../../_metronic/partials/content/selectionlists'
 
 export const UadForm = () => {
   const handleSubmit = () => {}
@@ -88,7 +88,7 @@ export const UadForm = () => {
                       Please select your country of residence
                     </label>
                     <select className='form-select form-select-white' aria-label='country'>
-                      <Country />
+                      <CountryList />
                     </select>
                   </div>
 
@@ -97,7 +97,7 @@ export const UadForm = () => {
                       Please select your country of origin
                     </label>
                     <select className='form-select form-select-white' aria-label='country'>
-                      <Country />
+                      <CountryList />
                     </select>
                   </div>
 

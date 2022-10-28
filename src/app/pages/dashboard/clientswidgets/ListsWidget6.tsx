@@ -2,7 +2,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {ListWidgetTimeLine} from './core/ListWidgetTimeLine'
-import {ITransModel2} from '../../../modules/Remittance/Components/Preferences/PreferencesModel'
+import {IRemittanceTransModel} from '../../../modules/Remittance/Components/Preferences/PreferencesModel'
 import {KTSVG} from '../../../../_metronic/helpers'
 import {Dropdown1} from '../../../../_metronic/partials/content/dropdown/Dropdown1'
 import {transactionExists} from '@okta/okta-auth-js'
@@ -10,7 +10,7 @@ import {transactionExists} from '@okta/okta-auth-js'
 type Props = {
   title: string
   className: string
-  trans: ITransModel2[]
+  trans: IRemittanceTransModel[]
 }
 
 const ListsWidget6: React.FC<Props> = (props: Props) => {

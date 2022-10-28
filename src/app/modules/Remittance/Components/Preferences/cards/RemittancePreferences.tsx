@@ -3,7 +3,7 @@ import {toAbsoluteUrl} from '../../../../../../_metronic/helpers'
 import {IRemittanceDetails, remittanceDetailsInitValues as initialValues} from '../PreferencesModel'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
-import {Country} from '../../../../../../_metronic/partials/content/countryselection/countryselection'
+import {CountryList} from '../../../../../../_metronic/partials/content/selectionlists'
 
 const preferencesSchema = Yup.object().shape({
   fName: Yup.string().required('First name is required'),
@@ -75,6 +75,7 @@ const RemittancePreferences: React.FC = () => {
                       type='text'
                       className='form-control form-control-lg form-control-solid mb-3 mb-lg-0'
                       placeholder='First name'
+                      disabled={true}
                       {...formik.getFieldProps('fName')}
                     />
                     {formik.touched.fName && formik.errors.fName && (
@@ -90,6 +91,7 @@ const RemittancePreferences: React.FC = () => {
                       type='text'
                       className='form-control form-control-lg form-control-solid'
                       placeholder='Last name'
+                      disabled={true}
                       {...formik.getFieldProps('lName')}
                     />
                     {formik.touched.lName && formik.errors.lName && (
@@ -113,6 +115,7 @@ const RemittancePreferences: React.FC = () => {
                   type='tel'
                   className='form-control form-control-lg form-control-solid'
                   placeholder='Preferred phone number'
+                  disabled={true}
                   {...formik.getFieldProps('contactPhone')}
                 />
                 {formik.touched.contactPhone && formik.errors.contactPhone && (
@@ -129,10 +132,11 @@ const RemittancePreferences: React.FC = () => {
               <div className='col-lg-8 fv-row'>
                 {/* <label className="form-label">Select your country of residence</label> */}
                 <select
+                  disabled={true}
                   className='form-select form-select-solid form-select-lg fw-bold'
                   {...formik.getFieldProps('country')}
                 >
-                  <Country />
+                  <CountryList />
                 </select>
                 {formik.touched.country && formik.errors.country && (
                   <div className='fv-plugins-message-container'>
@@ -197,7 +201,7 @@ const RemittancePreferences: React.FC = () => {
                   className='form-select form-select-solid form-select-lg fw-bold'
                   {...formik.getFieldProps('country')}
                 >
-                  <Country />
+                  <CountryList />
                 </select>
                 {formik.touched.recipientctr && formik.errors.recipientctr && (
                   <div className='fv-plugins-message-container'>
