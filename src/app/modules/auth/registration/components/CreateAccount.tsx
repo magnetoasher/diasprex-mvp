@@ -7,20 +7,21 @@ import {Step2} from './steps/Step2'
 import {Step3} from './steps/Step3'
 import {Step4} from './steps/Step4'
 import {Step5} from './steps/Step5'
-import AccountVerifiction from './steps/AccountVerification'
+import AccountVerification from './steps/AccountVerification'
 import {StepperComponent} from '../../../../../_metronic/assets/ts/components'
 import {Formik, Form, FormikValues} from 'formik'
 import './hide-stepper.css'
 import {ICreateAccount, createAccountSchemas, inits} from './CreateAccountWizardHelper'
 import SweetAlert from 'react-bootstrap-sweetalert'
-import SubscriptionPlans from './steps/SubscriptionPlans'
-// import SubscriptionPlans from '../components/SubscriptionComponet/SubscriptionPlans'
+// import SubscriptionPlans from './steps/SubscriptionPlans'
+import SubscriptionPlans3 from './SubscriptionComponet/SubscriptionPlans3'
+import SubscriptionPlans from './SubscriptionComponet/SubscriptionPlans2'
 
 const CreateAccount: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
-  const [userType, setUserType] = useState<string>('basic')
+  const [userType, setUserType] = useState<string>('enabler')
   const [userTypeFull, setUserTypeFull] = useState('')
   const [initValues] = useState<ICreateAccount>(inits)
 
@@ -30,8 +31,6 @@ const CreateAccount: FC = () => {
   const [showCancelBtn, setShowCancelBtn] = useState(true)
   const [titleText, setTitleText] = useState('')
   const [confirmBtnText, setConfirmBtnText] = useState('Yes')
-  const [currentState, setCurrentState] = useState<'month' | 'annual'>('month')
-  const [selected, setSelected] = useState('Startup')
   const [hideShow, setHideShow] = useState(true)
 
   useEffect(() => {
@@ -137,7 +136,7 @@ const CreateAccount: FC = () => {
   }
   useEffect(() => {
     localStorage.setItem('userType', 'basic')
-    localStorage.setItem('userTypeFull', 'generic')
+    localStorage.setItem('userTypeFull', 'Basic Enabler')
   }, [])
   console.log('total', stepper.current && stepper.current.totatStepsNumber)
   return (
@@ -279,7 +278,7 @@ const CreateAccount: FC = () => {
                 {/* w-xl-700px */}
                 <div className='d-flex justify-content-center align-items-center'>
                   <div className='current' data-kt-stepper-element='content'>
-                    <SubscriptionPlans
+                    <SubscriptionPlans3
                       userType={userType}
                       setUserType={setUserType}
                       submitStep={submitStep}
@@ -304,7 +303,7 @@ const CreateAccount: FC = () => {
 
                 {userType !== 'basic' && (
                   <div data-kt-stepper-element='content' className='w-xl-800px'>
-                    <AccountVerifiction />
+                    <AccountVerification />
                   </div>
                 )}
 
@@ -312,7 +311,7 @@ const CreateAccount: FC = () => {
                   <Step5 />
                 </div>
 
-                <div className='d-flex flex-stack pt-10'>
+                <div className='d-flex flex-stack justify-content-center pt-10'>
                   <div className='mr-2'>
                     <button
                       onClick={prevStep}

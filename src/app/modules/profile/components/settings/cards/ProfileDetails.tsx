@@ -103,8 +103,49 @@ const ProfileDetails: React.FC = () => {
                 >
                   <div
                     className='image-input-wrapper w-125px h-125px'
-                    style={{backgroundImage: `url(${toAbsoluteUrl(data.avatar)})`}}
+                    style={
+                      user !== 'sponsor'
+                        ? {backgroundImage: `url(${toAbsoluteUrl(data.avatar)})`}
+                        : {backgroundImage: `url(${toAbsoluteUrl('/media/logos/megold-logo.png')})`}
+                    }
                   ></div>
+                  {/* end::Preview existing avatar */}
+
+                  {/* begin::Label */}
+                  <label
+                    className='btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow'
+                    data-kt-image-input-action='change'
+                    data-bs-toggle='tooltip'
+                    title='Change Picture'
+                  >
+                    <i className='bi bi-pencil-fill fs-7'></i>
+
+                    <input type='file' name='avatar' accept='.png, .jpg, .jpeg' />
+                    <input type='hidden' name='avatar_remove' />
+                  </label>
+                  {/* end::Label */}
+
+                  {/* begin::Cancel */}
+                  {/* <span
+                    className='btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow'
+                    data-kt-image-input-action='cancel'
+                    data-bs-toggle='tooltip'
+                    title='Cancel avatar'
+                  >
+                    <i className='bi bi-x fs-2'></i>
+                  </span> */}
+                  {/* end::Cancel */}
+
+                  {/* begin::Remove */}
+                  <span
+                    className='btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow'
+                    data-kt-image-input-action='remove'
+                    data-bs-toggle='tooltip'
+                    title='Remove Picture'
+                  >
+                    <i className='bi bi-x fs-2'></i>
+                  </span>
+                  {/* end::Remove */}
                 </div>
               </div>
             </div>
@@ -598,7 +639,7 @@ const ProfileDetails: React.FC = () => {
             } */}
 
             {user === 'individual' ||
-              (user === 'admin' && (
+              ('admin' && (
                 <>
                   <div className='row mb-6'>
                     <label className='col-lg-4 col-form-label fw-bold fs-6'>

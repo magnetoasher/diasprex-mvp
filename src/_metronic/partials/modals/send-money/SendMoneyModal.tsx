@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom'
 export const SendMoneyModal: FC = () => {
   const sendMoney = () => {}
   return (
-    <div className='modal fade' id='kt_send_money_modal' aria-hidden='true'>
+    <div className='modal fade' id='kt_send_money_modal' aria-hidden='true' data-bs-menu='true'>
       <div className='modal-dialog mw-650px'>
         <div className='modal-content'>
           <div className='modal-header pb-0 border-0 justify-content-end'>

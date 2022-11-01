@@ -4,10 +4,11 @@ import {FC} from 'react'
 import {KTSVG} from '../../../helpers'
 import {useLayout} from '../../core'
 import {DefaultTitle} from '../header/page-title/DefaultTitle'
+import {Dropdown1} from '../../../partials'
+import {SendMoneyModal} from '../../../partials/modals/send-money/SendMoneyModal'
 
 const Toolbar1: FC = () => {
   const {classes} = useLayout()
-
   const userType = localStorage.getItem('userType')
 
   return (

@@ -78,20 +78,20 @@ const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, 
   const titles = [
     {
       title: 'Generic',
-
       value1: 'basic',
+      default: true,
     },
 
     {
       title: 'Enabler',
-
-      value1: 'Enabler',
+      value1: 'enabler',
+      default: false,
     },
 
     {
       title: 'Sponsor',
-
       value1: 'sponsor',
+      default: false,
     },
   ]
   const types = [

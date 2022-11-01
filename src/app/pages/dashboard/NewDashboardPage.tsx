@@ -54,7 +54,11 @@ const NewDashboardPage = () => {
             <div className='col-xs-1 d-flex align-items-center justify-content-center g-3 px-5'>
               <div className='d-flex mw-75 image-input-wrapper image-input-outline'>
                 <img
-                  src={toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')}
+                  src={
+                    user !== 'sponsor'
+                      ? toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')
+                      : toAbsoluteUrl('/media/logos/megold-logo.png')
+                  }
                   className='rounded mw-100'
                   alt='Diaspreex'
                 />
@@ -73,11 +77,11 @@ const NewDashboardPage = () => {
                             ></div>
                                 </div> */}
 
-            <div className='col-xs-1 d-flex align-items-center justify-content-center'>
+            <div className='col-xs-1 d-flex justify-content-center'>
               <div className='justify-content-center'>
                 <div className='d-flex mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary fs-4 fw-bolder me-1'>
-                    Max Smith
+                    {user !== 'sponsor' ? 'Max Smith' : 'MeGOLD Technology'}
                   </a>
                   {user !== 'basic' && (
                     <a href='#' data-toggle='tooltip' data-placement='top' title='Verified'>
@@ -89,43 +93,43 @@ const NewDashboardPage = () => {
                   )}
                 </div>
 
-                <div className='d-flex align-items-center mb-2'>
+                <div className='d-flex justify-content-center align-items-center mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary  me-1 text-capitalize'>
                     <span className='badge badge-light-success'>
                       {userTypeFull?.replace('_', ' ')}{' '}
                     </span>
                   </a>
                 </div>
-                <span className='symbol symbol-30px w-30px bg-light me-2'>
-                  <img
-                    src={toAbsoluteUrl('/media/flags/ghana.svg')}
-                    className='fs-6 fw-bold'
-                    alt='oppscard'
-                    data-toggle='tooltips'
-                    title='Ghana'
-                    data-bs-placement='bottom'
-                  />
-                </span>
-
-                {user !== 'sponsor' && (
+                <div className='d-flex justify-content-center align-items-center'>
                   <span className='symbol symbol-30px w-30px bg-light me-2'>
                     <img
-                      src={toAbsoluteUrl('/media/flags/united-states.svg')}
+                      src={toAbsoluteUrl('/media/flags/ghana.svg')}
                       className='fs-6 fw-bold'
                       alt='oppscard'
                       data-toggle='tooltips'
-                      title='United States'
+                      title='Ghana'
                       data-bs-placement='bottom'
                     />
                   </span>
-                )}
+                  {user !== 'sponsor' && (
+                    <span className='symbol symbol-30px w-30px bg-light me-2'>
+                      <img
+                        src={toAbsoluteUrl('/media/flags/united-states.svg')}
+                        className='fs-6 fw-bold'
+                        alt='oppscard'
+                        data-toggle='tooltips'
+                        title='United States'
+                        data-bs-placement='bottom'
+                      />
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
           </div>
 
-          {user !== 'sponsor' && (
+          {user === 'sponsor' ? (
             <>
-              {' '}
               <div className=' row d-flex g-5'>
                 <div className='separator me-0 mb-3'></div>
                 <div className='d-flex flex-wrap flex-stack'>
@@ -136,17 +140,17 @@ const NewDashboardPage = () => {
                           path='/media/icons/duotune/arrows/arr066.svg'
                           className='svg-icon-3 svg-icon-success me-2'
                         />
-                        <div className='fs-4 fw-bolder'>$10,500</div>
+                        <div className='fs-4 fw-bolder'>5</div>
                       </div>
 
-                      <div className='fw-bold fs-6 text-gray-400'>Total Transfer</div>
+                      <div className='fw-bold fs-6 text-gray-400'>Total Opps</div>
                     </div>
 
                     <div className='border border-gray-300 border-dashed rounded min-w-100px p-2 me-3 mb-3'>
                       <div className='d-flex align-items-center'>
                         <KTSVG
-                          path='/media/icons/duotune/arrows/arr065.svg'
-                          className='svg-icon-3 svg-icon-danger me-2'
+                          path='/media/icons/duotune/arrows/arr066.svg'
+                          className='svg-icon-3 svg-icon-success me-2'
                         />
                         <div className='fs-4 fw-bolder'>5%</div>
                       </div>
@@ -161,10 +165,10 @@ const NewDashboardPage = () => {
                           path='/media/icons/duotune/arrows/arr066.svg'
                           className='svg-icon-3 svg-icon-success me-2'
                         />
-                        <div className='fs-4 fw-bolder'>$60,500</div>
+                        <div className='fs-4 fw-bolder'>$65M</div>
                       </div>
 
-                      <div className='fw-bold fs-6 text-gray-400'>Total Retainer</div>
+                      <div className='fw-bold fs-6 text-gray-400'>Total Deals</div>
                     </div>
 
                     <div className='border border-gray-300 border-dashed rounded min-w-100px p-2 me-3 mb-3'>
@@ -176,12 +180,73 @@ const NewDashboardPage = () => {
                         <div className='fs-4 fw-bolder'>60%</div>
                       </div>
 
-                      <div className='fw-bold fs-6 text-gray-400'>Retainer Change</div>
+                      <div className='fw-bold fs-6 text-gray-400'>Annual Change</div>
                     </div>
                   </div>
                 </div>
               </div>
               <br />
+            </>
+          ) : (
+            <>
+              <>
+                <div className=' row d-flex g-5'>
+                  <div className='separator me-0 mb-3'></div>
+                  <div className='d-flex flex-wrap flex-stack'>
+                    <div className='col-sm-6'>
+                      <div className='border border-gray-300 border-dashed rounded min-w-100px p-2 me-3 mb-3'>
+                        <div className='d-flex align-items-center'>
+                          <KTSVG
+                            path='/media/icons/duotune/arrows/arr065.svg'
+                            className='svg-icon-3 svg-icon-danger me-2'
+                          />
+                          <div className='fs-4 fw-bolder'>$125</div>
+                        </div>
+
+                        <div className='fw-bold fs-6 text-gray-400'>Last Retainer</div>
+                      </div>
+
+                      <div className='border border-gray-300 border-dashed rounded min-w-100px p-2 me-3 mb-3'>
+                        <div className='d-flex align-items-center'>
+                          <KTSVG
+                            path='/media/icons/duotune/arrows/arr065.svg'
+                            className='svg-icon-3 svg-icon-danger me-2'
+                          />
+                          <div className='fs-4 fw-bolder'>5%</div>
+                        </div>
+
+                        <div className='fw-bold fs-6 text-gray-400'>Annual Change</div>
+                      </div>
+                    </div>
+                    <div className='col-sm-6'>
+                      <div className='border border-gray-300 border-dashed rounded min-w-100px p-2 me-3 mb-3'>
+                        <div className='d-flex align-items-center'>
+                          <KTSVG
+                            path='/media/icons/duotune/arrows/arr066.svg'
+                            className='svg-icon-3 svg-icon-success me-2'
+                          />
+                          <div className='fs-4 fw-bolder'>$15,000</div>
+                        </div>
+
+                        <div className='fw-bold fs-6 text-gray-400'>Total Retainer</div>
+                      </div>
+
+                      <div className='border border-gray-300 border-dashed rounded min-w-100px p-2 me-3 mb-3'>
+                        <div className='d-flex align-items-center'>
+                          <KTSVG
+                            path='/media/icons/duotune/arrows/arr066.svg'
+                            className='svg-icon-3 svg-icon-success me-2'
+                          />
+                          <div className='fs-4 fw-bolder'>60%</div>
+                        </div>
+
+                        <div className='fw-bold fs-6 text-gray-400'>Retainer Change</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br />
+              </>
             </>
           )}
 

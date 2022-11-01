@@ -174,6 +174,12 @@ function ViewOpportunity() {
       </Row>
 
       <Card style={{marginTop: '10px'}}>
+        <div className='fv-row d-flex align-items-center bg-light p-10'>
+          <span className='fw-bolder fs-4 text-dark text-uppercase me-3'>Deal Type:</span>
+          <span className='text-muted'>
+            Equity/Equity Financing, Debt Financing, Consulting, Contract
+          </span>
+        </div>
         <Row style={{display: 'flex', marginTop: '5px'}} gutter={[8, 16]}>
           <Col
             xs={24}
@@ -189,14 +195,7 @@ function ViewOpportunity() {
             }}
           >
             <div>
-              <label
-                style={{
-                  fontWeight: '600',
-                  fontSize: '20px',
-                }}
-              >
-                Summary
-              </label>
+              <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Summary</label>
             </div>
 
             <div>
@@ -293,12 +292,7 @@ function ViewOpportunity() {
             >
               <div className='row'>
                 <div className='col-xl-6'>
-                  <label
-                    style={{
-                      fontWeight: '600',
-                      fontSize: '20px',
-                    }}
-                  >
+                  <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
                     Opportunity Details
                   </label>
                 </div>
@@ -316,13 +310,8 @@ function ViewOpportunity() {
               </div>
 
               <div className='row'>
-                <div className='col-xl-6'>
-                  <label
-                    style={{
-                      fontWeight: '600',
-                      fontSize: '20px',
-                    }}
-                  >
+                <div className='col-xl-6 mt-10'>
+                  <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
                     Sponsor's Details
                   </label>
                 </div>
@@ -354,6 +343,7 @@ function ViewOpportunity() {
                     color: 'white',
                     fontWeight: '600',
                     borderRadius: '6px',
+                    marginTop: '6rem',
                   }}
                 >
                   Submit Proposal

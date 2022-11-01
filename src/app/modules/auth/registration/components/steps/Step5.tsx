@@ -30,7 +30,7 @@ const Step5: FC = () => {
           />
           <div className='d-flex flex-stack flex-grow-1'>
             <div className='fw-bold'>
-              <h4 className='text-gray-800 fw-bolder'>We need your attention!</h4>
+              <h4 className='text-gray-800 fw-bolder'>Attention!</h4>
               <div className='fs-6 text-gray-600'>
                 Clicking submit will save your create an account and save your account info
               </div>

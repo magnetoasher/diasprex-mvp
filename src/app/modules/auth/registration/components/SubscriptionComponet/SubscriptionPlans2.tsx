@@ -12,86 +12,80 @@ import clsx from 'clsx'
 const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, userTypeFull}) => {
   const [currentState, setCurrentState] = useState<'month' | 'annual'>('month')
   const [packagePrice, setPackagePrice] = useState()
-  const [generic] = useState([
-    {
-      title: 'Generic',
-      subTitle: 'Ideal for individuals and small companies',
-      description: 'Ideal for individuals and small companies',
-      priceMonth: 'Free',
-      priceAnnual: 'Free',
-      default: true,
-      custom: false,
-      value1: 'basic',
-      pricing: false,
-      features: [
-        {
-          title: 'View Opportunities',
-          supported: true,
-        },
-        {
-          title: 'Remittance retainer program',
-          supported: true,
-        },
-        {
-          title: 'Remittance fee waiver',
-          supported: false,
-        },
-        {
-          title: 'View oportunity details and submit proposal',
-          supported: false,
-        },
-        {
-          title: 'Discounted third party products and services',
-          supported: false,
-        },
-        {
-          title: "Diasprex's financing services",
-          supported: false,
-        },
-        {
-          title: 'Unlimited business and financing support services',
-          supported: false,
-        },
-        {
-          title: 'Unlimited network with Diasprex Sponsors and Enablers',
-          supported: false,
-        },
-        {
-          title: 'Participation in Diasprex-seeded Opportunities',
-          supported: false,
-        },
-        {
-          title: 'Access to customized opportunity services',
-          supported: false,
-        },
-        {
-          title: 'Services or product advertisement',
-          supported: false,
-        },
-        {
-          title: 'Loyalty program reward provider',
-          supported: false,
-        },
-      ],
-    },
-  ])
+  // const [generic] = useState([
+  //   {
+  //     title: 'Generic',
+  //     subTitle: 'Ideal for individuals and small companies',
+  //     description: 'Ideal for individuals and small companies',
+  //     priceMonth: 'Free',
+  //     priceAnnual: 'Free',
+  //     default: true,
+  //     custom: false,
+  //     value1: 'basic',
+  //     pricing: false,
+  //     features: [
+  //       {
+  //         title: 'View Opportunities',
+  //         supported: true,
+  //       },
+  //       {
+  //         title: 'Remittance retainer program',
+  //         supported: true,
+  //       },
+  //       {
+  //         title: 'Remittance fee waiver',
+  //         supported: false,
+  //       },
+  //       {
+  //         title: 'View oportunity details and submit proposal',
+  //         supported: false,
+  //       },
+  //       {
+  //         title: 'Discounted third party products and services',
+  //         supported: false,
+  //       },
+  //       {
+  //         title: "Diasprex's financing services",
+  //         supported: false,
+  //       },
+  //       {
+  //         title: 'Unlimited business and financing support services',
+  //         supported: false,
+  //       },
+  //       {
+  //         title: 'Unlimited network with Diasprex Sponsors and Enablers',
+  //         supported: false,
+  //       },
+  //       {
+  //         title: 'Participation in Diasprex-seeded Opportunities',
+  //         supported: false,
+  //       },
+  //       {
+  //         title: 'Access to customized opportunity services',
+  //         supported: false,
+  //       },
+  //       {
+  //         title: 'Services or product advertisement',
+  //         supported: false,
+  //       },
+  //       {
+  //         title: 'Loyalty program reward provider',
+  //         supported: false,
+  //       },
+  //     ],
+  //   },
+  // ])
   const titles = [
     {
-      title: 'Generic',
-
-      value1: 'basic',
-    },
-
-    {
       title: 'Enabler',
-
-      value1: 'Enabler',
+      value1: 'enabler',
+      default: true,
     },
 
     {
       title: 'Sponsor',
-
       value1: 'sponsor',
+      default: false,
     },
   ]
   const types = [
@@ -111,13 +105,14 @@ const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, 
     {
       title: 'Basic Enabler',
       subTitle: 'Ideal for individuals',
-      description: 'Ideal for individuals and small companies',
-      priceMonth: 'Free',
-      priceAnnual: 'Free',
+      description: 'Ideal for individuals',
+      priceMonth: '0',
+      priceAnnual: '0',
       default: true,
       custom: false,
       value1: 'basic',
-      pricing: false,
+      valueType: 'Basic_Enabler individual',
+      pricing: true,
       features: [
         {
           title: 'View Opportunities',
@@ -170,15 +165,15 @@ const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, 
       ],
     },
     {
-      title: 'Standard Enabler',
-      subTitle: 'Ideal for individuals and startups',
-      description: 'Ideal for individuals and startups',
+      title: 'Standard Enabler (BE)',
+      subTitle: 'Ideal for individuals',
+      description: 'Ideal for individuals',
       priceMonth: '4.99',
       priceAnnual: '54.00',
       default: false,
       custom: false,
       value1: 'individual',
-      valueType: 'Basic_Enabler individual',
+      valueType: 'Standard_Enabler individual',
       pricing: true,
       features: [
         {
@@ -232,7 +227,7 @@ const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, 
       ],
     },
     {
-      title: 'Super Enabler',
+      title: 'Super Enabler (SE)',
       subTitle: 'Ideal for individuals, startups & small businesses',
       description: 'Ideal for individuals, startups & small businesses',
       priceMonth: '9.99',
@@ -295,7 +290,7 @@ const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, 
       ],
     },
     {
-      title: 'Enterprise Enabler',
+      title: 'Enterprise Enabler (EE)',
       subTitle: 'Ideal for medium to large enterprises',
       description: 'Ideal for medium enterprises',
       priceMonth: 'Call customer service',
@@ -361,16 +356,15 @@ const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, 
   const [sponsor] = useState([
     {
       title: 'Basic (BS)',
-      subTitle: 'Best for startup businesses',
-      description: '$100 one time setup fee',
-      priceMonth: 'Free',
-      priceAnnual: 'Free',
+      subTitle: 'Best for individuals',
+      description: '$10 one time setup fee',
+      priceMonth: '0',
+      priceAnnual: '0',
       label: 'Most popular',
       default: false,
       value1: 'sponsor',
       valueType: 'Basic_Sponsor sponsor',
-
-      pricing: false,
+      pricing: true,
       custom: false,
       features: [
         {
@@ -413,7 +407,7 @@ const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, 
     },
     {
       title: 'Silver (SS)',
-      subTitle: 'Ideal for startup and early growth businesses',
+      subTitle: 'Ideal for startups',
       description: '$100 one time setup fee',
       priceMonth: '14.99',
       priceAnnual: '174.00',
@@ -642,11 +636,11 @@ const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, 
 
           <div className='nav flex justify-content-center align-items-center'>
             {userType !== 'basic' &&
-              types.map((plan, index) => {
+              types.map((type, index) => {
                 return (
                   <div
                     onClick={() => {
-                      setCurrentState(plan.value1)
+                      setCurrentState(type.value1)
                     }}
                     className={`cnav-link  d-flex flex-stack text-start p-6  col-lg-4` + 'mb-6 '}
                     data-bs-toggle='tab'
@@ -659,14 +653,14 @@ const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, 
                           className='form-check-input-type'
                           type='radio'
                           name='type'
-                          value={plan.value1}
-                          checked={currentState === plan.value1}
+                          value={type.value1}
+                          checked={currentState === type.value1}
                           onChange={(e) => setCurrentState(e.target.value)}
                         />
                       </div>
 
                       <div className='flex-grow-1'>
-                        <h5 className='d-flex align-items-center   flex-wrap'>{plan.title}</h5>
+                        <h5 className='d-flex align-items-center   flex-wrap'>{type.title}</h5>
                       </div>
                     </div>
                   </div>
@@ -674,7 +668,7 @@ const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, 
               })}
           </div>
 
-          {userType === 'basic' && (
+          {/* {userType === 'basic' && (
             <div className=' mt-5'>
               <div className='tab-content rounded h-100 bg-light p-10 '>
                 {generic.map((plan, index) => {
@@ -760,12 +754,9 @@ const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, 
                 })}
               </div>
             </div>
-          )}
+          )} */}
 
-          {(userType === 'Enabler' ||
-            userType === 'business' ||
-            userType === 'individual' ||
-            userType === 'enabler') && (
+          {(userType === 'enabler' || userType === 'Enabler') && (
             <div className=' mt-5'>
               <div className='tab-content rounded h-100 bg-light p-10 d-flex justify-content-between'>
                 {enabler.map((plan, index) => {

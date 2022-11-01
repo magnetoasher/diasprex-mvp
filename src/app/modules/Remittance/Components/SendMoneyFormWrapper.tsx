@@ -21,7 +21,7 @@ export const SendMoneyFormWrapper = () => {
         </div>
       </div>
       <div className='card-footer d-flex justify-content-between'>
-        Money transfer transactions are processed by Diasprex third party partners
+        Money transfer transactions are processed by Diasprex's third party partners
         <div className='me-1 d-flex'>
           {/* begin::Button */}
           <a
