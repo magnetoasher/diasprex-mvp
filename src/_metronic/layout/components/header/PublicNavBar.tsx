@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import React, {FC} from 'react'
+import {useOktaAuth} from '@okta/okta-react'
 import {Link} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search} from '../../../partials'
@@ -7,6 +8,8 @@ import {useLayout} from '../../core'
 import {Topbar} from './Topbar'
 
 export const PublicNavBar = () => {
+  const {authState} = useOktaAuth()
+
   return (
     <div
       className='landing-header'
@@ -162,18 +165,20 @@ export const PublicNavBar = () => {
               </div>
             </div>
           </div>
-          {}
-          <div className='flex-equal text-end ms-1'>
-            <Link to='/auth' className='btn btn-primary text-dark me-3'>
-              Login
-            </Link>
-            {/* </div>
-          <div className='flex-equal text-end ms-1'> */}
-            <Link to='/auth' className='btn btn-light-primary text-dark me-3'>
-              Join
-            </Link>
-          </div>
-          <Topbar />
+          {
+            authState && authState.isAuthenticated ? (
+              <div className='flex-equal text-end ms-1'>
+                <Link to='/auth' className='btn btn-primary text-dark me-3'>
+                  Login
+                </Link>
+                {/* </div>
+              <div className='flex-equal text-end ms-1'> */}
+                <Link to='/auth' className='btn btn-light-primary text-dark me-3'>
+                  Join
+                </Link>
+              </div>
+            ) : <Topbar />
+          }
         </div>
       </div>
     </div>
