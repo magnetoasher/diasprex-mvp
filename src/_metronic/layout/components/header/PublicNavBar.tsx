@@ -1,175 +1,181 @@
 import clsx from 'clsx'
-import React, { FC } from 'react'
-import { KTSVG, toAbsoluteUrl } from '../../../helpers'
-import { HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search } from '../../../partials'
-import { useLayout } from '../../core'
+import React, {FC} from 'react'
+import {Link} from 'react-router-dom'
+import {KTSVG, toAbsoluteUrl} from '../../../helpers'
+import {HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search} from '../../../partials'
+import {useLayout} from '../../core'
+import {Topbar} from './Topbar'
 
-
-const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
-  toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px',
-  toolbarUserAvatarHeightClass = 'symbol-30px symbol-md-40px',
-  toolbarButtonIconSizeClass = 'svg-icon-1'
-
-const Topbar: FC = () => {
-  const { config } = useLayout()
-
+export const PublicNavBar = () => {
   return (
-    <div className='d-flex align-items-stretch flex-shrink-0'>
+    <div
+      className='landing-header'
+      data-kt-sticky='true'
+      data-kt-sticky-name='landing-header'
+      data-kt-sticky-offset="{default: '200px', lg: '300px'}"
+    >
+      <div className='container'>
+        <div className='d-flex align-items-center justify-content-between'>
+          <div className='d-flex align-items-center flex-equal'>
+            <button
+              className='btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none'
+              id='kt_landing_menu_toggle'
+            >
+              <span className='svg-icon svg-icon-2hx'>
+                <svg
+                  width='24'
+                  height='24'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path
+                    d='M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z'
+                    fill='currentColor'
+                  />
+                  <path
+                    opacity='0.3'
+                    d='M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z'
+                    fill='currentColor'
+                  />
+                </svg>
+              </span>
+            </button>
 
-      <div className='d-flex align-items-stretch flex-shrink-0'>
-           {/* Begin: Search */}
-          <div className={clsx('d-flex align-items-stretch', toolbarButtonMarginClass)}>
-          <Search />
+            <Link to='#'>
+              <img
+                alt='Logo'
+                src={toAbsoluteUrl('/media/logos/diasprexlogo-light.svg')}
+                className='logo-default h-25px h-lg-50px'
+              />
+              <img
+                alt='Logo'
+                src={toAbsoluteUrl('/media/logos/diasprex-logo.png')}
+                className='logo-sticky h-20px h-lg-45px'
+              />
+            </Link>
           </div>
+
+          <div className='d-lg-block' id='kt_header_nav_wrapper'>
+            <div
+              className='d-lg-block p-5 p-lg-0'
+              data-kt-drawer='true'
+              data-kt-drawer-name='landing-menu'
+              data-kt-drawer-activate='{default: true, lg: false}'
+              data-kt-drawer-overlay='true'
+              data-kt-drawer-width='200px'
+              data-kt-drawer-direction='start'
+              data-kt-drawer-toggle='#kt_landing_menu_toggle'
+              data-kt-swapper='true'
+              data-kt-swapper-mode='prepend'
+              data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav_wrapper'}"
+            >
+              <div
+                className='menu menu-column flex-nowrap menu-rounded menu-lg-row menu-title-gray-500 menu-state-title-primary nav nav-flush fs-5 fw-semibold'
+                id='kt_landing_menu'
+              >
+                <div className='menu-item'>
+                  <Link
+                    className='menu-link nav-link active py-3 px-4 px-xxl-6'
+                    to='#kt_body'
+                    data-kt-scroll-toggle='true'
+                    data-kt-drawer-dismiss='true'
+                  >
+                    Home
+                  </Link>
+                </div>
+
+                <div className='menu-item'>
+                  <Link
+                    className='menu-link nav-link py-3 px-4 px-xxl-6'
+                    to='#how-it-works'
+                    data-kt-scroll-toggle='true'
+                    data-kt-drawer-dismiss='true'
+                  >
+                    Opportunities
+                  </Link>
+                </div>
+
+                <div className='menu-item'>
+                  <a
+                    className='menu-link nav-link py-3 px-4 px-xxl-6'
+                    href='#achievements'
+                    data-kt-scroll-toggle='true'
+                    data-kt-drawer-dismiss='true'
+                  >
+                    Remittance
+                  </a>
+                </div>
+
+                <div className='menu-item'>
+                  <a
+                    className='menu-link nav-link py-3 px-4 px-xxl-6'
+                    href='#team'
+                    data-kt-scroll-toggle='true'
+                    data-kt-drawer-dismiss='true'
+                  >
+                    DIF
+                  </a>
+                </div>
+
+                <div className='menu-item'>
+                  <a
+                    className='menu-link nav-link py-3 px-4 px-xxl-6'
+                    href='#portfolio'
+                    data-kt-scroll-toggle='true'
+                    data-kt-drawer-dismiss='true'
+                  >
+                    Diasporas
+                  </a>
+                </div>
+
+                <div className='menu-item'>
+                  <a
+                    className='menu-link nav-link py-3 px-4 px-xxl-6'
+                    href='#pricing'
+                    data-kt-scroll-toggle='true'
+                    data-kt-drawer-dismiss='true'
+                  >
+                    Resources
+                  </a>
+                </div>
+                <div className='menu-item'>
+                  <a
+                    className='menu-link nav-link py-3 px-4 px-xxl-6'
+                    href='#pricing'
+                    data-kt-scroll-toggle='true'
+                    data-kt-drawer-dismiss='true'
+                  >
+                    About Us
+                  </a>
+                </div>
+                <div className='menu-item'>
+                  <a
+                    className='menu-link nav-link py-3 px-4 px-xxl-6'
+                    href='#pricing'
+                    data-kt-scroll-toggle='true'
+                    data-kt-drawer-dismiss='true'
+                  >
+                    Contact Us
+                  </a>
+                </div>
+              </div>
             </div>
-
-      {/* CHAT */}
-      <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
-        {/* begin::Menu wrapper */}
-        <div
-          className={clsx(
-            'btn btn-icon btn-active-light-primary btn-custom position-relative',
-            toolbarButtonHeightClass
-          )}
-          id='kt_drawer_chat_toggle'
-        >
-          <KTSVG
-            path='/media/icons/duotune/communication/com012.svg'
-            className={toolbarButtonIconSizeClass}
-          />
-
-          <span className='bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink'></span>
-        </div>
-         </div>
-        <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
-          {/* begin::Menu- wrapper */}
-
-
-          <div
-            className={clsx(
-              'btn btn-icon btn-active-light-primary btn-custom',
-              toolbarButtonHeightClass
-            )}
-            data-kt-menu-trigger='click'
-            data-kt-menu-attach='parent'
-            data-kt-menu-placement='bottom-end'
-            data-kt-menu-flip='bottom'
-          >
-            <KTSVG
-              path='/media/icons/duotune/general/gen022.svg'
-              className={toolbarButtonIconSizeClass}
-            />
           </div>
-          <HeaderNotificationsMenu />
-          {/* end::Menu wrapper */}
-       
-        {/* end::Menu wrapper */}
-      </div>
-
-
-      {/* begin::User */}
-      <div
-        className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}
-        id='kt_header_user_menu_toggle'
-      >
-        {/* begin::Toggle */}
-        <div
-          className={clsx('cursor-pointer symbol', toolbarUserAvatarHeightClass)}
-          data-kt-menu-trigger='click'
-          data-kt-menu-attach='parent'
-          data-kt-menu-placement='bottom-end'
-          data-kt-menu-flip='bottom'
-        >
-          <img src={toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')} alt='metronic' />
-        </div>
-        <HeaderUserMenu />
-
-        {/* end::Toggle */}
-      </div>
-      {/* end::User */}
-
-
-
-      {/* begin::Aside Toggler */}
-      {config.header.left === 'menu' && (
-        <div className='d-flex align-items-center d-lg-none ms-2 me-n3' title='Show header menu'>
-          <div
-            className='btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px'
-            id='kt_header_menu_mobile_toggle'
-          >
-            <KTSVG path='/media/icons/duotune/text/txt001.svg' className='svg-icon-1' />
+          {}
+          <div className='flex-equal text-end ms-1'>
+            <Link to='/auth' className='btn btn-primary text-dark me-3'>
+              Login
+            </Link>
+            {/* </div>
+          <div className='flex-equal text-end ms-1'> */}
+            <Link to='/auth' className='btn btn-light-primary text-dark me-3'>
+              Join
+            </Link>
           </div>
+          <Topbar />
         </div>
-      )}
-
+      </div>
     </div>
-
-    // <div className='d-flex align-items-stretch flex-shrink-0'>
-    //   Search
-    //   <div className={clsx('d-flex align-items-stretch', toolbarButtonMarginClass)}>
-    //     <Search />
-    //   </div>
-    
-    //   {/* Activities */}
-    //   <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
-    //     {/* begin::Drawer toggle */}
-    //     <div
-    //       className={clsx('btn btn-icon btn-active-light-primary btn-custom', toolbarButtonHeightClass)}
-    //       id='kt_activities_toggle'
-    //     >
-    //       <KTSVG
-    //         path='/media/icons/duotune/general/gen032.svg'
-    //         className={toolbarButtonIconSizeClass}
-    //       />
-    //     </div>
-    //     {/* end::Drawer toggle */}
-    //   </div>
-
-    //   {/* NOTIFICATIONS */}
-    //   <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
-    //     {/* begin::Menu- wrapper */}
-    //     <div
-    //       className={clsx(
-    //         'btn btn-icon btn-active-light-primary btn-custom',
-    //         toolbarButtonHeightClass
-    //       )}
-    //       data-kt-menu-trigger='click'
-    //       data-kt-menu-attach='parent'
-    //       data-kt-menu-placement='bottom-end'
-    //       data-kt-menu-flip='bottom'
-    //     >
-    //       <KTSVG
-    //         path='/media/icons/duotune/general/gen022.svg'
-    //         className={toolbarButtonIconSizeClass}
-    //       />
-    //     </div>
-    //     <HeaderNotificationsMenu />
-    //     {/* end::Menu wrapper */}
-    //   </div>
-
-
-
-    //   {/* Quick links */}
-    //   <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
-    //     {/* begin::Menu wrapper */}
-    //     <div
-    //       className={clsx('btn btn-icon btn-active-light-primary btn-custom', toolbarButtonHeightClass)}
-    //       data-kt-menu-trigger='click'
-    //       data-kt-menu-attach='parent'
-    //       data-kt-menu-placement='bottom-end'
-    //       data-kt-menu-flip='bottom'
-    //     >
-    //       <KTSVG
-    //         path='/media/icons/duotune/general/gen025.svg'
-    //         className={toolbarButtonIconSizeClass}
-    //       />
-    //     </div>
-    //     <QuickLinks />
-    //     {/* end::Menu wrapper */}
-    //   </div>
-
-    // </div>
   )
 }
-
-export { Topbar }

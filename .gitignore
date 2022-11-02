@@ -4,7 +4,9 @@
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
 # Node artifact files
-Metroniks 8.15 backup/
+Metroniks 8.15 react/
+Metroniks 8.15 html/
+Metroniks 8.03 html/
 develop_10042022/
 node_modules/
 dist/

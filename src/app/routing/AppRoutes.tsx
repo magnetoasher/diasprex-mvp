@@ -20,6 +20,7 @@ import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import TopBarProgress from 'react-topbar-progress-indicator'
 import {App} from '../App'
 import config from '../../authConfig'
+import {Landing} from '../modules/landing/components/landing'
 
 /**
  * Base URL of the website.
@@ -56,6 +57,14 @@ const HasAccessToRouter = () => {
             element={
               <SuspensedView>
                 <Faqs />
+              </SuspensedView>
+            }
+          />
+          <Route
+            path='landing'
+            element={
+              <SuspensedView>
+                <Landing />
               </SuspensedView>
             }
           />
