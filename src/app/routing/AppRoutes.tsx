@@ -20,7 +20,7 @@ import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import TopBarProgress from 'react-topbar-progress-indicator'
 import {App} from '../App'
 import config from '../../authConfig'
-import {Landing} from '../modules/landing/components/landing'
+import {Landing} from '../modules/landing/landing'
 import {PublicNavbarProvider} from '../../_metronic/layout/components/header/publicnavbarprovider'
 
 /**
@@ -53,16 +53,7 @@ const HasAccessToRouter = () => {
         <Route path='authorization-code/callback' element={<LoginCallback />} />
         <Route element={<App />}>
           <Route path='error/*' element={<ErrorsPage />} />
-          <Route
-            path='faqs'
-            element={
-              <PublicNavbarProvider>
-                <SuspensedView>
-                  <Faqs />
-                </SuspensedView>
-              </PublicNavbarProvider>
-            }
-          />
+
           <Route
             path='/'
             element={
@@ -72,9 +63,20 @@ const HasAccessToRouter = () => {
                 </SuspensedView>
               </PublicNavbarProvider>
             }
-          ></Route>
+          />
           <Route
-            path='dif_resources'
+            path='/faqs'
+            element={
+              <PublicNavbarProvider>
+                <SuspensedView>
+                  <Faqs />
+                </SuspensedView>
+              </PublicNavbarProvider>
+            }
+          />
+
+          <Route
+            path='/dif_resources'
             element={
               <PublicNavbarProvider>
                 <SuspensedView>
@@ -84,7 +86,7 @@ const HasAccessToRouter = () => {
             }
           />
           <Route
-            path='about'
+            path='/about'
             element={
               <PublicNavbarProvider>
                 <SuspensedView>
@@ -93,8 +95,9 @@ const HasAccessToRouter = () => {
               </PublicNavbarProvider>
             }
           />
+
           <Route
-            path='remittance_resources'
+            path='/remittance_resources'
             element={
               <PublicNavbarProvider>
                 <SuspensedView>
@@ -103,8 +106,9 @@ const HasAccessToRouter = () => {
               </PublicNavbarProvider>
             }
           />
+
           <Route
-            path='diasporas'
+            path='/diasporas'
             element={
               <PublicNavbarProvider>
                 <SuspensedView>

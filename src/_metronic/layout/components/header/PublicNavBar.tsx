@@ -118,20 +118,20 @@ export const PublicNavBar = () => {
                     </div>
 
                     <div className='menu-item'>
-                      <a
+                      <Link
                         className='menu-link nav-link py-3 px-4 px-xxl-6'
-                        href='remittance_resources'
+                        to='/remittance_resources'
                         data-kt-scroll-toggle='true'
                         data-kt-drawer-dismiss='true'
                       >
                         Remittance
-                      </a>
+                      </Link>
                     </div>
 
                     <div className='menu-item'>
                       <Link
                         className='menu-link nav-link py-3 px-4 px-xxl-6'
-                        to='diasporas'
+                        to='/diasporas'
                         data-kt-scroll-toggle='true'
                         data-kt-drawer-dismiss='true'
                       >
