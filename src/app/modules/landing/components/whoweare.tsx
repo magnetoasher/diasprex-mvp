@@ -1,7 +1,7 @@
 import React from 'react'
 import {OctagonModel} from '../../../../_metronic/partials/content/utilities/octagonmodel'
 
-export const CurveTop2 = () => {
+export const WhoWeAre = () => {
   return (
     <div className='mt-sm-n10'>
       <div className='landing-curve landing-dark-color'>
@@ -17,8 +17,8 @@ export const CurveTop2 = () => {
         <div className='container'>
           <div
             className='text-center mt-15 mb-18'
-            id='achievements'
-            data-kt-scroll-offset='{default: 100, lg: 150}'
+            id='whatwedo'
+            data-kt-scroll-offset='{default: 50, lg: 150}'
           >
             <h3 className='fs-2hx text-white fw-bold mb-5'>
               We Connect African Opportunities with the Diaspora Resources{' '}

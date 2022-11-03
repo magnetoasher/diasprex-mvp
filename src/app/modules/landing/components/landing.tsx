@@ -3,13 +3,16 @@ import {Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {PublicNavBar} from '../../../../_metronic/layout/components/header/PublicNavBar'
 import {Carousel2} from './Carousel2'
-import {CurveTop2} from '../core/curvesection1'
+import {WhoWeAre} from './whoweare'
 import {FeaturedDiasporas} from './featureddiasporas'
 import {HowItWorks} from './howitworks'
 import {ServicesSection} from './servicessection'
-import {Pricing} from '../core/pricing'
+import {Pricing} from './pricing'
 import {Testimonies} from './testimonies'
 import {TrustedBy} from './trustedby'
+import {Connect} from './connect'
+import {FeaturedOpportunities} from './featuredopps'
+import {ContactUs} from '../../resources/components/contactus'
 
 export const Landing = () => {
   return (
@@ -20,30 +23,6 @@ export const Landing = () => {
       className='bg-white position-relative app-blank'
     >
       <div className='d-flex flex-column flex-root' id='kt_app_root'>
-        <div className='mb-0' id='home'>
-          <div
-            className='bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg'
-            style={{
-              backgroundImage: `url(${toAbsoluteUrl('/media/svg/illustrations/landing.svg')})`,
-            }}
-          >
-            <PublicNavBar />
-            {/* End of Background */}
-          </div>
-
-          {/* Begin Curve Bottome*/}
-          <div className='landing-curve landing-dark-color mb-10 mb-lg-20'>
-            <svg viewBox='15 12 1470 48' fill='none' xmlns='http://www.w3.org/2000/svg'>
-              <path
-                d='M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z'
-                fill='currentColor'
-              ></path>
-            </svg>
-          </div>
-          {/* End Curve Bottom*/}
-        </div>
-        {/* End Header Section*/}
-        {/* Begin How It Works*/}
         <div className='mb-n10 mb-lg-n20 z-index-2'>
           <div className='container'>
             <div className='text-center mb-17'>
@@ -58,7 +37,7 @@ export const Landing = () => {
                 A dynamic marketplace where people, business, and African development meet.
               </div>
             </div>
-            <HowItWorks />
+            {/* <HowItWorks /> */}
             {/* End How It Works*/}
 
             <div className='d-flex mw-100'>
@@ -75,11 +54,17 @@ export const Landing = () => {
           </div>
         </div>
         {/* Begin second curve section */}
-        <CurveTop2 />
+        <WhoWeAre />
         {/* End second curve section */}
 
+        {/* Begin how it works */}
+        <HowItWorks />
+        {/* End how it works */}
+
         {/* Begin featured diasporas */}
-        <FeaturedDiasporas />
+
+        <FeaturedOpportunities />
+
         {/* End featured diasporas */}
 
         {/* Begin our services section */}
@@ -95,9 +80,13 @@ export const Landing = () => {
         {/* Begind testimonies */}
         <Testimonies />
         {/* End testimonies */}
+
         {/* Begind Trusted By Section */}
         <TrustedBy />
         {/* End Trusted By Section */}
+        {/* Begind Footer Section */}
+        <Connect />
+        {/* End Footer Section */}
       </div>
     </body>
   )

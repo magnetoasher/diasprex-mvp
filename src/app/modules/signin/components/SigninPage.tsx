@@ -68,10 +68,7 @@ const SigninPage: FC = () => {
       >
         <div className='login-aside order-2 d-flex flex-row-auto position-relative overflow-hidden'>
           <div className='d-flex flex-column-fluid flex-column justify-content-between py-9 px-7 py-lg-13 px-lg-35'>
-            <a
-              href='https://preview.keenthemes.com/metronic/demo1/custom/pages/login/login-2.html#'
-              className='text-center pt-2'
-            >
+            <a href='/' className='text-center pt-2'>
               <img src='/media/logos/diasprex-logo.png' className='h-45px' alt='' />
             </a>
             <div className='d-flex flex-column-fluid flex-column flex-center'>

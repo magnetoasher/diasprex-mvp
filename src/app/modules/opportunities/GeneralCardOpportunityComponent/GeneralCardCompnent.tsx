@@ -14,8 +14,8 @@ type Props = {
   summary?: string
   dueDate: string
   reward?: string
-  following?: number
-  interest?: number
+  following?: string
+  interest?: string
 }
 
 const GeneralOpportunityCard = (props: Props) => {

@@ -5,6 +5,7 @@ import {Registration} from './components/Registration'
 import {ForgotPassword} from './components/ForgotPassword'
 import {SigninPage} from '../../modules/signin/components/SigninPage'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
+import {PublicNavbarProvider} from '../../../_metronic/layout/components/header/publicnavbarprovider'
 
 const AuthLayout = () => {
   useEffect(() => {
@@ -18,7 +19,9 @@ const AuthLayout = () => {
     <div
       className='d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed'
       style={{
-        backgroundImage: `url(${toAbsoluteUrl('/media/illustrations/sketchy-1/signup-banner.jpg')})`,
+        backgroundImage: `url(${toAbsoluteUrl(
+          '/media/illustrations/sketchy-1/signup-banner.jpg'
+        )})`,
       }}
     >
       {/* begin::Content */}
@@ -62,8 +65,21 @@ const AuthLayout = () => {
 
 const AuthPage = () => (
   <Routes>
-    <Route index element={<SigninPage />} />
-    <Route element={<AuthLayout />}>
+    <Route
+      index
+      element={
+        <PublicNavbarProvider>
+          <SigninPage />
+        </PublicNavbarProvider>
+      }
+    />
+    <Route
+      element={
+        <PublicNavbarProvider>
+          <AuthLayout />
+        </PublicNavbarProvider>
+      }
+    >
       {/* <Route path='login' element={<Login />} /> */}
       <Route path='registration' element={<Registration />} />
       <Route path='forgot-password' element={<ForgotPassword />} />

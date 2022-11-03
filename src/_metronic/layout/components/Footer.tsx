@@ -11,10 +11,10 @@ const Footer: FC = () => {
         className={`${classes.footerContainer} d-flex flex-column flex-md-row align-items-center justify-content-between`}
       >
         {/* begin::Copyright */}
-        <div className='text-dark order-2 order-md-1'>
+        <div className='text-gray-600 order-2 order-md-1'>
           <span className='text-muted fw-bold me-2'>{new Date().getFullYear()} &copy;</span>
           <a href='#' className='text-gray-800 text-hover-primary'>
-            Diasprex
+            Diasprex Inc.
           </a>
         </div>
         {/* end::Copyright */}
@@ -28,12 +28,12 @@ const Footer: FC = () => {
           </li>
           <li className='menu-item'>
             <a href='#' className='menu-link pe-0 pe-2'>
-              Contact
+              Team
             </a>
           </li>
           <li className='menu-item'>
             <a href='#' className='menu-link pe-0'>
-              Team
+              Contact
             </a>
           </li>
         </ul>

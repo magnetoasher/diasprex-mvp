@@ -21,6 +21,7 @@ import TopBarProgress from 'react-topbar-progress-indicator'
 import {App} from '../App'
 import config from '../../authConfig'
 import {Landing} from '../modules/landing/components/landing'
+import {PublicNavbarProvider} from '../../_metronic/layout/components/header/publicnavbarprovider'
 
 /**
  * Base URL of the website.
@@ -55,49 +56,61 @@ const HasAccessToRouter = () => {
           <Route
             path='faqs'
             element={
-              <SuspensedView>
-                <Faqs />
-              </SuspensedView>
+              <PublicNavbarProvider>
+                <SuspensedView>
+                  <Faqs />
+                </SuspensedView>
+              </PublicNavbarProvider>
             }
           />
           <Route
-            path='landing'
+            path='/'
             element={
-              <SuspensedView>
-                <Landing />
-              </SuspensedView>
+              <PublicNavbarProvider>
+                <SuspensedView>
+                  <Landing />
+                </SuspensedView>
+              </PublicNavbarProvider>
             }
-          />
+          ></Route>
           <Route
             path='dif_resources'
             element={
-              <SuspensedView>
-                <Dif />
-              </SuspensedView>
+              <PublicNavbarProvider>
+                <SuspensedView>
+                  <Dif />
+                </SuspensedView>
+              </PublicNavbarProvider>
             }
           />
           <Route
             path='about'
             element={
-              <SuspensedView>
-                <About />
-              </SuspensedView>
+              <PublicNavbarProvider>
+                <SuspensedView>
+                  <About />
+                </SuspensedView>
+              </PublicNavbarProvider>
             }
           />
           <Route
             path='remittance_resources'
             element={
-              <SuspensedView>
-                <Remittance />
-              </SuspensedView>
+              <PublicNavbarProvider>
+                <SuspensedView>
+                  <Remittance />
+                </SuspensedView>
+              </PublicNavbarProvider>
             }
           />
           <Route
             path='diasporas'
             element={
-              <SuspensedView>
-                <DiasporasPageWrapper />
-              </SuspensedView>
+              <PublicNavbarProvider>
+                <SuspensedView>
+                  <DiasporasPageWrapper />
+                </SuspensedView>
+              </PublicNavbarProvider>
             }
           />
 

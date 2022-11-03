@@ -10,10 +10,10 @@ export const ServicesSection = () => {
             <div className='text-center mb-5 mb-lg-10'>
               <h3
                 className='fs-2hx text-dark mb-5'
-                id='portfolio'
+                id='services'
                 data-kt-scroll-offset='{default: 100, lg: 250}'
               >
-                Our Services
+                Our Services Details
               </h3>
             </div>
 
@@ -26,7 +26,7 @@ export const ServicesSection = () => {
                     data-bs-toggle='tab'
                     data-bs-target='#kt_landing_projects_latest'
                   >
-                    Diaspora Business Development
+                    Remittance Mobilization
                   </a>
                 </li>
                 <li className='nav-item'>
@@ -46,7 +46,7 @@ export const ServicesSection = () => {
                     data-bs-toggle='tab'
                     data-bs-target='#kt_landing_projects_mobile_apps'
                   >
-                    Remittance Mobilization
+                    Diaspora Business Development
                   </a>
                 </li>
                 <li className='nav-item'>
@@ -72,21 +72,41 @@ export const ServicesSection = () => {
                       href={toAbsoluteUrl('assets/media/stock/600x600/img-23.jpg')}
                     >
                       <div
-                        className='overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100 min-h-250px'
+                        className='overlay-wrapper border border-1 bgi-no-repeat bgi-position-center bgi-size-contain card-rounded h-lg-100 min-h-250px'
                         style={{
                           backgroundImage: `url(${toAbsoluteUrl(
-                            '/media/stock/600x600/img-23.jpg'
+                            '/media/stock/diasprex/remittance-image1.svg'
                           )})`,
                         }}
                       ></div>
 
-                      <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                      <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                         <i className='bi bi-eye-fill fs-3x text-white'></i>
                       </div>
                     </a>
                   </div>
 
                   <div className='col-lg-6'>
+                    <div className='row g-10 mb-10'>
+                      <a
+                        className='d-block card-rounded overlay'
+                        data-fslightbox='lightbox-projects'
+                        href='assets/media/stock/600x400/img-20.jpg'
+                      >
+                        <div
+                          className='overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px'
+                          style={{
+                            backgroundImage: `url(${toAbsoluteUrl(
+                              '/media/stock/600x600/img-20.jpg'
+                            )})`,
+                          }}
+                        ></div>
+
+                        <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
+                          <i className='bi bi-eye-fill fs-3x text-white'></i>
+                        </div>
+                      </a>
+                    </div>
                     <div className='row g-10 mb-10'>
                       <div className='col-lg-6'>
                         <a
@@ -103,7 +123,7 @@ export const ServicesSection = () => {
                             }}
                           ></div>
 
-                          <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                          <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                             <i className='bi bi-eye-fill fs-3x text-white'></i>
                           </div>
                         </a>
@@ -124,31 +144,12 @@ export const ServicesSection = () => {
                             }}
                           ></div>
 
-                          <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                          <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                             <i className='bi bi-eye-fill fs-3x text-white'></i>
                           </div>
                         </a>
                       </div>
                     </div>
-
-                    <a
-                      className='d-block card-rounded overlay'
-                      data-fslightbox='lightbox-projects'
-                      href='assets/media/stock/600x400/img-20.jpg'
-                    >
-                      <div
-                        className='overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px'
-                        style={{
-                          backgroundImage: `url(${toAbsoluteUrl(
-                            '/media/stock/600x600/img-20.jpg'
-                          )})`,
-                        }}
-                      ></div>
-
-                      <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
-                        <i className='bi bi-eye-fill fs-3x text-white'></i>
-                      </div>
-                    </a>
                   </div>
                 </div>
               </div>
@@ -170,7 +171,7 @@ export const ServicesSection = () => {
                         }}
                       ></div>
 
-                      <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                      <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                         <i className='bi bi-eye-fill fs-3x text-white'></i>
                       </div>
                     </a>
@@ -193,7 +194,7 @@ export const ServicesSection = () => {
                             }}
                           ></div>
 
-                          <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                          <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                             <i className='bi bi-eye-fill fs-3x text-white'></i>
                           </div>
                         </a>
@@ -214,7 +215,7 @@ export const ServicesSection = () => {
                             }}
                           ></div>
 
-                          <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                          <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                             <i className='bi bi-eye-fill fs-3x text-white'></i>
                           </div>
                         </a>
@@ -235,7 +236,7 @@ export const ServicesSection = () => {
                         }}
                       ></div>
 
-                      <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                      <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                         <i className='bi bi-eye-fill fs-3x text-white'></i>
                       </div>
                     </a>
@@ -262,7 +263,7 @@ export const ServicesSection = () => {
                             }}
                           ></div>
 
-                          <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                          <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                             <i className='bi bi-eye-fill fs-3x text-white'></i>
                           </div>
                         </a>
@@ -283,7 +284,7 @@ export const ServicesSection = () => {
                             }}
                           ></div>
 
-                          <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                          <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                             <i className='bi bi-eye-fill fs-3x text-white'></i>
                           </div>
                         </a>
@@ -304,7 +305,7 @@ export const ServicesSection = () => {
                         }}
                       ></div>
 
-                      <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                      <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                         <i className='bi bi-eye-fill fs-3x text-white'></i>
                       </div>
                     </a>
@@ -325,7 +326,7 @@ export const ServicesSection = () => {
                         }}
                       ></div>
 
-                      <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                      <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                         <i className='bi bi-eye-fill fs-3x text-white'></i>
                       </div>
                     </a>
@@ -350,7 +351,7 @@ export const ServicesSection = () => {
                         }}
                       ></div>
 
-                      <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                      <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                         <i className='bi bi-eye-fill fs-3x text-white'></i>
                       </div>
                     </a>
@@ -373,7 +374,7 @@ export const ServicesSection = () => {
                             }}
                           ></div>
 
-                          <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                          <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                             <i className='bi bi-eye-fill fs-3x text-white'></i>
                           </div>
                         </a>
@@ -394,7 +395,7 @@ export const ServicesSection = () => {
                             }}
                           ></div>
 
-                          <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                          <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                             <i className='bi bi-eye-fill fs-3x text-white'></i>
                           </div>
                         </a>
@@ -415,7 +416,7 @@ export const ServicesSection = () => {
                         }}
                       ></div>
 
-                      <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                      <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
                         <i className='bi bi-eye-fill fs-3x text-white'></i>
                       </div>
                     </a>

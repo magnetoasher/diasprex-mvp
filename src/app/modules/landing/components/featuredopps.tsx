@@ -1,6 +1,8 @@
 import React from 'react'
 import Carousel from 'react-bootstrap/Carousel'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
+import GeneralCardComponent from '../../opportunities/GeneralCardOpportunityComponent/GeneralCardCompnent'
+import object1 from '../../opportunities/core/GeneralOpportunityCardObject1.json'
 
 export const FeaturedOpportunities = () => {
   return (
@@ -9,10 +11,10 @@ export const FeaturedOpportunities = () => {
         <div className='text-center mb-12'>
           <h3
             className='fs-2hx text-dark mb-5'
-            id='team'
+            id='opportunities'
             data-kt-scroll-offset='{default: 100, lg: 150}'
           >
-            Featured Diasporas
+            Featured Opportunities
           </h3>
 
           <div className='fs-5 text-muted fw-bold'>
@@ -22,43 +24,9 @@ export const FeaturedOpportunities = () => {
           </div>
         </div>
 
-        {/* <div className='tns tns-default' style={{direction: 'ltr'}}>
-          <div
-            data-tns='true'
-            data-tns-loop='true'
-            data-tns-swipe-angle='false'
-            data-tns-speed='2000'
-            data-tns-autoplay='true'
-            data-tns-autoplay-timeout='18000'
-            data-tns-controls='true'
-            data-tns-nav='false'
-            data-tns-items='1'
-            data-tns-center='false'
-            data-tns-dots='false'
-            data-tns-prev-button='#kt_team_slider_prev'
-            data-tns-next-button='#kt_team_slider_next'
-            data-tns-responsive='{1200: {items: 3}, 992: {items: 2}}'
-          > */}
         <Carousel>
           <Carousel.Item>
             <div className='d-flex flex-center justify-content-between'>
-              <div className='text-center'>
-                <div
-                  className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
-                  style={{
-                    backgroundImage: `url(${toAbsoluteUrl('/media/avatars/diasprex/dxp-1.jpg')})`,
-                  }}
-                ></div>
-
-                <div className='mb-0'>
-                  <a href='#' className='text-dark fw-bold text-hover-primary fs-3'>
-                    Paul Miles
-                  </a>
-
-                  <div className='text-muted fs-6 fw-semibold mt-1'>Development Lead</div>
-                </div>
-              </div>
-
               <div className='text-center'>
                 <div
                   className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
@@ -131,23 +99,6 @@ export const FeaturedOpportunities = () => {
 
           <Carousel.Item>
             <div className='d-flex flex-center justify-content-between'>
-              <div className='text-center'>
-                <div
-                  className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
-                  style={{
-                    backgroundImage: `url(${toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')})`,
-                  }}
-                ></div>
-
-                <div className='mb-0'>
-                  <a href='#' className='text-dark fw-bold text-hover-primary fs-3'>
-                    Anne Clarc
-                  </a>
-
-                  <div className='text-muted fs-6 fw-semibold mt-1'>Project Manager</div>
-                </div>
-              </div>
-
               <div className='text-center'>
                 <div
                   className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
