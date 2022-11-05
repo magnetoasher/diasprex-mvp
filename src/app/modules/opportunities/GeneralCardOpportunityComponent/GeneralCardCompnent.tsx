@@ -7,6 +7,8 @@ type Props = {
   src?: string
   flag: string
   badgeColor?: string
+  description?: string
+  budget?: string
   status?: string
   statusColor?: string
   title: string
@@ -28,6 +30,7 @@ const GeneralOpportunityCard = (props: Props) => {
   }
 
   return (
+    // <Link to='/view_opportunity'>
     <div className='card row-lg border border-2 border-gray-300 border-hover p-3'>
       <div className='col-xs g-1'>
         <div className='row-xs d-flex flex-row'>
@@ -200,9 +203,9 @@ const GeneralOpportunityCard = (props: Props) => {
           marginTop: '35px',
         }}
       >
-        <Button
-          // role="button"
-          // to="/view_opportunity"
+        <button
+          // role='button'
+          // href='/view_opportunity'
           className='btn btn-primary text-hover-white fw-bolder'
           style={{
             display: 'flex',
@@ -224,10 +227,11 @@ const GeneralOpportunityCard = (props: Props) => {
           }}
         >
           View Opportunity
-        </Button>
+        </button>
       </div>
       {/* </div> */}
     </div>
+    // </Link>
   )
 }
 export default GeneralOpportunityCard

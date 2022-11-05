@@ -8,6 +8,7 @@ import {Link} from 'react-router-dom'
 import {useFormik} from 'formik'
 import {useLottie} from 'lottie-react'
 import groovyWalkAnimation from '../../../../lf20_xvgg1zca.json'
+import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -222,14 +223,14 @@ const SigninPage: FC = () => {
           </div>
         </div>
         <div
-          className='content order-1 d-flex flex-column w-100 pb-0'
+          className='content order-1 d-flex flex-column w-100 pb-20 mb-20'
           style={{backgroundColor: '#f3f4f6'}}
         >
           <div className='d-flex flex-column justify-content-center text-center pt-lg-40 pt-md-5 pt-sm-5 px-lg-0 pt-5 px-7'>
-            <h3 className='display4 font-weight-bolder my-7 text-dark' style={{color: '#986923'}}>
+            <h3 className='display-6 font-weight-bolder my-7 text-dark' style={{color: '#986923'}}>
               The Journey Starts Here
             </h3>
-            <p className='font-weight-bolder font-size-h2-md font-size-lg text-dark opacity-70'>
+            <p className='fw-bolder fs-2 font-size-lg text-dark opacity-70'>
               Join Diasprex to build a prosperous future and leave
               <br />a legacy for the next generation of Africans
             </p>
@@ -240,7 +241,10 @@ const SigninPage: FC = () => {
             //   backgroundImage: 'url(media/svg/illustrations/login-visual-africa_final-01.svg)',
             // }}
           >
-            <>{View}</>
+            <img
+              src={toAbsoluteUrl('media/svg/illustrations/login-visual-africa_final-01.svg')}
+              className='mw-100'
+            />
           </div>
         </div>
       </div>

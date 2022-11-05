@@ -1,15 +1,16 @@
 import clsx from 'clsx'
-import React, {FC} from 'react'
+import React, {FC, useContext} from 'react'
 import {useOktaAuth} from '@okta/okta-react'
 import {Link} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
-import {HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search} from '../../../partials'
-import {useLayout} from '../../core'
+
 import {Topbar} from './Topbar'
 
-export const PublicNavBar = () => {
+import {NavDropdown} from 'react-bootstrap'
+
+export const PublicNavBar: FC = () => {
   const {authState} = useOktaAuth()
-  console.log(authState)
+
   return (
     <div className='mb-0' id='home'>
       <div
@@ -61,7 +62,7 @@ export const PublicNavBar = () => {
                   <img
                     alt='Logo'
                     src={toAbsoluteUrl('/media/logos/diasprex-logo.png')}
-                    className='logo-sticky h-20px h-lg-45px'
+                    className='logo-sticky h-25px h-lg-50px'
                   />
                 </Link>
               </div>
@@ -85,17 +86,17 @@ export const PublicNavBar = () => {
                     id='kt_landing_menu'
                   >
                     <div className='menu-item'>
-                      <Link
+                      <a
                         className='menu-link nav-link active py-3 px-4 px-xxl-6'
-                        to='/'
+                        href='/'
                         data-kt-scroll-toggle='true'
                         // data-kt-scrol-top='true'
                         data-kt-drawer-dismiss='true'
                       >
                         Home
-                      </Link>
+                      </a>
                     </div>
-                    <div className='menu-item'>
+                    {/* <div className='menu-item'>
                       <a
                         className='menu-link nav-link py-3 px-4 px-xxl-6'
                         href='#'
@@ -104,12 +105,12 @@ export const PublicNavBar = () => {
                       >
                         What We Do
                       </a>
-                    </div>
+                    </div> */}
 
                     <div className='menu-item'>
                       <a
                         className='menu-link nav-link py-3 px-4 px-xxl-6'
-                        href='#'
+                        href='/#kt_opportunities_section'
                         data-kt-scroll-toggle='true'
                         data-kt-drawer-dismiss='true'
                       >
@@ -118,57 +119,80 @@ export const PublicNavBar = () => {
                     </div>
 
                     <div className='menu-item'>
-                      <Link
+                      <a
                         className='menu-link nav-link py-3 px-4 px-xxl-6'
-                        to='/remittance_resources'
+                        href='/#kt_remittance_section'
                         data-kt-scroll-toggle='true'
                         data-kt-drawer-dismiss='true'
                       >
                         Remittance
-                      </Link>
+                      </a>
                     </div>
 
                     <div className='menu-item'>
-                      <Link
+                      <a
                         className='menu-link nav-link py-3 px-4 px-xxl-6'
-                        to='/diasporas'
+                        href='/#kt_diasporas_section'
                         data-kt-scroll-toggle='true'
                         data-kt-drawer-dismiss='true'
                       >
                         Diasporas
-                      </Link>
+                      </a>
                     </div>
 
-                    {/* <div className='menu-item'>
-                  <a
-                    className='menu-link nav-link py-3 px-4 px-xxl-6'
-                    href='#'
-                    data-kt-scroll-toggle='true'
-                    data-kt-drawer-dismiss='true'
-                  >
-                    Resources
-                  </a>
-                </div> */}
-                    {/* <div className='menu-item'>
-                  <a
-                    className='menu-link nav-link py-3 px-4 px-xxl-6'
-                    href='#'
-                    data-kt-scroll-toggle='true'
-                    data-kt-drawer-dismiss='true'
-                  >
-                    About Us
-                  </a>
-                </div> */}
-                    {/* <div className='menu-item'>
-                  <a
-                    className='menu-link nav-link py-3 px-4 px-xxl-6'
-                    href='#'
-                    data-kt-scroll-toggle='true'
-                    data-kt-drawer-dismiss='true'
-                  >
-                    Contact Us
-                  </a>
-                </div> */}
+                    <div className='menu-item'>
+                      <a
+                        className='menu-link nav-link py-3 px-4 px-xxl-6'
+                        href='/#kt_services_section'
+                        data-kt-scroll-toggle='true'
+                        data-kt-drawer-dismiss='true'
+                      >
+                        Our Services
+                      </a>
+                    </div>
+
+                    <div className='menu-item dropdown'>
+                      <a
+                        className='menu-link nav-link dropdown-toggle py-3 px-4 px-xxl-6'
+                        href=''
+                        data-kt-scroll-toggle='true'
+                        data-kt-drawer-dismiss='true'
+                        data-bs-toggle='dropdown'
+                        role='button'
+                        aria-expanded='true'
+                      >
+                        About Us
+                      </a>
+                      <ul className='dropdown-menu bg-light min-w-250px'>
+                        <li className='border border-2 border-dashed'>
+                          <a
+                            className='nav-link dropdown-item btn btn-active-primary px-3 fs-2'
+                            data-bs-toggle=''
+                            href='/about'
+                          >
+                            About Us
+                          </a>
+                        </li>
+                        <li className='border border-2 border-dashed'>
+                          <a
+                            className='nav-link dropdown-item btn btn-active-primary px-3 fs-2'
+                            data-bs-toggle=''
+                            href='/ourteam'
+                          >
+                            Our Team
+                          </a>
+                        </li>
+                        <li className='border border-2 border-dashed'>
+                          <a
+                            className='nav-link dropdown-item btn btn-active-primary px-3 fs-2'
+                            data-bs-toggle=''
+                            href='/contactus'
+                          >
+                            Contact Us
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
               </div>

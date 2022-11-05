@@ -21,7 +21,7 @@ import AdminSettings from '../modules/apps/admin-mgt-apps/settings/AdminSettings
 
 const PrivateRoutes = () => {
   const RemittancePage = lazy(() => import('./../modules/Remittance/RemittancePage'))
-  const BuilderPageWrapper = lazy(() => import('../pages/layout-builder/BuilderPageWrapper'))
+  // const BuilderPageWrapper = lazy(() => import('../pages/layout-builder/BuilderPageWrapper'))
   // const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
   // const RegistrationStepsPage = lazy(() => import('../modules/registration/RegistrationStepsPage'))
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))

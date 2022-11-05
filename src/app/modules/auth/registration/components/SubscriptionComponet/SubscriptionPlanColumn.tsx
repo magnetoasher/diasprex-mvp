@@ -9,7 +9,13 @@ import 'react-best-tabs/dist/index.css'
 import {HeaderNotificationsMenu, QuickLinks, Search} from '../../../../../../_metronic/partials'
 import clsx from 'clsx'
 
-const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, userTypeFull}) => {
+const SubscriptionPlanColumn = ({
+  userType,
+  setUserType,
+  submitStep,
+  setUserTypeFull,
+  userTypeFull,
+}) => {
   const [currentState, setCurrentState] = useState<'month' | 'annual'>('month')
   const [packagePrice, setPackagePrice] = useState()
   // const [generic] = useState([
@@ -952,4 +958,4 @@ const SubscriptionPlans = ({userType, setUserType, submitStep, setUserTypeFull, 
   )
 }
 
-export default SubscriptionPlans
+export default SubscriptionPlanColumn

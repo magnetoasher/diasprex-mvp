@@ -1,18 +1,15 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
-import {PublicNavBar} from '../../../_metronic/layout/components/header/PublicNavBar'
-import {Carousel2} from './components/Carousel2'
-import {WhoWeAre} from './components/whoweare'
-import {FeaturedDiasporas} from './components/featureddiasporas'
-import {HowItWorks} from './components/howitworks'
-import {ServicesSection} from './components/servicessection'
-import {Pricing} from './components/pricing'
+
+import {FeaturedDiasporas} from './components/diasporas/featureddiasporas'
+
+import {ServicesSection} from './components/otherservices/otherservices'
+import {Pricing} from './components/otherservices/pricing'
 import {Testimonies} from './components/testimonies'
 import {TrustedBy} from './components/trustedby'
 import {Connect} from './components/connect'
-import {FeaturedOpportunities} from './components/featuredopps'
-import {ContactUs} from '../resources/components/contactus'
+import {RemitttanceSection} from './components/remittance/remitttancesection'
+import {OppsSection} from './components/opportunities/oppssection'
+import {DiasporasSection} from './components/diasporas/diasporassection'
 
 export const Landing = () => {
   return (
@@ -39,11 +36,9 @@ export const Landing = () => {
             </div>
             {/* <HowItWorks /> */}
             {/* End How It Works*/}
-
             <div className='d-flex mw-100'>
               <img src={toAbsoluteUrl('/media/stock/diasprex/img-9.jpg')} className='mw-100' />
             </div>
-
             {/* Begin Carouse */}
             {/* <Carousel2
               img1url={toAbsoluteUrl('/media/stock/diasprex/img-8.jpg')}
@@ -54,32 +49,28 @@ export const Landing = () => {
           </div>
         </div>
         {/* Begin second curve section */}
-        <WhoWeAre />
+        <div id='kt_opportunities_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
+        <OppsSection />
         {/* End second curve section */}
-
-        {/* Begin how it works */}
-        <HowItWorks />
-        {/* End how it works */}
+        <div id='kt_remittance_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
+        <RemitttanceSection />
 
         {/* Begin featured diasporas */}
-
-        <FeaturedOpportunities />
-
+        <div id='kt_diasporas_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
+        <DiasporasSection />
         {/* End featured diasporas */}
+        {/* Begind testimonies */}
+        <Testimonies />
+        {/* End testimonies */}
 
         {/* Begin our services section */}
+        <div id='kt_services_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
         <ServicesSection />
         {/* End our services section */}
 
         {/* Begind pricing section*/}
         <Pricing />
         {/* End pricing section */}
-        {/* Begin featured diasporas */}
-        <FeaturedDiasporas />
-        {/* End featured diasporas */}
-        {/* Begind testimonies */}
-        <Testimonies />
-        {/* End testimonies */}
 
         {/* Begind Trusted By Section */}
         <TrustedBy />

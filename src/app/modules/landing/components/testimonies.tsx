@@ -3,7 +3,7 @@ import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 
 export const Testimonies = () => {
   return (
-    <div className='mt-20 mb-n20 position-relative z-index-2'>
+    <div className='mt-20 mb-20 position-relative z-index-2'>
       <div className='container'>
         <div className='text-center mb-17'>
           <h3

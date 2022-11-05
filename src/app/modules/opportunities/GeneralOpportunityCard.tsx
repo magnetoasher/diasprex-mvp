@@ -49,7 +49,6 @@ function GeneralOpportunityCard() {
                   dueDate={element.dueDate}
                   budget={element.budget}
                   src={element.img}
-                  avatar={element.avatar}
                   summary={element.summary}
                   following={element.following}
                   interest={element.interest}

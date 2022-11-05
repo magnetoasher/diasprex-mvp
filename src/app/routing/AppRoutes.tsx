@@ -22,7 +22,25 @@ import {App} from '../App'
 import config from '../../authConfig'
 import {Landing} from '../modules/landing/landing'
 import {PublicNavbarProvider} from '../../_metronic/layout/components/header/publicnavbarprovider'
+import GeneralOpportunityCard from '../modules/opportunities/GeneralOpportunityCard'
+import {ContactUs} from '../modules/resources/components/contactus'
+import {OurTeam} from '../modules/landing/components/team/our-team'
+import {PageLink, PageTitle} from '../../_metronic/layout/core'
 
+const profileBreadCrumbs: Array<PageLink> = [
+  {
+    title: 'Home',
+    path: '/',
+    isSeparator: false,
+    isActive: false,
+  },
+  {
+    title: '',
+    path: '',
+    isSeparator: true,
+    isActive: false,
+  },
+]
 /**
  * Base URL of the website.
  *
@@ -64,6 +82,17 @@ const HasAccessToRouter = () => {
               </PublicNavbarProvider>
             }
           />
+
+          <Route
+            path='/ourteam'
+            element={
+              <PublicNavbarProvider>
+                <SuspensedView>
+                  <OurTeam />
+                </SuspensedView>
+              </PublicNavbarProvider>
+            }
+          />
           <Route
             path='/faqs'
             element={
@@ -90,6 +119,7 @@ const HasAccessToRouter = () => {
             element={
               <PublicNavbarProvider>
                 <SuspensedView>
+                  {/* <PageTitle breadcrumbs={profileBreadCrumbs}>About Us</PageTitle> */}
                   <About />
                 </SuspensedView>
               </PublicNavbarProvider>
@@ -113,6 +143,17 @@ const HasAccessToRouter = () => {
               <PublicNavbarProvider>
                 <SuspensedView>
                   <DiasporasPageWrapper />
+                </SuspensedView>
+              </PublicNavbarProvider>
+            }
+          />
+
+          <Route
+            path='/contactus'
+            element={
+              <PublicNavbarProvider>
+                <SuspensedView>
+                  <ContactUs />
                 </SuspensedView>
               </PublicNavbarProvider>
             }

@@ -1,5 +1,5 @@
 import React from 'react'
-import {toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
 
 export const ServicesSection = () => {
   return (
@@ -13,7 +13,7 @@ export const ServicesSection = () => {
                 id='services'
                 data-kt-scroll-offset='{default: 100, lg: 250}'
               >
-                Our Services Details
+                Other Services
               </h3>
             </div>
 
@@ -26,7 +26,7 @@ export const ServicesSection = () => {
                     data-bs-toggle='tab'
                     data-bs-target='#kt_landing_projects_latest'
                   >
-                    Remittance Mobilization
+                    Africa Business Development
                   </a>
                 </li>
                 <li className='nav-item'>
@@ -36,7 +36,7 @@ export const ServicesSection = () => {
                     data-bs-toggle='tab'
                     data-bs-target='#kt_landing_projects_web_design'
                   >
-                    Africa Business Development
+                    Diaspora Business Development
                   </a>
                 </li>
                 <li className='nav-item'>
@@ -46,7 +46,7 @@ export const ServicesSection = () => {
                     data-bs-toggle='tab'
                     data-bs-target='#kt_landing_projects_mobile_apps'
                   >
-                    Diaspora Business Development
+                    Investments
                   </a>
                 </li>
                 <li className='nav-item'>
@@ -56,7 +56,7 @@ export const ServicesSection = () => {
                     data-bs-toggle='tab'
                     data-bs-target='#kt_landing_projects_development'
                   >
-                    Investments
+                    Consulting
                   </a>
                 </li>
               </ul>
@@ -75,7 +75,7 @@ export const ServicesSection = () => {
                         className='overlay-wrapper border border-1 bgi-no-repeat bgi-position-center bgi-size-contain card-rounded h-lg-100 min-h-250px'
                         style={{
                           backgroundImage: `url(${toAbsoluteUrl(
-                            '/media/stock/diasprex/remittance-image1.svg'
+                            '/media/stock/600x600/img-23.jpg'
                           )})`,
                         }}
                       ></div>

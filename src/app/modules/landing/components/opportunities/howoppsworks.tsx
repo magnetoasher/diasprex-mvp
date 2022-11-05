@@ -1,7 +1,7 @@
 import React from 'react'
-import {toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
 
-export const HowItWorks = () => {
+export const HowOppsWorks = () => {
   return (
     <div className='py-10 py-lg-20'>
       <div className='container'>
@@ -12,7 +12,7 @@ export const HowItWorks = () => {
               id='how-it-works'
               data-kt-scroll-offset='{default: 100, lg: 150}'
             >
-              How it Works
+              How Opportunity Engagement Works
             </h3>
             <div className='fs-5 text-muted fw-bold'>
               Save thousands to millions of bucks by using single tool

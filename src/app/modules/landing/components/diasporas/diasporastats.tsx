@@ -1,7 +1,7 @@
 import React from 'react'
-import {OctagonModel} from '../../../../_metronic/partials/content/utilities/octagonmodel'
+import {OctagonModel} from '../../../../../_metronic/partials/content/utilities/octagonmodel'
 
-export const WhoWeAre = () => {
+export const DiasporasStats = () => {
   return (
     <div className='mt-sm-n10'>
       <div className='landing-curve landing-dark-color'>
@@ -21,45 +21,44 @@ export const WhoWeAre = () => {
             data-kt-scroll-offset='{default: 50, lg: 150}'
           >
             <h3 className='fs-2hx text-white fw-bold mb-5'>
-              We Connect African Opportunities with the Diaspora Resources{' '}
+              African diasporas are highly educated professionals in multiple fields
             </h3>
 
             <div className='fs-5 text-white text-muted fw-bold'>
-              Promoting African economic development through diasporas' economic and intellectual
-              collaboration with African businesses and organizations.
+              African diasporas presents enoumous intelllectual capacities that can drive African
+              development
               <br />
-              Connecting capital market resources from the diaspora to the promoters of business and
-              developmental projects in Africa
+              We celebrate African diasporas making contributions in various fields
             </div>
           </div>
 
           <div className='d-flex flex-center'>
             <div className='d-flex flex-wrap flex-center justify-content-lg-between mb-15 mx-auto w-xl-900px'>
               <OctagonModel
-                imgscr='/media/icons/duotune/communication/com006.svg'
+                imgscr='/media/icons/duotune/graphs/gra010.svg'
                 imgcolor='info'
-                title1='1.5 Million'
-                label='Diapora Members'
+                title1='190,000'
+                label='Total in Healthcare'
                 width='250px'
                 height='250px'
                 bgcolor='light'
               />
 
               <OctagonModel
-                imgscr='/media/icons/duotune/finance/fin008.svg'
-                imgcolor='primary'
-                title1='75'
-                label='Total Deals'
+                imgscr='/media/icons/duotune/graphs/gra007.svg'
+                imgcolor='info'
+                title1='23,000'
+                label='Physicians'
                 width='250px'
                 height='250px'
                 bgcolor='light'
               />
 
               <OctagonModel
-                imgscr='/media/icons/duotune/finance/fin006.svg'
-                imgcolor='success'
-                title1='$2.3B'
-                label='Deal Value'
+                imgscr='/media/icons/duotune/graphs/gra008.svg'
+                imgcolor='info'
+                title1='57,000'
+                label='In STEM'
                 width='250px'
                 height='250px'
                 bgcolor='light'
@@ -68,18 +67,21 @@ export const WhoWeAre = () => {
           </div>
 
           <div className='fs-2 fw-semibold text-muted text-center mb-3'>
-            <span className='fs-1 lh-1 text-gray-700'>“</span>When you care about your topic, you’ll
-            write about it in a
+            <span className='fs-1 lh-1 text-gray-700'>“</span>Diasprex promotes African diaspora's
+            achievements and gives them visibility to leaders
             <br />
-            <span className='text-gray-700 me-1'>more powerful</span>, emotionally expressive way
+            in our monthly <span className='text-white me-1'>Unfound African Diasporas</span>,
+            emotionally expressive way
             <span className='fs-1 lh-1 text-gray-700'>“</span>
           </div>
 
           <div className='fs-2 fw-semibold text-muted text-center'>
-            <a href='../../demo1/dist/account/security.html' className='link-primary fs-4 fw-bold'>
-              Marcus Levy,
+            <span className='fs-4 fw-bold text-gray-600 me-2'>
+              Submit Your Profile or Invite Friends to
+            </span>
+            <a href='/diasporas' className='link-primary fs-4 fw-bold'>
+              Diasprex Unfound African Diasporas
             </a>
-            <span className='fs-4 fw-bold text-gray-600'>KeenThemes CEO</span>
           </div>
         </div>
       </div>
