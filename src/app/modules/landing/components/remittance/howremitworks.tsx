@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
 
 export const HowRemitWorks = () => {
@@ -101,6 +102,15 @@ export const HowRemitWorks = () => {
             </div>
           </div>
           <div className='tns tns-default'></div>
+          <div className='text-center mb-18 mt-10 ms-1'>
+            <Link to='/remittance_resources' className='btn btn-light-primary fs-2'>
+              Learn more
+            </Link>
+            <span className='fs-2 fw-bold'> or </span>
+            <Link to='/sendmoney' className='btn btn-light-primary fs-2'>
+              Send Money
+            </Link>
+          </div>
         </div>
       </div>
     </div>

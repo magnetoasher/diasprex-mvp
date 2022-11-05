@@ -9,7 +9,7 @@ import {registerables} from 'chart.js'
 export const FeaturedOpportunities = () => {
   const handleOppsEngage = () => {}
   return (
-    <div className='py-10 py-lg-20'>
+    <div className=''>
       <div className='container'>
         <div className='text-center mb-12'>
           <h3
@@ -21,8 +21,13 @@ export const FeaturedOpportunities = () => {
           </h3>
 
           <div className='fs-4 fw-bold' style={{color: 'rgba(0, 0, 56, 0.8'}}>
-            More than 100 opportunities worth over $5 Billion in value
+            More than 100 opportunities worth over $5 Billion in value.
             <br />
+          </div>
+          <div className='text-center ms-1'>
+            <Link to='/opportunities' className='btn btn-light-primary me-3'>
+              Sign Up to see all opportunities
+            </Link>
           </div>
         </div>
 
@@ -91,27 +96,21 @@ export const FeaturedOpportunities = () => {
           </button> */}
         </Carousel>
 
-        <div className='d-flex align-items-center justify-content-center mt-10'>
+        {/* <div className='d-flex align-items-center justify-content-center mt-10'>
           <div className='d-flex   fs-5 text-dark me-3 fw-bold'>
             Ready to engage opportunities today?
             <br />
-          </div>
-
-          <div className='text-center ms-1'>
-            <Link to='/opportunities' className='btn btn-light-primary text-dark me-3'>
-              Sign up here
-            </Link>
-          </div>
-          {/* <button
+          </div> */}
+        {/* <button
             className='btn btn-primary btn-light-primary'
             id='kt_opps_center'
             onClick={() => <Navigate to='opportunities' />}
           >
             View More
           </button> */}
-        </div>
-        <div className='separator mt-10'></div>
       </div>
+      {/* <div className='separator mt-10'></div> */}
+      {/* </div> */}
     </div>
   )
 }

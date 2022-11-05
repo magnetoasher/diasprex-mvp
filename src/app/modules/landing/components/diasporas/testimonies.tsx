@@ -1,7 +1,7 @@
 import React from 'react'
-import {toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
 
-export const Testimonies = () => {
+export const DiasporaTestimonies = () => {
   return (
     <div className='mt-20 mb-20 position-relative z-index-2'>
       <div className='container'>

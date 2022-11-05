@@ -3,6 +3,7 @@ import {PublicDiasporasCard} from './diasporascard'
 
 import {DiasporasStats} from './diasporastats'
 import {FeaturedDiasporas} from './featureddiasporas'
+import {DiasporaTestimonies} from './testimonies'
 
 export const DiasporasSection = () => {
   return (
@@ -10,6 +11,7 @@ export const DiasporasSection = () => {
       <PublicDiasporasCard />
       <DiasporasStats />
       <FeaturedDiasporas />
+      <DiasporaTestimonies />
     </div>
   )
 }

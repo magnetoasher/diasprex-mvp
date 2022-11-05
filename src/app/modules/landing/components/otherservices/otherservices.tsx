@@ -1,7 +1,7 @@
 import React from 'react'
 import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
 
-export const ServicesSection = () => {
+export const OtherServices = () => {
   return (
     <div className='mb-lg-n15 position-relative z-index-2'>
       <div className='container'>

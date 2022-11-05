@@ -1,15 +1,15 @@
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 
 import {FeaturedDiasporas} from './components/diasporas/featureddiasporas'
-
-import {ServicesSection} from './components/otherservices/otherservices'
+import {OtherServicesSection} from './components/otherservices/service-section'
 import {Pricing} from './components/otherservices/pricing'
-import {Testimonies} from './components/testimonies'
+
 import {TrustedBy} from './components/trustedby'
 import {Connect} from './components/connect'
 import {RemitttanceSection} from './components/remittance/remitttancesection'
 import {OppsSection} from './components/opportunities/oppssection'
 import {DiasporasSection} from './components/diasporas/diasporassection'
+import {Link} from 'react-router-dom'
 
 export const Landing = () => {
   return (
@@ -47,37 +47,35 @@ export const Landing = () => {
             /> */}
             {/* End Carosuel */}
           </div>
+          {/* Begin opps section */}
+          <div id='kt_opportunities_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
+          <OppsSection />
+          {/* End second opps section */}
+          <div id='kt_remittance_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
+          <RemitttanceSection />
+
+          {/* Begin diasporas section */}
+          <div id='kt_diasporas_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
+          <DiasporasSection />
+
+          {/* End diasporas section*/}
+
+          {/* Begin our services section */}
+          <div id='kt_services_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
+          <OtherServicesSection />
+          {/* End our services section */}
+
+          {/* Begind pricing section*/}
+          {/* <Pricing /> */}
+          {/* End pricing section */}
+
+          {/* Begind Trusted By Section */}
+          <TrustedBy />
+          {/* End Trusted By Section */}
+          {/* Begind Footer Section */}
+          <Connect />
+          {/* End Footer Section */}
         </div>
-        {/* Begin second curve section */}
-        <div id='kt_opportunities_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
-        <OppsSection />
-        {/* End second curve section */}
-        <div id='kt_remittance_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
-        <RemitttanceSection />
-
-        {/* Begin featured diasporas */}
-        <div id='kt_diasporas_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
-        <DiasporasSection />
-        {/* End featured diasporas */}
-        {/* Begind testimonies */}
-        <Testimonies />
-        {/* End testimonies */}
-
-        {/* Begin our services section */}
-        <div id='kt_services_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
-        <ServicesSection />
-        {/* End our services section */}
-
-        {/* Begind pricing section*/}
-        <Pricing />
-        {/* End pricing section */}
-
-        {/* Begind Trusted By Section */}
-        <TrustedBy />
-        {/* End Trusted By Section */}
-        {/* Begind Footer Section */}
-        <Connect />
-        {/* End Footer Section */}
       </div>
     </body>
   )

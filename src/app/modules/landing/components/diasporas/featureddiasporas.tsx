@@ -1,5 +1,6 @@
 import React from 'react'
 import Carousel from 'react-bootstrap/Carousel'
+import {Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
 
 export const FeaturedDiasporas = () => {
@@ -19,6 +20,11 @@ export const FeaturedDiasporas = () => {
             It’s no doubt that when a development takes longer to complete, additional costs to
             <br />
             integrate and test each extra feature creeps up and haunts most of us.
+          </div>
+          <div className='text-center mb-18 ms-1'>
+            <Link to='/diasporas' className='btn btn-light-primary me-3'>
+              Join our diasporas featuring
+            </Link>
           </div>
         </div>
 
