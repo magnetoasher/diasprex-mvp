@@ -60,7 +60,7 @@ export const IndustryList = () => {
       <option value='Government Relations'>Government Relations</option>
       <option value='Graphic Design/Web Design'>Graphic Design/Web Design</option>
       <option value='Health/Fitness'>Health/Fitness</option>
-      <option value='Higher Education/Acadamia'>Higher Education/Acadamia</option>
+      <option value='Higher Education/Academia'>Higher Education/Academia</option>
       <option value='Hospital/Health Care'>Hospital/Health Care</option>
       <option value='Hospitality'>Hospitality</option>
       <option value='Human Resources/HR'>Human Resources/HR</option>

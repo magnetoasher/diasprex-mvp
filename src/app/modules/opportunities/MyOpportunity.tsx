@@ -19,7 +19,8 @@ const MyOpportunity = () => {
   const [activeprop] = useState(active)
   const [submittedprop] = useState(submitted)
   const [declinedprop] = useState(declined)
-  let user = localStorage.getItem('userType')
+  let user = localStorage.getItem('userTypeFull')
+  let userType = localStorage.getItem('userType')
 
   const {TabPane} = Tabs
   const onChange = (key: string) => {
@@ -39,7 +40,7 @@ const MyOpportunity = () => {
       >
         <MyOpportunityTable />
       </TabPane>
-      {user !== 'basic' && (
+      {user !== 'basic_enabler' && (
         <>
           <TabPane
             tab={

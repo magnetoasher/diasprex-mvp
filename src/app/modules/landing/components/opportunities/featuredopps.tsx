@@ -12,22 +12,13 @@ export const FeaturedOpportunities = () => {
     <div className=''>
       <div className='container'>
         <div className='text-center mb-12'>
-          <h3
-            className='fs-2hx text-dark mb-5'
-            id='opportunities'
-            data-kt-scroll-offset='{default: 100, lg: 150}'
-          >
+          <h3 className='fs-2hx text-dark mb-5' id='featured_opps'>
             Featured Opportunities
           </h3>
 
           <div className='fs-4 fw-bold' style={{color: 'rgba(0, 0, 56, 0.8'}}>
             More than 100 opportunities worth over $5 Billion in value.
             <br />
-          </div>
-          <div className='text-center ms-1'>
-            <Link to='/opportunities' className='btn btn-light-primary me-3'>
-              Sign Up to see all opportunities
-            </Link>
           </div>
         </div>
 
@@ -111,6 +102,11 @@ export const FeaturedOpportunities = () => {
       </div>
       {/* <div className='separator mt-10'></div> */}
       {/* </div> */}
+      <div className='text-center mt-10 ms-1'>
+        <Link to='/opportunities' className='btn btn-light-primary rounded-pill me-3'>
+          Sign Up to see all opportunities
+        </Link>
+      </div>
     </div>
   )
 }

@@ -15,11 +15,7 @@ export const DiasporasStats = () => {
 
       <div className='pb-15 pt-18 landing-dark-bg'>
         <div className='container'>
-          <div
-            className='text-center mt-15 mb-18'
-            id='whatwedo'
-            data-kt-scroll-offset='{default: 50, lg: 150}'
-          >
+          <div className='text-center mt-15 mb-18' id='diasporas_stats'>
             <h3 className='fs-2hx text-white fw-bold mb-5'>
               African diasporas are highly educated professionals in multiple fields
             </h3>

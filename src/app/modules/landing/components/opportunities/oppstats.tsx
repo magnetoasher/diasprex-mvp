@@ -16,11 +16,7 @@ export const OppsStats = () => {
 
       <div className='pb-15 pt-18 landing-dark-bg'>
         <div className='container'>
-          <div
-            className='text-center mt-15 mb-18'
-            id='whatwedo'
-            data-kt-scroll-offset='{default: 100, lg: 150}'
-          >
+          <div className='text-center mt-15 mb-18' id='kt_opps_stats'>
             <h3 className='fs-2hx text-white fw-bold mb-5'>
               We Connect African Opportunities with the Diaspora Resources{' '}
             </h3>

@@ -1,6 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
+import {KTSVG, toAbsoluteUrl} from '../../../../../_metronic/helpers'
+
+import {BiModalConfirm} from '../../../../../_metronic/partials/modals/upgrade-plan/bimodalconfirm'
 
 export const HowRemitWorks = () => {
   return (
@@ -8,11 +10,7 @@ export const HowRemitWorks = () => {
       <div className='container'>
         <div className='text-center mb-12'>
           <div className='text-center mb-17'>
-            <h3
-              className='fs-2hx text-dark mb-5'
-              id='how-it-works'
-              data-kt-scroll-offset='{default: 100, lg: 150}'
-            >
+            <h3 className='fs-2hx text-dark mb-5' id='how_remittance_works'>
               How Our Remittance Mobilization Works
             </h3>
             <div className='fs-5 text-muted fw-bold'>
@@ -23,7 +21,7 @@ export const HowRemitWorks = () => {
           </div>
 
           <div className='row w-100 gy-10 mb-md-20'>
-            <div className='col-md-4 px-5'>
+            <div className='col-md-3 px-5'>
               <div className='text-center mb-10 mb-md-0'>
                 <img
                   src={toAbsoluteUrl('/media/illustrations/sketchy-1/2.png')}
@@ -36,20 +34,25 @@ export const HowRemitWorks = () => {
                     1
                   </span>
 
-                  <div className='fs-5 fs-lg-3 fw-bold text-dark'>Jane Miller</div>
+                  <div className='fs-5 fs-lg-3 fw-bold text-dark'>Become a Member</div>
                 </div>
 
                 <div className='fw-semibold fs-6 fs-lg-4 text-muted'>
-                  Save thousands to millions of bucks
-                  <br />
-                  by using single tool for different
-                  <br />
-                  amazing and great
+                  Register as a new Enabler or sign in to your Enabler's account
                 </div>
               </div>
             </div>
 
-            <div className='col-md-4 px-5'>
+            <div className='col-md-1 d-flex align-items-center px-5'>
+              <div className='text-center mb-10 mb-md-0'>
+                <KTSVG
+                  path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                  className={`svg-icon-1 svg-icon svg-icon-4tx`}
+                />
+              </div>
+            </div>
+
+            <div className='col-md-3 px-5'>
               <div className='text-center mb-10 mb-md-0'>
                 <img
                   src={toAbsoluteUrl('/media/illustrations/sketchy-1/8.png')}
@@ -62,20 +65,24 @@ export const HowRemitWorks = () => {
                     2
                   </span>
 
-                  <div className='fs-5 fs-lg-3 fw-bold text-dark'>Setup Your App</div>
+                  <div className='fs-5 fs-lg-3 fw-bold text-dark'>Initiate Monety Transfer</div>
                 </div>
 
                 <div className='fw-semibold fs-6 fs-lg-4 text-muted'>
-                  Save thousands to millions of bucks
-                  <br />
-                  by using single tool for different
-                  <br />
-                  amazing and great
+                  Initiate your money transer transmission from your account dashboard
                 </div>
               </div>
             </div>
+            <div className='col-md-1 d-flex align-items-center px-5'>
+              <div className='text-center mb-10 mb-md-0'>
+                <KTSVG
+                  path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                  className={`svg-icon-1 svg-icon svg-icon-4tx`}
+                />
+              </div>
+            </div>
 
-            <div className='col-md-4 px-5'>
+            <div className='col-md-3 px-5'>
               <div className='text-center mb-10 mb-md-0'>
                 <img
                   src={toAbsoluteUrl('/media/illustrations/sketchy-1/12.png')}
@@ -88,27 +95,23 @@ export const HowRemitWorks = () => {
                     3
                   </span>
 
-                  <div className='fs-5 fs-lg-3 fw-bold text-dark'>Enjoy Nautica App</div>
+                  <div className='fs-5 fs-lg-3 fw-bold text-dark'>Notify Your Recipient</div>
                 </div>
 
                 <div className='fw-semibold fs-6 fs-lg-4 text-muted'>
-                  Save thousands to millions of bucks
-                  <br />
-                  by using single tool for different
-                  <br />
-                  amazing and great
+                  Notify your recipient of the transmission
                 </div>
               </div>
             </div>
           </div>
-          <div className='tns tns-default'></div>
-          <div className='text-center mb-18 mt-10 ms-1'>
-            <Link to='/remittance_resources' className='btn btn-light-primary fs-2'>
+
+          <div className='text-center mt-10 ms-1'>
+            <Link to='/remittance_resources' className='btn btn-light-primary rounded-pill'>
               Learn more
             </Link>
             <span className='fs-2 fw-bold'> or </span>
-            <Link to='/sendmoney' className='btn btn-light-primary fs-2'>
-              Send Money
+            <Link className='btn btn-primary rounded-pill min-w- 100px' to='/auth' role='button'>
+              Sign In to Send Money
             </Link>
           </div>
         </div>

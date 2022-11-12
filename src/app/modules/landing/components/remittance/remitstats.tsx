@@ -15,11 +15,7 @@ export const RemittanceStats = () => {
 
       <div className='pb-15 pt-18 landing-dark-bg'>
         <div className='container'>
-          <div
-            className='text-center mt-15 mb-18'
-            id='whatwedo'
-            data-kt-scroll-offset='{default: 50, lg: 150}'
-          >
+          <div className='text-center mt-15 mb-18' id='remittance_stats'>
             <h3 className='fs-2hx text-white fw-bold mb-5'>
               Mobilizing Diaspora's Remittance for African Economic Prosperity is the Right Thing To
               Do

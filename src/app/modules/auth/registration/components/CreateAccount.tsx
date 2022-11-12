@@ -22,7 +22,7 @@ const CreateAccount: FC = () => {
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
   const [userType, setUserType] = useState<string>('enabler')
-  const [userTypeFull, setUserTypeFull] = useState('')
+  const [userTypeFull, setUserTypeFull] = useState('basic_enabler')
   const [initValues] = useState<ICreateAccount>(inits)
 
   const [isShowAlert, setIsShowAlert] = useState(false)
@@ -34,12 +34,12 @@ const CreateAccount: FC = () => {
   const [hideShow, setHideShow] = useState(true)
 
   useEffect(() => {
-    if (userType !== 'basic') {
+    if (userTypeFull !== 'basic_enabler' || userType === 'sponsor') {
       setHideShow(false)
     } else {
       setHideShow(true)
     }
-  }, [userType])
+  }, [userTypeFull, userType])
   const questions = {
     individual: 'Are you a citizen  or a resident of a country in the OECD regions?',
     business: 'Is your business  located and registered in a country in the OECD region',
@@ -54,9 +54,7 @@ const CreateAccount: FC = () => {
   const navigate = useNavigate()
 
   const loadStepper = () => {
-    stepper.current = stepper.current = StepperComponent.createInsance(
-      stepperRef.current as HTMLDivElement
-    )
+    stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement)
   }
 
   const prevStep = () => {
@@ -73,16 +71,16 @@ const CreateAccount: FC = () => {
     if (!stepper.current) {
       return
     }
-
     setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex])
 
-    if (stepper.current.currentStepIndex !== (userType === 'basic' ? 3 : 5)) {
+    if (stepper.current.currentStepIndex !== (userTypeFull === 'basic_enabler' ? 3 : 5)) {
       if (stepper.current.currentStepIndex == 1) {
         //text
-        if (userType == 'individual') {
+
+        if (userTypeFull == 'basic_enabler' || 'super_enabler' || 'standard_enabler') {
           setCategoryQuestion(questions.individual)
           setIsShowAlert(true)
-        } else if (userType == 'business') {
+        } else if (userType == 'business_enabler') {
           setCategoryQuestion(questions.business)
           setIsShowAlert(true)
         } else if (userType == 'sponsor') {
@@ -135,8 +133,8 @@ const CreateAccount: FC = () => {
     setIsShowAlert(false)
   }
   useEffect(() => {
-    localStorage.setItem('userType', 'basic')
-    localStorage.setItem('userTypeFull', 'Basic Enabler')
+    localStorage.setItem('userType', 'enabler')
+    localStorage.setItem('userTypeFull', 'basic_enabler')
   }, [])
   console.log('total', stepper.current && stepper.current.totatStepsNumber)
   return (
@@ -237,7 +235,7 @@ const CreateAccount: FC = () => {
 
                 <div className='stepper-icon w-40px h-40px'>
                   <i className='stepper-check fas fa-check'></i>
-                  <span className='stepper-number'>{userType === 'basic' ? 3 : 5}</span>
+                  <span className='stepper-number'>{userTypeFull === 'basic_enabler' ? 3 : 5}</span>
                 </div>
 
                 <div className='stepper-label'>
@@ -292,16 +290,16 @@ const CreateAccount: FC = () => {
                 <Step2 />
               </div> */}
                 <div data-kt-stepper-element='content' className='w-xl-800px'>
-                  <Step3 userType={userType} />
+                  <Step3 userType={userType} userTypeFull={userTypeFull} />
                 </div>
 
-                {userType !== 'basic' && (
+                {userTypeFull !== 'basic_enabler' && (
                   <div data-kt-stepper-element='content' className='w-xl-800px'>
                     <Step4 />
                   </div>
                 )}
 
-                {userType !== 'basic' && (
+                {userTypeFull !== 'basic_enabler' && (
                   <div data-kt-stepper-element='content' className='w-xl-800px'>
                     <AccountVerification />
                   </div>

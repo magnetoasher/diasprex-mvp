@@ -6,11 +6,7 @@ export const DiasporaTestimonies = () => {
     <div className='mt-20 mb-20 position-relative z-index-2'>
       <div className='container'>
         <div className='text-center mb-17'>
-          <h3
-            className='fs-2hx text-dark mb-5'
-            id='clients'
-            data-kt-scroll-offset='{default: 125, lg: 150}'
-          >
+          <h3 className='fs-2hx text-dark mb-5' id='diasporas_testimonies'>
             What They Are Saying
           </h3>
 

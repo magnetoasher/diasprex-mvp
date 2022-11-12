@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC} from 'react'
+import {FC, useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import {useOktaAuth} from '@okta/okta-react'
 import {toAbsoluteUrl} from '../../../helpers'
@@ -7,12 +7,22 @@ import {toAbsoluteUrl} from '../../../helpers'
 const HeaderUserMenu: FC = () => {
   var userTypeFull = localStorage.getItem('userTypeFull')
   var userType = localStorage.getItem('userType')
+  const [userLabel, setUserLabel] = useState<any>(userTypeFull)
 
   const {oktaAuth} = useOktaAuth()
 
   const logout = () => {
     oktaAuth.signOut()
   }
+
+  const userBadgeColor =
+    userType === 'sponsor' ? 'primary' : userType === 'admin' ? 'info' : 'success'
+
+  useEffect(() => {
+    userType === 'admin'
+      ? setUserLabel('Admin') //Temporary placeholder for admin user type
+      : setUserLabel(userTypeFull)
+  }, [userTypeFull, userType])
 
   return (
     <div
@@ -36,8 +46,10 @@ const HeaderUserMenu: FC = () => {
             <div className='fw-bolder d-flex align-items-center fs-5'>
               {/* {user.first_name} {user.first_name} */}
               Max Smith
-              <span className='badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2 text-capitalize'>
-                {userTypeFull}
+              <span
+                className={`badge badge-light-${userBadgeColor} fw-bolder fs-8 px-2 py-1 ms-2 text-capitalize`}
+              >
+                {userLabel?.replace('_', ' ')}{' '}
               </span>
             </div>
             <a href='#' className='fw-bold text-muted text-hover-primary fs-7'>

@@ -16,6 +16,8 @@ function ViewOpportunity() {
   const [isShowDetail, setIsShowDetail] = useState(false)
 
   const userType = localStorage.getItem('userType')
+  const userTypeFull = localStorage.getItem('userTypeFull')
+
   const openNotification = (placement, message) => {
     api.info({
       message: `${message} !`,
@@ -33,9 +35,9 @@ function ViewOpportunity() {
   const Context = React.createContext({
     name: 'Default',
   })
-  console.log(userType)
+
   const handleDetails = () => {
-    if (userType === 'basic') {
+    if (userTypeFull === 'basic_enabler') {
       openNotificationWarning('bottomRight', 'It requires paid subscription and ODA agreement')
     } else {
       setIsShowDetail(!isShowDetail)
@@ -94,15 +96,17 @@ function ViewOpportunity() {
                   type='button'
                   className='btn btn-primary'
                   data-bs-toggle='modal'
-                  data-bs-target={userType == 'basic' ? '#kt_subs_modal' : '#kt_oda_modal'}
+                  data-bs-target={
+                    userTypeFull == 'basic_enabler' ? '#kt_subs_modal' : '#kt_oda_modal'
+                  }
                   data-bs-tooltips='Requires Enbaler subscription'
                 >
                   View Opportunity Details
                 </button>
               </div>
             )}
-            {userType === 'basic' && <SubscriptionRequired />}
-            {userType !== 'basic' && <OppsDA OnDetails={handleDetails} />}
+            {userTypeFull === 'basic_enabler' && <SubscriptionRequired />}
+            {userTypeFull !== 'basic_enabler' && <OppsDA OnDetails={handleDetails} />}
 
             <div
               style={{
@@ -331,7 +335,7 @@ function ViewOpportunity() {
               <div className='col text-center'>
                 <Button
                   onClick={() => {
-                    userType === 'basic'
+                    userTypeFull === 'basic_enabler'
                       ? openNotificationWarning(
                           'bottomRight',
                           'It requires paid subscription and ODA agreement'

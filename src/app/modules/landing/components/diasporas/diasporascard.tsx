@@ -10,17 +10,16 @@ export const PublicDiasporasCard = () => {
         <div className='card shadow-sm'>
           <div className='card-body p-lg-20'>
             <div className='text-center mb-5 mb-lg-10'>
-              <h3
-                className='fs-2hx text-dark mb-5'
-                id='services'
-                data-kt-scroll-offset='{default: 100, lg: 250}'
-              >
+              <h3 className='fs-2hx text-dark mb-5' id='diasporas_card'>
                 African Diasporas
               </h3>
-              <div className='fs-4 fw-bold' style={{color: 'rgba(0, 0, 56, 0.8'}}>
+              <div className='fs-4 fw-bold' style={{color: 'rgba(156, 65, 186, 0.8'}}>
                 Promoting diasporas economic and professional development
-                <br />
-                and creating opportunities for the diasporas
+              </div>
+
+              <div className='fs-4 fw-bold' style={{color: 'rgba(0, 0, 56, 0.8'}}>
+                Diasprex Offers Diasporas a Platform to Participate in the Global Generational Weath
+                Generation
               </div>
             </div>
 

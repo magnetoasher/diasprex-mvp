@@ -56,7 +56,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
       default: true,
       custom: false,
       value1: 'basic',
-      valueType: 'Basic_Enabler',
+      valueType: 'basic_enabler',
       pricing: true,
       features: [
         {
@@ -120,7 +120,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
       default: false,
       custom: false,
       value1: 'individual',
-      valueType: 'Standard_Enabler',
+      valueType: 'standard_enabler',
       pricing: true,
       features: [
         {
@@ -184,7 +184,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
       default: false,
       custom: false,
       value1: 'individual',
-      valueType: 'Super_Enabler',
+      valueType: 'super_enabler',
 
       pricing: true,
       features: [
@@ -249,7 +249,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
       label: '',
       custom: true,
       value1: 'business',
-      valueType: 'Business_Enabler',
+      valueType: 'business_enabler',
 
       pricing: false,
       features: [
@@ -315,7 +315,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
       label: '',
       default: true,
       value1: 'sponsor',
-      valueType: 'Basic_Sponsor',
+      valueType: 'basic_sponsor',
       pricing: true,
       custom: false,
       features: [
@@ -367,7 +367,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
       label: '',
       default: false,
       value1: 'sponsor',
-      valueType: 'Silver_Sponsor',
+      valueType: 'silver_sponsor',
 
       pricing: true,
 
@@ -421,7 +421,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
       label: 'Most popular',
       default: false,
       value1: 'sponsor',
-      valueType: 'Gold_Sponsor',
+      valueType: 'gold_sponsor',
 
       pricing: true,
 
@@ -475,7 +475,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
       label: '',
       default: false,
       value1: 'sponsor',
-      valueType: 'Diamond_Sponsor',
+      valueType: 'diamond_sponsor',
 
       pricing: false,
 
@@ -571,6 +571,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
               return (
                 <div
                   onClick={() => {
+                    setUserTypeFull(`basic_${plan.value1}`)
                     setUserType(plan.value1.toLocaleLowerCase())
 
                     setSelectedEnabler('enabler1')
@@ -652,6 +653,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
                     <div
                       onClick={() => {
                         setUserTypeFull(plan.valueType)
+
                         {
                           currentState === 'month'
                             ? setPackagePrice(plan.priceMonth)

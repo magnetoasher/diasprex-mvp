@@ -6,16 +6,18 @@ import {useLocation} from 'react-router-dom'
 
 const ProfileHeader: React.FC = () => {
   const location = useLocation()
-  let user = localStorage.getItem('userType')
-  const fullUserType = localStorage.getItem('userTypeFull')
-  const [userTypeFull, setUserTypeFull] = useState<any>(
-    fullUserType && fullUserType.replace('_', ' ')
-  )
+  const userType = localStorage.getItem('userType')
+  const userTypeFull = localStorage.getItem('userTypeFull')
+  const [userLabel, setUserLabel] = useState<any>(userTypeFull)
+
   useEffect(() => {
-    user === 'admin'
-      ? setUserTypeFull('Admin') //Temporary placeholder for admin user type
-      : setUserTypeFull(fullUserType && fullUserType.replace('_', ' '))
-  }, [fullUserType])
+    userType === 'admin'
+      ? setUserLabel('Admin') //Temporary placeholder for admin user type
+      : setUserLabel(userTypeFull)
+  }, [userTypeFull, userType])
+
+  const userBadgeColor =
+    userType === 'sponsor' ? 'primary' : userType === 'admin' ? 'info' : 'success'
 
   return (
     <div className='card mb-5 mb-xl-10'>
@@ -25,7 +27,7 @@ const ProfileHeader: React.FC = () => {
             <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
               <img
                 src={
-                  user !== 'sponsor'
+                  userType !== 'sponsor'
                     ? toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')
                     : toAbsoluteUrl('/media/logos/megold-logo.png')
                 }
@@ -42,7 +44,7 @@ const ProfileHeader: React.FC = () => {
                   <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
                     Max Smith
                   </a>
-                  {user !== 'basic' && (
+                  {userTypeFull !== 'basic_enabler' && (
                     <a href='#' data-toggle='tooltip' data-placement='top' title='Verified account'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen026.svg'
@@ -61,7 +63,9 @@ const ProfileHeader: React.FC = () => {
                       path='/media/icons/duotune/communication/com006.svg'
                       className='svg-icon-4 me-1'
                     />
-                    <span style={{textTransform: 'capitalize'}}>{userTypeFull || 'Generic'}</span>
+                    <span className={`badge badge-light-${userBadgeColor} text-capitalize`}>
+                      {userLabel?.replace('_', ' ') || ' '}
+                    </span>
                   </a>
                   <a
                     href='#'
@@ -88,7 +92,7 @@ const ProfileHeader: React.FC = () => {
             </div>
 
             <div className='d-flex flex-wrap flex-stack'>
-              {user === 'sponsor' ? (
+              {userType === 'sponsor' ? (
                 <>
                   <div className='d-flex flex-column flex-grow-1 pe-8'>
                     <div className='d-flex flex-wrap'>
@@ -285,7 +289,7 @@ const ProfileHeader: React.FC = () => {
                     `nav-link text-active-primary me-6 ` +
                     (location.pathname === '/profile/overview' && 'active')
                   }
-                  to={`/profile/overview?userType=${user}`}
+                  to={`/profile/overview?userType=${userType}`}
                 >
                   Overview
                 </Link>
@@ -297,20 +301,20 @@ const ProfileHeader: React.FC = () => {
                     `nav-link text-active-primary me-6 ` +
                     (location.pathname === '/profile/settings' && 'active')
                   }
-                  to={`/profile/settings?userType=${user}`}
+                  to={`/profile/settings?userType=${userType}`}
                 >
                   Setting
                 </Link>
               </li>
 
-              {user !== 'basic' && (
+              {userTypeFull !== 'basic_enabler' && (
                 <li className='nav-item'>
                   <Link
                     className={
                       `nav-link text-active-primary me-6 ` +
                       (location.pathname === '/profile/billing' && 'active')
                     }
-                    to={`/profile/billing?userType=${user}`}
+                    to={`/profile/billing?userType=${userType}`}
                   >
                     Billing
                   </Link>

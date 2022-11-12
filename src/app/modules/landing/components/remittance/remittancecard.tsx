@@ -10,17 +10,14 @@ export const RemittanceCard = () => {
         <div className='card shadow-sm'>
           <div className='card-body p-lg-20'>
             <div className='text-center mb-5 mb-lg-10'>
-              <h3
-                className='fs-2hx text-dark mb-5'
-                id='services'
-                data-kt-scroll-offset='{default: 100, lg: 250}'
-              >
+              <h3 className='fs-2hx text-dark mb-5' id='remittance_card'>
                 Our Remittance Retainer Program
               </h3>
+              <div className='fs-4 fw-bold' style={{color: 'rgba(0, 50, 156, 1.0'}}>
+                Mobilizing Remittance Funds for Productive Economic Opportunities in Africa
+              </div>
               <div className='fs-4 fw-bold' style={{color: 'rgba(0, 0, 56, 0.8'}}>
-                Mobilizing remittance funds for productive economic opportunities in Africa
-                <br />
-                and creating opportunities for the diasporas
+                Creating opportunities for the diasporas
               </div>
             </div>
 
@@ -33,7 +30,7 @@ export const RemittanceCard = () => {
                     href='assets/media/stock/600x400/img-20.jpg'
                   >
                     <div
-                      className='overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px'
+                      className='overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-350px'
                       // style={{
                       //   backgroundImage: `url(${toAbsoluteUrl('/media/stock/600x600/img-20.jpg')})`,
                       // }}

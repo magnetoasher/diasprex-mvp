@@ -8,11 +8,7 @@ export const FeaturedDiasporas = () => {
     <div className='py-10 py-lg-20'>
       <div className='container'>
         <div className='text-center mb-12'>
-          <h3
-            className='fs-2hx text-dark mb-5'
-            id='team'
-            data-kt-scroll-offset='{default: 100, lg: 150}'
-          >
+          <h3 className='fs-2hx text-dark mb-5' id='featured_diasporas'>
             Featured Diasporas
           </h3>
 

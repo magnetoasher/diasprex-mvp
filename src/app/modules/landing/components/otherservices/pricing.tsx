@@ -18,11 +18,7 @@ export const Pricing = () => {
         <div className='container'>
           <div className='d-flex flex-column container pt-lg-20'>
             <div className='mb-13 text-center'>
-              <h1
-                className='fs-2hx fw-bold text-white mb-5'
-                id='pricing'
-                data-kt-scroll-offset='{default: 100, lg: 150}'
-              >
+              <h1 className='fs-2hx fw-bold text-white mb-5' id='pricing'>
                 Our Subscription Plan
               </h1>
               <div className='text-gray-600 fw-semibold fs-5'>

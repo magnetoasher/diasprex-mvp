@@ -169,13 +169,13 @@ export const SendMoneyModal: FC = () => {
                       type='button'
                       className='btn btn-primary'
                       // data-bs-toggle='modal'
-                      // data-bs-target='#kt_modal_3'
+                      // data-bs-target='#kt_proceed_modal'
                     >
                       Proceed
                     </button>
 
                     <ConfirmModal
-                      id='kt_modal_3'
+                      id='kt_proceed_modal'
                       title1='Money Transfer'
                       title2='Are you sure you want to send money'
                       confirm='Send'

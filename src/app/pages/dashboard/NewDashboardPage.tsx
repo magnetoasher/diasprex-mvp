@@ -10,36 +10,51 @@ import 'react-edit-text/dist/index.css'
 import {ITransArrayModel} from '../../modules/Remittance/Components/Preferences/PreferencesModel'
 
 const NewDashboardPage = () => {
-  var user = localStorage.getItem('userType')
-  const fullUserType = localStorage.getItem('userTypeFull')
-  const [userTypeFull, setUserTypeFull] = useState<any>(
-    fullUserType && fullUserType.replace('_', ' ')
-  )
+  const userType = localStorage.getItem('userType')
+  const userTypeFull = localStorage.getItem('userTypeFull')
+  const [userLabel, setUserLabel] = useState<any>(userTypeFull)
+
+  const userColor = {
+    enabler: {
+      basic: '#0274d1',
+      standard: '#069e09',
+      super: '#d19a02',
+      business: '#7e02d1',
+    },
+    sponsor: {
+      basic: '#0274d1',
+      silver: '#069e09',
+      gold: '#d19a02',
+      diamond: '#7e02d1',
+    },
+  }
+  const userBadgeColor =
+    userType === 'sponsor' ? 'primary' : userType === 'admin' ? 'info' : 'success'
 
   useEffect(() => {
-    user === 'admin'
-      ? setUserTypeFull('Admin') //Temporary placeholder for admin user type
-      : setUserTypeFull(fullUserType && fullUserType.replace('_', ' '))
-  }, [fullUserType])
+    userType === 'admin'
+      ? setUserLabel('Admin') //Temporary placeholder for admin user type
+      : setUserLabel(userTypeFull)
+  }, [userTypeFull, userType])
 
   const [dataObj] = useState([
     {
       name: 'Demo1',
-      userTypeFull: 'enabler',
+      userTypeFull: 'basic_enabler',
       title: 'This is title',
       details: 'this is detail, lorem ispum',
       src: 'https://loremflickr.com/g/320/240/things',
     },
     {
       name: 'Demo2',
-      userTypeFull: 'enabler',
+      userTypeFull: 'standard_enabler',
       title: 'This is title',
       details: 'this is detail, lorem ispum',
       src: 'https://loremflickr.com/g/320/241/things',
     },
     {
       name: 'Demo3',
-      userTypeFull: 'enabler',
+      userTypeFull: 'super_enabler',
       title: 'This is title',
       details: 'this is detail, lorem ispum',
       src: 'https://loremflickr.com/g/320/242/things',
@@ -55,7 +70,7 @@ const NewDashboardPage = () => {
               <div className='d-flex mw-75 image-input-wrapper image-input-outline'>
                 <img
                   src={
-                    user !== 'sponsor'
+                    userType !== 'sponsor'
                       ? toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')
                       : toAbsoluteUrl('/media/logos/megold-logo.png')
                   }
@@ -81,9 +96,9 @@ const NewDashboardPage = () => {
               <div className='justify-content-center'>
                 <div className='d-flex mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary fs-4 fw-bolder me-1'>
-                    {user !== 'sponsor' ? 'Max Smith' : 'MeGOLD Technology'}
+                    {userType !== 'sponsor' ? 'Max Smith' : 'MeGOLD Technology'}
                   </a>
-                  {user !== 'basic' && (
+                  {userTypeFull !== 'basic_enabler' && (
                     <a href='#' data-toggle='tooltip' data-placement='top' title='Verified'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen026.svg'
@@ -94,9 +109,9 @@ const NewDashboardPage = () => {
                 </div>
 
                 <div className='d-flex justify-content-center align-items-center mb-2'>
-                  <a href='#' className='text-gray-800 text-hover-primary  me-1 text-capitalize'>
-                    <span className='badge badge-light-success'>
-                      {userTypeFull?.replace('_', ' ')}{' '}
+                  <a href='#' className='text-gray-800 text-hover-primary  me-1 '>
+                    <span className={`badge badge-light-${userBadgeColor} text-capitalize`}>
+                      {userLabel?.replace('_', ' ') || ''}
                     </span>
                   </a>
                 </div>
@@ -111,7 +126,7 @@ const NewDashboardPage = () => {
                       data-bs-placement='bottom'
                     />
                   </span>
-                  {user !== 'sponsor' && (
+                  {userType !== 'sponsor' && (
                     <span className='symbol symbol-30px w-30px bg-light me-2'>
                       <img
                         src={toAbsoluteUrl('/media/flags/united-states.svg')}
@@ -128,7 +143,7 @@ const NewDashboardPage = () => {
             </div>
           </div>
 
-          {user === 'sponsor' ? (
+          {userType === 'sponsor' ? (
             <>
               <div className=' row d-flex g-5'>
                 <div className='separator me-0 mb-3'></div>
@@ -354,7 +369,7 @@ const NewDashboardPage = () => {
       </div>
 
       <div className='card col-9  d-flex flex-column-fluid'>
-        {user !== 'sponsor' ? (
+        {userType !== 'sponsor' ? (
           <>
             <Card className='shadow-sm mb-3'>
               <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>

@@ -21,11 +21,12 @@ import TopBarProgress from 'react-topbar-progress-indicator'
 import {App} from '../App'
 import config from '../../authConfig'
 import {Landing} from '../modules/landing/landing'
-import {PublicNavbarProvider} from '../../_metronic/layout/components/header/publicnavbarprovider'
+
 import GeneralOpportunityCard from '../modules/opportunities/GeneralOpportunityCard'
 import {ContactUs} from '../modules/resources/components/contactus'
-import {OurTeam} from '../modules/landing/components/team/our-team'
+import {OurTeam} from '../modules/resources/team/our-team'
 import {PageLink, PageTitle} from '../../_metronic/layout/core'
+import {PublicNavbarProvider} from '../../_metronic/layout/components/header/publicnavbar/publicnavbarprovider'
 
 const profileBreadCrumbs: Array<PageLink> = [
   {

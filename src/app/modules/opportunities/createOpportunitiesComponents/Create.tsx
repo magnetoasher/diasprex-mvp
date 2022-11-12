@@ -2,12 +2,12 @@
 import React, {useState, Component} from 'react'
 import {Tabs, Col, Row, Select, DatePicker, Button, Input, Card, Checkbox} from 'antd'
 import moment from 'moment'
-import Multiselect from 'multiselect-react-dropdown'
+
 import {UploadOutlined} from '@ant-design/icons'
 import {Upload} from 'antd'
 import {UserOutlined} from '@ant-design/icons'
 import {Editor} from 'react-draft-wysiwyg'
-import MultiSelectDropdown from '../../../../_metronic/partials/content/utilities/multiselectiondropdown'
+import {IndustryList} from '../../../../_metronic/partials/content/selectionlists'
 
 export const Create = () => {
   const {Option} = Select
@@ -45,7 +45,7 @@ export const Create = () => {
         boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
       }}
     >
-      <Row gutter={16}>
+      <div className='row px-10'>
         <div className='d-flex flex-column justify-content-start mb-10'>
           <h5>
             <b className=' fw-bolder text-uppercase text-primary fs-6 mb-2'>
@@ -57,8 +57,8 @@ export const Create = () => {
             website.
           </p>
         </div>
-      </Row>
-      <Row gutter={16}>
+      </div>
+      <div className='row px-10'>
         <Col xs={12} sm={12} md={5} lg={5}>
           <div style={{display: 'flex', flexDirection: 'column'}}>
             <h5>
@@ -70,9 +70,29 @@ export const Create = () => {
               placeholder='Select Category'
               optionFilterProp='children'
             >
-              <Option value='jack'>Jack</Option>
-              <Option value='lucy'>Lucy</Option>
-              <Option value='tom'>Tom</Option>
+              {/* <IndustryList /> */}
+              <>
+                <option value='Accounting'>Accounting</option>
+                <option value='Airlines/Aviation'>Airlines/Aviation</option>
+                <option value='Alternative Dispute Resolution'>
+                  Alternative Dispute Resolution
+                </option>
+                <option value='Alternative Medicine'>Alternative Medicine</option>
+                <option value='Animation'>Animation</option>
+                <option value='Apparel/Fashion'>Apparel/Fashion</option>
+                <option value='Architecture/Planning'>Architecture/Planning</option>
+                <option value='Arts/Crafts'>Arts/Crafts</option>
+                <option value='Automotive'>Automotive</option>
+                <option value='Aviation/Aerospace'>Aviation/Aerospace</option>
+                <option value='Banking/Mortgage'>Banking/Mortgage</option>
+                <option value='Biotechnology/Greentech'>Biotechnology/Greentech</option>
+                <option value='Broadcast Media'>Broadcast Media</option>
+                <option value='Building Materials'>Building Materials</option>
+                <option value='Business Supplies/Equipment'>Business Supplies/Equipment</option>
+                <option value='Capital Markets/Hedge Fund/Private Equity'>
+                  Capital Markets/Hedge Fund/Private Equity
+                </option>
+              </>
             </Select>
           </div>
         </Col>
@@ -94,10 +114,12 @@ export const Create = () => {
           {/* <div style={{display: 'flex', flexDirection: 'column'}}> */}
           <div className='row-xs-4'>
             <div className='col d-flex flex-row'>
-              <span className='required fw-bold fs-6 mb-2 me-6 '>Deal Type</span>
+              <span className='required fw-bold fs-6 mb-2 me-6 '>Deal Types</span>
             </div>
             <div className='col d-flex flex-row'>
-              <span>(Please select the deal types you are willing to consider)</span>
+              <span className='text-gray-800 fw-bolder'>
+                (Please select the deal types you are willing to consider)
+              </span>
             </div>
           </div>
           <div style={{display: 'flex', justifyContent: 'space-between'}}>
@@ -110,11 +132,12 @@ export const Create = () => {
             </span>
           )}
         </Col>
+
         <Col xs={12} sm={12} md={20} lg={20} style={{marginTop: '50px', marginBottom: '10px'}}>
           <h5>
             <b className='required fw-bold fs-6 mb-2'>Opportunity Title </b>
           </h5>
-          <Input style={{borderRadius: '10px'}} size='large' placeholder='Subject' />
+          <Input style={{borderRadius: '10px'}} size='large' placeholder='Title' />
         </Col>
 
         <Col xs={12} sm={12} md={20} lg={20} style={{marginTop: '10px'}}>
@@ -189,6 +212,23 @@ export const Create = () => {
             </Upload>
           </div>
         </Col>
+        <Col>
+          <div className='d-flex flex-column fv-row py-10'>
+            <div className='form-check form-check d-flex justify-content-start align-items-center'>
+              <input className='form-check-input' type='checkbox' id='request_diasprex_financing' />
+              <label
+                className='form-check-label fw-bold ps-2 fs-6'
+                htmlFor='request_diasprex_financing'
+              >
+                Requesting Diasprex's Financing
+              </label>
+            </div>
+            <div className='text-muted'>
+              Checking this box does not guarantee Diasprex's financing. Only outstading
+              opportunities that meet Diasprex's fiancing criteria are selected
+            </div>
+          </div>
+        </Col>
 
         <Col
           xs={12}
@@ -244,11 +284,11 @@ export const Create = () => {
         </Col>
         <Col xs={12} sm={12} md={8} lg={8}>
           <lable style={{fontSize: '9px', fontWeight: '700', color: '#b6b6b6'}}>
-            Disclaimer: Opportunity submittted will be only be published if it passes all review
+            Disclaimer: Opportunity submittted will only be published if it passes all review
             criteria. Publication on Diasprex does not guarantee positive outcome.
           </lable>
         </Col>
-      </Row>
+      </div>
     </Card>
   )
 }

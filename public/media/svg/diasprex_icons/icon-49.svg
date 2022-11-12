@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="74px" height="74px" viewBox="0 0 74 74" enable-background="new 0 0 74 74" xml:space="preserve">
+<g>
+	<ellipse fill="#4A5158" cx="37.138" cy="37.026" rx="36.977" ry="37.102"/>
+	<path fill="#343C44" d="M74.084,38.314L56.997,21.169c-0.277-0.281-0.645-0.422-1.012-0.422H18.292
+		c-0.367,0-0.735,0.141-1.012,0.422c-0.282,0.279-0.42,0.647-0.42,1.015v29.682c0,0.368,0.138,0.738,0.42,1.015l21.141,21.213
+		C57.823,73.429,73.42,57.778,74.084,38.314z"/>
+	<g>
+		<g>
+			<path fill="#95D9F1" d="M57.418,51.867c0,0.368-0.14,0.736-0.42,1.015c-0.28,0.281-0.645,0.422-1.012,0.422H18.292
+				c-0.367,0-0.733-0.141-1.012-0.422c-0.28-0.279-0.42-0.647-0.42-1.015V28.073h40.557V51.867z"/>
+			<path fill="#FFFFFF" d="M57.418,28.073H16.86v-5.888c0-0.366,0.14-0.734,0.42-1.015c0.278-0.279,0.645-0.422,1.012-0.422h37.693
+				c0.367,0,0.731,0.142,1.012,0.422c0.28,0.281,0.42,0.649,0.42,1.015V28.073z"/>
+		</g>
+		<path fill="#5AB5D9" d="M17.281,52.882c0.278,0.281,0.645,0.422,1.012,0.422h6.919V28.073H16.86v23.794
+			C16.86,52.235,17,52.603,17.281,52.882z"/>
+		<g>
+			<rect x="18.649" y="40.764" fill="#FFFFFF" width="4.772" height="1.071"/>
+			<rect x="18.649" y="38.626" fill="#FFFFFF" width="4.772" height="1.071"/>
+			<rect x="18.649" y="36.49" fill="#FFFFFF" width="4.772" height="1.069"/>
+			<rect x="18.649" y="34.35" fill="#FFFFFF" width="4.772" height="1.071"/>
+			<rect x="18.649" y="32.214" fill="#343C44" width="4.772" height="1.069"/>
+		</g>
+		<g>
+			<g>
+				<rect x="28.073" y="32.214" fill="#5AB5D9" width="26.48" height="7.329"/>
+				<g>
+					<rect x="28.073" y="41.835" fill="#5AB5D9" width="7.304" height="7.327"/>
+					<rect x="37.662" y="41.835" fill="#5AB5D9" width="7.304" height="7.327"/>
+					<rect x="47.251" y="41.835" fill="#5AB5D9" width="7.303" height="7.327"/>
+				</g>
+			</g>
+		</g>
+		<g>
+			<ellipse fill="#F4836B" cx="20.44" cy="24.411" rx="1.193" ry="1.198"/>
+			<ellipse fill="#FECE67" cx="24.018" cy="24.411" rx="1.193" ry="1.198"/>
+			<ellipse fill="#95D9F1" cx="27.596" cy="24.411" rx="1.193" ry="1.198"/>
+		</g>
+	</g>
+</g>
+</svg>

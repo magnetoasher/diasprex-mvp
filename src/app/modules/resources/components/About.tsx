@@ -530,37 +530,54 @@ class About extends Component {
                 <div className='card-body py-12'>
                   <a href='#' className='mx-4'>
                     <img
-                      src='media/svg/brand-logos/facebook-4.svg'
+                      src={toAbsoluteUrl('/media/svg/brand-logos/linkedin-2.svg')}
                       className='h-30px my-2'
                       alt=''
                     />
                   </a>
                   <a href='#' className='mx-4'>
                     <img
-                      src='media/svg/brand-logos/instagram-2-1.svg'
+                      src={toAbsoluteUrl('/media/svg/brand-logos/facebook-4.svg')}
                       className='h-30px my-2'
                       alt=''
                     />
                   </a>
-                  <a href='#' className='mx-4'>
-                    <img src='media/svg/brand-logos/github.svg' className='h-30px my-2' alt='' />
-                  </a>
-                  <a href='#' className='mx-4'>
-                    <img src='media/svg/brand-logos/behance.svg' className='h-30px my-2' alt='' />
-                  </a>
+
                   <a href='#' className='mx-4'>
                     <img
-                      src='media/svg/brand-logos/pinterest-p.svg'
+                      src={toAbsoluteUrl('/media/svg/brand-logos/instagram-2-1.svg')}
                       className='h-30px my-2'
                       alt=''
                     />
                   </a>
-                  <a href='#' className='mx-4'>
-                    <img src='media/svg/brand-logos/twitter.svg' className='h-30px my-2' alt='' />
-                  </a>
+
+                  {/* <a href='#' className='mx-4'>
+                    <img
+                      src={toAbsoluteUrl('/media/svg/brand-logos/github.svg')}
+                      className='h-30px my-2'
+                      alt=''
+                    />
+                  </a> */}
+
+                  {/* <a href='#' className='mx-4'>
+                    <img
+                      src={toAbsoluteUrl('/media/svg/brand-logos/behance.svg')}
+                      className='h-30px my-2'
+                      alt=''
+                    />
+                  </a> */}
+
                   <a href='#' className='mx-4'>
                     <img
-                      src='media/svg/brand-logos/dribbble-icon-1.svg'
+                      src={toAbsoluteUrl('/media/svg/brand-logos/pinterest-p.svg')}
+                      className='h-30px my-2'
+                      alt=''
+                    />
+                  </a>
+
+                  <a href='#' className='mx-4'>
+                    <img
+                      src={toAbsoluteUrl('/media/svg/brand-logos/twitter.svg')}
                       className='h-30px my-2'
                       alt=''
                     />

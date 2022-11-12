@@ -5,7 +5,7 @@ import {Registration} from './components/Registration'
 import {ForgotPassword} from './components/ForgotPassword'
 import {SigninPage} from '../../modules/signin/components/SigninPage'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
-import {PublicNavbarProvider} from '../../../_metronic/layout/components/header/publicnavbarprovider'
+import {PublicNavbarProvider} from '../../../_metronic/layout/components/header/publicnavbar/publicnavbarprovider'
 
 const AuthLayout = () => {
   useEffect(() => {

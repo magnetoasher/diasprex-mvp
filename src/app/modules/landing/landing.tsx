@@ -10,13 +10,15 @@ import {RemitttanceSection} from './components/remittance/remitttancesection'
 import {OppsSection} from './components/opportunities/oppssection'
 import {DiasporasSection} from './components/diasporas/diasporassection'
 import {Link} from 'react-router-dom'
+import {PublicNavBar} from '../../../_metronic/layout/components/header/publicnavbar/PublicNavBar'
 
 export const Landing = () => {
   return (
     <body
       id='kt_body'
       data-bs-spy='scroll'
-      data-bs-target='#kt_landing_menu'
+      data-bs-target='/#kt_landing_sections'
+      data-bs-offset='50'
       className='bg-white position-relative app-blank'
     >
       <div className='d-flex flex-column flex-root' id='kt_app_root'>
@@ -28,42 +30,66 @@ export const Landing = () => {
                 id='kt_diasprex'
                 data-kt-scroll-offset='{default: 100, lg: 150}'
               >
-                <span style={{color: 'rgba(50, 75, 120, 0.8)'}}>Diaspora Resource Exchange</span>
+                <span
+                  style={{
+                    backgroundImage: 'linear-gradient(to right, #010b1a 0%, #4f0404 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  }}
+                >
+                  Diaspora Resource Exchange
+                </span>
               </h3>
               <div className='fs-2 text-gray-600 fw-bold'>
                 A dynamic marketplace where people, business, and African development meet.
               </div>
             </div>
-            {/* <HowItWorks /> */}
-            {/* End How It Works*/}
-            <div className='d-flex mw-100'>
-              <img src={toAbsoluteUrl('/media/stock/diasprex/img-9.jpg')} className='mw-100' />
+            <div className='d-flex mw-100 '>
+              <div className='mb-lg-n15 position-relative z-index-2'>
+                <div className='container'>
+                  <div className='card'>
+                    <div className='card-body p-lg-20'></div>
+                    <img
+                      src={toAbsoluteUrl('/media/stock/diasprex/img-9.jpg')}
+                      className='mw-100'
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
             {/* Begin Carouse */}
-            {/* <Carousel2
-              img1url={toAbsoluteUrl('/media/stock/diasprex/img-8.jpg')}
-              img2url={toAbsoluteUrl('/media/stock/diasprex/img-3.jpg')}
-              img3url={toAbsoluteUrl('/media/stock/diasprex/img-9.jpg')}
-            /> */}
-            {/* End Carosuel */}
           </div>
-          {/* Begin opps section */}
-          <div id='kt_opportunities_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
-          <OppsSection />
-          {/* End second opps section */}
-          <div id='kt_remittance_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
-          <RemitttanceSection />
+          <div id='kt_landing_sections'>
+            {/* Begin opps section */}
+            <div
+              id='kt_opportunities_section'
+              data-kt-scroll-offset='{default: 100, lg: 150}'
+            ></div>
+            <OppsSection />
 
-          {/* Begin diasporas section */}
-          <div id='kt_diasporas_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
-          <DiasporasSection />
+            {/* End second opps section */}
+            <div
+              className='mb-20'
+              id='kt_remittance_section'
+              data-kt-scroll-offset='{default: 100, lg: 150}'
+            ></div>
+            <RemitttanceSection />
 
-          {/* End diasporas section*/}
+            {/* Begin diasporas section */}
+            <div
+              className='mb-20'
+              id='kt_diasporas_section'
+              data-kt-scroll-offset='{default: 100, lg: 150}'
+            ></div>
+            <DiasporasSection />
 
-          {/* Begin our services section */}
-          <div id='kt_services_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
-          <OtherServicesSection />
-          {/* End our services section */}
+            {/* End diasporas section*/}
+
+            {/* Begin our services section */}
+            <div id='kt_services_section' data-kt-scroll-offset='{default: 100, lg: 150}'></div>
+            <OtherServicesSection />
+            {/* End our services section */}
+          </div>
 
           {/* Begind pricing section*/}
           {/* <Pricing /> */}
