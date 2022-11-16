@@ -1,6 +1,7 @@
 import {Input, Form} from 'antd'
-import {KTSVG} from '../../../../_metronic/helpers'
+import {KTSVG, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {CountryList} from '../../../../_metronic/partials/content/selectionlists'
+import {UploadFile} from '../../../../_metronic/partials/modals/file-management/uploadfile'
 
 export const UadForm = () => {
   const handleSubmit = () => {}
@@ -51,7 +52,7 @@ export const UadForm = () => {
                   {/* <!--begin::Input group--> */}
 
                   <div className='mb-10'>
-                    <label className='form-label required text-primary fw-bold fs-6 mb-2'>
+                    <label className='form-label required text-muted fw-bold fs-6 mb-2'>
                       Enter your firstname
                     </label>
                     <input
@@ -62,7 +63,7 @@ export const UadForm = () => {
                   </div>
 
                   <div className='mb-10'>
-                    <label className='form-label required text-primary fw-bold fs-6 mb-2'>
+                    <label className='form-label required text-muted fw-bold fs-6 mb-2'>
                       Enter your lastname
                     </label>
                     <input
@@ -73,7 +74,7 @@ export const UadForm = () => {
                   </div>
 
                   <div className='mb-10'>
-                    <label className='form-label text-primary fw-bold fs-6 mb-2'>
+                    <label className='form-label text-muted fw-bold fs-6 mb-2'>
                       Enter Diasprex ID if you are a member
                     </label>
                     <input
@@ -84,7 +85,7 @@ export const UadForm = () => {
                   </div>
 
                   <div className=' mb-10'>
-                    <label className='form-label text-primary required fw-bold fs-6 mb-2'>
+                    <label className='form-label text-muted required fw-bold fs-6 mb-2'>
                       Please select your country of residence
                     </label>
                     <select className='form-select form-select-white' aria-label='country'>
@@ -93,7 +94,7 @@ export const UadForm = () => {
                   </div>
 
                   <div className=' mb-10'>
-                    <label className='form-label text-primary required fw-bold fs-6 mb-2'>
+                    <label className='form-label text-muted required fw-bold fs-6 mb-2'>
                       Please select your country of origin
                     </label>
                     <select className='form-select form-select-white' aria-label='country'>
@@ -102,7 +103,7 @@ export const UadForm = () => {
                   </div>
 
                   <div className='mb-10'>
-                    <label className='form-label text-primary fw-bold fs-6 mb-2'>
+                    <label className='form-label text-muted fw-bold fs-6 mb-2'>
                       Please enter your undergraduate information
                     </label>
                     <div className='input-group'>
@@ -127,7 +128,7 @@ export const UadForm = () => {
                   </div>
 
                   <div className='mb-10'>
-                    <label className='form-label text-primary fw-bold fs-6 mb-2'>
+                    <label className='form-label text-muted fw-bold fs-6 mb-2'>
                       Please enetr your graduate school information if applicable
                     </label>
                     <div className='input-group'>
@@ -151,7 +152,7 @@ export const UadForm = () => {
                     </div>
                   </div>
                   <div className='input-group d-flex flex-column mb-2'>
-                    <label className='form-label required text-primary fw-bold fs-6 mb-2 text-primary'>
+                    <label className='form-label required text-muted fw-bold fs-6 mb-2 text-primary'>
                       Please enter your professional summary (500 words max)
                     </label>
                   </div>
@@ -163,7 +164,7 @@ export const UadForm = () => {
                   ></textarea>
 
                   <div className='mb-10'>
-                    <label className='form-label required text-primary fw-bold fs-6 mb-2'>
+                    <label className='form-label required text-muted fw-bold fs-6 mb-2'>
                       Please list up to 4 professional interest
                     </label>
                     <div className='input-group'>
@@ -175,7 +176,7 @@ export const UadForm = () => {
                   </div>
 
                   <div className='input-group d-flex mb-2'>
-                    <label className='form-label text-primary'>
+                    <label className='form-label text-muted'>
                       Your Insight on Africa's Furture
                     </label>
                   </div>
@@ -185,6 +186,31 @@ export const UadForm = () => {
                     rows={3}
                     placeholder='Type your comment here'
                   ></textarea>
+
+                  {/* <div>
+                    <button
+                      type='button'
+                      className='btn btn-primary'
+                      data-bs-toggle='modal'
+                      data-bs-target='#kt_modal_upload'
+                    >
+                      <span className='svg-icon svg-icon-2'>
+                        <KTSVG
+                          path='/media/icons/duotune/files/fil018.svg'
+                          className='svg-icon-5 svg-icon-gray-600 me-1'
+                        />
+                      </span>
+                      Upload Files
+                    </button>
+                  </div> */}
+
+                  <div>
+                    <label className='form-label text-muted' htmlFor='uadFile'>
+                      Upload a profile photo or headshot
+                    </label>
+                    <input type='file' className='form-control' id='uadFile' />
+                  </div>
+                  {/* <UploadFile /> */}
 
                   {/* <!--end::Input group--> */}
                 </div>

@@ -3,6 +3,11 @@ import {Field, ErrorMessage} from 'formik'
 // @ts-ignore
 import AsyncSelect from 'react-select'
 import countryList from 'react-select-country-list'
+import 'react-phone-number-input/style.css'
+// import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
+import {getCountries, getCountryCallingCode} from 'react-phone-number-input/input'
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 const Basic = () => {
   const countryOptions = useMemo(() => countryList().getData(), [])
@@ -80,6 +85,7 @@ const Basic = () => {
       <div className='fv-row mb-10'>
         <label className='form-label required'>First Name</label>
         <Field name='businessName' className='form-control form-control-lg form-control-solid' />
+
         <div className='text-danger mt-2'>
           <ErrorMessage name='businessName' />
         </div>
@@ -107,7 +113,33 @@ const Basic = () => {
       </div>
       <div className='fv-row mb-10'>
         <label className='form-label required'>Primary Phone Number</label>
-        <Field name='businessName' className='form-control form-control-lg form-control-solid' />
+        <div className='d-flex flex-row mw-100 form-control form-control-lg form-control-solid'>
+          {/* <Field name='businessName' className='form-control form-control-lg form-control-solid' /> */}
+          <input
+            type='text'
+            maxLength={5}
+            name='businessName'
+            className='form-control mw-100px'
+            placeholder='Intl code'
+          />
+          <input
+            type='text'
+            maxLength={9}
+            name='businessName'
+            className='form-control'
+            placeholder='xxx-xxx-xxxx'
+          />
+        </div>
+        {/* <div className='d-flex flex-row mw-100 form-control form-control-lg form-control-solid'>
+          <PhoneInput
+            inputStyle={{width: '100px'}}
+            international
+            defaultCountry='US'
+            placeholder='Enter phone number'
+            value={phoneNumber}
+            onChange={() => setPhoneNumber}
+          />
+        </div> */}
         <div className='text-danger mt-2'>
           <ErrorMessage name='businessName' />
         </div>

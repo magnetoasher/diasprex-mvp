@@ -432,7 +432,7 @@ const Billing = () => {
         Change Plan
       </button>
       <div className='card mb-5 mb-xl-10 mt-5'>
-        <div className='modal ' tabindex='-1' id='changePlan'>
+        <div className='modal ' tabIndex={-1} id='changePlan'>
           <div className='modal-dialog modal-xl'>
             <div className='modal-content'>
               <div className='modal-body'>

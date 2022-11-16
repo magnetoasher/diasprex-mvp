@@ -22,7 +22,7 @@ const CreateAccount: FC = () => {
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
   const [userType, setUserType] = useState<string>('enabler')
-  const [userTypeFull, setUserTypeFull] = useState('basic_enabler')
+  const [userTypeFull, setUserTypeFull] = useState('standard_enabler')
   const [initValues] = useState<ICreateAccount>(inits)
 
   const [isShowAlert, setIsShowAlert] = useState(false)

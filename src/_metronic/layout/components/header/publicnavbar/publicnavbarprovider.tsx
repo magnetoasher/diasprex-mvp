@@ -3,6 +3,7 @@ import {PublicNavBar} from './PublicNavBar'
 import {useOktaAuth} from '@okta/okta-react'
 
 import {PublicFooter} from './PublicFooter'
+import clsx from 'clsx'
 export const AuthStateContext: any = createContext({})
 export const AuthStateContextProvider: FC = (props: any) => {
   const {authState} = useOktaAuth()

@@ -12,7 +12,7 @@ const deactivateProfileSchema = Yup.object().shape({
 
 const DeactivateProfile: React.FC = () => {
   const [loading, setLoading] = useState(false)
-  const [accountType, setAccountType] = useState(localStorage.getItem('userType'))
+  const [accountType, setAccountType] = useState(localStorage.getItem('userTypeFull'))
   const [openSweetAlert, setOpenSweetAlert] = useState(false)
   const onConfirm = () => {}
   const onCancel = () => {
@@ -44,7 +44,7 @@ const DeactivateProfile: React.FC = () => {
         aria-controls='kt_profile_deactivate'
       >
         <div className='card-title m-0'>
-          <h3 className='fw-bolder m-0'>Deactivate Profile</h3>
+          <h3 className='fw-bolder m-0'>Deactivate Account</h3>
         </div>
       </div>
 
@@ -63,7 +63,7 @@ const DeactivateProfile: React.FC = () => {
                   <div className='fs-6 text-gray-600'>
                     For extra security, this requires admin confirmation for Enablers and Sponsors.
                     <br />
-                    <a className='fw-bolder' href='#'>
+                    <a className='fw-bolder' href='/faqs'>
                       Learn more
                     </a>
                   </div>
@@ -103,7 +103,7 @@ const DeactivateProfile: React.FC = () => {
             show={openSweetAlert}
           >
             <div>
-              {accountType !== 'basic' ? (
+              {accountType !== 'basic_enabler' ? (
                 <h3>
                   Please contact the admin at{' '}
                   <a className='btn btn-link' href='#'>

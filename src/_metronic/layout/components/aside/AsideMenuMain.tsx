@@ -11,7 +11,8 @@ export function AsideMenuMain() {
   const intl = useIntl()
 
   const [searchParams, setSearchParams] = useSearchParams()
-  let user = localStorage.getItem('userType')
+  let userType = localStorage.getItem('userType')
+  let userTypeFull = localStorage.getItem('userTypeFull')
 
   return (
     <>
@@ -24,7 +25,15 @@ export function AsideMenuMain() {
       ) : (
         <GenericMenu />
       )} */}
-      {user == 'admin' ? <AdminMenu /> : user == 'sponsor' ? <Sponsor /> : <Enabler />}
+      {userType == 'admin' ? (
+        <AdminMenu />
+      ) : userType == 'sponsor' ? (
+        <Sponsor />
+      ) : userType == 'enabler' && userTypeFull !== 'basic_enabler' ? (
+        <Enabler />
+      ) : (
+        <GenericMenu />
+      )}
     </>
   )
 }

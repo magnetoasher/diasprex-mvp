@@ -7,7 +7,8 @@ import {AdminMenu} from './User_Menu/AdminMenu'
 
 export function MenuInner() {
   const intl = useIntl()
-  let user = localStorage.getItem('userType')
+  const userType = localStorage.getItem('userType')
+  const userTypeFull = localStorage.getItem('userTypeFull')
 
   return (
     <>
@@ -20,7 +21,15 @@ export function MenuInner() {
       ) : (
         <Generic />
       )} */}
-      {user === 'admin' ? <AdminMenu /> : user === 'sponsor' ? <Sponsor /> : <Enabler />}
+      {userType === 'admin' ? (
+        <AdminMenu />
+      ) : userType === 'sponsor' ? (
+        <Sponsor />
+      ) : userType == 'enabler' && userTypeFull !== 'basic_enabler' ? (
+        <Enabler />
+      ) : (
+        <Generic />
+      )}
     </>
   )
 }

@@ -17,11 +17,6 @@ export const FeaturedDiasporas = () => {
             <br />
             integrate and test each extra feature creeps up and haunts most of us.
           </div>
-          <div className='text-center mb-18 ms-1'>
-            <Link to='/diasporas' className='btn btn-light-primary me-3'>
-              Join our diasporas featuring
-            </Link>
-          </div>
         </div>
 
         {/* <div className='tns tns-default' style={{direction: 'ltr'}}>
@@ -46,7 +41,7 @@ export const FeaturedDiasporas = () => {
             <div className='d-flex flex-center justify-content-between'>
               <div className='text-center'>
                 <div
-                  className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
+                  className='rounded-circle mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl('/media/avatars/diasprex/dxp-1.jpg')})`,
                   }}
@@ -63,7 +58,7 @@ export const FeaturedDiasporas = () => {
 
               <div className='text-center'>
                 <div
-                  className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
+                  className='rounded-circle mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl('/media/avatars/diasprex/dxp-2.jpg')})`,
                   }}
@@ -80,7 +75,7 @@ export const FeaturedDiasporas = () => {
 
               <div className='text-center'>
                 <div
-                  className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
+                  className='rounded-circle mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl('/media/avatars/diasprex/dxp-3.jpg')})`,
                   }}
@@ -97,7 +92,7 @@ export const FeaturedDiasporas = () => {
 
               <div className='text-center'>
                 <div
-                  className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
+                  className='rounded-circle mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl('/media/avatars/diasprex/dxp-4.jpg')})`,
                   }}
@@ -114,7 +109,7 @@ export const FeaturedDiasporas = () => {
 
               <div className='text-center'>
                 <div
-                  className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
+                  className='rounded-circle mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl('/media/avatars/diasprex/dxp-5.jpg')})`,
                   }}
@@ -135,7 +130,7 @@ export const FeaturedDiasporas = () => {
             <div className='d-flex flex-center justify-content-between'>
               <div className='text-center'>
                 <div
-                  className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
+                  className='rounded-circle mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')})`,
                   }}
@@ -152,7 +147,7 @@ export const FeaturedDiasporas = () => {
 
               <div className='text-center'>
                 <div
-                  className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
+                  className='rounded-circle mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl('/media/avatars/diasprex/dxp-2.jpg')})`,
                   }}
@@ -169,7 +164,7 @@ export const FeaturedDiasporas = () => {
 
               <div className='text-center'>
                 <div
-                  className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
+                  className='rounded-circle mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl('/media/avatars/diasprex/dxp-7.jpg')})`,
                   }}
@@ -186,7 +181,7 @@ export const FeaturedDiasporas = () => {
 
               <div className='text-center'>
                 <div
-                  className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
+                  className='rounded-circle mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl('/media/avatars/diasprex/dxp-8.jpg')})`,
                   }}
@@ -203,7 +198,7 @@ export const FeaturedDiasporas = () => {
 
               <div className='text-center'>
                 <div
-                  className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
+                  className='rounded-circle mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
                   style={{
                     backgroundImage: `url(${toAbsoluteUrl('/media/avatars/diasprex/dxp-9.jpg')})`,
                   }}
@@ -255,6 +250,11 @@ export const FeaturedDiasporas = () => {
             </span>
           </button> */}
         </Carousel>
+      </div>
+      <div className='text-center mb-9 mt-9 ms-1'>
+        <Link to='/diasporas' className='btn btn-light-primary rounded-pill  me-3'>
+          Join our diasporas featuring
+        </Link>
       </div>
     </div>
   )

@@ -5,6 +5,8 @@ import {KTSVG} from '../../../helpers'
 import {Link} from 'react-router-dom'
 
 export const SendMoneyModal: FC = () => {
+  const userType = localStorage.getItem('userType')
+  const userTypeFull = localStorage.getItem('userTypeFull')
   const sendMoney = () => {}
   return (
     <div className='modal fade' id='kt_send_money_modal' aria-hidden='true' data-bs-menu='true'>
@@ -16,8 +18,8 @@ export const SendMoneyModal: FC = () => {
             </div>
           </div>
 
-          <div className='modal-body scroll-y mx-5 mx-xl-18 pt-0 pb-15'>
-            <div className='text-center mb-13'>
+          <div className='modal-body scroll-y mx-5 mx-xl-18 pb-15'>
+            <div className='text-center mb-5'>
               <h1 className='mb-3'>Send Money</h1>
 
               <div className='text-muted fw-bold fs-5'>
@@ -28,6 +30,23 @@ export const SendMoneyModal: FC = () => {
                 </a> */}
               </div>
             </div>
+            {userType !== 'sponsor' && userTypeFull === 'basic_enabler' && (
+              <div className='d-flex flex-column mb-5 mt-4 p-5 bg-primary rounded '>
+                <div className='text-center text-white fw-bold fs-3 mb-5'>
+                  We noticed you are not taking full advantage of our remittance retainer service.
+                  You can qualify for full fee waiver by upgrading to a paid Enabler's account
+                </div>
+                <div className='d-flex justify-content-center'>
+                  <button
+                    className='btn btn-light-primary rounded-circle me-2'
+                    data-bs-toggle='modal'
+                    data-bs-target='#kt_upgrade_plan'
+                  >
+                    Upgrade Plan
+                  </button>
+                </div>
+              </div>
+            )}
 
             <>
               <form className='form'>
@@ -165,12 +184,7 @@ export const SendMoneyModal: FC = () => {
                 <div className='form-footer'>
                   <div className='text-center pt-15'>
                     <button className='btn btn-light me-2'>Discard</button>
-                    <button
-                      type='button'
-                      className='btn btn-primary'
-                      // data-bs-toggle='modal'
-                      // data-bs-target='#kt_proceed_modal'
-                    >
+                    <button type='button' className='btn btn-primary'>
                       Proceed
                     </button>
 

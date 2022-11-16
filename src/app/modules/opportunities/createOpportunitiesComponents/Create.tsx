@@ -204,7 +204,7 @@ export const Create = () => {
           <div>
             <Upload>
               <Button
-                className='d-flexjustify-content-center align-items-center'
+                className='d-flex justify-content-center align-items-center'
                 icon={<UploadOutlined />}
               >
                 Upload Thumbnail

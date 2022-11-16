@@ -63,7 +63,7 @@ const NewDashboardPage = () => {
 
   return (
     <div className='row d-flex flex-column-fluid g-0'>
-      <div className='col-3 d-flex flex-column flex-column-fluid'>
+      <div className='col-sm-3'>
         <div className='card card-flush shadow me-2 mb-2 px-5 py-5'>
           <div className=' row d-flex flex-column flex-wrap'>
             <div className='col-xs-1 d-flex align-items-center justify-content-center g-3 px-5'>
@@ -79,18 +79,6 @@ const NewDashboardPage = () => {
                 />
               </div>
             </div>
-
-            {/* <div
-              className='image-input image-input-outline'
-              data-kt-image-input='true'
-              style={{backgroundImage: `url('${blankImg}')`}}
-            >
-            
-              <div
-                className='image-input-wrapper w-175px h-175px'
-                style={{backgroundImage: `url('${userAvatarImg}')`}}
-                            ></div>
-                                </div> */}
 
             <div className='col-xs-1 d-flex justify-content-center'>
               <div className='justify-content-center'>
@@ -147,7 +135,7 @@ const NewDashboardPage = () => {
             <>
               <div className=' row d-flex g-5'>
                 <div className='separator me-0 mb-3'></div>
-                <div className='d-flex flex-wrap flex-stack'>
+                <div className='d-flex flex-wrap flex-stack m-auto'>
                   <div className='col-sm-6'>
                     <div className='border border-gray-300 border-dashed rounded min-w-100px p-2 me-3 mb-3'>
                       <div className='d-flex align-items-center'>
@@ -207,7 +195,7 @@ const NewDashboardPage = () => {
               <>
                 <div className=' row d-flex g-5'>
                   <div className='separator me-0 mb-3'></div>
-                  <div className='d-flex flex-wrap flex-stack'>
+                  <div className='d-flex flex-wrap flex-stack m-auto'>
                     <div className='col-sm-6'>
                       <div className='border border-gray-300 border-dashed rounded min-w-100px p-2 me-3 mb-3'>
                         <div className='d-flex align-items-center'>
@@ -436,7 +424,7 @@ const NewDashboardPage = () => {
               <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>
                 <div className='card-header cursor-pointer'>
                   <div className='card-title m-0'>
-                    <h3 className='fw-bolder m-0'>Your Recent Opportunit Posts</h3>
+                    <h3 className='fw-bolder m-0'>Your Recent Opportunity Posts</h3>
                   </div>
                 </div>
 
