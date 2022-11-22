@@ -30,7 +30,7 @@ const Toolbar1: FC = () => {
                 href='#'
                 className='btn fw-bold btn-light'
                 data-bs-toggle='modal'
-                data-bs-target='#'
+                data-bs-target='#kt_send_money_modal'
                 id='kt_toolbar_sendmoney_button'
               >
                 <span className='svg-icon svg-icon-2x'>
@@ -52,7 +52,7 @@ const Toolbar1: FC = () => {
                 href='#'
                 className='btn fw-bold btn-primary'
                 data-bs-toggle='modal'
-                data-bs-target='#'
+                data-bs-target='#kt_modal_add_fund'
                 id='kt_toolbar_addfund_button'
               >
                 <span className='svg-icon svg-icon-2x'>
@@ -69,6 +69,7 @@ const Toolbar1: FC = () => {
         )}
         {/* end::Actions */}
       </div>
+      {/* <SendMoneyModal /> */}
       {/* end::Container */}
     </div>
   )

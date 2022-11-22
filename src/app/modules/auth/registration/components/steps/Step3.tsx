@@ -10,11 +10,13 @@ import Sponsor from './Forms/Sponsor'
 const Step3: FC = (props: any) => {
   return (
     <>
-      {props.userTypeFull == ('standard_enabler' || 'super_enabler') ? (
+      {props.userTypeFull === 'standard_enabler' ? (
         <Individual />
-      ) : props.userTypeFull == 'business_enabler' ? (
+      ) : props.userTypeFull === 'super_enabler' ? (
+        <Individual />
+      ) : props.userTypeFull === 'business_enabler' ? (
         <Business />
-      ) : props.userType == 'sponsor' ? (
+      ) : props.userType === 'sponsor' ? (
         <Sponsor />
       ) : (
         <Basic />

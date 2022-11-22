@@ -1,17 +1,21 @@
-import { useEffect } from 'react'
-import { Outlet } from 'react-router-dom'
-import { AsideDefault } from './components/aside/AsideDefault'
-import { Footer } from './components/Footer'
-import { HeaderWrapper } from './components/header/HeaderWrapper'
-import { Toolbar } from './components/toolbar/Toolbar'
+import {useEffect} from 'react'
+import {Outlet} from 'react-router-dom'
+import {AsideDefault} from './components/aside/AsideDefault'
+import {Footer} from './components/Footer'
+import {HeaderWrapper} from './components/header/HeaderWrapper'
+import {Toolbar} from './components/toolbar/Toolbar'
 // import {RightToolbar} from '../partials/layout/RightToolbar'
-import { ScrollTop } from './components/ScrollTop'
-import { Content } from './components/Content'
-import { PageDataProvider } from './core'
-import { useLocation } from 'react-router-dom'
-import { DrawerMessenger, ActivityDrawer, Main, InviteUsers, UpgradePlan } from '../partials'
-import { MenuComponent } from '../assets/ts/components'
-
+import {ScrollTop} from './components/ScrollTop'
+import {Content} from './components/Content'
+import {PageDataProvider} from './core'
+import {useLocation} from 'react-router-dom'
+import {DrawerMessenger, ActivityDrawer, Main, InviteUsers, UpgradePlan} from '../partials'
+import {MenuComponent} from '../assets/ts/components'
+import {SendMoneyModal} from '../partials/modals/send-money/SendMoneyModal'
+import {RightToolbar} from '../partials/layout/RightToolbar'
+import {ConfirmModal} from '../partials/modals/confirm-action/ConfirmAction'
+import {AddFund} from '../partials/modals/add-fund/addfund'
+const sendMoney = () => {}
 const MasterLayout = () => {
   const location = useLocation()
   useEffect(() => {
@@ -52,7 +56,16 @@ const MasterLayout = () => {
       {/* end:: Drawers */}
 
       {/* begin:: Modals */}
-      <Main />
+      <SendMoneyModal />
+      <ConfirmModal
+        id='kt_proceed_modal'
+        title1='Money Transfer'
+        title2='Are you sure you want to send money'
+        confirm='Send'
+        classname='btn btn-primary'
+        ConfirmHandler={async () => await sendMoney()}
+      />
+      <AddFund />
       <InviteUsers />
       <UpgradePlan />
       {/* end:: Modals */}
@@ -61,4 +74,4 @@ const MasterLayout = () => {
   )
 }
 
-export { MasterLayout }
+export {MasterLayout}

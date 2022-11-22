@@ -1,0 +1,182 @@
+{
+  "dpxdb": {
+    "users": [
+      {
+        "id": 1,
+        "userType": "user type: enabler or sponsor or admin",
+        " subscription": {
+          "usertier": "usertype tier",
+          "billing": "billing period: monthly or yearly"
+        },
+        "fName": "first name",
+        "lName": "last name",
+        "mInitial": "middle initial",
+        "email": "email address",
+        "phone": {
+          "intlcode": "country code",
+          "phonenumber": "phone number"
+        },
+        "address": {
+          "address1": "street address 1 including apt #",
+          "address2": "street address 2",
+          "city": "City",
+          "state": "state",
+          "zipcode": "zipcode or postal code"
+        },
+        "avatar": "profile avatar",
+        "countryOrig": "country of origin",
+        "countryRes": "country of residence",
+        "profilesummary": "profesisonal summary about the user",
+        "profession": "profession",
+        "professionfield": "professional field",
+        "degree": "highest degree",
+        "interest": ["up to four professional interest"],
+
+        "orgName": "organization name",
+        "orgAddress": "organizatin address",
+        "orgMailingAddress": "organization mailing address if different from physical address",
+        "orgRegistered": "organization is registered: YES",
+        "orgRegNumber": "organization registration number",
+        "orgRegYear": "organization registration year",
+        "orgRegCountry": "organization registration country",
+        "orgRegState": "organization registration state",
+        "orgRole": "role at organization",
+        "orgType": "organization type",
+        "dpxterms": "boolean: accepted Diasprex terms and conditions",
+        "enablerterms": "boolean: accepted Diasprex's enablers terms and conditions. For enablers only",
+        "sponsorterms": "boolean: accepted Diasprex's sponsor terms and conditions. For sponsors only",
+        "emailcommunicate": "boolean: accepted email notifications from Diasprex",
+        "userName": "user name",
+        "online": "boolean: whether user is currently online",
+        "status": "users status, pending | active | suspended | disabled",
+        "verified": "boolean: whetheraccount is verified",
+        "twostepauth": "boolean: whether two step authentication is enabled",
+        "remittanceretainer": "boolean: whether participating in remittance retainer",
+        "datejoined": "date joined the platform",
+        "dateleft": "date account deactivated",
+        "followedopps": "list of followed opportunities id",
+        "profilecompletion": "number: profile completion"
+      }
+    ],
+
+    "paymentmethods": [
+      {
+        "userid": 1,
+        "nameOnCard": "name on the card",
+        "cardNumber": "card number",
+        "cardExpiryMonth": "number:expiration month",
+        "cardExpiryYear": "number:expiration year",
+        "cardCvv": "number: ccvv code",
+        "saveCard": "boolean: saved on file",
+        "accountNumber": "number: checking account number",
+        "routingNumber": "number: checking account routing",
+        "primarymethod": "primary payment method"
+      }
+    ],
+
+    "opportunities": [
+      {
+        "id": 1,
+        "sponsorid": "sponsor's ID",
+        "name": "sponsor's name",
+        "detail": "sponsor's details",
+        "title": "opps title",
+        "category": "opps category",
+        "summary": "opps summary",
+        "description": "opps description",
+        "country": "sponsors country",
+        "flag": "derived from sponsors country",
+        "datesubmitted": "date submitted",
+        "dueDate": "Nov 18, 2022",
+        "dealtypes": "array of deal types",
+        "dpxfinancing": "boolean: whether requesting diasprex financing",
+        "pubstatus": "Publication status: Open | close",
+        "adminstatus": "In review | Accepted | Accepted with review | Not accepted",
+        "avatar": " opps thumbnail",
+        "following": "number of followers",
+        "showedinterest": "number of show of interest",
+        "attachment": "file attachmets"
+      }
+    ],
+    "proposals": [
+      {
+        "id": 1,
+        "enablerid": "sponsor's ID",
+        "enablername": "enabler's name",
+        "oppsid": "opportunity's id",
+        "title": "proposal title",
+        "summary": "proposal's summary",
+        "details": "proposal's detail",
+        "country": "enabler's country",
+        "datesubmitted": "Nov 18, 2022",
+        "status": "proposal status: pending | selected | declined | awarded | archived",
+        "avatar": "thumbnail",
+        "attachment": "file attachments"
+      }
+    ],
+    "remittancesretainer": [
+      {
+        "id": 1,
+        "enablerid": "enabler's id",
+        "rretainer": "boolean: enroll in remittance retainer",
+        "autoretainer": "boolean: automatic retainer enabled",
+        "preferredmto": "string: preferred money transfer operator",
+        "lastretainer": "number: last retainer transaction",
+        "retainerbalance": "number: retainer account balance",
+        "loanbalance": "number: loan balance"
+      }
+    ],
+    "sponsortransactions": [
+      {
+        "id": 1
+      }
+    ],
+    "transactions": [
+      {
+        "id": 1,
+        "enablerid": "enabler's id",
+        "party": "transaction party",
+        "date": "transaction date",
+        "time": "transaction time",
+        "type": "transaction type",
+        "amount": "transaction amount",
+        "currency": "transaction currency",
+        "country": "transaction origination country",
+        "state": "transaction origination state",
+        "terms": "boolean: accepted transaction terms and conditions"
+      }
+    ],
+    "admin": [{"task": "list of admin tasks"}],
+    "diasporas": [
+      {
+        "id": 4,
+        "fName": "first name",
+        "lName": "last name",
+        "dpxID": "diasprex ID if available",
+        "email": "email",
+        "phone": {
+          "intlcode": "country code",
+          "phonenumber": "phone number"
+        },
+        "countryRes": "country of residence",
+        "countryOrig": "country of origin",
+        "profession": "profession",
+        "undergrad": {
+          "inst": "undergraduate institution",
+          "field": "undergraduate field of study",
+          "degree": "undergraduate degree"
+        },
+        "grad": {
+          "inst": "graduate school institution",
+          "field": "graduate field of study",
+          "degree": "graduate degree"
+        },
+        "summary": "professional summary",
+        "interest": ["up to four areas of interest"],
+        "insightAfrica": "insight on Africa's economic development",
+        "avatar": "profile image",
+        "dateSubmitted": "date profile submitted"
+      }
+    ]
+  }
+}

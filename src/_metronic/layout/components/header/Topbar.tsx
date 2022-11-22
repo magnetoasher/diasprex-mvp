@@ -1,14 +1,23 @@
 import clsx from 'clsx'
 import React, {FC} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
-import {HeaderNotificationsMenu, HeaderUserMenu, QuickLinks, Search} from '../../../partials'
+import {
+  HeaderNotificationsMenu,
+  HeaderUserMenu,
+  QuickLinks,
+  Search,
+  ThemeModeSwitcher,
+} from '../../../partials'
 import {useLayout} from '../../core'
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
   toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px',
   toolbarUserAvatarHeightClass = 'symbol-30px symbol-md-40px',
   toolbarButtonIconSizeClass = 'svg-icon-1'
-
+const itemClass = 'ms-1 ms-lg-3'
+const btnClass =
+  'btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px'
+const btnIconClass = 'svg-icon-1'
 const Topbar: FC = () => {
   const {config} = useLayout()
   var userTypeFull = localStorage.getItem('userTypeFull')
@@ -23,8 +32,13 @@ const Topbar: FC = () => {
       </div>
 
       {/* CHAT */}
+      {/* <div className={clsx('app-navbar-item', itemClass)}>
+        <div className={clsx('position-relative', btnClass)} id='kt_drawer_chat_toggle'>
+          <KTSVG path='/media/icons/duotune/communication/com012.svg' className={btnIconClass} />
+          <span className='bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink' />
+        </div>
+      </div> */}
       <div className={clsx('d-flex align-items-center', toolbarButtonMarginClass)}>
-        {/* begin::Menu wrapper */}
         <div
           className={clsx(
             'btn btn-icon btn-active-light-primary btn-custom position-relative',
@@ -61,6 +75,9 @@ const Topbar: FC = () => {
         <HeaderNotificationsMenu />
         {/* end::Menu wrapper */}
 
+        {/* <div className={clsx('app-navbar-item', itemClass)}>
+          <ThemeModeSwitcher toggleBtnClass={clsx('btn-active-light-primary btn-custom')} />
+        </div> */}
         {/* end::Menu wrapper */}
       </div>
 

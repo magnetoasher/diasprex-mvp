@@ -4,6 +4,7 @@ import {useOktaAuth} from '@okta/okta-react'
 
 import {PublicFooter} from './PublicFooter'
 import clsx from 'clsx'
+import {ActivityDrawer, DrawerMessenger, UpgradePlan} from '../../../../partials'
 export const AuthStateContext: any = createContext({})
 export const AuthStateContextProvider: FC = (props: any) => {
   const {authState} = useOktaAuth()
@@ -19,6 +20,12 @@ export const PublicNavbarProvider: FC = (props: any) => {
       <main>{props.children}</main>
       <PublicFooter />
       {/* </AuthStateContextProvider> */}
+      {/* begin:: Drawers */}
+      <ActivityDrawer />
+      {/* <RightToolbar /> */}
+      <DrawerMessenger />
+      <UpgradePlan />
+      {/* end:: Drawers */}
     </div>
   )
 }

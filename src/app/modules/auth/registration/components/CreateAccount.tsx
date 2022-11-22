@@ -9,7 +9,7 @@ import {Step4} from './steps/Step4'
 import {Step5} from './steps/Step5'
 import AccountVerification from './steps/AccountVerification'
 import {StepperComponent} from '../../../../../_metronic/assets/ts/components'
-import {Formik, Form, FormikValues} from 'formik'
+import {Formik, Form, FormikActions, FormikValues} from 'formik'
 import './hide-stepper.css'
 import {ICreateAccount, createAccountSchemas, inits} from './CreateAccountWizardHelper'
 import SweetAlert from 'react-bootstrap-sweetalert'
@@ -22,7 +22,7 @@ const CreateAccount: FC = () => {
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
   const [userType, setUserType] = useState<string>('enabler')
-  const [userTypeFull, setUserTypeFull] = useState('standard_enabler')
+  const [userTypeFull, setUserTypeFull] = useState('basic_enabler')
   const [initValues] = useState<ICreateAccount>(inits)
 
   const [isShowAlert, setIsShowAlert] = useState(false)
@@ -67,7 +67,7 @@ const CreateAccount: FC = () => {
     setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex - 1])
   }
 
-  const submitStep = (values: ICreateAccount, actions: FormikValues) => {
+  const submitStep = (values: ICreateAccount, actions: FormikActions<FormikValues>) => {
     if (!stepper.current) {
       return
     }
@@ -75,8 +75,6 @@ const CreateAccount: FC = () => {
 
     if (stepper.current.currentStepIndex !== (userTypeFull === 'basic_enabler' ? 3 : 5)) {
       if (stepper.current.currentStepIndex == 1) {
-        //text
-
         if (userTypeFull == 'basic_enabler' || 'super_enabler' || 'standard_enabler') {
           setCategoryQuestion(questions.individual)
           setIsShowAlert(true)
@@ -90,6 +88,10 @@ const CreateAccount: FC = () => {
           stepper.current.goNext()
         }
       } else {
+        // data capture here
+        actions.setSubmitting(true)
+
+        console.log('FormValues', values)
         stepper.current.goNext()
       }
     } else {
@@ -136,7 +138,7 @@ const CreateAccount: FC = () => {
     localStorage.setItem('userType', 'enabler')
     localStorage.setItem('userTypeFull', 'basic_enabler')
   }, [])
-  console.log('total', stepper.current && stepper.current.totatStepsNumber)
+  // console.log('total', stepper.current && stepper.current.totatStepsNumber)
   return (
     <div>
       <div
@@ -263,7 +265,7 @@ const CreateAccount: FC = () => {
 
         <div className='d-flex flex-row-fluid flex-center bg-white rounded '>
           <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={submitStep}>
-            {() => (
+            {({}) => (
               <Form
                 className={
                   'py-20 w-100  px-9' +

@@ -6,19 +6,45 @@ export type Diasp = {
   afcountry: string
   flag: string
   undergrad?: {
-    institution: string
+    inst: string
     field: string
     degree: string
   }
 
   grad?: {
-    institution?: string
+    inst?: string
     field: string
     degree: string
   }
   summary: string
   interest: string[]
   afdinsight: string
+}
+
+export interface uadFormModel {
+  id?: string
+  fName: string
+  lName: string
+  dpxID?: string
+  email: string
+  phone: string
+  countryRes: string
+  countryOrig: string
+  profession?: string
+  undergrad?: {
+    inst: string
+    field: string
+    degree: string
+  }
+  grad: {
+    inst: string
+    field: string
+    degree: string
+  }
+  summary: string
+  interest: string[]
+  insightAfrica: string
+  avatar: string
 }
 
 export const InitialDiasp = {
@@ -29,13 +55,13 @@ export const InitialDiasp = {
   afcountry: 'Nigeria',
   flag: '/media/flags/nigeria.svg',
   undergrad: {
-    institution: 'Olabisi Onabanjo University, Ogun State, Nigeria',
+    inst: 'Olabisi Onabanjo University, Ogun State, Nigeria',
     field: 'Industrial Chemistry',
     degree: 'B.Sc',
   },
 
   grad: {
-    institution: 'Utah States University, Logan UT, United States',
+    inst: 'Utah States University, Logan UT, United States',
     field: 'Analytical Chemistry',
     degree: 'Ph.D.',
   },

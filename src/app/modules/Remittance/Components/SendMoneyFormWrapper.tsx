@@ -41,7 +41,7 @@ export const SendMoneyFormWrapper = () => {
           </a>
           {/* end::Button */}
         </div>
-        <SendMoneyModal />
+        {/* <SendMoneyModal /> */}
       </div>
     </div>
   )

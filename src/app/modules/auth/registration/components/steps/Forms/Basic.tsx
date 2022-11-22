@@ -1,16 +1,20 @@
 import React, {FC, useMemo, useState} from 'react'
 import {Field, ErrorMessage} from 'formik'
+
 // @ts-ignore
 import AsyncSelect from 'react-select'
 import countryList from 'react-select-country-list'
+import ReactCountryFlag from 'react-country-flag'
 import 'react-phone-number-input/style.css'
-// import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
+import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
 import {getCountries, getCountryCallingCode} from 'react-phone-number-input/input'
-import PhoneInput from 'react-phone-input-2'
+// import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import {CountryList} from '../../../../../../../_metronic/partials/content/selectionlists'
 
-const Basic = () => {
+const Basic: FC = () => {
   const countryOptions = useMemo(() => countryList().getData(), [])
+
   const [countryValue, setCountryValue] = useState({})
   const [areaOfInterest, setAreaOfInterest] = useState([])
   const [firstName, setFirstName] = useState('')
@@ -41,34 +45,6 @@ const Basic = () => {
     {value: 'other', label: 'Other'},
   ]
 
-  const handleCountryChange = (e: any) => {
-    setCountryValue(e)
-  }
-
-  const handleAreaOfInterest = (e: any) => {
-    setAreaOfInterest(e)
-  }
-
-  const handleFirstNameChange = (e: any) => {
-    setFirstName(e.target.value)
-  }
-
-  const handleMiddleNameChange = (e: any) => {
-    setFirstName(e.target.value)
-  }
-
-  const handleLastNameChange = (e: any) => {
-    setLastName(e.target.value)
-  }
-
-  const handleEmailChange = (e: any) => {
-    setEmail(e.target.value)
-  }
-
-  const handlePhoneNumberChange = (e: any) => {
-    setPhoneNumber(e.target.value)
-  }
-
   return (
     <div className='w-100'>
       <div className='pb-10 pb-lg-12'>
@@ -82,118 +58,182 @@ const Basic = () => {
           .
         </div>
       </div>
-      <div className='fv-row mb-10'>
-        <label className='form-label required'>First Name</label>
-        <Field name='businessName' className='form-control form-control-lg form-control-solid' />
 
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='businessName' />
-        </div>
-      </div>
-      <div className='fv-row mb-10'>
-        <label className='form-label required'>Middle Name</label>
-        <Field name='businessName' className='form-control form-control-lg form-control-solid' />
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='businessName' />
-        </div>
-      </div>
-      <div className='fv-row mb-10'>
-        <label className='form-label required'>Last Name</label>
-        <Field name='businessName' className='form-control form-control-lg form-control-solid' />
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='businessName' />
-        </div>
-      </div>
-      <div className='fv-row mb-10'>
-        <label className='form-label required'>Email Address</label>
-        <Field name='businessName' className='form-control form-control-lg form-control-solid' />
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='businessName' />
-        </div>
-      </div>
-      <div className='fv-row mb-10'>
-        <label className='form-label required'>Primary Phone Number</label>
-        <div className='d-flex flex-row mw-100 form-control form-control-lg form-control-solid'>
-          {/* <Field name='businessName' className='form-control form-control-lg form-control-solid' /> */}
-          <input
+      <div>
+        <div className='fv-row mb-10'>
+          <label className='form-label required'>First Name</label>
+          <Field
+            name='fName'
             type='text'
-            maxLength={5}
-            name='businessName'
-            className='form-control mw-100px'
-            placeholder='Intl code'
+            placeholder='Enter your first name'
+            className='form-control form-control-lg'
           />
-          <input
+
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='fName' component='span' />
+          </div>
+        </div>
+        <div className='fv-row mb-10'>
+          <label className='form-label'>Middle Initial</label>
+          <Field
+            name='mInitial'
             type='text'
-            maxLength={9}
-            name='businessName'
-            className='form-control'
-            placeholder='xxx-xxx-xxxx'
+            placeholder='Enter your middle intial'
+            className='form-control form-control-lg'
           />
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='mInitial' />
+          </div>
         </div>
-        {/* <div className='d-flex flex-row mw-100 form-control form-control-lg form-control-solid'>
-          <PhoneInput
-            inputStyle={{width: '100px'}}
-            international
-            defaultCountry='US'
-            placeholder='Enter phone number'
-            value={phoneNumber}
-            onChange={() => setPhoneNumber}
+        <div className='fv-row mb-10'>
+          <label className='form-label required'>Last Name</label>
+          <Field
+            name='lName'
+            type='text'
+            placeholder='Enter your last name'
+            className='form-control form-control-lg'
           />
-        </div> */}
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='businessName' />
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='lName' component='span' />
+          </div>
         </div>
-      </div>
-      <div className='fv-row mb-10'>
-        <label className='form-label required'>Country of Origin</label>
-        <AsyncSelect
-          name='businessType'
-          className='form-select form-select-lg form-select-solid'
-          options={countryOptions}
-          value={countryValue}
-          onChange={handleCountryChange}
-        />
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='businessType' />
+        <div className='fv-row mb-10'>
+          <label className='form-label required'>Email Address</label>
+          <Field
+            name='email'
+            type='email'
+            placeholder='Please enter a valid email'
+            className='form-control form-control-lg'
+          />
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='email' component='span' />
+          </div>
         </div>
-      </div>
-      <div className='fv-row mb-10'>
-        <label className='form-label required'>Country of Residence</label>
-        <AsyncSelect
-          name='businessType'
-          className='form-select form-select-lg form-select-solid'
-          options={countryOptions}
-          value={countryValue}
-          onChange={handleCountryChange}
-        />
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='businessType' />
+        <div className='fv-row mb-10'>
+          <label className='form-label required'>Primary Phone Number</label>
+          <div className='d-flex flex-row mw-100 form-control form-control-lg'>
+            <Field
+              type='text'
+              maxLength={5}
+              name='phone.code'
+              className='form-control mw-100px'
+              placeholder='Intl code'
+            />
+            <Field
+              type='text'
+              maxLength={9}
+              name='phone.phonenumber'
+              className='form-control'
+              placeholder='xxx-xxx-xxxx'
+            />
+          </div>
+          {/* <div className='d-flex flex-row mw-100 form-control form-control-lg form-control-solid'>
+            <PhoneInput
+              inputStyle={{width: '100px'}}
+              international
+              defaultCountry='US'
+              placeholder='Enter phone number'
+              value={phoneNumber}
+              onChange={() => setPhoneNumber}
+            />
+          </div> */}
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='phone.code' component='span' />
+          </div>
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='phone.phonenumber' component='span' />
+          </div>
         </div>
-      </div>
-      <div className='fv-row mb-10'>
-        <label className='form-label required'>Areas of Interest</label>
-        <AsyncSelect
-          name='businessType'
-          className='form-select form-select-lg form-select-solid'
-          options={areaOptions}
-          value={areaOfInterest}
-          defaultOptions
-          cacheOptions
-          isMulti
-          onChange={handleAreaOfInterest}
-        />
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='businessType' />
+        <div className='fv-row mb-10'>
+          <label className='form-label required'>Country of Origin</label>
+          <Field as='select' name='countryOrig' className='form-select form-select-lg'>
+            <option value=''>Select a country</option>
+            {countryOptions.map((option, index) => (
+              <option key={index} value={option.value}>
+                {/* <ReactCountryFlag
+                  countryCode={option.value}
+                  svg
+                  style={{fontSize: '2em', lineHeight: '2em'}}
+                /> */}
+                {option.label}
+              </option>
+            ))}
+          </Field>
+
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='countryOrig' component='span' />
+          </div>
         </div>
-      </div>
-      <div className='fv-row mb-10'>Terms &amp; Conditions:</div>
-      <input type='checkbox' required />
-      <div className='fv-row mb-10'>
-        <p>I agree to the Terms &amp; Conditions of DIASPREX International</p>
-      </div>
-      <input type='checkbox' required />
-      <div className='fv-row mb-10'>
-        <p>Email me relevant information from DIASPREX</p>
+        <div className='fv-row mb-10'>
+          <label className='form-label required'>Country of Residence</label>
+          <Field component='select' name='countryRes' className='form-select form-select-lg'>
+            <option value=''>Select a country</option>
+            {countryOptions.map((option, index) => (
+              <option key={index} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </Field>
+
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='countryRes' component='span' />
+          </div>
+        </div>
+        <div className='fv-row mb-10'>
+          <label className='form-label'>Areas of Interest (Choose most related)</label>
+
+          <Field
+            component='select'
+            name='interest'
+            className='form-select form-select-lg'
+            multiple
+            size='3'
+            selectpicker
+            data-live-search='true'
+            cacheOptions
+          >
+            {areaOptions.map((option, index) => (
+              <option key={index} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </Field>
+
+          {/* <AsyncSelect
+            name='interest'
+            className='form-select form-select-lg form-select-solid'
+            options={areaOptions}
+            value={areaOfInterest}
+            defaultOptions
+            cacheOptions
+            isMulti
+            onChange={handleAreaOfInterest}
+          /> */}
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='interest' component='span' />
+          </div>
+        </div>
+        <div className='fv-row fw-bold mb-10'>Terms &amp; Conditions:</div>
+
+        <div className='fv-row mb-10'>
+          <label>
+            <Field type='checkbox' name='dpxterms' className='me-3' />I agree to the Terms &amp;
+            Conditions of DIASPREX INC.
+          </label>
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='dpxterms' component='span' />
+          </div>
+        </div>
+
+        <div className='fv-row mb-10'>
+          <label>
+            <Field type='checkbox' name='emailcommunicate' className='me-3' />
+            Email me relevant information from DIASPREX
+          </label>
+          {/* <div className='text-danger mt-2'>
+            <ErrorMessage name='emailcommunicate' component='span' />
+          </div> */}
+        </div>
       </div>
     </div>
   )

@@ -1,4 +1,5 @@
-import {FC} from 'react'
+import {FC, useEffect, useState} from 'react'
+import axios, {AxiosResponse} from 'axios'
 import {KTSVG} from '../../../_metronic/helpers'
 import {Carousel2} from './components/Carousel2'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
@@ -12,11 +13,24 @@ import {
 import {YearCollapsible} from '../../../_metronic/partials/content/collapsibles/YearCollapsible'
 import {MonthCollapsible} from '../../../_metronic/partials/content/collapsibles/MonthCollapsible'
 import {DiasporasCard} from './components/DiasporasCard'
-import {Diasp} from './components/core/_model'
+import {Diasp, uadFormModel} from './components/core/_model'
 import {InviteUADFriends} from '../../../_metronic/partials'
 import {UadForm} from './components/uadform'
+import {profile} from 'console'
+// 'http://localhost:3000/diasporas'
 
+const API_URL = process.env.DIASPREX_API_URL
+const UAD_LIST_URL = 'http://localhost:3000/diasporas'
 export const DiasporasPage: FC<Diasp> = (diasp: Diasp) => {
+  const [profileList, setProfileList] = useState<uadFormModel[]>([])
+  console.log(API_URL)
+  useEffect(() => {
+    axios.get(UAD_LIST_URL).then((res) => {
+      setProfileList(res.data)
+      console.log(res.data)
+    })
+  }, [])
+
   const img1 = toAbsoluteUrl('./media/stock/diasprex/img-2.jpg')
   const img2 = toAbsoluteUrl('./media/stock/diasprex/img-1.jpg')
   const img3 = toAbsoluteUrl('./media/stock/diasprex/img-3.jpg')
@@ -40,7 +54,7 @@ export const DiasporasPage: FC<Diasp> = (diasp: Diasp) => {
             </div>
             <div className='btn-menu me-5'>
               <button
-                className='btn btn-light text-dark'
+                className='btn btn-light-primary rounded-pill'
                 data-bs-toggle='modal'
                 data-bs-target='#kt_modal_submit_profile'
               >
@@ -61,7 +75,7 @@ export const DiasporasPage: FC<Diasp> = (diasp: Diasp) => {
             </div>
             <div className='btn-menu me-5'>
               <button
-                className='btn btn-light text-dark'
+                className='btn btn-light-success rounded-pill'
                 data-bs-target='#kt_modal_invite_uad_friends'
                 data-bs-toggle='modal'
               >
@@ -85,7 +99,19 @@ export const DiasporasPage: FC<Diasp> = (diasp: Diasp) => {
             <h2 className='text-gray-800 fw-bolder mb-4'>UNFOUND AFRICAN DIASPORAS</h2>
 
             <div className='m-0'>
-              <YearCollapsible currentYear='2022' target='#kt_month_collapse' />
+              <div
+                className='card-header border-0 cursor-pointer'
+                role='button'
+                data-bs-toggle='collapse'
+                data-bs-target='#kt_month_collapse'
+                aria-expanded='true'
+                aria-controls='kt_month_collapse'
+              >
+                <div className='card-title m-0'>
+                  <h3 className='fw-bolder m-0'>2022</h3>
+                </div>
+              </div>
+              {/* <YearCollapsible currentYear='2022' target='#kt_month_collapse' /> */}
               <div className='mx-10'>
                 <MonthCollapsible currentMonth='Jan' target='#kt_job_collapse' />
               </div>
@@ -94,21 +120,25 @@ export const DiasporasPage: FC<Diasp> = (diasp: Diasp) => {
             <div className='separator separator-dashed'></div>
 
             <div id='kt_job_collapse' className='collapse show fs-6 ms-1 mw-100'>
-              <div className='mb-4 text-gray-600 fw-bold fs-6 ps-10'>
-                <DiasporasCard
-                  title={diasp.title}
-                  name={diasp.name}
-                  profession={diasp.profession}
-                  rcountry={diasp.rcountry}
-                  afdinsight={diasp.afdinsight}
-                  afcountry={diasp.afcountry}
-                  flag={toAbsoluteUrl(diasp.flag)}
-                  interest={diasp.interest}
-                  undergrad={diasp.undergrad}
-                  grad={diasp.grad}
-                  summary={diasp.summary}
-                />
-              </div>
+              {profileList.map((profile) => (
+                <article key={profile.id} className='mb-4 text-gray-600 fw-bold fs-6 ps-10'>
+                  <DiasporasCard
+                    fName={profile.fName}
+                    lName={profile.lName}
+                    email={profile.email}
+                    phone={profile.phone}
+                    profession={profile.profession}
+                    countryRes={profile.countryRes}
+                    insightAfrica={profile.insightAfrica}
+                    countryOrig={profile.countryOrig}
+                    avatar={toAbsoluteUrl(profile.avatar)}
+                    interest={profile.interest}
+                    undergrad={profile.undergrad}
+                    grad={profile.grad}
+                    summary={profile.summary}
+                  />
+                </article>
+              ))}
             </div>
           </div>
 

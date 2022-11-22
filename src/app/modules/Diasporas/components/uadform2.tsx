@@ -1,106 +1,80 @@
-import {FC, useState, useMemo} from 'react'
-
+import {useState} from 'react'
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
-import axios from 'axios'
-import {Diasp, InitialDiasp, uadFormModel} from './core/_model'
+import {Modal, Button, Form} from 'react-bootstrap'
+
+import {Diasp, InitialDiasp} from './core/_model'
 import {KTSVG, toAbsoluteUrl} from '../../../../_metronic/helpers'
-import countryList from 'react-select-country-list'
 import {CountryList} from '../../../../_metronic/partials/content/selectionlists'
 import {UploadFile} from '../../../../_metronic/partials/modals/file-management/uploadfile'
-import {date} from 'yup/lib/locale'
-import {phoneRegExp} from '../../../../_metronic/helpers'
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
 const editUADSchema = Yup.object().shape({
   fName: Yup.string()
     .min(1, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Name is required'),
-  // lName: Yup.string()
-  //   .min(1, 'Minimum 3 symbols')
-  //   .max(50, 'Maximum 50 symbols')
-  //   .required('Name is required'),
-  // email: Yup.string()
-  //   .email('Wrong email format')
-  //   .min(3, 'Minimum 3 symbols')
-  //   .max(50, 'Maximum 50 symbols')
-  //   .required('Email is required'),
-  // phone: Yup.string()
-  //   .min(3, 'Minimum 3 symbols')
-  //   .max(50, 'Maximum 50 symbols')
-  //   .matches(phoneRegExp, 'Phone number is not valid')
-  //   .required('Primary Phone is required'),
-  // countryRes: Yup.string().required('Country of Residence is required'),
-  // countryOrig: Yup.string().required('Country of Origin is required'),
-  // summary: Yup.string()
-  //   .min(5, 'minimum 5 characters')
-  //   .max(3000, 'maximum 3000 characters')
-  //   .required('Professional summary is required'),
-  // interest: Yup.array()
-  //   .min(1, 'At least one area of interest is required')
-  //   .required('Area of interest is required'),
-
-  // avatar: Yup.mixed()
-  //   .required("*Avatar image is required")
-  //   .test(
-  //     "fileSize",
-  //     "Image too large, max 8mb",
-  //     value => value && value.size <= FILE_SIZE
-  //   )
-  //   .test(
-  //     "fileFormat",
-  //     "Images only",
-  //     value => value && FILE_TYPES.includes(value.type)
-  //   )
+  lName: Yup.string()
+    .min(1, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
+    .required('Name is required'),
+  email: Yup.string()
+    .email('Wrong email format')
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
+    .required('Email is required'),
+  phone: Yup.string()
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
+    .matches(phoneRegExp, 'Phone number is not valid')
+    .required('Primary Phone is required'),
+  countryRes: Yup.string().required('Country of Residence is required'),
+  countryOrig: Yup.string().required('Country of Origin is required'),
+  summary: Yup.string()
+    .min(5, 'minimum 5 characters')
+    .max(3000, 'maximum 3000 characters')
+    .required('Professional summary is required'),
+  interest: Yup.array(Yup.string().required('At least one area of interest is required')).min(
+    1,
+    'At least one area of interest is required'
+  ),
 })
 
-export const UadForm: FC = () => {
-  const [value, setValue] = useState('')
-  const options = useMemo(() => countryList().getData(), [])
-  const [formData, setformData] = useState({})
-  const [avatarFile, setAvatarFile] = useState(null)
-  const initialValues: uadFormModel = {
-    fName: '',
-    lName: '',
-    dpxID: '',
-    email: '',
-    phone: '',
-    countryRes: '',
-    countryOrig: '',
-    profession: '',
-    undergrad: {
-      inst: '',
-      field: '',
-      degree: 'B.S',
-    },
-    grad: {
-      inst: '',
-      field: '',
-      degree: 'Ph.D',
-    },
-    summary: '',
-    interest: ['', '', '', ''],
-    insightAfrica: '',
-    avatar: '',
-  }
+export const UadForm = () => {
+  const [closeModal, setCloseModal] = useState(false)
+
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: initialValues,
+    initialValues: {
+      fName: '',
+      lName: '',
+      dpxID: '',
+      email: '',
+      phone: '',
+      countryRes: '',
+      countryOrig: '',
+      undergradInst: '',
+      undergradField: '',
+      undergradDegree: '',
+      gradInst: '',
+      gradField: '',
+      gradDegree: '',
+      summary: '',
+      interest: [],
+      insightAfrica: '',
+      avatar: '',
+    },
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
-      const data = {
-        ...values,
-        dateSubmitted: new Date(),
-      }
+
+      // await Axios.post('API url', values)
       try {
-        await axios
-          .post('http://localhost:3000/diasporas', data)
-          .then((res) => console.log('onSubmit', res))
-          .catch((error) => error)
+        await console.log('onSubmit', JSON.stringify(values))
       } catch {
         console.log(formik.errors)
       } finally {
-        formik.resetForm()
+        setCloseModal(true)
       }
     },
     validationSchema: editUADSchema,
@@ -111,7 +85,6 @@ export const UadForm: FC = () => {
     justifyContent: 'flex-end',
     fontWeight: 600,
   }
-
   // const [form] = Form.useForm()
   // const onSubmit = () => {
   //   form.validateFields().then(() => {
@@ -148,8 +121,8 @@ export const UadForm: FC = () => {
             data-kt-scroll-dependencies='#kt_js_header, #kt_modal_submit_profile, #kt_oda_header'
             data-kt-scroll-offset='100px'
           >
-            <div className='modal-body  scroll-y mx-5 mx-xl-18 pt-0 pb-15'>
-              <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit}>
+              <div className='modal-body border border-3 scroll-y mx-5 mx-xl-18 pt-0 pb-15'>
                 <div className='mw-900px'>
                   {/* <!--begin::Input group--> */}
 
@@ -308,27 +281,6 @@ export const UadForm: FC = () => {
                       </div>
                     )}
                   </div>
-                  <div className='fv-row mb-10'>
-                    <label className='form-label text-muted fw-bold fs-6 mb-2'>
-                      Enter your profession
-                    </label>
-                    <input
-                      type='text'
-                      className='form-control'
-                      placeholder='Enter your profession'
-                      {...formik.getFieldProps('profession')}
-                      name='profession'
-                      autoComplete='off'
-                      disabled={formik.isSubmitting}
-                    />
-                    {formik.touched.profession && formik.errors.profession && (
-                      <div className='fv-plugins-message-container'>
-                        <div className='fv-help-block'>
-                          <span role='alert'>{formik.errors.profession}</span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
 
                   <div className='fv-row mb-10'>
                     <label className='form-label text-muted fw-bold fs-6 mb-2'>
@@ -339,8 +291,8 @@ export const UadForm: FC = () => {
                         type='text'
                         className='form-control me-2'
                         placeholder='Institution'
-                        {...formik.getFieldProps('undergrad.inst')}
-                        name='undergrad.inst'
+                        {...formik.getFieldProps('undergradInst')}
+                        name='undergradInst'
                         autoComplete='off'
                         disabled={formik.isSubmitting}
                       />
@@ -348,8 +300,8 @@ export const UadForm: FC = () => {
                         type='text'
                         className='form-control me-2'
                         placeholder='Field of study'
-                        {...formik.getFieldProps('undergrad.field')}
-                        name='undergrad.field'
+                        {...formik.getFieldProps('undergradField')}
+                        name='undergradField'
                         autoComplete='off'
                         disabled={formik.isSubmitting}
                       />
@@ -357,8 +309,8 @@ export const UadForm: FC = () => {
                         className='form-select form-select-white mb-2'
                         aria-label='country'
                         defaultValue='Degree'
-                        {...formik.getFieldProps('undergrad.degree')}
-                        name='undergrad.degree'
+                        {...formik.getFieldProps('undergradDegree')}
+                        name='undergradDegree'
                         autoComplete='off'
                         disabled={formik.isSubmitting}
                       >
@@ -380,8 +332,8 @@ export const UadForm: FC = () => {
                         type='text'
                         className='form-control me-2'
                         placeholder='Institution'
-                        {...formik.getFieldProps('grad.inst')}
-                        name='grad.inst'
+                        {...formik.getFieldProps('gradInst')}
+                        name='gradInst'
                         autoComplete='off'
                         disabled={formik.isSubmitting}
                       />
@@ -389,8 +341,9 @@ export const UadForm: FC = () => {
                         type='text'
                         className='form-control me-2'
                         placeholder='Field of study'
-                        {...formik.getFieldProps('grad.field')}
-                        name='grad.field'
+                        {...formik.getFieldProps('gradField')}
+                        name='gradField'
+                        value={formik.values.gradField}
                         autoComplete='off'
                         disabled={formik.isSubmitting}
                       />
@@ -398,8 +351,8 @@ export const UadForm: FC = () => {
                         className='form-select form-select-white mb-2'
                         aria-label='country'
                         defaultValue='Degree'
-                        {...formik.getFieldProps('grad.degree')}
-                        name='grad.degree'
+                        {...formik.getFieldProps('gradDegree')}
+                        name='gradDegree'
                         autoComplete='off'
                         disabled={formik.isSubmitting}
                       >
@@ -439,50 +392,18 @@ export const UadForm: FC = () => {
                       Please list up to 4 professional interest
                     </label>
                     <div className='input-group'>
-                      <input
-                        type='text'
-                        className='form-control me-2'
-                        placeholder='Interest 1'
-                        {...formik.getFieldProps('interest[0]')}
-                        name='interest[0]'
-                        autoComplete='off'
-                        disabled={formik.isSubmitting}
-                      />
-                      <input
-                        type='text'
-                        className='form-control me-2'
-                        placeholder='Interest 2'
-                        {...formik.getFieldProps('interest[1]')}
-                        name='interest[1]'
-                        autoComplete='off'
-                        disabled={formik.isSubmitting}
-                      />
-                      <input
-                        type='text'
-                        className='form-control me-2'
-                        placeholder='Interest 3'
-                        {...formik.getFieldProps('interest[2]')}
-                        name='interest[2]'
-                        autoComplete='off'
-                        disabled={formik.isSubmitting}
-                      />
-                      <input
-                        type='text'
-                        className='form-control me-2'
-                        placeholder='Interest 4'
-                        {...formik.getFieldProps('interest[3]')}
-                        name='interest[3]'
-                        autoComplete='off'
-                        disabled={formik.isSubmitting}
-                      />
+                      <input type='text' className='form-control me-2' placeholder='Interest 1' />
+                      <input type='text' className='form-control me-2' placeholder='Interest 2' />
+                      <input type='text' className='form-control me-2' placeholder='Interest 3' />
+                      <input type='text' className='form-control me-2' placeholder='Interest 4' />
                     </div>
-                    {formik.touched.interest && formik.errors.interest && (
+                    {/* {formik.touched.interest && formik.errors.interest && (
                       <div className='fv-plugins-message-container'>
                         <div className='fv-help-block text-danger'>
                           <span role='alert'>{formik.errors.interest}</span>
                         </div>
                       </div>
-                    )}
+                    )} */}
                   </div>
 
                   <div className='fv-row mb-10'>
@@ -522,17 +443,7 @@ export const UadForm: FC = () => {
                     <label className='form-label text-muted' htmlFor='uadFile'>
                       Upload a profile photo or headshot
                     </label>
-                    <input
-                      type='file'
-                      accept='image/*'
-                      className='form-control'
-                      id='uadFile'
-                      {...formik.getFieldProps('avatar')}
-                      name='avatar'
-                      value={formik.values.avatar}
-                      autoComplete='off'
-                      disabled={formik.isSubmitting}
-                    />
+                    <input type='file' className='form-control' id='uadFile' />
                   </div>
                   {/* <UploadFile /> */}
 
@@ -540,28 +451,13 @@ export const UadForm: FC = () => {
                 </div>
                 <div className='form-footer'>
                   <div className='text-center pt-15'>
-                    <button
-                      type='button'
-                      className='btn btn-light-primary me-2'
-                      onClick={() => formik.resetForm()}
-                    >
-                      Reset
-                    </button>
-                    <button
-                      type='button'
-                      className='btn btn-light-primary me-2'
-                      data-bs-dismiss='modal'
-                      onClick={() => formik.resetForm()}
-                    >
+                    <button type='button' className='btn btn-light me-2' data-bs-dismiss='modal'>
                       Cancel
                     </button>
                     <button
                       type='submit'
                       className='btn btn-primary'
-                      disabled={
-                        Object.keys(formik.touched).length === 0 ||
-                        Object.keys(formik.errors).length !== 0
-                      }
+                      disabled={Object.keys(formik.touched).length === 0}
                       data-bs-dismiss={
                         Object.keys(formik.touched).length !== 0 &&
                         Object.keys(formik.errors).length === 0
@@ -573,8 +469,8 @@ export const UadForm: FC = () => {
                     </button>
                   </div>
                 </div>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>

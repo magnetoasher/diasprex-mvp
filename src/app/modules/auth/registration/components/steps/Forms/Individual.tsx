@@ -3,6 +3,7 @@ import {Field, ErrorMessage} from 'formik'
 // @ts-ignore
 import AsyncSelect from 'react-select'
 import countryList from 'react-select-country-list'
+import {IndustryList} from '../../../../../../../_metronic/partials/content/selectionlists'
 
 const Individual = () => {
   const countryOptions = useMemo(() => countryList().getData(), [])
@@ -17,27 +18,7 @@ const Individual = () => {
       [type]: value,
     })
   }
-  console.log(dataObj)
-  const professions = [
-    {value: 'acturarial', label: 'Acturarial'},
-    {value: 'analytics & research', label: 'Analytics & Research'},
-    {value: 'administrative/clerical', label: 'Administrative/Clerical'},
-    {value: 'business intellegence & marketing', label: 'Business Intellegence & Marketing'},
-    {value: 'claim', label: 'Claims'},
-    {value: 'communications', label: 'Communications'},
-    {value: 'customer service', label: 'Customer Service'},
-    {value: 'corporate service', label: 'Corporate Service'},
-    {value: 'human resources', label: 'Human Resources'},
-    {value: 'legal', label: 'legal'},
-    {value: 'finance and accounting', label: 'Finance and Accounting'},
-    {value: 'nurse', label: 'Nursing'},
-    {value: 'marketing', label: 'Marketing'},
-    {value: 'project management', label: 'Project Management'},
-    {value: 'operations', label: 'Operations'},
-    {value: 'sales', label: 'Sales'},
-    {value: 'technology', label: 'Technology'},
-    {value: 'underwriting', label: 'Underwriting'},
-  ]
+  // console.log(dataObj)
 
   const areaOptions = [
     {value: 'management', label: 'Management'},
@@ -81,58 +62,107 @@ const Individual = () => {
       </div>
       <div className='fv-row mb-10'>
         <label className='form-label required'>First Name</label>
-        <Field
-          name='fName'
-          className='form-control form-control-lg form-control-solid'
-          onChange={(e: any) => handleChange('first_name', e.target.value)}
-        />
+        <Field name='fName' className='form-control form-control-lg' />
         <div className='text-danger mt-2'>
-          <ErrorMessage name='businessName' />
+          <ErrorMessage name='fName' />
         </div>
       </div>
       <div className='fv-row mb-10'>
-        <label className='form-label required'>Middle Initial</label>
-        <Field
-          name='mName'
-          className='form-control form-control-lg form-control-solid'
-          onChange={(e: any) => handleChange('middle_name', e.target.value)}
-        />
+        <label className='form-label'>Middle Initial</label>
+        <Field name='mName' className='form-control form-control-lg' />
         <div className='text-danger mt-2'>
-          <ErrorMessage name='businessName' />
+          <ErrorMessage name='mInitial' />
         </div>
       </div>
       <div className='fv-row mb-10'>
         <label className='form-label required'>Last Name</label>
-        <Field
-          name='lName'
-          className='form-control form-control-lg form-control-solid'
-          onChange={(e: any) => handleChange('last_name', e.target.value)}
-        />
+        <Field name='lName' className='form-control form-control-lg' />
         <div className='text-danger mt-2'>
-          <ErrorMessage name='businessName' />
+          <ErrorMessage name='lName' />
         </div>
       </div>
       <div className='fv-row mb-10'>
         <label className='form-label required'>Email Address</label>
-        <Field
-          name='email'
-          className='form-control form-control-lg form-control-solid'
-          onChange={(e: any) => handleChange('email', e.target.value)}
-        />
+        <Field name='email' className='form-control form-control-lg' />
         <div className='text-danger mt-2'>
-          <ErrorMessage name='businessName' />
+          <ErrorMessage name='email' />
         </div>
       </div>
       <div className='fv-row mb-10'>
         <label className='form-label required'>Primary Phone Number</label>
-        <Field
-          name='businessName'
-          className='form-control form-control-lg form-control-solid'
-          onChange={(e: any) => handleChange('primary_phone', e.target.value)}
-        />
+        <div className='d-flex flex-row mw-100 form-control form-control-lg'>
+          <Field
+            type='text'
+            maxLength={5}
+            name='phone.code'
+            className='form-control mw-100px'
+            placeholder='Intl code'
+          />
+          <Field
+            type='text'
+            maxLength={9}
+            name='phone.phonenumber'
+            className='form-control'
+            placeholder='xxx-xxx-xxxx'
+          />
+        </div>
+        {/* <div className='d-flex flex-row mw-100 form-control form-control-lg form-control-solid'>
+            <PhoneInput
+              inputStyle={{width: '100px'}}
+              international
+              defaultCountry='US'
+              placeholder='Enter phone number'
+              value={phoneNumber}
+              onChange={() => setPhoneNumber}
+            />
+          </div> */}
+        <div className='text-danger mt-2'>
+          <ErrorMessage name='phone.code' component='span' />
+        </div>
+        <div className='text-danger mt-2'>
+          <ErrorMessage name='phone.phonenumber' component='span' />
+        </div>
+      </div>
+
+      <div className='fv-row mb-10'>
+        <label className='form-label required'>Country of Origin</label>
+        <Field component='select' name='countryOrig' className='form-select form-select-lg'>
+          <option value=''>Select a country</option>
+          {countryOptions.map((option, index) => (
+            <option key={index} value={option.value}>
+              {/* <ReactCountryFlag
+                  countryCode={option.value}
+                  svg
+                  style={{fontSize: '2em', lineHeight: '2em'}}
+                /> */}
+              {option.label}
+            </option>
+          ))}
+        </Field>
 
         <div className='text-danger mt-2'>
-          <ErrorMessage name='businessName' />
+          <ErrorMessage name='countryOrig' component='span' />
+        </div>
+      </div>
+
+      <div className='fv-row mb-10'>
+        <label className='form-label required'>Country of Residence</label>
+        <Field component='select' name='countryRes' className='form-select form-select-lg'>
+          <option value=''>Select a country</option>
+          {countryOptions.map((option, index) => (
+            <option key={index} value={option.value}>
+              {/* <ReactCountryFlag
+                  countryCode={option.value}
+                  svg
+                  style={{fontSize: '2em', lineHeight: '2em'}}
+                /> */}
+              {option.label}
+            </option>
+          ))}
+        </Field>
+
+        <div className='text-danger mt-2'>
+          <ErrorMessage name='countryRes' component='span' />
         </div>
       </div>
 
@@ -140,43 +170,80 @@ const Individual = () => {
         <label className='form-label required'>Profession</label>
         <Field
           name='profession'
-          className='form-control form-control-lg form-control-solid'
-          onChange={(e: any) => handleChange('profession', e.target.value)}
+          className='form-control form-control-lg'
+          placeholder='Enter your profession'
         />
+
         <div className='text-danger mt-2'>
-          <ErrorMessage name='businessName' />
+          <ErrorMessage name='profession' />
         </div>
       </div>
 
       <div className='fv-row mb-10'>
-        <label className='form-label required'>Highest Degree</label>
-        <Field
-          name='degree'
-          className='form-control form-control-lg form-control-solid'
-          onChange={(e: any) => handleChange('highest_degree', e.target.value)}
-        />
+        <label className='form-label required'>Professional Field (Choose most related)</label>
+        <Field component='select' name='proffield' className='form-select form-select-lg'>
+          <IndustryList />
+        </Field>
         <div className='text-danger mt-2'>
-          <ErrorMessage name='businessName' />
+          <ErrorMessage name='proffield' />
         </div>
-      </div>
-      <div className='fv-row mb-10'>
-        <label className='form-label required'>Professional Field (choose most related)</label>
-        <AsyncSelect
+
+        {/* <AsyncSelect
           name='areaOptions'
           className='form-select form-select-lg form-select-solid'
           options={areaOptions}
           value={dataObj.area_of_interest}
           onChange={(e: any) => handleChange('area_of_interest', e)}
-        />
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='businessType' />
-        </div>
+        /> */}
       </div>
 
       <div className='fv-row mb-10'>
-        <label className='form-label required'>Professional Interest</label>
-        <AsyncSelect
-          name='businessType'
+        <label className='form-label'>Highest Degree</label>
+        <Field
+          component='select'
+          name='degree'
+          className='form-select form-select-lg'
+          // onChange={(e: any) => handleChange('highest_degree', e.target.value)}
+        >
+          <option value=''> Select your highest degree</option>
+          <option value='Associate'> Associate</option>
+          <option value='OND'> OND</option>
+          <option value='BS'> B.S</option>
+          <option value='BA'> B.A</option>
+          <option value='HND'> HND</option>
+          <option value='PHD'> Ph.D</option>
+          <option value='MS'> MS</option>
+          <option value='MD'> MD</option>
+          <option value='JD'> J.D</option>
+          <option value='MBA'> MBA</option>
+        </Field>
+        {/* <div className='text-danger mt-2'>
+          <ErrorMessage name='degree' />
+        </div> */}
+      </div>
+
+      <div className='fv-row mb-10'>
+        <label className='form-label'>
+          Professional Interests (Select up to four applicable areas)
+        </label>
+        <Field
+          component='select'
+          name='interest'
+          className='form-select form-select-lg'
+          multiple
+          size='3'
+          selectpicker
+          data-live-search='true'
+          cacheOptions
+        >
+          {areaOptions.map((option, index) => (
+            <option key={index} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </Field>
+        {/* <AsyncSelect
+          name='interest'
           className='form-select form-select-lg form-select-solid'
           options={professions}
           // value={dataObj.professional_interest}
@@ -184,41 +251,43 @@ const Individual = () => {
           cacheOptions
           isMulti
           onChange={(e: any) => handleChange('professional_interest', e)}
-        />
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='businessType' />
-        </div>
+        /> */}
+        {/* <div className='text-danger mt-2'>
+          <ErrorMessage name='interest' />
+        </div> */}
       </div>
+      <div className='fv-row fw-bold mb-10'>Terms &amp; Conditions:</div>
       <div className='fv-row mb-10'>
-        <label className='form-label required'>Country of Origin</label>
-        <AsyncSelect
-          name='businessType'
-          className='form-select form-select-lg form-select-solid'
-          options={countryOptions}
-          // value={countryValue}
-          onChange={(e: any) => handleChange('origin', e)}
-        />
+        <label>
+          <Field type='checkbox' name='dpxterms' className='me-3' />I agree to the Terms &amp;
+          Conditions of DIASPREX INC.
+        </label>
         <div className='text-danger mt-2'>
-          <ErrorMessage name='businessType' />
+          <ErrorMessage name='dpxterms' component='span' />
         </div>
       </div>
 
       <div className='fv-row mb-10'>
-        <label className='form-label required'>Country of Residence</label>
-        <AsyncSelect
-          name='businessType'
-          className='form-select form-select-lg form-select-solid'
-          options={countryOptions}
-          // value={countryValue}
-          onChange={(e: any) => handleChange('country', e)}
-        />
+        <label>
+          <Field type='checkbox' name='enablerterms' className='me-3' />I agree to the Terms &amp;
+          Conditions of DIASPREX Enablers
+        </label>
         <div className='text-danger mt-2'>
-          <ErrorMessage name='businessType' />
+          <ErrorMessage name='enablerterms' component='span' />
         </div>
       </div>
 
-      <div className='fv-row mb-10'>Terms &amp; Conditions:</div>
-      <input type='checkbox' required />
+      <div className='fv-row mb-10'>
+        <label>
+          <Field type='checkbox' name='emailcommunicate' className='me-3' />
+          Email me relevant information from DIASPREX
+        </label>
+        {/* <div className='text-danger mt-2'>
+            <ErrorMessage name='emailcommunicate' component='span' />
+          </div> */}
+      </div>
+
+      {/* <input type='checkbox' required />
       <div className='fv-row mb-10'>
         <p>I agree to the Terms &amp; Conditions of DIASPREX Enablers</p>
       </div>
@@ -229,7 +298,7 @@ const Individual = () => {
       <input type='checkbox' required />
       <div className='fv-row mb-10'>
         <p>Email me relevant information from DIASPREX</p>
-      </div>
+      </div> */}
     </div>
   )
 }

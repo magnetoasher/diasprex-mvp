@@ -1,5 +1,4 @@
 import {FC} from 'react'
-import {ConfirmModal} from '../confirm-action/ConfirmAction'
 import {toAbsoluteUrl} from '../../../helpers'
 import {KTSVG} from '../../../helpers'
 import {Link} from 'react-router-dom'
@@ -7,9 +6,9 @@ import {Link} from 'react-router-dom'
 export const SendMoneyModal: FC = () => {
   const userType = localStorage.getItem('userType')
   const userTypeFull = localStorage.getItem('userTypeFull')
-  const sendMoney = () => {}
+
   return (
-    <div className='modal fade' id='kt_send_money_modal' aria-hidden='true' data-bs-menu='true'>
+    <div className='modal fade' id='kt_send_money_modal' data-bs-menu='true'>
       <div className='modal-dialog mw-650px'>
         <div className='modal-content'>
           <div className='modal-header pb-0 border-0 justify-content-end'>
@@ -183,19 +182,17 @@ export const SendMoneyModal: FC = () => {
                 </div>
                 <div className='form-footer'>
                   <div className='text-center pt-15'>
-                    <button className='btn btn-light me-2'>Discard</button>
-                    <button type='button' className='btn btn-primary'>
+                    <button type='button' className='btn btn-light me-2' data-bs-dismiss='modal'>
+                      Discard
+                    </button>
+                    <button
+                      type='button'
+                      className='btn btn-primary'
+                      data-bs-toggle='modal'
+                      data-bs-target='#kt_proceed_modal'
+                    >
                       Proceed
                     </button>
-
-                    <ConfirmModal
-                      id='kt_proceed_modal'
-                      title1='Money Transfer'
-                      title2='Are you sure you want to send money'
-                      confirm='Send'
-                      classname='btn btn-primary'
-                      ConfirmHandler={async () => await sendMoney()}
-                    />
                   </div>
                 </div>
               </form>

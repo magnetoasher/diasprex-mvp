@@ -12,8 +12,8 @@ import clsx from 'clsx'
 
 const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull, userTypeFull}) => {
   const [currentState, setCurrentState] = useState<'month' | 'annual'>('month')
-  const [selectedEnabler, setSelectedEnabler] = useState('enabler2')
-  const [selectedSponsor, setSelectedSponsor] = useState('sponsor2')
+  const [selectedEnabler, setSelectedEnabler] = useState('enabler1')
+  const [selectedSponsor, setSelectedSponsor] = useState('sponsor1')
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const [packagePrice, setPackagePrice] = useState()
   const [packageDuration, setPackageDuration] = useState()
@@ -53,7 +53,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
       priceMonth: '0',
       priceAnnual: '0',
       label: '',
-      default: false,
+      default: true,
       custom: false,
       value1: 'basic',
       valueType: 'basic_enabler',
@@ -117,7 +117,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
       priceMonth: '4.99',
       priceAnnual: '54.00',
       label: '',
-      default: true,
+      default: false,
       custom: false,
       value1: 'individual',
       valueType: 'standard_enabler',
@@ -313,7 +313,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
       priceMonth: '0',
       priceAnnual: '0',
       label: '',
-      default: false,
+      default: true,
       value1: 'sponsor',
       valueType: 'basic_sponsor',
       pricing: true,
@@ -365,7 +365,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
       priceMonth: '14.99',
       priceAnnual: '174.00',
       label: '',
-      default: true,
+      default: false,
       value1: 'sponsor',
       valueType: 'silver_sponsor',
 
@@ -543,7 +543,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
     localStorage.setItem('packagePrice', packagePrice)
   }, [userType, userTypeFull, currentState])
 
-  console.log(userType, userTypeFull, currentState, packagePrice)
+  // console.log(userType, userTypeFull, currentState, packagePrice)
 
   const tabPaneColorScheme =
     selectedIndex === 1
@@ -574,8 +574,8 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
                     setUserTypeFull(`basic_${plan.value1}`)
                     setUserType(plan.value1.toLocaleLowerCase())
 
-                    setSelectedEnabler('enabler2')
-                    setSelectedSponsor('sponsor2')
+                    setSelectedEnabler('enabler1')
+                    setSelectedSponsor('sponsor1')
                   }}
                   className={
                     `nav-link btn btn-outline btn-outline-dashed btn-color-dark d-flex flex-stack text-start p-6  col-lg-4` +

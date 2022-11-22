@@ -21,8 +21,8 @@ export const Carousel2: FC<Props> = (props: Props, children) => {
                 title={InitialDiasp.title}
                 name={InitialDiasp.name}
                 profession={InitialDiasp.profession}
-                afcountry={InitialDiasp.afcountry}
                 rcountry={InitialDiasp.rcountry}
+                afcountry={InitialDiasp.afcountry}
                 afdinsight={InitialDiasp.afdinsight}
                 flag={toAbsoluteUrl(InitialDiasp.flag)}
               />
