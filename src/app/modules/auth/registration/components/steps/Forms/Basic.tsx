@@ -11,6 +11,7 @@ import {getCountries, getCountryCallingCode} from 'react-phone-number-input/inpu
 // import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 import {CountryList} from '../../../../../../../_metronic/partials/content/selectionlists'
+import {toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
 
 const Basic: FC = () => {
   const countryOptions = useMemo(() => countryList().getData(), [])
@@ -129,7 +130,7 @@ const Basic: FC = () => {
           </div>
           {/* <div className='d-flex flex-row mw-100 form-control form-control-lg form-control-solid'>
             <PhoneInput
-              inputStyle={{width: '100px'}}
+              inputStyle={{maxWidth: '100'}}
               international
               defaultCountry='US'
               placeholder='Enter phone number'
@@ -144,17 +145,13 @@ const Basic: FC = () => {
             <ErrorMessage name='phone.phonenumber' component='span' />
           </div>
         </div>
+
         <div className='fv-row mb-10'>
           <label className='form-label required'>Country of Origin</label>
           <Field as='select' name='countryOrig' className='form-select form-select-lg'>
             <option value=''>Select a country</option>
             {countryOptions.map((option, index) => (
               <option key={index} value={option.value}>
-                {/* <ReactCountryFlag
-                  countryCode={option.value}
-                  svg
-                  style={{fontSize: '2em', lineHeight: '2em'}}
-                /> */}
                 {option.label}
               </option>
             ))}

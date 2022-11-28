@@ -18,6 +18,18 @@ import SponsorProposals from '../modules/proposals/components/SponsorProposals'
 import SendProposals from '../modules/proposals/SendProposals'
 import ViewOpportunity from '../modules/opportunities/ViewOpportunity'
 import AdminSettings from '../modules/apps/admin-mgt-apps/settings/AdminSettingsPage'
+// import DiasporasMgtPage from '../modules/apps/admin-mgt-apps/diasporas-management/DiasporasPage'
+// import RemitMgtPage from '../modules/apps/admin-mgt-apps/remittance-management/RemitPage'
+// import TransMgtPage from '../modules/apps/admin-mgt-apps/transactions-management/TransPage'
+import {
+  PayMethodMgtPage,
+  TransMgtPage,
+  RemitMgtPage,
+  DiasporasMgtPage,
+  OppsMgtPage,
+  ProposalMgtPage,
+  UsersMgtPage,
+} from '../modules/apps/admin-mgt-apps/admin-tables'
 
 const PrivateRoutes = () => {
   const RemittancePage = lazy(() => import('./../modules/Remittance/RemittancePage'))
@@ -27,11 +39,11 @@ const PrivateRoutes = () => {
   const ProfilePage = lazy(() => import('../modules/profile/ProfilePage'))
   const WidgetsPage = lazy(() => import('../modules/widgets/WidgetsPage'))
   const ChatPage = lazy(() => import('../modules/apps/chat/ChatPage'))
-  const UsersPage = lazy(() => import('../modules/apps/admin-mgt-apps/user-management/UsersPage'))
-  const OppsPage = lazy(() => import('../modules/apps/admin-mgt-apps/opp-management/OppsPage'))
-  const ProposalPage = lazy(
-    () => import('../modules/apps/admin-mgt-apps/proposal-management/ProposalPage')
-  )
+  // const UsersPage = lazy(() => import('../modules/apps/admin-mgt-apps/user-management/UsersPage'))
+  // const OppsPage = lazy(() => import('../modules/apps/admin-mgt-apps/opp-management/OppsPage'))
+  // const ProposalPage = lazy(
+  //   () => import('../modules/apps/admin-mgt-apps/proposal-management/ProposalPage')
+  // )
 
   // const RemitPage = lazy(() => import('../modules/apps/admin-mgt-apps/remittance-management/RemitPage'))
   const {authState} = useOktaAuth()
@@ -52,15 +64,18 @@ const PrivateRoutes = () => {
             <Route path='proposals' element={<Proposals />} />
             <Route path='sponsor_proposals' element={<SponsorProposals />} />
             <Route path='my_opportunities' element={<MyOpportunity />} />
-            <Route path='opportunities' element={<GeneralOpportunityCard />} />
+            <Route path='opportunities_center' element={<GeneralOpportunityCard />} />
             <Route path='send_proposals' element={<SendProposals />} />
             <Route path='referrals' element={<ReferralsForm />} />
             <Route path='view_opportunity' element={<ViewOpportunity />} />
-            <Route path='user_management/*' element={<UsersPage />} />
-            <Route path='opp_management/*' element={<OppsPage />} />
-            <Route path='prop_management/*' element={<ProposalPage />} />
+            <Route path='table/users_management/*' element={<UsersMgtPage />} />
+            <Route path='table/opps_management/*' element={<OppsMgtPage />} />
+            <Route path='table/props_management/*' element={<ProposalMgtPage />} />
+            <Route path='table/diaspora_management/*' element={<DiasporasMgtPage />} />
             <Route path='admin/*' element={<AdminSettings />} />
-            {/* <Route path="rr_management/*" element={<RemitPage />} /> */}
+            <Route path='table/rr_management/*' element={<RemitMgtPage />} />
+            <Route path='table/trans_management/*' element={<TransMgtPage />} />
+            <Route path='table/paymethod_management/*' element={<PayMethodMgtPage />} />
 
             {/* <Route path='chat' element={<ChatPage />}/> */}
 

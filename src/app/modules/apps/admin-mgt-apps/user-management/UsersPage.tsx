@@ -5,7 +5,7 @@ import {UsersListWrapper} from './users-list/UsersList'
 const usersBreadcrumbs: Array<PageLink> = [
   {
     title: 'Admin User Management',
-    path: '/user_management/users',
+    path: '/table/users_management/users',
     isSeparator: false,
     isActive: false,
   },
@@ -17,7 +17,7 @@ const usersBreadcrumbs: Array<PageLink> = [
   },
 ]
 
-const UsersPage = () => {
+export const UsersMgtPage = () => {
   return (
     <Routes>
       <Route element={<Outlet />}>
@@ -31,9 +31,9 @@ const UsersPage = () => {
           }
         />
       </Route>
-      <Route index element={<Navigate to='/user_management/users' />} />
+      <Route index element={<Navigate to='/table/users_management/users' />} />
     </Routes>
   )
 }
 
-export default UsersPage
+// export default UsersMgtPage

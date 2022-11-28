@@ -1,15 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx'
-import {FC} from 'react'
+import {FC, useState} from 'react'
 import {KTSVG} from '../../../helpers'
 import {useLayout} from '../../core'
 import {DefaultTitle} from '../header/page-title/DefaultTitle'
-import {Dropdown1} from '../../../partials'
-import {SendMoneyModal} from '../../../partials/modals/send-money/SendMoneyModal'
 
 const Toolbar1: FC = () => {
   const {classes} = useLayout()
   const userType = localStorage.getItem('userType')
+  const [showAddFundModal, setAddFundAppModal] = useState<boolean>(false)
 
   return (
     <div className='toolbar' id='kt_toolbar'>
@@ -46,8 +45,6 @@ const Toolbar1: FC = () => {
             {/* end::Wrapper */}
 
             <div className='me-1'>
-              {/* begin::Button */}
-
               <a
                 href='#'
                 className='btn fw-bold btn-primary'
@@ -64,7 +61,6 @@ const Toolbar1: FC = () => {
                 Add Fund
               </a>
             </div>
-            {/* end::Button */}
           </div>
         )}
         {/* end::Actions */}

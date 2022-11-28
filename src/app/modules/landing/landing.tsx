@@ -11,6 +11,7 @@ import {OppsSection} from './components/opportunities/oppssection'
 import {DiasporasSection} from './components/diasporas/diasporassection'
 import {Link} from 'react-router-dom'
 import {PublicNavBar} from '../../../_metronic/layout/components/header/publicnavbar/PublicNavBar'
+import ReactCountryFlag from 'react-country-flag'
 
 export const Landing = () => {
   return (
@@ -40,6 +41,7 @@ export const Landing = () => {
                   Diaspora Resource Exchange
                 </span>
               </h3>
+
               <div className='fs-2 text-gray-600 fw-bold'>
                 A dynamic marketplace where people, business, and African development meet.
               </div>

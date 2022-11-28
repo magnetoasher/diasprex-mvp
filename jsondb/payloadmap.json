@@ -61,6 +61,7 @@
 
     "paymentmethods": [
       {
+        "id": 1,
         "userid": 1,
         "nameOnCard": "name on the card",
         "cardNumber": "card number",

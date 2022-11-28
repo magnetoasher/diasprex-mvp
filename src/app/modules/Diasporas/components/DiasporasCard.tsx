@@ -9,32 +9,32 @@ export const DiasporasCard: FC<uadFormModel> = (props: uadFormModel) => {
         <div className='card-header g-5 align-middle'>
           <div className='row d-flex flex-row align-middle'>
             <div className='col-4 g-6 text-center'>
-              <img src={props.avatar} className='mw-100 rounded-circle' alt='profile image' />
+              <img src={props?.avatar} className='mw-100 rounded-circle' alt='profile image' />
             </div>
             <div className='col-8 gx-6 '>
               <div className='row gx-3 d-flex flex-column'>
                 <div className='menu-content pt-8 pb-2'>
                   <span className='menu-section text-dark text-uppercase fw-bolder fs-1 ls-1'>
-                    {props.fName}
-                    {props.lName}, {props.grad.degree}
+                    {props?.fName}
+                    {props?.lName}, {props.grad?.degree}
                   </span>
                 </div>
                 <h6>
                   <span className='fs-6 mb-2 text-dark me-3'>Resident Country:</span>
-                  <span className='fs-6 mb-2 text-muted'>{props.countryRes} </span>
+                  <span className='fs-6 mb-2 text-muted'>{props?.countryRes} </span>
                 </h6>
                 <h6>
                   <span className=' fs-6 mb-2 text-dark me-3'>Country of Origin:</span>
                   <span className=' fs-6 mb-2 text-muted me-3'>
-                    {props.countryOrig.replace('-', ' ')}
+                    {props.countryOrig?.replace('-', ' ')}
                   </span>
                   <span className='symbol symbol-30px w-30px bg-light me-2'>
                     <img
-                      src={toAbsoluteUrl(`/media/flags/${props.countryOrig.toLowerCase()}.svg`)}
+                      src={toAbsoluteUrl(`/media/flags/${props.countryOrig?.toLowerCase()}.svg`)}
                       className='fs-6 fw-bold'
-                      alt='oppscard'
+                      alt={`${props.countryOrig?.toLowerCase()}`}
                       data-toggle='tooltips'
-                      title={props.countryOrig.toLowerCase().replace('-', ' ')}
+                      title={props.countryOrig?.toLowerCase().replace('-', ' ')}
                       data-bs-placement='bottom'
                     />
                   </span>
@@ -102,7 +102,7 @@ export const DiasporasCard: FC<uadFormModel> = (props: uadFormModel) => {
           <div className='separator mb-3'></div>
           <div>
             <ul className='px-10'>
-              {props.interest.map((string) => (
+              {props.interest?.map((string) => (
                 <li className='mb-2 fw-light'> {string} </li>
               ))}
             </ul>

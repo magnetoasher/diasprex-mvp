@@ -19,7 +19,7 @@ export function AdminMenu() {
       />
 
       <AsideMenuItem
-        to='/opportunities'
+        to='opportunities_center'
         icon='/media/icons/duotune/general/gen008.svg'
         title='Opportunities'
         fontIcon='bi-app-indicator'
@@ -38,44 +38,73 @@ export function AdminMenu() {
         </div>
       </div>
 
-      <AsideMenuItem
+      <AsideMenuItemWithSub
+        to='table'
+        icon='/media/icons/duotune/art/art008.svg'
+        title='Admin Tables'
+        fontIcon='bi-app-indicator'
+      >
+        <AsideMenuItem to='table/users_management' title='Users' hasBullet={true} />
+        <AsideMenuItem to='table/opps_management' title='Opportunities' hasBullet={true} />
+        <AsideMenuItem to='table/props_management' title='Proposals' hasBullet={true} />
+        <AsideMenuItem to='table/rr_management' title='Remittance Retainer' hasBullet={true} />
+        <AsideMenuItem to='table/trans_management' title='Transactions' hasBullet={true} />
+        <AsideMenuItem to='table/paymethod_management' title='Payment Methods' hasBullet={true} />
+        <AsideMenuItem to='table/diaspora_management' title='Diasporas' hasBullet={true} />
+      </AsideMenuItemWithSub>
+
+      {/* <AsideMenuItem
         to='user_management'
         icon='/media/icons/duotune/art/art003.svg'
-        title='User Management'
+        title='Users'
         fontIcon='bi-app-indicator'
       />
       <AsideMenuItem
         to='opp_management'
         icon='/media/icons/duotune/art/art004.svg'
-        title='Opportunity Management'
+        title='Opportunities'
         fontIcon='bi-layers'
       />
 
       <AsideMenuItem
         to='prop_management'
         icon='/media/icons/duotune/art/art006.svg'
-        title='Proposal Management'
+        title='Proposals'
         fontIcon='bi-app-indicator'
       />
-      {/* <AsideMenuItem
-                to='/rr_management'
-                icon='/media/icons/duotune/art/art007.svg'
-                title='Remittance Management'
-                fontIcon='bi-layers'
-            /> */}
+      <AsideMenuItem
+        to='rr_management'
+        icon='/media/icons/duotune/art/art007.svg'
+        title='Remittances'
+        fontIcon='bi-layers'
+      />
 
       <AsideMenuItem
-        to='/diasporas'
+        to='trans_management'
+        icon='/media/icons/duotune/art/art007.svg'
+        title='Transactions'
+        fontIcon='bi-layers'
+      />
+
+      <AsideMenuItem
+        to='paymethod_management'
+        icon='/media/icons/duotune/art/art007.svg'
+        title='Payment Methods'
+        fontIcon='bi-layers'
+      />
+
+      <AsideMenuItem
+        to='diaspora_management'
         icon='/media/icons/duotune/art/art008.svg'
         title='Diasporas'
         fontIcon='bi-app-indicator'
-      />
-      <AsideMenuItem
+      /> */}
+      {/* <AsideMenuItem
         to='/faqs'
         icon='/media/icons/duotune/art/art009.svg'
         title='FAQs'
         fontIcon='bi-layers'
-      />
+      /> */}
 
       <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>

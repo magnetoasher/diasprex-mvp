@@ -25,7 +25,7 @@ export function GenericMenu() {
         </div>
       </div>
       <AsideMenuItem
-        to='/opportunities'
+        to='/opportunities_center'
         icon='/media/icons/duotune/art/art001.svg'
         title='Opportunities'
         fontIcon='bi-app-indicator'

@@ -16,18 +16,19 @@ import {DiasporasCard} from './components/DiasporasCard'
 import {Diasp, uadFormModel} from './components/core/_model'
 import {InviteUADFriends} from '../../../_metronic/partials'
 import {UadForm} from './components/uadform'
-import {profile} from 'console'
+import {useNavigate} from 'react-router-dom'
+
 // 'http://localhost:3000/diasporas'
 
-const API_URL = process.env.DIASPREX_API_URL
 const UAD_LIST_URL = 'http://localhost:3000/diasporas'
-export const DiasporasPage: FC<Diasp> = (diasp: Diasp) => {
+export const DiasporasPage: FC = () => {
+  const navigate = useNavigate()
   const [profileList, setProfileList] = useState<uadFormModel[]>([])
-  console.log(API_URL)
+
   useEffect(() => {
     axios.get(UAD_LIST_URL).then((res) => {
-      setProfileList(res.data)
-      console.log(res.data)
+      setProfileList(res.data.data)
+      console.log('Diaspora', res)
     })
   }, [])
 
@@ -55,8 +56,11 @@ export const DiasporasPage: FC<Diasp> = (diasp: Diasp) => {
             <div className='btn-menu me-5'>
               <button
                 className='btn btn-light-primary rounded-pill'
-                data-bs-toggle='modal'
-                data-bs-target='#kt_modal_submit_profile'
+                onClick={() => {
+                  navigate({pathname: '/uadform'})
+                }}
+                // data-bs-toggle='modal'
+                // data-bs-target='#kt_modal_submit_profile'
               >
                 <span className='svg-icon svg-icon-2x'>
                   <KTSVG
@@ -120,25 +124,26 @@ export const DiasporasPage: FC<Diasp> = (diasp: Diasp) => {
             <div className='separator separator-dashed'></div>
 
             <div id='kt_job_collapse' className='collapse show fs-6 ms-1 mw-100'>
-              {profileList.map((profile) => (
-                <article key={profile.id} className='mb-4 text-gray-600 fw-bold fs-6 ps-10'>
-                  <DiasporasCard
-                    fName={profile.fName}
-                    lName={profile.lName}
-                    email={profile.email}
-                    phone={profile.phone}
-                    profession={profile.profession}
-                    countryRes={profile.countryRes}
-                    insightAfrica={profile.insightAfrica}
-                    countryOrig={profile.countryOrig}
-                    avatar={toAbsoluteUrl(profile.avatar)}
-                    interest={profile.interest}
-                    undergrad={profile.undergrad}
-                    grad={profile.grad}
-                    summary={profile.summary}
-                  />
-                </article>
-              ))}
+              {profileList.length > 0 &&
+                profileList.map((profile) => (
+                  <article key={profile.id} className='mb-4 text-gray-600 fw-bold fs-6 ps-10'>
+                    <DiasporasCard
+                      fName={profile.fName}
+                      lName={profile.lName}
+                      email={profile.email}
+                      phone={profile.phone}
+                      profession={profile.profession}
+                      countryRes={profile.countryRes}
+                      insightAfrica={profile.insightAfrica}
+                      countryOrig={profile.countryOrig}
+                      avatar={toAbsoluteUrl(`/media/${profile.avatar}`)}
+                      interest={profile.interest}
+                      undergrad={profile.undergrad}
+                      grad={profile.grad}
+                      summary={profile.summary}
+                    />
+                  </article>
+                ))}
             </div>
           </div>
 

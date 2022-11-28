@@ -1,12 +1,12 @@
 import {Route, Routes, Outlet, Navigate} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../../../_metronic/layout/core'
-import { OppsListWrapper } from './opps-list/OppsList'
+import {OppsListWrapper} from './opps-list/OppsList'
 // import {UsersListWrapper} from './users-list/UsersList'
 
 const usersBreadcrumbs: Array<PageLink> = [
   {
     title: 'Admin Opportunity Management',
-    path: '/opp_management/opportunities',
+    path: '/table/opps_management/opportunities',
     isSeparator: false,
     isActive: false,
   },
@@ -18,7 +18,7 @@ const usersBreadcrumbs: Array<PageLink> = [
   },
 ]
 
-const OppsPage = () => {
+export const OppsMgtPage = () => {
   return (
     <Routes>
       <Route element={<Outlet />}>
@@ -32,9 +32,9 @@ const OppsPage = () => {
           }
         />
       </Route>
-      <Route index element={<Navigate to='/opp_management/opportunities' />} />
+      <Route index element={<Navigate to='/table/opps_management/opportunities' />} />
     </Routes>
   )
 }
 
-export default OppsPage
+// export default OppsMgtPage

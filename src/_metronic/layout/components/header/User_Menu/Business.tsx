@@ -8,7 +8,7 @@ const Business = () => {
   return (
     <>
       <MenuItem title={intl.formatMessage({id: 'MENU.DASHBOARD'})} to='/dashboard' />
-      <MenuItem title='Opportunities' to='/opportunities' />
+      <MenuItem title='Opportunities' to='/opportunities_center' />
       <MenuItem title='My Opportunities' to='/my_opportunities' />
       <MenuItem title='DIF Investment' to='dif_resources' />
       <MenuItem title='Remittance' to='remittance_resources' />

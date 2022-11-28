@@ -13,6 +13,7 @@ import {
 import {getUsers} from './_requests'
 import {User} from './_models'
 import {useQueryRequest} from './QueryRequestProvider'
+import {PayloadProvider} from '../../../core/custom-payload2'
 
 const QueryResponseContext = createResponseContext<User>(initialQueryResponse)
 const QueryResponseProvider: FC<WithChildren> = ({children}) => {
@@ -52,7 +53,7 @@ const useQueryResponseData = () => {
   if (!response) {
     return []
   }
-
+  // console.log('Response', response)
   return response?.data || []
 }
 
@@ -61,13 +62,13 @@ const useQueryResponsePagination = () => {
     links: [],
     ...initialQueryState,
   }
-
+  const {state} = useQueryRequest()
   const {response} = useQueryResponse()
   if (!response || !response.payload || !response.payload.pagination) {
     return defaultPaginationState
   }
-
-  return response.payload.pagination
+  return PayloadProvider(state.page, state.items_per_page, response.data?.length)
+  // return response.payload.pagination
 }
 
 const useQueryResponseLoading = (): boolean => {

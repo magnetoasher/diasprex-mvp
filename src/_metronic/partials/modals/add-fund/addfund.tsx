@@ -4,48 +4,54 @@ import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {Formik, Form, FormikValues, Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
 import {StepperComponent} from '../../../assets/ts/components'
+import {CheckingAccount, CreditCard, PaypalAcc} from '../../content/paymentcards'
 
 interface ICreateAccount {
-  appName: string
-  category: string
-  framework: string
-  dbName: string
-  dbType: string
+  amount: string
+  fundsource: string
+  routingNumber: string
+  accountNumber: string
   nameOnCard: string
   cardNumber: string
   cardExpiryMonth: string
   cardExpiryYear: string
   cardCvv: string
   saveCard: string
+  saveAccount: string
 }
 
 const inits: ICreateAccount = {
-  appName: '',
-  category: '1',
-  framework: '1',
-  dbName: '',
-  dbType: '1',
+  amount: '',
+  fundsource: '1',
+  routingNumber: '',
+  accountNumber: '',
   nameOnCard: 'Max Doe',
   cardNumber: '4111 1111 1111 1111',
   cardExpiryMonth: '1',
   cardExpiryYear: '2025',
   cardCvv: '123',
   saveCard: '1',
+  saveAccount: '1',
 }
 
 const createAppSchema = [
   Yup.object({
-    appName: Yup.string().required().label('App name'),
-    category: Yup.string().required().label('Category'),
+    amount: Yup.number().required().label('Fund Amount'),
+    fundsource: Yup.string().required().label('Fund Source'),
   }),
+  // Yup.object({
+  //   framework: Yup.string().required().label('Framework'),
+  // }),
+  // Yup.object({
+  //   dbName: Yup.string().required().label('Database name'),
+  //   dbType: Yup.string().required().label('Database engine'),
+  // }),
   Yup.object({
-    framework: Yup.string().required().label('Framework'),
-  }),
-  Yup.object({
-    dbName: Yup.string().required().label('Database name'),
-    dbType: Yup.string().required().label('Database engine'),
-  }),
-  Yup.object({
+    // routingNumber: Yup.string().when('fundsource', {
+    //   is: '1',
+    //   then: Yup.number().required().label('Routing number'),
+    // }),
+    // accountNumber: Yup.number().required().label('Account number'),
     nameOnCard: Yup.string().required().label('Name'),
     cardNumber: Yup.string().required().label('Card Number'),
     cardExpiryMonth: Yup.string().required().label('Expiration Month'),
@@ -59,6 +65,7 @@ const AddFund: FC = () => {
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createAppSchema[0])
   const [initValues] = useState<ICreateAccount>(inits)
+  const [fundSourceValue, setFundSourceValue] = useState('')
 
   const loadStepper = () => {
     stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement)
@@ -81,13 +88,29 @@ const AddFund: FC = () => {
 
     setCurrentSchema(createAppSchema[stepper.current.currentStepIndex])
 
-    if (stepper.current.currentStepIndex !== stepper.current.totatStepsNumber) {
+    if (stepper.current?.getCurrentStepIndex() !== stepper.current?.totatStepsNumber) {
       stepper.current.goNext()
+      setFundSourceValue(values.fundsource)
+      console.log(
+        'Fundsource',
+        fundSourceValue,
+        stepper.current?.currentStepIndex,
+        stepper.current?.totatStepsNumber
+      )
     } else {
-      stepper.current.goto(1)
+      // stepper.current.goto(1)
       actions.resetForm()
+      window.location.reload()
     }
   }
+
+  // const nextStep = () => {
+  //   if (!stepper.current) {
+  //     return
+  //   }
+
+  //   stepper.current.goNext()
+  // }
 
   useEffect(() => {
     if (!stepperRef.current) {
@@ -113,7 +136,7 @@ const AddFund: FC = () => {
             <div
               ref={stepperRef}
               className='stepper stepper-pills stepper-column d-flex flex-column flex-xl-row flex-row-fluid'
-              id='kt_modal_create_app_stepper'
+              id='kt_modal_add_fund_stepper'
             >
               <div className='d-flex justify-content-center justify-content-xl-start flex-row-auto w-100 w-xl-300px'>
                 <div className='stepper-nav ps-lg-10'>
@@ -126,9 +149,9 @@ const AddFund: FC = () => {
                     </div>
 
                     <div className='stepper-label'>
-                      <h3 className='stepper-title'>Details</h3>
+                      <h3 className='stepper-title'>Amount and Fund Source</h3>
 
-                      <div className='stepper-desc'>Name your App</div>
+                      <div className='stepper-desc'>Specify amount and the fund source</div>
                     </div>
                   </div>
 
@@ -141,9 +164,9 @@ const AddFund: FC = () => {
                     </div>
 
                     <div className='stepper-label'>
-                      <h3 className='stepper-title'>Frameworks</h3>
+                      <h3 className='stepper-title'>Payment Details</h3>
 
-                      <div className='stepper-desc'>Define your app framework</div>
+                      <div className='stepper-desc'>Provide payment details</div>
                     </div>
                   </div>
 
@@ -156,37 +179,7 @@ const AddFund: FC = () => {
                     </div>
 
                     <div className='stepper-label'>
-                      <h3 className='stepper-title'>Database</h3>
-
-                      <div className='stepper-desc'>Select the app database type</div>
-                    </div>
-                  </div>
-
-                  <div className='stepper-item' data-kt-stepper-element='nav'>
-                    <div className='stepper-line w-40px'></div>
-
-                    <div className='stepper-icon w-40px h-40px'>
-                      <i className='stepper-check fas fa-check'></i>
-                      <span className='stepper-number'>4</span>
-                    </div>
-
-                    <div className='stepper-label'>
-                      <h3 className='stepper-title'>Billing</h3>
-
-                      <div className='stepper-desc'>Provide payment details</div>
-                    </div>
-                  </div>
-
-                  <div className='stepper-item' data-kt-stepper-element='nav'>
-                    <div className='stepper-line w-40px'></div>
-
-                    <div className='stepper-icon w-40px h-40px'>
-                      <i className='stepper-check fas fa-check'></i>
-                      <span className='stepper-number'>5</span>
-                    </div>
-
-                    <div className='stepper-label'>
-                      <h3 className='stepper-title'>Release</h3>
+                      <h3 className='stepper-title'>Confirm</h3>
 
                       <div className='stepper-desc'>Review and Submit</div>
                     </div>
@@ -201,33 +194,32 @@ const AddFund: FC = () => {
                   onSubmit={submitStep}
                 >
                   {() => (
-                    <Form className='form' noValidate id='kt_modal_create_app_form'>
+                    <Form className='form' noValidate id='kt_modal_add_fund_form'>
                       <div className='current' data-kt-stepper-element='content'>
                         <div className='w-100'>
                           <div className='fv-row mb-10'>
                             <label className='d-flex align-items-center fs-5 fw-bold mb-2'>
-                              <span className='required'>App Name</span>
+                              <span className='required'>Amount in USD</span>
                               <i
                                 className='fas fa-exclamation-circle ms-2 fs-7'
                                 data-bs-toggle='tooltip'
-                                title='Specify your unique app name'
+                                title='Enter funds amount in USD'
                               ></i>
                             </label>
 
                             <Field
                               type='text'
                               className='form-control form-control-lg form-control-solid'
-                              name='appName'
+                              name='amount'
                               placeholder=''
                             />
                             <div className='text-danger'>
-                              <ErrorMessage name='appName' />
+                              <ErrorMessage name='amount' />
                             </div>
                           </div>
-
                           <div className='fv-row'>
                             <label className='d-flex align-items-center fs-5 fw-bold mb-4'>
-                              <span className='required'>Category</span>
+                              <span className='required'>Fund Source</span>
 
                               <i
                                 className='fas fa-exclamation-circle ms-2 fs-7'
@@ -242,17 +234,17 @@ const AddFund: FC = () => {
                                   <span className='symbol symbol-50px me-6'>
                                     <span className='symbol-label bg-light-primary'>
                                       <KTSVG
-                                        path='/media/icons/duotune/maps/map004.svg'
+                                        path='/media/icons/duotune/finance/fin003.svg'
                                         className='svg-icon-1 svg-icon-primary'
                                       />
                                     </span>
                                   </span>
 
                                   <span className='d-flex flex-column'>
-                                    <span className='fw-bolder fs-6'>Quick Online Courses</span>
+                                    <span className='fw-bolder fs-6'>Checking Account</span>
 
                                     <span className='fs-7 text-muted'>
-                                      Creating a clear text structure is just one SEO
+                                      Requires checking account number and rounting number
                                     </span>
                                   </span>
                                 </span>
@@ -261,8 +253,9 @@ const AddFund: FC = () => {
                                   <Field
                                     className='form-check-input'
                                     type='radio'
-                                    name='category'
+                                    name='fundsource'
                                     value='1'
+                                    // onChange={(e: any) => handleFundSourceValue(e.target.value)}
                                   />
                                 </span>
                               </label>
@@ -272,17 +265,17 @@ const AddFund: FC = () => {
                                   <span className='symbol symbol-50px me-6'>
                                     <span className='symbol-label bg-light-danger  '>
                                       <KTSVG
-                                        path='/media/icons/duotune/general/gen024.svg'
+                                        path='/media/icons/duotune/finance/fin002.svg'
                                         className='svg-icon-1 svg-icon-danger'
                                       />
                                     </span>
                                   </span>
 
                                   <span className='d-flex flex-column'>
-                                    <span className='fw-bolder fs-6'>Face to Face Discussions</span>
+                                    <span className='fw-bolder fs-6'>Credit Card</span>
 
                                     <span className='fs-7 text-muted'>
-                                      Creating a clear text structure is just one aspect
+                                      Master card, Visa, and American Express
                                     </span>
                                   </span>
                                 </span>
@@ -291,8 +284,9 @@ const AddFund: FC = () => {
                                   <Field
                                     className='form-check-input'
                                     type='radio'
-                                    name='category'
+                                    name='fundsource'
                                     value='2'
+                                    // onChange={(e: any) => handleFundSourceValue(e.target.value)}
                                   />
                                 </span>
                               </label>
@@ -302,17 +296,17 @@ const AddFund: FC = () => {
                                   <span className='symbol symbol-50px me-6'>
                                     <span className='symbol-label bg-light-success'>
                                       <KTSVG
-                                        path='/media/icons/duotune/general/gen013.svg'
+                                        path='/media/icons/duotune/finance/fin002.svg'
                                         className='svg-icon-1 svg-icon-success'
                                       />
                                     </span>
                                   </span>
 
                                   <span className='d-flex flex-column'>
-                                    <span className='fw-bolder fs-6'>Full Intro Training</span>
+                                    <span className='fw-bolder fs-6'>Paypal </span>
 
                                     <span className='fs-7 text-muted'>
-                                      Creating a clear text structure copywriting
+                                      Transfer funds from your paypal account
                                     </span>
                                   </span>
                                 </span>
@@ -321,7 +315,7 @@ const AddFund: FC = () => {
                                   <Field
                                     className='form-check-input'
                                     type='radio'
-                                    name='category'
+                                    name='fundsource'
                                     value='3'
                                   />
                                 </span>
@@ -329,240 +323,8 @@ const AddFund: FC = () => {
                             </div>
 
                             <div className='text-danger'>
-                              <ErrorMessage name='category' />
+                              <ErrorMessage name='fundsource' />
                             </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div data-kt-stepper-element='content'>
-                        <div className='w-100'>
-                          <div className='fv-row'>
-                            <label className='d-flex align-items-center fs-5 fw-bold mb-4'>
-                              <span className='required'>Select Framework</span>
-                              <i
-                                className='fas fa-exclamation-circle ms-2 fs-7'
-                                data-bs-toggle='tooltip'
-                                title='Specify your apps framework'
-                              ></i>
-                            </label>
-
-                            <label className='d-flex flex-stack cursor-pointer mb-5'>
-                              <span className='d-flex align-items-center me-2'>
-                                <span className='symbol symbol-50px me-6'>
-                                  <span className='symbol-label bg-light-warning'>
-                                    <i className='fab fa-html5 text-warning fs-2x'></i>
-                                  </span>
-                                </span>
-
-                                <span className='d-flex flex-column'>
-                                  <span className='fw-bolder fs-6'>HTML5</span>
-
-                                  <span className='fs-7 text-muted'>Base Web Projec</span>
-                                </span>
-                              </span>
-
-                              <span className='form-check form-check-custom form-check-solid'>
-                                <Field
-                                  className='form-check-input'
-                                  type='radio'
-                                  name='framework'
-                                  value='1'
-                                />
-                              </span>
-                            </label>
-
-                            <label className='d-flex flex-stack cursor-pointer mb-5'>
-                              <span className='d-flex align-items-center me-2'>
-                                <span className='symbol symbol-50px me-6'>
-                                  <span className='symbol-label bg-light-success'>
-                                    <i className='fab fa-react text-success fs-2x'></i>
-                                  </span>
-                                </span>
-
-                                <span className='d-flex flex-column'>
-                                  <span className='fw-bolder fs-6'>ReactJS</span>
-                                  <span className='fs-7 text-muted'>
-                                    Robust and flexible app framework
-                                  </span>
-                                </span>
-                              </span>
-
-                              <span className='form-check form-check-custom form-check-solid'>
-                                <Field
-                                  className='form-check-input'
-                                  type='radio'
-                                  name='framework'
-                                  value='2'
-                                />
-                              </span>
-                            </label>
-
-                            <label className='d-flex flex-stack cursor-pointer mb-5'>
-                              <span className='d-flex align-items-center me-2'>
-                                <span className='symbol symbol-50px me-6'>
-                                  <span className='symbol-label bg-light-danger'>
-                                    <i className='fab fa-angular text-danger fs-2x'></i>
-                                  </span>
-                                </span>
-
-                                <span className='d-flex flex-column'>
-                                  <span className='fw-bolder fs-6'>Angular</span>
-                                  <span className='fs-7 text-muted'>Powerful data mangement</span>
-                                </span>
-                              </span>
-
-                              <span className='form-check form-check-custom form-check-solid'>
-                                <Field
-                                  className='form-check-input'
-                                  type='radio'
-                                  name='framework'
-                                  value='3'
-                                />
-                              </span>
-                            </label>
-
-                            <label className='d-flex flex-stack cursor-pointer'>
-                              <span className='d-flex align-items-center me-2'>
-                                <span className='symbol symbol-50px me-6'>
-                                  <span className='symbol-label bg-light-primary'>
-                                    <i className='fab fa-vuejs text-primary fs-2x'></i>
-                                  </span>
-                                </span>
-
-                                <span className='d-flex flex-column'>
-                                  <span className='fw-bolder fs-6'>Vue</span>
-                                  <span className='fs-7 text-muted'>
-                                    Lightweight and responsive framework
-                                  </span>
-                                </span>
-                              </span>
-
-                              <span className='form-check form-check-custom form-check-solid'>
-                                <Field
-                                  className='form-check-input'
-                                  type='radio'
-                                  name='framework'
-                                  value='4'
-                                />
-                              </span>
-                            </label>
-                          </div>
-                          <div className='text-danger'>
-                            <ErrorMessage name='framework' />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div data-kt-stepper-element='content'>
-                        <div className='w-100'>
-                          <div className='fv-row mb-10'>
-                            <label className='required fs-5 fw-bold mb-2'>Database Name</label>
-
-                            <Field
-                              type='text'
-                              className='form-control form-control-lg form-control-solid'
-                              name='dbName'
-                              placeholder=''
-                            />
-                            <div className='text-danger'>
-                              <ErrorMessage name='dbName' />
-                            </div>
-                          </div>
-
-                          <div className='fv-row'>
-                            <label className='d-flex align-items-center fs-5 fw-bold mb-4'>
-                              <span className='required'>Select Database Engine</span>
-
-                              <i
-                                className='fas fa-exclamation-circle ms-2 fs-7'
-                                data-bs-toggle='tooltip'
-                                title='Select your app database engine'
-                              ></i>
-                            </label>
-
-                            <label className='d-flex flex-stack cursor-pointer mb-5'>
-                              <span className='d-flex align-items-center me-2'>
-                                <span className='symbol symbol-50px me-6'>
-                                  <span className='symbol-label bg-light-success'>
-                                    <i className='fas fa-database text-success fs-2x'></i>
-                                  </span>
-                                </span>
-
-                                <span className='d-flex flex-column'>
-                                  <span className='fw-bolder fs-6'>MySQL</span>
-
-                                  <span className='fs-7 text-muted'>Basic MySQL database</span>
-                                </span>
-                              </span>
-
-                              <span className='form-check form-check-custom form-check-solid'>
-                                <Field
-                                  className='form-check-input'
-                                  type='radio'
-                                  name='dbType'
-                                  value='1'
-                                />
-                              </span>
-                            </label>
-
-                            <label className='d-flex flex-stack cursor-pointer mb-5'>
-                              <span className='d-flex align-items-center me-2'>
-                                <span className='symbol symbol-50px me-6'>
-                                  <span className='symbol-label bg-light-danger'>
-                                    <i className='fab fa-google text-danger fs-2x'></i>
-                                  </span>
-                                </span>
-
-                                <span className='d-flex flex-column'>
-                                  <span className='fw-bolder fs-6'>Firebase</span>
-
-                                  <span className='fs-7 text-muted'>
-                                    Google based app data management
-                                  </span>
-                                </span>
-                              </span>
-
-                              <span className='form-check form-check-custom form-check-solid'>
-                                <Field
-                                  className='form-check-input'
-                                  type='radio'
-                                  name='dbType'
-                                  value='2'
-                                />
-                              </span>
-                            </label>
-
-                            <label className='d-flex flex-stack cursor-pointer'>
-                              <span className='d-flex align-items-center me-2'>
-                                <span className='symbol symbol-50px me-6'>
-                                  <span className='symbol-label bg-light-warning'>
-                                    <i className='fab fa-amazon text-warning fs-2x'></i>
-                                  </span>
-                                </span>
-
-                                <span className='d-flex flex-column'>
-                                  <span className='fw-bolder fs-6'>DynamoDB</span>
-
-                                  <span className='fs-7 text-muted'>
-                                    Amazon Fast NoSQL Database
-                                  </span>
-                                </span>
-                              </span>
-
-                              <span className='form-check form-check-custom form-check-solid'>
-                                <Field
-                                  className='form-check-input'
-                                  type='radio'
-                                  name='dbType'
-                                  value='3'
-                                />
-                              </span>
-                            </label>
-                          </div>
-
-                          <div className='text-danger'>
-                            <ErrorMessage name='dbType' />
                           </div>
                         </div>
                       </div>
@@ -572,174 +334,17 @@ const AddFund: FC = () => {
                           <div className='pb-10 pb-lg-15'>
                             <h2 className='fw-bolder text-dark'>Billing Details</h2>
 
-                            <div className='text-gray-400 fw-bold fs-6'>
-                              If you need more info, please check out
-                              <a href='#' className='text-primary fw-bolder'>
+                            <div className='text-gray-400 fw-bold fs-6 '>
+                              <span className='me-2'>If you need more info, please check out</span>
+                              <a href='/faqs' className='text-primary fw-bolder '>
                                 Help Page
                               </a>
                               .
                             </div>
                           </div>
-                          <div className='d-flex flex-column mb-7 fv-row'>
-                            <label className='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                              <span className='required'>Name On Card</span>
-                              <i
-                                className='fas fa-exclamation-circle ms-2 fs-7'
-                                data-bs-toggle='tooltip'
-                                title="Specify a card holder's name"
-                              ></i>
-                            </label>
-
-                            <Field
-                              type='text'
-                              className='form-control form-control-solid'
-                              placeholder=''
-                              name='nameOnCard'
-                            />
-                            <div className='text-danger'>
-                              <ErrorMessage name='nameOnCard' />
-                            </div>
-                          </div>
-                          <div className='d-flex flex-column mb-7 fv-row'>
-                            <label className='required fs-6 fw-bold form-label mb-2'>
-                              Card Number
-                            </label>
-
-                            <div className='position-relative'>
-                              <Field
-                                type='text'
-                                className='form-control form-control-solid'
-                                placeholder='Enter card number'
-                                name='cardNumber'
-                              />
-                              <div className='text-danger'>
-                                <ErrorMessage name='cardNumber' />
-                              </div>
-
-                              <div className='position-absolute translate-middle-y top-50 end-0 me-5'>
-                                <img
-                                  src={toAbsoluteUrl('/media/svg/card-logos/visa.svg')}
-                                  alt=''
-                                  className='h-25px'
-                                />
-                                <img
-                                  src={toAbsoluteUrl('/media/svg/card-logos/mastercard.svg')}
-                                  alt=''
-                                  className='h-25px'
-                                />
-                                <img
-                                  src={toAbsoluteUrl('/media/svg/card-logos/american-express.svg')}
-                                  alt=''
-                                  className='h-25px'
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          <div className='row mb-10'>
-                            <div className='col-md-8 fv-row'>
-                              <label className='required fs-6 fw-bold form-label mb-2'>
-                                Expiration Date
-                              </label>
-
-                              <div className='row fv-row'>
-                                <div className='col-6'>
-                                  <Field
-                                    as='select'
-                                    name='cardExpiryMonth'
-                                    className='form-select form-select-solid'
-                                  >
-                                    <option></option>
-                                    <option value='1'>1</option>
-                                    <option value='2'>2</option>
-                                    <option value='3'>3</option>
-                                    <option value='4'>4</option>
-                                    <option value='5'>5</option>
-                                    <option value='6'>6</option>
-                                    <option value='7'>7</option>
-                                    <option value='8'>8</option>
-                                    <option value='9'>9</option>
-                                    <option value='10'>10</option>
-                                    <option value='11'>11</option>
-                                    <option value='12'>12</option>
-                                  </Field>
-                                  <div className='text-danger'>
-                                    <ErrorMessage name='cardExpiryMonth' />
-                                  </div>
-                                </div>
-
-                                <div className='col-6'>
-                                  <Field
-                                    as='select'
-                                    name='cardExpiryYear'
-                                    className='form-select form-select-solid'
-                                  >
-                                    <option></option>
-                                    <option value='2021'>2021</option>
-                                    <option value='2022'>2022</option>
-                                    <option value='2023'>2023</option>
-                                    <option value='2024'>2024</option>
-                                    <option value='2025'>2025</option>
-                                    <option value='2026'>2026</option>
-                                    <option value='2027'>2027</option>
-                                    <option value='2028'>2028</option>
-                                    <option value='2029'>2029</option>
-                                    <option value='2030'>2030</option>
-                                    <option value='2031'>2031</option>
-                                  </Field>
-                                  <div className='text-danger'>
-                                    <ErrorMessage name='cardExpiryYear' />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className='col-md-4 fv-row'>
-                              <label className='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
-                                <span className='required'>CVV</span>
-                                <i
-                                  className='fas fa-exclamation-circle ms-2 fs-7'
-                                  data-bs-toggle='tooltip'
-                                  title='Enter a card CVV code'
-                                ></i>
-                              </label>
-
-                              <div className='position-relative'>
-                                <Field
-                                  type='text'
-                                  className='form-control form-control-solid'
-                                  placeholder='CVV'
-                                  name='cardCvv'
-                                />
-                                <div className='text-danger'>
-                                  <ErrorMessage name='cardCvv' />
-                                </div>
-
-                                <div className='position-absolute translate-middle-y top-50 end-0 me-3'>
-                                  <KTSVG
-                                    path='/media/icons/duotune/finance/fin002.svg'
-                                    className='svg-icon-2hx'
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className='d-flex flex-stack'>
-                            <div className='me-5'>
-                              <label className='fs-6 fw-bold form-label'>
-                                Save Card for further billing?
-                              </label>
-                              <div className='fs-7 fw-bold text-gray-400'>
-                                If you need more info, please check budget planning
-                              </div>
-                            </div>
-
-                            <label className='form-check form-switch form-check-custom form-check-solid'>
-                              <Field className='form-check-input' type='checkbox' />
-                              <span className='form-check-label fw-bold text-gray-400'>
-                                Save Card
-                              </span>
-                            </label>
-                          </div>
+                          {fundSourceValue === '1' && <CheckingAccount />}
+                          {fundSourceValue === '2' && <CreditCard />}
+                          {fundSourceValue === '3' && <PaypalAcc />}
                         </div>
                       </div>
 
@@ -773,7 +378,7 @@ const AddFund: FC = () => {
                               path='/media/icons/duotune/arrows/arr063.svg'
                               className='svg-icon-4 me-1'
                             />
-                            Back
+                            Previous
                           </button>
                         </div>
 
@@ -781,7 +386,7 @@ const AddFund: FC = () => {
                           <button type='submit' className='btn btn-lg btn-primary me-3'>
                             <span className='indicator-label'>
                               {stepper.current?.currentStepIndex !==
-                                stepper.current?.totatStepsNumber! - 1 && 'Continue'}
+                                stepper.current?.totatStepsNumber! - 1 && 'Next'}
                               {stepper.current?.currentStepIndex ===
                                 stepper.current?.totatStepsNumber! - 1 && 'Submit'}
                               <KTSVG

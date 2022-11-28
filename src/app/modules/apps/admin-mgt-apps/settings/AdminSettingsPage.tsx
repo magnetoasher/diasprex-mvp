@@ -1,8 +1,8 @@
 import {Route, Routes, Outlet, Navigate} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../../../_metronic/layout/core'
-import { AdminSettingsPage } from './components/Settings'
+import {AdminSettingsPage} from './components/Settings'
 
-const usersBreadcrumbs: Array<PageLink> = [
+const settingsBreadcrumbs: Array<PageLink> = [
   {
     title: 'Admin Settings',
     path: '/admin/settings',
@@ -25,7 +25,7 @@ const AdminSettings = () => {
           path='settings'
           element={
             <>
-              <PageTitle breadcrumbs={usersBreadcrumbs}>Opportunities list</PageTitle>
+              <PageTitle breadcrumbs={settingsBreadcrumbs}>Opportunities list</PageTitle>
               <AdminSettingsPage />
             </>
           }

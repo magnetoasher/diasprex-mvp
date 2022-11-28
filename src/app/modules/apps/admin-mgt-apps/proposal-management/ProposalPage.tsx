@@ -5,7 +5,7 @@ import {PropsListWrapper} from './props-list/PropsList'
 const proposalsBreadcrumbs: Array<PageLink> = [
   {
     title: 'Admin Proposal Management',
-    path: '/prop_management/proposals',
+    path: '/table/props_management/proposals',
     isSeparator: false,
     isActive: false,
   },
@@ -17,7 +17,7 @@ const proposalsBreadcrumbs: Array<PageLink> = [
   },
 ]
 
-const ProposalPage = () => {
+export const ProposalMgtPage = () => {
   return (
     <Routes>
       <Route element={<Outlet />}>
@@ -31,9 +31,9 @@ const ProposalPage = () => {
           }
         />
       </Route>
-      <Route index element={<Navigate to='/prop_management/proposals' />} />
+      <Route index element={<Navigate to='/table/props_management/proposals' />} />
     </Routes>
   )
 }
 
-export default ProposalPage
+// export default ProposalMgtPage

@@ -5,9 +5,8 @@ import {MenuComponent} from '../../../../../../../../_metronic/assets/ts/compone
 import {ID, KTSVG, QUERIES} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
-import { deleteUser } from '../../core/_requests'
+import {deleteUser} from '../../core/_requests'
 // import { ChatPage } from '../../../../chat/ChatPage'
-
 
 type Props = {
   id: ID
@@ -62,7 +61,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
         <div className='menu-item px-3'>
           <a
             className='menu-link px-3'
-            data-kt-users-table-filter='disable_row'
+            // data-kt-users-table-filter='disable_row'
             onClick={async () => await deleteItem.mutateAsync()}
           >
             Disable
@@ -70,7 +69,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
         </div>
         {/* end::Menu item */}
 
-         {/* begin::Menu item */}
+        {/* begin::Menu item */}
         {/* <div className='menu-item px-3'>
           <a
             className='menu-link px-3'
@@ -83,18 +82,11 @@ const UserActionsCell: FC<Props> = ({id}) => {
         {/* end::Menu item */}
 
         {/* begin::Menu item */}
-        <div className= 'menu-item px-3' id='kt_drawer_chat_toggle'>
-        {/* <div className='menu-item px-3'> */}
-          <a
-            className='menu-link px-3'
-           
-          >
-            Message 
-          </a>
-       
+        <div className='menu-item px-3' id='kt_drawer_chat_toggle'>
+          {/* <div className='menu-item px-3'> */}
+          <a className='menu-link px-3'>Message</a>
         </div>
         {/* end::Menu item */}
-
       </div>
       {/* end::Menu */}
     </>

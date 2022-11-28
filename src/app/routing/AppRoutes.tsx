@@ -16,6 +16,7 @@ import {Dif} from '../modules/resources/components/Dif'
 import {About} from '../modules/resources/components/About'
 import {Remittance} from '../modules/resources/components/Remittance'
 import {DiasporasPageWrapper} from '../modules/Diasporas/DiasporasPageWrapper'
+import {UadFormPage} from '../modules/Diasporas/components/uadformpage'
 import {getCSSVariableValue} from '../../_metronic/assets/ts/_utils'
 import TopBarProgress from 'react-topbar-progress-indicator'
 import {App} from '../App'
@@ -144,6 +145,17 @@ const HasAccessToRouter = () => {
               <PublicNavbarProvider>
                 <SuspensedView>
                   <DiasporasPageWrapper />
+                </SuspensedView>
+              </PublicNavbarProvider>
+            }
+          />
+
+          <Route
+            path='/uadform'
+            element={
+              <PublicNavbarProvider>
+                <SuspensedView>
+                  <UadFormPage />
                 </SuspensedView>
               </PublicNavbarProvider>
             }

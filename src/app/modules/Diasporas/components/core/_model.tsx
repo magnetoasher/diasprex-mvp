@@ -1,3 +1,4 @@
+import {ID} from '../../../../../_metronic/helpers'
 export type Diasp = {
   name: string
   title?: string
@@ -22,29 +23,34 @@ export type Diasp = {
 }
 
 export interface uadFormModel {
-  id?: string
-  fName: string
-  lName: string
+  id?: ID
+  fName?: string
+  lName?: string
   dpxID?: string
-  email: string
-  phone: string
-  countryRes: string
-  countryOrig: string
+  status?: string
+  email?: string
+  phone?: string
+  countryRes?: string
+  countryOrig?: string
   profession?: string
   undergrad?: {
-    inst: string
-    field: string
-    degree: string
+    inst?: string
+    field?: string
+    degree?: string
   }
-  grad: {
-    inst: string
-    field: string
-    degree: string
+  grad?: {
+    inst?: string
+    field?: string
+    degree?: string
   }
-  summary: string
-  interest: string[]
-  insightAfrica: string
-  avatar: string
+  summary?: string
+  interest?: string[]
+  insightAfrica?: string
+  avatar?: string
+  initials?: {
+    label?: string
+    state?: string
+  }
 }
 
 export const InitialDiasp = {

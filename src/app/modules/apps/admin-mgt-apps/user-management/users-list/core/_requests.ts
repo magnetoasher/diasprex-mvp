@@ -5,18 +5,33 @@ import {User, UsersQueryResponse} from './_models'
 const API_URL = process.env.REACT_APP_THEME_API_URL
 const USER_URL = `${API_URL}/user`
 const GET_USERS_URL = `${API_URL}/users/query`
+// const GET_USERS_URL = 'http://localhost:3000/users'
+// const USER_URL = 'http://localhost:3000/users'
 
-const getUsers = (query: string): Promise<UsersQueryResponse> => {
-  return axios
+// const getUsers = async (query: string) => {
+//   return await axios.get(`${GET_USERS_URL}`).then((response: AxiosResponse) => {
+//     console.log(response)
+//     return response.data
+//   })
+// }
+
+const getUsers = async (query: string): Promise<UsersQueryResponse> => {
+  return await axios
     .get(`${GET_USERS_URL}?${query}`)
-    .then((d: AxiosResponse<UsersQueryResponse>) => d.data)
+    .then((response: AxiosResponse<UsersQueryResponse>) => {
+      // console.log(response)
+      return response.data
+    })
 }
 
 const getUserById = (id: ID): Promise<User | undefined> => {
   return axios
     .get(`${USER_URL}/${id}`)
     .then((response: AxiosResponse<Response<User>>) => response.data)
-    .then((response: Response<User>) => response.data)
+    .then((response: Response<User>) => {
+      console.log('UserForEdit', response.data)
+      return response.data
+    })
 }
 
 const createUser = (user: User): Promise<User | undefined> => {
