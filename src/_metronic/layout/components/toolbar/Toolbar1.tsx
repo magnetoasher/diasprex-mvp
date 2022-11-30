@@ -55,7 +55,7 @@ const Toolbar1: FC = () => {
                 <span className='svg-icon svg-icon-2x'>
                   <KTSVG
                     path='/media/icons/duotune/finance/fin001.svg'
-                    className='svg-icon-muted svg-icon-2hx'
+                    className='svg-icon-muted svg-icon-5'
                   />
                 </span>
                 Add Fund

@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import {useContext, useEffect} from 'react'
 import {Outlet} from 'react-router-dom'
 import {AsideDefault} from './components/aside/AsideDefault'
 import {Footer} from './components/Footer'
@@ -22,8 +22,11 @@ import {SendMoneyModal} from '../partials/modals/send-money/SendMoneyModal'
 import {RightToolbar} from '../partials/layout/RightToolbar'
 import {ConfirmModal} from '../partials/modals/confirm-action/ConfirmAction'
 import {AddFund} from '../partials/modals/add-fund/addfund'
-const sendMoney = () => {}
+
 const MasterLayout = () => {
+  const sendMoney = () => {
+    console.log('ConfirmRemitValues')
+  }
   const location = useLocation()
   useEffect(() => {
     setTimeout(() => {
@@ -73,6 +76,7 @@ const MasterLayout = () => {
           classname='btn btn-primary'
           ConfirmHandler={async () => await sendMoney()}
         />
+
         {/* <Main /> */}
         <AddFund />
         <InviteUsers />

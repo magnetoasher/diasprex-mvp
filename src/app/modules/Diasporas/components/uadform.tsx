@@ -97,8 +97,8 @@ export const UadForm: FC = () => {
           .post('http://localhost:3000/diasporas', data)
           .then((res) => console.log('onSubmit', res))
           .catch((error) => error)
-      } catch {
-        console.log(formik.errors)
+      } catch (error) {
+        console.log(error)
       } finally {
         formik.resetForm()
       }

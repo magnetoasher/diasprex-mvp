@@ -4,7 +4,7 @@ import {uadFormModel} from './core/_model'
 
 export const DiasporasCard: FC<uadFormModel> = (props: uadFormModel) => {
   return (
-    <div className='card border border-2 mw-100'>
+    <div className='card border border-2 m-5 mw-100'>
       <div className='row'>
         <div className='card-header g-5 align-middle'>
           <div className='row d-flex flex-row align-middle'>
@@ -15,8 +15,7 @@ export const DiasporasCard: FC<uadFormModel> = (props: uadFormModel) => {
               <div className='row gx-3 d-flex flex-column'>
                 <div className='menu-content pt-8 pb-2'>
                   <span className='menu-section text-dark text-uppercase fw-bolder fs-1 ls-1'>
-                    {props?.fName}
-                    {props?.lName}, {props.grad?.degree}
+                    {`${props?.fName} ${props?.lName}, ${props.grad?.degree}`}
                   </span>
                 </div>
                 <h6>
