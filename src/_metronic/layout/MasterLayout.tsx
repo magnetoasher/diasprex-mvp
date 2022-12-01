@@ -22,6 +22,7 @@ import {SendMoneyModal} from '../partials/modals/send-money/SendMoneyModal'
 import {RightToolbar} from '../partials/layout/RightToolbar'
 import {ConfirmModal} from '../partials/modals/confirm-action/ConfirmAction'
 import {AddFund} from '../partials/modals/add-fund/addfund'
+import {UpgradePlanHorizontal} from '../partials/modals/upgrade-plan/UpgradePlanHorizontal'
 
 const MasterLayout = () => {
   const sendMoney = () => {
@@ -80,7 +81,8 @@ const MasterLayout = () => {
         {/* <Main /> */}
         <AddFund />
         <InviteUsers />
-        <UpgradePlan />
+        <UpgradePlanHorizontal />
+        {/* <UpgradePlan /> */}
         {/* end:: Modals */}
         <ScrollTop />
       </ThemeModeProvider>

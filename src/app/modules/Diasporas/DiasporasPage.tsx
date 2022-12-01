@@ -23,7 +23,7 @@ import diasporaList from './components/core/diasporas.json'
 
 // const UAD_LIST_URL = 'http://localhost:3000/diasporas'
 export const DiasporasPage: FC = () => {
-  const profileList = diasporaList.diasporas.data
+  const profileList = diasporaList.diasporas
   const [showProfile, setShowProfile] = useState('show')
   const navigate = useNavigate()
 
@@ -104,282 +104,116 @@ export const DiasporasPage: FC = () => {
         <div className='row g-5'>
           <div className='col-lg-8'>
             <h2 className='text-gray-800 fw-bolder mb-4'>UNFOUND AFRICAN DIASPORAS</h2>
-            <div className='card'>
-              <div className='m-0'>
-                <div
-                  id='accordion'
-                  className='card-header cursor-pointer'
-                  role='button'
-                  data-bs-toggle='collapse'
-                  data-bs-target='#kt_jan_collapse'
-                  aria-expanded='true'
-                  aria-controls='kt_jan_collapse'
-                >
-                  <div className='card-title m-0'>
-                    <h3 className='fw-bolder m-0'>2022</h3>
-                  </div>
-                </div>
-                {/* <YearCollapsible currentYear='2022' target='#kt_month_collapse' /> */}
-                <div className='mx-10'>
-                  <KTCollapsible
-                    label='Jan'
-                    parent='accordion'
-                    id='kt_jan_collapse'
-                    target='#kt_job_accordion'
-                    control=''
-                  />
-                </div>
+            {/* {profileList.length > 0 &&
+              profileList.map((profile, index) => ( */}
+            <div id='year-accordion'>
+              {/* <div className='card '> */}
+              <div className='accordion-item  ' id='year-heading'>
+                <h5 className='accordion-header'>
+                  <button
+                    type='button'
+                    className='accordion-button fs-2 fw-semibold collapsed'
+                    data-bs-toggle='collapse'
+                    data-bs-target='#month-collapse'
+                    aria-expanded='true'
+                    aria-controls='month-collapse'
+                  >
+                    2022
+                  </button>
+                </h5>
               </div>
-
-              {/* <div className='separator separator-dashed'></div> */}
-
-              {profileList.length > 0 &&
-                profileList.map((profile, index) => (
-                  <div className='accordion' id='kt_job_accordion'>
-                    <div className='card-header' id={`${profile.fName}${profile.lName}`}>
-                      <h2
-                        className='accordion-header'
-                        id={`${profile.fName}${profile.lName}-header`}
-                      >
-                        <button
-                          className='btn btn-link text-muted fs-4 fw-semibold'
-                          type='button'
-                          data-bs-toggle='collapse'
-                          data-bs-target={`#${profile.fName}${profile.lName}-body`}
-                          aria-expanded='false'
-                          aria-controls={`${profile.fName}${profile.lName}-body`}
-                        >
-                          {`${profile.fName} ${profile.lName}, ${profile.grad?.degree}`}
-                        </button>
-                      </h2>
-                      <div
-                        id={`${profile.fName}${profile.lName}-body`}
-                        className={'collapse' + (index === 0 && 'show') + 'fs-6 ms-1 mw-100'}
-                        data-bs-parent='#kt_job_accordion'
-                        aria-labelledby={`${profile.fName}${profile.lName}-header`}
-                      >
-                        <article key={profile.id} className='mb-4 text-gray-600 fw-bold fs-6 ps-10'>
-                          <DiasporasCard
-                            fName={profile.fName}
-                            lName={profile.lName}
-                            email={profile.email}
-                            phone={profile.phone}
-                            profession={profile.profession}
-                            countryRes={profile.countryRes}
-                            insightAfrica={profile.insightAfrica}
-                            countryOrig={profile.countryOrig}
-                            avatar={toAbsoluteUrl(`/media/${profile.avatar}`)}
-                            interest={profile.interest}
-                            undergrad={profile.undergrad}
-                            grad={profile.grad}
-                            summary={profile.summary}
-                          />
-                        </article>
+              <div
+                id='month-collapse'
+                className='collapse show'
+                data-bs-parent='#year-accordion'
+                aria-labelledby='year-heading'
+              >
+                <div className='card-body '>
+                  <div id='month-accordion'>
+                    <div className='card'>
+                      <div className='card-header' id='month-heading'>
+                        <h5 className='mb-0'>
+                          <a
+                            className='collapsed   fs-2'
+                            role='button'
+                            data-bs-toggle='collapse'
+                            href='#kt_job_accordion'
+                            aria-expanded='true'
+                            aria-controls='kt_job_accordion'
+                          >
+                            January
+                          </a>
+                        </h5>
                       </div>
-                    </div>
-                  </div>
-                ))}
-            </div>
-
-            {/* <div id='accordion'>
-              <div className='card'>
-                <div className='card-header' id='heading-1'>
-                  <h5 className='mb-0'>
-                    <a
-                      role='button'
-                      data-bs-toggle='collapse'
-                      href='#collapse-1'
-                      aria-expanded='true'
-                      aria-controls='collapse-1'
-                    >
-                      Item 1
-                    </a>
-                  </h5>
-                </div>
-                <div
-                  id='collapse-1'
-                  className='collapse show'
-                  data-bs-parent='#accordion'
-                  aria-labelledby='heading-1'
-                >
-                  <div className='card-body'>
-                    <div id='accordion-1'>
-                      <div className='card'>
-                        <div className='card-header' id='heading-1-1'>
-                          <h5 className='mb-0'>
-                            <a
-                              className='collapsed'
-                              role='button'
-                              data-bs-toggle='collapse'
-                              href='#collapse-1-1'
-                              aria-expanded='false'
-                              aria-controls='collapse-1-1'
-                            >
-                              Item 1 of 1
-                            </a>
-                          </h5>
-                        </div>
-                        <div
-                          id='collapse-1-1'
-                          className='collapse'
-                          data-bs-parent='#accordion-1'
-                          aria-labelledby='heading-1-1'
-                        >
-                          <div className='card-body'>
-                            <div id='accordion-1-1'>
-                              <div className='card'>
-                                <div className='card-header' id='heading-1-1-1'>
+                      {profileList.data.length > 0 &&
+                        profileList.data.map((profile, index) => (
+                          <div
+                            id='kt_job_accordion'
+                            className='collapse show'
+                            data-bs-parent='#month-accordion'
+                            aria-labelledby='month-heading'
+                          >
+                            <div className='card-body'>
+                              <div id={`${profile.fName}${profile.lName}-accordion`}>
+                                {/* <div className='card'> */}
+                                <div
+                                  className='card-header'
+                                  id={`${profile.fName}${profile.lName}-heading`}
+                                >
                                   <h5 className='mb-0'>
                                     <a
                                       className='collapsed'
                                       role='button'
                                       data-bs-toggle='collapse'
-                                      href='#collapse-1-1-1'
-                                      aria-expanded='false'
-                                      aria-controls='collapse-1-1-1'
+                                      href={`#${profile.fName}${profile.lName}-body`}
+                                      aria-expanded={index === 0 ? 'true' : 'false'}
+                                      aria-controls={`${profile.fName}${profile.lName}-body`}
                                     >
-                                      Item 1 of 1 of 1
+                                      {`${profile.fName} ${profile.lName}, ${profile.grad?.degree}`}
                                     </a>
                                   </h5>
                                 </div>
                                 <div
-                                  id='collapse-1-1-1'
+                                  id={`${profile.fName}${profile.lName}-body`}
                                   className='collapse'
-                                  data-bs-parent='#accordion-1-1'
-                                  aria-labelledby='heading-1-1-1'
+                                  data-bs-parent='#kt_job_accordion'
+                                  aria-labelledby={`${profile.fName}${profile.lName}-header`}
                                 >
-                                  <div className='card-body'>Text 1 of 1 of 1</div>
-                                </div>
-                              </div>
-                              <div className='card'>
-                                <div className='card-header' id='heading-1-1-2'>
-                                  <h5 className='mb-0'>
-                                    <a
-                                      className='collapsed'
-                                      role='button'
-                                      data-bs-toggle='collapse'
-                                      href='#collapse-1-1-2'
-                                      aria-expanded='false'
-                                      aria-controls='collapse-1-1-2'
+                                  <div className='card-body'>
+                                    <article
+                                      key={profile.id}
+                                      className='mb-4 text-gray-600 fw-bold fs-6 ps-10'
                                     >
-                                      Item 1 of 1 of 2
-                                    </a>
-                                  </h5>
+                                      <DiasporasCard
+                                        fName={profile.fName}
+                                        lName={profile.lName}
+                                        email={profile.email}
+                                        phone={profile.phone}
+                                        profession={profile.profession}
+                                        countryRes={profile.countryRes}
+                                        insightAfrica={profile.insightAfrica}
+                                        countryOrig={profile.countryOrig}
+                                        avatar={toAbsoluteUrl(`/media/${profile.avatar}`)}
+                                        interest={profile.interest}
+                                        undergrad={profile.undergrad}
+                                        grad={profile.grad}
+                                        summary={profile.summary}
+                                      />
+                                    </article>
+                                  </div>
                                 </div>
-                                <div
-                                  id='collapse-1-1-2'
-                                  className='collapse'
-                                  data-bs-parent='#accordion-1-1'
-                                  aria-labelledby='heading-1-1-2'
-                                >
-                                  <div className='card-body'>Text 1 of 1of 2</div>
-                                </div>
-                              </div>
-                              <div className='card'>
-                                <div className='card-header' id='heading-1-1-3'>
-                                  <h5 className='mb-0'>
-                                    <a
-                                      className='collapsed'
-                                      role='button'
-                                      data-bs-toggle='collapse'
-                                      href='#collapse-1-1-3'
-                                      aria-expanded='false'
-                                      aria-controls='collapse-1-1-3'
-                                    >
-                                      Item 1 of 1 of 3
-                                    </a>
-                                  </h5>
-                                </div>
-                                <div
-                                  id='collapse-1-1-3'
-                                  className='collapse'
-                                  data-bs-parent='#accordion-1-1'
-                                  aria-labelledby='heading-1-1-3'
-                                >
-                                  <div className='card-body'>Text 1 of 1 of 3</div>
-                                </div>
+                                {/* </div> */}
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                      <div className='card'>
-                        <div className='card-header' id='heading-1-2'>
-                          <h5 className='mb-0'>
-                            <a
-                              className='collapsed'
-                              role='button'
-                              data-bs-toggle='collapse'
-                              href='#collapse-1-2'
-                              aria-expanded='false'
-                              aria-controls='collapse-1-2'
-                            >
-                              Item 1 of 2
-                            </a>
-                          </h5>
-                        </div>
-                        <div
-                          id='collapse-1-2'
-                          className='collapse'
-                          data-bs-parent='#accordion-1'
-                          aria-labelledby='heading-1-2'
-                        >
-                          <div className='card-body'>Text 1 of 2</div>
-                        </div>
-                      </div>
+                        ))}
                     </div>
                   </div>
                 </div>
               </div>
-              <div className='card'>
-                <div className='card-header' id='heading-2'>
-                  <h5 className='mb-0'>
-                    <a
-                      className='collapsed'
-                      role='button'
-                      data-bs-toggle='collapse'
-                      href='#collapse-2'
-                      aria-expanded='true'
-                      aria-controls='collapse-2'
-                    >
-                      Item 2
-                    </a>
-                  </h5>
-                </div>
-                <div
-                  id='collapse-2'
-                  className='collapse'
-                  data-bs-parent='#accordion'
-                  aria-labelledby='heading-2'
-                >
-                  <div className='card-body'>Text 2</div>
-                </div>
-              </div>
-              <div className='card'>
-                <div className='card-header' id='heading-3'>
-                  <h5 className='mb-0'>
-                    <a
-                      className='collapsed'
-                      role='button'
-                      data-bs-toggle='collapse'
-                      href='#collapse-3'
-                      aria-expanded='false'
-                      aria-controls='collapse-3'
-                    >
-                      Item 3
-                    </a>
-                  </h5>
-                </div>
-                <div
-                  id='collapse-3'
-                  className='collapse'
-                  data-bs-parent='#accordion'
-                  aria-labelledby='heading-3'
-                >
-                  <div className='card-body'>Text 3</div>
-                </div>
-              </div>
-            </div> */}
+              {/* </div> */}
+            </div>
+            {/* ))} */}
           </div>
 
           <div className='col-lg-4'>

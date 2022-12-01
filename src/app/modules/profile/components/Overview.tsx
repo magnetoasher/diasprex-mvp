@@ -23,17 +23,6 @@ export function Overview() {
             <h3 className='fw-bolder m-0'>Profile Details</h3>
           </div>
           <div className='d-flex justify-content-end align-items-center'>
-            {userTypeFull && (
-              <button
-                data-bs-toggle='modal'
-                data-bs-target='#kt_modal_upgrade_plan'
-                type='button'
-                className='btn btn-light-primary'
-              >
-                Change Plan
-              </button>
-            )}
-
             <Link to='/profile/settings' className='btn btn-primary'>
               Edit Profile
             </Link>

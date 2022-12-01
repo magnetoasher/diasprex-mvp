@@ -73,6 +73,11 @@ const HeaderUserMenu: FC = () => {
           Settings
         </Link>
       </div>
+      <div className='menu-item px-5 my-1'>
+        <Link to='/profile/subscription' className='menu-link px-5'>
+          Subscription
+        </Link>
+      </div>
 
       {userType !== 'sponsor' && (
         <>

@@ -4,7 +4,7 @@ import {Field, ErrorMessage} from 'formik'
 
 export const CheckingAccount = () => {
   return (
-    <>
+    <div className='d-flex flex-column'>
       <div className='d-flex flex-column mb-7 fv-row'>
         <label className='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
           <span className='required'>Routing Number</span>
@@ -81,6 +81,6 @@ export const CheckingAccount = () => {
           <span className='form-check-label fw-bold text-gray-400'>Save Account</span>
         </label>
       </div>
-    </>
+    </div>
   )
 }

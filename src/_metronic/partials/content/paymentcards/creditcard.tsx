@@ -4,7 +4,7 @@ import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 
 export const CreditCard = () => {
   return (
-    <>
+    <div className='d-flex flex-column'>
       <div className='d-flex flex-column mb-7 fv-row'>
         <label className='d-flex align-items-center fs-6 fw-bold form-label mb-2'>
           <span className='required'>Name On Card</span>
@@ -140,6 +140,6 @@ export const CreditCard = () => {
           <span className='form-check-label fw-bold text-gray-400'>Save Card</span>
         </label>
       </div>
-    </>
+    </div>
   )
 }

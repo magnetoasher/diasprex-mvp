@@ -19,7 +19,7 @@ export const DiasporasCard: FC<uadFormModel> = (props: uadFormModel) => {
                   </span>
                 </div>
                 <h6>
-                  <span className='fs-6 mb-2 text-dark me-3'>Resident Country:</span>
+                  <span className='fs-6 mb-2 text-dark me-3'>Country of Residence:</span>
                   <span className='fs-6 mb-2 text-muted'>{props?.countryRes} </span>
                 </h6>
                 <h6>

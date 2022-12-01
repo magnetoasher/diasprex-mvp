@@ -79,7 +79,7 @@ export function GenericMenu() {
       >
         <AsideMenuItem to='profile/overview' title='Overview' hasBullet={true} />
         <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
-        {/* <AsideMenuItem to='profile/account' title='Account' hasBullet={true} /> */}
+        <AsideMenuItem to='profile/subscription' title='Subscription' hasBullet={true} />
       </AsideMenuItemWithSub>
 
       <AsideMenuItemWithSub

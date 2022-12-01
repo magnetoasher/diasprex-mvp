@@ -307,19 +307,17 @@ const ProfileHeader: React.FC = () => {
                 </Link>
               </li>
 
-              {userTypeFull !== 'basic_enabler' && (
-                <li className='nav-item'>
-                  <Link
-                    className={
-                      `nav-link text-active-primary me-6 ` +
-                      (location.pathname === '/profile/billing' && 'active')
-                    }
-                    to={`/profile/billing?userType=${userType}`}
-                  >
-                    Billing
-                  </Link>
-                </li>
-              )}
+              <li className='nav-item'>
+                <Link
+                  className={
+                    `nav-link text-active-primary me-6 ` +
+                    (location.pathname === '/profile/subscription' && 'active')
+                  }
+                  to={`/profile/subscription?userType=${userType}`}
+                >
+                  Subscription
+                </Link>
+              </li>
 
               {/* <li className='nav-item'>
                 <Link
