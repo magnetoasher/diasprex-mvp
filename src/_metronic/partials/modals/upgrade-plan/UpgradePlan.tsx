@@ -505,319 +505,324 @@ const UpgradePlan: FC = () => {
   ])
 
   return (
-    <div className='card'>
-      <div className='card-body pt-0 pb-15 px-5 px-xl-20'>
-        <div className='nav flex justify-content-center align-items-center'>
-          <div
-            className='nav-group d-flex flex-row nav-group-outline mx-auto'
-            data-kt-buttons='true'
-          >
-            {types.map((type, index) => (
-              <div key={index} className='d-flex cnav-link '>
-                <button
-                  type='button'
-                  className={
-                    'nav-link btn btn btn-color-gray-400 btn-active btn-active-secondary px-6 py-3 me-2 ' +
-                    (billingCycle === type.value1 && 'active')
-                  }
-                  onClick={() => {
-                    setBillingCycle(type.value1)
-                  }}
-                  data-kt-plan={type.value1}
-                >
-                  {type.title}
-                </button>
-              </div>
-            ))}
+    <div className='w-100'>
+      <div className='card'>
+        <div className='card-body pt-0 pb-15 px-5 px-xl-20'>
+          <div className='nav flex justify-content-center align-items-center'>
+            <div
+              className='nav-group d-flex flex-row nav-group-outline mx-auto'
+              data-kt-buttons='true'
+            >
+              {types.map((type, index) => (
+                <div key={index} className='d-flex cnav-link '>
+                  <button
+                    type='button'
+                    className={
+                      'nav-link btn btn btn-color-gray-400 btn-active btn-active-secondary px-6 py-3 me-2 ' +
+                      (billingCycle === type.value1 && 'active')
+                    }
+                    onClick={() => {
+                      setBillingCycle(type.value1)
+                    }}
+                    data-kt-plan={type.value1}
+                  >
+                    {type.title}
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {userType !== 'sponsor' ? (
-          <div className='row mt-10'>
-            <div className='col-lg-7 mb-10 mb-lg-0'>
-              <div className='nav flex-column'>
-                {enabler.map((plan, index) => {
-                  return (
-                    <div
-                      onClick={() => {
-                        setUserTypeFull(plan.valueType)
+          {userType !== 'sponsor' ? (
+            <div className='row mt-10'>
+              <div className='col-lg-7 mb-10 mb-lg-0'>
+                <div className='nav flex-column'>
+                  {enabler.map((plan, index) => {
+                    return (
+                      <div
+                        onClick={() => {
+                          setUserTypeFull(plan.valueType)
 
-                        {
-                          billingCycle === 'month'
-                            ? setPackagePrice(plan.priceMonth)
-                            : setPackagePrice(plan.priceAnnual)
+                          {
+                            billingCycle === 'month'
+                              ? setPackagePrice(plan.priceMonth)
+                              : setPackagePrice(plan.priceAnnual)
+                          }
+                          setSelectedEnabler(plan.titleid)
+                          setSelectedIndex(index)
+                        }}
+                        className={
+                          `nav-link btn btn-outline btn-outline-dashed btn-color-dark d-flex flex-stack text-start p-6 ` +
+                          (index !== enabler.length - 1 && 'mb-6 ') +
+                          (plan.default && 'active ') +
+                          (!plan.custom && 'btn-active btn-active-primary')
                         }
-                        setSelectedEnabler(plan.titleid)
-                        setSelectedIndex(index)
-                      }}
-                      className={
-                        `nav-link btn btn-outline btn-outline-dashed btn-color-dark d-flex flex-stack text-start p-6 ` +
-                        (index !== enabler.length - 1 && 'mb-6 ') +
-                        (plan.default && 'active ') +
-                        (!plan.custom && 'btn-active btn-active-primary')
-                      }
-                      id={`kt_usertype_pane_${index}`}
-                      data-bs-toggle='tab'
-                      data-bs-target={`#kt_upgrade_plan_${index}`}
-                      key={index}
-                    >
-                      <div className='d-flex align-items-center me-2'>
-                        {!plan.custom && (
-                          <div className='form-check form-check-custom form-check-solid form-check-success me-6'>
-                            <input
-                              className='form-check-input'
-                              type='radio'
-                              name='plan'
-                              value={plan.titleid}
-                              checked={selectedEnabler === plan.titleid}
-                              onChange={(e) => setSelectedEnabler(e.target.value)}
-                            />
-                          </div>
-                        )}
-                        <div className='flex-grow-1'>
-                          <h2 className='d-flex align-items-center fs-2 fw-bolder flex-wrap'>
-                            {plan.title}
+                        id={`kt_usertype_pane_${index}`}
+                        data-bs-toggle='tab'
+                        data-bs-target={`#kt_upgrade_plan_${index}`}
+                        key={index}
+                      >
+                        <div className='d-flex align-items-center me-2'>
+                          {!plan.custom && (
+                            <div className='form-check form-check-custom form-check-solid form-check-success me-6'>
+                              <input
+                                className='form-check-input'
+                                type='radio'
+                                name='plan'
+                                value={plan.titleid}
+                                checked={selectedEnabler === plan.titleid}
+                                onChange={(e) => setSelectedEnabler(e.target.value)}
+                              />
+                            </div>
+                          )}
+                          <div className='flex-grow-1'>
+                            <h2 className='d-flex align-items-center fs-2 fw-bolder flex-wrap'>
+                              {plan.title}
 
-                            {plan.label && (
-                              <span className='badge badge-light-success ms-2 fs-7'>
-                                {plan.label}
+                              {plan.label && (
+                                <span className='badge badge-light-success ms-2 fs-7'>
+                                  {plan.label}
+                                </span>
+                              )}
+                            </h2>
+                            <div className='fw-bold opacity-50'>{plan.subTitle}</div>
+                          </div>
+                        </div>
+
+                        <div className='ms-5'>
+                          {plan.custom && (
+                            <button className='btn btn-sm btn-primary'>Contact Us</button>
+                          )}
+                          {!plan.custom && (
+                            <>
+                              <span className='mb-2'>$</span>
+
+                              <span className='fs-3x fw-bolder'>
+                                {billingCycle === 'month' ? plan.priceMonth : plan.priceAnnual}
                               </span>
-                            )}
-                          </h2>
-                          <div className='fw-bold opacity-50'>{plan.subTitle}</div>
+
+                              <span className='fs-7 opacity-50'>
+                                /
+                                <span data-kt-element='period'>
+                                  {billingCycle === 'month' ? 'Month' : 'Year'}
+                                </span>
+                              </span>
+
+                              <div className='fw-bold opacity-50'>{plan.setupFee}</div>
+                            </>
+                          )}
                         </div>
                       </div>
-
-                      <div className='ms-5'>
-                        {plan.custom && (
-                          <button className='btn btn-sm btn-primary'>Contact Us</button>
-                        )}
-                        {!plan.custom && (
-                          <>
-                            <span className='mb-2'>$</span>
-
-                            <span className='fs-3x fw-bolder'>
-                              {billingCycle === 'month' ? plan.priceMonth : plan.priceAnnual}
-                            </span>
-
-                            <span className='fs-7 opacity-50'>
-                              /
-                              <span data-kt-element='period'>
-                                {billingCycle === 'month' ? 'Month' : 'Year'}
-                              </span>
-                            </span>
-
-                            <div className='fw-bold opacity-50'>{plan.setupFee}</div>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-
-            <div className='col-lg-5'>
-              <div className={`tab-content rounded h-100 p-10`}>
-                <div key={`custom${selectedIndex}`}>
-                  <div
-                    className={`tab-pane fade` + (enabler[selectedIndex].default && 'show active')}
-                    id={`kt_upgrade_plan_${selectedIndex}`}
-                    key={selectedIndex}
-                  >
-                    <div className='pb-5' id='kt_upgrade_plan_0' key='0'>
-                      <h2 className='fw-bolder text-dark'>
-                        What’s in {enabler[selectedIndex].title} Plan?
-                      </h2>
-
-                      <div className='text-gray-400 fw-bold'>
-                        The decscription for plan {enabler[selectedIndex].title}
-                      </div>
-                    </div>
-
-                    <div className='pt-1'>
-                      {enabler[selectedIndex].features!.map((feature, i) => {
-                        return (
-                          <div
-                            className={
-                              `d-flex align-items-center` +
-                              (i !== enabler[selectedIndex].features!.length - 1 && ' mb-7')
-                            }
-                            key={`${i}-${feature.title}`}
-                          >
-                            {feature.supported && (
-                              <>
-                                <span className='fw-bold fs-5 text-gray-700 flex-grow-1'>
-                                  {feature.title}
-                                </span>
-
-                                <KTSVG
-                                  path='/media/icons/duotune/general/gen043.svg'
-                                  className='svg-icon-1 svg-icon-success'
-                                />
-                              </>
-                            )}
-                            {!feature.supported && (
-                              <>
-                                <span className='fw-bold fs-5 text-gray-400 flex-grow-1'>
-                                  {feature.title}
-                                </span>
-                                <KTSVG
-                                  path='/media/icons/duotune/general/gen040.svg'
-                                  className='svg-icon-1'
-                                />
-                              </>
-                            )}
-                          </div>
-                        )
-                      })}
-                    </div>
-                  </div>
+                    )
+                  })}
                 </div>
               </div>
-            </div>
-          </div>
-        ) : (
-          <div className='row mt-10'>
-            <div className='col-lg-7 mb-10 mb-lg-0'>
-              <div className='nav flex-column'>
-                {sponsor.map((plan, index) => {
-                  return (
+
+              <div className='col-lg-5'>
+                <div className={`tab-content rounded h-100 p-10`}>
+                  <div key={`custom${selectedIndex}`}>
                     <div
-                      onClick={() => {
-                        setUserTypeFull(plan.valueType)
-                        setSelectedSponsor(plan.titleid)
-                        setSelectedIndex(index)
-                      }}
                       className={
-                        `nav-link btn btn-outline btn-outline-dashed btn-color-dark d-flex flex-stack text-start p-6 ` +
-                        (index !== sponsor.length - 1 && 'mb-6 ') +
-                        (plan.default && 'active ') +
-                        (!plan.custom && 'btn-active btn-active-primary ')
+                        `tab-pane fade` + (enabler[selectedIndex].default && 'show active')
                       }
-                      id={`kt_usertype_pane_${index}`}
-                      data-bs-toggle='tab'
-                      data-bs-target={`#kt_upgrade_plan_${index}`}
-                      key={index}
+                      id={`kt_upgrade_plan_${selectedIndex}`}
+                      key={selectedIndex}
                     >
-                      <div className='d-flex align-items-center me-2'>
-                        {!plan.custom && (
-                          <div className='form-check form-check-custom form-check-solid form-check-success me-6'>
-                            <input
-                              className='form-check-input'
-                              type='radio'
-                              name='plan'
-                              value={plan.titleid}
-                              checked={selectedSponsor === plan.titleid}
-                              onChange={(e) => setSelectedSponsor(e.target.value)}
-                            />
-                          </div>
-                        )}
-                        <div className='flex-grow-1'>
-                          <h2 className='d-flex align-items-center fs-2 fw-bolder flex-wrap'>
-                            {plan.title}
+                      <div className='pb-5' id='kt_upgrade_plan_0' key='0'>
+                        <h2 className='fw-bolder text-dark'>
+                          What’s in {enabler[selectedIndex].title} Plan?
+                        </h2>
 
-                            {plan.label && (
-                              <span className='badge badge-light-success ms-2 fs-7'>
-                                {plan.label}
-                              </span>
-                            )}
-                          </h2>
-                          <div className='fw-bold opacity-50'>{plan.subTitle}</div>
+                        <div className='text-gray-400 fw-bold'>
+                          The decscription for plan {enabler[selectedIndex].title}
                         </div>
                       </div>
 
-                      <div className='ms-5'>
-                        {plan.custom && (
-                          <button className='btn btn-sm btn-primary'>Contact Us</button>
-                        )}
-                        {!plan.custom && (
-                          <>
-                            <span className='mb-2'>$</span>
+                      <div className='pt-1'>
+                        {enabler[selectedIndex].features!.map((feature, i) => {
+                          return (
+                            <div
+                              className={
+                                `d-flex align-items-center` +
+                                (i !== enabler[selectedIndex].features!.length - 1 && ' mb-7')
+                              }
+                              key={`${i}-${feature.title}`}
+                            >
+                              {feature.supported && (
+                                <>
+                                  <span className='fw-bold fs-5 text-gray-700 flex-grow-1'>
+                                    {feature.title}
+                                  </span>
 
-                            <span className='fs-3x fw-bolder'>
-                              {billingCycle === 'month' ? plan.priceMonth : plan.priceAnnual}
-                            </span>
-
-                            <span className='fs-7 opacity-50'>
-                              /
-                              <span data-kt-element='period'>
-                                {billingCycle === 'month' ? 'Month' : 'Year'}
-                              </span>
-                            </span>
-                            <div className='fw-bold opacity-75'>{plan.setupFee}</div>
-                          </>
-                        )}
+                                  <KTSVG
+                                    path='/media/icons/duotune/general/gen043.svg'
+                                    className='svg-icon-1 svg-icon-success'
+                                  />
+                                </>
+                              )}
+                              {!feature.supported && (
+                                <>
+                                  <span className='fw-bold fs-5 text-gray-400 flex-grow-1'>
+                                    {feature.title}
+                                  </span>
+                                  <KTSVG
+                                    path='/media/icons/duotune/general/gen040.svg'
+                                    className='svg-icon-1'
+                                  />
+                                </>
+                              )}
+                            </div>
+                          )
+                        })}
                       </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-
-            <div className='col-lg-5'>
-              <div className={`tab-content rounded h-100 p-10`}>
-                <div key={`custom${selectedIndex}`}>
-                  <div
-                    className={`tab-pane fade` + (sponsor[selectedIndex].default && 'show active')}
-                    id={`kt_upgrade_plan_${selectedIndex}`}
-                    key={selectedIndex}
-                  >
-                    <div className='pb-5' id='kt_upgrade_plan_0' key='0'>
-                      <h2 className='fw-bolder text-dark'>
-                        What’s in {sponsor[selectedIndex].title} Plan?
-                      </h2>
-
-                      <div className='text-gray-400 fw-bold'>
-                        The decscription for plan {sponsor[selectedIndex].title}
-                      </div>
-                    </div>
-
-                    <div className='pt-1'>
-                      {sponsor[selectedIndex].features!.map((feature, i) => {
-                        return (
-                          <div
-                            className={
-                              `d-flex align-items-center` +
-                              (i !== sponsor[selectedIndex].features!.length - 1 && ' mb-7')
-                            }
-                            key={`${i}-${feature.title}`}
-                          >
-                            {feature.supported && (
-                              <>
-                                <span className='fw-bold fs-5 text-gray-700 flex-grow-1'>
-                                  {feature.title}
-                                </span>
-
-                                <KTSVG
-                                  path='/media/icons/duotune/general/gen043.svg'
-                                  className='svg-icon-1 svg-icon-success'
-                                />
-                              </>
-                            )}
-                            {!feature.supported && (
-                              <>
-                                <span className='fw-bold fs-5 text-gray-400 flex-grow-1'>
-                                  {feature.title}
-                                </span>
-                                <KTSVG
-                                  path='/media/icons/duotune/general/gen040.svg'
-                                  className='svg-icon-1'
-                                />
-                              </>
-                            )}
-                          </div>
-                        )
-                      })}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
+          ) : (
+            <div className='row mt-10'>
+              <div className='col-lg-7 mb-10 mb-lg-0'>
+                <div className='nav flex-column'>
+                  {sponsor.map((plan, index) => {
+                    return (
+                      <div
+                        onClick={() => {
+                          setUserTypeFull(plan.valueType)
+                          setSelectedSponsor(plan.titleid)
+                          setSelectedIndex(index)
+                        }}
+                        className={
+                          `nav-link btn btn-outline btn-outline-dashed btn-color-dark d-flex flex-stack text-start p-6 ` +
+                          (index !== sponsor.length - 1 && 'mb-6 ') +
+                          (plan.default && 'active ') +
+                          (!plan.custom && 'btn-active btn-active-primary ')
+                        }
+                        id={`kt_usertype_pane_${index}`}
+                        data-bs-toggle='tab'
+                        data-bs-target={`#kt_upgrade_plan_${index}`}
+                        key={index}
+                      >
+                        <div className='d-flex align-items-center me-2'>
+                          {!plan.custom && (
+                            <div className='form-check form-check-custom form-check-solid form-check-success me-6'>
+                              <input
+                                className='form-check-input'
+                                type='radio'
+                                name='plan'
+                                value={plan.titleid}
+                                checked={selectedSponsor === plan.titleid}
+                                onChange={(e) => setSelectedSponsor(e.target.value)}
+                              />
+                            </div>
+                          )}
+                          <div className='flex-grow-1'>
+                            <h2 className='d-flex align-items-center fs-2 fw-bolder flex-wrap'>
+                              {plan.title}
 
-        {/* <div className='d-flex flex-center flex-row-fluid pt-12'>
+                              {plan.label && (
+                                <span className='badge badge-light-success ms-2 fs-7'>
+                                  {plan.label}
+                                </span>
+                              )}
+                            </h2>
+                            <div className='fw-bold opacity-50'>{plan.subTitle}</div>
+                          </div>
+                        </div>
+
+                        <div className='ms-5'>
+                          {plan.custom && (
+                            <button className='btn btn-sm btn-primary'>Contact Us</button>
+                          )}
+                          {!plan.custom && (
+                            <>
+                              <span className='mb-2'>$</span>
+
+                              <span className='fs-3x fw-bolder'>
+                                {billingCycle === 'month' ? plan.priceMonth : plan.priceAnnual}
+                              </span>
+
+                              <span className='fs-7 opacity-50'>
+                                /
+                                <span data-kt-element='period'>
+                                  {billingCycle === 'month' ? 'Month' : 'Year'}
+                                </span>
+                              </span>
+                              <div className='fw-bold opacity-75'>{plan.setupFee}</div>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+
+              <div className='col-lg-5'>
+                <div className={`tab-content rounded h-100 p-10`}>
+                  <div key={`custom${selectedIndex}`}>
+                    <div
+                      className={
+                        `tab-pane fade` + (sponsor[selectedIndex].default && 'show active')
+                      }
+                      id={`kt_upgrade_plan_${selectedIndex}`}
+                      key={selectedIndex}
+                    >
+                      <div className='pb-5' id='kt_upgrade_plan_0' key='0'>
+                        <h2 className='fw-bolder text-dark'>
+                          What’s in {sponsor[selectedIndex].title} Plan?
+                        </h2>
+
+                        <div className='text-gray-400 fw-bold'>
+                          The decscription for plan {sponsor[selectedIndex].title}
+                        </div>
+                      </div>
+
+                      <div className='pt-1'>
+                        {sponsor[selectedIndex].features!.map((feature, i) => {
+                          return (
+                            <div
+                              className={
+                                `d-flex align-items-center` +
+                                (i !== sponsor[selectedIndex].features!.length - 1 && ' mb-7')
+                              }
+                              key={`${i}-${feature.title}`}
+                            >
+                              {feature.supported && (
+                                <>
+                                  <span className='fw-bold fs-5 text-gray-700 flex-grow-1'>
+                                    {feature.title}
+                                  </span>
+
+                                  <KTSVG
+                                    path='/media/icons/duotune/general/gen043.svg'
+                                    className='svg-icon-1 svg-icon-success'
+                                  />
+                                </>
+                              )}
+                              {!feature.supported && (
+                                <>
+                                  <span className='fw-bold fs-5 text-gray-400 flex-grow-1'>
+                                    {feature.title}
+                                  </span>
+                                  <KTSVG
+                                    path='/media/icons/duotune/general/gen040.svg'
+                                    className='svg-icon-1'
+                                  />
+                                </>
+                              )}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* <div className='d-flex flex-center flex-row-fluid pt-12'>
           <button type='reset' className='btn btn-light me-3' data-bs-dismiss='modal'>
             Cancel
           </button>
@@ -826,6 +831,7 @@ const UpgradePlan: FC = () => {
             Upgrade Plan
           </button>
         </div> */}
+        </div>
       </div>
     </div>
   )

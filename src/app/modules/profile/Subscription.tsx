@@ -50,7 +50,7 @@ const Subscription = () => {
       </div>
       <button
         data-bs-toggle='modal'
-        data-bs-target='#kt_modal_upgrade_plan'
+        data-bs-target='#upgrade_plan'
         type='button'
         className='btn btn-primary mb-5'
         style={{

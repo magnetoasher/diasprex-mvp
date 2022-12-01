@@ -177,7 +177,7 @@ export const SendMoneyModal: FC = () => {
                     type='button'
                     className='btn btn-light-primary rounded-circle me-2'
                     data-bs-toggle='modal'
-                    data-bs-target='#kt_modal_upgrade_plan'
+                    data-bs-target='#upgrade_plan'
                   >
                     Upgrade Plan
                   </button>

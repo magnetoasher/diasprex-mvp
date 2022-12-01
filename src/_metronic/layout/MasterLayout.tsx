@@ -82,7 +82,7 @@ const MasterLayout = () => {
         <AddFund />
         <InviteUsers />
         <UpgradePlanHorizontal />
-        {/* <UpgradePlan /> */}
+
         {/* end:: Modals */}
         <ScrollTop />
       </ThemeModeProvider>

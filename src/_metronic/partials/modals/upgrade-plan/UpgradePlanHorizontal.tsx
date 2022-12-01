@@ -81,7 +81,7 @@ const UpgradePlanHorizontal: FC = () => {
   }, [stepperRef])
 
   return (
-    <div className='modal fade' id='kt_modal_upgrade_plan' aria-hidden='true'>
+    <div className='modal fade' id='upgrade_plan' aria-hidden='true'>
       <div className='modal-dialog modal-dialog-centered mw-75'>
         <div className='modal-content'>
           <div className='modal-headerx bg-light'>

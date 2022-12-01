@@ -24,7 +24,6 @@ export const PublicNavbarProvider: FC = (props: any) => {
       <ActivityDrawer />
       {/* <RightToolbar /> */}
       <DrawerMessenger />
-      <UpgradePlan />
       {/* end:: Drawers */}
     </div>
   )
