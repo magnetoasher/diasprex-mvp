@@ -66,6 +66,7 @@ const AddFund: FC = () => {
   const [currentSchema, setCurrentSchema] = useState(createAppSchema[0])
   const [initValues] = useState<ICreateAccount>(inits)
   const [fundSourceValue, setFundSourceValue] = useState('')
+  const [isSubmitButton, setSubmitButton] = useState(false)
 
   const loadStepper = () => {
     stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement)
@@ -75,7 +76,8 @@ const AddFund: FC = () => {
     if (!stepper.current) {
       return
     }
-
+    // setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1)
+    setSubmitButton(false)
     stepper.current.goPrev()
 
     setCurrentSchema(createAppSchema[stepper.current.currentStepIndex - 1])
@@ -87,6 +89,7 @@ const AddFund: FC = () => {
     }
 
     setCurrentSchema(createAppSchema[stepper.current.currentStepIndex])
+    setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1)
 
     if (stepper.current?.getCurrentStepIndex() !== stepper.current?.totatStepsNumber) {
       stepper.current.goNext()
@@ -385,10 +388,8 @@ const AddFund: FC = () => {
                         <div>
                           <button type='submit' className='btn btn-lg btn-primary me-3'>
                             <span className='indicator-label'>
-                              {stepper.current?.currentStepIndex !==
-                                stepper.current?.totatStepsNumber! - 1 && 'Next'}
-                              {stepper.current?.currentStepIndex ===
-                                stepper.current?.totatStepsNumber! - 1 && 'Submit'}
+                              {!isSubmitButton && 'Continue'}
+                              {isSubmitButton && 'Submit'}
                               <KTSVG
                                 path='/media/icons/duotune/arrows/arr064.svg'
                                 className='svg-icon-3 ms-2 me-0'

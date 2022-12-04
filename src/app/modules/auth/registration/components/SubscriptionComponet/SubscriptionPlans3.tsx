@@ -10,10 +10,10 @@ import 'react-best-tabs/dist/index.css'
 import {HeaderNotificationsMenu, QuickLinks, Search} from '../../../../../../_metronic/partials'
 import clsx from 'clsx'
 
-const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull, userTypeFull}) => {
+const SubscriptionPlans3 = ({userType, setUserType, setUserTypeFull, userTypeFull}) => {
   const [currentState, setCurrentState] = useState<'month' | 'annual'>('month')
-  const [selectedEnabler, setSelectedEnabler] = useState('enabler1')
-  const [selectedSponsor, setSelectedSponsor] = useState('sponsor1')
+  const [selectedEnabler, setSelectedEnabler] = useState('basic_enabler')
+  const [selectedSponsor, setSelectedSponsor] = useState('basic_sponsor')
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
   const [packagePrice, setPackagePrice] = useState()
   const [packageDuration, setPackageDuration] = useState()
@@ -574,8 +574,8 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
                     setUserTypeFull(`basic_${plan.value1}`)
                     setUserType(plan.value1.toLocaleLowerCase())
 
-                    setSelectedEnabler('enabler1')
-                    setSelectedSponsor('sponsor1')
+                    setSelectedEnabler('basic_enabler')
+                    setSelectedSponsor('basic_sponsor')
                   }}
                   className={
                     `nav-link btn btn-outline btn-outline-dashed btn-color-dark d-flex flex-stack text-start p-6  col-lg-4` +
@@ -659,7 +659,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
                             ? setPackagePrice(plan.priceMonth)
                             : setPackagePrice(plan.priceAnnual)
                         }
-                        setSelectedEnabler(plan.titleid)
+                        setSelectedEnabler(plan.valueType)
                         setSelectedIndex(index)
                       }}
                       className={
@@ -680,8 +680,8 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
                               className='form-check-input'
                               type='radio'
                               name='plan'
-                              value={plan.titleid}
-                              checked={selectedEnabler === plan.titleid}
+                              value={plan.valueType}
+                              checked={selectedEnabler === plan.valueType}
                               onChange={(e) => setSelectedEnabler(e.target.value)}
                             />
                           </div>
@@ -799,7 +799,7 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
                     <div
                       onClick={() => {
                         setUserTypeFull(plan.valueType)
-                        setSelectedSponsor(plan.titleid)
+                        setSelectedSponsor(plan.valueType)
                         setSelectedIndex(index)
                       }}
                       className={
@@ -820,8 +820,8 @@ const SubscriptionPlans3 = ({userType, setUserType, submitStep, setUserTypeFull,
                               className='form-check-input'
                               type='radio'
                               name='plan'
-                              value={plan.titleid}
-                              checked={selectedSponsor === plan.titleid}
+                              value={plan.valueType}
+                              checked={selectedSponsor === plan.valueType}
                               onChange={(e) => setSelectedSponsor(e.target.value)}
                             />
                           </div>

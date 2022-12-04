@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC} from 'react'
+import {Link} from 'react-router-dom'
 import {useLayout} from '../core'
 
 const Footer: FC = () => {
@@ -13,28 +14,28 @@ const Footer: FC = () => {
         {/* begin::Copyright */}
         <div className='text-gray-600 order-2 order-md-1'>
           <span className='text-muted fw-bold me-2'>{new Date().getFullYear()} &copy;</span>
-          <a href='#' className='text-gray-800 text-hover-primary'>
+          <Link to='/' className='text-gray-800 text-hover-primary'>
             Diasprex Inc.
-          </a>
+          </Link>
         </div>
         {/* end::Copyright */}
 
         {/* begin::Nav */}
         <ul className='menu menu-gray-600 menu-hover-primary fw-bold order-1'>
           <li className='menu-item'>
-            <a href='#' className='menu-link ps-0 pe-2'>
+            <Link to='/about' className='menu-link ps-0 pe-2'>
               About
-            </a>
+            </Link>
           </li>
           <li className='menu-item'>
-            <a href='#' className='menu-link pe-0 pe-2'>
+            <Link to='/ourteam' className='menu-link pe-0 pe-2'>
               Team
-            </a>
+            </Link>
           </li>
           <li className='menu-item'>
-            <a href='#' className='menu-link pe-0'>
-              Contact
-            </a>
+            <Link to='/contactus' className='menu-link pe-0'>
+              Contact Us
+            </Link>
           </li>
         </ul>
         {/* end::Nav */}

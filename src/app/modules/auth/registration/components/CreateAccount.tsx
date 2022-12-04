@@ -24,7 +24,7 @@ const CreateAccount: FC = () => {
   const [userType, setUserType] = useState<string>('enabler')
   const [userTypeFull, setUserTypeFull] = useState('basic_enabler')
   const [initValues] = useState<ICreateAccount>(inits)
-
+  const [isSubmitButton, setSubmitButton] = useState(false)
   const [isShowAlert, setIsShowAlert] = useState(false)
   const [categoryQuestion, setCategoryQuestion] = useState('')
   const [alertType, setAlertType] = useState('')
@@ -61,7 +61,8 @@ const CreateAccount: FC = () => {
     if (!stepper.current) {
       return
     }
-
+    // setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1)
+    setSubmitButton(false)
     stepper.current.goPrev()
 
     setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex - 1])
@@ -72,6 +73,7 @@ const CreateAccount: FC = () => {
       return
     }
     setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex])
+    setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1)
 
     if (stepper.current.currentStepIndex !== (userTypeFull === 'basic_enabler' ? 3 : 5)) {
       if (stepper.current.currentStepIndex == 1) {
@@ -96,7 +98,7 @@ const CreateAccount: FC = () => {
       }
     } else {
       // stepper.current.goto(1)
-      // actions.resetForm()
+      //
 
       if (userType == 'sponsor') {
         setConfirmBtnText('Ok')
@@ -110,6 +112,7 @@ const CreateAccount: FC = () => {
           pathname: '/dashboard',
           search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
         })
+      actions.resetForm()
     }
   }
 
@@ -330,10 +333,8 @@ const CreateAccount: FC = () => {
                   <div>
                     <button type='submit' className='btn btn-lg btn-primary me-3'>
                       <span className='indicator-label'>
-                        {stepper.current?.currentStepIndex !==
-                          stepper.current?.totatStepsNumber! - 1 && 'Continue'}
-                        {stepper.current?.currentStepIndex ===
-                          stepper.current?.totatStepsNumber! - 1 && 'Submit'}
+                        {!isSubmitButton && 'Continue'}
+                        {isSubmitButton && 'Submit'}
                         <KTSVG
                           path='/media/icons/duotune/arrows/arr064.svg'
                           className='svg-icon-3 ms-2 me-0'

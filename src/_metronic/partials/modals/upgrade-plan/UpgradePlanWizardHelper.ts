@@ -1,6 +1,10 @@
 import * as Yup from 'yup'
 
 export interface IUpgradePlan {
+  usertype?: string
+  userTypeFull?: string
+  packageDuration?: string
+  packagePrice?: string
   accountType: string
   accountTeamSize: string
   accountName: string
@@ -10,33 +14,54 @@ export interface IUpgradePlan {
   businessType: string
   businessDescription: string
   businessEmail: string
+  paymethod?: string
   nameOnCard: string
   cardNumber: string
   cardExpiryMonth: string
   cardExpiryYear: string
   cardCvv: string
   saveCard: string
+  accountnumber?: string
+  routingnumber?: string
 }
 
 const upgradePlanSchemas = [
   Yup.object({
     accountType: Yup.string().required().label('Account Type'),
   }),
+
   Yup.object({
-    accountName: Yup.string().required().label('Account Name'),
-  }),
-  Yup.object({
-    businessName: Yup.string().required().label('Business Name'),
-    businessDescriptor: Yup.string().required().label('Shortened Descriptor'),
-    businessType: Yup.string().required().label('Corporation Type'),
-    businessEmail: Yup.string().required().label('Contact Email'),
-  }),
-  Yup.object({
-    nameOnCard: Yup.string().required().label('Name On Card'),
-    cardNumber: Yup.string().required().label('Card Number'),
-    cardExpiryMonth: Yup.string().required().label('Expiration Month'),
-    cardExpiryYear: Yup.string().required().label('Expiration Year'),
+    paymethod: Yup.string().required('Select a payment method'),
+    nameOnCard: Yup.string().when('paymethod', {
+      is: 'credit',
+      then: Yup.string().required().label('Name on Card'),
+    }),
+    cardNumber: Yup.string().when('paymethod', {
+      is: 'credit',
+      then: Yup.string().required().label('Card Number'),
+    }),
+    cardExpiryMonth: Yup.string().when('paymethod', {
+      is: 'credit',
+      then: Yup.string().required().label('Expiration Month'),
+    }),
+    cardExpiryYear: Yup.string().when('paymethod', {
+      is: 'credit',
+      then: Yup.string().required().label('Expiration Year'),
+    }),
     cardCvv: Yup.string().required().label('CVV'),
+
+    accountNumber: Yup.string().when('paymethod', {
+      is: 'checking',
+      then: Yup.string().required().label('Checking Number'),
+    }),
+    accountNumberConfirm: Yup.string().when('paymethod', {
+      is: 'checking',
+      then: Yup.string().required().label('Account Number Confirmation'),
+    }),
+    routingNumber: Yup.string().when('paymethod', {
+      is: 'checking',
+      then: Yup.string().required().label('Routing Number'),
+    }),
   }),
 ]
 

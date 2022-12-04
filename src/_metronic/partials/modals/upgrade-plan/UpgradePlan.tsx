@@ -1,18 +1,18 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 // @ts-nocheck comment
-import React, {FC, useState} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import {KTSVG} from '../../../helpers'
 
 const UpgradePlan: FC = () => {
-  const [selectedEnabler, setSelectedEnabler] = useState('enabler1')
-  const [selectedSponsor, setSelectedSponsor] = useState('sponsor1')
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
+  const [packagePrice, setPackagePrice] = useState(localStorage.getItem('packagePrice'))
+  const [packageDuration, setPackageDuration] = useState(localStorage.getItem('packageDuration'))
+  const [userTypeFull, setUserTypeFull] = useState(localStorage.getItem('userTypeFull'))
   const [userType] = useState(localStorage.getItem('userType'))
-  const [packagePrice, setPackagePrice] = useState('')
-  const [packageDuration, setPackageDuration] = useState('')
+  const [selectedEnabler, setSelectedEnabler] = useState(userTypeFull)
+  const [selectedSponsor, setSelectedSponsor] = useState(userTypeFull)
 
-  const [billingCycle, setBillingCycle] = useState<'month' | 'annual'>('month')
-  const [userTypeFull, setUserTypeFull] = useState('basic_enabler')
+  console.log('userTypeFull', userTypeFull)
 
   const types = [
     {
@@ -36,7 +36,7 @@ const UpgradePlan: FC = () => {
       priceMonth: '0',
       priceAnnual: '0',
       label: '',
-      default: true,
+      default: userTypeFull === 'basic_enabler' ? true : false,
       custom: false,
       value1: 'basic',
       valueType: 'basic_enabler',
@@ -100,7 +100,7 @@ const UpgradePlan: FC = () => {
       priceMonth: '4.99',
       priceAnnual: '54.00',
       label: '',
-      default: false,
+      default: userTypeFull === 'standard_enabler' ? true : false,
       custom: false,
       value1: 'individual',
       valueType: 'standard_enabler',
@@ -164,7 +164,7 @@ const UpgradePlan: FC = () => {
       priceMonth: '9.99',
       priceAnnual: '114.00',
       label: 'Most popular',
-      default: false,
+      default: userTypeFull === 'super_enabler' ? true : false,
       custom: false,
       value1: 'individual',
       valueType: 'super_enabler',
@@ -228,7 +228,7 @@ const UpgradePlan: FC = () => {
       setupFee: '',
       priceMonth: 'Call customer service',
       priceAnnual: 'Call customer service',
-      default: false,
+      default: userTypeFull === 'business_enabler' ? true : false,
       label: '',
       custom: true,
       value1: 'business',
@@ -296,7 +296,7 @@ const UpgradePlan: FC = () => {
       priceMonth: '0',
       priceAnnual: '0',
       label: '',
-      default: true,
+      default: userTypeFull === 'basic_sponsor' ? true : false,
       value1: 'sponsor',
       valueType: 'basic_sponsor',
       pricing: true,
@@ -348,7 +348,7 @@ const UpgradePlan: FC = () => {
       priceMonth: '14.99',
       priceAnnual: '174.00',
       label: '',
-      default: false,
+      default: userTypeFull === 'silver_sponsor' ? true : false,
       value1: 'sponsor',
       valueType: 'silver_sponsor',
 
@@ -402,7 +402,7 @@ const UpgradePlan: FC = () => {
       priceMonth: '49.99',
       priceAnnual: '594.00',
       label: 'Most popular',
-      default: false,
+      default: userTypeFull === 'gold_sponsor' ? true : false,
       value1: 'sponsor',
       valueType: 'gold_sponsor',
 
@@ -456,7 +456,7 @@ const UpgradePlan: FC = () => {
       priceMonth: 'Call customer service',
       priceAnnual: 'Call customer service',
       label: '',
-      default: false,
+      default: userTypeFull === 'diamond_sponsor' ? true : false,
       value1: 'sponsor',
       valueType: 'diamond_sponsor',
 
@@ -519,10 +519,10 @@ const UpgradePlan: FC = () => {
                     type='button'
                     className={
                       'nav-link btn btn btn-color-gray-400 btn-active btn-active-secondary px-6 py-3 me-2 ' +
-                      (billingCycle === type.value1 && 'active')
+                      (packageDuration === type.value1 && 'active')
                     }
                     onClick={() => {
-                      setBillingCycle(type.value1)
+                      setPackageDuration(type.value1)
                     }}
                     data-kt-plan={type.value1}
                   >
@@ -544,11 +544,11 @@ const UpgradePlan: FC = () => {
                           setUserTypeFull(plan.valueType)
 
                           {
-                            billingCycle === 'month'
+                            packageDuration === 'month'
                               ? setPackagePrice(plan.priceMonth)
                               : setPackagePrice(plan.priceAnnual)
                           }
-                          setSelectedEnabler(plan.titleid)
+                          setSelectedEnabler(plan.valueType)
                           setSelectedIndex(index)
                         }}
                         className={
@@ -569,8 +569,8 @@ const UpgradePlan: FC = () => {
                                 className='form-check-input'
                                 type='radio'
                                 name='plan'
-                                value={plan.titleid}
-                                checked={selectedEnabler === plan.titleid}
+                                value={plan.valueType}
+                                checked={selectedEnabler === plan.valueType}
                                 onChange={(e) => setSelectedEnabler(e.target.value)}
                               />
                             </div>
@@ -598,13 +598,13 @@ const UpgradePlan: FC = () => {
                               <span className='mb-2'>$</span>
 
                               <span className='fs-3x fw-bolder'>
-                                {billingCycle === 'month' ? plan.priceMonth : plan.priceAnnual}
+                                {packageDuration === 'month' ? plan.priceMonth : plan.priceAnnual}
                               </span>
 
                               <span className='fs-7 opacity-50'>
                                 /
                                 <span data-kt-element='period'>
-                                  {billingCycle === 'month' ? 'Month' : 'Year'}
+                                  {packageDuration === 'month' ? 'Month' : 'Year'}
                                 </span>
                               </span>
 
@@ -689,7 +689,7 @@ const UpgradePlan: FC = () => {
                       <div
                         onClick={() => {
                           setUserTypeFull(plan.valueType)
-                          setSelectedSponsor(plan.titleid)
+                          setSelectedSponsor(plan.valueType)
                           setSelectedIndex(index)
                         }}
                         className={
@@ -710,8 +710,8 @@ const UpgradePlan: FC = () => {
                                 className='form-check-input'
                                 type='radio'
                                 name='plan'
-                                value={plan.titleid}
-                                checked={selectedSponsor === plan.titleid}
+                                value={plan.valueType}
+                                checked={selectedSponsor === plan.valueType}
                                 onChange={(e) => setSelectedSponsor(e.target.value)}
                               />
                             </div>
@@ -739,13 +739,13 @@ const UpgradePlan: FC = () => {
                               <span className='mb-2'>$</span>
 
                               <span className='fs-3x fw-bolder'>
-                                {billingCycle === 'month' ? plan.priceMonth : plan.priceAnnual}
+                                {packageDuration === 'month' ? plan.priceMonth : plan.priceAnnual}
                               </span>
 
                               <span className='fs-7 opacity-50'>
                                 /
                                 <span data-kt-element='period'>
-                                  {billingCycle === 'month' ? 'Month' : 'Year'}
+                                  {packageDuration === 'month' ? 'Month' : 'Year'}
                                 </span>
                               </span>
                               <div className='fw-bold opacity-75'>{plan.setupFee}</div>

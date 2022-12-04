@@ -1,7 +1,6 @@
+// @ts-ignore
 import React, {FC, useMemo, useState} from 'react'
 import {Field, ErrorMessage} from 'formik'
-// @ts-ignore
-import AsyncSelect from 'react-select'
 import countryList from 'react-select-country-list'
 import {IndustryList} from '../../../../../../../_metronic/partials/content/selectionlists'
 

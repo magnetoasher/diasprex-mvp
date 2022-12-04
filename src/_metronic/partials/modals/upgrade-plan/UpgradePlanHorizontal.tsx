@@ -1,6 +1,6 @@
 // @ts-nocheck comment
 import {FC, useEffect, useRef, useState} from 'react'
-
+import {useNavigate} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {StepperComponent} from '../../../assets/ts/components'
 import {Formik, Form, Field, FormikValues} from 'formik'
@@ -14,9 +14,14 @@ const UpgradePlanHorizontal: FC = () => {
   const [currentSchema, setCurrentSchema] = useState(upgradePlanSchemas[0])
   const [initValues] = useState<IUpgradePlan>(inits)
   const [isSubmitButton, setSubmitButton] = useState(false)
+  const [userTypeFull, setUserTypeFull] = useState(localStorage.getItem('userTypeFull'))
+  const [billingCycle, setBillingCycle] = useState<'month' | 'annual'>('month')
+  const userType = localStorage.getItem('userType')
 
   const [upgradePackage, setUpgradePackage] = useState()
   const [payMethod, setPayMethod] = useState('credit')
+
+  const navigate = useNavigate()
 
   const PayMethod = [
     {
@@ -41,12 +46,13 @@ const UpgradePlanHorizontal: FC = () => {
       return
     }
 
-    setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1)
-
+    // setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1)
+    setSubmitButton(false)
     stepper.current.goPrev()
 
     setCurrentSchema(upgradePlanSchemas[stepper.current.currentStepIndex - 1])
   }
+  console.log('Submitting', isSubmitButton)
 
   const submitStep = (values: IUpgradePlan, actions: FormikValues) => {
     if (!stepper.current) {
@@ -61,11 +67,24 @@ const UpgradePlanHorizontal: FC = () => {
       stepper.current.goNext()
     } else {
       try {
-        setUpgradePackage(values)
+        const data: IUpgradePlan = {
+          ...values,
+          userType: localStorage.getItem('userType'),
+          userTypeFull: localStorage.getItem('userTypeFull'),
+          packageDuration: localStorage.getItem('packageDuration'),
+          packagePrice: localStorage.getItem('packagePrice'),
+        }
+        setUpgradePackage(data)
+        console.log(data)
       } catch (errors) {
         console.log(errors)
       } finally {
+        // navigate({
+        //   pathname: '/dashboard',
+        //   search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
+        // })
         actions.resetForm()
+        window.location.reload()
       }
 
       // stepper.current.goto(1)
@@ -84,7 +103,7 @@ const UpgradePlanHorizontal: FC = () => {
     <div className='modal fade' id='upgrade_plan' aria-hidden='true'>
       <div className='modal-dialog modal-dialog-centered mw-75'>
         <div className='modal-content'>
-          <div className='modal-headerx bg-light'>
+          <div className='modal-headerx'>
             <div className='d-flex justify-content-end pt-3 px-3 '>
               <div className='btn btn-sm btn-icon btn-active-color-primary' data-bs-dismiss='modal'>
                 <KTSVG path='/media/icons/duotune/arrows/arr061.svg' className='svg-icon-1' />
@@ -123,15 +142,15 @@ const UpgradePlanHorizontal: FC = () => {
               </div>
 
               <Formik
-                // validationSchema={currentSchema}
+                validationSchema={currentSchema}
                 initialValues={initValues}
                 onSubmit={submitStep}
               >
-                {() => (
+                {({}) => (
                   <Form className='mx-auto w-100 pt-15 pb-10' id='kt_upgrade_plan_form'>
                     <div className='d-flex justify-content-center'>
                       <div className='current ' data-kt-stepper-element='content'>
-                        <UpgradePlan />
+                        <UpgradePlan userType={userType} />
                       </div>
 
                       <div data-kt-stepper-element='content'>
@@ -176,25 +195,142 @@ const UpgradePlanHorizontal: FC = () => {
                       </div>
 
                       <div data-kt-stepper-element='content'>
-                        <div className='w-100 text-center'>
-                          <h1 className='fw-bolder text-dark mb-3'>Confirm!</h1>
+                        <div className='row mb-5 mw-100'>
+                          <div className='col-6'>
+                            <div className='mw-100 text-center'>
+                              <h1 className='fw-bolder text-dark mb-3'>Confirm!</h1>
 
-                          <div className='text-primary fw-bold fs-3'>
-                            Submit your upgrade request.
+                              <div className='text-primary fw-bold fs-3'>
+                                Submit your upgrade request.
+                              </div>
+
+                              <div className='text-center px-4 py-15'>
+                                <img
+                                  src={toAbsoluteUrl('/media/illustrations/sketchy-1/9.png')}
+                                  alt=''
+                                  className='w-100 mh-300px'
+                                />
+                              </div>
+                            </div>
                           </div>
+                          <div className='col-6'>
+                            <div className='card'>
+                              <div className='card-header'>
+                                <div className='card-title'>
+                                  <h2 className='fw-bolder'>Verify Details</h2>
+                                </div>
+                              </div>
+                              <div className='d-flex flex-wrap py-5'>
+                                <div className='flex-equal me-5'>
+                                  <table className='table fs-6 fw-bold gs-0 gy-2 gx-2 m-0'>
+                                    <tr>
+                                      <td className='text-gray-400 min-w-175px w-175px'>
+                                        Bill to:
+                                      </td>
+                                      <td className='text-gray-800 min-w-200px'>
+                                        <a
+                                          href='../../demo1/dist/pages/apps/customers/view.html'
+                                          className='text-gray-800 text-hover-primary'
+                                        >
+                                          corp@support.com
+                                        </a>
+                                      </td>
+                                    </tr>
 
-                          <div className='text-center px-4 py-15'>
-                            <img
-                              src={toAbsoluteUrl('/media/illustrations/sketchy-1/9.png')}
-                              alt=''
-                              className='w-100 mh-300px'
-                            />
+                                    <tr>
+                                      <td className='text-gray-400'>Customer Name:</td>
+                                      <td className='text-gray-800'>Max Doe</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td className='text-gray-400'>Address:</td>
+                                      <td className='text-gray-800'>
+                                        Floor 10, 101 Avenue of the Light Square, New York, NY,
+                                        10050.
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td className='text-gray-400'>Phone:</td>
+                                      <td className='text-gray-800'>(555) 555-1234</td>
+                                    </tr>
+                                  </table>
+                                </div>
+
+                                <div className='flex-equal'>
+                                  <table className='table fs-6 fw-bold gs-0 gy-2 gx-2 m-0'>
+                                    <tr>
+                                      <td className='text-gray-400 min-w-175px w-175px'>
+                                        Subscribed Product:
+                                      </td>
+                                      <td className='text-gray-800 min-w-200px'>
+                                        <a
+                                          href='#'
+                                          className='text-gray-800 text-hover-primary text-capitalize'
+                                        >{` ${userTypeFull?.replace('_', ' ')} bundle`}</a>
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td className='text-gray-400'>Subscription Fees:</td>
+                                      <td className='text-gray-800 text-capitalize'>{`$149.99 / ${billingCycle}`}</td>
+                                    </tr>
+
+                                    <tr>
+                                      <td className='text-gray-400'>Billing method:</td>
+                                      <td className='text-gray-800'>
+                                        {billingCycle == 'month' ? 'Monthly' : 'Annually'}
+                                      </td>
+                                    </tr>
+
+                                    <tr>
+                                      <td className='text-gray-400'>Currency:</td>
+                                      <td className='text-gray-800'>USD - US Dollar</td>
+                                    </tr>
+                                  </table>
+                                </div>
+
+                                <div className='mb-0'>
+                                  <h5 className='mb-4'>Subscribed Products:</h5>
+
+                                  <div className='table-responsive'>
+                                    <table className='table align-middle table-row-dashed fs-6 gy-4 mb-0'>
+                                      <thead>
+                                        <tr className='border-bottom border-gray-200 text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0'>
+                                          <th className='min-w-150px'>Product</th>
+                                          <th className='min-w-125px'>Subscription ID</th>
+                                          <th className='min-w-125px'>Total</th>
+                                        </tr>
+                                      </thead>
+
+                                      <tbody className='fw-bold text-gray-800'>
+                                        <tr>
+                                          <td>
+                                            <label className='w-150px text-capitalize'>{`${userType} Bundle`}</label>
+                                            <div className='fw-normal text-gray-600'>{` ${userTypeFull?.replace(
+                                              '_',
+                                              ' '
+                                            )} bundle`}</div>
+                                          </td>
+                                          <td>
+                                            <span className='badge badge-light-danger'>
+                                              sub_4567_8765
+                                            </span>
+                                          </td>
+                                          <td className='text-capitalize'>{`$149.99 / ${billingCycle}`}</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className='d-flex flex-stack pt-15'>
+                    <div className='d-flex flex-stack pt-15 px-10'>
                       <div className='mr-2'>
                         <button
                           onClick={prevStep}
@@ -210,11 +346,12 @@ const UpgradePlanHorizontal: FC = () => {
                         </button>
                       </div>
 
-                      <div>
+                      <div className='d-flex mw-100'>
                         <button type='submit' className='btn btn-lg btn-primary me-3'>
                           <span className='indicator-label'>
                             {!isSubmitButton && 'Continue'}
                             {isSubmitButton && 'Submit'}
+
                             <KTSVG
                               path='/media/icons/duotune/arrows/arr064.svg'
                               className='svg-icon-3 ms-2 me-0'
