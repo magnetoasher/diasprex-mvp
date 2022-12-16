@@ -3,7 +3,7 @@ import {QueryRequestProvider} from './core/QueryRequestProvider'
 import {QueryResponseProvider} from './core/QueryResponseProvider'
 import {PropsListHeader} from './components/header/PropsListHeader'
 import {PropsTable} from './table/PropsTable'
-import {UserEditModal} from './user-edit-modal/UserEditModal'
+import {PropEditModal} from './props-edit-modal/PropsEditModal'
 import {KTCard} from '../../../../../../_metronic/helpers'
 
 const PropsList = () => {
@@ -14,7 +14,7 @@ const PropsList = () => {
         <PropsListHeader />
         <PropsTable />
       </KTCard>
-      {itemIdForUpdate !== undefined && <UserEditModal />}
+      {itemIdForUpdate !== undefined && <PropEditModal />}
     </>
   )
 }

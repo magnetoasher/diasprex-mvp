@@ -1,6 +1,10 @@
-import React from 'react'
-import {string} from 'yup/lib/locale'
+import React, {useState} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../../../_metronic/helpers'
+
+const enabler = {
+  month: {basic: '0', standard: '4.99', super: '9.99', Enterprice: 'Contact Us'},
+  annual: {basic: '0', standard: '49.99', super: '99.99', Enterprice: 'Contact Us'},
+}
 
 const PricingFeatures = [
   {
@@ -90,6 +94,8 @@ const PricingFeatures = [
 ]
 
 export const SubscriptionPlanTable = () => {
+  const [currentState, setCurrentState] = useState<'month' | 'annual'>('month')
+  const [packagePricing, setPackagePricing] = useState(enabler.month)
   const Supported = (
     <KTSVG
       path={toAbsoluteUrl('/media/icons/duotune/arrows/arr085.svg')}
@@ -112,18 +118,34 @@ export const SubscriptionPlanTable = () => {
             <tr id='kt_pricing'>
               <th>
                 <div
-                  className='nav bg-light rounded-pill px-3 py-2 ms-9 mb-15'
+                  className='nav-group d-flex flex-row rounded-pill px-3 py-2 ms-9 mb-15'
                   data-kt-buttons='true'
                 >
                   <button
-                    className='nav-link active btn btn-active btn-active-dark fw-bold btn-color-gray-600 active py-3 px-5 m-1 rounded-pill'
+                    type='button'
+                    className={
+                      'btn  fw-bold btn-color-gray-600 py-3 px-5 m-1 btn-active btn-active-dark rounded-pill' +
+                      (currentState === 'month' && 'nav-link active')
+                    }
+                    onClick={() => {
+                      setCurrentState('month')
+                      setPackagePricing(enabler.month)
+                    }}
                     data-kt-plan='month'
                   >
                     Monthly
                   </button>
 
                   <button
-                    className='nav-link btn btn-active btn-active-dark fw-bold btn-color-gray-600 py-3 px-5 m-1 rounded-pill'
+                    type='button'
+                    className={
+                      'btn  fw-bold btn-color-gray-600 py-3 px-5 m-1 btn-active btn-active-dark rounded-pill' +
+                      (currentState === 'annual' && 'nav-link active')
+                    }
+                    onClick={() => {
+                      setCurrentState('annual')
+                      setPackagePricing(enabler.annual)
+                    }}
                     data-kt-plan='annual'
                   >
                     Annually
@@ -134,7 +156,8 @@ export const SubscriptionPlanTable = () => {
                 <div className='min-w-200px mb-15'>
                   <div className='text-primary fs-3 fw-bold mb-7'>Basic</div>
                   <div className='fs-5x fw-semibold d-flex justify-content-center align-items-start lh-sm'>
-                    <span className='align-self-start fs-2 mt-3'>$</span>0
+                    <span className='align-self-start fs-2 mt-3'>$</span>
+                    {packagePricing.basic}
                   </div>
                   <div className='text-muted fw-bold mb-7'>Monthly</div>
                   {/* <a href='#' className='btn btn-light-primary fw-bold mx-auto'>
@@ -146,7 +169,8 @@ export const SubscriptionPlanTable = () => {
                 <div className='min-w-200px mb-15'>
                   <div className='text-primary fs-3 fw-bold mb-7'>Standard</div>
                   <div className='fs-5x fw-semibold d-flex justify-content-center align-items-start lh-sm'>
-                    <span className='align-self-start fs-2 mt-3'>$</span>4.99
+                    <span className='align-self-start fs-2 mt-3'>$</span>
+                    {packagePricing.standard}
                   </div>
                   <div className='text-muted fw-bold mb-7'>Monthly</div>
                   {/* <a href='#' className='btn btn-light-primary fw-bold mx-auto'>
@@ -159,7 +183,8 @@ export const SubscriptionPlanTable = () => {
                 <div className='min-w-200px mb-15'>
                   <div className='text-primary fs-3 fw-bold mb-7'>Supper</div>
                   <div className='fs-5x fw-semibold d-flex justify-content-center align-items-start lh-sm'>
-                    <span className='align-self-start fs-2 mt-3'>$</span>9.99
+                    <span className='align-self-start fs-2 mt-3'>$</span>
+                    {packagePricing.super}
                   </div>
                   <div className='text-muted fw-bold mb-7'>Monthly</div>
                   {/* <a href='#' className='btn btn-light-primary fw-bold mx-auto'>
@@ -171,14 +196,13 @@ export const SubscriptionPlanTable = () => {
               <th className='text-center min-w-200px'>
                 <div className='min-w-200px mb-15'>
                   <div className='text-primary fs-3 fw-bold mb-7'>Enterprise</div>
-                  <div className='fs-5x d-flex justify-content-center align-items-start'>
-                    <span className='fs-2 mt-3'>$</span>
+                  <div className='fs-2x btn btnactive btn-active-primary d-flex justify-content-center align-items-start'>
                     <span
-                      className='lh-sm fw-semibold'
+                      className='fw-semibold'
                       data-kt-plan-price-month='199'
                       data-kt-plan-price-annual='999'
                     >
-                      199
+                      Contact Us
                     </span>
                   </div>
                   <div className='text-muted fw-bold mb-7'>Monthly</div>

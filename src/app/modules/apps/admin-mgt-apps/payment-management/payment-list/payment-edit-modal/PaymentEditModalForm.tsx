@@ -5,7 +5,8 @@ import {isNotEmpty, toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
 import {initialUser, User} from '../core/_models'
 import clsx from 'clsx'
 import {useListView} from '../core/ListViewProvider'
-import {PayMethodListLoading} from '../components/loading/PaymentListLoading'
+
+import {ListLoading} from '../../../core/loading/ListLoading'
 import {createPayMethod, updatePayMethod} from '../core/_requests'
 import {useQueryResponse} from '../core/QueryResponseProvider'
 
@@ -399,7 +400,7 @@ const PayMethodEditModalForm: FC<Props> = ({user, isUserLoading}) => {
         </div>
         {/* end::Actions */}
       </form>
-      {(formik.isSubmitting || isUserLoading) && <PayMethodListLoading />}
+      {(formik.isSubmitting || isUserLoading) && <ListLoading />}
     </>
   )
 }

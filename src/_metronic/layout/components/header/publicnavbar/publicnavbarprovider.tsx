@@ -4,7 +4,9 @@ import {useOktaAuth} from '@okta/okta-react'
 
 import {PublicFooter} from './PublicFooter'
 import clsx from 'clsx'
-import {ActivityDrawer, DrawerMessenger, UpgradePlan} from '../../../../partials'
+import {ActivityDrawer, DrawerMessenger, ThemeModeProvider, UpgradePlan} from '../../../../partials'
+import {UpgradePlanHorizontal} from '../../../../partials/modals/upgrade-plan/UpgradePlanHorizontal'
+import {ScrollTop} from '../../ScrollTop'
 export const AuthStateContext: any = createContext({})
 export const AuthStateContextProvider: FC = (props: any) => {
   const {authState} = useOktaAuth()
@@ -15,16 +17,20 @@ export const AuthStateContextProvider: FC = (props: any) => {
 export const PublicNavbarProvider: FC = (props: any) => {
   return (
     <div className='mh-100 align-items-stretch'>
-      {/* <AuthStateContextProvider> */}
-      <PublicNavBar />
-      <main>{props.children}</main>
-      <PublicFooter />
-      {/* </AuthStateContextProvider> */}
-      {/* begin:: Drawers */}
-      <ActivityDrawer />
-      {/* <RightToolbar /> */}
-      <DrawerMessenger />
-      {/* end:: Drawers */}
+      <ThemeModeProvider>
+        {/* <AuthStateContextProvider> */}
+        <PublicNavBar />
+        <main>{props.children}</main>
+        <PublicFooter />
+        {/* </AuthStateContextProvider> */}
+        {/* begin:: Drawers */}
+        <ActivityDrawer />
+        {/* <RightToolbar /> */}
+        <DrawerMessenger />
+        {/* end:: Drawers */}
+        <UpgradePlanHorizontal />
+        <ScrollTop />
+      </ThemeModeProvider>
     </div>
   )
 }

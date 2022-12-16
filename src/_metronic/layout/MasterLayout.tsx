@@ -44,20 +44,22 @@ const MasterLayout = () => {
   return (
     <PageDataProvider>
       <ThemeModeProvider>
-        <div className='page d-flex flex-row flex-column-fluid'>
-          <AsideDefault />
-          <div className='wrapper d-flex flex-column flex-row-fluid' id='kt_wrapper'>
-            <HeaderWrapper />
+        <div className='d-flex flex-column flex-root app-root' id='kt_app_root'>
+          <div className='page d-flex flex-row flex-column-fluid' id='kt_app_root'>
+            <AsideDefault />
+            <div className='wrapper d-flex flex-column flex-row-fluid' id='kt_wrapper'>
+              <HeaderWrapper />
 
-            <div id='kt_content' className='content d-flex flex-column flex-column-fluid'>
-              <Toolbar />
-              <div className='post d-flex flex-column-fluid' id='kt_post'>
-                <Content>
-                  <Outlet />
-                </Content>
+              <div id='kt_content' className='content d-flex flex-column flex-column-fluid'>
+                <Toolbar />
+                <div className='post d-flex flex-column-fluid' id='kt_post'>
+                  <Content>
+                    <Outlet />
+                  </Content>
+                </div>
               </div>
+              <Footer />
             </div>
-            <Footer />
           </div>
         </div>
 

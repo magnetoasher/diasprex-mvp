@@ -4,14 +4,16 @@ import {useFormik} from 'formik'
 import {isNotEmpty, toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
 import {initialDiaspora} from '../core/_models'
 import clsx from 'clsx'
-import {KTSVG} from '../../../../../../../_metronic/helpers'
+
 import {useListView} from '../core/ListViewProvider'
-import {DiasporasListLoading} from '../components/loading/DiasporasListLoading'
+import {ListLoading} from '../../../core/loading/ListLoading'
 import {createDiaspora, updateDiaspora} from '../core/_requests'
 import {useQueryResponse} from '../core/QueryResponseProvider'
-import {SponsorTiers, EnablerTiers} from './usertiers'
+
 import {DiasporasCard} from '../../../../../Diasporas/components/DiasporasCard'
 import {uadFormModel} from '../../../../../Diasporas/components/core/_model'
+import DropzoneComp from '../../../../../../../_metronic/partials/content/utilities/dropzonecomp'
+import {CountryList} from '../../../../../../../_metronic/partials/content/selectionlists'
 
 type Props = {
   isDiasporaLoading: boolean
@@ -19,34 +21,38 @@ type Props = {
 }
 
 const editDiasporaSchema = Yup.object().shape({
+  fName: Yup.string()
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
+    .required('First Name is required'),
+  lName: Yup.string()
+    .min(3, 'Minimum 3 symbols')
+    .max(50, 'Maximum 50 symbols')
+    .required('Last Name is required'),
   email: Yup.string()
     .email('Wrong email format')
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Email is required'),
-  name: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Name is required'),
 
-  phone: Yup.string()
-    // .min(3, 'Minimum 3 symbols')
-    // .max(50, 'Maximum 50 symbols')
-    .required('Primary Phone is required'),
+  phone: Yup.string(),
+  // .min(3, 'Minimum 3 symbols')
+  // .max(50, 'Maximum 50 symbols')
+  // .required('Primary Phone is required'),
 })
 
 const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
   const {setItemIdForUpdate} = useListView()
   const {refetch} = useQueryResponse()
 
-  const [diasporaForEdit] = useState<uadFormModel>({
+  const [diasporaForEdit] = useState({
     ...diaspora,
-    avatar: diaspora.avatar || initialDiaspora.avatar,
     fName: diaspora.fName || initialDiaspora.fName,
     lName: diaspora.lName || initialDiaspora.lName,
     email: diaspora.email || initialDiaspora.email,
     phone: diaspora.phone || initialDiaspora.phone,
     status: diaspora.status || initialDiaspora.status,
+    avatar: diaspora.avatar || initialDiaspora.avatar,
   })
 
   const cancel = (withRefresh?: boolean) => {
@@ -62,22 +68,30 @@ const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
     setEditDiasporaDetails(!editDiasporaDetails)
   }
 
-  const blankImg = toAbsoluteUrl('/media/svg/avatars/blank.svg')
   const diasporaAvatarImg = toAbsoluteUrl(`/media/${diasporaForEdit.avatar}`)
 
   const formik = useFormik({
     initialValues: diasporaForEdit,
     validationSchema: editDiasporaSchema,
+    // validateOnChange: false,
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
+
       try {
         if (isNotEmpty(values.id)) {
-          await updateDiaspora(values)
+          const updatedProfile = {...diasporaForEdit, ...values}
+          await createDiaspora(updatedProfile)
         } else {
-          await createDiaspora(values)
+          const newProfile = {
+            ...values,
+            id: values.email,
+            dateSubmitted: new Date(),
+            status: 'New',
+          }
+          await createDiaspora(newProfile)
         }
-      } catch (ex) {
-        console.error(ex)
+      } catch (err) {
+        console.error(err)
       } finally {
         setSubmitting(true)
         cancel(true)
@@ -105,7 +119,7 @@ const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
           data-kt-scroll-offset='300px'
         >
           <div className='row g-5'>
-            <div className='col-lg-4'>
+            <div className='card-body'>
               <article className='mb-4 text-gray-600 fw-bold fs-6 ps-10'>
                 <DiasporasCard
                   fName={diasporaForEdit.fName}
@@ -116,7 +130,7 @@ const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
                   countryRes={diasporaForEdit.countryRes}
                   insightAfrica={diasporaForEdit.insightAfrica}
                   countryOrig={diasporaForEdit.countryOrig}
-                  avatar={toAbsoluteUrl(`/media/${diasporaForEdit.avatar}`)}
+                  avatar={diasporaAvatarImg}
                   interest={diasporaForEdit.interest}
                   undergrad={diasporaForEdit.undergrad}
                   grad={diasporaForEdit.grad}
@@ -125,7 +139,7 @@ const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
               </article>
             </div>
 
-            <div className='col-lg-7 shadow'>
+            <div className='card shadow'>
               <div className='card card-stretch card-bordered mb-5'>
                 <div className='card-header'>
                   <h3 className='card-title'>Edit Diaspora Details</h3>
@@ -137,7 +151,7 @@ const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
 
                     <input
                       placeholder='First name'
-                      {...formik.getFieldProps('fname')}
+                      {...formik.getFieldProps('fName')}
                       type='text'
                       name='fName'
                       className={clsx(
@@ -164,7 +178,7 @@ const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
 
                     <input
                       placeholder='Last name'
-                      {...formik.getFieldProps('lname')}
+                      {...formik.getFieldProps('lName')}
                       type='text'
                       name='lName'
                       className={clsx(
@@ -177,7 +191,7 @@ const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
                       autoComplete='off'
                       disabled={formik.isSubmitting || isDiasporaLoading}
                     />
-                    {formik.touched.fName && formik.errors.fName && (
+                    {formik.touched.lName && formik.errors.lName && (
                       <div className='fv-plugins-message-container'>
                         <div className='fv-help-block'>
                           <span role='alert'>{formik.errors.lName}</span>
@@ -246,6 +260,154 @@ const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
                       </div>
                     )}
                   </div>
+                  <div className=' fv-row mb-10'>
+                    <label className='form-label text-muted required fw-bold fs-6 mb-2'>
+                      Please select your country of residence
+                    </label>
+                    <select
+                      className='form-select form-select-white'
+                      aria-label='countryRes'
+                      {...formik.getFieldProps('countryRes')}
+                      name='countryRes'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                    >
+                      <CountryList />
+                    </select>
+                    {formik.touched.countryRes && formik.errors.countryRes && (
+                      <div className='fv-plugins-message-container'>
+                        <div className='fv-help-block text-danger'>
+                          <span role='alert'>{formik.errors.countryRes}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className='fv-row mb-10'>
+                    <label className='form-label text-muted required fw-bold fs-6 mb-2'>
+                      Please select your country of origin
+                    </label>
+                    <select
+                      className='form-select form-select-white'
+                      aria-label='countryOrig'
+                      {...formik.getFieldProps('countryOrig')}
+                      name='countryOrig'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                    >
+                      <CountryList />
+                    </select>
+                    {formik.touched.countryOrig && formik.errors.countryOrig && (
+                      <div className='fv-plugins-message-container'>
+                        <div className='fv-help-block text-danger'>
+                          <span role='alert'>{formik.errors.countryOrig}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className='fv-row mb-10'>
+                    <label className='form-label text-muted fw-bold fs-6 mb-2'>
+                      Enter your profession
+                    </label>
+                    <input
+                      type='text'
+                      className='form-control'
+                      placeholder='Enter your profession'
+                      {...formik.getFieldProps('profession')}
+                      name='profession'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                    />
+                    {formik.touched.profession && formik.errors.profession && (
+                      <div className='fv-plugins-message-container'>
+                        <div className='fv-help-block'>
+                          <span role='alert'>{formik.errors.profession}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className='fv-row mb-10'>
+                    <label className='form-label text-muted fw-bold fs-6 mb-2'>
+                      Please enter your undergraduate information
+                    </label>
+                    <div className='input-group'>
+                      <input
+                        type='text'
+                        className='form-control me-2'
+                        placeholder='Institution'
+                        {...formik.getFieldProps('undergrad.inst')}
+                        name='undergrad.inst'
+                        autoComplete='off'
+                        disabled={formik.isSubmitting}
+                      />
+                      <input
+                        type='text'
+                        className='form-control me-2'
+                        placeholder='Field of study'
+                        {...formik.getFieldProps('undergrad.field')}
+                        name='undergrad.field'
+                        autoComplete='off'
+                        disabled={formik.isSubmitting}
+                      />
+                      <select
+                        className='form-select form-select-white mb-2'
+                        aria-label='country'
+                        defaultValue='Degree'
+                        {...formik.getFieldProps('undergrad.degree')}
+                        name='undergrad.degree'
+                        autoComplete='off'
+                        disabled={formik.isSubmitting}
+                      >
+                        <option> B.S</option>
+                        <option> B.A</option>
+                        <option> HND</option>
+                        <option> OND</option>
+                        <option> Associate</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className='fv-row mb-10'>
+                    <label className='form-label text-muted fw-bold fs-6 mb-2'>
+                      Please enetr your graduate school information if applicable
+                    </label>
+                    <div className='input-group'>
+                      <input
+                        type='text'
+                        className='form-control me-2'
+                        placeholder='Institution'
+                        {...formik.getFieldProps('grad.inst')}
+                        name='grad.inst'
+                        autoComplete='off'
+                        disabled={formik.isSubmitting}
+                      />
+                      <input
+                        type='text'
+                        className='form-control me-2'
+                        placeholder='Field of study'
+                        {...formik.getFieldProps('grad.field')}
+                        name='grad.field'
+                        autoComplete='off'
+                        disabled={formik.isSubmitting}
+                      />
+                      <select
+                        className='form-select form-select-white mb-2'
+                        aria-label='country'
+                        defaultValue='Degree'
+                        {...formik.getFieldProps('grad.degree')}
+                        name='grad.degree'
+                        autoComplete='off'
+                        disabled={formik.isSubmitting}
+                      >
+                        <option> Ph.D</option>
+                        <option> MS</option>
+                        <option> MD</option>
+                        <option> J.D</option>
+                        <option> MBA</option>
+                      </select>
+                    </div>
+                  </div>
 
                   <div className='fv-row mb-7'>
                     <label className='required fw-bold fs-6 mb-2'>Summary</label>
@@ -275,32 +437,78 @@ const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
 
                   <div className='separator separator-dashed my-5'></div>
 
-                  <div className='fv-row mb-7'>
-                    {/* begin::Label */}
-                    <label className='required fw-bold fs-6 mb-2'>Update Status</label>
-                    {/* end::Label */}
+                  <div className='fv-row mb-10'>
+                    <label className='form-label required text-muted fw-bold fs-6 mb-2'>
+                      Please list up to 4 professional interest
+                    </label>
+                    <div className='input-group'>
+                      <input
+                        type='text'
+                        className='form-control me-2'
+                        placeholder='Interest 1'
+                        {...formik.getFieldProps('interest[0]')}
+                        name='interest[0]'
+                        autoComplete='off'
+                        disabled={formik.isSubmitting}
+                      />
+                      <input
+                        type='text'
+                        className='form-control me-2'
+                        placeholder='Interest 2'
+                        {...formik.getFieldProps('interest[1]')}
+                        name='interest[1]'
+                        autoComplete='off'
+                        disabled={formik.isSubmitting}
+                      />
+                      <input
+                        type='text'
+                        className='form-control me-2'
+                        placeholder='Interest 3'
+                        {...formik.getFieldProps('interest[2]')}
+                        name='interest[2]'
+                        autoComplete='off'
+                        disabled={formik.isSubmitting}
+                      />
+                      <input
+                        type='text'
+                        className='form-control me-2'
+                        placeholder='Interest 4'
+                        {...formik.getFieldProps('interest[3]')}
+                        name='interest[3]'
+                        autoComplete='off'
+                        disabled={formik.isSubmitting}
+                      />
+                    </div>
+                    {formik.touched.interest && formik.errors.interest && (
+                      <div className='fv-plugins-message-container'>
+                        <div className='fv-help-block text-danger'>
+                          <span role='alert'>{formik.errors.interest}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
 
-                    {/* begin::Select */}
-                    <select
-                      className={clsx(
-                        'form-select form-select-solid mb-3 mb-lg-0',
-                        {'is-invalid': formik.touched.status && formik.errors.status},
-                        {
-                          'is-valid': formik.touched.status && !formik.errors.status,
-                        }
-                      )}
-                      data-kt-select2='true'
-                      data-placeholder='Update Status'
-                      data-allow-clear='true'
-                      defaultValue={diasporaForEdit.status || 'Choose Status'}
+                  <div className='fv-row mb-10'>
+                    <label className='form-label text-muted'>
+                      Your Insight on Africa's Furture
+                    </label>
+
+                    <textarea
+                      className='form-control mb-8'
+                      rows={3}
+                      placeholder='Type your insight here'
+                      {...formik.getFieldProps('insightAfrica')}
+                      name='insightAfrica'
                       autoComplete='off'
-                      disabled={formik.isSubmitting || isDiasporaLoading}
-                    >
-                      <option></option>
-                      <option value='active'>Publish</option>
-                      <option value='pending'>Pending</option>
-                      <option value='suspended'>Declined</option>
-                    </select>
+                      disabled={formik.isSubmitting}
+                    ></textarea>
+                  </div>
+
+                  <div className='fv-row mb-10'>
+                    <label className='form-label text-muted' htmlFor='uadFile'>
+                      Upload a profile photo or headshot
+                    </label>
+                    <DropzoneComp />
                   </div>
 
                   <div className='card-footer'>Footer</div>
@@ -313,20 +521,20 @@ const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
         {/* begin::Actions */}
         <div className='text-center pt-15'>
           <button
-            type='reset'
+            type='button'
             onClick={() => handleEditDiaspora()}
             className='btn btn-light me-3'
-            data-kt-users-modal-action='cancel'
+            data-kt-diasporas-modal-action='reset'
             disabled={formik.isSubmitting || isDiasporaLoading}
           >
             Discard
           </button>
 
           <button
-            type='reset'
+            type='button'
             onClick={() => cancel()}
             className='btn btn-light me-3'
-            data-kt-users-modal-action='cancel'
+            data-kt-diasporas-modal-action='cancel'
             disabled={formik.isSubmitting || isDiasporaLoading}
           >
             Cancel
@@ -335,15 +543,13 @@ const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
           <button
             type='submit'
             className='btn btn-primary'
-            data-kt-users-modal-action='submit'
-            disabled={
-              isDiasporaLoading || formik.isSubmitting || !formik.isValid || !formik.touched
-            }
+            data-kt-diasporas-modal-action='submit'
+            disabled={isDiasporaLoading || formik.isSubmitting}
           >
             <span className='indicator-label'>Save</span>
             {(formik.isSubmitting || isDiasporaLoading) && (
               <span className='indicator-progress'>
-                Please wait...{' '}
+                Please wait...
                 <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
               </span>
             )}
@@ -351,7 +557,7 @@ const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
         </div>
         {/* end::Actions */}
       </form>
-      {(formik.isSubmitting || isDiasporaLoading) && <DiasporasListLoading />}
+      {(formik.isSubmitting || isDiasporaLoading) && <ListLoading />}
     </>
   )
 }

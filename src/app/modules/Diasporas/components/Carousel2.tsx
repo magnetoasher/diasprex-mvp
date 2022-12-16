@@ -24,7 +24,6 @@ export const Carousel2: FC<Props> = (props: Props, children) => {
                 rcountry={InitialDiasp.rcountry}
                 afcountry={InitialDiasp.afcountry}
                 afdinsight={InitialDiasp.afdinsight}
-                flag={toAbsoluteUrl(InitialDiasp.flag)}
               />
             </div>
             <div className='col-9'>
@@ -49,7 +48,6 @@ export const Carousel2: FC<Props> = (props: Props, children) => {
                 rcountry={InitialDiasp.rcountry}
                 afcountry={InitialDiasp.afcountry}
                 afdinsight={InitialDiasp.afdinsight}
-                flag={toAbsoluteUrl(InitialDiasp.flag)}
               />
             </div>
             <div className='col-9'>
@@ -74,7 +72,6 @@ export const Carousel2: FC<Props> = (props: Props, children) => {
                 afcountry={InitialDiasp.afcountry}
                 rcountry={InitialDiasp.rcountry}
                 afdinsight={InitialDiasp.afdinsight}
-                flag={toAbsoluteUrl(InitialDiasp.flag)}
               />
             </div>
             <div className='col-9'>

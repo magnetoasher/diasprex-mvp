@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx'
 import {useQueryResponseLoading, useQueryResponsePagination} from '../../core/QueryResponseProvider'
-import {useQueryRequest} from '../../core/QueryRequestProvider'
+import {useQueryRequest} from '../../../../core/QueryRequestProvider'
 
 const mappedLabel = (label: string): string => {
   if (label === '&laquo; Previous') {
@@ -31,7 +31,7 @@ const DiasporasListPagination = () => {
     <div className='row'>
       <div className='col-sm-12 col-md-5 d-flex align-items-center justify-content-center justify-content-md-start'></div>
       <div className='col-sm-12 col-md-7 d-flex align-items-center justify-content-center justify-content-md-end'>
-        <div id='kt_table_users_paginate'>
+        <div id='kt_table_diaspora_paginate'>
           <ul className='pagination'>
             {pagination.links
               ?.map((link) => {

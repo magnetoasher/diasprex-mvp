@@ -2,7 +2,7 @@ import {useQueryClient, useMutation} from 'react-query'
 import {QUERIES} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
-import {deleteSelectedDiasporas} from '../../core/_requests'
+import {deleteSelectedDiasporas, publishSelectedDiasporas} from '../../core/_requests'
 import {ConfirmModal} from '../../../../../../../../_metronic/partials/modals/confirm-action/ConfirmAction'
 // import { KTSVG } from '../../../../../../../_metronic/helpers'
 
@@ -15,7 +15,16 @@ const DiasporasListGrouping = () => {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
-      queryClient.invalidateQueries([`${QUERIES.USERS_LIST}-${query}`])
+      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
+      clearSelected()
+    },
+  })
+
+  const publishSelectedItems = useMutation(() => publishSelectedDiasporas(selected), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
       clearSelected()
     },
   })
@@ -63,7 +72,7 @@ const DiasporasListGrouping = () => {
         title2='Are you sure you want to publish selected diasporas'
         confirm='Verify'
         classname='btn btn-primary'
-        ConfirmHandler={async () => await deleteSelectedItems.mutateAsync()}
+        ConfirmHandler={async () => await publishSelectedItems.mutateAsync()}
       />
 
       {/* <button

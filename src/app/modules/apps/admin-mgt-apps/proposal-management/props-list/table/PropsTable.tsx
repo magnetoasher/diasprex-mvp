@@ -5,7 +5,7 @@ import {CustomRow} from './columns/CustomRow'
 import {useQueryResponseData, useQueryResponseLoading} from '../core/QueryResponseProvider'
 import {proposalsColumns} from './columns/_columns'
 import {Proposal} from '../core/_models'
-import {PropsListLoading} from '../components/loading/PropsListLoading'
+import {ListLoading} from '../../../core/loading/ListLoading'
 import {PropsListPagination} from '../components/pagination/PropsListPagination'
 import {KTCardBody} from '../../../../../../../_metronic/helpers'
 
@@ -23,7 +23,7 @@ const PropsTable = () => {
     <KTCardBody className='py-4'>
       <div className='table-responsive'>
         <table
-          id='kt_table_users'
+          id='kt_table_props'
           className='table table-hover align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'
           {...getTableProps()}
         >
@@ -53,7 +53,7 @@ const PropsTable = () => {
         </table>
       </div>
       <PropsListPagination />
-      {isLoading && <PropsListLoading />}
+      {isLoading && <ListLoading />}
     </KTCardBody>
   )
 }

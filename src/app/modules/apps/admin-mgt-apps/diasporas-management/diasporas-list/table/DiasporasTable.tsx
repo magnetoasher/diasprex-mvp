@@ -5,7 +5,7 @@ import {CustomRow} from './columns/CustomRow'
 import {useQueryResponseData, useQueryResponseLoading} from '../core/QueryResponseProvider'
 import {diasporasColumns} from './columns/_columns'
 import {Diaspora} from '../core/_models'
-import {DiasporasListLoading} from '../components/loading/DiasporasListLoading'
+import {ListLoading} from '../../../core/loading/ListLoading'
 import {DiasporasListPagination} from '../components/pagination/DiasporasListPagination'
 import {KTCardBody} from '../../../../../../../_metronic/helpers'
 
@@ -53,7 +53,7 @@ const DiasporasTable = () => {
         </table>
       </div>
       <DiasporasListPagination />
-      {isLoading && <DiasporasListLoading />}
+      {isLoading && <ListLoading />}
     </KTCardBody>
   )
 }

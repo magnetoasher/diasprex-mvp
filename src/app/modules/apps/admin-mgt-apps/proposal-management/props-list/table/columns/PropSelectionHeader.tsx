@@ -1,7 +1,7 @@
 import {FC, PropsWithChildren} from 'react'
 import {HeaderProps} from 'react-table'
 import {useListView} from '../../core/ListViewProvider'
-import { Proposal } from '../../core/_models'
+import {Proposal} from '../../core/_models'
 
 type Props = {
   tableProps: PropsWithChildren<HeaderProps<Proposal>>
@@ -16,7 +16,7 @@ const PropSelectionHeader: FC<Props> = ({tableProps}) => {
           className='form-check-input'
           type='checkbox'
           data-kt-check={isAllSelected}
-          data-kt-check-target='#kt_table_users .form-check-input'
+          data-kt-check-target='#kt_table_props .form-check-input'
           checked={isAllSelected}
           onChange={onSelectAll}
         />

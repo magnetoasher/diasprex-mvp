@@ -1,11 +1,11 @@
 import {Button, Tooltip} from 'antd'
 import {useNavigate, Link} from 'react-router-dom'
+import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 
 type Props = {
   id: number
   sponsor: string
   src?: string
-  flag: string
   badgeColor?: string
   description?: string
   budget?: string
@@ -21,13 +21,7 @@ type Props = {
 }
 
 const GeneralOpportunityCard = (props: Props) => {
-  console.log(props.src)
   const history = useNavigate()
-  const TruncateText = (truncateText: any, stringLength: any) => {
-    return truncateText.length > stringLength
-      ? truncateText.substr(0, stringLength) + '...'
-      : truncateText
-  }
 
   return (
     // <Link to='/view_opportunity'>
@@ -42,7 +36,7 @@ const GeneralOpportunityCard = (props: Props) => {
           <div className='col text-end'>
             <span className='symbol symbol-30px w-30px bg-light me-2'>
               <img
-                src={props.flag}
+                src={toAbsoluteUrl(`/media/flags/${props.country?.toLowerCase()}.svg`)}
                 className='fs-6 fw-bold'
                 alt='oppscard'
                 data-toggle='tooltips'

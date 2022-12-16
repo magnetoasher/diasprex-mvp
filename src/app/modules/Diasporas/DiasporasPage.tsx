@@ -17,23 +17,22 @@ import {Diasp, uadFormModel} from './components/core/_model'
 import {InviteUADFriends} from '../../../_metronic/partials'
 import {UadForm} from './components/uadform'
 import {useNavigate} from 'react-router-dom'
-import diasporaList from './components/core/diasporas.json'
 
 // 'http://localhost:3000/diasporas'
 
-// const UAD_LIST_URL = 'http://localhost:3000/diasporas'
+const UAD_LIST_URL = process.env.REACT_APP_DIASPREX_API_URL
 export const DiasporasPage: FC = () => {
-  const profileList = diasporaList.diasporas
+  // const profileList = diasporaList.diasporas
   const [showProfile, setShowProfile] = useState('show')
   const navigate = useNavigate()
+  const [profileList, setProfileList] = useState<uadFormModel[]>([])
 
-  // const [profileList, setProfileList] = useState<uadFormModel[]>([])
-  // useEffect(() => {
-  //   axios.get(UAD_LIST_URL).then((res) => {
-  //     setProfileList(res.data.data)
-  //     // console.log('Diaspora', res)
-  //   })
-  // }, [])
+  useEffect(() => {
+    axios.get(`${UAD_LIST_URL}/diaspora?status=Published`).then((response: AxiosResponse) => {
+      // console.log('Published Diaspora', response.data)
+      setProfileList(response.data.data)
+    })
+  }, [])
 
   const img1 = toAbsoluteUrl('./media/stock/diasprex/img-2.jpg')
   const img2 = toAbsoluteUrl('./media/stock/diasprex/img-1.jpg')
@@ -145,8 +144,8 @@ export const DiasporasPage: FC = () => {
                           </a>
                         </h5>
                       </div>
-                      {profileList.data.length > 0 &&
-                        profileList.data.map((profile, index) => (
+                      {profileList.length > 0 &&
+                        profileList.map((profile, index) => (
                           <div
                             id='kt_job_accordion'
                             className='collapse show'

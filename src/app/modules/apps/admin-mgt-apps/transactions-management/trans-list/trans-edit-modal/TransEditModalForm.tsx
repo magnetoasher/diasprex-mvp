@@ -5,7 +5,7 @@ import {isNotEmpty, toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
 import {initialUser, User} from '../core/_models'
 import clsx from 'clsx'
 import {useListView} from '../core/ListViewProvider'
-import {TransListLoading} from '../components/loading/TransListLoading'
+import {ListLoading} from '../../../core/loading/ListLoading'
 import {createTrans, updateTrans} from '../core/_requests'
 import {useQueryResponse} from '../core/QueryResponseProvider'
 
@@ -399,7 +399,7 @@ const TransEditModalForm: FC<Props> = ({user, isUserLoading}) => {
         </div>
         {/* end::Actions */}
       </form>
-      {(formik.isSubmitting || isUserLoading) && <TransListLoading />}
+      {(formik.isSubmitting || isUserLoading) && <ListLoading />}
     </>
   )
 }

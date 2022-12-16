@@ -7,8 +7,8 @@ import {useQueryResponse} from '../../core/QueryResponseProvider'
 const UsersListFilter = () => {
   const {updateState} = useQueryRequest()
   const {isLoading} = useQueryResponse()
-  const [role, setRole] = useState<string | undefined>()
-  const [lastLogin, setLastLogin] = useState<string | undefined>()
+  const [userType, setUserType] = useState<string | undefined>()
+  const [status, setStatus] = useState<string | undefined>()
 
   useEffect(() => {
     MenuComponent.reinitialization()
@@ -20,7 +20,7 @@ const UsersListFilter = () => {
 
   const filterData = () => {
     updateState({
-      filter: {role, last_login: lastLogin},
+      filter: {usertype: userType, status: status},
       ...initialQueryState,
     })
   }
@@ -61,17 +61,15 @@ const UsersListFilter = () => {
               data-kt-select2='true'
               data-placeholder='Select option'
               data-allow-clear='true'
-              data-kt-user-table-filter='role'
+              data-kt-user-table-filter='usertype'
               data-hide-search='true'
-              onChange={(e) => setRole(e.target.value)}
-              value={role}
+              onChange={(e) => setUserType(e.target.value)}
+              value={userType}
             >
               <option value=''></option>
-              <option value='Administrator'>Super Admin</option>
-              <option value='Analyst'>Standard Admin</option>
+              <option value='Administrator'>Admin</option>
               <option value='Developer'>Enabler</option>
               <option value='Support'>Sponsor</option>
-              <option value='Trial'>Generic</option>
             </select>
           </div>
           {/* end::Input group */}
@@ -84,15 +82,15 @@ const UsersListFilter = () => {
               data-kt-select2='true'
               data-placeholder='Select option'
               data-allow-clear='true'
-              data-kt-user-table-filter='two-step'
+              data-kt-user-table-filter='status'
               data-hide-search='true'
-              onChange={(e) => setLastLogin(e.target.value)}
-              value={lastLogin}
+              onChange={(e) => setStatus(e.target.value)}
+              value={status}
             >
               <option value=''></option>
-              <option value='Yesterday'>Active</option>
-              <option value='20 mins ago'>Suspended</option>
-              <option value='5 hours ago'>Pending</option>
+              <option value='active'>Active</option>
+              <option value='suspended'>Suspended</option>
+              <option value='pending'>Pending</option>
               {/* <option value='2 days ago'>Other</option> */}
             </select>
           </div>
@@ -103,7 +101,7 @@ const UsersListFilter = () => {
             <button
               type='button'
               disabled={isLoading}
-              onClick={filterData}
+              onClick={resetData}
               className='btn btn-light btn-active-light-primary fw-bold me-2 px-6'
               data-kt-menu-dismiss='true'
               data-kt-user-table-filter='reset'
@@ -113,7 +111,7 @@ const UsersListFilter = () => {
             <button
               disabled={isLoading}
               type='button'
-              onClick={resetData}
+              onClick={filterData}
               className='btn btn-primary fw-bold px-6'
               data-kt-menu-dismiss='true'
               data-kt-user-table-filter='filter'

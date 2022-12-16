@@ -1,6 +1,6 @@
 //To replace UserSelectionCell
 
-import { FC, useMemo } from 'react'
+import {FC, useMemo} from 'react'
 import {ID} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 
@@ -17,7 +17,7 @@ const OppsSelectionCell: FC<Props> = ({id}) => {
         className='form-check-input'
         type='checkbox'
         data-kt-check={isSelected}
-        data-kt-check-target='#kt_table_users .form-check-input'
+        data-kt-check-target='#kt_table_opps .form-check-input'
         checked={isSelected}
         onChange={() => onSelect(id)}
       />

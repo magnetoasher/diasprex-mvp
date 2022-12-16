@@ -3,12 +3,11 @@ import {FC, useState, useMemo} from 'react'
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
-import {Diasp, InitialDiasp, uadFormModel} from './core/_model'
-import {KTSVG, toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {uadFormModel} from './core/_model'
+
 import countryList from 'react-select-country-list'
 import {CountryList} from '../../../../_metronic/partials/content/selectionlists'
 import {UploadFile} from '../../../../_metronic/partials/modals/file-management/uploadfile'
-import {date} from 'yup/lib/locale'
 import {phoneRegExp} from '../../../../_metronic/helpers'
 
 const editUADSchema = Yup.object().shape({
@@ -90,11 +89,13 @@ export const UadFormPage: FC = () => {
       setSubmitting(true)
       const data = {
         ...values,
+        id: values.email,
         dateSubmitted: new Date(),
+        status: 'New',
       }
       try {
         await axios
-          .post('http://localhost:3000/diasporas', data)
+          .post(`${process.env.REACT_APP_DIASPREX_API_URL}/diaspora/create`, data)
           .then((res) => console.log('onSubmit', res))
           .catch((error) => error)
       } catch {

@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import {FC, PropsWithChildren, useMemo} from 'react'
 import {HeaderProps} from 'react-table'
 import {initialQueryState} from '../../../../../../../../_metronic/helpers'
-import {useQueryRequest} from '../../core/QueryRequestProvider'
+import {useQueryRequest} from '../../../../core/QueryRequestProvider'
 import {Diaspora} from '../../core/_models'
 
 type Props = {

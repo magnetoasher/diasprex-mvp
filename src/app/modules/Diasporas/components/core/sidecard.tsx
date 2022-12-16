@@ -24,7 +24,19 @@ export const SideCard: FC<Props> = (props: Props) => {
           </div>
           <h6>
             <p className='fs-6 mb-2 text-dark me-3'>Resident Country</p>
-            <p className='fs-6 mb-2 text-muted'>{props.rcountry} </p>
+            <p className='fs-6 mb-2 text-muted'>
+              <span className=' fs-6 mb-2 text-muted me-3'>{props.rcountry} </span>
+              <span className='symbol symbol-30px w-30px bg-light me-2'>
+                <img
+                  src={toAbsoluteUrl(`/media/flags/${props.rcountry?.toLowerCase()}.svg`)}
+                  className='fs-6 fw-bold'
+                  alt={props.rcountry}
+                  data-toggle='tooltips'
+                  title={props.rcountry?.toLowerCase()}
+                  data-bs-placement='bottom'
+                />
+              </span>
+            </p>
           </h6>
           <h6>
             <p className=' fs-6 mb-2 text-dark me-3'>Country of Origin</p>
@@ -34,7 +46,7 @@ export const SideCard: FC<Props> = (props: Props) => {
                 <img
                   src={toAbsoluteUrl(`/media/flags/${props.afcountry?.toLowerCase()}.svg`)}
                   className='fs-6 fw-bold'
-                  alt='oppscard'
+                  alt={props.afcountry}
                   data-toggle='tooltips'
                   title={props.afcountry?.toLowerCase()}
                   data-bs-placement='bottom'

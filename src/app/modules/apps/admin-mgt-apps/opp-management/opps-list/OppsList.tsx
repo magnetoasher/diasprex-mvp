@@ -1,5 +1,5 @@
 import {ListViewProvider, useListView} from './core/ListViewProvider'
-import {QueryRequestProvider} from './core/QueryRequestProvider'
+import {QueryRequestProvider} from '../../core/QueryRequestProvider'
 import {QueryResponseProvider} from './core/QueryResponseProvider'
 import {OppsListHeader} from './components/header/OppsListHeader'
 import {OppsTable} from './table/OppsTable'

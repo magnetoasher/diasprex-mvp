@@ -5,7 +5,7 @@ import {CustomRow} from './columns/CustomRow'
 import {useQueryResponseData, useQueryResponseLoading} from '../core/QueryResponseProvider'
 import {RemitColumns} from './columns/_columns'
 import {Proposal} from '../core/_models'
-import {RemitsListLoading} from '../components/loading/RemitListLoading'
+import {ListLoading} from '../../../core/loading/ListLoading'
 import {RemitsListPagination} from '../components/pagination/RemitListPagination'
 import {KTCardBody} from '../../../../../../../_metronic/helpers'
 
@@ -53,7 +53,7 @@ const RemitsTable = () => {
         </table>
       </div>
       <RemitsListPagination />
-      {isLoading && <RemitsListLoading />}
+      {isLoading && <ListLoading />}
     </KTCardBody>
   )
 }

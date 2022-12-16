@@ -5,7 +5,7 @@ import {CustomRow} from './oppscolumns/CustomRow'
 import {useQueryResponseData, useQueryResponseLoading} from '../core/QueryResponseProvider'
 import {OppsColumns} from './oppscolumns/_columns'
 import {Opps} from '../core/_models'
-import {OppsListLoading} from '../components/loading/OppsListLoading'
+import {ListLoading} from '../../../core/loading/ListLoading'
 import {OppsListPagination} from '../components/pagination/OppsListPagination'
 import {KTCardBody} from '../../../../../../../_metronic/helpers'
 
@@ -24,7 +24,7 @@ const OppsTable = () => {
     <KTCardBody className='py-4'>
       <div className='table-responsive'>
         <table
-          id='kt_table_users'
+          id='kt_table_opps'
           className='table table-hover  align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'
           {...getTableProps()}
         >
@@ -54,7 +54,7 @@ const OppsTable = () => {
         </table>
       </div>
       <OppsListPagination />
-      {isLoading && <OppsListLoading />}
+      {isLoading && <ListLoading />}
     </KTCardBody>
   )
 }

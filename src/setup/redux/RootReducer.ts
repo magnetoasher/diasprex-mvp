@@ -2,7 +2,7 @@ import {all} from 'redux-saga/effects'
 import {combineReducers} from 'redux'
 
 import * as auth from '../../app/modules/auth'
-import diasporaReducer from '../../app/modules/Diasporas/redux/diasporaslice'
+import diasporaReducer from '../../app/modules/apps/admin-mgt-apps/redux/diasporas/diasporaslice'
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,

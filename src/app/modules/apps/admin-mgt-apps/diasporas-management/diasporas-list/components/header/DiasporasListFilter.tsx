@@ -1,14 +1,13 @@
 import {useEffect, useState} from 'react'
 import {MenuComponent} from '../../../../../../../../_metronic/assets/ts/components'
 import {initialQueryState, KTSVG} from '../../../../../../../../_metronic/helpers'
-import {useQueryRequest} from '../../core/QueryRequestProvider'
+import {useQueryRequest} from '../../../../core/QueryRequestProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
 
 const DiasporasListFilter = () => {
   const {updateState} = useQueryRequest()
   const {isLoading} = useQueryResponse()
-  const [role, setRole] = useState<string | undefined>()
-  const [lastLogin, setLastLogin] = useState<string | undefined>()
+  const [status, setStatus] = useState<string | undefined>()
 
   useEffect(() => {
     MenuComponent.reinitialization()
@@ -19,10 +18,11 @@ const DiasporasListFilter = () => {
   }
 
   const filterData = () => {
-    updateState({
-      filter: {role, last_login: lastLogin},
-      ...initialQueryState,
-    })
+    status !== '' &&
+      updateState({
+        filter: {status},
+        ...initialQueryState,
+      })
   }
 
   return (
@@ -84,15 +84,15 @@ const DiasporasListFilter = () => {
               data-kt-select2='true'
               data-placeholder='Select option'
               data-allow-clear='true'
-              data-kt-user-table-filter='two-step'
+              data-kt-user-table-filter='status'
               data-hide-search='true'
-              onChange={(e) => setLastLogin(e.target.value)}
-              value={lastLogin}
+              onChange={(e) => setStatus(e.target.value)}
+              value={status}
             >
-              <option value=''></option>
-              <option value='Yesterday'>New</option>
-              <option value='20 mins ago'>Published</option>
-              <option value='5 hours ago'>Decline</option>
+              <option value=''>Select a filter option</option>
+              <option value='New'>New</option>
+              <option value='Published'>Published</option>
+              <option value='Declined'>Declined</option>
               {/* <option value='2 days ago'>Other</option> */}
             </select>
           </div>
@@ -103,7 +103,7 @@ const DiasporasListFilter = () => {
             <button
               type='button'
               disabled={isLoading}
-              onClick={filterData}
+              onClick={resetData}
               className='btn btn-light btn-active-light-primary fw-bold me-2 px-6'
               data-kt-menu-dismiss='true'
               data-kt-user-table-filter='reset'
@@ -113,7 +113,7 @@ const DiasporasListFilter = () => {
             <button
               disabled={isLoading}
               type='button'
-              onClick={resetData}
+              onClick={filterData}
               className='btn btn-primary fw-bold px-6'
               data-kt-menu-dismiss='true'
               data-kt-user-table-filter='filter'

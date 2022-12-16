@@ -5,7 +5,8 @@ import {CustomRow} from './columns/CustomRow'
 import {useQueryResponseData, useQueryResponseLoading} from '../core/QueryResponseProvider'
 import {PayMethodColumns} from './columns/_columns'
 import {PayMethod} from '../core/_models'
-import {PayMethodListLoading} from '../components/loading/PaymentListLoading'
+
+import {ListLoading} from '../../../core/loading/ListLoading'
 import {PayMethodListPagination} from '../components/pagination/paymentListPagination'
 import {KTCardBody} from '../../../../../../../_metronic/helpers'
 
@@ -23,7 +24,7 @@ const PayMethodTable = () => {
     <KTCardBody className='py-4'>
       <div className='table-responsive'>
         <table
-          id='kt_table_users'
+          id='kt_table_paymethod'
           className='table table-hover align-middle table-row-dashed fs-6 gy-5 dataTable no-footer'
           {...getTableProps()}
         >
@@ -53,7 +54,7 @@ const PayMethodTable = () => {
         </table>
       </div>
       <PayMethodListPagination />
-      {isLoading && <PayMethodListLoading />}
+      {isLoading && <ListLoading />}
     </KTCardBody>
   )
 }

@@ -1,7 +1,8 @@
 import {ID, Response} from '../../../../../../../_metronic/helpers'
+import * as Yup from 'yup'
 
 // type model for opportunities
-export type Opps= {
+export type Opps = {
   id?: ID
   title?: string
   thumbnail?: string
@@ -14,32 +15,44 @@ export type Opps= {
   status?: string
   duedate?: string
   open?: boolean
-  rewards?: {
-    equity: boolean
-    cash: boolean
-    contract: boolean
-    other: {
-      selected: boolean
-      description: string
-    }
-  }
+  dealtype?: string[]
+  otherdealtype?: string[]
   initials?: {
     label: string
     state: string
   }
+  following?: number
+  showedinterest?: number
 }
 
 export type OppsQueryResponse = Response<Array<Opps>>
 
-
 export const initialOpps: Opps = {
-  title: 'Vaccine Production Manufacturing Plant',
-  id: 'DXXXXXXXXXX',
+  title: '',
+  id: '',
   thumbnail: 'avatars/300-6.jpg',
-  sponsor: 'MeGOLD Nig. Ltd',
-  summary: 'Opportunity summary ',
-  status: 'pending',
+  sponsor: '',
+  summary: '',
+  status: '',
   datesubmitted: '10 May 2022',
-  duedate: '12 December 2022',
-  category: 'Manufacturing'
+  duedate: '',
+  category: '',
+  following: 0,
+  showedinterest: 0,
 }
+
+export const createOppsSchemas = [
+  Yup.object({
+    accountType: Yup.string().required().label('Account Type'),
+  }),
+
+  // Create/edit opps validation schema
+  Yup.object({
+    category: Yup.string().required().label('Category'),
+    duedate: Yup.string().required().label('Due Date'),
+    dealtype: Yup.string().required().label('Deal Type'),
+    title: Yup.string().required().label('Title'),
+    summary: Yup.string().required().label('Opportunity summary'),
+    oppsdesc: Yup.string().required().label('Opportunity detail'),
+  }),
+]

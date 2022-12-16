@@ -6,12 +6,11 @@ import {DiasporaActionsCell} from './DiasporaActionsCell'
 import {DiasporaSelectionCell} from './DiasporaSelectionCell'
 import {DiasporaCustomHeader} from './DiasporaCustomHeader'
 import {DiasporaSelectionHeader} from './DiasporaSelectionHeader'
-
 import {DiasporaStatusCell} from './DiasporaStatusCell'
-import {Diaspora} from '../../core/_models'
 import {DiasporaDateCell} from './DiasporaDateCell'
+import {uadFormModel} from '../../../../../../Diasporas/components/core/_model'
 
-const diasporasColumns: ReadonlyArray<Column<Diaspora>> = [
+const diasporasColumns: ReadonlyArray<Column<uadFormModel>> = [
   {
     Header: (props) => <DiasporaSelectionHeader tableProps={props} />,
     id: 'selection',

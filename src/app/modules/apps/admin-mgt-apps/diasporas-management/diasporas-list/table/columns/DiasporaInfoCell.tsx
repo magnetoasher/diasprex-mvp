@@ -25,11 +25,24 @@ const DiasporaInfoCell: FC<Props> = ({diaspora}) => (
           <div
             className={clsx(
               'symbol-label fs-3',
-              `bg-light-${diaspora.initials?.state}`,
-              `text-${diaspora.initials?.state}`
+              `bg-light-${
+                diaspora.initials?.state || diaspora.status === 'New'
+                  ? 'info'
+                  : diaspora.status === 'Published'
+                  ? 'success'
+                  : 'danger'
+              }`,
+              `text-${
+                diaspora.initials?.state || diaspora.status === 'New'
+                  ? 'info'
+                  : diaspora.status === 'Published'
+                  ? 'success'
+                  : 'danger'
+              }`
             )}
           >
-            {diaspora.initials?.label}
+            {diaspora.initials?.label ||
+              `${diaspora.fName?.slice(0, 1)} ${diaspora.lName?.slice(0, 1)}`}
           </div>
         )}
       </a>

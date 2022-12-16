@@ -16,7 +16,7 @@ const OppsSelectionHeader: FC<Props> = ({tableProps}) => {
           className='form-check-input'
           type='checkbox'
           data-kt-check={isAllSelected}
-          data-kt-check-target='#kt_table_users .form-check-input'
+          data-kt-check-target='#kt_table_opps .form-check-input'
           checked={isAllSelected}
           onChange={onSelectAll}
         />

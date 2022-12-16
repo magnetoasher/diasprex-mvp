@@ -12,7 +12,7 @@ import {
 } from '../../../../../../../_metronic/helpers'
 import {getOpps} from './_oppsrequests'
 import {Opps} from './_models'
-import {useQueryRequest} from './QueryRequestProvider'
+import {useQueryRequest} from '../../../core/QueryRequestProvider'
 
 const QueryResponseContext = createResponseContext<Opps>(initialQueryResponse)
 const QueryResponseProvider: FC<WithChildren> = ({children}) => {
@@ -29,18 +29,17 @@ const QueryResponseProvider: FC<WithChildren> = ({children}) => {
   const {
     isFetching,
     refetch,
-    data:response
+    data: response,
   } = useQuery(
     `${QUERIES.OPPS_LIST}-${query}`,
     () => {
       return getOpps(query)
     },
     {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
-    )
- 
+  )
 
   return (
-    <QueryResponseContext.Provider value={{ isLoading: isFetching, refetch, response, query }}>
+    <QueryResponseContext.Provider value={{isLoading: isFetching, refetch, response, query}}>
       {children}
     </QueryResponseContext.Provider>
   )
@@ -48,15 +47,14 @@ const QueryResponseProvider: FC<WithChildren> = ({children}) => {
 
 const useQueryResponse = () => useContext(QueryResponseContext)
 
-
 const useQueryResponseData = () => {
-  const { response } = useQueryResponse()
-    console.log(response)
-    if (!response) {
-      return []
-    }
-    return response?.data || []
+  const {response} = useQueryResponse()
+  console.log('Opps Respose', response)
+  if (!response) {
+    return []
   }
+  return response?.data || []
+}
 
 const useQueryResponsePagination = () => {
   const defaultPaginationState: PaginationState = {

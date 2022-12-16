@@ -12,7 +12,7 @@ import {
 } from '../../../../../../../_metronic/helpers'
 import {getDiasporas} from './_requests'
 import {Diaspora} from './_models'
-import {useQueryRequest} from './QueryRequestProvider'
+import {useQueryRequest} from '../../../core/QueryRequestProvider'
 import {PayloadProvider} from '../../../core/custom-payload2'
 
 const QueryResponseContext = createResponseContext<Diaspora>(initialQueryResponse)
@@ -34,6 +34,7 @@ const QueryResponseProvider: FC<WithChildren> = ({children}) => {
   } = useQuery(
     `${QUERIES.DIASPORAS_LIST}-${query}`,
     () => {
+      console.log('Query', query)
       return getDiasporas(query)
     },
     {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
@@ -68,8 +69,8 @@ const useQueryResponsePagination = () => {
   if (!response || !response.payload || !response.payload.pagination) {
     return defaultPaginationState
   }
-  return PayloadProvider(state.page, state.items_per_page, response.data?.length)
-  // return response.payload.pagination
+  // return PayloadProvider(state.page, state.items_per_page, response.data?.length)
+  return response.payload.pagination
 }
 
 const useQueryResponseLoading = (): boolean => {

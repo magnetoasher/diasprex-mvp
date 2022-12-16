@@ -19,7 +19,6 @@ const getUsers = async (query: string): Promise<UsersQueryResponse> => {
   return await axios
     .get(`${GET_USERS_URL}?${query}`)
     .then((response: AxiosResponse<UsersQueryResponse>) => {
-      // console.log(response)
       return response.data
     })
 }
@@ -29,7 +28,6 @@ const getUserById = (id: ID): Promise<User | undefined> => {
     .get(`${USER_URL}/${id}`)
     .then((response: AxiosResponse<Response<User>>) => response.data)
     .then((response: Response<User>) => {
-      console.log('UserForEdit', response.data)
       return response.data
     })
 }

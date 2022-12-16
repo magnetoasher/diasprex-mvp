@@ -5,9 +5,27 @@ export type Diaspora = uadFormModel
 export type DiasporasQueryResponse = Response<Array<uadFormModel>>
 
 export const initialDiaspora: uadFormModel = {
-  avatar: 'avatars/300-6.jpg',
+  avatar: 'avatars/diasprex/dxp-1.jpg',
   fName: 'Tosin',
   lName: 'Dada',
   email: '',
   status: '',
+  dpxID: '',
+  phone: '',
+  countryRes: '',
+  countryOrig: '',
+  profession: '',
+  undergrad: {
+    inst: '',
+    field: '',
+    degree: 'B.S',
+  },
+  grad: {
+    inst: '',
+    field: '',
+    degree: 'Ph.D',
+  },
+  summary: '',
+  interest: ['', '', '', ''],
+  insightAfrica: '',
 }

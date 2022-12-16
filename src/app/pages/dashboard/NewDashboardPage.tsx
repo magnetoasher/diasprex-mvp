@@ -108,7 +108,7 @@ const NewDashboardPage = () => {
                     <img
                       src={toAbsoluteUrl('/media/flags/ghana.svg')}
                       className='fs-6 fw-bold'
-                      alt='oppscard'
+                      alt='ghana'
                       data-toggle='tooltips'
                       title='Ghana'
                       data-bs-placement='bottom'
@@ -117,9 +117,9 @@ const NewDashboardPage = () => {
                   {userType !== 'sponsor' && (
                     <span className='symbol symbol-30px w-30px bg-light me-2'>
                       <img
-                        src={toAbsoluteUrl('/media/flags/united-states.svg')}
+                        src={toAbsoluteUrl('/media/flags/united states.svg')}
                         className='fs-6 fw-bold'
-                        alt='oppscard'
+                        alt='united states'
                         data-toggle='tooltips'
                         title='United States'
                         data-bs-placement='bottom'

@@ -12,7 +12,7 @@ import {
 } from '../../../../../../../_metronic/helpers'
 import {getPayMethod} from './_requests'
 import {PayMethod} from './_models'
-import {useQueryRequest} from './QueryRequestProvider'
+import {useQueryRequest} from '../../../core/QueryRequestProvider'
 
 const QueryResponseContext = createResponseContext<PayMethod>(initialQueryResponse)
 const QueryResponseProvider: FC<WithChildren> = ({children}) => {

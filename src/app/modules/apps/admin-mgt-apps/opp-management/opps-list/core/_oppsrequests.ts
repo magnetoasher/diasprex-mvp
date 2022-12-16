@@ -5,10 +5,10 @@
 
 // Firebose uis: j18c5SP2VhXEOIgBHgbf3kNvloS2
 
-import axios, { AxiosResponse } from 'axios'
+import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../../../_metronic/helpers'
 // import { Opps } from './_models'
-import { Opps, OppsQueryResponse } from './_models'
+import {Opps, OppsQueryResponse} from './_models'
 
 // For posting dummy data to Firebase. Delete at completion
 // import FireBaseHelper from '../../../../../../_metronic/helpers/firebasehelper'
@@ -18,43 +18,27 @@ import { Opps, OppsQueryResponse } from './_models'
 // let useruid = `${username}.${uid}`
 // let token = 'n0793EocywTXnolyidNY1KX6nG42fc14UPdVXaU2'
 // const API_URL ='https://diasprex-demo-api-default-rtdb.firebaseio.com'
-const API_URL = 'https://diasprex-api-demo-default-rtdb.firebaseio.com'
-const OPPS_URL = `${API_URL}/oppsdata`
-const GET_OPPS_URL = `${OPPS_URL}.json`
+const API_URL = process.env.REACT_APP_DIASPREX_API_URL
+const OPPS_URL = `${API_URL}/opportunities`
+const GET_OPPS_URL = `${OPPS_URL}/opportunities`
 
-// const API_URL = process.env.REACT_APP_THEME_API_URL
-// const USER_URL = `${API_URL}/user`
-// const GET_USERS_URL = `${API_URL}/users/query`
-
-
-//  const getOpps = (query: string) => {
-//    fetch(`${GET_OPPS_URL}?${query}`)
-//      .then((res) => res.json())
-//    .then(data)
-// };
+// const getOpps = async (query: string): Promise<OppsQueryResponse> => {
+//   const res = await fetch(`${OPPS_URL}?${query}`)
+//   const resjson: OppsQueryResponse = await res.json()
+//   const result = {
+//     data: Object.values(resjson) as Opps[],
+//     payload: resjson.payload,
+//   }
+//   return result
+// }
 
 const getOpps = async (query: string): Promise<OppsQueryResponse> => {
-  const res = await fetch(`${GET_OPPS_URL}?${query}`);
-  const resjson: OppsQueryResponse = await res.json();
-  const result = {
-    data: Object.values(resjson) as Opps[],
-    payload: resjson.payload
-  }
-  return result
+  return await axios
+    .get(`${OPPS_URL}?${query}`)
+    .then((response: AxiosResponse<OppsQueryResponse>) => {
+      return response.data
+    })
 }
-
-// }
-// const getOpps = async (query: string):Promise<OppsQueryResponse> => {
-//   const res: AxiosResponse = await axios.get(GET_OPPS_URL);
-//   return res;
-// };
-
-// const getOpps = (query: string): Promise<OppsQueryResponse> => {
-//   return axios
-//     // .get(GET_OPPS_URL)
-//     .get(`${GET_OPPS_URL}?${query}`)
-//     .then((d: AxiosResponse<OppsQueryResponse>) => d.data)
-// }
 
 const getOppById = (id: ID): Promise<Opps | undefined> => {
   return axios

@@ -5,7 +5,7 @@ import {isNotEmpty, toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
 import {initialUser, User} from '../core/_models'
 import clsx from 'clsx'
 import {useListView} from '../core/ListViewProvider'
-import {RemitsListLoading} from '../components/loading/RemitListLoading'
+import {ListLoading} from '../../../core/loading/ListLoading'
 import {createRemit, updateRemit} from '../core/_requests'
 import {useQueryResponse} from '../core/QueryResponseProvider'
 
@@ -399,7 +399,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
         </div>
         {/* end::Actions */}
       </form>
-      {(formik.isSubmitting || isUserLoading) && <RemitsListLoading />}
+      {(formik.isSubmitting || isUserLoading) && <ListLoading />}
     </>
   )
 }

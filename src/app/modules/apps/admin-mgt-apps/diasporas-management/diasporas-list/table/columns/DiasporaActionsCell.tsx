@@ -1,21 +1,24 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useEffect} from 'react'
+import {FC, useEffect, useState} from 'react'
 import {useMutation, useQueryClient} from 'react-query'
 import {MenuComponent} from '../../../../../../../../_metronic/assets/ts/components'
 import {ID, KTSVG, QUERIES} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
-import {deleteDiaspora} from '../../core/_requests'
+import {deleteDiaspora, changeDiasporaStatus} from '../../core/_requests'
+
 // import { ChatPage } from '../../../../chat/ChatPage'
 
 type Props = {
   id: ID
+  status: string
 }
 
 const DiasporaActionsCell: FC<Props> = ({id}) => {
   const {setItemIdForUpdate} = useListView()
   const {query} = useQueryResponse()
   const queryClient = useQueryClient()
+  const [status, setStatus] = useState<string>('')
 
   useEffect(() => {
     MenuComponent.reinitialization()
@@ -25,7 +28,31 @@ const DiasporaActionsCell: FC<Props> = ({id}) => {
     setItemIdForUpdate(id)
   }
 
-  const deleteItem = useMutation(() => deleteDiaspora(id), {
+  // const deleteItem = useMutation(() => deleteDiaspora(id), {
+  //   // 💡 response of the mutation is passed to onSuccess
+  //   onSuccess: () => {
+  //     // ✅ update detail view directly
+  //     queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
+  //   },
+  // })
+
+  const deleteDiaspora = useMutation(() => changeDiasporaStatus(id, 'Deleted'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
+    },
+  })
+
+  const publishDiaspora = useMutation(() => changeDiasporaStatus(id, 'Published'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
+    },
+  })
+
+  const declineDiaspora = useMutation(() => changeDiasporaStatus(id, 'Declined'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
@@ -62,9 +89,20 @@ const DiasporaActionsCell: FC<Props> = ({id}) => {
           <a
             className='menu-link px-3'
             // data-kt-users-table-filter='disable_row'
-            onClick={async () => await deleteItem.mutateAsync()}
+            onClick={async () => await publishDiaspora.mutateAsync()}
           >
             Publish
+          </a>
+        </div>
+        {/* end::Menu item */}
+        {/* begin::Menu item */}
+        <div className='menu-item px-3'>
+          <a
+            className='menu-link px-3'
+            // data-kt-users-table-filter='delete_row'
+            onClick={async () => await declineDiaspora.mutateAsync()}
+          >
+            Decline
           </a>
         </div>
         {/* end::Menu item */}
@@ -74,7 +112,7 @@ const DiasporaActionsCell: FC<Props> = ({id}) => {
           <a
             className='menu-link px-3'
             // data-kt-users-table-filter='delete_row'
-            onClick={async () => await deleteItem.mutateAsync()}
+            onClick={async () => await deleteDiaspora.mutateAsync()}
           >
             Delete
           </a>

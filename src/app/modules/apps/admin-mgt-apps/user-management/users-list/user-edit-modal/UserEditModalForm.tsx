@@ -6,7 +6,7 @@ import {initialUser, User} from '../core/_models'
 import clsx from 'clsx'
 import {KTSVG} from '../../../../../../../_metronic/helpers'
 import {useListView} from '../core/ListViewProvider'
-import {UsersListLoading} from '../components/loading/UsersListLoading'
+import {ListLoading} from '../../../core/loading/ListLoading'
 import {createUser, updateUser} from '../core/_requests'
 import {useQueryResponse} from '../core/QueryResponseProvider'
 import {SponsorTiers, EnablerTiers} from './usertiers'
@@ -47,7 +47,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
     phone: user.phone || initialUser.phone,
     status: user.status || initialUser.status,
   })
-
+  console.log('User', userForEdit)
   const cancel = (withRefresh?: boolean) => {
     if (withRefresh) {
       refetch()
@@ -776,7 +776,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
         </div>
         {/* end::Actions */}
       </form>
-      {(formik.isSubmitting || isUserLoading) && <UsersListLoading />}
+      {(formik.isSubmitting || isUserLoading) && <ListLoading />}
     </>
   )
 }

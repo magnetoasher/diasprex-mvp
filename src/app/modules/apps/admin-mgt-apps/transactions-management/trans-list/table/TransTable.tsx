@@ -5,7 +5,7 @@ import {CustomRow} from './columns/CustomRow'
 import {useQueryResponseData, useQueryResponseLoading} from '../core/QueryResponseProvider'
 import {TransColumns} from './columns/_columns'
 import {Proposal} from '../core/_models'
-import {TransListLoading} from '../components/loading/TransListLoading'
+import {ListLoading} from '../../../core/loading/ListLoading'
 import {RemitsListPagination} from '../components/pagination/TransListPagination'
 import {KTCardBody} from '../../../../../../../_metronic/helpers'
 
@@ -53,7 +53,7 @@ const TransTable = () => {
         </table>
       </div>
       <RemitsListPagination />
-      {isLoading && <TransListLoading />}
+      {isLoading && <ListLoading />}
     </KTCardBody>
   )
 }

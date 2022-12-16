@@ -2,40 +2,60 @@
 import React, {useState, Component} from 'react'
 import {Tabs, Col, Row, Select, DatePicker, Button, Input, Card, Checkbox} from 'antd'
 import moment from 'moment'
-
+import {
+  initialOpps,
+  createOppsSchemas,
+} from '../../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {UploadOutlined} from '@ant-design/icons'
 import {Upload} from 'antd'
 import {UserOutlined} from '@ant-design/icons'
 import {Editor} from 'react-draft-wysiwyg'
-import {IndustryList} from '../../../../_metronic/partials/content/selectionlists'
+import {CountryList, IndustryList} from '../../../../_metronic/partials/content/selectionlists'
+import {Formik, useFormik} from 'formik'
+import {nanoid} from '@reduxjs/toolkit'
+import axios from 'axios'
 
 export const Create = () => {
   const {Option} = Select
   const {TextArea} = Input
   const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY']
   const [isOtherSelected, setIsOtherSelected] = useState(false)
+  const [otherDealTypes, setOtherDealTypes] = useState('')
+
   const onChange = (value) => {
     console.log(`selected ${value}`)
   }
-  const handleCheckBox = (e) => {
-    let temp = e.find((element) => element == 6)
-    if (temp == 6) {
-      setIsOtherSelected(true)
-    } else {
-      setIsOtherSelected(false)
-    }
-  }
-  const onSearch = (value) => {
-    console.log('search:', value)
-  }
-  const options = [
-    {label: 'Equity/Equity Financing', value: 1},
-    {label: 'Debt Financing', value: 2},
-    {label: 'Contract', value: 3},
-    {label: 'Strategic partnership', value: 4},
-    {label: 'Consulting', value: 5},
-    {label: 'Other', value: 6},
-  ]
+
+  const formik = useFormik({
+    initialValues: initialOpps,
+    // validationSchema: createOppsSchemas,
+    validateOnChange: false,
+    onSubmit: async (values, {setSubmitting}) => {
+      setSubmitting(true)
+
+      const data = {
+        ...values,
+        uuid: nanoid(),
+        sponsorUserId: nanoid(),
+        sponsor: localStorage.getItem('userTypeFull'),
+        status: 'new',
+        datesubmitted: new Date(),
+        duedate: values.duedate === '' && moment(new Date()).add(90, 'days').toDate(),
+        otherdealtype: !isOtherSelected ? null : values.otherdealtype,
+      }
+      try {
+        console.log('CreateOpps', data)
+        await axios
+          .post(`${process.env.REACT_APP_DIASPREX_API_URL}/opportunities/create`, data)
+          .then((res) => console.log('onSubmit', res))
+          .catch((error) => error)
+      } catch (err) {
+        console.log(formik.errors)
+      } finally {
+        formik.resetForm()
+      }
+    },
+  })
 
   return (
     <Card
@@ -45,177 +65,337 @@ export const Create = () => {
         boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
       }}
     >
-      <div className='row px-10'>
-        <div className='d-flex flex-column justify-content-start mb-10'>
-          <h5>
-            <b className=' fw-bolder text-uppercase text-primary fs-6 mb-2'>
-              Opportunity submission form
-            </b>
-          </h5>
-          <p className='fs-6 text-mute'>
-            Please complete this form to submit your opportunity fro publicationion Diasprex
-            website.
-          </p>
+      <form onSubmit={formik.handleSubmit}>
+        <div className='row px-10'>
+          <div className='d-flex flex-column justify-content-start mb-10'>
+            <h5>
+              <b className=' fw-bolder text-uppercase text-primary fs-6 mb-2'>
+                Opportunity submission form
+              </b>
+            </h5>
+            <p className='fs-6 text-mute'>
+              Please complete this form to submit your opportunity fro publicationion Diasprex
+              website.
+            </p>
+          </div>
         </div>
-      </div>
-      <div className='row px-10'>
-        <Col xs={12} sm={12} md={5} lg={5}>
-          <div style={{display: 'flex', flexDirection: 'column'}}>
-            <h5>
-              <b className='required fw-bold fs-6 mb-2'>Select Category</b>
-            </h5>
-            <Select
-              style={{borderRadius: '10px !important'}}
-              showSearch
-              placeholder='Select Category'
-              optionFilterProp='children'
-            >
-              {/* <IndustryList /> */}
-              <>
-                <option value='Accounting'>Accounting</option>
-                <option value='Airlines/Aviation'>Airlines/Aviation</option>
-                <option value='Alternative Dispute Resolution'>
-                  Alternative Dispute Resolution
-                </option>
-                <option value='Alternative Medicine'>Alternative Medicine</option>
-                <option value='Animation'>Animation</option>
-                <option value='Apparel/Fashion'>Apparel/Fashion</option>
-                <option value='Architecture/Planning'>Architecture/Planning</option>
-                <option value='Arts/Crafts'>Arts/Crafts</option>
-                <option value='Automotive'>Automotive</option>
-                <option value='Aviation/Aerospace'>Aviation/Aerospace</option>
-                <option value='Banking/Mortgage'>Banking/Mortgage</option>
-                <option value='Biotechnology/Greentech'>Biotechnology/Greentech</option>
-                <option value='Broadcast Media'>Broadcast Media</option>
-                <option value='Building Materials'>Building Materials</option>
-                <option value='Business Supplies/Equipment'>Business Supplies/Equipment</option>
-                <option value='Capital Markets/Hedge Fund/Private Equity'>
-                  Capital Markets/Hedge Fund/Private Equity
-                </option>
-              </>
-            </Select>
-          </div>
-        </Col>
 
-        <Col xs={12} sm={12} md={5} lg={5}>
-          <div style={{display: 'flex', flexDirection: 'column'}}>
-            <h5>
-              <b className='required fw-bold fs-6 mb-2'>Due Date</b>
-            </h5>
-            <DatePicker
-              style={{borderRadius: '10px'}}
-              defaultValue={moment('01/01/2015', dateFormatList[0])}
-              format={dateFormatList}
-            />
-          </div>
-        </Col>
+        <div className='row px-10'>
+          <div className='d-flex mb-5 fv-row'>
+            <div className='col-md-4'>
+              <div className='form-group mb-5'>
+                <h5>
+                  <b className='required fw-bold fs-6 mb-2'>Select Category</b>
+                </h5>
+                <select
+                  className='form-select form-select-lg'
+                  aria-label='countryRes'
+                  placeholder='Select Category'
+                  {...formik.getFieldProps('category')}
+                  name='category'
+                  autoComplete='off'
+                  disabled={formik.isSubmitting}
+                >
+                  <>
+                    <option value='Accounting'>Accounting</option>
+                    <option value='Airlines/Aviation'>Airlines/Aviation</option>
+                    <option value='Alternative Dispute Resolution'>
+                      Alternative Dispute Resolution
+                    </option>
+                    <option value='Alternative Medicine'>Alternative Medicine</option>
+                    <option value='Animation'>Animation</option>
+                    <option value='Apparel/Fashion'>Apparel/Fashion</option>
+                    <option value='Architecture/Planning'>Architecture/Planning</option>
+                    <option value='Arts/Crafts'>Arts/Crafts</option>
+                    <option value='Automotive'>Automotive</option>
+                    <option value='Aviation/Aerospace'>Aviation/Aerospace</option>
+                    <option value='Banking/Mortgage'>Banking/Mortgage</option>
+                    <option value='Biotechnology/Greentech'>Biotechnology/Greentech</option>
+                    <option value='Broadcast Media'>Broadcast Media</option>
+                    <option value='Building Materials'>Building Materials</option>
+                    <option value='Business Supplies/Equipment'>Business Supplies/Equipment</option>
+                    <option value='Capital Markets/Hedge Fund/Private Equity'>
+                      Capital Markets/Hedge Fund/Private Equity
+                    </option>
+                  </>
+                </select>
+                {formik.touched.category && formik.errors.category && (
+                  <div className='fv-plugins-message-container'>
+                    <div className='fv-help-block text-danger'>
+                      <span role='alert'>{formik.errors.category}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className='fv-row mb-5'>
+                <label className='form-label text-muted required fw-bold fs-6 mb-2'>
+                  Please select the country for this opportunity
+                </label>
+                <select
+                  className='form-select form-select-white'
+                  aria-label='country'
+                  {...formik.getFieldProps('country')}
+                  name='country'
+                  autoComplete='off'
+                  disabled={formik.isSubmitting}
+                >
+                  <CountryList />
+                </select>
+                {formik.touched.country && formik.errors.country && (
+                  <div className='fv-plugins-message-container'>
+                    <div className='fv-help-block text-danger'>
+                      <span role='alert'>{formik.errors.country}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
 
-        <Col xs={12} sm={12} md={9} lg={9}>
-          {/* <div style={{display: 'flex', flexDirection: 'column'}}> */}
-          <div className='row-xs-4'>
-            <div className='col d-flex flex-row'>
-              <span className='required fw-bold fs-6 mb-2 me-6 '>Deal Types</span>
+              <div className='form-group mb-5'>
+                <h5>
+                  <b className='required fw-bold fs-6 mb-2'>Due Date</b>
+                </h5>
+
+                <DatePicker
+                  defaultValue={moment('01/01/2015', dateFormatList[0])}
+                  format={dateFormatList}
+                  // {...formik.getFieldProps('duedate')}
+                  // name='duedate'
+                />
+                {/* {formik.touched.duedate && formik.errors.duedate && (
+                  <div className='fv-plugins-message-container'>
+                    <div className='fv-help-block text-danger'>
+                      <span role='alert'>{formik.errors.duedate}</span>
+                    </div>
+                  </div>
+                )} */}
+              </div>
             </div>
-            <div className='col d-flex flex-row'>
-              <span className='text-gray-800 fw-bolder'>
+
+            <div className='form-group col-md-8 px-10'>
+              <label className='fs-6 fw-bold mb-2'>Deal Type</label>
+              <p className='text-muted'>
                 (Please select the deal types you are willing to consider)
-              </span>
+              </p>
+              <div className='input-group d-flex flex-wrap mb-3'>
+                <div className='form-check me-5 mb-3'>
+                  <input
+                    className='form-check-input me-2'
+                    type='checkbox'
+                    {...formik.getFieldProps('dealtype')}
+                    name='dealtype'
+                    id='dealtype1'
+                    value='Equity & Equity Finance'
+                    disabled={formik.isSubmitting}
+                  />
+                  <label className='form-check-label' htmlFor='dealtype1'>
+                    Equity & Equity Financing
+                  </label>
+                </div>
+
+                <div className='form-check me-5 mb-3'>
+                  <input
+                    className='form-check-input me-2'
+                    type='checkbox'
+                    {...formik.getFieldProps('dealtype')}
+                    name='dealtype'
+                    id='dealtype2'
+                    value='Debt Finance'
+                    disabled={formik.isSubmitting}
+                  />
+                  <label className='form-check-label' htmlFor='dealtype2'>
+                    Debt Fnancing
+                  </label>
+                </div>
+                <div className='form-check me-5 mb-3'>
+                  <input
+                    className='form-check-input me-2'
+                    type='checkbox'
+                    {...formik.getFieldProps('dealtype')}
+                    name='dealtype'
+                    id='dealtype3'
+                    value='Contract'
+                    disabled={formik.isSubmitting}
+                  />
+                  <label className='form-check-label' htmlFor='dealtype3'>
+                    Contract/Consulting
+                  </label>
+                </div>
+                <div className='form-check me-5 mb-3'>
+                  <input
+                    className='form-check-input me-2'
+                    type='checkbox'
+                    {...formik.getFieldProps('dealtype')}
+                    name='dealtype'
+                    id='dealtype4'
+                    value='Partnership'
+                    disabled={formik.isSubmitting}
+                  />
+                  <label className='form-check-label' htmlFor='dealtype4'>
+                    Partnership
+                  </label>
+                </div>
+                <div className='form-check me-5 mb-3'>
+                  <input
+                    className='form-check-input me-2'
+                    type='checkbox'
+                    {...formik.getFieldProps('dealtype')}
+                    name='dealtype'
+                    id='dealtype5'
+                    value='Consulting'
+                    disabled={formik.isSubmitting}
+                  />
+                  <label className='form-check-label' htmlFor='dealtype5'>
+                    Consulting
+                  </label>
+                </div>
+                <div className='form-check me-5 mb-3'>
+                  <input
+                    className='form-check-input me-2'
+                    type='checkbox'
+                    {...formik.getFieldProps('dealtype')}
+                    name='dealtype'
+                    id='dealtype6'
+                    onChange={() => setIsOtherSelected(!isOtherSelected)}
+                  />
+                  <label className='form-check-label' htmlFor='dealtype6'>
+                    Other
+                  </label>
+                </div>
+              </div>
+              {isOtherSelected && (
+                <span>
+                  <Input
+                    style={{borderRadius: '10px', marginTop: '10px'}}
+                    placeholder='Enter other type deals separated by comma'
+                    {...formik.getFieldProps('otherdealtype')}
+                    name='otherdealtype'
+                    disabled={formik.isSubmitting}
+                  />
+                </span>
+              )}
+              {formik.touched.dealtype && formik.errors.dealtype && (
+                <div className='fv-plugins-message-container'>
+                  <div className='fv-help-block text-danger'>
+                    <span role='alert'>{formik.errors.dealtype}</span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-          <div style={{display: 'flex', justifyContent: 'space-between'}}>
-            <Checkbox.Group options={options} onChange={handleCheckBox} />
+
+          <div className='d-flex flex-column mb-5 fv-row'>
+            <label className='fs-6 fw-bold mb-2'>Opportunity Title</label>
+
+            <input
+              className='form-control'
+              placeholder='Title'
+              {...formik.getFieldProps('title')}
+              name='title'
+            />
+            {formik.touched.title && formik.errors.title && (
+              <div className='fv-plugins-message-container'>
+                <div className='fv-help-block text-danger'>
+                  <span role='alert'>{formik.errors.title}</span>
+                </div>
+              </div>
+            )}
           </div>
-          {/* </div> */}
-          {isOtherSelected && (
-            <span>
-              <Input style={{borderRadius: '10px', marginTop: '10px'}} placeholder='Enter Value' />
-            </span>
-          )}
-        </Col>
 
-        <Col xs={12} sm={12} md={20} lg={20} style={{marginTop: '50px', marginBottom: '10px'}}>
-          <h5>
-            <b className='required fw-bold fs-6 mb-2'>Opportunity Title </b>
-          </h5>
-          <Input style={{borderRadius: '10px'}} size='large' placeholder='Title' />
-        </Col>
-
-        <Col xs={12} sm={12} md={20} lg={20} style={{marginTop: '10px'}}>
-          <h5>
-            <b className='required fw-bold fs-6 mb-2'>Opportunity Summary</b>
-          </h5>
-          <TextArea
-            showCount
-            maxLength={3000}
-            style={{height: 120, borderRadius: '10px'}}
-            onChange={onChange}
-            placeholder={'Please enter the summary of your Opportunity (max of 500 characters'}
-          />
-        </Col>
-        <Col xs={12} sm={12} md={20} lg={20} style={{marginTop: '10px'}}>
-          <h5>
-            <b className='required fw-bold fs-6 mb-2'>Opportunity Details</b>
-          </h5>
-          <p>
-            Please describe the opportunity in details as best as you can and ensure to address the
-            following without disclosing any proprietary information. Proprietary materials can be
-            included as a file attachments.
-            <ul>
-              <li>Market need</li>
-              <li>Your solution</li>
-
-              <li>Market size</li>
-              <li>Company</li>
-
-              <li>The team</li>
-              <li>Developmental impact</li>
-              <li>Diaspora engagement plan</li>
-            </ul>
-          </p>
-          <Editor
-            editorStyle={{
-              border: '1px solid',
-              resize: 'vertical',
-              overflow: 'auto',
-              height: '300px', // whatever height you want
-              width: '100%',
-              borderRadius: '5px',
-            }}
-            //   editorState={editorState}
-            toolbarClassName='toolbarClassName'
-            wrapperClassName='wrapperClassName'
-            editorClassName='editorClassName'
-            onEditorStateChange={(val) => {
-              console.log(val)
-            }}
-          />
-        </Col>
-        <Col xs={12} sm={12} md={5} lg={5} style={{marginTop: '10px', display: 'flex'}}>
-          <div style={{marginRight: '10px'}}>
-            <Upload>
-              <Button
-                className='d-flex justify-content-center align-items-center'
-                icon={<UploadOutlined />}
-              >
-                Upload File
-              </Button>
-            </Upload>
+          <div className='d-flex flex-column mb-10 fv-row'>
+            <label className='required fs-6 fw-bold mb-2'>Opportunity Summary</label>
+            <textarea
+              className='form-control mb-2'
+              rows={5}
+              placeholder='Type the summary of your opportunity  (max of 500 characters)'
+              {...formik.getFieldProps('summary')}
+              name='summary'
+              autoComplete='off'
+              disabled={formik.isSubmitting}
+            ></textarea>
           </div>
-          <div>
-            <Upload>
-              <Button
-                className='d-flex justify-content-center align-items-center'
-                icon={<UploadOutlined />}
-              >
-                Upload Thumbnail
-              </Button>
-            </Upload>
+          <div className='d-flex flex-column fv-row mb-10 '>
+            <h5>
+              <b className='required fw-bold fs-6 mb-2'>Opportunity Details</b>
+            </h5>
+            <p className='text-muted'>
+              Please describe the opportunity in details as best as you can and ensure to address
+              the following without disclosing any proprietary information. Proprietary materials
+              can be included as a file attachments.
+              <ul>
+                <li>Market need</li>
+                <li>Your solution</li>
+                <li>Developmental impact</li>
+                <li>Market size</li>
+                <li>Company</li>
+                <li>The team</li>
+                <li>The Ask</li>
+                <li>Diaspora engagement plan</li>
+              </ul>
+            </p>
+
+            <Editor
+              editorStyle={{
+                border: '1px solid',
+                resize: 'vertical',
+                overflow: 'auto',
+                height: '300px', // whatever height you want
+                width: '100%',
+                borderRadius: '5px',
+              }}
+              id='oppsdesc'
+              // editorState={editorState}
+              toolbarClassName='toolbarClassName'
+              wrapperClassName='wrapperClassName'
+              editorClassName='editorClassName'
+              value={formik.values.oppsdesc}
+              onContentStateChange={(val) => {
+                formik.handleChange({target: {name: 'oppdesc', value: val.blocks[0].text}})
+              }}
+              name='oppsdesc'
+              disabled={formik.isSubmitting}
+            />
+            {formik.touched.oppsdesc && formik.errors.oppsdesc && (
+              <div className='fv-plugins-message-container'>
+                <div className='fv-help-block text-danger'>
+                  <span role='alert'>{formik.errors.oppsdesc}</span>
+                </div>
+              </div>
+            )}
           </div>
-        </Col>
-        <Col>
+
+          <div className='fv-row d-flex flex-row'>
+            <div style={{marginRight: '10px'}}>
+              <Upload>
+                <Button
+                  className='d-flex justify-content-center align-items-center'
+                  icon={<UploadOutlined />}
+                >
+                  Upload File
+                </Button>
+              </Upload>
+            </div>
+            <div>
+              <Upload>
+                <Button
+                  className='d-flex justify-content-center align-items-center'
+                  icon={<UploadOutlined />}
+                >
+                  Upload Thumbnail
+                </Button>
+              </Upload>
+            </div>
+          </div>
+
           <div className='d-flex flex-column fv-row py-10'>
-            <div className='form-check form-check d-flex justify-content-start align-items-center'>
-              <input className='form-check-input' type='checkbox' id='request_diasprex_financing' />
+            <div className='form-check form-check d-flex justify-content-start align-items-center mb-3'>
+              <input
+                className='form-check-input'
+                type='checkbox'
+                {...formik.getFieldProps('dpxfinancing')}
+                id='request_diasprex_financing'
+                name='dpxfinancing'
+                disabled={formik.isSubmitting}
+              />
               <label
                 className='form-check-label fw-bold ps-2 fs-6'
                 htmlFor='request_diasprex_financing'
@@ -223,72 +403,55 @@ export const Create = () => {
                 Requesting Diasprex's Financing
               </label>
             </div>
+            <div className='form-check form-check d-flex justify-content-start align-items-center mb-3'>
+              <input
+                className='form-check-input'
+                type='checkbox'
+                {...formik.getFieldProps('crowdfunding')}
+                id='request_crowdfunding'
+                name='crowdfunding'
+                disabled={true}
+              />
+              <label className='form-check-label fw-bold ps-2 fs-6' htmlFor='request_crowdfunding'>
+                Requesting Crowdfunding Campaign Through Diasprex (Coming soon)
+              </label>
+            </div>
             <div className='text-muted'>
-              Checking this box does not guarantee Diasprex's financing. Only outstading
+              Checking these boxes does not guarantee Diasprex's financing. Only outstading
               opportunities that meet Diasprex's fiancing criteria are selected
             </div>
           </div>
-        </Col>
 
-        <Col
-          xs={12}
-          sm={12}
-          md={21}
-          lg={21}
-          style={{
-            marginTop: '5px',
-            display: 'flex',
-            justifyContent: 'flex-end',
-          }}
-        >
-          <Button
-            style={{
-              borderRadius: '20px',
-              width: '145px',
-              height: '40px',
-              borderColor: '#009EF7',
-              color: '#009EF7',
-              fontWeight: 500,
-              marginRight: '5px',
-            }}
-          >
-            Save For Later
-          </Button>
+          <div className='text-center pt-15'>
+            <button type='reset' className='btn btn-light me-3' disabled={formik.isSubmitting}>
+              Discard
+            </button>
+            <button
+              type='button'
+              className='btn btn-light-primary me-3'
+              disabled={formik.isSubmitting}
+            >
+              Save Draft
+            </button>
 
-          <Button
-            style={{
-              borderRadius: '20px',
-              width: '145px',
-              height: '40px',
-              borderColor: '#009EF7',
-              color: '#009EF7',
-              fontWeight: 500,
-            }}
-          >
-            Submit
-          </Button>
-
-          <Button
-            style={{
-              borderRadius: '20px',
-              width: '145px',
-              height: '40px',
-              borderColor: '#009EF7',
-              color: '#009EF7',
-              fontWeight: 500,
-              marginLeft: '5px',
-            }}
-          >
-            Discard
-          </Button>
-        </Col>
-        <Col xs={12} sm={12} md={8} lg={8}>
-          <lable style={{fontSize: '9px', fontWeight: '700', color: '#b6b6b6'}}>
-            Disclaimer: Opportunity submittted will only be published if it passes all review
-            criteria. Publication on Diasprex does not guarantee positive outcome.
-          </lable>
-        </Col>
-      </div>
+            <button type='submit' className='btn btn-primary' disabled={formik.isSubmitting}>
+              <span className='indicator-label'>Submit</span>
+              {/* {(formik.isSubmitting || isOppLoading) && (
+                <span className='indicator-progress'>
+                  Please wait...{' '}
+                  <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+                </span>
+              )} */}
+            </button>
+          </div>
+          <div className='d-flex flex-column fv-row py-10'>
+            <lable style={{fontSize: '10px', fontWeight: '700', color: '#b6b6b6'}}>
+              Disclaimer: Opportunity submittted will only be published if it passes all review
+              criteria. Publication on Diasprex does not guarantee positive outcome.
+            </lable>
+          </div>
+        </div>
+      </form>
     </Card>
   )
 }

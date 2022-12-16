@@ -21,6 +21,16 @@ export const DiasporasCard: FC<uadFormModel> = (props: uadFormModel) => {
                 <h6>
                   <span className='fs-6 mb-2 text-dark me-3'>Country of Residence:</span>
                   <span className='fs-6 mb-2 text-muted'>{props?.countryRes} </span>
+                  <span className='symbol symbol-30px w-30px bg-light me-2'>
+                    <img
+                      src={toAbsoluteUrl(`/media/flags/${props.countryRes?.toLowerCase()}.svg`)}
+                      className='fs-6 fw-bold'
+                      alt={`${props.countryRes?.toLowerCase()}`}
+                      data-toggle='tooltips'
+                      title={props.countryRes?.toLowerCase().replace('-', ' ')}
+                      data-bs-placement='bottom'
+                    />
+                  </span>
                 </h6>
                 <h6>
                   <span className=' fs-6 mb-2 text-dark me-3'>Country of Origin:</span>

@@ -15,7 +15,7 @@ const PropSelectionCell: FC<Props> = ({id}) => {
         className='form-check-input'
         type='checkbox'
         data-kt-check={isSelected}
-        data-kt-check-target='#kt_table_users .form-check-input'
+        data-kt-check-target='#kt_table_props .form-check-input'
         checked={isSelected}
         onChange={() => onSelect(id)}
       />
