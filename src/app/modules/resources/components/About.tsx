@@ -2,6 +2,8 @@
 import {Component} from 'react'
 import TinySlider from 'tiny-slider-react'
 import 'tiny-slider/dist/tiny-slider.css'
+import {toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {OctagonModel} from '../../../../_metronic/partials/content/utilities/octagonmodel'
 
 const settings = {
   lazyload: true,
@@ -30,10 +32,10 @@ class About extends Component {
                   <div className='overlay'>
                     <img
                       className='w-100 card-rounded'
-                      src='media/stock/1600x800/img-1.jpg'
+                      src={toAbsoluteUrl('media/stock/diasprex/aboutus.jpg')}
                       alt=''
                     />
-                    <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
+                    {/* <div className='overlay-layer card-rounded bg-dark bg-opacity-25'>
                       <a
                         href='../../demo1/dist/pages/pricing/pricing-2.html'
                         className='btn btn-primary'
@@ -46,24 +48,65 @@ class About extends Component {
                       >
                         Join Us
                       </a>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className='fs-5 fw-bold text-gray-600'>
-                  <p className='mb-8'>Who we are</p>
-                  <p className='mb-8'>What we do</p>
-                  <p className='mb-8'>Our aim</p>
+                  <h4>Who We Are</h4>
+                  <p className='mb-8'>
+                    Diasprex Inc. is a private business development services company based in
+                    Seattle WA United States.
+                  </p>
+
+                  <h4> Our Vision</h4>
+                  <p className='mb-8'>
+                    Diasprex aims to make Africans an integral part of the decision-making process
+                    regarding African wealth structures.
+                  </p>
+
+                  <h4> What we do</h4>
+                  <p className='mb-8'>
+                    Connecting opportunities on the continent of Africa to African diasporas and
+                    friends of Africa
+                  </p>
+
+                  <h4>Why Diasprex?</h4>
+                  <p>
+                    Wealth creation and freedom are primarily driven by economic power, which
+                    determines where and how resources are spent. Diasprex is an opportunity for
+                    African Diaspora members, friends of Africa, and others to participate in
+                    economic and development initiatives that benefit all of Africa. Diasprex
+                    participants can fund life-changing projects, support nascent industries, and
+                    build generational wealth.
+                  </p>
+
+                  <h4>Confidence</h4>
+                  <p>
+                    Diasprex is managed by a team of professional members of the diaspora hailing
+                    from diverse African countries with years of experience in the business.
+                    Diasprex is a fully incorporated Delaware Corporation with all legal structures
+                    in place, including legal representation and risk mitigation provisions.
+                    Transparency is Diasprex’s management motto.
+                  </p>
                 </div>
               </div>
-              <div className='card bg-light mb-18'>
+              <div className='card bg-light bg-opacity-50 mb-18'>
                 <div className='card-body py-15'>
                   <div className='fs-2 fw-bold text-muted text-center mb-3'>
                     <span className='text-gray-700 me-1'>Our Wins</span>
                   </div>
                   <div className='d-flex flex-center'>
                     <div className='d-flex justify-content-between mb-10 mx-auto w-xl-900px'>
-                      <div className='octagon d-flex flex-center h-200px w-200px bg-body mx-2'>
-                        <div className='text-center'>
+                      <div className='octagon d-flex flex-center h-200px w-200px bg-primary bg-opacity-10 mx-2'>
+                        <OctagonModel
+                          imgscr='/media/icons/duotune/maps/map010.svg'
+                          imgcolor='primary'
+                          title1='$50M'
+                          label='JDG, Ghana'
+                          width='200px'
+                          height='200px'
+                        />
+                        {/* <div className='text-center'>
                           <span className='svg-icon svg-icon-2tx svg-icon-primary'>
                             <svg
                               xmlns='http://www.w3.org/2000/svg'
@@ -109,16 +152,23 @@ class About extends Component {
                                 data-kt-countup='true'
                                 data-kt-countup-value='700'
                               >
-                                0
+                                $50M
                               </div>
-                              K+
                             </div>
-                            <span className='text-gray-600 fw-bold fs-5 lh-0'>Project 1</span>
+                            <span className='text-gray-600 fw-bold fs-5 lh-0'>JDG, Ghana</span>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
-                      <div className='octagon d-flex flex-center h-200px w-200px bg-body mx-2'>
-                        <div className='text-center'>
+                      <div className='octagon d-flex flex-center h-200px w-200px bg-success bg-opacity-10 mx-2'>
+                        <OctagonModel
+                          imgscr='/media/icons/duotune/medicine/med008.svg'
+                          imgcolor='success'
+                          title1='$100M'
+                          label='BioFin, Nigeria'
+                          width='200px'
+                          height='200px'
+                        />
+                        {/* <div className='text-center'>
                           <span className='svg-icon svg-icon-2tx svg-icon-success'>
                             <svg
                               xmlns='http://www.w3.org/2000/svg'
@@ -150,16 +200,23 @@ class About extends Component {
                                 data-kt-countup='true'
                                 data-kt-countup-value='80'
                               >
-                                0
+                                $100M
                               </div>
-                              K+
                             </div>
-                            <span className='text-gray-600 fw-bold fs-5 lh-0'>Project 2</span>
+                            <span className='text-gray-600 fw-bold fs-5 lh-0'>BioFin, Nigeria</span>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
-                      <div className='octagon d-flex flex-center h-200px w-200px bg-body mx-2'>
-                        <div className='text-center'>
+                      <div className='octagon d-flex flex-center h-200px w-200px bg-info bg-opacity-10 mx-2'>
+                        <OctagonModel
+                          imgscr='/media/icons/duotune/finance/fin006.svg'
+                          imgcolor='info'
+                          title1='$25M'
+                          label='AgroChem, Kenya'
+                          width='200px'
+                          height='200px'
+                        />
+                        {/* <div className='text-center'>
                           <span className='svg-icon svg-icon-2tx svg-icon-info'>
                             <svg
                               xmlns='http://www.w3.org/2000/svg'
@@ -191,13 +248,12 @@ class About extends Component {
                                 data-kt-countup='true'
                                 data-kt-countup-value='35'
                               >
-                                0
+                                $25M
                               </div>
-                              K+
                             </div>
-                            <span className='text-gray-600 fw-bold fs-5 lh-0'>Project 3</span>
+                            <span className='text-gray-600 fw-bold fs-5 lh-0'>AgroChem, Kenya</span>
                           </div>
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>
@@ -207,9 +263,9 @@ class About extends Component {
                 <div className='text-center mb-12'>
                   <h3 className='fs-2hx text-dark mb-5'>LATEST NEWS</h3>
                   <div className='fs-5 text-muted fw-bold'>
-                    Our goal is to provide a complete and robust theme solution
+                    Our goal is to provide a complete and robust business solutions
                     <br />
-                    to boost all of our customer’s project deployments
+                    to client's economic growth in africa and OECD countries
                   </div>
                 </div>
                 <div className='row g-10'>
@@ -222,7 +278,7 @@ class About extends Component {
                       >
                         <div
                           className='overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px'
-                          style={{backgroundImage: "url('media/stock/600x400/img-73.jpg')"}}
+                          style={{backgroundImage: "url('media/stock/diasprex/img-7.jpg')"}}
                         ></div>
                         <div className='overlay-layer bg-dark card-rounded bg-opacity-25'>
                           <i className='bi bi-eye-fill fs-2x text-white'></i>
@@ -233,7 +289,7 @@ class About extends Component {
                           href='../../demo1/dist/pages/user-profile/overview.html'
                           className='fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base'
                         >
-                          Admin Panel - How To Started the Dashboard Tutorial
+                          Diaspora Financing for Economic Prosperity in Africa
                         </a>
                         <div className='fw-bold fs-5 text-gray-600 text-dark mt-3 mb-5'>
                           We’ve been focused on making a the from also not been afraid to and step
@@ -260,7 +316,7 @@ class About extends Component {
                       >
                         <div
                           className='overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px'
-                          style={{backgroundImage: "url('media/stock/600x400/img-74.jpg')"}}
+                          style={{backgroundImage: "url('media/stock/diasprex/img-6.jpg')"}}
                         ></div>
                         <div className='overlay-layer bg-dark card-rounded bg-opacity-25'>
                           <i className='bi bi-eye-fill fs-2x text-white'></i>
@@ -271,7 +327,7 @@ class About extends Component {
                           href='../../demo1/dist/pages/user-profile/overview.html'
                           className='fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base'
                         >
-                          Admin Panel - How To Started the Dashboard Tutorial
+                          Exponential Trade Growth in West Africa Catalysed by Diaspora's Investment
                         </a>
                         <div className='fw-bold fs-5 text-gray-600 text-dark mt-3 mb-5'>
                           We’ve been focused on making the from v4 to v5 but we have also not been
@@ -298,7 +354,7 @@ class About extends Component {
                       >
                         <div
                           className='overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-175px'
-                          style={{backgroundImage: "url('media/stock/600x400/img-47.jpg')"}}
+                          style={{backgroundImage: "url('media/stock/diasprex/img-5.jpg')"}}
                         ></div>
                         <div className='overlay-layer bg-dark card-rounded bg-opacity-25'>
                           <i className='bi bi-eye-fill fs-2x text-white'></i>
@@ -309,7 +365,7 @@ class About extends Component {
                           href='../../demo1/dist/pages/user-profile/overview.html'
                           className='fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base'
                         >
-                          Admin Panel - How To Started the Dashboard Tutorial
+                          The much needed infrastrcture for African development
                         </a>
                         <div className='fw-bold fs-5 text-gray-600 text-dark mt-3 mb-5'>
                           We’ve been focused on making the from v4 to v5 but we’ve also not been
@@ -333,10 +389,9 @@ class About extends Component {
                 <div className='text-center mb-12'>
                   <h3 className='fs-2hx text-dark mb-5'>MEET THE TEAM</h3>
                   <div className='fs-5 text-muted fw-bold'>
-                    It’s no doubt that when a development takes longer to complete, additional costs
-                    to
+                    Diasprex is managed by a team of professional members of the diaspora hailing
                     <br />
-                    integrate and test each extra feature creeps up and haunts most of us.
+                    from diverse African countries with years of experience in the business.
                   </div>
                 </div>
                 <div className='tns tns-default mb-10'>
@@ -344,23 +399,23 @@ class About extends Component {
                     <div className='text-center'>
                       <div
                         className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
-                        style={{backgroundImage: "url('media/avatars/300-1.jpg')"}}
+                        style={{backgroundImage: "url('media/avatars/diasprex/dxp-1.jpg')"}}
                       ></div>
                       <div className='mb-0'>
                         <a href='#' className='text-dark fw-bolder text-hover-primary fs-3'>
-                          Paul Miles
+                          Tosin Dada, Ph.D.
                         </a>
-                        <div className='text-muted fs-6 fw-bold mt-1'>Development Lead</div>
+                        <div className='text-muted fs-6 fw-bold mt-1'>President</div>
                       </div>
                     </div>
                     <div className='text-center'>
                       <div
                         className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
-                        style={{backgroundImage: "url('media/avatars/300-2.jpg')"}}
+                        style={{backgroundImage: "url('media/avatars/diasprex/dxp-3.jpg')"}}
                       ></div>
                       <div className='mb-0'>
                         <a href='#' className='text-dark fw-bolder text-hover-primary fs-3'>
-                          Melisa Marcus
+                          Angella kianga, M.S.
                         </a>
                         <div className='text-muted fs-6 fw-bold mt-1'>Creative Director</div>
                       </div>
@@ -368,37 +423,37 @@ class About extends Component {
                     <div className='text-center'>
                       <div
                         className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
-                        style={{backgroundImage: "url('media/avatars/300-5.jpg')"}}
+                        style={{backgroundImage: "url('media/avatars/diasprex/dxp-9.jpg')"}}
                       ></div>
                       <div className='mb-0'>
                         <a href='#' className='text-dark fw-bolder text-hover-primary fs-3'>
-                          David Nilson
+                          Peter Sarpong, M.S., M.B.A
                         </a>
-                        <div className='text-muted fs-6 fw-bold mt-1'>Python Expert</div>
+                        <div className='text-muted fs-6 fw-bold mt-1'>V.P. Marketing </div>
                       </div>
                     </div>
                     <div className='text-center'>
                       <div
                         className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
-                        style={{backgroundImage: "url('media/avatars/300-20.jpg')"}}
+                        style={{backgroundImage: "url('media/avatars/diasprex/dxp-7.jpg')"}}
                       ></div>
                       <div className='mb-0'>
                         <a href='#' className='text-dark fw-bolder text-hover-primary fs-3'>
-                          Anne Clarc
+                          Tosin Lara Dada, Ph.D.
                         </a>
-                        <div className='text-muted fs-6 fw-bold mt-1'>Project Manager</div>
+                        <div className='text-muted fs-6 fw-bold mt-1'>V.P. Prrograms</div>
                       </div>
                     </div>
                     <div className='text-center'>
                       <div
                         className='octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center'
-                        style={{backgroundImage: "url('media/avatars/300-23.jpg')"}}
+                        style={{backgroundImage: "url('media/avatars/diasprex/dxp-8.jpg')"}}
                       ></div>
                       <div className='mb-0'>
                         <a href='#' className='text-dark fw-bolder text-hover-primary fs-3'>
-                          Ricky Hunt
+                          Seth Abelson, Ph.D.
                         </a>
-                        <div className='text-muted fs-6 fw-bold mt-1'>Art Director</div>
+                        <div className='text-muted fs-6 fw-bold mt-1'>V.P. Operation</div>
                       </div>
                     </div>
                     <div className='text-center'>
@@ -475,37 +530,54 @@ class About extends Component {
                 <div className='card-body py-12'>
                   <a href='#' className='mx-4'>
                     <img
-                      src='media/svg/brand-logos/facebook-4.svg'
+                      src={toAbsoluteUrl('/media/svg/brand-logos/linkedin-2.svg')}
                       className='h-30px my-2'
                       alt=''
                     />
                   </a>
                   <a href='#' className='mx-4'>
                     <img
-                      src='media/svg/brand-logos/instagram-2-1.svg'
+                      src={toAbsoluteUrl('/media/svg/brand-logos/facebook-4.svg')}
                       className='h-30px my-2'
                       alt=''
                     />
                   </a>
-                  <a href='#' className='mx-4'>
-                    <img src='media/svg/brand-logos/github.svg' className='h-30px my-2' alt='' />
-                  </a>
-                  <a href='#' className='mx-4'>
-                    <img src='media/svg/brand-logos/behance.svg' className='h-30px my-2' alt='' />
-                  </a>
+
                   <a href='#' className='mx-4'>
                     <img
-                      src='media/svg/brand-logos/pinterest-p.svg'
+                      src={toAbsoluteUrl('/media/svg/brand-logos/instagram-2-1.svg')}
                       className='h-30px my-2'
                       alt=''
                     />
                   </a>
-                  <a href='#' className='mx-4'>
-                    <img src='media/svg/brand-logos/twitter.svg' className='h-30px my-2' alt='' />
-                  </a>
+
+                  {/* <a href='#' className='mx-4'>
+                    <img
+                      src={toAbsoluteUrl('/media/svg/brand-logos/github.svg')}
+                      className='h-30px my-2'
+                      alt=''
+                    />
+                  </a> */}
+
+                  {/* <a href='#' className='mx-4'>
+                    <img
+                      src={toAbsoluteUrl('/media/svg/brand-logos/behance.svg')}
+                      className='h-30px my-2'
+                      alt=''
+                    />
+                  </a> */}
+
                   <a href='#' className='mx-4'>
                     <img
-                      src='media/svg/brand-logos/dribbble-icon-1.svg'
+                      src={toAbsoluteUrl('/media/svg/brand-logos/pinterest-p.svg')}
+                      className='h-30px my-2'
+                      alt=''
+                    />
+                  </a>
+
+                  <a href='#' className='mx-4'>
+                    <img
+                      src={toAbsoluteUrl('/media/svg/brand-logos/twitter.svg')}
                       className='h-30px my-2'
                       alt=''
                     />

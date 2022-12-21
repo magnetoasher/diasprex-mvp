@@ -5,6 +5,7 @@ import {Registration} from './components/Registration'
 import {ForgotPassword} from './components/ForgotPassword'
 import {SigninPage} from '../../modules/signin/components/SigninPage'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
+import {PublicNavbarProvider} from '../../../_metronic/layout/components/header/publicnavbar/publicnavbarprovider'
 
 const AuthLayout = () => {
   useEffect(() => {
@@ -16,9 +17,11 @@ const AuthLayout = () => {
 
   return (
     <div
-      className='d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed'
+      className='d-flex flex-column flex-column-fluid bgi-position-y-center position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed'
       style={{
-        backgroundImage: `url(${toAbsoluteUrl('/media/illustrations/sketchy-1/signup-banner.jpg')})`,
+        backgroundImage: `url(${toAbsoluteUrl(
+          '/media/illustrations/sketchy-1/signup-banner.jpg'
+        )})`,
       }}
     >
       {/* begin::Content */}
@@ -33,28 +36,20 @@ const AuthLayout = () => {
         </a>
         {/* end::Logo */}
         {/* begin::Wrapper */}
+
         <div className='w-lg-500px bg-white rounded shadow-sm p-10 p-lg-15 mx-auto'>
           <Outlet />
         </div>
         {/* end::Wrapper */}
       </div>
+      {/* <img
+        src={toAbsoluteUrl('/media/illustrations/sketchy-1/signup-banner.jpg')}
+        className='mw-100'
+      /> */}
+
       {/* end::Content */}
       {/* begin::Footer */}
-      <div className='d-flex flex-center flex-column-auto p-10'>
-        <div className='d-flex align-items-center fw-bold fs-6'>
-          <a href='#' className='text-muted text-hover-primary px-2'>
-            About
-          </a>
 
-          <a href='#' className='text-muted text-hover-primary px-2'>
-            Contact
-          </a>
-
-          <a href='#' className='text-muted text-hover-primary px-2'>
-            Contact Us
-          </a>
-        </div>
-      </div>
       {/* end::Footer */}
     </div>
   )
@@ -62,11 +57,25 @@ const AuthLayout = () => {
 
 const AuthPage = () => (
   <Routes>
-    <Route index element={<SigninPage />} />
-    <Route element={<AuthLayout />}>
-      {/* <Route path='login' element={<Login />} /> */}
+    <Route
+      index
+      element={
+        <PublicNavbarProvider>
+          <SigninPage />
+        </PublicNavbarProvider>
+      }
+    />
+    <Route
+      element={
+        <PublicNavbarProvider>
+          <AuthLayout />
+        </PublicNavbarProvider>
+      }
+    >
       <Route path='registration' element={<Registration />} />
       <Route path='forgot-password' element={<ForgotPassword />} />
+      {/* <Route path='login' element={<Login />} /> */}
+
       {/* <Route index element={<Login />} /> */}
     </Route>
   </Routes>

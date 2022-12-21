@@ -6,7 +6,7 @@ const Step5: FC = () => {
   return (
     <div className='w-100'>
       <div className='pb-8 pb-lg-10'>
-        <h2 className='fw-bolder text-dark'>Your Are Done!</h2>
+        <h2 className='fw-bolder text-dark'>You Are Done!</h2>
 
         <div className='text-gray-400 fw-bold fs-6'>
           If you need more info, please
@@ -30,7 +30,7 @@ const Step5: FC = () => {
           />
           <div className='d-flex flex-stack flex-grow-1'>
             <div className='fw-bold'>
-              <h4 className='text-gray-800 fw-bolder'>We need your attention!</h4>
+              <h4 className='text-gray-800 fw-bolder'>Attention!</h4>
               <div className='fs-6 text-gray-600'>
                 Clicking submit will save your create an account and save your account info
               </div>

@@ -11,7 +11,6 @@ import {VerifyCode} from './VerifyCode'
 import {Groups} from '../../../../enums/groups'
 import {Roles} from '../../../../enums/roles'
 
-
 const initialValues = {
   firstname: '',
   lastname: '',
@@ -61,14 +60,7 @@ export function Registration() {
   const completeRegistration = (setStatus, setSubmitting, setLoading) => {
     setLoading(true)
     setTimeout(() => {
-      register(
-        email,
-        firtName,
-        lastName,
-        password,
-        [Groups.BASIC],
-        Roles.BASIC
-      )
+      register(email, firtName, lastName, password, [Groups.BASIC], Roles.BASIC)
         .then((data) => {
           setLoading(false)
           navigate('/auth')
@@ -80,7 +72,7 @@ export function Registration() {
         })
     }, 1000)
   }
-  
+
   const formik = useFormik({
     initialValues,
     validationSchema: registrationSchema,
@@ -107,7 +99,9 @@ export function Registration() {
         <VerifyCode email={email} completeRegistration={completeRegistration} />
       </span>
       <form
-        className={`form w-100 fv-plugins-bootstrap5 fv-plugins-framework${!hideRegistrationForm ? '' : ' custom-disappear'}`}
+        className={`form w-100 fv-plugins-bootstrap5 fv-plugins-framework${
+          !hideRegistrationForm ? '' : ' custom-disappear'
+        }`}
         noValidate
         id='kt_login_signup_form'
         onSubmit={formik.handleSubmit}
@@ -121,7 +115,17 @@ export function Registration() {
           {/* begin::Link */}
           <div className='text-gray-400 fw-bold fs-4'>
             Already have an account?
-            <Link to='/auth/forgot-password' className='link-primary fw-bolder' style={{marginLeft: '5px'}}>
+            <Link to='/auth' className='link-primary fw-bolder' style={{marginLeft: '5px'}}>
+              Sign In
+            </Link>
+          </div>
+          <div className='text-gray-400 fw-bold fs-4'>
+            Forgot Password?
+            <Link
+              to='/auth/forgot-password'
+              className='link-primary fw-bolder'
+              style={{marginLeft: '5px'}}
+            >
               Forgot Password ?
             </Link>
           </div>

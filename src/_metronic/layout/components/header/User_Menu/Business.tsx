@@ -1,17 +1,21 @@
 import React from 'react'
-import { MenuItem } from '../MenuItem'
-import { useIntl } from 'react-intl'
+import {MenuItem} from '../MenuItem'
+import {useIntl} from 'react-intl'
 
 const Business = () => {
-    const intl = useIntl()
+  const intl = useIntl()
 
-    return (
-        <>
-            <MenuItem title={intl.formatMessage({ id: 'MENU.DASHBOARD' })} to='/dashboard' />
-            <MenuItem title='Opportunities' to='opportunities' />
-            <MenuItem title='My Opportunities' to='my_opportunities' />
-        </>
-    )
+  return (
+    <>
+      <MenuItem title={intl.formatMessage({id: 'MENU.DASHBOARD'})} to='/dashboard' />
+      <MenuItem title='Opportunities' to='/opportunities_center' />
+      <MenuItem title='My Opportunities' to='/my_opportunities' />
+      <MenuItem title='DIF Investment' to='dif_resources' />
+      <MenuItem title='Remittance' to='remittance_resources' />
+      <MenuItem title='Diaspora' to='/diasporas' />
+      <MenuItem title='FAQs' to='faqs' />
+    </>
+  )
 }
 
 export default Business

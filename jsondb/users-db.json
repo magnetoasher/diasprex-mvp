@@ -1,0 +1,47 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "fName": "",
+      "lName": "",
+      "mInitial": "",
+      "email": "",
+      "phone": {
+        "intlcode": "",
+        "phonenumber": ""
+      },
+      "avatar": "",
+      "countryOrig": "",
+      "countryRes": "",
+      "profession": "",
+      "professionfield": "",
+      "degree": "",
+      "interest": [],
+      "userType": "",
+      " subscription": {
+        "usertier": "super_enabler",
+        "billing": "monthly"
+      },
+      "orgName": "",
+      "orgAddress": "",
+      "orgMailingAddress": "",
+      "orgRegistered": "",
+      "orgRegNumber": "",
+      "orgRegYear": "",
+      "orgRegCountry": "",
+      "orgRegState": "",
+      "orgRole": "",
+      "orgType": "",
+      "dpxterms": false,
+      "enablerterms": false,
+      "emailcommunicate": false,
+      "userName": "",
+      "online": false,
+      "status": "",
+      "verified": false,
+      "twostepauth": false,
+      "remittanceretainer": true,
+      "datejoined": ""
+    }
+  ]
+}

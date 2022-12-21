@@ -22,7 +22,8 @@ function stringifyRequestQuery(state: QueryState): string {
     ? Object.entries(state.filter as Object)
         .filter((obj) => isNotEmpty(obj[1]))
         .map((obj) => {
-          return `filter_${obj[0]}=${obj[1]}`
+          // return `filter_${obj[0]}=${obj[1]}`
+          return `${obj[0]}=${obj[1]}`
         })
         .join('&')
     : ''
@@ -120,5 +121,5 @@ export {
   groupingOnSelect,
   groupingOnSelectAll,
   useDebounce,
-  isNotEmpty
+  isNotEmpty,
 }

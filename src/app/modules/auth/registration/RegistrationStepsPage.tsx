@@ -1,4 +1,6 @@
 import {Route, Routes, Outlet} from 'react-router-dom'
+import {PublicNavBar} from '../../../../_metronic/layout/components/header/publicnavbar/PublicNavBar'
+import {PublicNavbarProvider} from '../../../../_metronic/layout/components/header/publicnavbar/publicnavbarprovider'
 // import {PageLink, PageTitle} from '../../../_metronic/layout/core'
 import {CreateAccount} from './components/CreateAccount'
 // import {Horizontal} from './components/Horizontal'
@@ -20,7 +22,13 @@ import {CreateAccount} from './components/CreateAccount'
 
 const RegistrationStepsPage = () => (
   <Routes>
-    <Route element={<Outlet />}>
+    <Route
+      element={
+        // <PublicNavbarProvider>
+        <Outlet />
+        // </PublicNavbarProvider>
+      }
+    >
       {/* <Route
         path='horizontal'
         element={
@@ -35,7 +43,9 @@ const RegistrationStepsPage = () => (
         element={
           <>
             {/* <PageTitle breadcrumbs={wizardsBreadCrumbs}>Vertical</PageTitle> */}
+            {/* <PublicNavbarProvider> */}
             <CreateAccount />
+            {/* </PublicNavbarProvider> */}
           </>
         }
       />

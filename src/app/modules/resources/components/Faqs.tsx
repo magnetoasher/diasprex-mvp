@@ -1,4 +1,6 @@
 import React, {FC} from 'react'
+import {KTSVG, toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {FlowThumbnail1} from '../../../../_metronic/partials/content/utilities/flowthumbnail1'
 
 const Faqs: FC = () => {
   return (
@@ -10,362 +12,509 @@ const Faqs: FC = () => {
               <div className='mb-13'>
                 <div className='mb-15'>
                   <h4 className='fs-2x text-gray-800 w-bolder mb-6'>
-                    HOW DIASPREX CROWDINNOVATION WORKS
+                    HOW DIASPREX MARKETPLACE WORKS
                   </h4>
-                  <p className='fw-bold fs-4 text-gray-600 mb-2'>
-                    <p>
-                      <span>
-                        <span>&nbsp;</span>
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>
-                        Diasprex crowdinnovation is focused on African development. The main outcome
-                        is to connect sponsors of private and institutional business opportunities
-                        from Africa to&nbsp; the Enablers -innovators, partners, and investors- in
-                        the diaspora. The Crowdinnovation has four key components:
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>Sponsors -&nbsp;</span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>Enablers -&nbsp;</span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>Teaming arrangement -&nbsp;</span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>Financing -&nbsp;</span>
-                    </p>
-                    <p>
-                      <span>
-                        <span>&nbsp;</span>
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>How it works for Sponsors</span>
-                    </p>
-                    <p dir='ltr'>&nbsp;</p>
-                    <p dir='ltr'>
-                      <span>
+                  <div className='fw-bold fs-4 text-gray-600 mb-2'>
+                    <div className='row-sm'>
+                      <p>
                         <span>
-                          <img
-                            src='https://lh4.googleusercontent.com/bs8hFxcq7AiUkD-8OY8bH6hqdZfJbaudxWod_WiEhQGPDIrFPBSs_121Hkp3AY_3Cf6CZbAzrl_BiN2DdTqaAt0V7b-lbv7QSuF7lCNpY1SOlJ2TbSy-oJHS9XQBrY29KITif7wHRzAK4W94lg'
-                            alt=''
-                            width='624'
-                            height='167'
+                          <span>&nbsp;</span>
+                        </span>
+                      </p>
+                      <p dir='ltr'>
+                        <span>
+                          Diasprex marketplace is focused on African diasporas' engagement with
+                          business opportunities on the continent of Africa. The main outcome is to
+                          connect sponsors of private and institutional business opportunities from
+                          Africa to&nbsp; the Enablers -innovators, partners, and investors- in the
+                          diaspora. The marketplace has four key components:
+                        </span>
+                      </p>
+                      <p dir='ltr'>
+                        <span className='text-gray-800 text-uppercase'>SPONSOR: </span>{' '}
+                        <span>
+                          {' '}
+                          Sponsors are promoters of projects in Africa. A Sponsor must have a valid
+                          business entity registered with approapriate local authorities in the
+                          country of operation;
+                        </span>
+                      </p>
+                      <p dir='ltr'>
+                        <span className='text-gray-800 text-uppercase'>ENABLER</span>{' '}
+                        <span>
+                          {' '}
+                          - Enablers can be individuals, professionals, or businesses interested in
+                          enabling opportunities from a particular Sponsor. Offerings could be
+                          financing, professional service, or partnership. Enablers must be resident
+                          in an OECD country.
+                        </span>
+                      </p>
+                      <p dir='ltr'>
+                        <span className='text-gray-800 text-uppercase'>Teaming Arrangement </span>{' '}
+                        <span>
+                          {' '}
+                          - Our teaming arrangement begins when a Sponsor identifies a potential
+                          Enabler to engage. Diasprex initiates the process offline upon successful
+                          due diligence on both parties
+                        </span>
+                      </p>
+                      <p dir='ltr'>
+                        <span className='text-gray-800 text-uppercase'>Financing </span>{' '}
+                        <span>
+                          {' '}
+                          - Our financing can be either equity or debt instrument. Diasprex
+                          financing relies mainly on Diasporas financing resources. Every
+                          opportunity submission can request financing but only outstanding ones are
+                          selected for financing.
+                        </span>
+                      </p>
+                      <p>
+                        <span>
+                          <span>&nbsp;</span>
+                        </span>
+                      </p>
+                    </div>
+                    <div className='row-sm d-flex'>
+                      <span className='text-gray-800 text-uppercase'>
+                        How it works for Sponsors
+                      </span>
+                    </div>
+                    <div className='row-sm d-flex flex-wrap mb-10 mt-10'>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={1}
+                        label='Register/Login'
+                        icon='/media/svg/diasprex_icons/icon-4-dark.svg'
+                      />
+                      <div className='col-sm d-flex align-items-center px-5'>
+                        <div className='text-center mb-10 mb-md-0'>
+                          <KTSVG
+                            path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                            className={`svg-icon-1 svg-icon svg-icon-2tx`}
                           />
-                        </span>
-                      </span>
-                    </p>
-                    <p>
-                      <span>
-                        <span>&nbsp;</span>
-                      </span>
-                    </p>
-                    <ul>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>
-                            Login to your sponsor&rsquo;s account or Register to become a sponsor. A
-                            Sponsor is typically a business or an organization from Africa. First
-                            time Sponsor registration is a request for Diasprex to initiate the
-                            process of becoming a Sponsor. You will proofs of your business or
-                            organization legitimacy and point of contacts to complete the
-                            registration
-                          </span>
-                        </p>
-                      </li>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>
-                            After submitting your registration to become a Sponsor, Diasprex
-                            admin&nbsp; will initiate the vetting process to validate the legitimacy
-                            of your organization. The vetting process involves multiple steps and
-                            could take 4-6 weeks to complete. Upon a successful verification of your
-                            business or organization, Diasprex will notify you with the credential
-                            to login to your account
-                          </span>
-                        </p>
-                      </li>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>
-                            After receiving your login credentials from Diasprex, you will be able
-                            to change your password, change your authentication settings, and build
-                            your business or organization profile.
-                          </span>
-                        </p>
-                      </li>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>
-                            You can then create an opportunity using our opportunity submission
-                            tools within your profile. Creating an opportunity typically requires a
-                            one-pager describing, without any proprietary information:
-                          </span>
-                        </p>
-                      </li>
-                    </ul>
-                    <ul>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>
-                            the problem or project that you or your organization would like to solve
-                            in Africa
-                          </span>
-                        </p>
-                      </li>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>the business opportunities</span>
-                        </p>
-                      </li>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>and the type of partnership you are seeking</span>
-                        </p>
-                      </li>
-                    </ul>
-                    <p dir='ltr'>
-                      <span>
-                        Our team will be available to assist with building your opportunity campaign
-                        to ensure it meets Diasprex&rsquo;s criteria and appeals to our community of
-                        Enablers.&nbsp; An opportunity may be submitted with or without financing
-                      </span>
-                    </p>
-                    <p>
-                      <span>
-                        <span>&nbsp;</span>
-                      </span>
-                    </p>
-                    <ul>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>
-                            Submit your opportunity. Submitted opportunities are routed through our
-                            team for verification and approval before it is published. If your
-                            opportunity is not approved for publication, our team will contact you
-                            and advise on how to improve your submission. You can re-submit your
-                            revised opportunities as many times as possible.
-                          </span>
-                        </p>
-                      </li>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>
-                            Review proposals. You can start reviewing proposals for your
-                            opportunities as soons as they are received. However, you will not be
-                            able to make selections until after the opportunity&rsquo;s due date
-                          </span>
-                        </p>
-                      </li>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>
-                            Shortlist 3-5 proposals you would like to consider for potential teaming
-                            arrangements. You can request Diasprex service for screening and
-                            shortlisting the proposals. This list is passed to the Diasprex team for
-                            review and initiation of the teaming discussions.
-                          </span>
-                        </p>
-                      </li>
-                    </ul>
-                    <p>
-                      <span>
-                        <span>
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                        </span>
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>How it works for Enablers -</span>
-                      <span>&nbsp;</span>
-                    </p>
-                    <p>
-                      <span>
-                        <span>&nbsp;</span>
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>
-                        <span>
-                          <img
-                            src='https://lh5.googleusercontent.com/TbMF-jTtij1jsn2CZZzdRmIm-t86YIuJjjq_bNfTmUUVySqEuTwtAIPfeQS9kaY_cOaAQUiGWJCBZwl4Hf1bbOvVgmzEUYncg0GwBg7qZAAZWOaf8LBeeOmRjgTcQzEcNkm-BECSsgEwHneFog'
-                            alt=''
-                            width='624'
-                            height='163'
+                        </div>
+                      </div>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={2}
+                        label='Verification'
+                        icon='/media/svg/diasprex_icons/icon-20.svg'
+                      />
+                      <div className='col-sm d-flex align-items-center px-5'>
+                        <div className='text-center mb-10 mb-md-0'>
+                          <KTSVG
+                            path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                            className={`svg-icon-1 svg-icon svg-icon-2tx`}
                           />
-                        </span>
-                      </span>
-                    </p>
-                    <p>
-                      <span>
-                        <span>&nbsp;</span>
-                      </span>
-                    </p>
-                    <ul>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>See open Opportunities (</span>
-                          <span>link to list of opportunities</span>
-                          <span>)</span>
-                        </p>
-                      </li>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>
-                            Login or Register to see the details of the opportunities. Enablers are
-                            typically individuals, businesses, or organizations from the OECD
-                            countries. The level of details that you can access varies by your
-                            subscription and opportunities. You will also need to accept the
-                            Opportunity Disclosure Agreement (ODA) and our Terms of Use. Find out
-                            more about ODAs here (link to ODAs).
-                          </span>
-                        </p>
-                      </li>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>
-                            Develop your proposal for the Opportunity. The required deliverables
-                            typically include a proposal, biosketch, references, and samples of
-                            prior relevant activities (option). For any questions, message the
-                            Diasprex support team from within your account profile
-                          </span>
-                        </p>
-                      </li>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>
-                            Submit your proposal&nbsp; before the Opportunity&rsquo;s deadline. When
-                            submitting for multiple opportunities, each opportunity must be treated
-                            separately. Only Diasprex and the Sponsor of that Opportunity can view
-                            your solution.
-                          </span>
-                        </p>
-                      </li>
-                      <li dir='ltr'>
-                        <p dir='ltr'>
-                          <span>
-                            After the Opportunity&rsquo;s deadline, the Sponsor will evaluate all
-                            proposal submissions.. Once this stage is completed, you will be
-                            notified via email as to whether or not your submission has been
-                            selected for the next stage, which is typically a teaming arrangement.
-                          </span>
-                        </p>
-                      </li>
-                    </ul>
-                    <p>
-                      <span>
-                        <span>&nbsp;</span>
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>
-                        Learn more about how to become an Enabler (Link to instructions on how to
-                        subscribe as an enabler)
-                      </span>
-                    </p>
-                    <p>
-                      <span>
-                        <span>
-                          <br />
-                          <br />
-                          <br />
-                        </span>
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>How teaming arrangements (TA) work -&nbsp;</span>
-                    </p>
-                    <p>
-                      <span>
-                        <span>&nbsp;</span>
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>
-                        <span>
-                          <img
-                            src='https://lh5.googleusercontent.com/TbMF-jTtij1jsn2CZZzdRmIm-t86YIuJjjq_bNfTmUUVySqEuTwtAIPfeQS9kaY_cOaAQUiGWJCBZwl4Hf1bbOvVgmzEUYncg0GwBg7qZAAZWOaf8LBeeOmRjgTcQzEcNkm-BECSsgEwHneFog'
-                            alt=''
-                            width='624'
-                            height='163'
+                        </div>
+                      </div>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={3}
+                        label='Profile Setup'
+                        icon='/media/svg/diasprex_icons/icon-10.svg'
+                      />
+                      <div className='col-sm d-flex align-items-center px-5'>
+                        <div className='text-center mb-10 mb-md-0'>
+                          <KTSVG
+                            path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                            className={`svg-icon-1 svg-icon svg-icon-2tx`}
                           />
-                        </span>
-                      </span>
-                    </p>
-                    <p>
-                      <span>
-                        <span>&nbsp;</span>
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>
-                        The teaming arrangement begins after the Sponsor has shortlisted the top
-                        candidates for their Opportunity. The goal of the TA process is to arrive at
-                        the final Enabler to work with the Sponsor. This process can take x - y
-                        weeks to complete. The TA process includes:
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>Due Diligence</span>
-                      <span>
-                        : Diasprex team and the Sponsor conducts their due diligence to ensure no
-                        conflict of interest or IP infringement.
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>Planning</span>
-                      <span>
-                        : The planning process typically involves the Sponsor, Enabler, and Diasprex
-                        team to develop a plan for execution and compensation.
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>Execution</span>
-                      <span>
-                        : The opportunity moves to execution with or without Diasprex involvement
-                      </span>
-                    </p>
-                    <p>
-                      <span>
-                        <span>
-                          <br />
-                          <br />
-                          <br />
-                        </span>
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>How financing works</span>
-                    </p>
-                    <p>
-                      <span>
-                        <span>&nbsp;</span>
-                      </span>
-                    </p>
-                    <p dir='ltr'>
-                      <span>
-                        <span>
-                          <img
-                            src='https://lh5.googleusercontent.com/TbMF-jTtij1jsn2CZZzdRmIm-t86YIuJjjq_bNfTmUUVySqEuTwtAIPfeQS9kaY_cOaAQUiGWJCBZwl4Hf1bbOvVgmzEUYncg0GwBg7qZAAZWOaf8LBeeOmRjgTcQzEcNkm-BECSsgEwHneFog'
-                            alt=''
-                            width='624'
-                            height='163'
+                        </div>
+                      </div>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={4}
+                        label='Submit Opportunities'
+                        icon='/media/svg/diasprex_icons/icon-26.svg'
+                      />
+
+                      <div className='col-sm d-flex align-items-center px-5'>
+                        <div className='text-center mb-10 mb-md-0'>
+                          <KTSVG
+                            path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                            className={`svg-icon-1 svg-icon svg-icon-2tx`}
                           />
+                        </div>
+                      </div>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={5}
+                        label='Review Proposals'
+                        icon='/media/svg/diasprex_icons/icon-16.svg'
+                      />
+                      <div className='col-sm d-flex align-items-center px-5'>
+                        <div className='text-center mb-10 mb-md-0'>
+                          <KTSVG
+                            path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                            className={`svg-icon-1 svg-icon svg-icon-2tx`}
+                          />
+                        </div>
+                      </div>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={6}
+                        label='Partner Selection'
+                        icon='/media/svg/diasprex_icons/icon-25.svg'
+                      />
+                    </div>
+                    <div className='row-sm d-flex'>
+                      <ol>
+                        <li dir='ltr'>
+                          <p dir='ltr'>
+                            <span>
+                              Login to your sponsor&rsquo;s account or Register to become a sponsor.
+                              A Sponsor is typically a business or an organization from Africa.
+                              First time Sponsor registration is a request for Diasprex to initiate
+                              the process of becoming a Sponsor. You will proofs of your business or
+                              organization legitimacy and point of contacts to complete the
+                              registration
+                            </span>
+                          </p>
+                        </li>
+                        <li dir='ltr'>
+                          <p dir='ltr'>
+                            <span>
+                              After submitting your registration to become a Sponsor, Diasprex
+                              admin&nbsp; will initiate the vetting process to validate the
+                              legitimacy of your organization. The vetting process involves multiple
+                              steps and could take 4-6 weeks to complete. Upon a successful
+                              verification of your business or organization, Diasprex will notify
+                              you with the credential to login to your account
+                            </span>
+                          </p>
+                        </li>
+                        <li dir='ltr'>
+                          <p dir='ltr'>
+                            <span>
+                              After receiving your login credentials from Diasprex, you will be able
+                              to change your password, change your authentication settings, and
+                              build your business or organization profile.
+                            </span>
+                          </p>
+                        </li>
+                        <li dir='ltr'>
+                          <p dir='ltr'>
+                            <span>
+                              You can then create and submit Opportunities using our opportunity
+                              submission tools within your profile. Creating an opportunity
+                              typically requires a one-pager describing, without any proprietary
+                              information:
+                            </span>
+                          </p>
+                          <ul>
+                            <li>
+                              <p dir='ltr'>
+                                <span>
+                                  the problem or project that you or your organization would like to
+                                  solve in Africa
+                                </span>
+                              </p>
+                            </li>
+                            <li>
+                              <p dir='ltr'>
+                                <span>the business opportunities</span>
+                              </p>
+                            </li>
+                            <li>
+                              <p dir='ltr'>
+                                <span>and the type of partnership you are seeking</span>
+                              </p>
+                            </li>
+                          </ul>
+                          <p dir='ltr'>
+                            <span>
+                              Our team will be available to assist with building your opportunity
+                              campaign to ensure it meets Diasprex&rsquo;s criteria and appeals to
+                              our community of Enablers.&nbsp; An opportunity may be submitted with
+                              or without financing. Submitted opportunities are routed through our
+                              team for verification and approval before it is published. If your
+                              opportunity is not approved for publication, our team will contact you
+                              and advise on how to improve your submission. You can re-submit your
+                              revised opportunities as many times as possible.
+                            </span>
+                          </p>
+                        </li>
+                        <li dir='ltr'>
+                          <p dir='ltr'>
+                            <span>
+                              Review proposals. You can start reviewing proposals for your
+                              opportunities as soons as they are received. However, you will not be
+                              able to make selections until after the opportunity&rsquo;s due date
+                            </span>
+                          </p>
+                        </li>
+                        <li dir='ltr'>
+                          <p dir='ltr'>
+                            <span>
+                              Shortlist 3-5 proposals you would like to consider for potential
+                              teaming arrangements. You can request Diasprex service for screening
+                              and shortlisting the proposals. This list is passed to the Diasprex
+                              team for review and initiation of the teaming discussions.
+                            </span>
+                          </p>
+                        </li>
+                      </ol>
+                    </div>
+
+                    <div className='row-sm d-flex'>
+                      <p dir='ltr'>
+                        <span className='text-gray-800 text-uppercase'>
+                          How it works for Enablers -
                         </span>
-                      </span>
-                    </p>
-                    <p>
-                      <span>
                         <span>&nbsp;</span>
-                      </span>
-                    </p>
+                      </p>
+                    </div>
+                    <div className='row-sm d-flex flex-wrap mb-10 mt-10'>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={1}
+                        label='Register/Login'
+                        icon='/media/svg/diasprex_icons/icon-4-dark.svg'
+                      />
+                      <div className='col-sm d-flex align-items-center px-5'>
+                        <div className='text-center mb-10 mb-md-0'>
+                          <KTSVG
+                            path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                            className={`svg-icon-1 svg-icon svg-icon-2tx`}
+                          />
+                        </div>
+                      </div>
+
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={2}
+                        label='Review Opportunities'
+                        icon='/media/svg/diasprex_icons/icon-2-red-yellow.svg'
+                      />
+                      <div className='col-sm d-flex align-items-center px-5'>
+                        <div className='text-center mb-10 mb-md-0'>
+                          <KTSVG
+                            path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                            className={`svg-icon-1 svg-icon svg-icon-2tx`}
+                          />
+                        </div>
+                      </div>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={3}
+                        label='Submit Proposals'
+                        icon='/media/svg/diasprex_icons/icon-23.svg'
+                      />
+
+                      <div className='col-sm d-flex align-items-center px-5'>
+                        <div className='text-center mb-10 mb-md-0'>
+                          <KTSVG
+                            path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                            className={`svg-icon-1 svg-icon svg-icon-2tx`}
+                          />
+                        </div>
+                      </div>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={4}
+                        label='Notification'
+                        icon='/media/svg/diasprex_icons/icon-28.svg'
+                      />
+                    </div>
+
+                    <div className='row-sm d-flex'>
+                      <ol>
+                        <li dir='ltr'>
+                          <p dir='ltr'>
+                            <span>
+                              Login or Register to see all open opportunities. Enablers are
+                              typically individuals, businesses, or organizations from OECD
+                              countries. Learn more about how to become an Enabler (Link to
+                              instructions on how to subscribe as an enabler)
+                            </span>
+                          </p>
+                        </li>
+                        <li dir='ltr'>
+                          <p dir='ltr'>
+                            <span>
+                              Review Opportunities: Review details of opportunites. The level of
+                              details you can access varies by your subscription and the opportunity
+                              type. You will also need to accept the Opportunity Disclosure
+                              Agreement (ODA) and our Terms of Use. Find out more about ODAs here
+                              (link to ODAs). Develop your proposal for an Opportunity interest. The
+                              required deliverables typically include a proposal, biosketch,
+                              references, and optional samples of prior relevant activities. For any
+                              questions, message the Diasprex support team from within your account
+                              profile
+                            </span>
+                          </p>
+                        </li>
+                        <li dir='ltr'>
+                          <p dir='ltr'>
+                            <span>
+                              Submit Proposal: Submit your proposal before the Opportunity&rsquo;s
+                              deadline. When submitting for multiple opportunities, each opportunity
+                              must be treated separately. Only Diasprex and the Sponsor of that
+                              Opportunity can view your proposal.
+                            </span>
+                          </p>
+                        </li>
+                        <li dir='ltr'>
+                          <p dir='ltr'>
+                            <span>
+                              Notification: After the Opportunity&rsquo;s deadline, the Sponsor will
+                              evaluate all proposal submissions.. Once this stage is completed, you
+                              will be notified via email as to whether or not your submission has
+                              been selected for the next stage, which is typically a teaming
+                              arrangement.
+                            </span>
+                          </p>
+                        </li>
+                      </ol>
+                    </div>
+                    <div className='row-sm d-flex'>
+                      <p dir='ltr'>
+                        <span className='text-gray-800 text-uppercase'>
+                          How teaming arrangements (TA) work -&nbsp;
+                        </span>
+                      </p>
+                    </div>
+
+                    <div className='row-sm d-flex flex-wrap mb-10 mt-10'>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={1}
+                        label='Proposal Selected'
+                        icon='/media/svg/diasprex_icons/icon-20-blue.svg'
+                      />
+                      <div className='col-sm d-flex align-items-center px-5'>
+                        <div className='text-center mb-10 mb-md-0'>
+                          <KTSVG
+                            path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                            className={`svg-icon-1 svg-icon svg-icon-2tx`}
+                          />
+                        </div>
+                      </div>
+
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={2}
+                        label='Sponsor-Enabler Meeting'
+                        icon='/media/svg/diasprex_icons/icon-67.svg'
+                      />
+                      <div className='col-sm d-flex align-items-center px-5'>
+                        <div className='text-center mb-10 mb-md-0'>
+                          <KTSVG
+                            path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                            className={`svg-icon-1 svg-icon svg-icon-2tx`}
+                          />
+                        </div>
+                      </div>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={3}
+                        label='Due Diligence'
+                        icon='/media/svg/diasprex_icons/icon-1.svg'
+                      />
+
+                      <div className='col-sm d-flex align-items-center px-5'>
+                        <div className='text-center mb-10 mb-md-0'>
+                          <KTSVG
+                            path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                            className={`svg-icon-1 svg-icon svg-icon-2tx`}
+                          />
+                        </div>
+                      </div>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={4}
+                        label='Sign Agreement'
+                        icon='/media/svg/diasprex_icons/icon-46.svg'
+                      />
+                    </div>
+                    <div className='row-sm d-flex flex-column'>
+                      <ol>
+                        <li dir='ltr'>
+                          <p dir='ltr'>
+                            <span>
+                              The teaming arrangement begins after the Sponsor has shortlisted the
+                              top candidates for their Opportunity. The goal of the TA process is to
+                              arrive at the final Enabler to work with the Sponsor. This process can
+                              take x - y weeks to complete. The TA process includes:
+                            </span>
+                          </p>
+                        </li>
+                        <li>
+                          <p dir='ltr'>
+                            <span>Due Diligence</span>
+                            <span>
+                              : Diasprex team and the Sponsor conducts their due diligence to ensure
+                              no conflict of interest or IP infringement.
+                            </span>
+                          </p>
+                        </li>
+                        <li>
+                          <p dir='ltr'>
+                            <span>Planning</span>
+                            <span>
+                              : The planning process typically involves the Sponsor, Enabler, and
+                              Diasprex team to develop a plan for execution and compensation.
+                            </span>
+                          </p>
+                        </li>
+                        <li>
+                          <p dir='ltr'>
+                            <span>Execution</span>
+                            <span>
+                              : The opportunity moves to execution with or without Diasprex
+                              involvement
+                            </span>
+                          </p>
+                        </li>
+                      </ol>
+                    </div>
+
+                    <div className='row-sm d-flex'>
+                      <p dir='ltr'>
+                        <span className='text-gray-800 text-uppercase'>How financing works</span>
+                      </p>
+                    </div>
+
+                    <div className='row-sm d-flex flex-wrap mb-10 mt-10'>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={1}
+                        label='Request Financing'
+                        icon='/media/svg/diasprex_icons/icon-20-blue.svg'
+                      />
+                      <div className='col-sm d-flex align-items-center px-5'>
+                        <div className='text-center mb-10 mb-md-0'>
+                          <KTSVG
+                            path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                            className={`svg-icon-1 svg-icon svg-icon-2tx`}
+                          />
+                        </div>
+                      </div>
+
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={2}
+                        label='Due Diligence'
+                        icon='/media/svg/diasprex_icons/icon-1.svg'
+                      />
+
+                      <div className='col-sm d-flex align-items-center px-5'>
+                        <div className='text-center mb-10 mb-md-0'>
+                          <KTSVG
+                            path={toAbsoluteUrl('/media/icons/duotune/arrows/arr024.svg')}
+                            className={`svg-icon-1 svg-icon svg-icon-2tx`}
+                          />
+                        </div>
+                      </div>
+                      <FlowThumbnail1
+                        classname='col-sm m-3'
+                        tagnumber={3}
+                        label='Decision'
+                        icon='/media/svg/diasprex_icons/icon-46.svg'
+                      />
+                    </div>
+
                     <p dir='ltr'>
                       <span>
                         Sponsored opportunities may or may not already have financing. For
@@ -379,11 +528,11 @@ const Faqs: FC = () => {
                     <p>
                       <span>&nbsp;</span>
                     </p>
-                  </p>
+                  </div>
                 </div>
                 <div className='row mb-12'>
                   <div className='col-md-6 pe-md-10 mb-10 mb-md-0'>
-                    <h2 className='text-gray-800 fw-bolder mb-4'>PLACEHOLDER</h2>
+                    <h2 className='text-gray-800 fw-bolder mb-4'>BECOMING A MEMBER</h2>
                     <div className='m-0'>
                       <div
                         className='d-flex align-items-center collapsible py-3 toggle mb-0'
@@ -784,7 +933,7 @@ const Faqs: FC = () => {
                           </span>
                         </div>
                         <h4 className='text-gray-700 fw-bolder cursor-pointer mb-0'>
-                          How do I join the Diasprex Marketplace and register a new Snabler’s
+                          How do I join the Diasprex Marketplace and register a new Enabler’s
                           account?
                         </h4>
                       </div>
@@ -796,7 +945,7 @@ const Faqs: FC = () => {
                     </div>
                   </div>
                   <div className='col-md-6 ps-md-10'>
-                    <h2 className='text-gray-800 fw-bolder mb-4'>PLACEHOLDER</h2>
+                    <h2 className='text-gray-800 fw-bolder mb-4'>SUBMITTING SHOW OF INTEREST</h2>
                     <div className='m-0'>
                       <div
                         className='d-flex align-items-center collapsible py-3 toggle mb-0'
@@ -1198,7 +1347,7 @@ const Faqs: FC = () => {
                 </div>
                 <div className='row'>
                   <div className='col-md-6 pe-md-10 mb-10 mb-md-0'>
-                    <h2 className='text-gray-800 w-bolder mb-4'>PLACEHOLDER</h2>
+                    <h2 className='text-gray-800 w-bolder mb-4'>RREMITTANCE RETAINER</h2>
                     <div className='m-0'>
                       <div
                         className='d-flex align-items-center collapsible py-3 toggle mb-0'
@@ -1536,7 +1685,7 @@ const Faqs: FC = () => {
                     </div>
                   </div>
                   <div className='col-md-6 ps-md-10'>
-                    <h2 className='text-gray-800 fw-bolder mb-4'>PLACEHOLDER</h2>
+                    <h2 className='text-gray-800 fw-bolder mb-4'>OTHER MARKETPLACE QUESTIONS</h2>
                     <div className='m-0'>
                       <div
                         className='d-flex align-items-center collapsible py-3 toggle mb-0'
@@ -1609,8 +1758,7 @@ const Faqs: FC = () => {
                           </span>
                         </div>
                         <h4 className='text-gray-700 fw-bolder cursor-pointer mb-0'>
-                          What types of Opportunities can I submit to the Diasprex CrowdInnovation
-                          Marketplace?
+                          What types of Opportunities can I submit to the Diasprex Marketplace?
                         </h4>
                       </div>
                       <div id='kt_job_7_1' className='collapse show fs-6 ms-1'>
@@ -1780,7 +1928,7 @@ const Faqs: FC = () => {
                         </div>
                         <h4 className='text-gray-700 fw-bolder cursor-pointer mb-0'>
                           My opportunity is still an idea, does it qualify for the Diasprex’s
-                          CrowdInnovation Marketplace?
+                          Marketplace?
                         </h4>
                       </div>
                       <div id='kt_job_7_3' className='collapse fs-6 ms-1'>
@@ -1865,7 +2013,7 @@ const Faqs: FC = () => {
                         </div>
                         <h4 className='text-gray-700 fw-bolder cursor-pointer mb-0'>
                           I am primarily interested in financing an Opportunity, does it qualify for
-                          Diasprex’s CrowdInnovation Marketplace?
+                          Diasprex’s Marketplace?
                         </h4>
                       </div>
                       <div id='kt_job_7_6' className='collapse fs-6 ms-1'>
@@ -2174,37 +2322,54 @@ const Faqs: FC = () => {
                 <div className='card-body py-12'>
                   <a href='#' className='mx-4'>
                     <img
-                      src='media/svg/brand-logos/facebook-4.svg'
+                      src={toAbsoluteUrl('/media/svg/brand-logos/linkedin-2.svg')}
                       className='h-30px my-2'
                       alt=''
                     />
                   </a>
                   <a href='#' className='mx-4'>
                     <img
-                      src='media/svg/brand-logos/instagram-2-1.svg'
+                      src={toAbsoluteUrl('/media/svg/brand-logos/facebook-4.svg')}
                       className='h-30px my-2'
                       alt=''
                     />
                   </a>
-                  <a href='#' className='mx-4'>
-                    <img src='media/svg/brand-logos/github.svg' className='h-30px my-2' alt='' />
-                  </a>
-                  <a href='#' className='mx-4'>
-                    <img src='media/svg/brand-logos/behance.svg' className='h-30px my-2' alt='' />
-                  </a>
+
                   <a href='#' className='mx-4'>
                     <img
-                      src='media/svg/brand-logos/pinterest-p.svg'
+                      src={toAbsoluteUrl('/media/svg/brand-logos/instagram-2-1.svg')}
                       className='h-30px my-2'
                       alt=''
                     />
                   </a>
-                  <a href='#' className='mx-4'>
-                    <img src='media/svg/brand-logos/twitter.svg' className='h-30px my-2' alt='' />
-                  </a>
+
+                  {/* <a href='#' className='mx-4'>
+                    <img
+                      src={toAbsoluteUrl('/media/svg/brand-logos/github.svg')}
+                      className='h-30px my-2'
+                      alt=''
+                    />
+                  </a> */}
+
+                  {/* <a href='#' className='mx-4'>
+                    <img
+                      src={toAbsoluteUrl('/media/svg/brand-logos/behance.svg')}
+                      className='h-30px my-2'
+                      alt=''
+                    />
+                  </a> */}
+
                   <a href='#' className='mx-4'>
                     <img
-                      src='media/svg/brand-logos/dribbble-icon-1.svg'
+                      src={toAbsoluteUrl('/media/svg/brand-logos/pinterest-p.svg')}
+                      className='h-30px my-2'
+                      alt=''
+                    />
+                  </a>
+
+                  <a href='#' className='mx-4'>
+                    <img
+                      src={toAbsoluteUrl('/media/svg/brand-logos/twitter.svg')}
                       className='h-30px my-2'
                       alt=''
                     />
