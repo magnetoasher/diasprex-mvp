@@ -1,27 +1,39 @@
 /* eslint-disable react/jsx-no-target-blank */
-import React from 'react'
-import { useIntl } from 'react-intl'
-import { KTSVG } from '../../../helpers'
-import { useSearchParams } from 'react-router-dom'
-import { AsideMenuItemWithSub } from './AsideMenuItemWithSub'
-import { AsideMenuItem } from './AsideMenuItem'
-import { Sponsor } from './MenuList/Sponsor'
-import { Business } from './MenuList/Business'
-import { Individual } from './MenuList/Individual'
-import { BasicMenu } from './MenuList/BasicMenu'
+
+import {useIntl} from 'react-intl'
+import {useSearchParams} from 'react-router-dom'
+import {Sponsor} from './MenuList/Sponsor'
+import {AdminMenu} from './MenuList/AdminMenu'
+import {Enabler} from './MenuList/Enabler'
+import {GenericMenu} from './MenuList/GenericMenu'
 
 export function AsideMenuMain() {
-
   const intl = useIntl()
 
   const [searchParams, setSearchParams] = useSearchParams()
-  let user = localStorage.getItem("userType");
-
-
+  let userType = localStorage.getItem('userType')
+  let userTypeFull = localStorage.getItem('userTypeFull')
 
   return (
     <>
-      {user == "sponsor" ? <Sponsor /> : (user == "individual" || user == "business") ? <Individual /> : <BasicMenu />}
+      {/* {user == 'admin' ? (
+        <AdminMenu />
+      ) : user == 'sponsor' ? (
+        <Sponsor />
+      ) : user == 'individual' || user == 'business' ? (
+        <Individual />
+      ) : (
+        <GenericMenu />
+      )} */}
+      {userType == 'admin' ? (
+        <AdminMenu />
+      ) : userType == 'sponsor' ? (
+        <Sponsor />
+      ) : userType == 'enabler' && userTypeFull !== 'basic_enabler' ? (
+        <Enabler />
+      ) : (
+        <GenericMenu />
+      )}
     </>
   )
 }

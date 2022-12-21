@@ -2,6 +2,7 @@
 import React, {useState} from 'react'
 import {KTSVG} from '../../../../../../_metronic/helpers'
 import {IDeactivateProfile, deactivateProfile} from '../SettingsModel'
+import SweetAlert from 'react-bootstrap-sweetalert'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 
@@ -11,6 +12,13 @@ const deactivateProfileSchema = Yup.object().shape({
 
 const DeactivateProfile: React.FC = () => {
   const [loading, setLoading] = useState(false)
+  const [accountType, setAccountType] = useState(localStorage.getItem('userTypeFull'))
+  const [openSweetAlert, setOpenSweetAlert] = useState(false)
+  const onConfirm = () => {}
+  const onCancel = () => {
+    setOpenSweetAlert(false)
+  }
+
   const formik = useFormik<IDeactivateProfile>({
     initialValues: {
       ...deactivateProfile,
@@ -36,7 +44,7 @@ const DeactivateProfile: React.FC = () => {
         aria-controls='kt_profile_deactivate'
       >
         <div className='card-title m-0'>
-          <h3 className='fw-bolder m-0'>Deactivate Profile</h3>
+          <h3 className='fw-bolder m-0'>Deactivate Account</h3>
         </div>
       </div>
 
@@ -53,35 +61,63 @@ const DeactivateProfile: React.FC = () => {
                 <div className='fw-bold'>
                   <h4 className='text-gray-800 fw-bolder'>You Are Deactivating Your Profile</h4>
                   <div className='fs-6 text-gray-600'>
-                    For extra security, this requires you to confirm your email or phone number when
-                    you reset yousignr password.
+                    For extra security, this requires admin confirmation for Enablers and Sponsors.
                     <br />
-                    <a className='fw-bolder' href='#'>
+                    <a className='fw-bolder' href='/faqs'>
                       Learn more
                     </a>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div className='form-check form-check-solid fv-row'>
-              <input
-                className='form-check-input'
-                type='checkbox'
-                {...formik.getFieldProps('confirm')}
-              />
-              <label className='form-check-label fw-bold ps-2 fs-6' htmlFor='deactivate'>
-                I confirm my profile deactivation
-              </label>
-            </div>
-            {formik.touched.confirm && formik.errors.confirm && (
-              <div className='fv-plugins-message-container'>
-                <div className='fv-help-block'>{formik.errors.confirm}</div>
-              </div>
-            )}
           </div>
 
-          <div className='card-footer d-flex justify-content-end py-6 px-9'>
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <div>
+              <label
+                style={{
+                  fontWeight: 600,
+                  fontSize: '14px',
+                }}
+              >
+                Deactivate Account
+              </label>
+            </div>
+            <div>
+              <button
+                type='button'
+                className='btn btn-danger btn-active-light-primary px-6'
+                onClick={() => {
+                  setOpenSweetAlert(true)
+                }}
+              >
+                Deactivate Account
+              </button>
+            </div>
+          </div>
+          <SweetAlert
+            title={'Account Deactivation'}
+            onConfirm={onConfirm}
+            onCancel={onCancel}
+            showCancel={true}
+            show={openSweetAlert}
+          >
+            <div>
+              {accountType !== 'basic_enabler' ? (
+                <h3>
+                  Please contact the admin at{' '}
+                  <a className='btn btn-link' href='#'>
+                    admin@diasprex.com{' '}
+                  </a>{' '}
+                  to deactivate your account.
+                </h3>
+              ) : (
+                <h3>Are you sure to permanently delete your account?</h3>
+              )}
+            </div>
+          </SweetAlert>
+
+          {/* <div className='card-footer d-flex justify-content-end py-6 px-9'>
             <button
               id='kt_profile_deactivate_profile_submit'
               type='submit'
@@ -95,7 +131,7 @@ const DeactivateProfile: React.FC = () => {
                 </span>
               )}
             </button>
-          </div>
+          </div> */}
         </form>
       </div>
     </div>

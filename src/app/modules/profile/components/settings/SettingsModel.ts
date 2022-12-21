@@ -1,20 +1,26 @@
 export interface IProfileDetails {
   avatar: string
   fName: string
+  mInitial?: string
   lName: string
-  company: string
+  email: string
+  company?: string
+  orgRole?: string
   contactPhone: string
-  companySite: string
+  companySite?: string
   country: string
-  language: string
-  timeZone: string
-  currency: string
-  role:string
-  organization:string
-  oecd:string
-  address:string
-  profession:string
-  degree:string
+  language?: string
+  timeZone?: string
+  organization?: string
+  orgAddress?: string
+  orgMailAddress?: string
+  orgIndustry?: string
+  orgRegNumber?: string
+  orgRegCountry?: string
+  oecd?: string
+  address: string
+  profession?: string
+  degree?: string
   communications: {
     email: boolean
     phone: boolean
@@ -77,22 +83,28 @@ export interface IDeactivateProfile {
 }
 
 export const profileDetailsInitValues: IProfileDetails = {
-  avatar: '/media/avatars/300-1.jpg',
-  fName: 'Max',
+  avatar: '/media/avatars/diasprex/dxp-6.jpg',
+  fName: 'John',
+  mInitial: 'J',
   lName: 'Smith',
-  company: 'Keenthemes',
+  email: 'm.smith@diasprex.com',
+  company: 'Julius Berger PLC',
   contactPhone: '044 3276 454 935',
   companySite: 'keenthemes.com',
   country: 'South Africa',
   language: '',
   timeZone: '',
-  currency: '',
-  role:'',
-  organization:'',
-  oecd:'',
-  address:'1750 Gemsbok St',
-  profession:'',
-  degree:'',
+  orgRole: 'President and CEO',
+  organization: '',
+  orgIndustry: 'Advertisement',
+  orgRegNumber: 'NGN0004874653',
+  orgRegCountry: 'South Africa',
+  oecd: '',
+  address: '1750 Gemsbok St',
+  orgAddress: '7868 Wamco Rd, Ikeja Lagos, Nigeria',
+  orgMailAddress: '7868 Wamco Rd, Ikeja Lagos, Nigeria',
+  profession: '',
+  degree: '',
   communications: {
     email: false,
     phone: false,

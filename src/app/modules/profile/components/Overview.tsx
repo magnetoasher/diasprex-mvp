@@ -1,19 +1,20 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { KTSVG } from '../../../../_metronic/helpers'
+import {Link} from 'react-router-dom'
+import {KTSVG} from '../../../../_metronic/helpers'
 import {
   ChartsWidget1,
   TablesWidget1,
   ListsWidget5,
   TablesWidget5,
 } from '../../../../_metronic/partials/widgets'
-import { useSearchParams } from 'react-router-dom'
+import {useSearchParams} from 'react-router-dom'
+import {profileDetailsInitValues} from './settings/SettingsModel'
 
 export function Overview() {
   const [searchParams, setSearchParams] = useSearchParams()
-  let user = localStorage.getItem('userType')
-
+  let userTypeFull = localStorage.getItem('userTypeFull')
+  const profile = profileDetailsInitValues
   return (
     <>
       <div className='card mb-5 mb-xl-10' id='kt_profile_details_view'>
@@ -21,10 +22,11 @@ export function Overview() {
           <div className='card-title m-0'>
             <h3 className='fw-bolder m-0'>Profile Details</h3>
           </div>
-
-          <Link to='/crafted/profile/settings' className='btn btn-primary align-self-center'>
-            Edit Profile
-          </Link>
+          <div className='d-flex justify-content-end align-items-center'>
+            <Link to='/profile/settings' className='btn btn-primary'>
+              Edit Profile
+            </Link>
+          </div>
         </div>
 
         <div className='card-body p-9'>
@@ -32,15 +34,24 @@ export function Overview() {
             <label className='col-lg-4 fw-bold text-muted'>Full Name</label>
 
             <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-dark'>Max Smith</span>
+              <span className='fw-bolder fs-6 text-dark'>
+                {profile.fName} {profile.mInitial}. {profile.lName}
+              </span>
             </div>
           </div>
 
           <div className='row mb-7'>
-            <label className='col-lg-4 fw-bold text-muted'>Company</label>
+            <label className='col-lg-4 fw-bold text-muted'>
+              Email
+              <i
+                className='fas fa-exclamation-circle ms-1 fs-7'
+                data-bs-toggle='tooltip'
+                title='Email must be active'
+              ></i>
+            </label>
 
-            <div className='col-lg-8 fv-row'>
-              <span className='fw-bold fs-6'>Keenthemes</span>
+            <div className='col-lg-8'>
+              <span className='fw-bolder fs-6 text-dark'>{profile.email}</span>
             </div>
           </div>
 
@@ -55,9 +66,17 @@ export function Overview() {
             </label>
 
             <div className='col-lg-8 d-flex align-items-center'>
-              <span className='fw-bolder fs-6 me-2'>044 3276 454 935</span>
+              <span className='fw-bolder fs-6 me-2'>{profile.contactPhone}</span>
 
               <span className='badge badge-success'>Verified</span>
+            </div>
+          </div>
+
+          <div className='row mb-7'>
+            <label className='col-lg-4 fw-bold text-muted'>Company</label>
+
+            <div className='col-lg-8 fv-row'>
+              <span className='fw-bold fs-6'>{profile.company}</span>
             </div>
           </div>
 
@@ -66,7 +85,7 @@ export function Overview() {
 
             <div className='col-lg-8'>
               <a href='#' className='fw-bolder fs-6 text-dark'>
-                keenthemes.com
+                {profile.companySite}
               </a>
             </div>
           </div>
@@ -75,7 +94,7 @@ export function Overview() {
 
             <div className='col-lg-8'>
               <a href='#' className='fw-bolder fs-6 text-dark'>
-                2777 Vera Cruz Ln N
+                {profile.address}
               </a>
             </div>
           </div>
@@ -91,7 +110,7 @@ export function Overview() {
             </label>
 
             <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-dark'>Germany</span>
+              <span className='fw-bolder fs-6 text-dark'>{profile.country}</span>
             </div>
           </div>
 
@@ -99,7 +118,10 @@ export function Overview() {
             <label className='col-lg-4 fw-bold text-muted'>Communication</label>
 
             <div className='col-lg-8'>
-              <span className='fw-bolder fs-6 text-dark'>Email, Phone</span>
+              <span className='fw-bolder fs-6 text-dark'>
+                {profile.communications.email && 'Email'}
+                {profile.communications.phone && 'Phone'}
+              </span>
             </div>
           </div>
 

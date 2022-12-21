@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import clsx from 'clsx'
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { KTSVG, toAbsoluteUrl } from '../../../helpers'
-import { useLayout } from '../../core'
-import { Header } from './Header'
-import { DefaultTitle } from './page-title/DefaultTitle'
-import { Topbar } from './Topbar'
+import {Link} from 'react-router-dom'
+import {KTSVG, toAbsoluteUrl} from '../../../helpers'
+import {useLayout} from '../../core'
+import {Header} from './Header'
+import {DefaultTitle} from './page-title/DefaultTitle'
+import {Topbar} from './Topbar'
 
 export function HeaderWrapper() {
-  const { config, classes, attributes } = useLayout()
-  const { header, aside } = config
+  const {config, classes, attributes} = useLayout()
+  const {header, aside} = config
 
   return (
     <div
@@ -39,8 +39,12 @@ export function HeaderWrapper() {
         {/* begin::Logo */}
         {!aside.display && (
           <div className='d-flex align-items-center flex-grow-1 flex-lg-grow-0'>
-            <Link to='/dashboard' className='d-lg-none'>
-              <img alt='Logo' src={toAbsoluteUrl('/media/logos/diasprex-logo.png')} className='h-30px' />
+            <Link to='about' className='d-lg-none'>
+              <img
+                alt='Logo'
+                src={toAbsoluteUrl('/media/logos/diasprex-logo.png')}
+                className='h-30px'
+              />
             </Link>
           </div>
         )}
@@ -48,8 +52,12 @@ export function HeaderWrapper() {
 
         {aside.display && (
           <div className='d-flex align-items-center flex-grow-1 flex-lg-grow-0'>
-            <Link to='/' className='d-lg-none'>
-              <img alt='Logo' src={toAbsoluteUrl('/media/logos/diasprex-logo.png')} className='h-30px' />
+            <Link to='about' className='d-lg-none'>
+              <img
+                alt='Logo'
+                src={toAbsoluteUrl('/media/logos/diasprex-logo.png')}
+                className='h-30px'
+              />
             </Link>
           </div>
         )}
@@ -70,7 +78,6 @@ export function HeaderWrapper() {
           )}
 
           <div className='d-flex align-items-stretch flex-shrink-0'>
-
             <Topbar />
           </div>
         </div>

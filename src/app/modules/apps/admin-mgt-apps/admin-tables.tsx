@@ -1,0 +1,7 @@
+export * from './user-management/UsersPage'
+export * from './opp-management/OppsPage'
+export * from './proposal-management/ProposalPage'
+export * from './remittance-management/RemitPage'
+export * from './transactions-management/TransPage'
+export * from './payment-management/PaymentPage'
+export * from './diasporas-management/DiasporasPage'

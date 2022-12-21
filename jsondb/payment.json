@@ -1,0 +1,15 @@
+{
+  "methods": [
+    {
+      "userid": 1,
+      "nameOnCard": "",
+      "cardNumber": "",
+      "cardExpiryMonth": "",
+      "cardExpiryYear": "",
+      "cardCvv": 123,
+      "saveCard": false,
+      "accountNumber": 123456789,
+      "routingNumber": 110000000
+    }
+  ]
+}

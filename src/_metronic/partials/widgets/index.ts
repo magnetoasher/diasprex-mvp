@@ -37,6 +37,7 @@ export * from './statistics/StatisticsWidget5'
 export * from './statistics/StatisticsWidget6'
 
 // charts
+export * from './charts/ChartsWidget1New'
 export * from './charts/ChartsWidget1'
 export * from './charts/ChartsWidget2'
 export * from './charts/ChartsWidget3'
@@ -82,3 +83,7 @@ export * from './stats/StatsWidget9'
 export * from './feeds/FeedsWidget2'
 export * from './feeds/FeedsWidget3'
 export * from './feeds/FeedsWidget4'
+
+// cards
+export * from './cards/CardsWidget7'
+export * from './cards/CardsWidget20'

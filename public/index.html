@@ -5,30 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Diasprex Platform" />
-    <link
-      href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"
-      rel="stylesheet"
-    />
+    <link href="//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- SPLASH SCREEN-->
-    <link
-      rel="stylesheet"
-      id="layout-styles-anchor"
-      href="%PUBLIC_URL%/splash-screen.css"
-    />
+    <link rel="stylesheet" id="layout-styles-anchor" href="%PUBLIC_URL%/splash-screen.css" />
     <title>Diasprex</title>
-    <link rel="shortcut icon" href="%PUBLIC_URL%/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/media/logos/diasprexicon.svg" />
   </head>
   <!-- TIP: add dark-mode class to enable dark mode -->
   <body id="kt_body" class="page-loading dark-mode">
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <!--begin::Theme mode setup on page load-->
+    <script>
+      if (document.documentElement) {
+        var defaultThemeMode = 'system'
+
+        var themeMode = localStorage.getItem('kt_theme_mode_value')
+        if (!themeMode) {
+          if (defaultThemeMode === 'system') {
+            themeMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+          } else {
+            themeMode = defaultThemeMode
+          }
+        }
+
+        document.documentElement.setAttribute('data-theme', themeMode)
+      }
+    </script>
+    <!--end::Theme mode setup on page load-->
     <div id="root" class="d-flex flex-column flex-root"></div>
     <div id="splash-screen" class="splash-screen">
-      <img
-        src="%PUBLIC_URL%/media/logos/diasprex-logo.png"
-        alt="Metronic logo"
-        class="h-30px"
-      />
+      <img src="%PUBLIC_URL%/media/logos/diasprexlogo.svg" alt="Metronic logo" class="h-30px" />
       <span>Loading ...</span>
     </div>
     <div id="root-modals"></div>

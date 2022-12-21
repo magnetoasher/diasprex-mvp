@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, Fragment} from 'react'
 import * as Yup from 'yup'
 import clsx from 'clsx'
 import {Link} from 'react-router-dom'
@@ -43,7 +43,7 @@ export function ForgotPassword() {
   })
 
   return (
-    <>
+    <Fragment>
       <form
         className='form w-100 fv-plugins-bootstrap5 fv-plugins-framework'
         noValidate
@@ -130,6 +130,6 @@ export function ForgotPassword() {
         </div>
         {/* end::Form group */}
       </form>
-    </>
+    </Fragment>
   )
 }

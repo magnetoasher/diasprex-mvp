@@ -80,10 +80,7 @@ const HeaderNotificationsMenu: FC = () => (
         </div>
 
         <div className='py-3 text-center border-top'>
-          <Link
-            to='/crafted/profile/overview'
-            className='btn btn-color-gray-600 btn-active-color-primary'
-          >
+          <Link to='/profile/overview' className='btn btn-color-gray-600 btn-active-color-primary'>
             View All <KTSVG path='/media/icons/duotune/arrows/arr064.svg' className='svg-icon-5' />
           </Link>
         </div>
@@ -103,7 +100,7 @@ const HeaderNotificationsMenu: FC = () => (
                 href='#'
                 className='btn btn-sm btn-primary px-6'
                 data-bs-toggle='modal'
-                data-bs-target='#kt_modal_upgrade_plan'
+                data-bs-target='#upgrade_plan'
               >
                 Upgrade
               </a>
