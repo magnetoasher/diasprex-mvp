@@ -17,13 +17,13 @@ import {Opps, OppsQueryResponse} from './_models'
 // let uid = 'j18c5SP2VhXEOIgBHgbf3kNvloS2'
 // let useruid = `${username}.${uid}`
 // let token = 'n0793EocywTXnolyidNY1KX6nG42fc14UPdVXaU2'
-// const API_URL ='https://diasprex-demo-api-default-rtdb.firebaseio.com'
+// const OPPS_URL = 'https://diasprex-api-demo-default-rtdb.firebaseio.com/oppsdata'
 const API_URL = process.env.REACT_APP_DIASPREX_API_URL
 const OPPS_URL = `${API_URL}/opportunities`
 const GET_OPPS_URL = `${OPPS_URL}/opportunities`
 
 // const getOpps = async (query: string): Promise<OppsQueryResponse> => {
-//   const res = await fetch(`${OPPS_URL}?${query}`)
+//   const res = await fetch(OPPS_URL)
 //   const resjson: OppsQueryResponse = await res.json()
 //   const result = {
 //     data: Object.values(resjson) as Opps[],
@@ -49,7 +49,7 @@ const getOppById = (id: ID): Promise<Opps | undefined> => {
 
 const createOpp = (opps: Opps): Promise<Opps | undefined> => {
   return axios
-    .put(OPPS_URL, opps)
+    .post(`${OPPS_URL}/create`, opps)
     .then((response: AxiosResponse<Response<Opps>>) => response.data)
     .then((response: Response<Opps>) => response.data)
 }
@@ -65,9 +65,34 @@ const deleteOpps = (userId: ID): Promise<void> => {
   return axios.delete(`${OPPS_URL}/${userId}`).then(() => {})
 }
 
+// const deleteSelectedOpps = (oppsIds: Array<ID>): Promise<void> => {
+//   const requests = oppsIds.map((id) => axios.delete(`${OPPS_URL}/${id}`))
+//   return axios.all(requests).then(() => {})
+// }
+
 const deleteSelectedOpps = (oppsIds: Array<ID>): Promise<void> => {
-  const requests = oppsIds.map((id) => axios.delete(`${OPPS_URL}/${id}`))
+  const requests = oppsIds.map((id) => changeOppsStatus(id, 'deleted'))
+  return axios.all(requests).then(() => {})
+}
+const publishSelectedOpps = (oppsIds: Array<ID>): Promise<void> => {
+  const requests = oppsIds.map((id) => changeOppsStatus(id, 'published'))
   return axios.all(requests).then(() => {})
 }
 
-export {getOpps, deleteOpps, deleteSelectedOpps, getOppById, createOpp, updateOpp}
+const changeOppsStatus = (id: ID, status: string): Promise<void> => {
+  const data = {
+    status,
+  }
+  return axios.post(`${OPPS_URL}/${id}/status?status=${status}`, data).then(() => {})
+}
+
+export {
+  getOpps,
+  deleteOpps,
+  deleteSelectedOpps,
+  getOppById,
+  createOpp,
+  updateOpp,
+  publishSelectedOpps,
+  changeOppsStatus,
+}

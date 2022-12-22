@@ -5,7 +5,7 @@ import {MenuComponent} from '../../../../../../../../_metronic/assets/ts/compone
 import {ID, KTSVG, QUERIES} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
-import {deleteOpps} from '../../core/_oppsrequests'
+import {deleteOpps, changeOppsStatus} from '../../core/_oppsrequests'
 
 type Props = {
   id: ID
@@ -24,11 +24,48 @@ const OppsActionsCell: FC<Props> = ({id}) => {
     setItemIdForUpdate(id)
   }
 
-  const deleteItem = useMutation(() => deleteOpps(id), {
+  // const deleteItem = useMutation(() => deleteOpps(id), {
+  //   // 💡 response of the mutation is passed to onSuccess
+  //   onSuccess: () => {
+  //     // ✅ update detail view directly
+  //     queryClient.invalidateQueries([`${QUERIES.OPPS_LIST}-${query}`])
+  //   },
+  // })
+
+  const deleteOpp = useMutation(() => changeOppsStatus(id, 'deleted'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
-      queryClient.invalidateQueries([`${QUERIES.OPPS_LIST}-${query}`])
+      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
+    },
+  })
+  const acceptOpp = useMutation(() => changeOppsStatus(id, 'accepted'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
+    },
+  })
+  const acceptOppwRevision = useMutation(() => changeOppsStatus(id, 'accepted with revision'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
+    },
+  })
+
+  const publishOpp = useMutation(() => changeOppsStatus(id, 'published'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
+    },
+  })
+  const rejectOpp = useMutation(() => changeOppsStatus(id, 'not accepted'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
     },
   })
 
@@ -60,19 +97,58 @@ const OppsActionsCell: FC<Props> = ({id}) => {
         <div className='menu-item px-3'>
           <a
             className='menu-link px-3'
-            data-kt-users-table-filter='delete_row'
-            onClick={async () => await deleteItem.mutateAsync()}
+            data-kt-users-table-filter='publish_opp'
+            onClick={async () => await publishOpp.mutateAsync()}
+          >
+            Publish
+          </a>
+        </div>
+        <div className='menu-item px-3'>
+          <a
+            className='menu-link px-3'
+            data-kt-users-table-filter='accept_opp'
+            onClick={async () => await acceptOpp.mutateAsync()}
+          >
+            Accept
+          </a>
+        </div>
+
+        <div className='menu-item px-3'>
+          <a
+            className='menu-link px-3'
+            data-kt-users-table-filter='revision'
+            onClick={async () => await acceptOppwRevision.mutateAsync()}
+          >
+            Accept/Review
+          </a>
+        </div>
+
+        <div className='menu-item px-3'>
+          <a
+            className='menu-link px-3'
+            data-kt-users-table-filter='reject'
+            onClick={async () => await rejectOpp.mutateAsync()}
+          >
+            Reject
+          </a>
+        </div>
+
+        <div className='menu-item px-3'>
+          <a
+            className='menu-link px-3'
+            data-kt-users-table-filter='delete_opp'
+            onClick={async () => await deleteOpp.mutateAsync()}
           >
             Delete
           </a>
         </div>
 
-          <div className='menu-item px-3'>
+        <div className='menu-item px-3'>
           <a
             className='menu-link px-3'
             id='kt_drawer_chat_toggle'
-            data-kt-users-table-filter='delete_row'
-            onClick={async () => await deleteItem.mutateAsync()}
+            data-kt-users-table-filter='delete_opp'
+            onClick={async () => await deleteOpp.mutateAsync()}
           >
             Message
           </a>

@@ -1,28 +1,14 @@
 import {Button, Tooltip} from 'antd'
+import clsx from 'clsx'
 import {useNavigate, Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {Opps} from '../../../../app/modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 
-type Props = {
-  id: number
-  sponsor: string
-  src?: string
-  badgeColor?: string
-  description?: string
-  budget?: string
-  status?: string
-  statusColor?: string
-  title: string
-  country: string
-  summary?: string
-  dueDate: string
-  reward?: string
-  following?: string
-  interest?: string
-}
-
-const GeneralOpportunityCard = (props: Props) => {
+const GeneralOpportunityCard = (props: Opps) => {
   const history = useNavigate()
-
+  const blankImg = toAbsoluteUrl('/media/svg/avatars/blank.svg')
+  const badgeColor = props.open ? 'success' : 'danger'
+  const dealTypeLength = props.dealtype?.length! - 1
   return (
     // <Link to='/view_opportunity'>
     <div className='card row-lg border border-2 border-gray-300 border-hover p-3'>
@@ -45,8 +31,8 @@ const GeneralOpportunityCard = (props: Props) => {
               />
             </span>
 
-            <span className={`badge badge-light-${props.badgeColor} fw-bolder me-auto py-3`}>
-              {props.status}
+            <span className={`badge badge-light-${badgeColor} fw-bolder me-auto py-3`}>
+              {props.open ? 'Open' : 'Closed'}
             </span>
           </div>
         </div>
@@ -57,8 +43,23 @@ const GeneralOpportunityCard = (props: Props) => {
       <div className=' col py-1 px-3 mb-1'>
         <p className='text-gray-400 fw-bold fs-9 mt-1 mb-2'>{props.title}</p>
       </div>
+
       <div className='col text-center text-center py-1 mb-3 '>
-        <img className='d-block mw-100 rounded' src={props.src} alt='oppsthumb' />
+        {/* begin::Image input */}
+
+        {props.thumbnail === '' ? (
+          <div
+            className={clsx(
+              'd-flex symbol-label mw-100 h-200px align-items-center justify-content-center fs-1 rounded',
+              `bg-light-${badgeColor}`,
+              ` text-capitalize text-${badgeColor}`
+            )}
+          >
+            {props.country}
+          </div>
+        ) : (
+          <img className='d-block mw-100 rounded' src={props.thumbnail} alt='oppsthumb' />
+        )}
       </div>
 
       {/* <div style={{
@@ -112,7 +113,7 @@ const GeneralOpportunityCard = (props: Props) => {
                   fontSize: '12px',
                 }}
               >
-                {props.dueDate}
+                {props.duedate}
               </label>
             </div>
             <div className='fw-bold text-gray-400'>Due Date</div>
@@ -130,7 +131,13 @@ const GeneralOpportunityCard = (props: Props) => {
                   fontSize: '12px',
                 }}
               >
-                Cash Contract Equity
+                {props.dealtype?.map((deal, index) =>
+                  index !== dealTypeLength ? (
+                    <span className='me-1'>{deal} |</span>
+                  ) : (
+                    <span className='me-1'>{deal}</span>
+                  )
+                )}
               </label>
             </div>
             <div className='fw-bold text-gray-400'>Deal Type</div>
@@ -176,7 +183,7 @@ const GeneralOpportunityCard = (props: Props) => {
               textAlign: 'center',
             }}
           >
-            <label style={{fontSize: '23px', fontWeight: '600'}}>{props.interest}</label>
+            <label style={{fontSize: '23px', fontWeight: '600'}}>{props.showedinterest}</label>
             <label
               style={{
                 fontSize: '16px',
@@ -212,10 +219,10 @@ const GeneralOpportunityCard = (props: Props) => {
               state: {
                 title: props.title,
                 summary: props.summary,
-                due_date: props.dueDate,
+                due_date: props.duedate,
                 following: props.following,
-                interest: props.interest,
-                imgSource: props.src,
+                interest: props.showedinterest,
+                imgSource: props.thumbnail,
               },
             })
           }}

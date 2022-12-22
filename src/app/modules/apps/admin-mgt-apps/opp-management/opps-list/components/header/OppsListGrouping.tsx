@@ -2,8 +2,8 @@ import {useQueryClient, useMutation} from 'react-query'
 import {QUERIES} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
-import { deleteSelectedOpps } from '../../core/_oppsrequests'
-import { ConfirmModal } from '../../../../../../../../_metronic/partials/modals/confirm-action/ConfirmAction'
+import {deleteSelectedOpps, publishSelectedOpps} from '../../core/_oppsrequests'
+import {ConfirmModal} from '../../../../../../../../_metronic/partials/modals/confirm-action/ConfirmAction'
 
 const OppsListGrouping = () => {
   const {selected, clearSelected} = useListView()
@@ -11,6 +11,14 @@ const OppsListGrouping = () => {
   const {query} = useQueryResponse()
 
   const deleteSelectedItems = useMutation(() => deleteSelectedOpps(selected), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.OPPS_LIST}-${query}`])
+      clearSelected()
+    },
+  })
+  const publishSelectedItems = useMutation(() => publishSelectedOpps(selected), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
@@ -28,35 +36,36 @@ const OppsListGrouping = () => {
       <button
         type='button'
         className='btn btn-danger me-2'
-        data-bs-toggle="modal"
-        data-bs-target="#kt_modal_3"
-        onClick={async () => await deleteSelectedItems.mutateAsync()}
+        data-bs-toggle='modal'
+        data-bs-target='#kt_modal_3'
       >
         Delete Selected
       </button>
-    <ConfirmModal
-        id ="kt_modal_3"
+      <ConfirmModal
+        id='kt_modal_3'
         title1='Delete Users'
         title2='Are you sure you want to permanently selected opportunities'
         confirm='Delete'
-         classname = "btn btn-danger"
-      ConfirmHandler={async () => await deleteSelectedItems.mutateAsync()}/>
+        classname='btn btn-danger'
+        ConfirmHandler={async () => await deleteSelectedItems.mutateAsync()}
+      />
 
-            <button
+      <button
         type='button'
         className='btn btn-primary me-2'
-        data-bs-toggle="modal"
-         data-bs-target="#kt_modal_4"
+        data-bs-toggle='modal'
+        data-bs-target='#kt_modal_4'
       >
-        Change Status
+        Publish Selected
       </button>
       <ConfirmModal
-        id ="kt_modal_4"
+        id='kt_modal_4'
         title1='Change Opportunities Status'
         title2='Are you sure you want to change the status of the selected opportunities'
-        confirm='Update'
-         classname = "btn btn-primary"
-      ConfirmHandler={async () => await deleteSelectedItems.mutateAsync()}/>
+        confirm='Publish'
+        classname='btn btn-primary'
+        ConfirmHandler={async () => await publishSelectedItems.mutateAsync()}
+      />
     </div>
   )
 }

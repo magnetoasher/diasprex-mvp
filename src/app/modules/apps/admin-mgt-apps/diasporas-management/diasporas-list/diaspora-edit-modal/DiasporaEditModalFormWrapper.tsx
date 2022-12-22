@@ -4,6 +4,7 @@ import {isNotEmpty, QUERIES} from '../../../../../../../_metronic/helpers'
 import {useListView} from '../core/ListViewProvider'
 import {getDiasporaById} from '../core/_requests'
 import {initialDiaspora} from '../core/_models'
+import {uadFormModel} from '../../../../../Diasporas/components/core/_model'
 
 const DiasporaEditModalFormWrapper = () => {
   const {itemIdForUpdate, setItemIdForUpdate} = useListView()
@@ -35,7 +36,10 @@ const DiasporaEditModalFormWrapper = () => {
 
   if (!isLoading && !error && diaspora) {
     return (
-      <DiasporaEditModalForm isDiasporaLoading={isLoading} diaspora={Object.values(diaspora)[0]} />
+      <DiasporaEditModalForm
+        isDiasporaLoading={isLoading}
+        diaspora={Object.values(diaspora)[0] as uadFormModel}
+      />
     )
   }
 

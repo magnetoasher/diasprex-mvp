@@ -1,14 +1,15 @@
 import {useEffect, useState} from 'react'
 import {MenuComponent} from '../../../../../../../../_metronic/assets/ts/components'
 import {initialQueryState, KTSVG} from '../../../../../../../../_metronic/helpers'
+import {OppsCategory} from '../../../../../../../../_metronic/partials/content/selectionlists/oppscategory'
 import {useQueryRequest} from '../../../../core/QueryRequestProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
 
 const OppsListFilter = () => {
   const {updateState} = useQueryRequest()
   const {isLoading} = useQueryResponse()
-  const [role, setRole] = useState<string | undefined>()
-  const [lastLogin, setLastLogin] = useState<string | undefined>()
+  const [status, setStatus] = useState<string | undefined>()
+  const [category, setCategory] = useState<string | undefined>()
 
   useEffect(() => {
     MenuComponent.reinitialization()
@@ -20,7 +21,7 @@ const OppsListFilter = () => {
 
   const filterData = () => {
     updateState({
-      filter: {role, last_login: lastLogin},
+      filter: {status, category: category},
       ...initialQueryState,
     })
   }
@@ -61,17 +62,19 @@ const OppsListFilter = () => {
               data-kt-select2='true'
               data-placeholder='Select option'
               data-allow-clear='true'
-              data-kt-user-table-filter='role'
+              data-kt-user-table-filter='status'
               data-hide-search='true'
-              onChange={(e) => setRole(e.target.value)}
-              value={role}
+              onChange={(e) => setStatus(e.target.value)}
+              value={status}
             >
               <option value=''></option>
-              <option value='Administrator'>In Review</option>
-              <option value='Analyst'>Accepted</option>
-              <option value='Developer'>Accepted w/ Revision</option>
-              <option value='Support'>Not Accepted</option>
-              <option value='Trial'>Expired</option>
+              <option value='new'>New</option>
+              <option value='inreview'>In Review</option>
+              <option value='accepted'>Accepted</option>
+              <option value='revision'>Accepted with Revision</option>
+              <option value='notaccepted'>Not Accepted</option>
+              <option value='expired'>Expired</option>
+              <option value='published'>Published</option>
             </select>
           </div>
           {/* end::Input group */}
@@ -84,20 +87,12 @@ const OppsListFilter = () => {
               data-kt-select2='true'
               data-placeholder='Select option'
               data-allow-clear='true'
-              data-kt-user-table-filter='two-step'
+              data-kt-user-table-filter='category'
               data-hide-search='true'
-              onChange={(e) => setLastLogin(e.target.value)}
-              value={lastLogin}
+              onChange={(e) => setCategory(e.target.value)}
+              value={category}
             >
-              <option value=''></option>
-              <option value='Yesterday'>Agriculture</option>
-              <option value='20 mins ago'>Healthcare</option>
-              <option value='5 hours ago'>Education</option>
-              <option value='2 days ago'>Manufacturing</option>
-              <option value='2 days ago'>Tourism</option>
-              <option value='2 days ago'>Transportation</option>
-              <option value='2 days ago'>Technology</option>
-              <option value='2 days ago'>Travel</option>
+              <OppsCategory />
             </select>
           </div>
           {/* end::Input group */}
@@ -107,7 +102,7 @@ const OppsListFilter = () => {
             <button
               type='button'
               disabled={isLoading}
-              onClick={filterData}
+              onClick={resetData}
               className='btn btn-light btn-active-light-primary fw-bold me-2 px-6'
               data-kt-menu-dismiss='true'
               data-kt-user-table-filter='reset'
@@ -117,7 +112,7 @@ const OppsListFilter = () => {
             <button
               disabled={isLoading}
               type='button'
-              onClick={resetData}
+              onClick={filterData}
               className='btn btn-primary fw-bold px-6'
               data-kt-menu-dismiss='true'
               data-kt-user-table-filter='filter'

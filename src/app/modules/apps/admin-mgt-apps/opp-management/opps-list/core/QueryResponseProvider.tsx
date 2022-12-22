@@ -37,6 +37,7 @@ const QueryResponseProvider: FC<WithChildren> = ({children}) => {
     },
     {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
   )
+  console.log('Opps Query', query)
 
   return (
     <QueryResponseContext.Provider value={{isLoading: isFetching, refetch, response, query}}>
@@ -49,7 +50,7 @@ const useQueryResponse = () => useContext(QueryResponseContext)
 
 const useQueryResponseData = () => {
   const {response} = useQueryResponse()
-  console.log('Opps Respose', response)
+  // console.log('Opps Respose', response)
   if (!response) {
     return []
   }

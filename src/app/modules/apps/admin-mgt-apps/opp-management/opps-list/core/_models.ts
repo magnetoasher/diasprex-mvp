@@ -3,6 +3,7 @@ import * as Yup from 'yup'
 
 // type model for opportunities
 export type Opps = {
+  uuid?: ID
   id?: ID
   title?: string
   thumbnail?: string
@@ -16,7 +17,8 @@ export type Opps = {
   duedate?: string
   open?: boolean
   dealtype?: string[]
-  otherdealtype?: string[]
+  otherdealtype?: string
+  featuredopp?: boolean
   initials?: {
     label: string
     state: string
@@ -30,11 +32,11 @@ export type OppsQueryResponse = Response<Array<Opps>>
 export const initialOpps: Opps = {
   title: '',
   id: '',
-  thumbnail: 'avatars/300-6.jpg',
+  thumbnail: '',
   sponsor: '',
   summary: '',
   status: '',
-  datesubmitted: '10 May 2022',
+  datesubmitted: 'Todays Date',
   duedate: '',
   category: '',
   following: 0,

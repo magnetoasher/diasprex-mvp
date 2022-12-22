@@ -51,6 +51,7 @@ export interface uadFormModel {
     label?: string
     state?: string
   }
+  featureddiasp?: boolean
 }
 
 export const InitialDiasp = {

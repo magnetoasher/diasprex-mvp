@@ -16,17 +16,41 @@ const OppsInfoCell: FC<Props> = ({opp}) => (
       <a href='#'>
         {opp.thumbnail ? (
           <div className='symbol-label'>
-            <img src={toAbsoluteUrl(`/media/${opp.thumbnail}`)} alt={opp.sponsor} className='w-100' />
+            <img
+              src={toAbsoluteUrl(`/media/${opp.thumbnail}`)}
+              alt={opp.sponsor}
+              className='w-100'
+            />
           </div>
         ) : (
           <div
             className={clsx(
               'symbol-label fs-3',
-              `bg-light-${opp.initials?.state}`,
-              `text-${opp.initials?.state}`
+              `bg-light-${
+                opp.initials?.state || opp.status === 'new'
+                  ? 'info'
+                  : opp.status === 'published'
+                  ? 'success'
+                  : opp.status === 'not accepted'
+                  ? 'danger'
+                  : opp.status === 'accepted'
+                  ? 'primary'
+                  : 'warning'
+              }`,
+              `text-${
+                opp.initials?.state || opp.status === 'new'
+                  ? 'info'
+                  : opp.status === 'published'
+                  ? 'success'
+                  : opp.status === 'not accepted'
+                  ? 'danger'
+                  : opp.status === 'accepted'
+                  ? 'primary'
+                  : 'warning'
+              }`
             )}
           >
-            {opp.title}
+            {opp.country}
           </div>
         )}
       </a>

@@ -1,11 +1,14 @@
 import {FC} from 'react'
-
+import Moment from 'moment'
 type Props = {
-  date_prop?: string
+  value: string
 }
 
-const OppsDateCell: FC<Props> = ({date_prop}) => (
-  <div className='badge badge-light fw-bolder'>{date_prop}</div>
+const OppsDateCell: FC<Props> = ({value}) => (
+  <div className='badge badge-light fw-bolder'>
+    {' '}
+    {Moment(value).format('MMMM Do YYYY, h:mm:ss a')}
+  </div>
 )
 
 export {OppsDateCell}

@@ -1,19 +1,18 @@
 // @ts-nocheck
 import {Column} from 'react-table'
-import {OppsOpenCell} from './OppsOpenCell'
-import {OppsDateCell } from './OppsDateCell'
+import {OppsYesNoCell} from './OppsYesNoCell'
+import {OppsDateCell} from './OppsDateCell'
 import {OppsStatusCell} from './OppsStatusCell'
 import {OppsActionsCell} from './OppsActionsCell'
 import {OppsSelectionCell} from './OppsSelectionCell'
 import {OppsCustomHeader} from './OppsCustomHeader'
-import {OppsSelectionHeader } from './OppsSelectionHeader'
-import {OppsSponsorCell } from './OppsSponsorCell'
-import { OppsInfoCell } from './OppsInfoCell'
+import {OppsSelectionHeader} from './OppsSelectionHeader'
+import {OppsSponsorCell} from './OppsSponsorCell'
+import {OppsInfoCell} from './OppsInfoCell'
 import {Opps} from '../../core/_models'
 
 const OppsColumns: ReadonlyArray<Column<Opps>> = [
-
-// Begin ID:: Column
+  // Begin ID:: Column
   {
     Header: (props) => <OppsSelectionHeader tableProps={props} />,
     id: 'selection',
@@ -29,23 +28,32 @@ const OppsColumns: ReadonlyArray<Column<Opps>> = [
 
   // Begin Title:: Column
   {
-    Header: (props) => <OppsCustomHeader tableProps={props} title='Title' className='min-w-125px' />,
+    Header: (props) => (
+      <OppsCustomHeader tableProps={props} title='Title' className='min-w-125px' />
+    ),
     accessor: 'title',
+  },
+
+  {
+    Header: (props) => (
+      <OppsCustomHeader tableProps={props} title='Category' className='min-w-125px' />
+    ),
+    accessor: 'category',
   },
 
   // Begine Open:: Column
   {
-    Header: (props) => (
-      <OppsCustomHeader tableProps={props} title='Open' className='min-w-125px' />
-    ),
+    Header: (props) => <OppsCustomHeader tableProps={props} title='Open' className='min-w-125px' />,
     id: 'open',
-    Cell: ({...props}) => <OppsOpenCell open={props.data[props.row.index].open} />,
+    Cell: ({...props}) => <OppsYesNoCell yes={props.data[props.row.index].open} />,
   },
 
-   // Begine Sponsor:: Column
+  // Begine Sponsor:: Column
   {
-    Header: (props) => <OppsCustomHeader tableProps={props} title='Sponsor' className='min-w-125px' />,
-        id: 'sponsor',
+    Header: (props) => (
+      <OppsCustomHeader tableProps={props} title='Sponsor' className='min-w-125px' />
+    ),
+    id: 'sponsor',
     Cell: ({...props}) => <OppsSponsorCell opp={props.data[props.row.index]} />,
   },
 
@@ -55,7 +63,7 @@ const OppsColumns: ReadonlyArray<Column<Opps>> = [
       <OppsCustomHeader tableProps={props} title='Date Submitted' className='min-w-125px' />
     ),
     id: 'datesubmitted',
-    Cell: ({...props}) => <OppsDateCell date_prop={props.data[props.row.index].datesubmitted} />,
+    Cell: ({...props}) => <OppsDateCell value={props.data[props.row.index].datesubmitted} />,
   },
 
   // Begine Due Date:: Column
@@ -64,9 +72,9 @@ const OppsColumns: ReadonlyArray<Column<Opps>> = [
       <OppsCustomHeader tableProps={props} title='Due Date' className='min-w-125px' />
     ),
     id: 'duedate',
-    Cell: ({...props}) => <OppsDateCell date_prop={props.data[props.row.index].duedate} />,
+    Cell: ({...props}) => <OppsDateCell value={props.data[props.row.index].duedate} />,
   },
-  
+
   // Begine Status:: Column
   {
     Header: (props) => (
@@ -74,6 +82,15 @@ const OppsColumns: ReadonlyArray<Column<Opps>> = [
     ),
     id: 'status',
     Cell: ({...props}) => <OppsStatusCell status={props.data[props.row.index].status} />,
+  },
+
+  // Begine Featured:: Column
+  {
+    Header: (props) => (
+      <OppsCustomHeader tableProps={props} title='Featured' className='min-w-125px' />
+    ),
+    id: 'featuredopp',
+    Cell: ({...props}) => <OppsYesNoCell yes={props.data[props.row.index].featuredopp} />,
   },
 
   // Begine Actions:: Column

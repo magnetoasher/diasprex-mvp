@@ -14,13 +14,14 @@ import {CountryList, IndustryList} from '../../../../_metronic/partials/content/
 import {Formik, useFormik} from 'formik'
 import {nanoid} from '@reduxjs/toolkit'
 import axios from 'axios'
+import {getUniqueIdWithPrefix} from '../../../../_metronic/assets/ts/_utils'
+import {OppsCategory} from '../../../../_metronic/partials/content/selectionlists/oppscategory'
 
 export const Create = () => {
   const {Option} = Select
   const {TextArea} = Input
   const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY']
   const [isOtherSelected, setIsOtherSelected] = useState(false)
-  const [otherDealTypes, setOtherDealTypes] = useState('')
 
   const onChange = (value) => {
     console.log(`selected ${value}`)
@@ -32,13 +33,15 @@ export const Create = () => {
     validateOnChange: false,
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
-
+      const idNumber = nanoid()
       const data = {
         ...values,
-        uuid: nanoid(),
+        uuid: idNumber,
+        id: idNumber,
         sponsorUserId: nanoid(),
         sponsor: localStorage.getItem('userTypeFull'),
         status: 'new',
+        open: false,
         datesubmitted: new Date(),
         duedate: values.duedate === '' && moment(new Date()).add(90, 'days').toDate(),
         otherdealtype: !isOtherSelected ? null : values.otherdealtype,
@@ -96,28 +99,7 @@ export const Create = () => {
                   autoComplete='off'
                   disabled={formik.isSubmitting}
                 >
-                  <>
-                    <option value='Accounting'>Accounting</option>
-                    <option value='Airlines/Aviation'>Airlines/Aviation</option>
-                    <option value='Alternative Dispute Resolution'>
-                      Alternative Dispute Resolution
-                    </option>
-                    <option value='Alternative Medicine'>Alternative Medicine</option>
-                    <option value='Animation'>Animation</option>
-                    <option value='Apparel/Fashion'>Apparel/Fashion</option>
-                    <option value='Architecture/Planning'>Architecture/Planning</option>
-                    <option value='Arts/Crafts'>Arts/Crafts</option>
-                    <option value='Automotive'>Automotive</option>
-                    <option value='Aviation/Aerospace'>Aviation/Aerospace</option>
-                    <option value='Banking/Mortgage'>Banking/Mortgage</option>
-                    <option value='Biotechnology/Greentech'>Biotechnology/Greentech</option>
-                    <option value='Broadcast Media'>Broadcast Media</option>
-                    <option value='Building Materials'>Building Materials</option>
-                    <option value='Business Supplies/Equipment'>Business Supplies/Equipment</option>
-                    <option value='Capital Markets/Hedge Fund/Private Equity'>
-                      Capital Markets/Hedge Fund/Private Equity
-                    </option>
-                  </>
+                  <OppsCategory />
                 </select>
                 {formik.touched.category && formik.errors.category && (
                   <div className='fv-plugins-message-container'>
@@ -347,17 +329,17 @@ export const Create = () => {
               toolbarClassName='toolbarClassName'
               wrapperClassName='wrapperClassName'
               editorClassName='editorClassName'
-              value={formik.values.oppsdesc}
+              value={formik.values.oppdesc}
               onContentStateChange={(val) => {
                 formik.handleChange({target: {name: 'oppdesc', value: val.blocks[0].text}})
               }}
               name='oppsdesc'
               disabled={formik.isSubmitting}
             />
-            {formik.touched.oppsdesc && formik.errors.oppsdesc && (
+            {formik.touched.oppdesc && formik.errors.oppdesc && (
               <div className='fv-plugins-message-container'>
                 <div className='fv-help-block text-danger'>
-                  <span role='alert'>{formik.errors.oppsdesc}</span>
+                  <span role='alert'>{formik.errors.oppdesc}</span>
                 </div>
               </div>
             )}
@@ -404,17 +386,32 @@ export const Create = () => {
               </label>
             </div>
             <div className='form-check form-check d-flex justify-content-start align-items-center mb-3'>
-              <input
-                className='form-check-input'
-                type='checkbox'
-                {...formik.getFieldProps('crowdfunding')}
-                id='request_crowdfunding'
-                name='crowdfunding'
-                disabled={true}
-              />
-              <label className='form-check-label fw-bold ps-2 fs-6' htmlFor='request_crowdfunding'>
-                Requesting Crowdfunding Campaign Through Diasprex (Coming soon)
-              </label>
+              <span className='me-3'>
+                <input
+                  className='form-check-input'
+                  type='checkbox'
+                  {...formik.getFieldProps('crowdfunding')}
+                  id='crowdfunding'
+                  name='crowdfunding'
+                  disabled={true}
+                />
+                <label className='form-check-label fw-bold ps-2 fs-6' htmlFor='crowdfunding'>
+                  Crowdfunding Campaign Through Diasprex (Coming soon)
+                </label>
+              </span>
+              <span className='me-3'>
+                <input
+                  className='form-check-input'
+                  type='checkbox'
+                  {...formik.getFieldProps('crowdlending')}
+                  id='crowdlending'
+                  name='crowdlending'
+                  disabled={true}
+                />
+                <label className='form-check-label fw-bold ps-2 fs-6' htmlFor='crowdlending'>
+                  Crowdlending Campaign Through Diasprex (Coming soon)
+                </label>
+              </span>
             </div>
             <div className='text-muted'>
               Checking these boxes does not guarantee Diasprex's financing. Only outstading

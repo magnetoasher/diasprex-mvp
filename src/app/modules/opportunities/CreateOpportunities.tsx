@@ -13,6 +13,7 @@ import {PageTitle} from '../../../_metronic/layout/core'
 
 import {Create} from './createOpportunitiesComponents/Create'
 import Opportunity from './Opportunity'
+
 const CreateOpportunities = () => {
   const {TabPane} = Tabs
   const onChange = (key: string) => {
