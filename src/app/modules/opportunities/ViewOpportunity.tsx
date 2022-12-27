@@ -129,7 +129,8 @@ function ViewOpportunity() {
                     color: 'white',
                   }}
                 >
-                  <Tooltip title='Share'>
+                  Crowdfund
+                  <Tooltip title='Crowdfund'>
                     <ShareAltOutlined />
                   </Tooltip>
                 </Button>
@@ -150,7 +151,8 @@ function ViewOpportunity() {
                     color: 'white',
                   }}
                 >
-                  <Tooltip title='Bookmark'>
+                  Crowdlend
+                  <Tooltip title='Crowdlend'>
                     <StarOutlined />
                   </Tooltip>
                 </Button>
@@ -169,7 +171,7 @@ function ViewOpportunity() {
                     borderRadius: '6px',
                   }}
                 >
-                  Add to Favourite
+                  Follow
                 </Button>
               </div>
             </div>

@@ -310,7 +310,7 @@ const Sponsor = () => {
         </div>
       </div>
 
-      <div className='fv-row mb-10'>
+      {/* <div className='fv-row mb-10'>
         <label>
           <Field type='checkbox' name='sponsorterms' className='me-3' />I agree to the Terms &amp;
           Conditions of DIASPREX Sponsors
@@ -318,7 +318,7 @@ const Sponsor = () => {
         <div className='text-danger mt-2'>
           <ErrorMessage name='sponsorterms' component='span' />
         </div>
-      </div>
+      </div> */}
 
       <div className='fv-row mb-10'>
         <label>

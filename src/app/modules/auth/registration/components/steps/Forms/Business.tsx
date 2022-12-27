@@ -301,7 +301,7 @@ const Business = () => {
         </div>
       </div>
 
-      <div className='fv-row mb-10'>
+      {/* <div className='fv-row mb-10'>
         <label>
           <Field type='checkbox' name='enablerterms' className='me-3' />I agree to the Terms &amp;
           Conditions of DIASPREX Enablers
@@ -309,7 +309,7 @@ const Business = () => {
         <div className='text-danger mt-2'>
           <ErrorMessage name='enablerterms' component='span' />
         </div>
-      </div>
+      </div> */}
 
       <div className='fv-row mb-10'>
         <label>

@@ -46,12 +46,15 @@ export interface uadFormModel {
   summary?: string
   interest?: string[]
   insightAfrica?: string
+  publishcontactinfo?: boolean
   avatar?: string
   initials?: {
     label?: string
     state?: string
   }
   featureddiasp?: boolean
+  dpxterms?: boolean
+  honeypot?: string
 }
 
 export const InitialDiasp = {
@@ -61,6 +64,9 @@ export const InitialDiasp = {
   rcountry: 'United States',
   afcountry: 'Nigeria',
   flag: '/media/flags/nigeria.svg',
+  honeypot: null,
+  dpxterms: false,
+  publishcontactinfo: true,
   undergrad: {
     inst: 'Olabisi Onabanjo University, Ogun State, Nigeria',
     field: 'Industrial Chemistry',
