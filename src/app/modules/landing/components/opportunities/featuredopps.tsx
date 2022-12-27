@@ -7,7 +7,6 @@ import object1 from '../../../opportunities/core/GeneralOpportunityCardObject1.j
 import {registerables} from 'chart.js'
 
 export const FeaturedOpportunities = () => {
-  const handleOppsEngage = () => {}
   return (
     <div className=''>
       <div className='container'>
@@ -29,17 +28,16 @@ export const FeaturedOpportunities = () => {
                 <GeneralCardComponent
                   id={element.id}
                   sponsor={element.sponsor}
-                  badgeColor={element.status == 'Open' ? 'success' : 'danger'}
+                  open={element.open}
                   title={element.title}
                   country={element.country}
                   status={element.status}
-                  description={element.description}
-                  dueDate={element.dueDate}
-                  budget={element.budget}
-                  src={element.img}
+                  oppdesc={element.oppdesc}
+                  duedate={element.duedate}
+                  thumbnail={element.thumbnail}
                   summary={element.summary}
                   following={element.following}
-                  interest={element.interest}
+                  showedinterest={element.showedinterest}
                 />
               ))}
             </div>
@@ -51,17 +49,16 @@ export const FeaturedOpportunities = () => {
                 <GeneralCardComponent
                   id={element.id}
                   sponsor={element.sponsor}
-                  badgeColor={element.status == 'Open' ? 'success' : 'danger'}
+                  open={element.open}
                   title={element.title}
                   country={element.country}
                   status={element.status}
-                  description={element.description}
-                  dueDate={element.dueDate}
-                  budget={element.budget}
-                  src={element.img}
+                  oppdesc={element.oppdesc}
+                  duedate={element.duedate}
+                  thumbnail={element.thumbnail}
                   summary={element.summary}
                   following={element.following}
-                  interest={element.interest}
+                  showedinterest={element.showedinterest}
                 />
               ))}
             </div>

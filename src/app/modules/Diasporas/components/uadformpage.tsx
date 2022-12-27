@@ -1,14 +1,21 @@
-import {FC, useState, useMemo} from 'react'
+import {FC, useState, useMemo, useEffect, forwardRef, createRef} from 'react'
 
 import {useFormik} from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import {uadFormModel} from './core/_model'
-
+import PhoneInput from 'react-phone-number-input'
+// import PhoneInput from 'react-phone-input-2'
 import countryList from 'react-select-country-list'
-import {CountryList} from '../../../../_metronic/partials/content/selectionlists'
+import {
+  CountryCodeList,
+  AfricanCountryList,
+} from '../../../../_metronic/partials/content/selectionlists'
 import {UploadFile} from '../../../../_metronic/partials/modals/file-management/uploadfile'
-import {phoneRegExp} from '../../../../_metronic/helpers'
+import {phoneRegExp, toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {useNavigate} from 'react-router-dom'
+import {OecdcountryList} from '../../../../_metronic/partials/content/selectionlists/oecdcountrylist'
+import 'react-phone-number-input/style.css'
 
 const editUADSchema = Yup.object().shape({
   fName: Yup.string()
@@ -51,13 +58,18 @@ const editUADSchema = Yup.object().shape({
   //     "Images only",
   //     value => value && FILE_TYPES.includes(value.type)
   //   )
+  dpxterms: Yup.boolean().required().label('Diasprex Terms and Conditions'),
 })
 
 export const UadFormPage: FC = () => {
-  const [value, setValue] = useState('')
-  const options = useMemo(() => countryList().getData(), [])
+  const [phoneValue, setPhoneValue] = useState('')
+  const countryOptions = useMemo(() => countryList().getData(), [])
+  const [countryResLabel, setCountryResLabel] = useState('united states')
+  const [countryOrigLabel, setCountryOrigLabel] = useState('algeria')
   const [formData, setformData] = useState({})
   const [avatarFile, setAvatarFile] = useState(null)
+
+  const navigate = useNavigate()
   const initialValues: uadFormModel = {
     fName: '',
     lName: '',
@@ -94,14 +106,18 @@ export const UadFormPage: FC = () => {
         status: 'New',
       }
       try {
-        await axios
-          .post(`${process.env.REACT_APP_DIASPREX_API_URL}/diaspora/create`, data)
-          .then((res) => console.log('onSubmit', res))
-          .catch((error) => error)
+        !values.honeypot && values.dpxterms
+          ? console.log('UADDATA', data)
+          : // await axios
+            //     .post(`${process.env.REACT_APP_DIASPREX_API_URL}/diaspora/create`, data)
+            //     .then((res) => console.log('onSubmit', res))
+            //     .catch((error) => error)
+            console.log('Robot Fill or Terms and Condition Error', data)
       } catch {
         console.log(formik.errors)
       } finally {
         formik.resetForm()
+        // navigate({pathname: '/diasporas'})
       }
     },
     validationSchema: editUADSchema,
@@ -113,12 +129,16 @@ export const UadFormPage: FC = () => {
     fontWeight: 600,
   }
 
-  // const [form] = Form.useForm()
-  // const onSubmit = () => {
-  //   form.validateFields().then(() => {
-  //     console.log('submitted')
-  //   })
-  // }
+  useEffect(() => {
+    console.log('Country', formik.values.countryOrig)
+    if (formik.values.countryRes) {
+      setCountryResLabel(formik.values.countryRes)
+    }
+    if (formik.values.countryOrig) {
+      setCountryOrigLabel(formik.values.countryOrig.toLowerCase())
+    }
+  }, [formik.values.countryRes, formik.values.countryOrig])
+
   return (
     <div className='card  mw-960px'>
       <div className='card-header d-flex flex-column text-center mb-13'>
@@ -224,6 +244,20 @@ export const UadFormPage: FC = () => {
               <label className='form-label required text-muted fw-bold fs-6 mb-2'>
                 Enter a valid phone number
               </label>
+
+              {/* <PhoneInput
+                {...formik.getFieldProps('phone')}
+                style={{}}
+                defaultCountry='US'
+                placeholder='Enter your phone number'
+                value={phoneValue}
+                onChange={() => {
+                  formik.handleChange({
+                    target: {name: 'phone', value: phoneValue},
+                  })
+                }}
+              /> */}
+
               <input
                 type='text'
                 className='form-control'
@@ -233,6 +267,7 @@ export const UadFormPage: FC = () => {
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               />
+
               {formik.touched.phone && formik.errors.phone && (
                 <div className='fv-plugins-message-container'>
                   <div className='fv-help-block text-danger'>
@@ -246,16 +281,31 @@ export const UadFormPage: FC = () => {
               <label className='form-label text-muted required fw-bold fs-6 mb-2'>
                 Please select your country of residence
               </label>
-              <select
-                className='form-select form-select-white'
-                aria-label='countryRes'
-                {...formik.getFieldProps('countryRes')}
-                name='countryRes'
-                autoComplete='off'
-                disabled={formik.isSubmitting}
-              >
-                <CountryList />
-              </select>
+              <span className='d-flex flex-row'>
+                <div className='input-group-prepend'>
+                  <div className='input-group' id='countryflag'>
+                    <img
+                      className='form-control mw-55px'
+                      src={toAbsoluteUrl(`/media/flags/${countryResLabel}.svg`)}
+                    />
+                  </div>
+                </div>
+                <select
+                  className='form-select form-select-white'
+                  aria-label='countryRes'
+                  {...formik.getFieldProps('countryRes')}
+                  name='countryRes'
+                  autoComplete='off'
+                  disabled={formik.isSubmitting}
+                  onChange={(e) => {
+                    formik.handleChange({
+                      target: {name: 'countryRes', value: e.target.value},
+                    })
+                  }}
+                >
+                  <OecdcountryList />
+                </select>
+              </span>
               {formik.touched.countryRes && formik.errors.countryRes && (
                 <div className='fv-plugins-message-container'>
                   <div className='fv-help-block text-danger'>
@@ -269,16 +319,32 @@ export const UadFormPage: FC = () => {
               <label className='form-label text-muted required fw-bold fs-6 mb-2'>
                 Please select your country of origin
               </label>
-              <select
-                className='form-select form-select-white'
-                aria-label='countryOrig'
-                {...formik.getFieldProps('countryOrig')}
-                name='countryOrig'
-                autoComplete='off'
-                disabled={formik.isSubmitting}
-              >
-                <CountryList />
-              </select>
+              <span className='d-flex flex-row'>
+                <div className='input-group-prepend'>
+                  <div className='input-group' id='countryflag'>
+                    <img
+                      className='form-control mw-55px'
+                      src={toAbsoluteUrl(`/media/flags/${countryOrigLabel}.svg`)}
+                    />
+                  </div>
+                </div>
+
+                <select
+                  className='form-select form-select-white'
+                  aria-label='countryOrig'
+                  {...formik.getFieldProps('countryOrig')}
+                  name='countryOrig'
+                  autoComplete='off'
+                  disabled={formik.isSubmitting}
+                  onChange={(e) => {
+                    formik.handleChange({
+                      target: {name: 'countryOrig', value: e.target.value},
+                    })
+                  }}
+                >
+                  <AfricanCountryList />
+                </select>
+              </span>
               {formik.touched.countryOrig && formik.errors.countryOrig && (
                 <div className='fv-plugins-message-container'>
                   <div className='fv-help-block text-danger'>
@@ -494,26 +560,100 @@ export const UadFormPage: FC = () => {
                       Upload Files
                     </button>
                   </div> */}
+            <div className='row d-flex justify-content-center'>
+              <div className='col-lg-6 d-flex flex-column'>
+                <div className='fv-row mb-10'>
+                  <label className='form-label text-muted' htmlFor='uadFile'>
+                    Upload a profile photo or headshot
+                  </label>
+                  <div className='input-group'>
+                    <input
+                      type='file'
+                      accept='image/*'
+                      className='form-control'
+                      id='uadFile'
+                      {...formik.getFieldProps('avatar')}
+                      name='avatar'
+                      value={formik.values.avatar}
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                    />
+                    <button className='btn btn-secondary' type='button' id='upload'>
+                      Upload
+                    </button>
+                  </div>
+                </div>
 
-            <div>
-              <label className='form-label text-muted' htmlFor='uadFile'>
-                Upload a profile photo or headshot
-              </label>
-              <input
-                type='file'
-                accept='image/*'
-                className='form-control'
-                id='uadFile'
-                {...formik.getFieldProps('avatar')}
-                name='avatar'
-                value={formik.values.avatar}
-                autoComplete='off'
-                disabled={formik.isSubmitting}
-              />
+                <div style={{display: 'none'}}>
+                  <input
+                    type='text'
+                    className='form-control'
+                    placeholder='Enter Unfound African Diasporas'
+                    {...formik.getFieldProps('honeypot')}
+                    name='honeypot'
+                    autoComplete='off'
+                    disabled={formik.isSubmitting}
+                  />
+                </div>
+
+                <div className='d-flex flex-column '>
+                  <div className='fv-row fs-2 fw-bold mb-2'>Terms &amp; Conditions</div>
+                  <div className='fv-row mb-5'>
+                    <label>
+                      <input
+                        type='checkbox'
+                        className='me-3'
+                        {...formik.getFieldProps('dpxterms')}
+                        name='dpxterms'
+                        autoComplete='off'
+                        disabled={formik.isSubmitting}
+                        onChange={() => {
+                          formik.handleChange({
+                            target: {name: 'dpxterms', value: !formik.values.dpxterms},
+                          })
+                        }}
+                      />
+                      I agree to the Terms &amp; Conditions of DIASPREX INC.
+                    </label>
+                    {formik.touched.dpxterms && formik.errors.dpxterms && (
+                      <div className='fv-plugins-message-container'>
+                        <div className='fv-help-block text-danger'>
+                          <span role='alert'>{formik.errors.dpxterms}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className='fv-row mb-5'>
+                    <label>
+                      <input
+                        type='checkbox'
+                        className='me-3'
+                        {...formik.getFieldProps('publishcontactinfo')}
+                        name='publishcontactinfo'
+                        autoComplete='off'
+                        disabled={formik.isSubmitting}
+                        onChange={() => {
+                          formik.handleChange({
+                            target: {
+                              name: 'publishcontactinfo',
+                              value: !formik.values.publishcontactinfo,
+                            },
+                          })
+                        }}
+                      />
+                      Publish my email and phone information so people can contact me.
+                    </label>
+                    {formik.touched.publishcontactinfo && formik.errors.publishcontactinfo && (
+                      <div className='fv-plugins-message-container'>
+                        <div className='fv-help-block text-danger'>
+                          <span role='alert'>{formik.errors.publishcontactinfo}</span>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
-            {/* <UploadFile /> */}
-
-            {/* <!--end::Input group--> */}
 
             <div className='form-footer'>
               <div className='text-center pt-15'>
@@ -536,7 +676,8 @@ export const UadFormPage: FC = () => {
                   className='btn btn-primary'
                   disabled={
                     Object.keys(formik.touched).length === 0 ||
-                    Object.keys(formik.errors).length !== 0
+                    Object.keys(formik.errors).length !== 0 ||
+                    !formik.values.dpxterms
                   }
                   data-bs-dismiss={
                     Object.keys(formik.touched).length !== 0 &&

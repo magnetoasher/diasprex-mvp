@@ -141,9 +141,29 @@ const DiasporaEditModalForm: FC<Props> = ({diaspora, isDiasporaLoading}) => {
 
             <div className='card shadow'>
               <div className='card card-stretch card-bordered mb-5'>
-                <div className='card-header'>
+                <div className='card-header d-flex justify-content-between'>
                   <h3 className='card-title'>Edit Diaspora Details</h3>
+                  <div className='form-check form-switch form-check-custom form-check-solid me-5 mb-3'>
+                    <input
+                      className='form-check-input me-2'
+                      type='checkbox'
+                      {...formik.getFieldProps('featureddiasp')}
+                      name='featureddiasp'
+                      id='featureddiasp'
+                      checked={formik.values.featureddiasp}
+                      disabled={formik.isSubmitting}
+                      onChange={() => {
+                        formik.handleChange({
+                          target: {name: 'featureddiasp', value: !formik.values.featureddiasp},
+                        })
+                      }}
+                    />
+                    <label className='form-check-label' htmlFor='featuredopp'>
+                      Featured
+                    </label>
+                  </div>
                 </div>
+
                 <div className='card-body'>
                   {/* begin::Input group */}
                   <div className='fv-row mb-7'>

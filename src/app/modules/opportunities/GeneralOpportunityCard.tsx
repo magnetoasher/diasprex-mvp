@@ -40,17 +40,17 @@ function GeneralOpportunityCard() {
                 <GeneralCardComponent
                   id={element.id}
                   sponsor={element.sponsor}
-                  badgeColor={element.status == 'Open' ? 'success' : 'danger'}
                   title={element.title}
                   country={element.country}
+                  open={element.open}
                   status={element.status}
-                  description={element.description}
-                  dueDate={element.dueDate}
-                  budget={element.budget}
-                  src={element.img}
+                  dealtype={element.dealtype}
+                  oppdesc={element.oppdesc}
+                  duedate={element.duedate}
+                  thumbnail={element.thumbnail}
                   summary={element.summary}
                   following={element.following}
-                  interest={element.interest}
+                  showedinterest={element.showedinterest}
                 />
               </Col>
             ))}

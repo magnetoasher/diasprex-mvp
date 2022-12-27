@@ -13,7 +13,7 @@ const OppEditModalHeader = () => {
       {/* begin::Close */}
       <div
         className='btn btn-icon btn-sm btn-active-icon-primary'
-        data-kt-users-modal-action='close'
+        data-kt-opps-modal-action='close'
         onClick={() => setItemIdForUpdate(undefined)}
         style={{cursor: 'pointer'}}
       >

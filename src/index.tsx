@@ -26,6 +26,7 @@ import './_metronic/assets/sass/style.scss'
 import './_metronic/assets/sass/style.react.scss'
 import './_metronic/assets/sass/plugins.scss'
 import {AppRoutes} from './app/routing/AppRoutes'
+
 /**
  * Creates `axios-mock-adapter` instance for provided `axios` instance, add
  * basic Metronic mocks and returns it.

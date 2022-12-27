@@ -9,6 +9,7 @@ import {DiasporaSelectionHeader} from './DiasporaSelectionHeader'
 import {DiasporaStatusCell} from './DiasporaStatusCell'
 import {DiasporaDateCell} from './DiasporaDateCell'
 import {uadFormModel} from '../../../../../../Diasporas/components/core/_model'
+import {DiasporaYesNoCell} from './DiasporaYesNoCell'
 
 const diasporasColumns: ReadonlyArray<Column<uadFormModel>> = [
   {
@@ -69,6 +70,14 @@ const diasporasColumns: ReadonlyArray<Column<uadFormModel>> = [
     ),
     id: 'status',
     Cell: ({...props}) => <DiasporaStatusCell status={props.data[props.row.index].status} />,
+  },
+  // Begine Featured:: Column
+  {
+    Header: (props) => (
+      <DiasporaCustomHeader tableProps={props} title='Featured' className='min-w-125px' />
+    ),
+    id: 'featureddiasp',
+    Cell: ({...props}) => <DiasporaYesNoCell yes={props.data[props.row.index].featureddiasp} />,
   },
 
   {

@@ -12,7 +12,7 @@ import {Tag, Checkbox, Tooltip} from 'antd'
 export const myOpportunitiesData = [
   {
     id: 'BSC17',
-    sponser: 'Muhammad',
+    sponsor: 'Muhammad',
     country: 'Pakistan',
     date_open: '01/12/2022',
     due_date: '02/03/2022',
@@ -23,7 +23,7 @@ export const myOpportunitiesData = [
   },
   {
     id: 'BSC56',
-    sponser: 'Ali',
+    sponsor: 'Ali',
     country: 'Nigeria',
     date_open: '01/12/2022',
     due_date: '02/03/2022',
@@ -34,7 +34,7 @@ export const myOpportunitiesData = [
   },
   {
     id: 'BSC44',
-    sponser: 'Bill',
+    sponsor: 'Bill',
     country: 'Greeland',
     date_open: '01/12/2022',
     due_date: '02/03/2022',
@@ -46,7 +46,7 @@ export const myOpportunitiesData = [
 
   {
     id: 'BSC56',
-    sponser: 'Ali',
+    sponsor: 'Ali',
     country: 'Nigeria',
     date_open: '01/12/2022',
     due_date: '02/03/2022',
@@ -57,7 +57,7 @@ export const myOpportunitiesData = [
   },
   {
     id: 'BSC44',
-    sponser: 'Bill',
+    sponsor: 'Bill',
     country: 'Greeland',
     date_open: '01/12/2022',
     due_date: '02/03/2022',
@@ -68,7 +68,7 @@ export const myOpportunitiesData = [
   },
   {
     id: 'BSC18',
-    sponser: 'Joe',
+    sponsor: 'Joe',
     country: 'Nigeria',
     date_open: '01/12/2022',
     due_date: '02/03/2022',
@@ -101,9 +101,9 @@ export const myOppTabColumns = [
     },
   },
   {
-    title: 'Sponser',
-    dataIndex: 'sponser',
-    key: 'sponser',
+    title: 'Sponsor',
+    dataIndex: 'sponsor',
+    key: 'sponsor',
     align: 'center',
     width: 100,
   },
@@ -172,65 +172,78 @@ export const myOppTabColumns = [
     render: (_: any, ele: any) => {
       return (
         <div style={{display: 'flex', justifyContent: 'space-around'}}>
-          <div
-            style={{
-              margin: '2px',
-              backgroundColor: '#ededed',
-              color: 'green',
-              padding: '7px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '28px',
-              borderRadius: '5px',
-            }}
-          >
-            <EyeOutlined />
+          <div>
+            <a
+              href='#'
+              style={{
+                margin: '2px',
+                backgroundColor: '#ededed',
+                color: 'green',
+                padding: '7px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '28px',
+                borderRadius: '5px',
+              }}
+            >
+              <EyeOutlined />
+            </a>
           </div>
-          <div
-            style={{
-              margin: '2px',
-              backgroundColor: '#ededed',
-              color: 'orange',
-              padding: '7px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '28px',
-              borderRadius: '5px',
-            }}
-          >
-            <UserDeleteOutlined />
+          <div>
+            <a
+              href='#'
+              style={{
+                margin: '2px',
+                backgroundColor: '#ededed',
+                color: 'orange',
+                padding: '7px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '28px',
+                borderRadius: '5px',
+              }}
+            >
+              <UserDeleteOutlined />
+            </a>
           </div>
-          <div
-            style={{
-              margin: '2px',
-              backgroundColor: '#ededed',
-              color: '#0065ff',
-              padding: '7px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '28px',
-              borderRadius: '5px',
-            }}
-          >
-            <EditOutlined />
+          <div>
+            <a
+              href='#'
+              style={{
+                margin: '2px',
+                backgroundColor: '#ededed',
+                color: '#0065ff',
+                padding: '7px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '28px',
+                borderRadius: '5px',
+              }}
+            >
+              <EditOutlined />
+            </a>
           </div>
-          <div
-            style={{
-              margin: '2px',
-              backgroundColor: '#ededed',
-              color: 'red',
-              padding: '7px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '28px',
-              borderRadius: '5px',
-            }}
-          >
-            <DeleteOutlined />
+
+          <div>
+            <a
+              href='#'
+              style={{
+                margin: '2px',
+                backgroundColor: '#ededed',
+                color: 'red',
+                padding: '7px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '28px',
+                borderRadius: '5px',
+              }}
+            >
+              <DeleteOutlined />
+            </a>
           </div>
         </div>
       )

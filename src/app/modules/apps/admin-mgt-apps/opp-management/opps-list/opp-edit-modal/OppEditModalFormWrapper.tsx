@@ -3,6 +3,7 @@ import {OppEditModalForm} from './OppEditModalForm'
 import {isNotEmpty, QUERIES} from '../../../../../../../_metronic/helpers'
 import {useListView} from '../core/ListViewProvider'
 import {getOppById} from '../core/_oppsrequests'
+import {initialOpps, Opps} from '../core/_models'
 
 const OppEditModalFormWrapper = () => {
   const {itemIdForUpdate, setItemIdForUpdate} = useListView()
@@ -16,6 +17,7 @@ const OppEditModalFormWrapper = () => {
     () => {
       return getOppById(itemIdForUpdate)
     },
+
     {
       cacheTime: 0,
       enabled: enabledQuery,
@@ -27,11 +29,11 @@ const OppEditModalFormWrapper = () => {
   )
 
   if (!itemIdForUpdate) {
-    return <OppEditModalForm isOppLoading={isLoading} opp={{id: undefined}} />
+    return <OppEditModalForm isOppLoading={isLoading} opp={initialOpps} />
   }
 
   if (!isLoading && !error && opp) {
-    return <OppEditModalForm isOppLoading={isLoading} opp={opp} />
+    return <OppEditModalForm isOppLoading={isLoading} opp={Object.values(opp)[0] as Opps} />
   }
 
   return null
