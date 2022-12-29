@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {PageTitle} from '../../../../_metronic/layout/core'
-import Opportunity from '../../opportunities/Opportunity'
+import Opportunity from '../../opportunities/EnablerOpportunityCard'
 import {
   SendOutlined,
   DashboardOutlined,

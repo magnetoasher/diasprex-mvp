@@ -1,13 +1,16 @@
 import {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
-import Opportunity from '../../modules/opportunities/Opportunity'
+import Opportunity from '../../modules/opportunities/EnablerOpportunityCard'
 import {ListsWidget6, ChartsWidget3} from '../dashboard/clientswidgets'
-import Oppurtunity from '../../modules/opportunities/Opportunity'
+import Oppurtunity from '../../modules/opportunities/EnablerOpportunityCard'
 import {Card, Row} from 'antd'
 import {EditText, EditTextarea} from 'react-edit-text'
 import 'react-edit-text/dist/index.css'
 import {ITransArrayModel} from '../../modules/Remittance/Components/Preferences/PreferencesModel'
+import EnablerOpportunityCard from '../../modules/opportunities/EnablerOpportunityCard'
+import SponsorOpportunityCard from '../../modules/opportunities/SponsorsOpportunityCard'
+import {SponsorProposalCard} from '../../modules/proposals/components/SponsorProposalCard'
 
 const NewDashboardPage = () => {
   const userType = localStorage.getItem('userType')
@@ -37,27 +40,96 @@ const NewDashboardPage = () => {
       : setUserLabel(userTypeFull)
   }, [userTypeFull, userType])
 
-  const [dataObj] = useState([
+  const [enableroppsdataObj] = useState([
     {
-      name: 'Demo1',
-      userTypeFull: 'basic_enabler',
+      country: 'Ghana',
+      sponsor: 'Sponsor 1',
       title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: 'https://loremflickr.com/g/320/240/things',
+      summary: 'this is detail, lorem ispum',
+      src: 'https://picsum.photos/192/140',
     },
     {
-      name: 'Demo2',
-      userTypeFull: 'standard_enabler',
+      country: 'Kenya',
+      sponsor: 'Sponsor 2',
       title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: 'https://loremflickr.com/g/320/241/things',
+      summary: 'this is detail, lorem ispum',
+      src: 'https://picsum.photos/193/140',
     },
     {
-      name: 'Demo3',
-      userTypeFull: 'super_enabler',
+      country: 'Nigeria',
+      sponsor: 'Sponsor 3',
       title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: 'https://loremflickr.com/g/320/242/things',
+      summary: 'this is detail, lorem ispum',
+      src: 'https://picsum.photos/194/140',
+    },
+    {
+      country: 'Uganda',
+      sponsor: 'Sponsor 4',
+      title: 'This is title',
+      summary: 'this is detail, lorem ispum',
+      src: 'https://picsum.photos/195/140',
+    },
+  ])
+
+  const [sponsoroppsdataObj] = useState([
+    {
+      category: 'Demo 1',
+      dealtype: 'Equity Financing',
+      title: 'This is title',
+      summary: 'this is detail, lorem ispum',
+      src: 'https://picsum.photos/192/140',
+    },
+    {
+      category: 'Demo 2',
+      dealtype: 'Debt Financing',
+      title: 'This is title',
+      summary: 'this is detail, lorem ispum',
+      src: 'https://picsum.photos/193/140',
+    },
+    {
+      category: 'Nigeria',
+      dealtype: 'Crowfunding',
+      title: 'This is title',
+      summary: 'this is detail, lorem ispum',
+      src: 'https://picsum.photos/194/140',
+    },
+    {
+      category: 'Demo 4',
+      dealtype: 'Partnership',
+      title: 'This is title',
+      summary: 'this is detail, lorem ispum',
+      src: 'https://picsum.photos/195/140',
+    },
+  ])
+
+  const [propsdataObj] = useState([
+    {
+      propcountry: 'United States',
+      propenabler: 'Enabler 1',
+      title: 'This is title',
+      summary: 'this is detail, lorem ispum',
+      src: 'https://picsum.photos/192/140',
+    },
+    {
+      propcountry: 'France',
+      propenabler: 'Enabler 2',
+      title: 'This is title',
+      summary: 'this is detail, lorem ispum',
+      src: 'https://picsum.photos/193/140',
+    },
+    {
+      propcountry: 'United Kingdom',
+      propenabler: 'Enabler 3',
+      title: 'This is title',
+      summary: 'this is detail, lorem ispum',
+      src: 'https://picsum.photos/194/140',
+    },
+    {
+      propcountry: 'Canada',
+      propenabler: 'Enabler 4',
+      title: 'This is title',
+      summary: 'this is detail, lorem ispum',
+      src: 'https://picsum.photos/195/140',
     },
   ])
 
@@ -368,15 +440,15 @@ const NewDashboardPage = () => {
                 </div>
 
                 <div className='card-body p-2 overflow-auto' style={{height: '350px'}}>
-                  {dataObj.map((e) => (
-                    <Opportunity
-                      name={e.name}
-                      userTypeFull={e.userTypeFull}
+                  {enableroppsdataObj.map((e) => (
+                    <EnablerOpportunityCard
+                      sponsor={e.sponsor}
+                      country={e.country}
                       title={e.title}
-                      detail={e.details}
-                      column={4}
-                      badgeColor='blue'
-                      badgeText='New Opportunity'
+                      summary={e.summary}
+                      badgeColor='info'
+                      status='New'
+                      dashboard={true}
                       picSrc={e.src}
                     />
                   ))}
@@ -429,15 +501,15 @@ const NewDashboardPage = () => {
                 </div>
 
                 <div className='card-body p-2 overflow-auto' style={{height: '350px'}}>
-                  {dataObj.map((e) => (
-                    <Opportunity
-                      name={e.name}
-                      userTypeFull={e.userTypeFull}
+                  {sponsoroppsdataObj.map((e) => (
+                    <SponsorOpportunityCard
+                      category={e.category}
+                      dealtype={e.dealtype}
                       title={e.title}
-                      detail={e.details}
-                      column={4}
-                      badgeColor='blue'
-                      badgeText='New Opportunity'
+                      summary={e.summary}
+                      dashboard={true}
+                      badgeColor='info'
+                      status='Publication Status'
                       picSrc={e.src}
                     />
                   ))}
@@ -449,20 +521,20 @@ const NewDashboardPage = () => {
               <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>
                 <div className='card-header cursor-pointer'>
                   <div className='card-title m-0'>
-                    <h3 className='fw-bolder m-0'>New Show of Interest</h3>
+                    <h3 className='fw-bolder m-0'>New Proposals</h3>
                   </div>
                 </div>
 
                 <div className='card-body p-2 overflow-auto' style={{height: '350px'}}>
-                  {dataObj.map((e) => (
-                    <Opportunity
-                      name={e.name}
-                      userTypeFull={e.userTypeFull}
-                      title={e.title}
-                      detail={e.details}
-                      column={4}
-                      badgeColor='green'
-                      badgeText='New proposal'
+                  {propsdataObj.map((e) => (
+                    <SponsorProposalCard
+                      propenabler={e.propenabler}
+                      propcountry={e.propcountry}
+                      proptitle={e.title}
+                      propsummary={e.summary}
+                      badgeColor='info'
+                      status='New'
+                      dashboard={true}
                       picSrc={e.src}
                     />
                   ))}

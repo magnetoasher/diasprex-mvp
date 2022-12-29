@@ -3,10 +3,10 @@ import {PageTitle} from '../../../../_metronic/layout/core'
 import {Card} from 'antd'
 import {CreateTable} from '../../../../_metronic/partials/content/utilities/CreateTables'
 import {TableFilters} from '../../../../_metronic/partials/content/utilities/TableFilters'
-import {proposalsTabColumns, proposalsData} from '../../opportunities/TableObjects/TableObjects'
+import {proposalsTabColumns, proposalsData} from '../core/PropsTableObjects'
 
 const SponsorProposals = () => {
-  const filter1 = ['All', 'Achieved', 'Selected', 'Declined', 'Awarded']
+  const filter1 = ['All', 'Achived', 'Selected', 'Declined', 'Awarded']
   const filter2 = ['All', 'Basic Enabler', 'Super Enabler', 'Business']
   const [data, setData] = useState(proposalsData)
   const handleChange = (value: any) => {

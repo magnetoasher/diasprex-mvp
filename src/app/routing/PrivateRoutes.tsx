@@ -30,6 +30,7 @@ import {
   ProposalMgtPage,
   UsersMgtPage,
 } from '../modules/apps/admin-mgt-apps/admin-tables'
+import {SponsorPropsRevPage} from '../modules/proposals/proposalreviewtable/ProposalReviewPage'
 
 const PrivateRoutes = () => {
   const RemittancePage = lazy(() => import('./../modules/Remittance/RemittancePage'))
@@ -62,7 +63,8 @@ const PrivateRoutes = () => {
             {/* <Route path='builder' element={<BuilderPageWrapper />} /> */}
             <Route path='createopportunities' element={<CreateOpportunities />} />
             <Route path='proposals' element={<Proposals />} />
-            <Route path='sponsor_proposals' element={<SponsorProposals />} />
+            {/* <Route path='sponsor_proposals' element={<SponsorProposals />} /> */}
+            <Route path='sponsor/props_review/*' element={<SponsorPropsRevPage />} />
             <Route path='my_opportunities' element={<MyOpportunity />} />
             <Route path='opportunities_center' element={<GeneralOpportunityCard />} />
             <Route path='send_proposals' element={<SendProposals />} />
