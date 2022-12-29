@@ -3,7 +3,7 @@ import {PageTitle} from '../../../_metronic/layout/core'
 
 import {Tabs, Card, Tooltip, Select, Input} from 'antd'
 import {CreateTable} from '../../../_metronic/partials/content/utilities/CreateTables'
-import {myOppTabColumns, myOpportunitiesData} from './TableObjects/TableObjects'
+import {myOppTabColumns, myOpportunitiesData} from './TableObjects/OppsTableObjects'
 import {TableFilters} from '../../../_metronic/partials/content/utilities/TableFilters'
 
 export const MyOpportunityTable = () => {

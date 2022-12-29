@@ -59,7 +59,7 @@ export function Business() {
         <AsideMenuItem
           to='my_opportunities'
           icon='/media/icons/duotune/art/art002.svg'
-          title='My Opportunities'
+          title='My Opportunities/Proposals'
           fontIcon='bi-layers'
         />
         <AsideMenuItem to='profile/overview' title='Overview' hasBullet={true} />

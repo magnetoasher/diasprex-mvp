@@ -8,17 +8,19 @@ import {
   CheckOutlined,
   DashboardOutlined,
 } from '@ant-design/icons'
-import Opportunity from './Opportunity'
-import {MyOpportunityTable} from './MyOpportunityTable'
-import {Tabs, Card, Tooltip, Select, Input} from 'antd'
-import {followed, saved, submitted, active, declined} from '../proposals/components/ProposalModels'
+import Opportunity from './EnablerOpportunityCard'
+// import {MyOpportunityTable} from './MyOpportunityTable'
+import {Tabs} from 'antd'
+import {followedopps, draft, submitted, active, completed} from '../proposals/components/models'
+import {EnablerProposalCard} from '../proposals/components/EnablerProposalCard'
+import EnablerOpportunityCard from './EnablerOpportunityCard'
 
 const MyOpportunity = () => {
-  const [followedopps] = useState(followed)
-  const [draftprop] = useState(saved)
+  const [followed] = useState(followedopps)
+  const [draftprop] = useState(draft)
   const [activeprop] = useState(active)
   const [submittedprop] = useState(submitted)
-  const [declinedprop] = useState(declined)
+  const [completedprop] = useState(completed)
   let user = localStorage.getItem('userTypeFull')
   let userType = localStorage.getItem('userType')
 
@@ -33,12 +35,30 @@ const MyOpportunity = () => {
         tab={
           <span className='d-flex justify-content-center align-items-center'>
             <EyeOutlined />
-            Opportunities
+            Followed Opps
           </span>
         }
         key='1'
       >
-        <MyOpportunityTable />
+        <div className=' overflow-auto p-3'>
+          <div className=' d-flex text-muted mb-5'>Followed Opporutinities</div>
+          {/* <button type='button' className='btn btn-sm btn-light-primary'>
+            Unfollow Selected
+          </button> */}
+          {followed.map((e) => (
+            <EnablerOpportunityCard
+              sponsor={e.sponsor}
+              country={e.country}
+              title={e.title}
+              summary={e.summary}
+              followed={e.followed}
+              badgeColor='info'
+              status='publication status'
+              picSrc={e.src}
+            />
+          ))}
+        </div>
+        {/* <MyOpportunityTable /> */}
       </TabPane>
       {user !== 'basic_enabler' && (
         <>
@@ -52,15 +72,18 @@ const MyOpportunity = () => {
             key='2'
           >
             <div className=' overflow-auto p-3'>
+              <div className=' d-flex text-muted mb-5'>Draft Proposals</div>
+              {/* <button type='button' className='btn btn-sm btn-light-danger'>
+                Delete Selected
+              </button> */}
               {draftprop.map((e) => (
-                <Opportunity
-                  name={e.name}
-                  userType={e.userType}
-                  title={e.title}
-                  detail={e.details}
-                  column={2}
-                  badgeColor='gray'
-                  badgeText='Draft'
+                <EnablerProposalCard
+                  oppsponsor={e.oppsponsor}
+                  oppcountry={e.oppcountry}
+                  proptitle={e.proptitle}
+                  propsummary={e.propsummary}
+                  badgeColor='gray-800'
+                  status='proposal in draft'
                   picSrc={e.src}
                 />
               ))}
@@ -76,15 +99,15 @@ const MyOpportunity = () => {
             key='3'
           >
             <div className=' overflow-auto p-3'>
+              <div className=' d-flex text-muted mb-5'>Submitted Proposals</div>
               {submittedprop.map((e) => (
-                <Opportunity
-                  name={e.name}
-                  userType={e.userType}
-                  title={e.title}
-                  detail={e.details}
-                  column={2}
-                  badgeColor='green'
-                  badgeText='Submitted'
+                <EnablerProposalCard
+                  oppsponsor={e.oppsponsor}
+                  oppcountry={e.oppcountry}
+                  proptitle={e.proptitle}
+                  propsummary={e.propsummary}
+                  badgeColor='primary'
+                  status='submission status'
                   picSrc={e.src}
                 />
               ))}
@@ -101,15 +124,15 @@ const MyOpportunity = () => {
             key='4'
           >
             <div className=' overflow-auto p-3'>
+              <div className=' d-flex text-muted mb-5'>Active Proposals</div>
               {activeprop.map((e) => (
-                <Opportunity
-                  name={e.name}
-                  userType={e.userType}
-                  title={e.title}
-                  detail={e.details}
-                  column={2}
-                  badgeColor='blue'
-                  badgeText='Active'
+                <EnablerProposalCard
+                  oppsponsor={e.oppsponsor}
+                  oppcountry={e.oppcountry}
+                  proptitle={e.proptitle}
+                  propsummary={e.propsummary}
+                  badgeColor='success'
+                  status='active'
                   picSrc={e.src}
                 />
               ))}
@@ -120,21 +143,21 @@ const MyOpportunity = () => {
             tab={
               <span className='d-flex justify-content-center align-items-center'>
                 <FileAddOutlined />
-                Declined
+                Completed
               </span>
             }
             key='5'
           >
             <div className=' overflow-auto p-3'>
-              {declinedprop.map((e) => (
-                <Opportunity
-                  name={e.name}
-                  userType={e.userType}
-                  title={e.title}
-                  detail={e.details}
-                  column={2}
-                  badgeColor='red'
-                  badgeText='Declined'
+              <div className=' d-flex text-muted mb-5'>Completed Proposals</div>
+              {completedprop.map((e) => (
+                <EnablerProposalCard
+                  oppsponsor={e.oppsponsor}
+                  oppcountry={e.oppcountry}
+                  proptitle={e.proptitle}
+                  propsummary={e.propsummary}
+                  badgeColor='primary'
+                  status='completed'
                   picSrc={e.src}
                 />
               ))}

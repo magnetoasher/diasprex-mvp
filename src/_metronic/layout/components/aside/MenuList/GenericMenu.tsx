@@ -67,7 +67,7 @@ export function GenericMenu() {
       <AsideMenuItem
         to='my_opportunities'
         icon='/media/icons/duotune/art/art003.svg'
-        title='My Opportunities'
+        title='My Opportunities/Proposals'
         fontIcon='bi-layers'
       />
 

@@ -2,7 +2,12 @@
 import React, {FC, useMemo, useState} from 'react'
 import {Field, ErrorMessage} from 'formik'
 import countryList from 'react-select-country-list'
-import {IndustryList} from '../../../../../../../_metronic/partials/content/selectionlists'
+import {
+  AfricanCountryList,
+  IndustryList,
+} from '../../../../../../../_metronic/partials/content/selectionlists'
+import {OecdcountryList} from '../../../../../../../_metronic/partials/content/selectionlists/oecdcountrylist'
+import Input, {getCountries, getCountryCallingCode} from 'react-phone-number-input'
 
 const Individual = () => {
   const countryOptions = useMemo(() => countryList().getData(), [])
@@ -10,6 +15,7 @@ const Individual = () => {
     area_of_interest: '',
     professional_interest: '',
   })
+  const [phoneNumber, setPhoneNumber] = useState()
 
   const handleChange = (type: any, value: any) => {
     setDataObj({
@@ -17,7 +23,6 @@ const Individual = () => {
       [type]: value,
     })
   }
-  // console.log(dataObj)
 
   const areaOptions = [
     {value: 'management', label: 'Management'},
@@ -89,7 +94,7 @@ const Individual = () => {
       </div>
       <div className='fv-row mb-10'>
         <label className='form-label required'>Primary Phone Number</label>
-        <div className='d-flex flex-row mw-100 form-control form-control-lg'>
+        <span className='d-flex me-2'>
           <Field
             type='text'
             maxLength={5}
@@ -104,17 +109,18 @@ const Individual = () => {
             className='form-control'
             placeholder='xxx-xxx-xxxx'
           />
-        </div>
-        {/* <div className='d-flex flex-row mw-100 form-control form-control-lg form-control-solid'>
-            <PhoneInput
-              inputStyle={{width: '100px'}}
-              international
-              defaultCountry='US'
-              placeholder='Enter phone number'
-              value={phoneNumber}
-              onChange={() => setPhoneNumber}
-            />
-          </div> */}
+        </span>
+
+        {/* <div className='d-flex flex-row mw-100 form-control form-control-lg form-control'>
+          <Input
+            inputStyle={{}}
+            international
+            defaultCountry='US'
+            placeholder='Enter phone number'
+            value={phoneNumber}
+            onChange={() => setPhoneNumber}
+          />
+        </div> */}
         <div className='text-danger mt-2'>
           <ErrorMessage name='phone.code' component='span' />
         </div>
@@ -127,16 +133,7 @@ const Individual = () => {
         <label className='form-label required'>Country of Origin</label>
         <Field component='select' name='countryOrig' className='form-select form-select-lg'>
           <option value=''>Select a country</option>
-          {countryOptions.map((option, index) => (
-            <option key={index} value={option.value}>
-              {/* <ReactCountryFlag
-                  countryCode={option.value}
-                  svg
-                  style={{fontSize: '2em', lineHeight: '2em'}}
-                /> */}
-              {option.label}
-            </option>
-          ))}
+          <AfricanCountryList />
         </Field>
 
         <div className='text-danger mt-2'>
@@ -147,17 +144,7 @@ const Individual = () => {
       <div className='fv-row mb-10'>
         <label className='form-label required'>Country of Residence</label>
         <Field component='select' name='countryRes' className='form-select form-select-lg'>
-          <option value=''>Select a country</option>
-          {countryOptions.map((option, index) => (
-            <option key={index} value={option.value}>
-              {/* <ReactCountryFlag
-                  countryCode={option.value}
-                  svg
-                  style={{fontSize: '2em', lineHeight: '2em'}}
-                /> */}
-              {option.label}
-            </option>
-          ))}
+          <OecdcountryList />
         </Field>
 
         <div className='text-danger mt-2'>
