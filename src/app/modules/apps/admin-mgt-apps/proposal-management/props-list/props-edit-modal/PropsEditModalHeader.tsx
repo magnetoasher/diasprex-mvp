@@ -7,7 +7,7 @@ const PropEditModalHeader = () => {
   return (
     <div className='modal-header'>
       {/* begin::Modal title */}
-      <h2 className='fw-bolder'>Add User</h2>
+      <h2 className='fw-bolder'>Add/Edit Proposal</h2>
       {/* end::Modal title */}
 
       {/* begin::Close */}

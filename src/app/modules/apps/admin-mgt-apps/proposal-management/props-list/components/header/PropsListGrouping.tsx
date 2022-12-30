@@ -2,7 +2,7 @@ import {useQueryClient, useMutation} from 'react-query'
 import {QUERIES} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
-import {deleteSelectedProposals} from '../../core/_proposalrequests'
+import {deleteSelectedProposals} from '../../core/_requests'
 
 const PropsListGrouping = () => {
   const {selected, clearSelected} = useListView()
@@ -31,7 +31,7 @@ const PropsListGrouping = () => {
       >
         Delete Selected
       </button>
-            <button
+      <button
         type='button'
         className='btn btn-danger'
         onClick={async () => await deleteSelectedItems.mutateAsync()}

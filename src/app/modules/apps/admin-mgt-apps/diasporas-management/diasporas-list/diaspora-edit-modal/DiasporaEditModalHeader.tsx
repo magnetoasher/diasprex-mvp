@@ -7,7 +7,7 @@ const DiasporaEditModalHeader = () => {
   return (
     <div className='modal-header'>
       {/* begin::Modal title */}
-      <h2 className='fw-bolder'>Update Diaspora Details</h2>
+      <h2 className='fw-bolder'>Add/Edit Diaspora Details</h2>
       {/* end::Modal title */}
 
       {/* begin::Close */}

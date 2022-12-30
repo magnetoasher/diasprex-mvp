@@ -5,7 +5,7 @@ import {MenuComponent} from '../../../../../../../../_metronic/assets/ts/compone
 import {ID, KTSVG, QUERIES} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
-import {deleteProposal} from '../../core/_proposalrequests'
+import {deleteProposal} from '../../core/_requests'
 
 type Props = {
   id: ID
@@ -68,7 +68,7 @@ const PropActionsCell: FC<Props> = ({id}) => {
         </div>
         {/* end::Menu item */}
 
-         {/* begin::Menu item */}
+        {/* begin::Menu item */}
         <div className='menu-item px-3'>
           <a
             className='menu-link px-3'

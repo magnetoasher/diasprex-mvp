@@ -210,21 +210,21 @@ const PropReviewModalForm: FC<Props> = ({proposal, isProposalLoading}) => {
                 </div>
               </div>
               <div className='separator separator-dashed my-5'></div>
-              <div className='card-title m-0'>
-                <h3 className='fw-bolder m-0'>Attachments</h3>
-              </div>
-              <div className='text-center pt-15'>
-                <span className='me-3'>
-                  <p>Proposal attachment</p>
-                  <button
-                    type='button'
-                    onClick={() => {}}
-                    className='btn btn-light me-3'
-                    disabled={formik.isSubmitting || isProposalLoading}
-                  >
-                    Download
-                  </button>
-                </span>
+              <div className='fv-row mb-7'>
+                <label className='required fs-6 fw-bold mb-2'>Attachments</label>
+                <div className='mb-3'>
+                  <div className=' d-flex flex-row align-items-center'>
+                    <p className='me-3'>Proposal attachment</p>
+                    <button
+                      type='button'
+                      onClick={() => {}}
+                      className='btn btn-light me-3'
+                      disabled={formik.isSubmitting || isProposalLoading}
+                    >
+                      Download
+                    </button>
+                  </div>
+                </div>
               </div>
 
               {/* begin::Input group */}
