@@ -2,7 +2,7 @@ import {useQuery} from 'react-query'
 import {PropEditModalForm} from './PropsEditModalForm'
 import {isNotEmpty, QUERIES} from '../../../../../../../_metronic/helpers'
 import {useListView} from '../core/ListViewProvider'
-import {getUserById} from '../core/_requests'
+import {getProposalById} from '../core/_requests'
 
 const PropEditModalFormWrapper = () => {
   const {itemIdForUpdate, setItemIdForUpdate} = useListView()
@@ -12,9 +12,9 @@ const PropEditModalFormWrapper = () => {
     data: user,
     error,
   } = useQuery(
-    `${QUERIES.USERS_LIST}-user-${itemIdForUpdate}`,
+    `${QUERIES.PROPS_LIST}-proposal-${itemIdForUpdate}`,
     () => {
-      return getUserById(itemIdForUpdate)
+      return getProposalById(itemIdForUpdate)
     },
     {
       cacheTime: 0,
@@ -27,11 +27,11 @@ const PropEditModalFormWrapper = () => {
   )
 
   if (!itemIdForUpdate) {
-    return <PropEditModalForm isUserLoading={isLoading} user={{id: undefined}} />
+    return <PropEditModalForm isProposalLoading={isLoading} proposal={{id: undefined}} />
   }
 
   if (!isLoading && !error && user) {
-    return <PropEditModalForm isUserLoading={isLoading} user={user} />
+    return <PropEditModalForm isProposalLoading={isLoading} proposal={user} />
   }
 
   return null

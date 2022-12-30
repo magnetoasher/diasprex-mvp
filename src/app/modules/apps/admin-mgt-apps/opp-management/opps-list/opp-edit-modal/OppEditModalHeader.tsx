@@ -7,7 +7,7 @@ const OppEditModalHeader = () => {
   return (
     <div className='modal-header'>
       {/* begin::Modal title */}
-      <h2 className='fw-bolder'>Edit Opportunity</h2>
+      <h2 className='fw-bolder'>Add/Edit Opportunity</h2>
       {/* end::Modal title */}
 
       {/* begin::Close */}

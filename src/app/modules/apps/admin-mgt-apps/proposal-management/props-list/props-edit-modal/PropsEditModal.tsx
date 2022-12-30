@@ -14,13 +14,13 @@ const PropEditModal = () => {
     <>
       <div
         className='modal fade show d-block'
-        id='kt_modal_add_user'
+        id='kt_modal_add_proposal'
         role='dialog'
         tabIndex={-1}
         aria-modal='true'
       >
         {/* begin::Modal dialog */}
-        <div className='modal-dialog modal-dialog-centered mw-650px'>
+        <div className='modal-dialog modal-dialog-centered mw-75'>
           {/* begin::Modal content */}
           <div className='modal-content'>
             <PropEditModalHeader />
