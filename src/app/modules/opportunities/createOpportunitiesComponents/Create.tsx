@@ -16,6 +16,7 @@ import {nanoid} from '@reduxjs/toolkit'
 import axios from 'axios'
 import {getUniqueIdWithPrefix} from '../../../../_metronic/assets/ts/_utils'
 import {OppsCategory} from '../../../../_metronic/partials/content/selectionlists/oppscategory'
+import {DefaultDraftInlineStyle} from 'draft-js'
 
 export const Create = () => {
   const {Option} = Select
@@ -140,8 +141,10 @@ export const Create = () => {
                 <DatePicker
                   defaultValue={moment('01/01/2015', dateFormatList[0])}
                   format={dateFormatList}
-                  // {...formik.getFieldProps('duedate')}
-                  // name='duedate'
+                  onChange={(e) => {
+                    formik.handleChange({target: {name: 'duedate', value: e.target.value}})
+                    console.log('Date', moment(e.target.value).format('YYYY MMM DD'))
+                  }}
                 />
                 {/* {formik.touched.duedate && formik.errors.duedate && (
                   <div className='fv-plugins-message-container'>

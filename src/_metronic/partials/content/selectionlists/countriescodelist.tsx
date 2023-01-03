@@ -1,18 +1,3 @@
-type countries = (
-  | {
-      code: string
-      label: string
-      phone: string
-      suggested?: undefined
-    }
-  | {
-      code: string
-      label: string
-      phone: string
-      suggested: boolean
-    }
-)[]
-
 export const CountriesCodeList = [
   {code: 'AD', label: 'Andorra', phone: '376'},
   {code: 'AE', label: 'United Arab Emirates', phone: '971'},
