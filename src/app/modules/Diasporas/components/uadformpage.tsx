@@ -7,16 +7,15 @@ import {uadFormModel} from './core/_model'
 import PhoneInput from 'react-phone-number-input'
 // import PhoneInput from 'react-phone-input-2'
 import countryList from 'react-select-country-list'
-import {
-  CountryCodeList,
-  AfricanCountryList,
-} from '../../../../_metronic/partials/content/selectionlists'
+import {AfricanCountryList} from '../../../../_metronic/partials/content/selectionlists'
 import {UploadFile} from '../../../../_metronic/partials/modals/file-management/uploadfile'
 import {phoneRegExp, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useNavigate} from 'react-router-dom'
 import {OecdcountryList} from '../../../../_metronic/partials/content/selectionlists/oecdcountrylist'
 import 'react-phone-number-input/style.css'
+import Swal from 'sweetalert2'
 
+import CountryCodeList from '../../../../_metronic/partials/content/selectionlists/countries.json'
 const editUADSchema = Yup.object().shape({
   fName: Yup.string()
     .min(1, 'Minimum 3 symbols')
@@ -66,10 +65,66 @@ export const UadFormPage: FC = () => {
   const countryOptions = useMemo(() => countryList().getData(), [])
   const [countryResLabel, setCountryResLabel] = useState('united states')
   const [countryOrigLabel, setCountryOrigLabel] = useState('algeria')
-  const [formData, setformData] = useState({})
+  const [phoneIsConfirmed, setPhoneIsConfirmed] = useState(false)
   const [avatarFile, setAvatarFile] = useState(null)
-
+  const [phoneCode, setPhoneCode] = useState('+1')
+  const [selectedCountry, setSelectedCountry] = useState('united states')
   const navigate = useNavigate()
+  const handleFormConfirm = () => {
+    Swal.fire({
+      text: 'Are you sure all information are entered correctly?',
+      icon: 'warning',
+      showCancelButton: true,
+      buttonsStyling: false,
+      confirmButtonText: 'Yes, Submit!',
+      cancelButtonText: 'No, return',
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-active-light',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // console.log(
+        //   'SWAL',
+        //   result.value,
+        //   result.isConfirmed,
+        //   result.isDismissed,
+        //   result.dismiss,
+        //   result.isDenied
+        // )
+        handleFormSubmit()
+      } else if (result.isDismissed) {
+        return
+      }
+    })
+  }
+  const handleFormSubmit = () => {
+    formik.submitForm()
+    Swal.fire({
+      text: 'Congratutions! We have received your profile for Diasprex UAD',
+      icon: 'success',
+      buttonsStyling: false,
+      confirmButtonText: 'OK',
+      customClass: {
+        confirmButton: 'btn btn-primary',
+      },
+    }).then((result) => {
+      if (result) {
+        handleNavigateDiasporas()
+      }
+    })
+  }
+
+  const handleNavigateDiasporas = () => {
+    navigate({pathname: '/diasporas'})
+  }
+
+  const handleFormReset = (e: any) => {
+    e.preventDefault()
+    formik.resetForm()
+    formik.setFieldValue('dpxterms', false)
+  }
+
   const initialValues: uadFormModel = {
     fName: '',
     lName: '',
@@ -96,7 +151,7 @@ export const UadFormPage: FC = () => {
   }
   const formik = useFormik({
     enableReinitialize: true,
-    initialValues: initialValues,
+    initialValues,
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
       const data = {
@@ -104,19 +159,20 @@ export const UadFormPage: FC = () => {
         id: values.email,
         dateSubmitted: new Date(),
         status: 'New',
+        phone: `${phoneCode}${values.phone}`,
       }
       try {
         !values.honeypot && values.dpxterms
           ? console.log('UADDATA', data)
           : // await axios
-            //     .post(`${process.env.REACT_APP_DIASPREX_API_URL}/diaspora/create`, data)
-            //     .then((res) => console.log('onSubmit', res))
-            //     .catch((error) => error)
+            //   .post(`${process.env.REACT_APP_DIASPREX_API_URL}/diaspora/create`, data)
+            //   .then((res) => console.log('onSubmit', res))
+            // .catch((error) => error)
             console.log('Robot Fill or Terms and Condition Error', data)
       } catch {
         console.log(formik.errors)
       } finally {
-        formik.resetForm()
+        // formik.resetForm()
         // navigate({pathname: '/diasporas'})
       }
     },
@@ -130,7 +186,6 @@ export const UadFormPage: FC = () => {
   }
 
   useEffect(() => {
-    console.log('Country', formik.values.countryOrig)
     if (formik.values.countryRes) {
       setCountryResLabel(formik.values.countryRes)
     }
@@ -149,7 +204,7 @@ export const UadFormPage: FC = () => {
       </div>
       <div className='container'>
         <div className='card-body shadow-sm mx-5 mx-xl-18 pt-15 mb-15 pb-15'>
-          <form onSubmit={formik.handleSubmit}>
+          <form>
             {/* <!--begin::Input group--> */}
 
             <div className='fv-row mb-10'>
@@ -244,29 +299,79 @@ export const UadFormPage: FC = () => {
               <label className='form-label required text-muted fw-bold fs-6 mb-2'>
                 Enter a valid phone number
               </label>
+              <div className='d-flex'>
+                <div className='me-1'>
+                  <button
+                    className='btn btn-outline btn-active-light-primary dropdown-toggle'
+                    type='button'
+                    data-bs-toggle='dropdown'
+                    aria-haspopup='true'
+                    aria-expanded='false'
+                  >
+                    <span className='flagstrap-icon mw-100'>
+                      <img
+                        className='mw-15px m-0 me-2'
+                        src={toAbsoluteUrl(`/media/flags/${selectedCountry}.svg`)}
+                      />
+                      {phoneCode}
+                    </span>
+                  </button>
 
-              {/* <PhoneInput
-                {...formik.getFieldProps('phone')}
-                style={{}}
-                defaultCountry='US'
-                placeholder='Enter your phone number'
-                value={phoneValue}
-                onChange={() => {
-                  formik.handleChange({
-                    target: {name: 'phone', value: phoneValue},
-                  })
-                }}
-              /> */}
+                  <div
+                    className='dropdown-menu menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-6 h=300px py-4 overflow-scroll'
+                    data-kt-menu='true'
+                  >
+                    <div
+                      className='d-flex flex-column scroll-y me-n7 pe-7'
+                      id='kt_selection_scroll'
+                      data-kt-scroll='true'
+                      data-kt-scroll-activate='{default: false, lg: true}'
+                      data-kt-scroll-max-height='auto'
+                      data-kt-scroll-dependencies='#kt_selection_header'
+                      data-kt-scroll-wrappers='#kt_modal_selection_scroll'
+                      data-kt-scroll-offset='125px'
+                    >
+                      <ul style={{listStyle: 'none'}}>
+                        {CountryCodeList.map((option) => (
+                          <a
+                            className='dropdown-item mb-2 h = 125px'
+                            onClick={() => {
+                              setPhoneCode(`+${option.phone}`)
 
-              <input
-                type='text'
-                className='form-control'
-                placeholder='Enter your phone number'
-                {...formik.getFieldProps('phone')}
-                name='phone'
-                autoComplete='off'
-                disabled={formik.isSubmitting}
-              />
+                              setSelectedCountry(option.label)
+                            }}
+                          >
+                            <li value={option.code} data-name={option.label}>
+                              <span className='flagstrap-icon'>
+                                <img
+                                  className='mw-25px m-0 me-2'
+                                  src={toAbsoluteUrl(`/media/flags/${option.label}.svg`)}
+                                />
+                              </span>
+                              {`${option.label} (+${option.phone})`}
+                            </li>
+                          </a>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <input
+                  type='text'
+                  className='form-control'
+                  placeholder='Enter your phone number'
+                  {...formik.getFieldProps('phone')}
+                  name='phone'
+                  autoComplete='off'
+                  disabled={formik.isSubmitting}
+                  onChange={(e) => {
+                    formik.handleChange({
+                      target: {name: 'phone', value: e.target.value},
+                    })
+                  }}
+                />
+              </div>
 
               {formik.touched.phone && formik.errors.phone && (
                 <div className='fv-plugins-message-container'>
@@ -276,275 +381,287 @@ export const UadFormPage: FC = () => {
                 </div>
               )}
             </div>
-
             <div className=' fv-row mb-10'>
-              <label className='form-label text-muted required fw-bold fs-6 mb-2'>
-                Please select your country of residence
-              </label>
-              <span className='d-flex flex-row'>
-                <div className='input-group-prepend'>
-                  <div className='input-group' id='countryflag'>
-                    <img
-                      className='form-control mw-55px'
-                      src={toAbsoluteUrl(`/media/flags/${countryResLabel}.svg`)}
+              <button
+                className='btn btn-success btn-active-ligth-success'
+                disabled={phoneIsConfirmed}
+                onClick={() => {
+                  setPhoneIsConfirmed(true)
+                }}
+              >
+                Verify Phone Number
+              </button>
+            </div>
+            {phoneIsConfirmed && (
+              <>
+                <div className=' fv-row mb-10'>
+                  <label className='form-label text-muted required fw-bold fs-6 mb-2'>
+                    Please select your country of residence
+                  </label>
+                  <span className='d-flex flex-row'>
+                    <div className='input-group-prepend'>
+                      <div className='input-group' id='countryflag'>
+                        <img
+                          className='form-control mw-55px'
+                          src={toAbsoluteUrl(`/media/flags/${countryResLabel}.svg`)}
+                        />
+                      </div>
+                    </div>
+                    <select
+                      className='form-select form-select-white'
+                      aria-label='countryRes'
+                      {...formik.getFieldProps('countryRes')}
+                      name='countryRes'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                      onChange={(e) => {
+                        formik.handleChange({
+                          target: {name: 'countryRes', value: e.target.value},
+                        })
+                      }}
+                    >
+                      <OecdcountryList />
+                    </select>
+                  </span>
+                  {formik.touched.countryRes && formik.errors.countryRes && (
+                    <div className='fv-plugins-message-container'>
+                      <div className='fv-help-block text-danger'>
+                        <span role='alert'>{formik.errors.countryRes}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className='fv-row mb-10'>
+                  <label className='form-label text-muted required fw-bold fs-6 mb-2'>
+                    Please select your country of origin
+                  </label>
+                  <span className='d-flex flex-row'>
+                    <div className='input-group-prepend'>
+                      <div className='input-group' id='countryflag'>
+                        <img
+                          className='form-control mw-55px'
+                          src={toAbsoluteUrl(`/media/flags/${countryOrigLabel}.svg`)}
+                        />
+                      </div>
+                    </div>
+
+                    <select
+                      className='form-select form-select-white'
+                      aria-label='countryOrig'
+                      {...formik.getFieldProps('countryOrig')}
+                      name='countryOrig'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                      onChange={(e) => {
+                        formik.handleChange({
+                          target: {name: 'countryOrig', value: e.target.value},
+                        })
+                      }}
+                    >
+                      <AfricanCountryList />
+                    </select>
+                  </span>
+                  {formik.touched.countryOrig && formik.errors.countryOrig && (
+                    <div className='fv-plugins-message-container'>
+                      <div className='fv-help-block text-danger'>
+                        <span role='alert'>{formik.errors.countryOrig}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <div className='fv-row mb-10'>
+                  <label className='form-label text-muted fw-bold fs-6 mb-2'>
+                    Enter your profession
+                  </label>
+                  <input
+                    type='text'
+                    className='form-control'
+                    placeholder='Enter your profession'
+                    {...formik.getFieldProps('profession')}
+                    name='profession'
+                    autoComplete='off'
+                    disabled={formik.isSubmitting}
+                  />
+                  {formik.touched.profession && formik.errors.profession && (
+                    <div className='fv-plugins-message-container'>
+                      <div className='fv-help-block'>
+                        <span role='alert'>{formik.errors.profession}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className='fv-row mb-10'>
+                  <label className='form-label text-muted fw-bold fs-6 mb-2'>
+                    Please enter your undergraduate information
+                  </label>
+                  <div className='input-group'>
+                    <input
+                      type='text'
+                      className='form-control me-2'
+                      placeholder='Institution'
+                      {...formik.getFieldProps('undergrad.inst')}
+                      name='undergrad.inst'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                    />
+                    <input
+                      type='text'
+                      className='form-control me-2'
+                      placeholder='Field of study'
+                      {...formik.getFieldProps('undergrad.field')}
+                      name='undergrad.field'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                    />
+                    <select
+                      className='form-select form-select-white mb-2'
+                      aria-label='country'
+                      defaultValue='Degree'
+                      {...formik.getFieldProps('undergrad.degree')}
+                      name='undergrad.degree'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                    >
+                      <option> B.S</option>
+                      <option> B.A</option>
+                      <option> HND</option>
+                      <option> OND</option>
+                      <option> Associate</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className='fv-row mb-10'>
+                  <label className='form-label text-muted fw-bold fs-6 mb-2'>
+                    Please enetr your graduate school information if applicable
+                  </label>
+                  <div className='input-group'>
+                    <input
+                      type='text'
+                      className='form-control me-2'
+                      placeholder='Institution'
+                      {...formik.getFieldProps('grad.inst')}
+                      name='grad.inst'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                    />
+                    <input
+                      type='text'
+                      className='form-control me-2'
+                      placeholder='Field of study'
+                      {...formik.getFieldProps('grad.field')}
+                      name='grad.field'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                    />
+                    <select
+                      className='form-select form-select-white mb-2'
+                      aria-label='country'
+                      defaultValue='Degree'
+                      {...formik.getFieldProps('grad.degree')}
+                      name='grad.degree'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                    >
+                      <option> Ph.D</option>
+                      <option> MS</option>
+                      <option> MD</option>
+                      <option> J.D</option>
+                      <option> MBA</option>
+                    </select>
+                  </div>
+                </div>
+                <div className='fv-row mb-10'>
+                  <label className='form-label required text-muted fw-bold fs-6 mb-2 text-primary'>
+                    Please enter your professional summary (500 words max)
+                  </label>
+
+                  <textarea
+                    className='form-control mb-2'
+                    rows={5}
+                    placeholder='Type your professional summary'
+                    {...formik.getFieldProps('summary')}
+                    name='summary'
+                    autoComplete='off'
+                    disabled={formik.isSubmitting}
+                  ></textarea>
+                  {formik.touched.summary && formik.errors.summary && (
+                    <div className='fv-plugins-message-container'>
+                      <div className='fv-help-block text-danger'>
+                        <span role='alert'>{formik.errors.summary}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className='fv-row mb-10'>
+                  <label className='form-label required text-muted fw-bold fs-6 mb-2'>
+                    Please list up to 4 professional interest
+                  </label>
+                  <div className='input-group'>
+                    <input
+                      type='text'
+                      className='form-control me-2'
+                      placeholder='Interest 1'
+                      {...formik.getFieldProps('interest[0]')}
+                      name='interest[0]'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                    />
+                    <input
+                      type='text'
+                      className='form-control me-2'
+                      placeholder='Interest 2'
+                      {...formik.getFieldProps('interest[1]')}
+                      name='interest[1]'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                    />
+                    <input
+                      type='text'
+                      className='form-control me-2'
+                      placeholder='Interest 3'
+                      {...formik.getFieldProps('interest[2]')}
+                      name='interest[2]'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
+                    />
+                    <input
+                      type='text'
+                      className='form-control me-2'
+                      placeholder='Interest 4'
+                      {...formik.getFieldProps('interest[3]')}
+                      name='interest[3]'
+                      autoComplete='off'
+                      disabled={formik.isSubmitting}
                     />
                   </div>
-                </div>
-                <select
-                  className='form-select form-select-white'
-                  aria-label='countryRes'
-                  {...formik.getFieldProps('countryRes')}
-                  name='countryRes'
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                  onChange={(e) => {
-                    formik.handleChange({
-                      target: {name: 'countryRes', value: e.target.value},
-                    })
-                  }}
-                >
-                  <OecdcountryList />
-                </select>
-              </span>
-              {formik.touched.countryRes && formik.errors.countryRes && (
-                <div className='fv-plugins-message-container'>
-                  <div className='fv-help-block text-danger'>
-                    <span role='alert'>{formik.errors.countryRes}</span>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div className='fv-row mb-10'>
-              <label className='form-label text-muted required fw-bold fs-6 mb-2'>
-                Please select your country of origin
-              </label>
-              <span className='d-flex flex-row'>
-                <div className='input-group-prepend'>
-                  <div className='input-group' id='countryflag'>
-                    <img
-                      className='form-control mw-55px'
-                      src={toAbsoluteUrl(`/media/flags/${countryOrigLabel}.svg`)}
-                    />
-                  </div>
+                  {formik.touched.interest && formik.errors.interest && (
+                    <div className='fv-plugins-message-container'>
+                      <div className='fv-help-block text-danger'>
+                        <span role='alert'>{formik.errors.interest}</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
-                <select
-                  className='form-select form-select-white'
-                  aria-label='countryOrig'
-                  {...formik.getFieldProps('countryOrig')}
-                  name='countryOrig'
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                  onChange={(e) => {
-                    formik.handleChange({
-                      target: {name: 'countryOrig', value: e.target.value},
-                    })
-                  }}
-                >
-                  <AfricanCountryList />
-                </select>
-              </span>
-              {formik.touched.countryOrig && formik.errors.countryOrig && (
-                <div className='fv-plugins-message-container'>
-                  <div className='fv-help-block text-danger'>
-                    <span role='alert'>{formik.errors.countryOrig}</span>
-                  </div>
+                <div className='fv-row mb-10'>
+                  <label className='form-label text-muted'>Your Insight on Africa's Furture</label>
+
+                  <textarea
+                    className='form-control mb-8'
+                    rows={3}
+                    placeholder='Type your insight here'
+                    {...formik.getFieldProps('insightAfrica')}
+                    name='insightAfrica'
+                    autoComplete='off'
+                    disabled={formik.isSubmitting}
+                  ></textarea>
                 </div>
-              )}
-            </div>
-            <div className='fv-row mb-10'>
-              <label className='form-label text-muted fw-bold fs-6 mb-2'>
-                Enter your profession
-              </label>
-              <input
-                type='text'
-                className='form-control'
-                placeholder='Enter your profession'
-                {...formik.getFieldProps('profession')}
-                name='profession'
-                autoComplete='off'
-                disabled={formik.isSubmitting}
-              />
-              {formik.touched.profession && formik.errors.profession && (
-                <div className='fv-plugins-message-container'>
-                  <div className='fv-help-block'>
-                    <span role='alert'>{formik.errors.profession}</span>
-                  </div>
-                </div>
-              )}
-            </div>
 
-            <div className='fv-row mb-10'>
-              <label className='form-label text-muted fw-bold fs-6 mb-2'>
-                Please enter your undergraduate information
-              </label>
-              <div className='input-group'>
-                <input
-                  type='text'
-                  className='form-control me-2'
-                  placeholder='Institution'
-                  {...formik.getFieldProps('undergrad.inst')}
-                  name='undergrad.inst'
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                />
-                <input
-                  type='text'
-                  className='form-control me-2'
-                  placeholder='Field of study'
-                  {...formik.getFieldProps('undergrad.field')}
-                  name='undergrad.field'
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                />
-                <select
-                  className='form-select form-select-white mb-2'
-                  aria-label='country'
-                  defaultValue='Degree'
-                  {...formik.getFieldProps('undergrad.degree')}
-                  name='undergrad.degree'
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                >
-                  <option> B.S</option>
-                  <option> B.A</option>
-                  <option> HND</option>
-                  <option> OND</option>
-                  <option> Associate</option>
-                </select>
-              </div>
-            </div>
-
-            <div className='fv-row mb-10'>
-              <label className='form-label text-muted fw-bold fs-6 mb-2'>
-                Please enetr your graduate school information if applicable
-              </label>
-              <div className='input-group'>
-                <input
-                  type='text'
-                  className='form-control me-2'
-                  placeholder='Institution'
-                  {...formik.getFieldProps('grad.inst')}
-                  name='grad.inst'
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                />
-                <input
-                  type='text'
-                  className='form-control me-2'
-                  placeholder='Field of study'
-                  {...formik.getFieldProps('grad.field')}
-                  name='grad.field'
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                />
-                <select
-                  className='form-select form-select-white mb-2'
-                  aria-label='country'
-                  defaultValue='Degree'
-                  {...formik.getFieldProps('grad.degree')}
-                  name='grad.degree'
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                >
-                  <option> Ph.D</option>
-                  <option> MS</option>
-                  <option> MD</option>
-                  <option> J.D</option>
-                  <option> MBA</option>
-                </select>
-              </div>
-            </div>
-            <div className='fv-row mb-10'>
-              <label className='form-label required text-muted fw-bold fs-6 mb-2 text-primary'>
-                Please enter your professional summary (500 words max)
-              </label>
-
-              <textarea
-                className='form-control mb-2'
-                rows={5}
-                placeholder='Type your professional summary'
-                {...formik.getFieldProps('summary')}
-                name='summary'
-                autoComplete='off'
-                disabled={formik.isSubmitting}
-              ></textarea>
-              {formik.touched.summary && formik.errors.summary && (
-                <div className='fv-plugins-message-container'>
-                  <div className='fv-help-block text-danger'>
-                    <span role='alert'>{formik.errors.summary}</span>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div className='fv-row mb-10'>
-              <label className='form-label required text-muted fw-bold fs-6 mb-2'>
-                Please list up to 4 professional interest
-              </label>
-              <div className='input-group'>
-                <input
-                  type='text'
-                  className='form-control me-2'
-                  placeholder='Interest 1'
-                  {...formik.getFieldProps('interest[0]')}
-                  name='interest[0]'
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                />
-                <input
-                  type='text'
-                  className='form-control me-2'
-                  placeholder='Interest 2'
-                  {...formik.getFieldProps('interest[1]')}
-                  name='interest[1]'
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                />
-                <input
-                  type='text'
-                  className='form-control me-2'
-                  placeholder='Interest 3'
-                  {...formik.getFieldProps('interest[2]')}
-                  name='interest[2]'
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                />
-                <input
-                  type='text'
-                  className='form-control me-2'
-                  placeholder='Interest 4'
-                  {...formik.getFieldProps('interest[3]')}
-                  name='interest[3]'
-                  autoComplete='off'
-                  disabled={formik.isSubmitting}
-                />
-              </div>
-              {formik.touched.interest && formik.errors.interest && (
-                <div className='fv-plugins-message-container'>
-                  <div className='fv-help-block text-danger'>
-                    <span role='alert'>{formik.errors.interest}</span>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            <div className='fv-row mb-10'>
-              <label className='form-label text-muted'>Your Insight on Africa's Furture</label>
-
-              <textarea
-                className='form-control mb-8'
-                rows={3}
-                placeholder='Type your insight here'
-                {...formik.getFieldProps('insightAfrica')}
-                name='insightAfrica'
-                autoComplete='off'
-                disabled={formik.isSubmitting}
-              ></textarea>
-            </div>
-
-            {/* <div>
+                {/* <div>
                     <button
                       type='button'
                       className='btn btn-primary'
@@ -560,120 +677,133 @@ export const UadFormPage: FC = () => {
                       Upload Files
                     </button>
                   </div> */}
-            <div className='row d-flex justify-content-center'>
-              <div className='col-lg-6 d-flex flex-column'>
-                <div className='fv-row mb-10'>
-                  <label className='form-label text-muted' htmlFor='uadFile'>
-                    Upload a profile photo or headshot
-                  </label>
-                  <div className='input-group'>
-                    <input
-                      type='file'
-                      accept='image/*'
-                      className='form-control'
-                      id='uadFile'
-                      {...formik.getFieldProps('avatar')}
-                      name='avatar'
-                      value={formik.values.avatar}
-                      autoComplete='off'
-                      disabled={formik.isSubmitting}
-                    />
-                    <button className='btn btn-secondary' type='button' id='upload'>
-                      Upload
-                    </button>
-                  </div>
-                </div>
+                <div className='row d-flex justify-content-center'>
+                  <div className='col-lg-6 d-flex flex-column'>
+                    <div className='fv-row mb-10'>
+                      <label className='form-label text-muted' htmlFor='uadFile'>
+                        Upload a profile photo or headshot
+                      </label>
+                      <div className='input-group'>
+                        <input
+                          type='file'
+                          accept='image/*'
+                          className='form-control'
+                          id='uadFile'
+                          {...formik.getFieldProps('avatar')}
+                          name='avatar'
+                          value={formik.values.avatar}
+                          autoComplete='off'
+                          disabled={formik.isSubmitting}
+                        />
+                        <button className='btn btn-secondary' type='button' id='upload'>
+                          Upload
+                        </button>
+                      </div>
+                    </div>
 
-                <div style={{display: 'none'}}>
-                  <input
-                    type='text'
-                    className='form-control'
-                    placeholder='Enter Unfound African Diasporas'
-                    {...formik.getFieldProps('honeypot')}
-                    name='honeypot'
-                    autoComplete='off'
-                    disabled={formik.isSubmitting}
-                  />
-                </div>
-
-                <div className='d-flex flex-column '>
-                  <div className='fv-row fs-2 fw-bold mb-2'>Terms &amp; Conditions</div>
-                  <div className='fv-row mb-5'>
-                    <label>
+                    <div style={{display: 'none'}}>
                       <input
-                        type='checkbox'
-                        className='me-3'
-                        {...formik.getFieldProps('dpxterms')}
-                        name='dpxterms'
+                        type='text'
+                        className='form-control'
+                        placeholder='Enter Unfound African Diasporas'
+                        {...formik.getFieldProps('honeypot')}
+                        name='honeypot'
                         autoComplete='off'
                         disabled={formik.isSubmitting}
-                        onChange={() => {
-                          formik.handleChange({
-                            target: {name: 'dpxterms', value: !formik.values.dpxterms},
-                          })
-                        }}
                       />
-                      I agree to the Terms &amp; Conditions of DIASPREX INC.
-                    </label>
-                    {formik.touched.dpxterms && formik.errors.dpxterms && (
-                      <div className='fv-plugins-message-container'>
-                        <div className='fv-help-block text-danger'>
-                          <span role='alert'>{formik.errors.dpxterms}</span>
-                        </div>
+                    </div>
+
+                    <div className='d-flex flex-column '>
+                      <div className='fv-row fs-2 fw-bold mb-2'>Terms &amp; Conditions</div>
+                      <div className='fv-row mb-5'>
+                        <label>
+                          <input
+                            type='checkbox'
+                            className='me-3'
+                            {...formik.getFieldProps('dpxterms')}
+                            name='dpxterms'
+                            autoComplete='off'
+                            disabled={formik.isSubmitting}
+                            checked={formik.values.dpxterms === true}
+                            onChange={() => {
+                              formik.handleChange({
+                                target: {name: 'dpxterms', value: !formik.values.dpxterms},
+                              })
+                            }}
+                          />
+                          I agree to the Terms &amp; Conditions of DIASPREX INC.
+                        </label>
+                        {formik.touched.dpxterms && formik.errors.dpxterms && (
+                          <div className='fv-plugins-message-container'>
+                            <div className='fv-help-block text-danger'>
+                              <span role='alert'>{formik.errors.dpxterms}</span>
+                            </div>
+                          </div>
+                        )}
                       </div>
-                    )}
-                  </div>
-                  <div className='fv-row mb-5'>
-                    <label>
-                      <input
-                        type='checkbox'
-                        className='me-3'
-                        {...formik.getFieldProps('publishcontactinfo')}
-                        name='publishcontactinfo'
-                        autoComplete='off'
-                        disabled={formik.isSubmitting}
-                        onChange={() => {
-                          formik.handleChange({
-                            target: {
-                              name: 'publishcontactinfo',
-                              value: !formik.values.publishcontactinfo,
-                            },
-                          })
-                        }}
-                      />
-                      Publish my email and phone information so people can contact me.
-                    </label>
-                    {formik.touched.publishcontactinfo && formik.errors.publishcontactinfo && (
-                      <div className='fv-plugins-message-container'>
-                        <div className='fv-help-block text-danger'>
-                          <span role='alert'>{formik.errors.publishcontactinfo}</span>
-                        </div>
+                      <div className='fv-row mb-5'>
+                        <label>
+                          <input
+                            type='checkbox'
+                            className='me-3'
+                            {...formik.getFieldProps('publishcontactinfo')}
+                            name='publishcontactinfo'
+                            autoComplete='off'
+                            disabled={formik.isSubmitting}
+                            checked={formik.values.publishcontactinfo === true}
+                            onChange={() => {
+                              formik.handleChange({
+                                target: {
+                                  name: 'publishcontactinfo',
+                                  value: !formik.values.publishcontactinfo,
+                                },
+                              })
+                            }}
+                          />
+                          Publish my email and phone information so people can contact me.
+                        </label>
+                        {formik.touched.publishcontactinfo && formik.errors.publishcontactinfo && (
+                          <div className='fv-plugins-message-container'>
+                            <div className='fv-help-block text-danger'>
+                              <span role='alert'>{formik.errors.publishcontactinfo}</span>
+                            </div>
+                          </div>
+                        )}
                       </div>
-                    )}
+                    </div>
+                    <div className='g-recaptcha' data-sitekey='your_site_key'></div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </>
+            )}
 
             <div className='form-footer'>
               <div className='text-center pt-15'>
                 <button
                   type='button'
                   className='btn btn-light-primary me-2'
-                  onClick={() => formik.resetForm()}
+                  onClick={(e) => {
+                    handleFormReset(e)
+                  }}
                 >
                   Reset
                 </button>
                 <button
                   type='button'
                   className='btn btn-light-primary me-2'
-                  onClick={() => formik.resetForm()}
+                  onClick={(e) => {
+                    handleNavigateDiasporas()
+                  }}
                 >
                   Cancel
                 </button>
                 <button
-                  type='submit'
+                  type='button'
                   className='btn btn-primary'
+                  onClick={(e) => {
+                    // formik.handleSubmit()
+                    handleFormConfirm()
+                  }}
                   disabled={
                     Object.keys(formik.touched).length === 0 ||
                     Object.keys(formik.errors).length !== 0 ||
