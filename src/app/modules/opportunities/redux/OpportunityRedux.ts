@@ -1,6 +1,9 @@
 import {Action} from '@reduxjs/toolkit'
 import {put, takeLatest} from 'redux-saga/effects'
-import {Opps, OppsQueryResponse} from '../../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {
+  Opps,
+  OppsQueryResponse,
+} from '../../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {ID} from '../../../../_metronic/helpers/crud-helper/models'
 import {getAllOppsAPI, getOppByIdAPI} from './OpportunityAPI'
 
@@ -24,11 +27,15 @@ const initialState: IOppsState = {
   error: null,
 }
 
+interface IAction {
+  type: string
+  payload: ID
+}
 export interface IOppsState {
-  opps: Opps[],
-  opp: Opps,
-  isLoading: boolean,
-  error: string | null,
+  opps: Opps[]
+  opp: Opps
+  isLoading: boolean
+  error: string | null
 }
 
 export const reducer = (state = initialState, action: ActionWithPayload<IOppsState>) => {
@@ -36,7 +43,7 @@ export const reducer = (state = initialState, action: ActionWithPayload<IOppsSta
     case actionTypes.GET_ALL_OPPS_REQUEST:
       return {
         ...state,
-        isLoading: true
+        isLoading: true,
       }
     case actionTypes.GET_ALL_OPPS_SUCCESS:
       return {
@@ -76,7 +83,10 @@ export const reducer = (state = initialState, action: ActionWithPayload<IOppsSta
 
 export const actions = {
   getAllOppsRequest: () => ({type: actionTypes.GET_ALL_OPPS_REQUEST}),
-  getAllOppsSuccess: (data: OppsQueryResponse) => ({type: actionTypes.GET_ALL_OPPS_SUCCESS, payload: data}),
+  getAllOppsSuccess: (data: OppsQueryResponse) => ({
+    type: actionTypes.GET_ALL_OPPS_SUCCESS,
+    payload: data,
+  }),
   getAllOppsFailed: (error: any) => ({type: actionTypes.GET_ALL_OPPS_FAILED, payload: error}),
   getOppByIdRequest: (id: ID) => ({type: actionTypes.GET_OPP_BY_ID_REQUEST, payload: id}),
   getOppByIdSuccess: (data: Opps) => ({type: actionTypes.GET_OPP_BY_ID_SUCCESS, payload: data}),
@@ -86,19 +96,18 @@ export const actions = {
 export function* saga() {
   yield takeLatest(actionTypes.GET_ALL_OPPS_REQUEST, function* getAllOppsSaga() {
     try {
-      const { data: data } = yield getAllOppsAPI()
+      const {data: data} = yield getAllOppsAPI()
       yield put(actions.getAllOppsSuccess(data))
-    } catch(error) {
+    } catch (error) {
       yield put(actions.getAllOppsFailed(error))
     }
   })
-  yield takeLatest(actionTypes.GET_OPP_BY_ID_REQUEST, function* getOppByIdSaga(id) {
-    console.log('oppById', id)
-    // try {
-    //   const { data: data } = yield getOppByIdAPI(action)
-    //   yield put(actions.getOppByIdSuccess(data))
-    // } catch(error) {
-    //   yield put(actions.getOppByIdFailed(error))
-    // }
+  yield takeLatest(actionTypes.GET_OPP_BY_ID_REQUEST, function* getOppByIdSaga(action: IAction) {
+    try {
+      const {data: data} = yield getOppByIdAPI(action.payload)
+      yield put(actions.getOppByIdSuccess(data.data))
+    } catch (error) {
+      yield put(actions.getOppByIdFailed(error))
+    }
   })
 }
