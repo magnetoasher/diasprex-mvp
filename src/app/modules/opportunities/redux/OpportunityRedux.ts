@@ -1,4 +1,4 @@
-import {Action} from '@reduxjs/toolkit'
+import {Action, Reducer} from '@reduxjs/toolkit'
 import {put, takeLatest} from 'redux-saga/effects'
 import {
   Opps,
@@ -6,6 +6,7 @@ import {
 } from '../../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {ID} from '../../../../_metronic/helpers/crud-helper/models'
 import {getAllOppsAPI, getOppByIdAPI} from './OpportunityAPI'
+import {IQuery} from './OpportunityAPI'
 
 export interface ActionWithPayload<T> extends Action {
   payload?: T
@@ -31,6 +32,12 @@ interface IAction {
   type: string
   payload: ID
 }
+
+interface IQueryAction {
+  type: string
+  payload: IQuery
+}
+
 export interface IOppsState {
   opps: Opps[]
   opp: Opps
@@ -38,7 +45,7 @@ export interface IOppsState {
   error: string | null
 }
 
-export const reducer = (state = initialState, action: ActionWithPayload<IOppsState>) => {
+export const reducer: Reducer = (state = initialState, action: ActionWithPayload<IOppsState>) => {
   switch (action.type) {
     case actionTypes.GET_ALL_OPPS_REQUEST:
       return {
@@ -82,7 +89,7 @@ export const reducer = (state = initialState, action: ActionWithPayload<IOppsSta
 }
 
 export const actions = {
-  getAllOppsRequest: () => ({type: actionTypes.GET_ALL_OPPS_REQUEST}),
+  getAllOppsRequest: (query?: IQuery) => ({type: actionTypes.GET_ALL_OPPS_REQUEST, payload: query}),
   getAllOppsSuccess: (data: OppsQueryResponse) => ({
     type: actionTypes.GET_ALL_OPPS_SUCCESS,
     payload: data,
@@ -94,14 +101,17 @@ export const actions = {
 }
 
 export function* saga() {
-  yield takeLatest(actionTypes.GET_ALL_OPPS_REQUEST, function* getAllOppsSaga() {
-    try {
-      const {data: data} = yield getAllOppsAPI()
-      yield put(actions.getAllOppsSuccess(data))
-    } catch (error) {
-      yield put(actions.getAllOppsFailed(error))
+  yield takeLatest(
+    actionTypes.GET_ALL_OPPS_REQUEST,
+    function* getAllOppsSaga(action: IQueryAction) {
+      try {
+        const {data: data} = yield getAllOppsAPI(action.payload)
+        yield put(actions.getAllOppsSuccess(data))
+      } catch (error) {
+        yield put(actions.getAllOppsFailed(error))
+      }
     }
-  })
+  )
   yield takeLatest(actionTypes.GET_OPP_BY_ID_REQUEST, function* getOppByIdSaga(action: IAction) {
     try {
       const {data: data} = yield getOppByIdAPI(action.payload)
