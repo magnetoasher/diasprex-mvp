@@ -3,25 +3,24 @@
 import React, {useEffect, useState} from 'react'
 import {Row, Col, Button, Card} from 'antd'
 import {StarOutlined, ShareAltOutlined} from '@ant-design/icons'
-import { useDispatch, connect, ConnectedProps } from 'react-redux'
+import {useDispatch, connect, ConnectedProps} from 'react-redux'
 import {useLocation, useNavigate, useParams} from 'react-router-dom'
 import {notification, Tooltip} from 'antd'
 import {OppsDA} from './component/oda'
 import {SubscriptionRequired} from './component/subscription-error-modal'
 import * as opps from './redux/OpportunityRedux'
 import {RootState} from '../../../setup'
+import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
-  const { id: id } = useParams()
+  const {id: id} = useParams()
   const dispatch = useDispatch()
-  const location = useLocation()
-  console.log('location', location)
   const navigate = useNavigate()
-  const [historyObject, setHistoryObject] = useState(location.state)
+  const [oppData, SetOppData] = useState<Opps>({})
   const [api, contextHolder] = notification.useNotification()
   const [isShowDetail, setIsShowDetail] = useState(false)
 
@@ -32,17 +31,21 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     dispatch(props.getOppByIdRequest(id))
   }, [])
 
+  useEffect(() => {
+    SetOppData(props.opps.opp[0])
+  }, [props.opps])
+
   const openNotification = (placement, message) => {
     api.info({
       message: `${message} !`,
-      description: <Context.Consumer>{({}) => `Project: ${historyObject.title}`}</Context.Consumer>,
+      description: <Context.Consumer>{({}) => `Project: ${oppData?.title}`}</Context.Consumer>,
       placement,
     })
   }
   const openNotificationWarning = (placement, message) => {
     api.warning({
       message: `${message} !`,
-      description: <Context.Consumer>{({}) => `Project: ${historyObject.title}`}</Context.Consumer>,
+      description: <Context.Consumer>{({}) => `Project: ${oppData?.title}`}</Context.Consumer>,
       placement,
     })
   }
@@ -85,7 +88,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                 color: 'white',
               }}
             >
-              {historyObject.title}
+              {oppData?.title}
             </label>
           </div>
         </Col>
@@ -225,7 +228,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   fontSize: '14px',
                 }}
               >
-                {historyObject.summary}
+                {oppData?.summary}
               </label>
             </div>
           </Col>
@@ -261,7 +264,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   width: '120px',
                 }}
               >
-                Following <br /> {historyObject.following}{' '}
+                Following <br /> {oppData?.following}{' '}
               </label>
               <label
                 style={{
@@ -277,7 +280,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                 }}
               >
                 Interest <br />
-                {historyObject.interest}{' '}
+                {oppData?.interest}{' '}
               </label>
               <label
                 style={{
@@ -292,7 +295,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   width: '120px',
                 }}
               >
-                Due Date <br /> {historyObject.due_date}
+                Due Date <br /> {oppData?.due_date}
               </label>
             </div>
           </Col>
@@ -324,7 +327,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                       fontSize: '14px',
                     }}
                   >
-                    {historyObject.summary}
+                    {oppData?.summary}
                   </label>
                 </div>
               </div>
@@ -343,7 +346,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                       fontSize: '14px',
                     }}
                   >
-                    {historyObject.summary}
+                    {oppData?.summary}
                   </label>
                 </div>
               </div>
