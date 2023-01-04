@@ -38,12 +38,12 @@ export function GenericMenu() {
         fontIcon='bi-archive'
       />
 
-      <AsideMenuItem
+      {/* <AsideMenuItem
         to='/dif_resources'
         icon='/media/icons/duotune/art/art004.svg'
         title='DIF Investment'
         fontIcon='bi-app-indicator'
-      />
+      /> */}
 
       <AsideMenuItem
         to='/diasporas'

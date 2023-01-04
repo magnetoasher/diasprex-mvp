@@ -11,7 +11,7 @@ export const HowRemitWorks = () => {
         <div className='text-center mb-12'>
           <div className='text-center mb-17'>
             <h3 className='fs-2hx text-dark mb-5' id='how_remittance_works'>
-              How Our Remittance Mobilization Works
+              How Our RemitFund Works
             </h3>
             <div className='fs-5 text-muted fw-bold'>
               We save our diasporas thousands of dollars in remittance transfer fees
