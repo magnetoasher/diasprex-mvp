@@ -215,9 +215,9 @@ const GeneralOpportunityCard = (props: Opps) => {
             borderRadius: '6px',
           }}
           onClick={() => {
-            history('/view_opportunity', {
+            history(`/opportunities_center/${props.uuid}`, {
               state: {
-                title: props.title,
+                title: props.sponsor,
                 summary: props.summary,
                 due_date: props.duedate,
                 following: props.following,

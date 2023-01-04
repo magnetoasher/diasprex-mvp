@@ -10,7 +10,7 @@ import './component/opportunity.css'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import * as opps from './redux/OpportunityRedux'
 import {RootState} from '../../../setup'
-import {IOpp} from './core/_models'
+import { Opps } from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -18,7 +18,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 const GeneralOpportunityCard: React.FC<PropsFromRedux> = (props) => {
   const dispatch = useDispatch()
-  const [oppsData, setOppsData] = useState<IOpp[]>([])
+  const [oppsData, setOppsData] = useState<Opps[]>([])
 
   useEffect(() => {
     dispatch(props.getAllOppsRequest())
@@ -56,6 +56,7 @@ const GeneralOpportunityCard: React.FC<PropsFromRedux> = (props) => {
               >
                 <GeneralCardComponent
                   id={element.id}
+                  uuid={element.uuid}
                   sponsor={element.sponsor}
                   title={element.title}
                   country={element.country}

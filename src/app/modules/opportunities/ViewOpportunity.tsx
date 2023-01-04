@@ -1,15 +1,25 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Row, Col, Button, Card} from 'antd'
 import {StarOutlined, ShareAltOutlined} from '@ant-design/icons'
-import {useLocation, useNavigate} from 'react-router-dom'
+import { useDispatch, connect, ConnectedProps } from 'react-redux'
+import {useLocation, useNavigate, useParams} from 'react-router-dom'
 import {notification, Tooltip} from 'antd'
 import {OppsDA} from './component/oda'
 import {SubscriptionRequired} from './component/subscription-error-modal'
+import * as opps from './redux/OpportunityRedux'
+import {RootState} from '../../../setup'
 
-function ViewOpportunity() {
+const mapState = (state: RootState) => ({opps: state.opps})
+const connector = connect(mapState, opps.actions)
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
+  const { id: id } = useParams()
+  const dispatch = useDispatch()
   const location = useLocation()
+  console.log('location', location)
   const navigate = useNavigate()
   const [historyObject, setHistoryObject] = useState(location.state)
   const [api, contextHolder] = notification.useNotification()
@@ -17,6 +27,10 @@ function ViewOpportunity() {
 
   const userType = localStorage.getItem('userType')
   const userTypeFull = localStorage.getItem('userTypeFull')
+
+  useEffect(() => {
+    dispatch(props.getOppByIdRequest(id))
+  }, [])
 
   const openNotification = (placement, message) => {
     api.info({
@@ -56,7 +70,7 @@ function ViewOpportunity() {
           <div style={{position: 'relative'}}>
             <img
               style={{height: '350px', width: '1255px', objectFit: 'cover'}}
-              src={historyObject.imgSource}
+              src={''}
               alt='sample'
             />
 
@@ -365,4 +379,4 @@ function ViewOpportunity() {
   )
 }
 
-export default ViewOpportunity
+export default connector(ViewOpportunity)
