@@ -1,23 +1,40 @@
 // eslint-disable jsx-a11y/anchor-is-valid /
 // @ts-nocheck comment
 
-import React, {useState, useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
+import {useDispatch, connect, ConnectedProps} from 'react-redux'
 import GeneralCardComponent from './GeneralCardOpportunityComponent/GeneralCardCompnent'
 import {Row, Col, Card, Typography, Pagination} from 'antd'
 import {PageTitle, PageLink} from '../../../_metronic/layout/core'
-import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import './component/opportunity.css'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import object1 from './core/GeneralOpportunityCardObject1.json'
+import * as opps from './redux/OpportunityRedux'
+import {RootState} from '../../../setup'
+import {IOpp} from './core/_models'
 
-function GeneralOpportunityCard() {
+const mapState = (state: RootState) => ({opps: state.opps})
+const connector = connect(mapState, opps.actions)
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const GeneralOpportunityCard: React.FC<PropsFromRedux> = (props) => {
+  const dispatch = useDispatch()
+  const [oppsData, setOppsData] = useState<IOpp[]>([])
+
+  useEffect(() => {
+    dispatch(props.getAllOppsRequest())
+  }, [])
+
+  useEffect(() => {
+    setOppsData(props.opps.opps.data)
+  }, [props.opps])
+
   const fetchData = async () => {}
   return (
     <>
       <PageTitle>Opportunities</PageTitle>
       <Card style={{backgroundColor: 'rgba(0,0,0, .02)'}}>
         <InfiniteScroll
-          dataLength={object1.length} //This is important field to render the next data
+          dataLength={oppsData?.length} //This is important field to render the next data
           next={fetchData}
           hasMore={true}
           loader={<h4 style={{textAlign: 'center'}}>Loading...</h4>}
@@ -28,7 +45,7 @@ function GeneralOpportunityCard() {
           }
         >
           <Row gutter={8} justify='space-evenly'>
-            {object1.map((element) => (
+            {oppsData?.map((element) => (
               <Col
                 xs={24}
                 sm={24}
@@ -60,4 +77,4 @@ function GeneralOpportunityCard() {
     </>
   )
 }
-export default GeneralOpportunityCard
+export default connector(GeneralOpportunityCard)
