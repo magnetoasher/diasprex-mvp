@@ -1,9 +1,8 @@
 import {useEffect, useState} from 'react'
+import {useDispatch, connect, ConnectedProps} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
-import Opportunity from '../../modules/opportunities/EnablerOpportunityCard'
 import {ListsWidget6, ChartsWidget3} from '../dashboard/clientswidgets'
-import Oppurtunity from '../../modules/opportunities/EnablerOpportunityCard'
 import {Card, Row} from 'antd'
 import {EditText, EditTextarea} from 'react-edit-text'
 import 'react-edit-text/dist/index.css'
@@ -11,11 +10,25 @@ import {ITransArrayModel} from '../../modules/Remittance/Components/Preferences/
 import EnablerOpportunityCard from '../../modules/opportunities/EnablerOpportunityCard'
 import SponsorOpportunityCard from '../../modules/opportunities/SponsorsOpportunityCard'
 import {SponsorProposalCard} from '../../modules/proposals/components/SponsorProposalCard'
+import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
+import {RootState} from '../../../setup'
+import {Opps} from '../../modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {ListLoading} from '../../modules/apps/admin-mgt-apps/core/loading/ListLoading'
 
-const NewDashboardPage = () => {
+const mapState = (state: RootState) => ({opps: state.opps})
+const connector = connect(mapState, opps.actions)
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
   const userType = localStorage.getItem('userType')
   const userTypeFull = localStorage.getItem('userTypeFull')
   const [userLabel, setUserLabel] = useState<any>(userTypeFull)
+  const dispatch = useDispatch()
+  const [recentOpps, setRecentOpps] = useState<Opps[]>([])
+  const query = {
+    items_per_page: 5,
+    page: 1,
+  }
 
   const userColor = {
     enabler: {
@@ -40,36 +53,13 @@ const NewDashboardPage = () => {
       : setUserLabel(userTypeFull)
   }, [userTypeFull, userType])
 
-  const [enableroppsdataObj] = useState([
-    {
-      country: 'Ghana',
-      sponsor: 'Sponsor 1',
-      title: 'This is title',
-      summary: 'this is detail, lorem ispum',
-      src: 'https://picsum.photos/192/140',
-    },
-    {
-      country: 'Kenya',
-      sponsor: 'Sponsor 2',
-      title: 'This is title',
-      summary: 'this is detail, lorem ispum',
-      src: 'https://picsum.photos/193/140',
-    },
-    {
-      country: 'Nigeria',
-      sponsor: 'Sponsor 3',
-      title: 'This is title',
-      summary: 'this is detail, lorem ispum',
-      src: 'https://picsum.photos/194/140',
-    },
-    {
-      country: 'Uganda',
-      sponsor: 'Sponsor 4',
-      title: 'This is title',
-      summary: 'this is detail, lorem ispum',
-      src: 'https://picsum.photos/195/140',
-    },
-  ])
+  useEffect(() => {
+    dispatch(props.getAllOppsRequest(query))
+  }, [])
+
+  useEffect(() => {
+    setRecentOpps(props.opps.opps?.data)
+  }, [props.opps])
 
   const [sponsoroppsdataObj] = useState([
     {
@@ -440,18 +430,22 @@ const NewDashboardPage = () => {
                 </div>
 
                 <div className='card-body p-2 overflow-auto' style={{height: '350px'}}>
-                  {enableroppsdataObj.map((e) => (
-                    <EnablerOpportunityCard
-                      sponsor={e.sponsor}
-                      country={e.country}
-                      title={e.title}
-                      summary={e.summary}
-                      badgeColor='info'
-                      status='New'
-                      dashboard={true}
-                      picSrc={e.src}
-                    />
-                  ))}
+                  {props.opps.isLoading ? (
+                    <ListLoading />
+                  ) : (
+                    recentOpps?.map((e) => (
+                      <EnablerOpportunityCard
+                        sponsor={e.sponsor}
+                        country={e.country}
+                        title={e.title}
+                        summary={e.summary}
+                        badgeColor='info'
+                        status='New'
+                        dashboard={true}
+                        picSrc={e.thumbnail}
+                      />
+                    ))
+                  )}
                 </div>
               </div>
             </Card>
@@ -574,4 +568,4 @@ const NewDashboardPage = () => {
   )
 }
 
-export default NewDashboardPage
+export default connector(NewDashboardPage)
