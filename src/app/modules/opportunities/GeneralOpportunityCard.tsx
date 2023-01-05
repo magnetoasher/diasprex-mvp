@@ -10,7 +10,7 @@ import './component/opportunity.css'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import * as opps from './redux/OpportunityRedux'
 import {RootState} from '../../../setup'
-import { Opps } from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -44,16 +44,9 @@ const GeneralOpportunityCard: React.FC<PropsFromRedux> = (props) => {
             </p>
           }
         >
-          <Row gutter={8} justify='space-evenly'>
+          <div className='row g-6 g-xl-9'>
             {oppsData?.map((element) => (
-              <Col
-                xs={24}
-                sm={24}
-                md={6}
-                lg={6}
-                style={{margin: '5px'}}
-                className='box-shadow-style bg-white'
-              >
+              <div className='col-md-6 col-xl-4'>
                 <GeneralCardComponent
                   id={element.id}
                   uuid={element.uuid}
@@ -70,9 +63,9 @@ const GeneralOpportunityCard: React.FC<PropsFromRedux> = (props) => {
                   following={element.following}
                   showedinterest={element.showedinterest}
                 />
-              </Col>
+              </div>
             ))}
-          </Row>
+          </div>
         </InfiniteScroll>
       </Card>
     </>

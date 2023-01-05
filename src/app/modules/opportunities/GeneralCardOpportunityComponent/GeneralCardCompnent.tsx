@@ -1,8 +1,8 @@
-import {Button, Tooltip} from 'antd'
 import clsx from 'clsx'
 import {useNavigate, Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {Opps} from '../../../../app/modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import Moment from 'moment'
 
 const GeneralOpportunityCard = (props: Opps) => {
   const history = useNavigate()
@@ -11,20 +11,18 @@ const GeneralOpportunityCard = (props: Opps) => {
   const dealTypeLength = props.dealtype?.length! - 1
   return (
     // <Link to='/view_opportunity'>
-    <div className='card row-lg border border-2 border-gray-300 border-hover p-3'>
-      <div className='col-xs g-1'>
-        <div className='row-xs d-flex flex-row'>
-          <div className='col flex-start'>
-            <p className='fs-3 fw-bolder text-dark'>
-              {props.sponsor} {props.id}
-            </p>
+    <div className='card shadow-sm border border-2 border-gray-300 border-hover p-3'>
+      <div className='col-md g-1'>
+        <div className='row d-flex flex-row'>
+          <div className='col-md-6 flex-start'>
+            <p className='fs-3 fw-bolder text-dark'>{props.sponsor}</p>
           </div>
-          <div className='col text-end'>
+          <div className='col-md-6 text-end'>
             <span className='symbol symbol-30px w-30px bg-light me-2'>
               <img
                 src={toAbsoluteUrl(`/media/flags/${props.country?.toLowerCase()}.svg`)}
                 className='fs-6 fw-bold'
-                alt='oppscard'
+                alt={props.country}
                 data-toggle='tooltips'
                 title={props.country}
                 data-bs-placement='bottom'
@@ -99,7 +97,25 @@ const GeneralOpportunityCard = (props: Opps) => {
             </div> */}
       <div className='col-md py-1 px-3 mb-3'>
         <div className='d-flex justify-content-center flex-wrap mb-5'>
-          <div
+          <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3'>
+            <div className='fs-6 text-gray-800 fw-bold'>
+              {Moment(props.duedate).format('MMM Do, YYYY')}
+            </div>
+            <div className='fw-semibold text-gray-400'>Due Date</div>
+          </div>
+          <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3'>
+            <div className='fs-6 text-gray-800 fw-bold'>
+              {props.dealtype?.map((deal, index) =>
+                index !== dealTypeLength ? (
+                  <span className='me-1'>{deal} |</span>
+                ) : (
+                  <span className='me-1'>{deal}</span>
+                )
+              )}
+            </div>
+            <div className='fw-semibold text-gray-400'>Deal Type</div>
+          </div>
+          {/* <div
             className='border border-gray-300 border-dashed rounded py-1 px-1 me-7 mb-3'
             style={{
               display: 'flex',
@@ -113,13 +129,14 @@ const GeneralOpportunityCard = (props: Opps) => {
                   fontSize: '12px',
                 }}
               >
-                {props.duedate}
+                {Moment(props.duedate).format('MMM Do, YYYY')}
+              
               </label>
             </div>
             <div className='fw-bold text-gray-400'>Due Date</div>
-          </div>
+          </div> */}
 
-          <div
+          {/* <div
             className='border border-gray-300 border-dashed rounded  py-1 px-1 mb-3'
             style={{
               textAlign: 'center',
@@ -141,7 +158,7 @@ const GeneralOpportunityCard = (props: Opps) => {
               </label>
             </div>
             <div className='fw-bold text-gray-400'>Deal Type</div>
-          </div>
+          </div> */}
         </div>
 
         <div
