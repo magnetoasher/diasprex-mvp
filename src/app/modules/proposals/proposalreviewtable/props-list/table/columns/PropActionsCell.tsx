@@ -54,6 +54,15 @@ const PropActionsCell: FC<Props> = ({id}) => {
             Review
           </a>
         </div>
+        <div className='menu-item px-3'>
+          <a
+            className='menu-link px-3'
+            data-kt-users-table-filter='delete_row'
+            onClick={async () => await deleteItem.mutateAsync()} // Change to select callback
+          >
+            Select
+          </a>
+        </div>
         {/* end::Menu item */}
 
         {/* begin::Menu item */}
@@ -61,11 +70,12 @@ const PropActionsCell: FC<Props> = ({id}) => {
           <a
             className='menu-link px-3'
             data-kt-users-table-filter='delete_row'
-            onClick={async () => await deleteItem.mutateAsync()}
+            onClick={async () => await deleteItem.mutateAsync()} // Change to decline callback
           >
             Decline
           </a>
         </div>
+
         {/* end::Menu item */}
 
         {/* begin::Menu item */}

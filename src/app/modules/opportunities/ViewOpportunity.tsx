@@ -1,6 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import React, {useEffect, useState} from 'react'
+import clsx from 'clsx'
+import Moment from 'moment'
 import {Row, Col, Button, Card} from 'antd'
 import {StarOutlined, ShareAltOutlined} from '@ant-design/icons'
 import {useDispatch, connect, ConnectedProps} from 'react-redux'
@@ -11,6 +13,7 @@ import {SubscriptionRequired} from './component/subscription-error-modal'
 import * as opps from './redux/OpportunityRedux'
 import {RootState} from '../../../setup'
 import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {toAbsoluteUrl} from '../../../_metronic/helpers'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -66,32 +69,106 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     setIsShowDetail(!isShowDetail)
   }
 
+  const badgeColor = oppData?.open ? 'success' : 'danger'
+  const dealTypeLength = oppData?.dealtype?.length! - 1
+
   return (
     <>
-      <Row gutter={[8, 16]}>
-        <Col xs={24} sm={24} md={24} lg={24}>
-          <div style={{position: 'relative'}}>
-            <img
-              style={{height: '350px', width: '1255px', objectFit: 'cover'}}
-              src={''}
-              alt='sample'
-            />
+      <div className='app-content'>
+        <div className='card shadow-sm mb-6 mb-xl-9'>
+          <div className='card-body pt-9 pb-0'>
+            <div class='d-flex flex-wrap flex-sm-nowrap mb-6'>
+              <div class='d-flex flex-center flex-shrink-0 bg-light rounded w-200px h-100px w-lg-250px h-lg-250px me-7 mb-4'>
+                {oppData?.thumbnail === '' ? (
+                  <div
+                    className={clsx(
+                      'd-flex symbol-label mw-100 h-100px h-lg-150px align-items-center justify-content-center fs-1 rounded',
+                      `bg-light-${badgeColor}`,
+                      ` text-capitalize text-${badgeColor}`
+                    )}
+                  >
+                    {oppData?.country}
+                  </div>
+                ) : (
+                  <img
+                    className='d-block mw-100 rounded'
+                    src={oppData?.thumbnail}
+                    alt='oppsthumb'
+                  />
+                )}
+              </div>
+              <div class='flex-grow-1'>
+                <div class='d-flex justify-content-between align-items-start flex-wrap mb-2'>
+                  <div class='d-flex flex-column'>
+                    <div className='d-flex align-items-center mb-1'>
+                      <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bold me-3'>
+                        {oppData?.sponsor}
+                      </a>
+                      <span className='symbol symbol-30px w-30px bg-light me-2'>
+                        <img
+                          src={toAbsoluteUrl(`/media/flags/${oppData?.country?.toLowerCase()}.svg`)}
+                          className='fs-6 fw-bold'
+                          alt={oppData?.country}
+                          data-toggle='tooltips'
+                          title={oppData?.country}
+                          data-bs-placement='bottom'
+                        />
+                      </span>
+                      <span className={`badge badge-light-${badgeColor} me-auto`}>
+                        {oppData?.open ? 'Open' : 'Closed'}
+                      </span>
+                    </div>
 
-            <label
-              style={{
-                position: 'absolute',
-                display: 'block',
-                fontSize: '40px',
-                fontWeight: '600',
-                bottom: '50px',
-                left: '30px',
-                color: 'white',
-              }}
-            >
-              {oppData?.title}
-            </label>
+                    <div className='d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-400'>
+                      Title: {oppData?.title}
+                    </div>
+                  </div>
+                  <div className='d-flex mb-4'>
+                    <button type='button' className='btn btn-sm btn-primary me-3'>
+                      Support
+                      <Tooltip title='Support Opportunity'>
+                        <StarOutlined />
+                      </Tooltip>
+                    </button>
+
+                    <button type='button' className='btn btn-sm btn-success me-3'>
+                      Follow
+                    </button>
+                  </div>
+                </div>
+                <div class='d-flex flex-wrap justify-content-start'>
+                  <div className='d-flex flex-wrap'>
+                    <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                      <div className='d-flex align-items-center'>
+                        <div className='fs-4 fw-bold'>
+                          {Moment(oppData?.duedate).format('MMM Do, YYYY')}
+                        </div>
+                      </div>
+
+                      <div className='fw-semibold fs-6 text-gray-400'>Due Date</div>
+                    </div>
+                    <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                      <div className='d-flex align-items-center'>
+                        <div className='fs-4 fw-bold'>
+                          {oppData?.dealtype?.map((deal, index) =>
+                            index !== dealTypeLength ? (
+                              <span className='me-1'>{deal} |</span>
+                            ) : (
+                              <span className='me-1'>{deal}</span>
+                            )
+                          )}
+                        </div>
+                      </div>
+
+                      <div className='fw-semibold fs-6 text-gray-400'>Deal Type</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </Col>
+        </div>
+
         <Col xs={24} sm={24} md={24} lg={24}>
           <div
             style={{
@@ -124,83 +201,21 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
             )}
             {userTypeFull === 'basic_enabler' && <SubscriptionRequired />}
             {userTypeFull !== 'basic_enabler' && <OppsDA OnDetails={handleDetails} />}
-
-            <div
-              style={{
-                display: 'flex',
-              }}
-            >
-              <div
-                style={{
-                  padding: '1px',
-                }}
-              >
-                <Button
-                  style={{
-                    background: '#4eacff',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    fontSize: '15px',
-                    color: 'white',
-                  }}
-                >
-                  Crowdfund
-                  <Tooltip title='Crowdfund'>
-                    <ShareAltOutlined />
-                  </Tooltip>
-                </Button>
-              </div>
-              <div
-                style={{
-                  padding: '1px',
-                }}
-              >
-                <Button
-                  style={{
-                    background: '#4eacff',
-                    borderRadius: '8px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    fontSize: '15px',
-                    color: 'white',
-                  }}
-                >
-                  Crowdlend
-                  <Tooltip title='Crowdlend'>
-                    <StarOutlined />
-                  </Tooltip>
-                </Button>
-              </div>
-              <div
-                style={{
-                  padding: '1px',
-                }}
-              >
-                <Button
-                  onClick={() => openNotification('topRight', 'Added to Favourite')}
-                  style={{
-                    background: '#7fe772',
-                    color: 'white',
-                    fontWeight: '600',
-                    borderRadius: '6px',
-                  }}
-                >
-                  Follow
-                </Button>
-              </div>
-            </div>
           </div>
         </Col>
-      </Row>
+      </div>
 
       <Card style={{marginTop: '10px'}}>
         <div className='fv-row d-flex align-items-center bg-light p-10'>
           <span className='fw-bolder fs-4 text-dark text-uppercase me-3'>Deal Type:</span>
           <span className='text-muted'>
-            Equity/Equity Financing, Debt Financing, Consulting, Contract
+            {oppData?.dealtype?.map((deal, index) =>
+              index !== dealTypeLength ? (
+                <span className='me-1'>{deal} |</span>
+              ) : (
+                <span className='me-1'>{deal}</span>
+              )
+            )}
           </span>
         </div>
         <Row style={{display: 'flex', marginTop: '5px'}} gutter={[8, 16]}>

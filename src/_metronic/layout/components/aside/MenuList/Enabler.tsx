@@ -29,12 +29,12 @@ export function Enabler() {
         fontIcon='bi-app-indicator'
       />
 
-      <AsideMenuItem
+      {/* <AsideMenuItem
         to='dif_resources'
         icon='/media/icons/duotune/art/art003.svg'
         title='DIF Investment'
         fontIcon='bi-app-indicator'
-      />
+      /> */}
       <AsideMenuItem
         to='remittance_resources'
         icon='/media/icons/duotune/art/art004.svg'

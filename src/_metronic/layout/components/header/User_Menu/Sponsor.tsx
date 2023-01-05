@@ -1,20 +1,20 @@
 import React from 'react'
-import { MenuItem } from '../MenuItem'
-import { useIntl } from 'react-intl'
+import {MenuItem} from '../MenuItem'
+import {useIntl} from 'react-intl'
 
 const Sponsor = () => {
-    const intl = useIntl()
+  const intl = useIntl()
 
-    return (
-        <>
-            <MenuItem title={intl.formatMessage({ id: 'MENU.DASHBOARD' })} to='/dashboard' />
-            <MenuItem title='Create Opportunities' to='/createopportunities' />
-            <MenuItem title='Proposals' to='/sponsor_proposals' />
-            <MenuItem title='DIF Investment' to='dif_resources' />
-            <MenuItem title='Diaspora' to='/diasporas' />
-            <MenuItem title='FAQs' to='faqs' />
-
-        </>)
+  return (
+    <>
+      <MenuItem title={intl.formatMessage({id: 'MENU.DASHBOARD'})} to='/dashboard' />
+      <MenuItem title='My Opportunities' to='/createopportunities' />
+      <MenuItem title='Proposals' to='/sponsor_proposals' />
+      {/* <MenuItem title='DIF Investment' to='dif_resources' /> */}
+      <MenuItem title='Diaspora' to='/diasporas' />
+      <MenuItem title='FAQs' to='faqs' />
+    </>
+  )
 }
 
 export default Sponsor
