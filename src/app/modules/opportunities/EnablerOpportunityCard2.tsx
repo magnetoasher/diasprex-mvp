@@ -5,9 +5,9 @@ import {useNavigate, Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import {Opps} from '../../../app/modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 type Props = {
-  opp: Opps
-  followed?: boolean | undefined
-  dashboard?: boolean | undefined
+  opp?: Opps
+  followed?: boolean
+  dashboard?: boolean
 }
 const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp}) => {
   const badgeColor =
@@ -18,7 +18,10 @@ const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp}) => {
       <div className='card shadow-sm mb-6 mb-xl-9'>
         <div className={`card-header ribbon bg-gray-400 ribbon-end ribbon-clip`}>
           <div className='d-flex align-items-center mb-1'>
-            <Link to={`/opportunities_center/${opp?.uuid}`} className='text-gray-800 text-hover-primary fs-2 fw-bold me-3'>
+            <Link
+              to={`/opportunities_center/${opp?.uuid}`}
+              className='text-gray-800 text-hover-primary fs-2 fw-bold me-3'
+            >
               {opp?.sponsor}
             </Link>
             <span className='symbol symbol-30px w-30px bg-light me-2'>
