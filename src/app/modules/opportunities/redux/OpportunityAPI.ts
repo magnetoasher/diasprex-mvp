@@ -7,6 +7,7 @@ const OPPS_URL = `${API_URL}/opportunities`
 export interface IQuery {
   items_per_page: number
   page: number
+  status: string
 }
 
 const getAllOppsAPI = (query?: IQuery) => axios.get(`${OPPS_URL}`, {params: query})
