@@ -19,9 +19,13 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 const GeneralOpportunityCard: React.FC<PropsFromRedux> = (props) => {
   const dispatch = useDispatch()
   const [oppsData, setOppsData] = useState<Opps[]>([])
+  const query = {
+    status: "published",
+    featured: true,
+  }
 
   useEffect(() => {
-    dispatch(props.getAllOppsRequest())
+    dispatch(props.getAllOppsRequest(query))
   }, [])
 
   useEffect(() => {
