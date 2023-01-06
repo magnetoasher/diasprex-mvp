@@ -28,7 +28,7 @@ const PropActionsCell: FC<Props> = ({id}) => {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
-      queryClient.invalidateQueries([`${QUERIES.USERS_LIST}-${query}`])
+      queryClient.invalidateQueries([`${QUERIES.PROPS_LIST}-${query}`])
     },
   })
 
@@ -52,6 +52,14 @@ const PropActionsCell: FC<Props> = ({id}) => {
         <div className='menu-item px-3'>
           <a className='menu-link px-3' onClick={openEditModal}>
             Edit
+          </a>
+        </div>
+        {/* end::Menu item */}
+
+        {/* begin::Menu item */}
+        <div className='menu-item px-3'>
+          <a className='menu-link px-3' onClick={openEditModal}>
+            Decline
           </a>
         </div>
         {/* end::Menu item */}

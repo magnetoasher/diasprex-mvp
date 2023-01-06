@@ -14,6 +14,7 @@ import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
 import {RootState} from '../../../setup'
 import {Opps} from '../../modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {ListLoading} from '../../modules/apps/admin-mgt-apps/core/loading/ListLoading'
+import EnablerOpportunityCard2 from '../../modules/opportunities/EnablerOpportunityCard2'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -425,25 +426,16 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
               <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>
                 <div className='card-header cursor-pointer'>
                   <div className='card-title m-0'>
-                    <h3 className='fw-bolder m-0'>Recent Opportunities</h3>
+                    <h3 className='fw-bolder m-0 text-uppercase'>Recent Opportunities</h3>
                   </div>
                 </div>
 
-                <div className='card-body p-2 overflow-auto' style={{height: '350px'}}>
+                <div className='card-body p-2 overflow-auto' style={{height: '500px'}}>
                   {props.opps.isLoading ? (
                     <ListLoading />
                   ) : (
-                    recentOpps?.map((e) => (
-                      <EnablerOpportunityCard
-                        sponsor={e.sponsor}
-                        country={e.country}
-                        title={e.title}
-                        summary={e.summary}
-                        badgeColor='info'
-                        status='New'
-                        dashboard={true}
-                        picSrc={e.thumbnail}
-                      />
+                    recentOpps?.map((oppObject) => (
+                      <EnablerOpportunityCard2 opp={oppObject} dashboard={true} />
                     ))
                   )}
                 </div>
@@ -455,7 +447,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                 <a
                   role='button'
                   href='/my_opportunities'
-                  className='btn btn-primary text-hover-white fw-bolder'
+                  className='btn btn-primary text-uppercase text-hover-white fw-bolder'
                 >
                   Followed Opportunities
                 </a>

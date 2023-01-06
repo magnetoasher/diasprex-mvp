@@ -3,11 +3,11 @@
 import React, {useEffect, useState} from 'react'
 import clsx from 'clsx'
 import Moment from 'moment'
-import {Row, Col, Button, Card} from 'antd'
+import {Row, Col, Button, Card, notification, Tooltip} from 'antd'
 import {StarOutlined, ShareAltOutlined} from '@ant-design/icons'
 import {useDispatch, connect, ConnectedProps} from 'react-redux'
 import {useLocation, useNavigate, useParams} from 'react-router-dom'
-import {notification, Tooltip} from 'antd'
+
 import {OppsDA} from './component/oda'
 import {SubscriptionRequired} from './component/subscription-error-modal'
 import * as opps from './redux/OpportunityRedux'
@@ -77,8 +77,10 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
       <div className='app-content'>
         <div className='card shadow-sm mb-6 mb-xl-9'>
           <div className='card-body pt-9 pb-0'>
-            <div class='d-flex flex-wrap flex-sm-nowrap mb-6'>
-              <div class='d-flex flex-center flex-shrink-0 bg-light rounded w-200px h-100px w-lg-250px h-lg-250px me-7 mb-4'>
+            <div className='d-flex flex-wrap flex-sm-nowrap mb-6'>
+              <div
+                className={`d-flex flex-center flex-shrink-0 bg-light-${badgeColor} rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4`}
+              >
                 {oppData?.thumbnail === '' ? (
                   <div
                     className={clsx(
@@ -97,9 +99,9 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   />
                 )}
               </div>
-              <div class='flex-grow-1'>
-                <div class='d-flex justify-content-between align-items-start flex-wrap mb-2'>
-                  <div class='d-flex flex-column'>
+              <div className='flex-grow-1'>
+                <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
+                  <div className='d-flex flex-column'>
                     <div className='d-flex align-items-center mb-1'>
                       <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bold me-3'>
                         {oppData?.sponsor}
@@ -136,7 +138,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                     </button>
                   </div>
                 </div>
-                <div class='d-flex flex-wrap justify-content-start'>
+                <div className='d-flex flex-wrap justify-content-start'>
                   <div className='d-flex flex-wrap'>
                     <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                       <div className='d-flex align-items-center'>
