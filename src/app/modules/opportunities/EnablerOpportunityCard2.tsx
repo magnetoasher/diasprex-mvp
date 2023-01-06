@@ -18,9 +18,9 @@ const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp}) => {
       <div className='card shadow-sm mb-6 mb-xl-9'>
         <div className={`card-header ribbon bg-gray-400 ribbon-end ribbon-clip`}>
           <div className='d-flex align-items-center mb-1'>
-            <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bold me-3'>
+            <Link to={`/opportunities_center/${opp?.uuid}`} className='text-gray-800 text-hover-primary fs-2 fw-bold me-3'>
               {opp?.sponsor}
-            </a>
+            </Link>
             <span className='symbol symbol-30px w-30px bg-light me-2'>
               <img
                 src={toAbsoluteUrl(`/media/flags/${opp?.country?.toLowerCase()}.svg`)}

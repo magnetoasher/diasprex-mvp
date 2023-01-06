@@ -29,6 +29,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
   const query = {
     items_per_page: 5,
     page: 1,
+    status: 'published'
   }
 
   const userColor = {
