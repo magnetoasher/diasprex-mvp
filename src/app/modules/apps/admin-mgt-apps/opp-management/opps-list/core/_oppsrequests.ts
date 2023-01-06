@@ -83,7 +83,7 @@ const changeOppsStatus = (id: ID, status: string): Promise<void> => {
   const data = {
     status,
   }
-  return axios.post(`${OPPS_URL}/${id}/status?status=${status}`, data).then(() => {})
+  return axios.put(`${OPPS_URL}/${id}/status?status=${status}`, data).then(() => {})
 }
 
 export {
