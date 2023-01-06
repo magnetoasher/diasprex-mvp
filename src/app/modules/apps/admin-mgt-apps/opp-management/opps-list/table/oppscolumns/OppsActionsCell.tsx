@@ -36,21 +36,21 @@ const OppsActionsCell: FC<Props> = ({id}) => {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
-      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
+      queryClient.invalidateQueries([`${QUERIES.OPPS_LIST}-${query}`])
     },
   })
   const acceptOpp = useMutation(() => changeOppsStatus(id, 'accepted'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
-      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
+      queryClient.invalidateQueries([`${QUERIES.OPPS_LIST}-${query}`])
     },
   })
   const acceptOppwRevision = useMutation(() => changeOppsStatus(id, 'accepted with revision'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
-      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
+      queryClient.invalidateQueries([`${QUERIES.OPPS_LIST}-${query}`])
     },
   })
 
@@ -58,14 +58,14 @@ const OppsActionsCell: FC<Props> = ({id}) => {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
-      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
+      queryClient.invalidateQueries([`${QUERIES.OPPS_LIST}-${query}`])
     },
   })
   const rejectOpp = useMutation(() => changeOppsStatus(id, 'not accepted'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
-      queryClient.invalidateQueries([`${QUERIES.DIASPORAS_LIST}-${query}`])
+      queryClient.invalidateQueries([`${QUERIES.OPPS_LIST}-${query}`])
     },
   })
 

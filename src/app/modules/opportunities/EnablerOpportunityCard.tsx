@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import {useState} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
 
@@ -38,7 +39,20 @@ const EnablerOpportunityCard = ({
                 />
               </div> */}
               <div className='symbol symbol-50px symbol-lg-60px symbol-fixed position-relative me-3'>
-                <img src={picSrc} alt='Metornic' />
+                {picSrc === '' ? (
+                  <div
+                    className={clsx(
+                      'd-flex symbol-label mw-100 h-100px h-lg-150px align-items-center justify-content-center fs-1 rounded',
+                      `bg-light-${badgeColor}`,
+                      ` text-capitalize text-${badgeColor}`
+                    )}
+                  >
+                    {country}
+                  </div>
+                ) : (
+                  <img className='d-block mw-100 rounded' src={picSrc} alt='oppsthumb' />
+                )}
+                {/* <img src={picSrc} alt={sponsor}/> */}
                 <div className='position-absolute translate-middle bottom-0 start-100 mb-6 border-white h-20px w-30px'></div>
               </div>
 

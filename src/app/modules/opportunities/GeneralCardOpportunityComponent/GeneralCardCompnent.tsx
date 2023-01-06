@@ -99,7 +99,7 @@ const GeneralOpportunityCard = (props: Opps) => {
         <div className='d-flex justify-content-center flex-wrap mb-5'>
           <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3'>
             <div className='fs-6 text-gray-800 fw-bold'>
-              {Moment(props.duedate).format('MMM Do, YYYY')}
+              {Moment(props.duedate).format('DD MMM, YYYY')}
             </div>
             <div className='fw-semibold text-gray-400'>Due Date</div>
           </div>
