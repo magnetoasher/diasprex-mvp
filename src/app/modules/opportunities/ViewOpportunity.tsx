@@ -126,6 +126,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                     </div>
                   </div>
                   <div className='d-flex mb-4'>
+                    {/* Click Support increases support parameter by +1  */}
                     <button type='button' className='btn btn-sm btn-primary me-3'>
                       Support
                       <Tooltip title='Support Opportunity'>
@@ -133,6 +134,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                       </Tooltip>
                     </button>
 
+                    {/* Click Follow increases following parameter by +1 text changed to unfollow if Enabler is already following */}
                     <button type='button' className='btn btn-sm btn-success me-3'>
                       Follow
                     </button>
@@ -297,7 +299,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                 }}
               >
                 Interest <br />
-                {oppData?.interest}{' '}
+                {oppData?.showedinterest}
               </label>
               <label
                 style={{
@@ -312,7 +314,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   width: '120px',
                 }}
               >
-                Due Date <br /> {oppData?.due_date}
+                Due Date <br /> {Moment(oppData?.duedate).format('DD MMM, YYYY')}
               </label>
             </div>
           </Col>

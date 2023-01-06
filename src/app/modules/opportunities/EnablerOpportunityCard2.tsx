@@ -1,10 +1,8 @@
 //@ts-nocheck
 import clsx from 'clsx'
-import {useState, FC} from 'react'
-import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
-import {Tooltip} from 'antd'
-import Moment from 'moment'
-import {StarOutlined, ShareAltOutlined} from '@ant-design/icons'
+import {FC} from 'react'
+import {useNavigate, Link} from 'react-router-dom'
+import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import {Opps} from '../../../app/modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 type Props = {
   opp: Opps
@@ -14,6 +12,7 @@ type Props = {
 const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp}) => {
   const badgeColor =
     opp?.status === 'new' ? 'info' : opp?.status === 'published' ? 'success' : 'danger'
+  const history = useNavigate()
   return (
     <div className='KTCard mb-5'>
       <div className='card shadow-sm mb-6 mb-xl-9'>
@@ -45,7 +44,11 @@ const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp}) => {
             <span className={`ribbon-inner bg-info`}></span>
           </div>
         </div>
-        <a onClick={() => {}}>
+        <a
+          onClick={() => {
+            history(`/opportunities_center/${opp.uuid}`)
+          }}
+        >
           <div className='card-body pt-9 pb-0'>
             <div className='d-flex flex-wrap flex-sm-nowrap mb-6'>
               <div
