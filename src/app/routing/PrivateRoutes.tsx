@@ -51,6 +51,7 @@ const PrivateRoutes = () => {
 
   if (authState !== null) {
     if (authState.isAuthenticated) {
+      console.log('****AUTH STATE OBJECT****:', authState)
       return (
         <Routes>
           <Route path='account/*' element={<RegistrationStepsPage />} />
