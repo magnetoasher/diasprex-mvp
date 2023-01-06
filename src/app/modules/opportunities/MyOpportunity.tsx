@@ -13,12 +13,14 @@ import {
 import Opportunity from './EnablerOpportunityCard'
 // import {MyOpportunityTable} from './MyOpportunityTable'
 import {Tabs} from 'antd'
-import {followedopps, draft, submitted, active, completed} from '../proposals/components/models'
+// import {followedopps, draft, submitted, active, completed} from '../proposals/components/models'
 import {EnablerProposalCard} from '../proposals/components/EnablerProposalCard'
 import EnablerOpportunityCard from './EnablerOpportunityCard'
 import * as proposals from '../proposals/redux/ProposalRedux'
 import {RootState} from '../../../setup'
 import {Proposal} from '../proposals/proposalreviewtable/props-list/core/_models'
+import EnablerOpportunityCard2 from './EnablerOpportunityCard2'
+import {Link} from 'react-router-dom'
 
 const mapState = (state: RootState) => ({proposals: state.proposals})
 const connector = connect(mapState, proposals.actions)
@@ -31,11 +33,11 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
     // @ts-ignore
     enablerUserId: authState.accessToken.claims.uid,
   }
-  const [followed, setFollowed] = useState([])
-  const [draftprop, setDraftprop] = useState([])
-  const [activeprop, setActiveprop] = useState([])
-  const [submittedprop, setSubmittedprop] = useState([])
-  const [completedprop, setCompletedprop] = useState([])
+  const [followedopp, setFollowed] = useState<Proposal[]>([])
+  const [draftprop, setDraftprop] = useState<Proposal[]>([])
+  const [activeprop, setActiveprop] = useState<Proposal[]>([])
+  const [submittedprop, setSubmittedprop] = useState<Proposal[]>([])
+  const [completedprop, setCompletedprop] = useState<Proposal[]>([])
 
   let user = localStorage.getItem('userTypeFull')
   let userType = localStorage.getItem('userType')
@@ -48,14 +50,30 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
 
   useEffect(() => {
     if (props.proposals.proposals.data) {
-      setDraftprop(props.proposals?.proposals.data?.filter((obj: Proposal) => {return obj.status === 'draft'}))
-      setActiveprop(props.proposals?.proposals.data?.filter((obj: Proposal) => {return obj.status === 'active'}))
-      setSubmittedprop(props.proposals?.proposals.data?.filter((obj: Proposal) => {return obj.status === 'submitted'}))
-      setCompletedprop(props.proposals?.proposals.data?.filter((obj: Proposal) => {return obj.status === 'completed'}))
+      setDraftprop(
+        props.proposals?.proposals.data?.filter((obj: Proposal) => {
+          return obj.status === 'draft'
+        })
+      )
+      setActiveprop(
+        props.proposals?.proposals.data?.filter((obj: Proposal) => {
+          return obj.status === 'active'
+        })
+      )
+      setSubmittedprop(
+        props.proposals?.proposals.data?.filter((obj: Proposal) => {
+          return obj.status === 'submitted'
+        })
+      )
+      setCompletedprop(
+        props.proposals?.proposals.data?.filter((obj: Proposal) => {
+          return obj.status === 'completed'
+        })
+      )
     }
   }, [props.proposals])
 
-  console.log('followed', followed)
+  console.log('followed', followedopp)
 
   const {TabPane} = Tabs
   const onChange = (key: string) => {
@@ -78,20 +96,24 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
           {/* <button type='button' className='btn btn-sm btn-light-primary'>
             Unfollow Selected
           </button> */}
-          {props.proposals?.proposals.data?.map((e: Proposal) => (
-            <EnablerOpportunityCard
-              // sponsor={e.opportunityObject.sponsor} // There is no attribute such as sponsor in opportunityObject
-              // country={e.opportunityObject.country} // There is no attribute such as country in opportunityObject 
-              // title={e.opportunityObject.title} // There is no attribute such as title in opportunityObject
-              // summary={e.opportunityObject.summary} // There is no attribute such as summary in opportunityObject
-              // followed={e.opportunityObject.followed} // There is no attribute such as followed in opportunityObject
-              // badgeColor='info'
-              // status='publication status'
-              // picSrc={e.opportunityObject.src} // There is no picture src such as sponsor in opportunityObject
-            />
-          ))}
+
+          {followedopp.length > 0 ? (
+            followedopp.map((e: Proposal) => (
+              <EnablerOpportunityCard2 opp={e?.opportunityObject} followed={true} />
+            ))
+          ) : (
+            <div className='d-flex flex-column'>
+              <p className='fs-2'>You are not following any opporptunities</p>
+              <p className='text-muted fs-5'>
+                Review current opportunities at the
+                <Link to='/opportunities_center' className='px-2'>
+                  Opportunity Center{' '}
+                </Link>
+                and click follow
+              </p>
+            </div>
+          )}
         </div>
-        {/* <MyOpportunityTable /> */}
       </TabPane>
       {user !== 'basic_enabler' && (
         <>
