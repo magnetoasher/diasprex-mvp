@@ -1,12 +1,35 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import {useDispatch, connect, ConnectedProps} from 'react-redux'
 import Carousel from 'react-bootstrap/Carousel'
 import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
 import {Link} from 'react-router-dom'
 import GeneralCardComponent from '../../../opportunities/GeneralCardOpportunityComponent/GeneralCardCompnent'
 import object1 from '../../../opportunities/core/GeneralOpportunityCardObject1.json'
 import {registerables} from 'chart.js'
+import {RootState} from '../../../../../setup'
+import * as opps from '../../../opportunities/redux/OpportunityRedux'
+import {Opps} from '../../../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 
-export const FeaturedOpportunities = () => {
+const mapState = (state: RootState) => ({opps: state.opps})
+const connector = connect(mapState, opps.actions)
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const FeaturedOpportunities: React.FC<PropsFromRedux> = (props) => {
+  const dispatch = useDispatch()
+  const [featuredOpps, setFeaturedOpps] = useState<Opps[]>([])
+  const query = {
+    status: 'published',
+    featured: true,
+  }
+
+  useEffect(() => {
+    dispatch(props.getAllOppsRequest(query))
+  }, [])
+
+  useEffect(() => {
+    setFeaturedOpps(props.opps.opps.data)
+  }, [props.opps])
+  
   return (
     <div className=''>
       <div className='container'>
@@ -24,7 +47,7 @@ export const FeaturedOpportunities = () => {
         <Carousel>
           <Carousel.Item>
             <div className='d-flex flex-center justify-content-between'>
-              {object1.slice(0, 3).map((element) => (
+              {featuredOpps?.slice(0, 3).map((element) => (
                 <GeneralCardComponent
                   id={element.id}
                   sponsor={element.sponsor}
@@ -45,7 +68,7 @@ export const FeaturedOpportunities = () => {
 
           <Carousel.Item>
             <div className='d-flex flex-center justify-content-between'>
-              {object1.slice(4, 7).map((element) => (
+              {featuredOpps?.slice(3, 7).map((element) => (
                 <GeneralCardComponent
                   id={element.id}
                   sponsor={element.sponsor}
@@ -105,3 +128,5 @@ export const FeaturedOpportunities = () => {
     </div>
   )
 }
+
+export default connector(FeaturedOpportunities)

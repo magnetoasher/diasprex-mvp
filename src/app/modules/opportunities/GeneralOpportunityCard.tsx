@@ -21,7 +21,6 @@ const GeneralOpportunityCard: React.FC<PropsFromRedux> = (props) => {
   const [oppsData, setOppsData] = useState<Opps[]>([])
   const query = {
     status: 'published',
-    // featured: true, only for opps shown on the public landing page
   }
 
   useEffect(() => {
