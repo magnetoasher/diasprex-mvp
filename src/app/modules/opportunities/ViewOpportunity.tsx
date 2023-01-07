@@ -166,6 +166,20 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
 
                       <div className='fw-semibold fs-6 text-gray-400'>Deal Type</div>
                     </div>
+                    <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                      <div className='d-flex align-items-center'>
+                        <div className='fs-4 fw-bold'>{oppData?.showedinterest}</div>
+                      </div>
+
+                      <div className='fw-semibold fs-6 text-gray-400'>Show of Interest</div>
+                    </div>
+                    <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                      <div className='d-flex align-items-center'>
+                        <div className='fs-4 fw-bold'>{oppData?.following}</div>
+                      </div>
+
+                      <div className='fw-semibold fs-6 text-gray-400'>Following</div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -209,192 +223,127 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
         </Col>
       </div>
 
-      <Card style={{marginTop: '10px'}}>
-        <div className='fv-row d-flex align-items-center bg-light p-10'>
-          <span className='fw-bolder fs-4 text-dark text-uppercase me-3'>Deal Type:</span>
-          <span className='text-muted'>
-            {oppData?.dealtype?.map((deal, index) =>
-              index !== dealTypeLength ? (
-                <span className='me-1'>{deal} |</span>
-              ) : (
-                <span className='me-1'>{deal}</span>
-              )
-            )}
-          </span>
-        </div>
-        <Row style={{display: 'flex', marginTop: '5px'}} gutter={[8, 16]}>
-          <Col
-            xs={24}
-            sm={24}
-            md={24}
-            lg={24}
-            style={{
-              backgroundColor: '#f1f1f1',
-              padding: '30px 40px',
-              paddingTop: '30px',
-              paddingBottom: '30px',
-              borderRadius: '8px',
-            }}
-          >
-            <div>
-              <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Summary</label>
-            </div>
-
-            <div>
-              <label
-                style={{
-                  textAlign: 'justify',
-                  fontSize: '14px',
-                }}
-              >
-                {oppData?.summary}
-              </label>
-            </div>
-          </Col>
-
-          <Col
-            xs={24}
-            sm={24}
-            md={24}
-            lg={24}
-            style={{
-              backgroundColor: '#f1f1f1',
-              borderRadius: '8px',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'space-around',
-                marginTop: '5px',
-                padding: '30px',
-              }}
-            >
-              <label
-                style={{
-                  boxShadow: 'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',
-                  fontSize: '14px',
-                  fontWeight: '600',
-                  backgroundColor: '#7fe772',
-                  color: 'white',
-                  padding: '10px',
-                  borderRadius: '7px',
-                  textAlign: 'center',
-                  width: '120px',
-                }}
-              >
-                Following <br /> {oppData?.following}{' '}
-              </label>
-              <label
-                style={{
-                  boxShadow: 'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',
-                  fontSize: '14px',
-                  color: 'white',
-                  fontWeight: '600',
-                  backgroundColor: '#4eacff',
-                  padding: '10px',
-                  borderRadius: '7px',
-                  textAlign: 'center',
-                  width: '120px',
-                }}
-              >
-                Interest <br />
-                {oppData?.showedinterest}
-              </label>
-              <label
-                style={{
-                  boxShadow: 'rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px',
-                  fontSize: '14px',
-                  color: 'white',
-                  fontWeight: '600',
-                  backgroundColor: '#fd5757',
-                  padding: '10px',
-                  borderRadius: '7px',
-                  textAlign: 'center',
-                  width: '120px',
-                }}
-              >
-                Due Date <br /> {Moment(oppData?.duedate).format('DD MMM, YYYY')}
-              </label>
-            </div>
-          </Col>
-
-          {isShowDetail && (
+      <div class='card'>
+        <div class='card-body'>
+          <div className='fv-row d-flex align-items-center bg-light p-10'>
+            <span className='fw-bolder fs-4 text-dark text-uppercase me-3'>Deal Type:</span>
+            <span className='text-muted'>
+              {oppData?.dealtype?.map((deal, index) =>
+                index !== dealTypeLength ? (
+                  <span className='me-1'>{deal} |</span>
+                ) : (
+                  <span className='me-1'>{deal}</span>
+                )
+              )}
+            </span>
+          </div>
+          <Row style={{display: 'flex', marginTop: '5px'}} gutter={[8, 16]}>
             <Col
               xs={24}
               sm={24}
               md={24}
               lg={24}
               style={{
+                backgroundColor: '#f1f1f1',
                 padding: '30px 40px',
                 paddingTop: '30px',
                 paddingBottom: '30px',
                 borderRadius: '8px',
               }}
             >
-              <div className='row'>
-                <div className='col-xl-6'>
-                  <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
-                    Opportunity Details
-                  </label>
-                </div>
-
-                <div className='border m-3'>
-                  <label
-                    style={{
-                      textAlign: 'justify',
-                      fontSize: '14px',
-                    }}
-                  >
-                    {oppData?.summary}
-                  </label>
-                </div>
+              <div>
+                <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Summary</label>
               </div>
 
-              <div className='row'>
-                <div className='col-xl-6 mt-10'>
-                  <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
-                    Sponsor's Details
-                  </label>
-                </div>
-
-                <div className='border m-3'>
-                  <label
-                    style={{
-                      textAlign: 'justify',
-                      fontSize: '14px',
-                    }}
-                  >
-                    {oppData?.summary}
-                  </label>
-                </div>
-              </div>
-
-              <div className='col text-center'>
-                <Button
-                  onClick={() => {
-                    userTypeFull === 'basic_enabler'
-                      ? openNotificationWarning(
-                          'bottomRight',
-                          'It requires paid subscription and ODA agreement'
-                        )
-                      : navigate('/send_proposals')
-                  }}
+              <div>
+                <label
                   style={{
-                    background: '#4eacff',
-                    color: 'white',
-                    fontWeight: '600',
-                    borderRadius: '6px',
-                    marginTop: '6rem',
+                    textAlign: 'justify',
+                    fontSize: '14px',
                   }}
                 >
-                  Submit Proposal
-                </Button>
+                  {oppData?.summary}
+                </label>
               </div>
             </Col>
-          )}
-        </Row>
-      </Card>
+
+            {isShowDetail && (
+              <Col
+                xs={24}
+                sm={24}
+                md={24}
+                lg={24}
+                style={{
+                  padding: '30px 40px',
+                  paddingTop: '30px',
+                  paddingBottom: '30px',
+                  borderRadius: '8px',
+                }}
+              >
+                <div className='row'>
+                  <div className='col-xl-6'>
+                    <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
+                      Opportunity Details
+                    </label>
+                  </div>
+
+                  <div className='border m-3'>
+                    <label
+                      style={{
+                        textAlign: 'justify',
+                        fontSize: '14px',
+                      }}
+                    >
+                      {oppData?.summary}
+                    </label>
+                  </div>
+                </div>
+
+                <div className='row'>
+                  <div className='col-xl-6 mt-10'>
+                    <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
+                      Sponsor's Details
+                    </label>
+                  </div>
+
+                  <div className='border m-3'>
+                    <label
+                      style={{
+                        textAlign: 'justify',
+                        fontSize: '14px',
+                      }}
+                    >
+                      {oppData?.summary}
+                    </label>
+                  </div>
+                </div>
+
+                <div className='col text-center'>
+                  <Button
+                    onClick={() => {
+                      userTypeFull === 'basic_enabler'
+                        ? openNotificationWarning(
+                            'bottomRight',
+                            'It requires paid subscription and ODA agreement'
+                          )
+                        : navigate('/send_proposals')
+                    }}
+                    style={{
+                      background: '#4eacff',
+                      color: 'white',
+                      fontWeight: '600',
+                      borderRadius: '6px',
+                      marginTop: '6rem',
+                    }}
+                  >
+                    Submit Proposal
+                  </Button>
+                </div>
+              </Col>
+            )}
+          </Row>
+        </div>
+      </div>
 
       <Context.Provider>{contextHolder}</Context.Provider>
     </>

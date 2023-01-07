@@ -1,4 +1,5 @@
 import {ID, Response} from '../../../../../../../_metronic/helpers'
+import * as Yup from 'yup'
 export type Proposal = {
   id?: ID
   title?: string
@@ -22,9 +23,22 @@ export const initialProposal: Proposal = {
   thumbnail: 'avatars/300-6.jpg',
   enabler: 'David Johnson',
   country: 'United States',
-  title: 'Proposal Demo 1',
-  summary: 'Proposal summary ',
+  title: '',
+  summary: '',
   status: 'pending',
   admin_screening: false,
   date_submitted: '',
 }
+
+export const createPropsSchemas = [
+  Yup.object({
+    accountType: Yup.string().required().label('Account Type'),
+  }),
+
+  // Create/edit opps validation schema
+  Yup.object({
+    title: Yup.string().required().label('Title'),
+    summary: Yup.string().required().label('Proposal summary'),
+    oppsdesc: Yup.string().required().label('Proposal detail'),
+  }),
+]

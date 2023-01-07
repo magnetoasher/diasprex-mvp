@@ -1,12 +1,47 @@
 import React from 'react'
+import {useFormik} from 'formik'
 import {PageTitle, PageLink} from '../../../_metronic/layout/core'
 import {Row, Col, Button, Input, Card, Form} from 'antd'
 import {UploadOutlined, CameraOutlined} from '@ant-design/icons'
 import {Upload} from 'antd'
-import {Editor} from 'react-draft-wysiwyg'
+import {
+  createPropsSchemas,
+  initialProposal,
+} from '../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import '../../modules/opportunities/component/opportunity.css'
+import {nanoid} from '@reduxjs/toolkit'
 const SendProposals = () => {
+  const formik = useFormik({
+    initialValues: initialProposal,
+    // validationSchema: createPropsSchemas,
+    validateOnChange: false,
+    onSubmit: async (values, {setSubmitting}) => {
+      setSubmitting(true)
+      const data = {
+        ...values,
+        enablerUserId: '',
+        sponsorUserId: '',
+        enablerName: '',
+        opportunityUuid: '',
+        status: 'new',
+        date_submitted: new Date(),
+        opportunityObject: {},
+      }
+      try {
+        console.log('CreateProps', data)
+        //  await axios
+        //    .post(`${process.env.REACT_APP_DIASPREX_API_URL}/proposals/create`, data)
+        //    .then((res) => console.log('onSubmit', res))
+        //    .catch((error) => error)
+      } catch (err) {
+        console.log(formik.errors)
+      } finally {
+        formik.resetForm()
+      }
+    },
+  })
+
   return (
     <>
       <PageTitle breadcrumbs={[]}>Send Proposal</PageTitle>
@@ -15,260 +50,133 @@ const SendProposals = () => {
           boxShadow: 'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
         }}
       >
-        <Row justify='space-between'>
-          <Col xs={24} sm={24} md={17} lg={17}>
-            <div
-              style={{
-                display: 'block',
-              }}
-            >
-              <label>
-                <i
-                  style={{
-                    color: 'black',
-                    fontSize: '15px',
-                  }}
-                >
-                  Upload Files and images as supporting information to your content to make it more
-                  engaging
-                </i>
-              </label>
+        <form onSubmit={formik.handleSubmit}>
+          <div className='row px-10'>
+            <div className='d-flex flex-column justify-content-start mb-10'>
+              <h5>
+                <b className=' fw-bolder text-uppercase text-primary fs-6 mb-2'>
+                  Proposal submission form
+                </b>
+              </h5>
+              <p className='fs-6 text-mute'>
+                Please complete this form to submit your proposal for Opportunity DPX0000001
+              </p>
             </div>
-            <div style={{marginTop: '40px'}}>
-              <Form colon={false} layout={'vertical'}>
-                <Form.Item
-                  label={
-                    <label
-                      style={{
-                        fontWeight: 600,
-                        fontSize: '17px',
-                      }}
-                    >
-                      Proposal Name
-                    </label>
-                  }
-                  name='solution'
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please input solution',
-                    },
-                  ]}
-                >
-                  <Input
-                    style={{borderRadius: '5px'}}
-                    placeholder='Enter a title of maximum length of 100 characters '
-                    maxLength={100}
-                  />
-                </Form.Item>
-              </Form>
-            </div>
-            <div style={{marginTop: '40px'}}>
-              <Form colon={false} layout={'vertical'}>
-                <Form.Item
-                  label={
-                    <label
-                      style={{
-                        fontWeight: 600,
-                        fontSize: '17px',
-                      }}
-                    >
-                      Proposal Details
-                    </label>
-                  }
-                  name='solution'
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please input solution abstract',
-                    },
-                  ]}
-                >
-                  <Editor
-                    editorStyle={{
-                      border: '1px solid',
-                      resize: 'vertical',
-                      overflow: 'auto',
-                      height: '300px', // whatever height you want
-                      width: '100%',
-                    }}
-                    //   editorState={editorState}
-                    toolbarClassName='toolbarClassName'
-                    wrapperClassName='wrapperClassName'
-                    editorClassName='editorClassName'
-                    onEditorStateChange={(val) => {
-                      console.log(val)
-                    }}
-                  />
-                </Form.Item>
-                <Col
-                  xs={12}
-                  sm={12}
-                  md={24}
-                  lg={24}
-                  style={{
-                    marginTop: '5px',
-                    display: 'flex-column',
-                    justifyContent: 'flex-start',
-                  }}
-                >
-                  <div style={{display: 'flex'}}>
-                    <Upload>
-                      <Button
-                        className='buttonOne'
-                        style={{
-                          backgroundColor: '#008ef8',
-                          color: 'white',
-                          fontWeight: 600,
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          borderRadius: '8px 0px 0px 8px',
-                        }}
-                        icon={<CameraOutlined />}
-                      >
-                        Upload File
-                      </Button>
-                    </Upload>
-                    <Upload>
-                      <Button
-                        className='buttonTwo'
-                        style={{
-                          backgroundColor: '#008ef8',
-                          color: 'white',
-                          fontWeight: 600,
-                          display: 'flex',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          borderRadius: '0px 8px 8px 0px',
-                        }}
-                        icon={<CameraOutlined />}
-                      >
-                        Upload Image
-                      </Button>
-                    </Upload>
-                  </div>
-                  <div
-                    style={{
-                      display: 'block',
-                    }}
-                  >
-                    <label>
-                      <i
-                        style={{
-                          color: 'black',
-                          fontSize: '15px',
-                        }}
-                      >
-                        (Upload files and images as supporting information. File must be a single
-                        PDF or WORD document. Image must be in jpg or png format)
-                      </i>
-                    </label>
-                  </div>
-                </Col>
+          </div>
+          <div className='d-flex flex-column mb-5 fv-row'>
+            <label className='fs-6 fw-bold mb-2'>Proposal Title</label>
 
-                <Col
-                  xs={12}
-                  sm={12}
-                  md={24}
-                  lg={24}
-                  style={{
-                    marginTop: '5px',
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                  }}
-                >
-                  <Button
-                    style={{
-                      borderRadius: '20px',
-                      width: '145px',
-                      height: '40px',
-                      borderColor: '#009EF7',
-                      color: '#009EF7',
-                      fontWeight: 500,
-                      marginRight: '5px',
-                    }}
-                  >
-                    Save For Later
-                  </Button>
-
-                  <Button
-                    style={{
-                      borderRadius: '20px',
-                      width: '145px',
-                      height: '40px',
-                      borderColor: '#009EF7',
-                      color: '#009EF7',
-                      fontWeight: 500,
-                    }}
-                  >
-                    Submit
-                  </Button>
-
-                  <Button
-                    style={{
-                      borderRadius: '20px',
-                      width: '145px',
-                      height: '40px',
-                      borderColor: '#009EF7',
-                      color: '#009EF7',
-                      fontWeight: 500,
-                      marginLeft: '5px',
-                    }}
-                  >
-                    Discard
-                  </Button>
-                </Col>
-              </Form>
-            </div>
-          </Col>
-          <Col xs={24} sm={24} md={6} lg={6}>
-            <Card
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                boxShadow: 'rgba(0, 0, 0, 0.1) 0px 4px 12px',
-              }}
-            >
-              <div className='card'>
-                <img
-                  src='https://i.pinimg.com/originals/4d/4f/32/4d4f328ea4fdc2e19ed979b1ff28d576.jpg'
-                  className='card-img-top'
-                />
-                <div
-                  style={{
-                    // "backgroundColor": "#f1f1f1",
-                    height: '150px',
-                    overflow: 'auto',
-                    margin: '3px',
-                    textAlign: 'justify',
-                    padding: '6px',
-                  }}
-                  className='card-body'
-                >
-                  <label
-                    style={{
-                      padding: '2px',
-                      fontSize: '18px',
-                      fontWeight: 600,
-                    }}
-                  >
-                    Abstract
-                  </label>
-                  <p style={{fontSize: '15px'}} className='card-text'>
-                    Some quick example text to build on the card title and make up the bulk of the
-                    card's content. Some quick example text to build on the card title and make up
-                    the bulk of the card's content. Some quick example text to build on the card
-                    title and make up the bulk of the card's content. Some quick example text to
-                    build on the card title and make up the bulk of the card's content.
-                  </p>
+            <input
+              className='form-control'
+              placeholder='Title'
+              {...formik.getFieldProps('title')}
+              name='title'
+            />
+            {formik.touched.title && formik.errors.title && (
+              <div className='fv-plugins-message-container'>
+                <div className='fv-help-block text-danger'>
+                  <span role='alert'>{formik.errors.title}</span>
                 </div>
               </div>
-            </Card>
-          </Col>
+            )}
+          </div>
+          <div className='d-flex flex-column mb-10 fv-row'>
+            <label className='required fs-6 fw-bold mb-2'>Proposal Summary</label>
+            <textarea
+              className='form-control mb-2'
+              rows={5}
+              placeholder='Type the summary of your opportunity  (max of 500 characters)'
+              {...formik.getFieldProps('summary')}
+              name='summary'
+              autoComplete='off'
+              disabled={formik.isSubmitting}
+            ></textarea>
+            {formik.touched.summary && formik.errors.summary && (
+              <div className='fv-plugins-message-container'>
+                <div className='fv-help-block text-danger'>
+                  <span role='alert'>{formik.errors.summary}</span>
+                </div>
+              </div>
+            )}
+          </div>
 
-          <Col xs={24} sm={24} md={24} lg={24}></Col>
-        </Row>
+          <div className='d-flex flex-column mb-10 fv-row'>
+            <label className='required fs-6 fw-bold mb-2'>Proposal Detail</label>
+            <textarea
+              className='form-control mb-2'
+              rows={5}
+              placeholder='Please describe your offering in detail (max of 5000 characters)'
+              {...formik.getFieldProps('propdesc')}
+              name='propdesc'
+              autoComplete='off'
+              disabled={formik.isSubmitting}
+            ></textarea>
+            {formik.touched.propdesc && formik.errors.propdesc && (
+              <div className='fv-plugins-message-container'>
+                <div className='fv-help-block text-danger'>
+                  <span role='alert'>{formik.errors.propdesc}</span>
+                </div>
+              </div>
+            )}
+          </div>
+          <div>
+            <label className='mb-2'>
+              Kindly upload an image thumbnail for the proposal and supporting documents in PDF or
+              WORD format
+            </label>
+
+            <div className='fv-row d-flex flex-row'>
+              <div style={{marginRight: '10px'}}>
+                <Upload>
+                  <Button
+                    className='d-flex justify-content-center align-items-center'
+                    icon={<UploadOutlined />}
+                  >
+                    Upload File
+                  </Button>
+                </Upload>
+              </div>
+              <div>
+                <Upload>
+                  <Button
+                    className='d-flex justify-content-center align-items-center'
+                    icon={<UploadOutlined />}
+                  >
+                    Upload Thumbnail
+                  </Button>
+                </Upload>
+              </div>
+            </div>
+          </div>
+          <div className='text-center pt-15'>
+            <button type='reset' className='btn btn-light me-3' disabled={formik.isSubmitting}>
+              Discard
+            </button>
+            <button
+              type='button'
+              className='btn btn-light-primary me-3'
+              disabled={formik.isSubmitting}
+            >
+              Save Draft
+            </button>
+
+            <button type='submit' className='btn btn-primary' disabled={formik.isSubmitting}>
+              <span className='indicator-label'>Submit</span>
+              {formik.isSubmitting && (
+                <span className='indicator-progress'>
+                  Please wait...
+                  <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+                </span>
+              )}
+            </button>
+          </div>
+          <div className='d-flex flex-column fv-row py-10'>
+            <label style={{fontSize: '10px', fontWeight: '700', color: '#b6b6b6'}}>
+              Disclaimer: Proposals submittted will be reviewed. Only selected proposals will be
+              considered for further considerations
+            </label>
+          </div>
+        </form>
       </Card>
     </>
   )
