@@ -1,5 +1,5 @@
 import React from 'react'
-import {FeaturedOpportunities} from './featuredopps'
+import FeaturedOpportunities from './featuredopps'
 import {HowOppsWorks} from './howoppsworks'
 import {OppsStats} from './oppstats'
 
