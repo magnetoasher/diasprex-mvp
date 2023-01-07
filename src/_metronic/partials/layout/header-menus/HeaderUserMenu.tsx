@@ -62,7 +62,10 @@ const HeaderUserMenu: FC = () => {
 
       <div className='separator my-2'></div>
       <div className='menu-item px-5'>
-        <Link to={'/dashboard'} className='menu-link px-5'>
+        <Link
+          to={userType === 'admin' ? '/admindashboard' : '/dashboard'}
+          className='menu-link px-5'
+        >
           Dashboard
         </Link>
       </div>

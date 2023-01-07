@@ -5,7 +5,7 @@ import {MenuComponent} from '../../../../../../../../_metronic/assets/ts/compone
 import {ID, KTSVG, QUERIES} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
-import {deleteOpps, changeOppsStatus} from '../../core/_oppsrequests'
+import {deleteOpps, changeOppsStatus} from '../../core/_requests'
 
 type Props = {
   id: ID

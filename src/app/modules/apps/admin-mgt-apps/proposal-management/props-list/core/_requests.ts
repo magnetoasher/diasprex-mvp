@@ -2,9 +2,9 @@ import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../../../_metronic/helpers'
 import {Proposal, ProposalsQueryResponse} from './_models'
 
-const API_URL = process.env.REACT_APP_THEME_API_URL
-const PROP_URL = `${API_URL}/proposal`
-const GET_PROP_URL = `${API_URL}/proposals/query`
+const API_URL = process.env.REACT_APP_DIASPREX_API_URL
+const PROP_URL = `${API_URL}/proposals`
+const GET_PROP_URL = `${API_URL}/proposals`
 
 const getProposals = (query: string): Promise<ProposalsQueryResponse> => {
   return axios
@@ -42,4 +42,11 @@ const deleteSelectedProposals = (userIds: Array<ID>): Promise<void> => {
   return axios.all(requests).then(() => {})
 }
 
-export {getProposals, deleteProposal, deleteSelectedProposals, getProposalById, createProposal, updateProposal}
+export {
+  getProposals,
+  deleteProposal,
+  deleteSelectedProposals,
+  getProposalById,
+  createProposal,
+  updateProposal,
+}

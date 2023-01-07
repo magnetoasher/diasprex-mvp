@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import {useNavigate, Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
-import {Opps} from '../../../../app/modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {Opps} from '../../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import Moment from 'moment'
 
 const GeneralOpportunityCard = (props: Opps) => {

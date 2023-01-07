@@ -24,6 +24,7 @@ const SendProposals = () => {
         sponsorUserId: '',
         enablerName: '',
         opportunityUuid: '',
+        id: `${'opportunityUuid'}/${'enablerUserId'}`, //Replace with actual ids by removing the quotes
         status: 'new',
         date_submitted: new Date(),
         opportunityObject: {},

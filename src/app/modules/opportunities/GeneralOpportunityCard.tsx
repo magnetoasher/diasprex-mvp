@@ -3,7 +3,7 @@
 
 import React, {useEffect, useState} from 'react'
 import {useDispatch, connect, ConnectedProps} from 'react-redux'
-import GeneralCardComponent from './GeneralCardOpportunityComponent/GeneralCardCompnent'
+import GeneralCardComponent from './GeneralCardOpportunityComponent/GeneralCardComponent'
 import {Row, Col, Card, Typography, Pagination} from 'antd'
 import {PageTitle, PageLink} from '../../../_metronic/layout/core'
 import './component/opportunity.css'
