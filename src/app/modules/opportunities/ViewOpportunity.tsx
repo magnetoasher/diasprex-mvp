@@ -23,7 +23,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   const {id: id} = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [oppData, SetOppData] = useState<Opps>({})
+  const [oppData, setOppData] = useState<Opps>({})
   const [api, contextHolder] = notification.useNotification()
   const [isShowDetail, setIsShowDetail] = useState(false)
 
@@ -35,7 +35,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   }, [])
 
   useEffect(() => {
-    SetOppData(props.opps.opp[0])
+    setOppData(props.opps.opp[0])
   }, [props.opps])
 
   const openNotification = (placement, message) => {
@@ -326,7 +326,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                             'bottomRight',
                             'It requires paid subscription and ODA agreement'
                           )
-                        : navigate('/send_proposals')
+                          : navigate(`/opportunities_center/${oppData.uuid}/send_proposals`)
                     }}
                     style={{
                       background: '#4eacff',

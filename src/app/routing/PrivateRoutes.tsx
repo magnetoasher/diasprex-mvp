@@ -68,7 +68,7 @@ const PrivateRoutes = () => {
             <Route path='sponsor/props_review/*' element={<SponsorPropsRevPage />} />
             <Route path='my_opportunities' element={<MyOpportunity />} />
             <Route path='opportunities_center' element={<GeneralOpportunityCard />} />
-            <Route path='send_proposals' element={<SendProposals />} />
+            <Route path='opportunities_center/:id/send_proposals' element={<SendProposals />} />
             <Route path='referrals' element={<ReferralsForm />} />
             <Route path='opportunities_center/:id' element={<ViewOpportunity />} />
             <Route path='table/users_management/*' element={<UsersMgtPage />} />

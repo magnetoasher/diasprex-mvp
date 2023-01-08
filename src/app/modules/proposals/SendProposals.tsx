@@ -1,4 +1,8 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
+import {useDispatch, connect, ConnectedProps} from 'react-redux'
+import {useParams} from 'react-router-dom'
+import axios from 'axios'
+import {useOktaAuth} from '@okta/okta-react'
 import {useFormik} from 'formik'
 import {PageTitle, PageLink} from '../../../_metronic/layout/core'
 import {Row, Col, Button, Input, Card, Form} from 'antd'
@@ -10,31 +14,68 @@ import {
 } from '../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import '../../modules/opportunities/component/opportunity.css'
-import {nanoid} from '@reduxjs/toolkit'
-const SendProposals = () => {
+import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
+import { Opps } from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import { User } from '../apps/admin-mgt-apps/payment-management/payment-list/core/_models'
+import Swal from 'sweetalert2'
+import { RootState } from '../../../setup'
+
+const mapState = (state: RootState) => ({opps: state.opps})
+const connector = connect(mapState, opps.actions)
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const SendProposals: React.FC<PropsFromRedux> = (props) => {
+  const {authState} = useOktaAuth()
+  const {id: id} = useParams()
+  const dispatch = useDispatch()
+  const [status, setStatus] = useState('')
+  const [oppData, setOppData] = useState<Opps>({})
+  const [user, setUser] = useState<User>({})
+
+  useEffect(() => {
+    // axios
+    //   .get(`${process.env.REACT_APP_DIASPREX_API_URL}/users/user/${authState?.accessToken?.claims.uid}`)
+    //   .then((res) => console.log('user response', res))
+    //   .catch((error) => error)
+    dispatch(props.getOppByIdRequest(id))
+  }, [])
+
+  useEffect(() => {
+    setOppData(props.opps.opp[0])
+  }, [props.opps])
+
+  
+  const initVals = {
+    title: '',
+    summary: '',
+    propdesc: '',
+  }
   const formik = useFormik({
-    initialValues: initialProposal,
+    initialValues: initVals,
     // validationSchema: createPropsSchemas,
     validateOnChange: false,
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
       const data = {
         ...values,
-        enablerUserId: '',
-        sponsorUserId: '',
-        enablerName: '',
-        opportunityUuid: '',
-        id: `${'opportunityUuid'}/${'enablerUserId'}`, //Replace with actual ids by removing the quotes
-        status: 'new',
-        date_submitted: new Date(),
-        opportunityObject: {},
+        status: status,
+        opportunityUuid: oppData.uuid,
+        opportunityObject: oppData,
+        enablerUserId: authState?.accessToken?.claims.uid,
+        enablerName: 'Glen Johnson',
+        sponsorUserId: oppData?.uuid
       }
       try {
-        console.log('CreateProps', data)
-        //  await axios
-        //    .post(`${process.env.REACT_APP_DIASPREX_API_URL}/proposals/create`, data)
-        //    .then((res) => console.log('onSubmit', res))
-        //    .catch((error) => error)
+         await axios
+           .post(`${process.env.REACT_APP_DIASPREX_API_URL}/proposals/create`, data)
+           .then((res) => 
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Successfuly done!',
+              })
+            )
+           .catch((error) => error)
       } catch (err) {
         console.log(formik.errors)
       } finally {
@@ -51,7 +92,7 @@ const SendProposals = () => {
           boxShadow: 'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
         }}
       >
-        <form onSubmit={formik.handleSubmit}>
+        <form>
           <div className='row px-10'>
             <div className='d-flex flex-column justify-content-start mb-10'>
               <h5>
@@ -157,11 +198,23 @@ const SendProposals = () => {
               type='button'
               className='btn btn-light-primary me-3'
               disabled={formik.isSubmitting}
+              onClick={() => {
+                setStatus('draft')
+                formik.handleSubmit()
+              }}
             >
               Save Draft
             </button>
 
-            <button type='submit' className='btn btn-primary' disabled={formik.isSubmitting}>
+            <button
+              type='button'
+              className='btn btn-primary'
+              disabled={formik.isSubmitting}
+              onClick={() => {
+                setStatus('new')
+                formik.handleSubmit()
+              }}
+            >
               <span className='indicator-label'>Submit</span>
               {formik.isSubmitting && (
                 <span className='indicator-progress'>
@@ -183,4 +236,4 @@ const SendProposals = () => {
   )
 }
 
-export default SendProposals
+export default connector(SendProposals)
