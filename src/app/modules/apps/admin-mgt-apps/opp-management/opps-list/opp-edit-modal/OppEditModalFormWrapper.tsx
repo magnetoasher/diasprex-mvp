@@ -2,7 +2,7 @@ import {useQuery} from 'react-query'
 import {OppEditModalForm} from './OppEditModalForm'
 import {isNotEmpty, QUERIES} from '../../../../../../../_metronic/helpers'
 import {useListView} from '../core/ListViewProvider'
-import {getOppById} from '../core/_oppsrequests'
+import {getOppById} from '../core/_requests'
 import {initialOpps, Opps} from '../core/_models'
 
 const OppEditModalFormWrapper = () => {

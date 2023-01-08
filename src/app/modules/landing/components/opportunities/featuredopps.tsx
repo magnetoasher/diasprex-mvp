@@ -3,7 +3,7 @@ import {useDispatch, connect, ConnectedProps} from 'react-redux'
 import Carousel from 'react-bootstrap/Carousel'
 import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
 import {Link} from 'react-router-dom'
-import GeneralCardComponent from '../../../opportunities/GeneralCardOpportunityComponent/GeneralCardCompnent'
+import GeneralCardComponent from '../../../opportunities/GeneralCardOpportunityComponent/GeneralCardComponent'
 import object1 from '../../../opportunities/core/GeneralOpportunityCardObject1.json'
 import {registerables} from 'chart.js'
 import {RootState} from '../../../../../setup'
@@ -19,7 +19,7 @@ const FeaturedOpportunities: React.FC<PropsFromRedux> = (props) => {
   const [featuredOpps, setFeaturedOpps] = useState<Opps[]>([])
   const query = {
     status: 'published',
-    featured: true,
+    featuredopp: true,
   }
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const FeaturedOpportunities: React.FC<PropsFromRedux> = (props) => {
   useEffect(() => {
     setFeaturedOpps(props.opps.opps.data)
   }, [props.opps])
-  
+
   return (
     <div className=''>
       <div className='container'>

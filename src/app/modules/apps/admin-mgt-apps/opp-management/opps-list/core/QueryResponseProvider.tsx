@@ -10,7 +10,7 @@ import {
   stringifyRequestQuery,
   WithChildren,
 } from '../../../../../../../_metronic/helpers'
-import {getOpps} from './_oppsrequests'
+import {getOpps} from './_requests'
 import {Opps} from './_models'
 import {useQueryRequest} from '../../../core/QueryRequestProvider'
 

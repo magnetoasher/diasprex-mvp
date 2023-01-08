@@ -2,7 +2,7 @@ import {useQueryClient, useMutation} from 'react-query'
 import {QUERIES} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
-import {deleteSelectedOpps, publishSelectedOpps} from '../../core/_oppsrequests'
+import {deleteSelectedOpps, publishSelectedOpps} from '../../core/_requests'
 import {ConfirmModal} from '../../../../../../../../_metronic/partials/modals/confirm-action/ConfirmAction'
 
 const OppsListGrouping = () => {
