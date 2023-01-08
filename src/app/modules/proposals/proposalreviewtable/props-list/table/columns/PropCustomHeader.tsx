@@ -3,7 +3,7 @@ import {FC, PropsWithChildren, useMemo} from 'react'
 import {HeaderProps} from 'react-table'
 import {initialQueryState} from '../../../../../../../_metronic/helpers'
 import {useQueryRequest} from '../../core/QueryRequestProvider'
-import {Proposal} from '../../core/_models'
+import {Proposal} from '../../../../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 
 type Props = {
   className?: string

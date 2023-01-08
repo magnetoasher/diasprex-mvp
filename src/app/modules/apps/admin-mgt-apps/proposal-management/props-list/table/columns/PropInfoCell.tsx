@@ -15,24 +15,48 @@ const PropInfoCell: FC<Props> = ({proposal}) => (
       <a href='#'>
         {proposal.thumbnail ? (
           <div className='symbol-label'>
-            <img src={toAbsoluteUrl(`/media/${proposal.thumbnail}`)} alt={proposal.enabler} className='w-100' />
+            <img
+              src={toAbsoluteUrl(`/media/${proposal.thumbnail}`)}
+              alt={proposal.enablerName}
+              className='w-100'
+            />
           </div>
         ) : (
           <div
             className={clsx(
               'symbol-label fs-3',
-              `bg-light-${proposal.initials?.state}`,
-              `text-${proposal.initials?.state}`
+              `bg-light-${
+                proposal.initials?.state || proposal.status === 'new'
+                  ? 'info'
+                  : proposal.status === 'selected'
+                  ? 'success'
+                  : proposal.status === 'declined'
+                  ? 'danger'
+                  : proposal.status === 'pending'
+                  ? 'primary'
+                  : 'warning'
+              }`,
+              `text-${
+                proposal.initials?.state || proposal.status === 'new'
+                  ? 'info'
+                  : proposal.status === 'selected'
+                  ? 'success'
+                  : proposal.status === 'declined'
+                  ? 'danger'
+                  : proposal.status === 'pending'
+                  ? 'primary'
+                  : 'warning'
+              }`
             )}
           >
-            {proposal.country}
+            {proposal.enablerName?.slice(0, 1)}
           </div>
         )}
       </a>
     </div>
     <div className='d-flex flex-column'>
       <a href='#' className='text-gray-800 text-hover-primary mb-1'>
-        {proposal.id}
+        {proposal.enablerName}
       </a>
       <span>{proposal.country}</span>
     </div>

@@ -2,7 +2,7 @@
 import clsx from 'clsx'
 import {FC} from 'react'
 import {toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
-import {Proposal} from '../../core/_models'
+import {Proposal} from '../../../../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 
 type Props = {
   proposal: Proposal
@@ -17,7 +17,7 @@ const PropInfoCell: FC<Props> = ({proposal}) => (
           <div className='symbol-label'>
             <img
               src={toAbsoluteUrl(`/media/${proposal.thumbnail}`)}
-              alt={proposal.enabler}
+              alt={proposal.enablerName}
               className='w-100'
             />
           </div>

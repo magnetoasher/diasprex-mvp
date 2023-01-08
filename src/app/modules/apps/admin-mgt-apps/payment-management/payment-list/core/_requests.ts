@@ -2,9 +2,9 @@ import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../../../_metronic/helpers'
 import {PayMethod, PayMethodQueryResponse} from './_models'
 
-const API_URL = process.env.REACT_APP_THEME_API_URL
-const PAYMETHOD_URL = `${API_URL}/paymethod`
-const GET_PAYMETHOD_URL = `${API_URL}/paymethods/query`
+const API_URL = process.env.REACT_APP_DIASPREX_API_URL
+const PAYMETHOD_URL = `${API_URL}/paymethods`
+const GET_PAYMETHOD_URL = `${API_URL}/paymethods`
 
 const getPayMethod = (query: string): Promise<PayMethodQueryResponse> => {
   return axios

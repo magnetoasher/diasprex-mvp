@@ -18,7 +18,7 @@ import {EnablerProposalCard} from '../proposals/components/EnablerProposalCard'
 import EnablerOpportunityCard from './EnablerOpportunityCard'
 import * as proposals from '../proposals/redux/ProposalRedux'
 import {RootState} from '../../../setup'
-import {Proposal} from '../proposals/proposalreviewtable/props-list/core/_models'
+import {Proposal} from '../../modules/apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 import EnablerOpportunityCard2 from './EnablerOpportunityCard2'
 import {Link} from 'react-router-dom'
 

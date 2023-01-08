@@ -2,7 +2,10 @@ import {FC, useState} from 'react'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 import {isNotEmpty, toAbsoluteUrl} from '../../../../../../_metronic/helpers'
-import {initialProposal, Proposal} from '../core/_models'
+import {
+  initialProposal,
+  Proposal,
+} from '../../../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 import clsx from 'clsx'
 import {useListView} from '../core/ListViewProvider'
 import {ListLoading} from '../../../../apps/admin-mgt-apps/core/loading/ListLoading'
@@ -33,7 +36,7 @@ const PropReviewModalForm: FC<Props> = ({proposal, isProposalLoading}) => {
   const [proposalForReview] = useState<Proposal>({
     ...proposal,
     thumbnail: proposal.thumbnail || initialProposal.thumbnail,
-    enabler: proposal.enabler || initialProposal.enabler,
+    enablerName: proposal.enablerName || initialProposal.enablerName,
     title: proposal.title || initialProposal.title,
     summary: proposal.summary || initialProposal.summary,
     country: proposal.country || initialProposal.country,
@@ -121,7 +124,7 @@ const PropReviewModalForm: FC<Props> = ({proposal, isProposalLoading}) => {
                 {/* end::Label */}
 
                 {/* begin::Input */}
-                <h5 className='mb-3 mb-lg-0 text-muted'> {formik.values.enabler}</h5>
+                <h5 className='mb-3 mb-lg-0 text-muted'> {formik.values.enablerName}</h5>
                 {/* end::Input */}
               </div>
 

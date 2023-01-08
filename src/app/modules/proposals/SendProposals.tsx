@@ -15,10 +15,10 @@ import {
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import '../../modules/opportunities/component/opportunity.css'
 import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
-import { Opps } from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
-import { User } from '../apps/admin-mgt-apps/payment-management/payment-list/core/_models'
+import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {User} from '../apps/admin-mgt-apps/payment-management/payment-list/core/_models'
 import Swal from 'sweetalert2'
-import { RootState } from '../../../setup'
+import {RootState} from '../../../setup'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -44,7 +44,6 @@ const SendProposals: React.FC<PropsFromRedux> = (props) => {
     setOppData(props.opps.opp[0])
   }, [props.opps])
 
-  
   const initVals = {
     title: '',
     summary: '',
@@ -58,24 +57,28 @@ const SendProposals: React.FC<PropsFromRedux> = (props) => {
       setSubmitting(true)
       const data = {
         ...values,
+        id: `${oppData.uuid}/${authState?.accessToken?.claims.uid}`,
         status: status,
         opportunityUuid: oppData.uuid,
         opportunityObject: oppData,
         enablerUserId: authState?.accessToken?.claims.uid,
-        enablerName: 'Glen Johnson',
-        sponsorUserId: oppData?.uuid
+        enablerName: 'Glen Johnson', //This should be replaced with Enbaler's Firstname LastName
+        sponsorUserId: oppData?.sponsorUserId,
+        date_submitted: new Date(),
+        country: 'United States', //This should be replaced with Enbaler's countryRes
       }
       try {
-         await axios
-           .post(`${process.env.REACT_APP_DIASPREX_API_URL}/proposals/create`, data)
-           .then((res) => 
-              Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Successfuly done!',
-              })
-            )
-           .catch((error) => error)
+        await axios
+          .post(`${process.env.REACT_APP_DIASPREX_API_URL}/proposals/create`, data)
+          .then((res) => {
+            console.log('Proposal', res.data)
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Successfuly done!',
+            })
+          })
+          .catch((error) => error)
       } catch (err) {
         console.log(formik.errors)
       } finally {

@@ -2,9 +2,9 @@ import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../../../_metronic/helpers'
 import {Remit, RemitsQueryResponse} from './_models'
 
-const API_URL = process.env.REACT_APP_THEME_API_URL
-const REMIT_URL = `${API_URL}/remit`
-const GET_REMITS_URL = `${API_URL}/remits/query`
+const API_URL = process.env.REACT_APP_DIASPREX_API_URL
+const REMIT_URL = `${API_URL}/remits`
+const GET_REMITS_URL = `${API_URL}/remits`
 
 const getRemits = (query: string): Promise<RemitsQueryResponse> => {
   return axios

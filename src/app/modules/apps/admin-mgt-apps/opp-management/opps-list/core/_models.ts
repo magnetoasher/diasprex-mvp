@@ -8,6 +8,7 @@ export type Opps = {
   title?: string
   thumbnail?: string
   sponsor?: string
+  sponsorUserId?: string
   category?: string
   summary?: string
   oppdesc?: string
@@ -23,8 +24,9 @@ export type Opps = {
     label: string
     state: string
   }
-  following?: number
-  showedinterest?: number
+  following?: string[]
+  showedinterest?: string[]
+  supporting?: string[]
 }
 
 export type OppsQueryResponse = Response<Array<Opps>>
@@ -39,8 +41,8 @@ export const initialOpps: Opps = {
   datesubmitted: 'Todays Date',
   duedate: '',
   category: '',
-  following: 0,
-  showedinterest: 0,
+  following: [],
+  showedinterest: [],
 }
 
 export const createOppsSchemas = [

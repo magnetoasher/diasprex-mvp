@@ -49,6 +49,7 @@ const useQueryResponse = () => useContext(QueryResponseContext)
 
 const useQueryResponseData = () => {
   const {response} = useQueryResponse()
+  // console.log('Proposal', response)
   if (!response) {
     return []
   }

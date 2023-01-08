@@ -7,9 +7,7 @@ const PROP_URL = `${API_URL}/proposals`
 const GET_PROP_URL = `${API_URL}/proposals`
 
 const getProposals = (query: string): Promise<ProposalsQueryResponse> => {
-  return axios
-    .get(`${GET_PROP_URL}?${query}`)
-    .then((d: AxiosResponse<ProposalsQueryResponse>) => d.data)
+  return axios.get(`${GET_PROP_URL}`).then((d: AxiosResponse<ProposalsQueryResponse>) => d.data)
 }
 
 const getProposalById = (id: ID): Promise<Proposal | undefined> => {

@@ -1,7 +1,7 @@
 import {FC, PropsWithChildren} from 'react'
 import {HeaderProps} from 'react-table'
 import {useListView} from '../../core/ListViewProvider'
-import {Proposal} from '../../core/_models'
+import {Proposal} from '../../../../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 
 type Props = {
   tableProps: PropsWithChildren<HeaderProps<Proposal>>

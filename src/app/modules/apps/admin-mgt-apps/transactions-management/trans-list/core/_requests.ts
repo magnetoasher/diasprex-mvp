@@ -2,9 +2,9 @@ import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../../../_metronic/helpers'
 import {Trans, TransQueryResponse} from './_models'
 
-const API_URL = process.env.REACT_APP_THEME_API_URL
-const TRANS_URL = `${API_URL}/remit`
-const GET_TRANS_URL = `${API_URL}/remits/query`
+const API_URL = process.env.REACT_APP_DIASPREX_API_URL
+const TRANS_URL = `${API_URL}/transactions`
+const GET_TRANS_URL = `${API_URL}/transactions`
 
 const getTrans = (query: string): Promise<TransQueryResponse> => {
   return axios
