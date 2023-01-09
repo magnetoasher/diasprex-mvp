@@ -14,6 +14,7 @@ import * as opps from './redux/OpportunityRedux'
 import {RootState} from '../../../setup'
 import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
+import Swal from 'sweetalert2'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
