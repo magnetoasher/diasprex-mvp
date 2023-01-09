@@ -8,7 +8,7 @@ export interface IQuery {
   items_per_page?: number
   page?: number
   status?: string
-  featured?: boolean
+  featuredopp?: boolean
 }
 
 const getAllOppsAPI = (query?: IQuery) => axios.get(`${OPPS_URL}`, {params: query})

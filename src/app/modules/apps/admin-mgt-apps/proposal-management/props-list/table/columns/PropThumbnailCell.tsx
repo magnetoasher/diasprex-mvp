@@ -16,7 +16,11 @@ const PropsThumbnailCell: FC<Props> = ({proposal}) => (
       <a href='#'>
         {proposal.thumbnail ? (
           <div className='symbol-label'>
-            <img src={toAbsoluteUrl(`/media/${proposal.thumbnail}`)} alt={proposal.enabler} className='w-100' />
+            <img
+              src={toAbsoluteUrl(`/media/${proposal.thumbnail}`)}
+              alt={proposal.enablerName}
+              className='w-100'
+            />
           </div>
         ) : (
           <div

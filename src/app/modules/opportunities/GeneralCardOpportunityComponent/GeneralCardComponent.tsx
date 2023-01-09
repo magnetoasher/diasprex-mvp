@@ -182,7 +182,7 @@ const GeneralOpportunityCard = (props: Opps) => {
               textAlign: 'center',
             }}
           >
-            <label style={{fontSize: '23px', fontWeight: '600'}}>{props.following}</label>
+            <label style={{fontSize: '23px', fontWeight: '600'}}>{props.following?.length}</label>
             <label
               style={{
                 fontSize: '16px',
@@ -200,7 +200,9 @@ const GeneralOpportunityCard = (props: Opps) => {
               textAlign: 'center',
             }}
           >
-            <label style={{fontSize: '23px', fontWeight: '600'}}>{props.showedinterest}</label>
+            <label style={{fontSize: '23px', fontWeight: '600'}}>
+              {props.showedinterest?.length}
+            </label>
             <label
               style={{
                 fontSize: '16px',

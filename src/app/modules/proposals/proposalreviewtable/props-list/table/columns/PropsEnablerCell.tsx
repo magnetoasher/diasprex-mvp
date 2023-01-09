@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 // import clsx from 'clsx'
 import {FC} from 'react'
-import {Proposal} from '../../core/_models'
+import {Proposal} from '../../../../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 
 type Props = {
   proposal: Proposal
@@ -10,11 +10,10 @@ type Props = {
 
 const PropsEnablerCell: FC<Props> = ({proposal}) => (
   <div className='d-flex align-items-center'>
-
     {/* End:: Thumbnail */}
     <div className='d-flex flex-column'>
       <a href='#' className='text-gray-800 text-hover-primary mb-1'>
-        {proposal.enabler}
+        {proposal.enablerName}
       </a>
       <span>{proposal.country}</span>
     </div>

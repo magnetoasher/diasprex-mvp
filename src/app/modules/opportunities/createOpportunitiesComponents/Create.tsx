@@ -44,11 +44,16 @@ export const Create = () => {
         status: 'new',
         open: false,
         datesubmitted: new Date(),
-        duedate: values.duedate === '' && moment(new Date()).add(90, 'days').toDate(),
+        duedate:
+          values.duedate < moment(new Date()).add(90, 'days').toDate()
+            ? moment(new Date()).add(90, 'days').toDate()
+            : values.duedate > moment(new Date()).add(6, 'months').toDate()
+            ? moment(new Date()).add(6, 'months').toDate()
+            : values.duedate,
         otherdealtype: !isOtherSelected ? null : values.otherdealtype,
       }
       try {
-        console.log('CreateOpps', data)
+        // console.log('CreateOpps', data)
         await axios
           .post(`${process.env.REACT_APP_DIASPREX_API_URL}/opportunities/create`, data)
           .then((res) => console.log('onSubmit', res))
@@ -139,11 +144,11 @@ export const Create = () => {
                 </h5>
 
                 <DatePicker
-                  defaultValue={moment('01/01/2015', dateFormatList[0])}
+                  defaultValue={moment('06/01/2023', dateFormatList[0])}
                   format={dateFormatList}
-                  onChange={(e) => {
-                    formik.handleChange({target: {name: 'duedate', value: e.target.value}})
-                    console.log('Date', moment(e.target.value).format('YYYY MMM DD'))
+                  onChange={(date, dateString) => {
+                    formik.handleChange({target: {name: 'duedate', value: date}})
+                    console.log('Date', moment(date).format('DD MMM YYYY'), dateString)
                   }}
                 />
                 {/* {formik.touched.duedate && formik.errors.duedate && (
@@ -158,9 +163,7 @@ export const Create = () => {
 
             <div className='form-group col-md-8 px-10'>
               <label className='fs-6 fw-bold mb-2'>Deal Type</label>
-              <p className='text-muted'>
-                (Please select the deal types you are willing to consider)
-              </p>
+              <p className='text-muted'>(Please select the deal types you are seeking)</p>
               <div className='input-group d-flex flex-wrap mb-3'>
                 <div className='form-check me-5 mb-3'>
                   <input

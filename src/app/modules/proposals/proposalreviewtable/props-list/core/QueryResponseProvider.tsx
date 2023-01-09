@@ -11,7 +11,7 @@ import {
   WithChildren,
 } from '../../../../../../_metronic/helpers'
 import {getProposals} from './_requests'
-import {Proposal} from './_models'
+import {Proposal} from '../../../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 import {useQueryRequest} from './QueryRequestProvider'
 
 const QueryResponseContext = createResponseContext<Proposal>(initialQueryResponse)

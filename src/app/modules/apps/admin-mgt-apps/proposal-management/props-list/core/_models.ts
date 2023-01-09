@@ -1,16 +1,19 @@
 import {ID, Response} from '../../../../../../../_metronic/helpers'
 import * as Yup from 'yup'
+import {Opps} from '../../../opp-management/opps-list/core/_models'
 export type Proposal = {
   id?: ID
   title?: string
   thumbnail?: string
-  enabler?: string
+  enablerName?: string
+  enablerUserId?: string
   summary?: string
   propdesc?: string
   country?: string
   status?: string
   date_submitted?: string
   admin_screening?: boolean
+  opportunityObject?: Opps
   initials?: {
     label: string
     state: string
@@ -21,7 +24,7 @@ export type ProposalsQueryResponse = Response<Array<Proposal>>
 
 export const initialProposal: Proposal = {
   thumbnail: 'avatars/300-6.jpg',
-  enabler: 'David Johnson',
+  enablerName: 'David Johnson',
   country: 'United States',
   title: '',
   summary: '',

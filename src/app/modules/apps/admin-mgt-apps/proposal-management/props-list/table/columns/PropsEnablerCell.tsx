@@ -10,11 +10,10 @@ type Props = {
 
 const PropsEnablerCell: FC<Props> = ({proposal}) => (
   <div className='d-flex align-items-center'>
-
     {/* End:: Thumbnail */}
     <div className='d-flex flex-column'>
       <a href='#' className='text-gray-800 text-hover-primary mb-1'>
-        {proposal.enabler}
+        {proposal.enablerName}
       </a>
       <span>{proposal.country}</span>
     </div>

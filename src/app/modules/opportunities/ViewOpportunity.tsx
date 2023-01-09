@@ -6,7 +6,7 @@ import Moment from 'moment'
 import {Row, Col, Button, Card, notification, Tooltip} from 'antd'
 import {StarOutlined, ShareAltOutlined} from '@ant-design/icons'
 import {useDispatch, connect, ConnectedProps} from 'react-redux'
-import {useLocation, useNavigate, useParams} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 
 import {OppsDA} from './component/oda'
 import {SubscriptionRequired} from './component/subscription-error-modal'
@@ -14,6 +14,7 @@ import * as opps from './redux/OpportunityRedux'
 import {RootState} from '../../../setup'
 import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
+import Swal from 'sweetalert2'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -326,7 +327,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                             'bottomRight',
                             'It requires paid subscription and ODA agreement'
                           )
-                          : navigate(`/opportunities_center/${oppData.uuid}/send_proposals`)
+                        : navigate(`/opportunities_center/${oppData.uuid}/send_proposals`)
                     }}
                     style={{
                       background: '#4eacff',

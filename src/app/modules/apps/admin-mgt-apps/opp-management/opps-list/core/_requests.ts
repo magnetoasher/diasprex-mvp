@@ -20,24 +20,12 @@ import {Opps, OppsQueryResponse} from './_models'
 // const OPPS_URL = 'https://diasprex-api-demo-default-rtdb.firebaseio.com/oppsdata'
 const API_URL = process.env.REACT_APP_DIASPREX_API_URL
 const OPPS_URL = `${API_URL}/opportunities`
-const GET_OPPS_URL = `${OPPS_URL}/opportunities`
-
-// const getOpps = async (query: string): Promise<OppsQueryResponse> => {
-//   const res = await fetch(OPPS_URL)
-//   const resjson: OppsQueryResponse = await res.json()
-//   const result = {
-//     data: Object.values(resjson) as Opps[],
-//     payload: resjson.payload,
-//   }
-//   return result
-// }
+const GET_OPPS_URL = `${API_URL}/opportunities`
 
 const getOpps = async (query: string): Promise<OppsQueryResponse> => {
   return await axios
-    .get(`${OPPS_URL}?${query}`)
-    .then((response: AxiosResponse<OppsQueryResponse>) => {
-      return response.data
-    })
+    .get(`${GET_OPPS_URL}?${query}`)
+    .then((d: AxiosResponse<OppsQueryResponse>) => d.data)
 }
 
 const getOppById = (id: ID): Promise<Opps | undefined> => {
