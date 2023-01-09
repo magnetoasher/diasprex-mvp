@@ -27,6 +27,7 @@ export type Opps = {
   following?: string[]
   showedinterest?: string[]
   supporting?: string[]
+  attachment?: string
 }
 
 export type OppsQueryResponse = Response<Array<Opps>>

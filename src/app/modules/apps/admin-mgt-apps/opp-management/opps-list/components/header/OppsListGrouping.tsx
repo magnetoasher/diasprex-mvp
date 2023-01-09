@@ -37,13 +37,13 @@ const OppsListGrouping = () => {
         type='button'
         className='btn btn-danger me-2'
         data-bs-toggle='modal'
-        data-bs-target='#kt_modal_3'
+        data-bs-target='#kt_modal_deleteopps'
       >
         Delete Selected
       </button>
       <ConfirmModal
-        id='kt_modal_3'
-        title1='Delete Users'
+        id='kt_modal_deleteopps'
+        title1='Delete Opps'
         title2='Are you sure you want to permanently selected opportunities'
         confirm='Delete'
         classname='btn btn-danger'
@@ -54,14 +54,14 @@ const OppsListGrouping = () => {
         type='button'
         className='btn btn-primary me-2'
         data-bs-toggle='modal'
-        data-bs-target='#kt_modal_4'
+        data-bs-target='#kt_modal_publishopps'
       >
         Publish Selected
       </button>
       <ConfirmModal
-        id='kt_modal_4'
+        id='kt_modal_publishopps'
         title1='Change Opportunities Status'
-        title2='Are you sure you want to change the status of the selected opportunities'
+        title2='Are you sure you want to publish the status of the selected opportunities'
         confirm='Publish'
         classname='btn btn-primary'
         ConfirmHandler={async () => await publishSelectedItems.mutateAsync()}
