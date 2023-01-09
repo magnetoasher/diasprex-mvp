@@ -62,7 +62,7 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
       )
       setSubmittedprop(
         props.proposals?.proposals.data?.filter((obj: Proposal) => {
-          return obj.status === 'submitted'
+          return obj.status !== 'draft'
         })
       )
       setCompletedprop(
@@ -128,20 +128,20 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
           >
             <div className=' overflow-auto p-3'>
               <div className=' d-flex text-muted mb-5'>Draft Proposals</div>
-              {/* <button type='button' className='btn btn-sm btn-light-danger'>
-                Delete Selected
-              </button> */}
-              {/* {draftprop.map((e) => (
-                <EnablerProposalCard
-                  oppsponsor={e.oppsponsor}
-                  oppcountry={e.oppcountry}
-                  proptitle={e.proptitle}
-                  propsummary={e.propsummary}
-                  badgeColor='gray-800'
-                  status='proposal in draft'
-                  picSrc={e.src}
-                />
-              ))} */}
+              {draftprop.length > 0 ? (
+                draftprop.map((e: Proposal) => <EnablerProposalCard prop={e} />)
+              ) : (
+                <div className='d-flex flex-column'>
+                  <p className='fs-2'>You currently have no draft proposals</p>
+                  <p className='text-muted fs-5'>
+                    Review current opportunities at the
+                    <Link to='/opportunities_center' className='px-2'>
+                      Opportunity Center{' '}
+                    </Link>
+                    and submit your proposal
+                  </p>
+                </div>
+              )}
             </div>
           </TabPane>
           <TabPane
@@ -155,17 +155,20 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
           >
             <div className=' overflow-auto p-3'>
               <div className=' d-flex text-muted mb-5'>Submitted Proposals</div>
-              {/* {submittedprop.map((e) => (
-                <EnablerProposalCard
-                  oppsponsor={e.oppsponsor}
-                  oppcountry={e.oppcountry}
-                  proptitle={e.proptitle}
-                  propsummary={e.propsummary}
-                  badgeColor='primary'
-                  status='submission status'
-                  picSrc={e.src}
-                />
-              ))} */}
+              {submittedprop.length > 0 ? (
+                submittedprop.map((e: Proposal) => <EnablerProposalCard prop={e} />)
+              ) : (
+                <div className='d-flex flex-column'>
+                  <p className='fs-2'>You currently have no submitted proposals</p>
+                  <p className='text-muted fs-5'>
+                    Review current opportunities at the
+                    <Link to='/opportunities_center' className='px-2'>
+                      Opportunity Center{' '}
+                    </Link>
+                    and submit your proposal
+                  </p>
+                </div>
+              )}
             </div>
           </TabPane>
 

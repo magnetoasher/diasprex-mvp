@@ -55,18 +55,21 @@ const SendProposals: React.FC<PropsFromRedux> = (props) => {
     validateOnChange: false,
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
-      const data = {
-        ...values,
-        id: `${oppData.uuid}/${authState?.accessToken?.claims.uid}`,
-        status: status,
-        opportunityUuid: oppData.uuid,
-        opportunityObject: oppData,
-        enablerUserId: authState?.accessToken?.claims.uid,
-        enablerName: 'Glen Johnson', //This should be replaced with Enbaler's Firstname LastName
-        sponsorUserId: oppData?.sponsorUserId,
-        date_submitted: new Date(),
-        country: 'United States', //This should be replaced with Enbaler's countryRes
-      }
+      const data =
+        status === 'new'
+          ? {
+              ...values,
+              id: `${oppData.uuid}/${authState?.accessToken?.claims.uid}`,
+              status: status,
+              opportunityUuid: oppData.uuid,
+              opportunityObject: oppData,
+              enablerUserId: authState?.accessToken?.claims.uid,
+              enablerName: 'Glen Johnson', //This should be replaced with Enbaler's Firstname LastName
+              sponsorUserId: oppData?.sponsorUserId,
+              date_submitted: new Date(),
+              country: 'United States', //This should be replaced with Enbaler's countryRes
+            }
+          : {values}
       try {
         await axios
           .post(`${process.env.REACT_APP_DIASPREX_API_URL}/proposals/create`, data)
@@ -75,7 +78,7 @@ const SendProposals: React.FC<PropsFromRedux> = (props) => {
             Swal.fire({
               icon: 'success',
               title: 'Success',
-              text: 'Successfuly done!',
+              text: 'Your proposal is successfully submitted',
             })
           })
           .catch((error) => error)

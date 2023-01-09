@@ -1,20 +1,20 @@
+import {FC} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../../_metronic/helpers'
+import {Proposal} from '../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
+type Props = {
+  prop?: Proposal
+  dashboard?: boolean
+}
 
-export const EnablerProposalCard = ({
-  oppsponsor,
-  oppcountry,
-  proptitle,
-  propsummary,
-  badgeColor,
-  status,
-  picSrc,
-}: any) => {
+export const EnablerProposalCard: FC<Props> = ({dashboard, prop}) => {
+  const badgeColor =
+    prop?.status === 'new' ? 'info' : prop?.status === 'published' ? 'success' : 'danger'
   return (
     <div className='KTCard mb-5'>
       <div className=' mb-2 box-shadow-style'>
         <div className='card-header ribbon ribbon-end ribbon-clip'>
           <div className='ribbon-label text-capitalize'>
-            {status}
+            {prop?.status}
             <span className={`ribbon-inner bg-${badgeColor}`}></span>
           </div>
         </div>
@@ -24,32 +24,20 @@ export const EnablerProposalCard = ({
               className='d-flex justify-content-start align-items-center'
               style={{borderRight: '1px solid black'}}
             >
-              {/* {status === 'Proposal in Draft' && (
-                <div className='form-check form-check-custom form-check-solid me-3'>
-                  <input
-                    className='form-check-input'
-                    type='checkbox'
-                    data-kt-check={isSelected}
-                    data-kt-check-target='#kt_table_users .form-check-input'
-                    checked={isSelected}
-                    onChange={() => onSelect(id)}
-                  />
-                </div>
-              )} */}
               <div className='symbol symbol-50px symbol-lg-60px symbol-fixed position-relative me-3'>
-                <img src={picSrc} alt='Metornic' />
+                <img src={prop?.thumbnail} alt='Metornic' />
                 <div className='position-absolute translate-middle bottom-0 start-100 mb-6 border-white h-20px w-30px'></div>
               </div>
 
               <div className='d-flex flex-column'>
                 <div className='d-flex align-items-center mb-2'>
                   <a href='#' className='text-gray-800 text-capitalize fs-3 fw-bolder '>
-                    {oppsponsor}
+                    {prop?.thumbnail}
                   </a>
                 </div>
                 <div className='d-flex align-items-center mb-2'>
                   <a href='#' className=' text-primary text-capitalize me-1'>
-                    {oppcountry}
+                    {prop?.country}
                   </a>
                 </div>
               </div>
@@ -60,19 +48,19 @@ export const EnablerProposalCard = ({
             <div className='d-flex flex-column'>
               <div className='d-flex align-items-center mb-2'>
                 <a href='#' className='text-gray-800  text-capitalize fs-2 fw-bolder me-1'>
-                  {proptitle}
+                  {prop?.title}
                 </a>
               </div>
               <div className='d-flex align-items-center mb-2'>
                 <a href='#' className='text-gray-800   me-1'>
-                  {propsummary}
+                  {prop?.summary}
                 </a>
               </div>
             </div>
           </div>
 
           <div className={`col-lg-3 d-flex align-items-start justify-content-end`}>
-            {status !== 'active' && status !== 'completed' && (
+            {prop?.status !== 'active' && prop?.status !== 'completed' && (
               <>
                 <button
                   className='btn btn-sm btn-light btn-active-light-primary dropdown-toggle'
@@ -93,7 +81,7 @@ export const EnablerProposalCard = ({
                     </a>
                   </div>
 
-                  {status === 'proposal in draft' && (
+                  {prop?.status === 'draft' && (
                     <div className='dropdown-item px-3'>
                       <a
                         href='#'
@@ -104,17 +92,18 @@ export const EnablerProposalCard = ({
                       </a>
                     </div>
                   )}
-                  {status === 'submission status' && (
-                    <div className='dropdown-item px-3'>
-                      <a
-                        href='#'
-                        className='menu-link px-3'
-                        data-kt-customer-table-filter='delete_row'
-                      >
-                        Withdraw
-                      </a>
-                    </div>
-                  )}
+                  {prop?.status === 'new' ||
+                    (prop?.status === 'pending' && (
+                      <div className='dropdown-item px-3'>
+                        <a
+                          href='#'
+                          className='menu-link px-3'
+                          data-kt-customer-table-filter='delete_row'
+                        >
+                          Withdraw
+                        </a>
+                      </div>
+                    ))}
                 </div>
               </>
             )}

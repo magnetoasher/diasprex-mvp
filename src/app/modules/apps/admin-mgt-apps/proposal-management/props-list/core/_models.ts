@@ -1,5 +1,6 @@
 import {ID, Response} from '../../../../../../../_metronic/helpers'
 import * as Yup from 'yup'
+import {Opps} from '../../../opp-management/opps-list/core/_models'
 export type Proposal = {
   id?: ID
   title?: string
@@ -12,7 +13,7 @@ export type Proposal = {
   status?: string
   date_submitted?: string
   admin_screening?: boolean
-  opportunityObject?: {}
+  opportunityObject?: Opps
   initials?: {
     label: string
     state: string
