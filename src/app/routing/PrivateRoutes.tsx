@@ -15,7 +15,8 @@ import Proposals from '../modules/proposals/components/Proposals'
 import MyOpportunity from '../modules/opportunities/MyOpportunity'
 import GeneralOpportunityCard from '../modules/opportunities/GeneralOpportunityCard'
 import SponsorProposals from '../modules/proposals/components/SponsorProposals'
-import SendProposals from '../modules/proposals/SendProposals'
+import SendProposals from '../modules/proposals/components/SendProposals'
+import ViewProposal from '../modules/proposals/components/viewproposal'
 import ViewOpportunity from '../modules/opportunities/ViewOpportunity'
 import AdminSettings from '../modules/apps/admin-mgt-apps/settings/AdminSettingsPage'
 // import DiasporasMgtPage from '../modules/apps/admin-mgt-apps/diasporas-management/DiasporasPage'
@@ -64,11 +65,13 @@ const PrivateRoutes = () => {
             {/* <Route path='builder' element={<BuilderPageWrapper />} /> */}
             <Route path='createopportunities' element={<CreateOpportunities />} />
             <Route path='proposals' element={<Proposals />} />
+            <Route path='proposals/:oppid/:enablerid' element={<ViewProposal />} />
             {/* <Route path='sponsor_proposals' element={<SponsorProposals />} /> */}
             <Route path='sponsor/props_review/*' element={<SponsorPropsRevPage />} />
             <Route path='my_opportunities' element={<MyOpportunity />} />
             <Route path='opportunities_center' element={<GeneralOpportunityCard />} />
-            <Route path='opportunities_center/:id/send_proposals' element={<SendProposals />} />
+            <Route path='opportunities_center/:oppid/send_proposals' element={<SendProposals />} />
+            <Route path='opportunities_center/:oppid/:enablerid/send_proposals' element={<SendProposals />} />
             <Route path='referrals' element={<ReferralsForm />} />
             <Route path='opportunities_center/:id' element={<ViewOpportunity />} />
             <Route path='table/users_management/*' element={<UsersMgtPage />} />

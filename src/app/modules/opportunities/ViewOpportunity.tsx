@@ -15,6 +15,7 @@ import {RootState} from '../../../setup'
 import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import Swal from 'sweetalert2'
+import {FeedbackModal} from '../../../_metronic/partials/modals/confirm-action/feedbackform'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -72,7 +73,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
 
   const badgeColor = oppData?.open ? 'success' : 'danger'
   const dealTypeLength = oppData?.dealtype?.length! - 1
-
+  const handleFeedbackSubmit = () => {}
   return (
     <>
       <div className='app-content'>
@@ -220,6 +221,30 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
             )}
             {userTypeFull === 'basic_enabler' && <SubscriptionRequired />}
             {userTypeFull !== 'basic_enabler' && <OppsDA OnDetails={handleDetails} />}
+
+            <div>
+              <div className='actions'>
+                <button
+                  type='button'
+                  className='btn btn-light-success btn-active-success'
+                  data-bs-toggle='modal'
+                  data-bs-target='#kt_oppfeedback_modal'
+                  data-bs-tooltips='Provide Feedback'
+                >
+                  Provide Feedback
+                </button>
+                <FeedbackModal
+                  id='kt_oppfeedback_modal'
+                  title1={`Provide a feedback for opportunity ${oppData?.id}`}
+                  title2='Type your feedback  (max of 700 characters)'
+                  confirm='Submit'
+                  classname='btn btn-primary'
+                  ConfirmHandler={() => {
+                    handleFeedbackSubmit()
+                  }}
+                />
+              </div>
+            </div>
           </div>
         </Col>
       </div>

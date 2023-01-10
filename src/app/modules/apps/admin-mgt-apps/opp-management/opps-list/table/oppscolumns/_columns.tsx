@@ -9,6 +9,7 @@ import {OppsCustomHeader} from './OppsCustomHeader'
 import {OppsSelectionHeader} from './OppsSelectionHeader'
 import {OppsSponsorCell} from './OppsSponsorCell'
 import {OppsInfoCell} from './OppsInfoCell'
+import {OppAttachmentCell} from './PropAttachmentCell'
 import {Opps} from '../../core/_models'
 
 const OppsColumns: ReadonlyArray<Column<Opps>> = [
@@ -91,6 +92,14 @@ const OppsColumns: ReadonlyArray<Column<Opps>> = [
     ),
     id: 'featuredopp',
     Cell: ({...props}) => <OppsYesNoCell yes={props.data[props.row.index].featuredopp} />,
+  },
+  // Begine Attachment:: Column
+  {
+    Header: (props) => (
+      <OppsCustomHeader tableProps={props} title='Attachment' className='min-w-125px' />
+    ),
+    id: 'attachment',
+    Cell: ({...props}) => <OppAttachmentCell attachment={props.data[props.row.index].attachment} />,
   },
 
   // Begine Actions:: Column

@@ -34,6 +34,10 @@ const PropInfoCell: FC<Props> = ({proposal}) => (
                   ? 'danger'
                   : proposal.status === 'pending'
                   ? 'primary'
+                  : proposal.status === 'completed'
+                  ? 'success'
+                  : proposal.status === 'active'
+                  ? 'primary'
                   : 'warning'
               }`,
               `text-${
@@ -44,6 +48,10 @@ const PropInfoCell: FC<Props> = ({proposal}) => (
                   : proposal.status === 'declined'
                   ? 'danger'
                   : proposal.status === 'pending'
+                  ? 'primary'
+                  : proposal.status === 'completed'
+                  ? 'success'
+                  : proposal.status === 'active'
                   ? 'primary'
                   : 'warning'
               }`
@@ -58,7 +66,7 @@ const PropInfoCell: FC<Props> = ({proposal}) => (
       <a href='#' className='text-gray-800 text-hover-primary mb-1'>
         {proposal.enablerName}
       </a>
-      <span>{proposal.country}</span>
+      {/* <span>{proposal.country}</span> */}
     </div>
   </div>
 )

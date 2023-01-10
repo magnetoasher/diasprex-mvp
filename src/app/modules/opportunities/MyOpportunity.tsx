@@ -62,7 +62,7 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
       )
       setSubmittedprop(
         props.proposals?.proposals.data?.filter((obj: Proposal) => {
-          return obj.status !== 'draft'
+          return obj.status === ('new' || 'pending' || 'selected' || 'declined')
         })
       )
       setCompletedprop(

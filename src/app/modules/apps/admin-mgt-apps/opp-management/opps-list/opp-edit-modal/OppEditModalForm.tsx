@@ -54,7 +54,7 @@ const OppEditModalForm: FC<Props> = ({opp, isOppLoading}) => {
     title: opp.title || initialOpps.title,
     summary: opp.summary || initialOpps.summary,
     category: opp.category || initialOpps.category,
-    sponsor: opp.sponsor || initialOpps.sponsor,
+    sponsorName: opp.sponsorName || initialOpps.sponsorName,
     datesubmitted: opp.datesubmitted || initialOpps.datesubmitted,
     duedate: opp.duedate || initialOpps.duedate,
     dealtype: opp.dealtype || initialOpps.dealtype,
@@ -140,7 +140,7 @@ const OppEditModalForm: FC<Props> = ({opp, isOppLoading}) => {
                 > */}
               <GeneralCardComponent
                 id={oppForEdit.id}
-                sponsor={oppForEdit.sponsor}
+                sponsorName={oppForEdit.sponsorName}
                 title={oppForEdit.title}
                 country={oppForEdit.country}
                 status={oppForEdit.status}
@@ -285,7 +285,7 @@ const OppEditModalForm: FC<Props> = ({opp, isOppLoading}) => {
                   <label className='fw-bold fs-6 mb-2'>Sponsor:</label>
                   {/* end::Label */}
                   {/* begin::Span */}
-                  <span> {oppForEdit.sponsor} </span>
+                  <span> {oppForEdit.sponsorName} </span>
                   {/* end::Input */}
                 </div>
                 {/* end::Input group */}

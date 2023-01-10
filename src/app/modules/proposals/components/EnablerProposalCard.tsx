@@ -1,4 +1,5 @@
 import {FC} from 'react'
+import {useNavigate} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {Proposal} from '../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 type Props = {
@@ -7,6 +8,7 @@ type Props = {
 }
 
 export const EnablerProposalCard: FC<Props> = ({dashboard, prop}) => {
+  const navigate = useNavigate()
   const badgeColor =
     prop?.status === 'new' ? 'info' : prop?.status === 'published' ? 'success' : 'danger'
   return (
@@ -25,19 +27,19 @@ export const EnablerProposalCard: FC<Props> = ({dashboard, prop}) => {
               style={{borderRight: '1px solid black'}}
             >
               <div className='symbol symbol-50px symbol-lg-60px symbol-fixed position-relative me-3'>
-                <img src={prop?.thumbnail} alt='Metornic' />
+                <img src={prop?.opportunityObject?.thumbnail} alt='Metornic' />
                 <div className='position-absolute translate-middle bottom-0 start-100 mb-6 border-white h-20px w-30px'></div>
               </div>
 
               <div className='d-flex flex-column'>
                 <div className='d-flex align-items-center mb-2'>
                   <a href='#' className='text-gray-800 text-capitalize fs-3 fw-bolder '>
-                    {prop?.thumbnail}
+                    {prop?.opportunityObject?.thumbnail}
                   </a>
                 </div>
                 <div className='d-flex align-items-center mb-2'>
                   <a href='#' className=' text-primary text-capitalize me-1'>
-                    {prop?.country}
+                    {prop?.opportunityObject?.country}
                   </a>
                 </div>
               </div>
@@ -76,7 +78,14 @@ export const EnablerProposalCard: FC<Props> = ({dashboard, prop}) => {
                   data-kt-menu='true'
                 >
                   <div className='dropdown-item px-3'>
-                    <a href='#' className='menu-link px-3'>
+                    <a
+                      className='menu-link px-3'
+                      onClick={() => {
+                        prop?.status === 'draft'
+                          ? navigate(`/opportunities_center/${prop?.opportunityUuid}/${prop?.enablerUserId}/send_proposals`)
+                          : navigate(`/proposals/${prop?.opportunityUuid}/${prop?.enablerUserId}`)
+                      }}
+                    >
                       View
                     </a>
                   </div>

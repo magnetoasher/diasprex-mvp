@@ -7,6 +7,8 @@ export type Proposal = {
   thumbnail?: string
   enablerName?: string
   enablerUserId?: string
+  sponsorUserId?: string
+  opportunityUuid?: string
   summary?: string
   propdesc?: string
   country?: string

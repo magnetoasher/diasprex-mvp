@@ -25,8 +25,36 @@ const PropInfoCell: FC<Props> = ({proposal}) => (
           <div
             className={clsx(
               'symbol-label fs-3',
-              `bg-light-${proposal.initials?.state}`,
-              `text-${proposal.initials?.state}`
+              `bg-light-${
+                proposal.initials?.state || proposal.status === 'new'
+                  ? 'info'
+                  : proposal.status === 'selected'
+                  ? 'success'
+                  : proposal.status === 'declined'
+                  ? 'danger'
+                  : proposal.status === 'pending'
+                  ? 'primary'
+                  : proposal.status === 'completed'
+                  ? 'success'
+                  : proposal.status === 'active'
+                  ? 'primary'
+                  : 'warning'
+              }`,
+              `text-${
+                proposal.initials?.state || proposal.status === 'new'
+                  ? 'info'
+                  : proposal.status === 'selected'
+                  ? 'success'
+                  : proposal.status === 'declined'
+                  ? 'danger'
+                  : proposal.status === 'pending'
+                  ? 'primary'
+                  : proposal.status === 'completed'
+                  ? 'success'
+                  : proposal.status === 'active'
+                  ? 'primary'
+                  : 'warning'
+              }`
             )}
           >
             {proposal.country}

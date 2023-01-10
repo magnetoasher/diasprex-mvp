@@ -37,9 +37,25 @@ const deleteProposal = (proposalId: ID): Promise<void> => {
   return axios.delete(`${PROP_URL}/${proposalId}`).then(() => {})
 }
 
-const deleteSelectedProposals = (userIds: Array<ID>): Promise<void> => {
-  const requests = userIds.map((id) => axios.delete(`${PROP_URL}/${id}`))
+// const deleteSelectedProposals = (userIds: Array<ID>): Promise<void> => {
+//   const requests = userIds.map((id) => axios.delete(`${PROP_URL}/${id}`))
+//   return axios.all(requests).then(() => {})
+// }
+const deleteSelectedProposals = (oppsIds: Array<ID>): Promise<void> => {
+  const requests = oppsIds.map((id) => changePropsStatus(id, 'deleted'))
   return axios.all(requests).then(() => {})
+}
+
+const changeSelectedProposals = (oppsIds: Array<ID>, status: string): Promise<void> => {
+  const requests = oppsIds.map((id) => changePropsStatus(id, status))
+  return axios.all(requests).then(() => {})
+}
+
+const changePropsStatus = (id: ID, status: string): Promise<void> => {
+  const data = {
+    status,
+  }
+  return axios.put(`${PROP_URL}/${id}/status?status=${status}`, data).then(() => {})
 }
 
 export {
@@ -49,4 +65,6 @@ export {
   getProposalById,
   createProposal,
   updateProposal,
+  changePropsStatus,
+  changeSelectedProposals,
 }

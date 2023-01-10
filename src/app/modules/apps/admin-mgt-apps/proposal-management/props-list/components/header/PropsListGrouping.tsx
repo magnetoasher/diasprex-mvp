@@ -1,8 +1,9 @@
 import {useQueryClient, useMutation} from 'react-query'
 import {QUERIES} from '../../../../../../../../_metronic/helpers'
+import {ConfirmModal} from '../../../../../../../../_metronic/partials/modals/confirm-action/ConfirmAction'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
-import {deleteSelectedProposals} from '../../core/_requests'
+import {deleteSelectedProposals, changeSelectedProposals} from '../../core/_requests'
 
 const PropsListGrouping = () => {
   const {selected, clearSelected} = useListView()
@@ -10,6 +11,15 @@ const PropsListGrouping = () => {
   const {query} = useQueryResponse()
 
   const deleteSelectedItems = useMutation(() => deleteSelectedProposals(selected), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.PROPS_LIST}-${query}`])
+      clearSelected()
+    },
+  })
+
+  const changeSelectedItems = useMutation(() => changeSelectedProposals(selected, 'pending'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
@@ -26,18 +36,37 @@ const PropsListGrouping = () => {
 
       <button
         type='button'
-        className='btn btn-danger'
-        onClick={async () => await deleteSelectedItems.mutateAsync()}
+        className='btn btn-danger me-2'
+        data-bs-toggle='modal'
+        data-bs-target='#kt_modal_deleteProps'
       >
         Delete Selected
       </button>
+      <ConfirmModal
+        id='kt_modal_deleteProps'
+        title1='Delete Props'
+        title2='Are you sure you want to permanently selected proposal'
+        confirm='Delete'
+        classname='btn btn-danger'
+        ConfirmHandler={async () => await deleteSelectedItems.mutateAsync()}
+      />
+
       <button
         type='button'
-        className='btn btn-danger'
-        onClick={async () => await deleteSelectedItems.mutateAsync()}
+        className='btn btn-primary me-2'
+        data-bs-toggle='modal'
+        data-bs-target='#kt_modal_pendingprop'
       >
-        Update Status
+        Change to Pending
       </button>
+      <ConfirmModal
+        id='kt_modal_pendingprop'
+        title1='Change Opportunities Status'
+        title2='Are you sure you want to change the status of the selected proposal to pending'
+        confirm='Yes'
+        classname='btn btn-primary'
+        ConfirmHandler={async () => await changeSelectedItems.mutateAsync()}
+      />
     </div>
   )
 }

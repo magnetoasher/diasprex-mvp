@@ -15,7 +15,7 @@ const GeneralOpportunityCard = (props: Opps) => {
       <div className='col-md g-1'>
         <div className='row d-flex flex-row'>
           <div className='col-md-6 flex-start'>
-            <p className='fs-3 fw-bolder text-dark'>{props.sponsor}</p>
+            <p className='fs-3 fw-bolder text-dark'>{props.sponsorName}</p>
           </div>
           <div className='col-md-6 text-end'>
             <span className='symbol symbol-30px w-30px bg-light me-2'>

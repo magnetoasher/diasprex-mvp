@@ -50,7 +50,7 @@ const FeaturedOpportunities: React.FC<PropsFromRedux> = (props) => {
               {featuredOpps?.slice(0, 3).map((element) => (
                 <GeneralCardComponent
                   id={element.id}
-                  sponsor={element.sponsor}
+                  sponsorName={element.sponsorName}
                   open={element.open}
                   title={element.title}
                   country={element.country}
@@ -71,7 +71,7 @@ const FeaturedOpportunities: React.FC<PropsFromRedux> = (props) => {
               {featuredOpps?.slice(3, 7).map((element) => (
                 <GeneralCardComponent
                   id={element.id}
-                  sponsor={element.sponsor}
+                  sponsorName={element.sponsorName}
                   open={element.open}
                   title={element.title}
                   country={element.country}

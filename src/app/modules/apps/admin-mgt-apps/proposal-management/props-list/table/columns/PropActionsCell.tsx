@@ -5,7 +5,7 @@ import {MenuComponent} from '../../../../../../../../_metronic/assets/ts/compone
 import {ID, KTSVG, QUERIES} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
-import {deleteProposal} from '../../core/_requests'
+import {deleteProposal, changePropsStatus} from '../../core/_requests'
 
 type Props = {
   id: ID
@@ -24,7 +24,31 @@ const PropActionsCell: FC<Props> = ({id}) => {
     setItemIdForUpdate(id)
   }
 
-  const deleteItem = useMutation(() => deleteProposal(id), {
+  const deleteProp = useMutation(() => changePropsStatus(id, 'deleted'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.PROPS_LIST}-${query}`])
+    },
+  })
+
+  const activeProp = useMutation(() => changePropsStatus(id, 'active'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.PROPS_LIST}-${query}`])
+    },
+  })
+
+  const completedProp = useMutation(() => changePropsStatus(id, 'completed'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.PROPS_LIST}-${query}`])
+    },
+  })
+
+  const pendingProp = useMutation(() => changePropsStatus(id, 'pending'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
@@ -58,8 +82,22 @@ const PropActionsCell: FC<Props> = ({id}) => {
 
         {/* begin::Menu item */}
         <div className='menu-item px-3'>
-          <a className='menu-link px-3' onClick={openEditModal}>
-            Decline
+          <a className='menu-link px-3' onClick={async () => await pendingProp.mutateAsync()}>
+            Pending
+          </a>
+        </div>
+        {/* end::Menu item */}
+        {/* begin::Menu item */}
+        <div className='menu-item px-3'>
+          <a className='menu-link px-3' onClick={async () => await activeProp.mutateAsync()}>
+            Active
+          </a>
+        </div>
+        {/* end::Menu item */}
+        {/* begin::Menu item */}
+        <div className='menu-item px-3'>
+          <a className='menu-link px-3' onClick={async () => await completedProp.mutateAsync()}>
+            Completed
           </a>
         </div>
         {/* end::Menu item */}
@@ -69,7 +107,7 @@ const PropActionsCell: FC<Props> = ({id}) => {
           <a
             className='menu-link px-3'
             data-kt-users-table-filter='delete_row'
-            onClick={async () => await deleteItem.mutateAsync()}
+            onClick={async () => await deleteProp.mutateAsync()}
           >
             Delete
           </a>
@@ -80,10 +118,10 @@ const PropActionsCell: FC<Props> = ({id}) => {
         <div className='menu-item px-3'>
           <a
             className='menu-link px-3'
-            data-kt-users-table-filter='delete_row'
-            onClick={async () => await deleteItem.mutateAsync()}
+            // data-kt-users-table-filter='delete_row'
+            onClick={async () => await deleteProp.mutateAsync()}
           >
-            Message Enabler
+            DM Enabler
           </a>
         </div>
         {/* end::Menu item */}

@@ -4,53 +4,71 @@ import {useParams} from 'react-router-dom'
 import axios from 'axios'
 import {useOktaAuth} from '@okta/okta-react'
 import {useFormik} from 'formik'
-import {PageTitle, PageLink} from '../../../_metronic/layout/core'
+import {PageTitle, PageLink} from '../../../../_metronic/layout/core'
 import {Row, Col, Button, Input, Card, Form} from 'antd'
 import {UploadOutlined, CameraOutlined} from '@ant-design/icons'
 import {Upload} from 'antd'
 import {
+  Proposal,
   createPropsSchemas,
   initialProposal,
-} from '../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
+} from '../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-import '../../modules/opportunities/component/opportunity.css'
-import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
-import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
-import {User} from '../apps/admin-mgt-apps/payment-management/payment-list/core/_models'
+import '../../../modules/opportunities/component/opportunity.css'
+import * as opps from '../../../modules/opportunities/redux/OpportunityRedux'
+import * as proposal from '../../../modules/proposals/redux/ProposalRedux'
+import {Opps} from '../../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {User} from '../../apps/admin-mgt-apps/payment-management/payment-list/core/_models'
 import Swal from 'sweetalert2'
-import {RootState} from '../../../setup'
+import {RootState} from '../../../../setup'
+import {ListLoading} from '../../apps/admin-mgt-apps/core/loading/ListLoading'
 
-const mapState = (state: RootState) => ({opps: state.opps})
-const connector = connect(mapState, opps.actions)
+const mapState = (state: RootState) => ({opps: state.opps, proposal: state.proposals})
+const connector = connect(mapState, {...opps.actions, ...proposal.actions})
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const SendProposals: React.FC<PropsFromRedux> = (props) => {
   const {authState} = useOktaAuth()
-  const {id: id} = useParams()
+  const {oppid: oppId, enablerid: enablerId} = useParams()
   const dispatch = useDispatch()
   const [status, setStatus] = useState('')
   const [oppData, setOppData] = useState<Opps>({})
+  const [propData, setPropData] = useState<Proposal>({})
   const [user, setUser] = useState<User>({})
+  const query = {
+    enablerUserId: enablerId,
+    opportunityUuid: oppId,
+  }
 
   useEffect(() => {
     // axios
     //   .get(`${process.env.REACT_APP_DIASPREX_API_URL}/users/user/${authState?.accessToken?.claims.uid}`)
     //   .then((res) => console.log('user response', res))
     //   .catch((error) => error)
-    dispatch(props.getOppByIdRequest(id))
+    if (enablerId) {
+      dispatch(props.getProposalRequest(query))
+    } else {
+      dispatch(props.getOppByIdRequest(oppId))
+    }
   }, [])
 
   useEffect(() => {
-    setOppData(props.opps.opp[0])
-  }, [props.opps])
+    if (enablerId) {
+      setPropData(props.proposal?.proposal[0])
+    } else {
+      setOppData(props.opps.opp[0])
+    }
+  }, [props.opps.opp, props.proposal.proposal])
+
 
   const initVals = {
-    title: '',
-    summary: '',
-    propdesc: '',
+    title: enablerId ? propData?.title : '',
+    summary: enablerId ? propData?.summary : '',
+    propdesc: enablerId ? propData?.propdesc : '',
   }
   const formik = useFormik({
     initialValues: initVals,
+    enableReinitialize: true,
     // validationSchema: createPropsSchemas,
     validateOnChange: false,
     onSubmit: async (values, {setSubmitting}) => {
@@ -58,6 +76,18 @@ const SendProposals: React.FC<PropsFromRedux> = (props) => {
       const data =
         status === 'new'
           ? {
+              ...values,
+              id: enablerId ? `${propData.opportunityUuid}/${authState?.accessToken?.claims.uid}` : `${oppData.uuid}/${authState?.accessToken?.claims.uid}`,
+              status: status,
+              opportunityUuid: enablerId ? propData.opportunityUuid : oppData.uuid,
+              opportunityObject: enablerId ? propData.opportunityObject : oppData,
+              enablerUserId: authState?.accessToken?.claims.uid,
+              enablerName: 'Glen Johnson', //This should be replaced with Enbaler's Firstname LastName
+              sponsorUserId: enablerId ? propData.sponsorUserId : oppData?.sponsorUserId,
+              date_submitted: new Date(),
+              country: 'United States', //This should be replaced with Enbaler's countryRes
+            }
+          : {
               ...values,
               id: `${oppData.uuid}/${authState?.accessToken?.claims.uid}`,
               status: status,
@@ -69,17 +99,17 @@ const SendProposals: React.FC<PropsFromRedux> = (props) => {
               date_submitted: new Date(),
               country: 'United States', //This should be replaced with Enbaler's countryRes
             }
-          : {values}
       try {
         await axios
           .post(`${process.env.REACT_APP_DIASPREX_API_URL}/proposals/create`, data)
           .then((res) => {
-            console.log('Proposal', res.data)
-            Swal.fire({
-              icon: 'success',
-              title: 'Success',
-              text: 'Your proposal is successfully submitted',
-            })
+            if (res.status === 200) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Successfully done',
+              })
+            }
           })
           .catch((error) => error)
       } catch (err) {
@@ -98,7 +128,9 @@ const SendProposals: React.FC<PropsFromRedux> = (props) => {
           boxShadow: 'rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
         }}
       >
-        <form>
+        {props.proposal?.isLoading ? 
+          <ListLoading /> :
+          <form>
           <div className='row px-10'>
             <div className='d-flex flex-column justify-content-start mb-10'>
               <h5>
@@ -200,18 +232,19 @@ const SendProposals: React.FC<PropsFromRedux> = (props) => {
             <button type='reset' className='btn btn-light me-3' disabled={formik.isSubmitting}>
               Discard
             </button>
-            <button
-              type='button'
-              className='btn btn-light-primary me-3'
-              disabled={formik.isSubmitting}
-              onClick={() => {
-                setStatus('draft')
-                formik.handleSubmit()
-              }}
-            >
-              Save Draft
-            </button>
-
+            {!enablerId && 
+              <button
+                type='button'
+                className='btn btn-light-primary me-3'
+                disabled={formik.isSubmitting}
+                onClick={() => {
+                  setStatus('draft')
+                  formik.handleSubmit()
+                }}
+              >
+                Save Draft
+              </button>
+            }
             <button
               type='button'
               className='btn btn-primary'
@@ -237,6 +270,7 @@ const SendProposals: React.FC<PropsFromRedux> = (props) => {
             </label>
           </div>
         </form>
+        }
       </Card>
     </>
   )
