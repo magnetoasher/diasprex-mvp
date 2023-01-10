@@ -12,5 +12,6 @@ export interface IQuery {
 
 const getProposalsAPI = (query?: IQuery) => axios.get(`${PROPS_URL}`, {params: query})
 
+const getProposalAPI = (query?: IQuery) => axios.get(`${PROPS_URL}/${query?.opportunityUuid}/${query?.enablerUserId}`)
 
-export {getProposalsAPI}
+export {getProposalsAPI, getProposalAPI}
