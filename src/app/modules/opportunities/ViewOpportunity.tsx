@@ -129,12 +129,6 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   </div>
                   <div className='d-flex mb-4'>
                     {/* Click Support increases support parameter by +1  */}
-                    <button type='button' className='btn btn-sm btn-primary me-3'>
-                      Support
-                      <Tooltip title='Support Opportunity'>
-                        <StarOutlined />
-                      </Tooltip>
-                    </button>
 
                     {/* Click Follow increases following parameter by +1 text changed to unfollow if Enabler is already following */}
                     <button type='button' className='btn btn-sm btn-success me-3'>
@@ -221,37 +215,13 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
             )}
             {userTypeFull === 'basic_enabler' && <SubscriptionRequired />}
             {userTypeFull !== 'basic_enabler' && <OppsDA OnDetails={handleDetails} />}
-
-            <div>
-              <div className='actions'>
-                <button
-                  type='button'
-                  className='btn btn-light-success btn-active-success'
-                  data-bs-toggle='modal'
-                  data-bs-target='#kt_oppfeedback_modal'
-                  data-bs-tooltips='Provide Feedback'
-                >
-                  Provide Feedback
-                </button>
-                <FeedbackModal
-                  id='kt_oppfeedback_modal'
-                  title1={`Provide a feedback for opportunity ${oppData?.id}`}
-                  title2='Type your feedback  (max of 700 characters)'
-                  confirm='Submit'
-                  classname='btn btn-primary'
-                  ConfirmHandler={() => {
-                    handleFeedbackSubmit()
-                  }}
-                />
-              </div>
-            </div>
           </div>
         </Col>
       </div>
 
       <div class='card'>
         <div class='card-body'>
-          <div className='fv-row d-flex align-items-center bg-light p-10'>
+          <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
             <span className='fw-bolder fs-4 text-dark text-uppercase me-3'>Deal Type:</span>
             <span className='text-muted'>
               {oppData?.dealtype?.map((deal, index) =>
@@ -264,19 +234,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
             </span>
           </div>
           <Row style={{display: 'flex', marginTop: '5px'}} gutter={[8, 16]}>
-            <Col
-              xs={24}
-              sm={24}
-              md={24}
-              lg={24}
-              style={{
-                backgroundColor: '#f1f1f1',
-                padding: '30px 40px',
-                paddingTop: '30px',
-                paddingBottom: '30px',
-                borderRadius: '8px',
-              }}
-            >
+            <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
               <div>
                 <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Summary</label>
               </div>
@@ -291,21 +249,10 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   {oppData?.summary}
                 </label>
               </div>
-            </Col>
+            </div>
 
             {isShowDetail && (
-              <Col
-                xs={24}
-                sm={24}
-                md={24}
-                lg={24}
-                style={{
-                  padding: '30px 40px',
-                  paddingTop: '30px',
-                  paddingBottom: '30px',
-                  borderRadius: '8px',
-                }}
-              >
+              <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                 <div className='row'>
                   <div className='col-xl-6'>
                     <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
@@ -313,7 +260,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                     </label>
                   </div>
 
-                  <div className='border m-3'>
+                  <div>
                     <label
                       style={{
                         textAlign: 'justify',
@@ -332,7 +279,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                     </label>
                   </div>
 
-                  <div className='border m-3'>
+                  <div>
                     <label
                       style={{
                         textAlign: 'justify',
@@ -344,8 +291,36 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   </div>
                 </div>
 
-                <div className='col text-center'>
-                  <Button
+                <div className='text-center pt-15'>
+                  <button
+                    type='button'
+                    className='btn btn-light btn-active-primary me-3'
+                    data-bs-toggle='modal'
+                    data-bs-target='#kt_oppfeedback_modal'
+                    data-bs-tooltips='Provide Feedback'
+                  >
+                    Provide Feedback
+                  </button>
+                  <FeedbackModal
+                    id='kt_oppfeedback_modal'
+                    title1={`Provide a feedback for opportunity ${oppData?.id}`}
+                    title2='Type your feedback  (max of 700 characters)'
+                    confirm='Submit'
+                    classname='btn btn-primary'
+                    ConfirmHandler={() => {
+                      handleFeedbackSubmit()
+                    }}
+                  />
+                  <button type='button' className='btn btn btn-light btn-active-primary me-3'>
+                    Support
+                    <Tooltip title='Support Opportunity'>
+                      <StarOutlined />
+                    </Tooltip>
+                  </button>
+
+                  <button
+                    type='button'
+                    className='btn btn-primary'
                     onClick={() => {
                       userTypeFull === 'basic_enabler'
                         ? openNotificationWarning(
@@ -354,18 +329,11 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                           )
                         : navigate(`/opportunities_center/${oppData.uuid}/send_proposals`)
                     }}
-                    style={{
-                      background: '#4eacff',
-                      color: 'white',
-                      fontWeight: '600',
-                      borderRadius: '6px',
-                      marginTop: '6rem',
-                    }}
                   >
                     Submit Proposal
-                  </Button>
+                  </button>
                 </div>
-              </Col>
+              </div>
             )}
           </Row>
         </div>
