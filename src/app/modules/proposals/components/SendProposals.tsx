@@ -4,21 +4,20 @@ import {useParams} from 'react-router-dom'
 import axios from 'axios'
 import {useOktaAuth} from '@okta/okta-react'
 import {useFormik} from 'formik'
-import {PageTitle, PageLink} from '../../../_metronic/layout/core'
+import {PageTitle, PageLink} from '../../../../_metronic/layout/core'
 import {Row, Col, Button, Input, Card, Form} from 'antd'
 import {UploadOutlined, CameraOutlined} from '@ant-design/icons'
 import {Upload} from 'antd'
 import {
   createPropsSchemas,
   initialProposal,
-} from '../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
+} from '../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-import '../../modules/opportunities/component/opportunity.css'
-import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
-import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
-import {User} from '../apps/admin-mgt-apps/payment-management/payment-list/core/_models'
+import * as opps from '../../opportunities/redux/OpportunityRedux'
+import {Opps} from '../../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {User} from '../../apps/admin-mgt-apps/payment-management/payment-list/core/_models'
 import Swal from 'sweetalert2'
-import {RootState} from '../../../setup'
+import {RootState} from '../../../../setup'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)

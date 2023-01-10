@@ -10,11 +10,10 @@ type Props = {
 
 const OppsSponsorCell: FC<Props> = ({opp}) => (
   <div className='d-flex align-items-center'>
-
     {/* End:: Thumbnail */}
     <div className='d-flex flex-column'>
       <a href='#' className='text-gray-800 text-hover-primary mb-1'>
-        {opp.sponsor}
+        {opp.sponsorName}
       </a>
     </div>
   </div>

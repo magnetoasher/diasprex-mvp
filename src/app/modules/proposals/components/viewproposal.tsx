@@ -42,7 +42,7 @@ export const ViewProposal: FC<Props> = ({proposal}) => {
                 <div className='d-flex flex-column'>
                   <div className='d-flex align-items-center mb-1'>
                     <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bold me-3'>
-                      {proposal?.opportunityObject?.sponsor}
+                      {proposal?.opportunityObject?.sponsorName}
                     </a>
                     <span className='symbol symbol-30px w-30px bg-light me-2'>
                       <img

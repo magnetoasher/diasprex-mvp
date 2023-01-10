@@ -40,7 +40,7 @@ export const Create = () => {
         uuid: idNumber,
         id: idNumber,
         sponsorUserId: nanoid(),
-        sponsor: localStorage.getItem('userTypeFull'),
+        sponsorName: localStorage.getItem('userTypeFull'),
         status: 'new',
         open: false,
         datesubmitted: new Date(),

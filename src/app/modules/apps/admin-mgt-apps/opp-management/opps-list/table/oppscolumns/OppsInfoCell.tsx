@@ -18,7 +18,7 @@ const OppsInfoCell: FC<Props> = ({opp}) => (
           <div className='symbol-label'>
             <img
               src={toAbsoluteUrl(`/media/${opp.thumbnail}`)}
-              alt={opp.sponsor}
+              alt={opp.sponsorName}
               className='w-100'
             />
           </div>
