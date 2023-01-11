@@ -62,7 +62,10 @@ const HeaderUserMenu: FC = () => {
 
       <div className='separator my-2'></div>
       <div className='menu-item px-5'>
-        <a href={userType === 'admin' ? 'admindashboard' : 'dashboard'} className='menu-link px-5'>
+        <a
+          href={userType === 'admin' ? '/admindashboard' : '/dashboard'}
+          className='menu-link px-5'
+        >
           Dashboard
         </a>
       </div>
@@ -79,37 +82,41 @@ const HeaderUserMenu: FC = () => {
         </a>
         <div className='menu-sub menu-sub-dropdown py-4'>
           <div className='menu-item px-5'>
-            <Link to={'profile/overview'} className='menu-link px-5'>
+            <Link to={'/profile/overview'} className='menu-link px-5'>
               Profile Overview
             </Link>
           </div>
 
           <div className='menu-item px-5 my-1'>
-            <Link to='profile/settings' className='menu-link px-5'>
+            <Link to='/profile/settings' className='menu-link px-5'>
               Settings
             </Link>
           </div>
           <div className='menu-item px-5 my-1'>
-            <Link to='profile/subscription' className='menu-link px-5'>
+            <Link to='/profile/subscription' className='menu-link px-5'>
               Subscription
             </Link>
           </div>
-          <div className='menu-item px-5'>
-            <Link to={'my_investments'} className='menu-link px-5'>
-              Investment
-            </Link>
-          </div>
+          {userType !== 'sponsor' && (
+            <>
+              {/* <div className='menu-item px-5'>
+                <Link to={'my_investments'} className='menu-link px-5'>
+                  Investment
+                </Link>
+              </div> */}
 
-          <div className='menu-item px-5 my-1'>
-            <Link to='profile/loans' className='menu-link px-5'>
-              Loans
-            </Link>
-          </div>
-          <div className='menu-item px-5 my-1'>
-            <Link to='profile/statements' className='menu-link px-5'>
-              Statements
-            </Link>
-          </div>
+              <div className='menu-item px-5 my-1'>
+                <Link to='/profile/loans' className='menu-link px-5'>
+                  Loans
+                </Link>
+              </div>
+              <div className='menu-item px-5 my-1'>
+                <Link to='/profile/statements' className='menu-link px-5'>
+                  Statements
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -129,12 +136,12 @@ const HeaderUserMenu: FC = () => {
             </a>
             <div className='menu-sub menu-sub-dropdown py-4'>
               <div className='menu-item px-5'>
-                <Link to={'my_opportunities'} className='menu-link px-5'>
+                <Link to={'/my_opportunities'} className='menu-link px-5'>
                   My Opportunities
                 </Link>
               </div>
               <div className='menu-item px-5'>
-                <Link to={'my_proposals'} className='menu-link px-5'>
+                <Link to={'/my_proposals'} className='menu-link px-5'>
                   My Proposals
                 </Link>
               </div>
@@ -177,16 +184,16 @@ const HeaderUserMenu: FC = () => {
                 </a>
                 <div className='menu-sub menu-sub-dropdown py-4'>
                   <div className='menu-item px-5'>
-                    <Link to={'remittance/summary'} className='menu-link px-5'>
+                    <Link to={'/remittance/summary'} className='menu-link px-5'>
                       My Remittances
                     </Link>
                     <div className='menu-item px-5 my-1'>
-                      <Link to='remittance/sendmoney' className='menu-link px-5'>
+                      <Link to='/remittance/sendmoney' className='menu-link px-5'>
                         Send Money
                       </Link>
                     </div>
                     <div className='menu-item px-5 my-1'>
-                      <Link to='remittance/retainer' className='menu-link px-5'>
+                      <Link to='/remittance/retainer' className='menu-link px-5'>
                         Remitt Fund Escrow
                       </Link>
                     </div>
@@ -199,14 +206,14 @@ const HeaderUserMenu: FC = () => {
           <div className='separator my-2'></div>
 
           <div className='menu-item px-5 my-1'>
-            <Link to='referrals' className='menu-link px-5'>
+            <Link to='/referrals' className='menu-link px-5'>
               Referrals
             </Link>
           </div>
         </>
       )}
       <div className='menu-item px-5 my-1'>
-        <Link to='chat/private-chat' className='menu-link px-5'>
+        <Link to='/chat/private-chat' className='menu-link px-5'>
           Messages
         </Link>
       </div>

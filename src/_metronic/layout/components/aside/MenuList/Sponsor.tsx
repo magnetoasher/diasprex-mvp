@@ -25,7 +25,7 @@ export function Sponsor() {
         </div>
       </div>
       <AsideMenuItem
-        to='createopportunities'
+        to='/createopportunities'
         icon='/media/icons/duotune/art/art001.svg'
         title='My Opportunities'
         fontIcon='bi-app-indicator'
@@ -62,7 +62,7 @@ export function Sponsor() {
         title='My Profile'
         fontIcon='bi-app-indicator'
       >
-        <AsideMenuItem to='profile/overview' title='Overview' hasBullet={true} />
+        <AsideMenuItem to='profile/overview' title='Profile Overview' hasBullet={true} />
         <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
         <AsideMenuItem to='profile/subscription' title='Subscription' hasBullet={true} />
         {/* <AsideMenuItem to='profile/account' title='Account' hasBullet={true} /> */}

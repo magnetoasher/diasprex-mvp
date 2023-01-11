@@ -10,10 +10,10 @@ const Sponsor = () => {
     <>
       <MenuItem title={intl.formatMessage({id: 'MENU.DASHBOARD'})} to='/dashboard' />
       <MenuItem title='My Opportunities' to='/createopportunities' />
-      <MenuItem title='Proposals' to='sponsor/props_review' />
+      <MenuItem title='Proposals' to='/sponsor/props_review' />
       {/* <MenuItem title='DIF Investment' to='dif_resources' /> */}
       <MenuItemHyper title='Diaspora' to='/diasporas' />
-      <MenuItemHyper title='FAQs' to='faqs' />
+      <MenuItemHyper title='FAQs' to='/faqs' />
     </>
   )
 }
