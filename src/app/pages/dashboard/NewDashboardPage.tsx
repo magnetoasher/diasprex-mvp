@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import {useDispatch, connect, ConnectedProps} from 'react-redux'
+import {useOktaAuth} from '@okta/okta-react'
 import {Link} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
 import {ListsWidget6, ChartsWidget3} from '../dashboard/clientswidgets'
@@ -21,16 +22,12 @@ const connector = connect(mapState, opps.actions)
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
+  const {authState} = useOktaAuth()
   const userType = localStorage.getItem('userType')
   const userTypeFull = localStorage.getItem('userTypeFull')
   const [userLabel, setUserLabel] = useState<any>(userTypeFull)
   const dispatch = useDispatch()
   const [recentOpps, setRecentOpps] = useState<Opps[]>([])
-  const query = {
-    items_per_page: 5,
-    page: 1,
-    status: 'published'
-  }
 
   const userColor = {
     enabler: {
@@ -56,7 +53,15 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
   }, [userTypeFull, userType])
 
   useEffect(() => {
-    dispatch(props.getAllOppsRequest(query))
+    if (authState !== null) {
+      const query = {
+        items_per_page: 5,
+        page: 1,
+        status: 'published',
+        sponsorUserId: userType === 'sponsor' && authState?.accessToken?.claims.uid
+      }
+      dispatch(props.getAllOppsRequest(query))
+    }
   }, [])
 
   useEffect(() => {
@@ -488,7 +493,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                 </div>
 
                 <div className='card-body p-2 overflow-auto' style={{height: '350px'}}>
-                  {sponsoroppsdataObj.map((e) => (
+                  {recentOpps?.map((e) => (
                     <SponsorOpportunityCard
                       category={e.category}
                       dealtype={e.dealtype}
@@ -497,7 +502,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                       dashboard={true}
                       badgeColor='info'
                       status='Publication Status'
-                      picSrc={e.src}
+                      picSrc={e.thumbnail}
                     />
                   ))}
                 </div>
