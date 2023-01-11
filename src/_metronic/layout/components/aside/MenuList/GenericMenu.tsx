@@ -6,6 +6,7 @@ import {AsideMenuItemWithSub} from '../AsideMenuItemWithSub'
 import {AsideMenuItem} from '../AsideMenuItem'
 import {KTSVG} from '../../../../helpers'
 import {notification, Tooltip} from 'antd'
+import {AsideMenuItemHyper} from '../AsideMenuItemhyper'
 
 export function GenericMenu() {
   const intl = useIntl()
@@ -31,7 +32,7 @@ export function GenericMenu() {
         fontIcon='bi-app-indicator'
       />
 
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='/remittance_resources'
         icon='/media/icons/duotune/art/art003.svg'
         title='Remittances'
@@ -45,13 +46,13 @@ export function GenericMenu() {
         fontIcon='bi-app-indicator'
       /> */}
 
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='/diasporas'
         icon='/media/icons/duotune/art/art006.svg'
         title='Diasporas'
         fontIcon='bi-app-indicator'
       />
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='/faqs'
         icon='/media/icons/duotune/art/art007.svg'
         title='FAQs'

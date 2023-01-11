@@ -5,6 +5,7 @@ import {useSearchParams} from 'react-router-dom'
 import {AsideMenuItemWithSub} from '../AsideMenuItemWithSub'
 import {AsideMenuItem} from '../AsideMenuItem'
 import {KTSVG} from '../../../../helpers'
+import {AsideMenuItemHyper} from '../AsideMenuItemhyper'
 
 export function Business() {
   const intl = useIntl()
@@ -25,20 +26,20 @@ export function Business() {
         fontIcon='bi-app-indicator'
       />
 
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='/remittance_resources'
         icon='/media/icons/duotune/art/art005.svg'
         title='Remittance'
         fontIcon='bi-app-indicator'
       />
 
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='/diasporas'
         icon='/media/icons/duotune/art/art005.svg'
         title='Diasporas'
         fontIcon='bi-app-indicator'
       />
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='/faqs'
         icon='/media/icons/duotune/art/art006.svg'
         title='FAQs'

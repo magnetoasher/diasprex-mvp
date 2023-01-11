@@ -1,6 +1,7 @@
 import React from 'react'
 import {useIntl} from 'react-intl'
 import {MenuItem} from '../MenuItem'
+import {MenuItemHyper} from '../MenuItemHyper'
 
 const Generic = () => {
   const intl = useIntl()
@@ -11,9 +12,9 @@ const Generic = () => {
       <MenuItem title='Opportunities' to='/opportunities_center' />
       <MenuItem title='My Opportunities/Proposals' to='/my_opportunities' />
       {/* <MenuItem title='DIF Investment' to='dif_resources' /> */}
-      <MenuItem title='Remittance' to='remittance_resources' />
-      <MenuItem title='Diaspora' to='/diasporas' />
-      <MenuItem title='FAQs' to='faqs' />
+      <MenuItemHyper title='Remittance' to='remittance_resources' />
+      <MenuItemHyper title='Diaspora' to='/diasporas' />
+      <MenuItemHyper title='FAQs' to='faqs' />
     </>
   )
 }

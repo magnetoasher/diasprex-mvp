@@ -23,19 +23,19 @@ const Footer: FC = () => {
         {/* begin::Nav */}
         <ul className='menu menu-gray-600 menu-hover-primary fw-bold order-1'>
           <li className='menu-item'>
-            <Link to='/about' className='menu-link ps-0 pe-2'>
+            <a href='/about' className='menu-link ps-0 pe-2'>
               About
-            </Link>
+            </a>
           </li>
           <li className='menu-item'>
-            <Link to='/ourteam' className='menu-link pe-0 pe-2'>
+            <a href='/ourteam' className='menu-link pe-0 pe-2'>
               Team
-            </Link>
+            </a>
           </li>
           <li className='menu-item'>
-            <Link to='/contactus' className='menu-link pe-0'>
+            <a href='/contactus' className='menu-link pe-0'>
               Contact Us
-            </Link>
+            </a>
           </li>
         </ul>
         {/* end::Nav */}

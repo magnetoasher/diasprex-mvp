@@ -5,6 +5,7 @@ import {useSearchParams} from 'react-router-dom'
 import {AsideMenuItemWithSub} from '../AsideMenuItemWithSub'
 import {AsideMenuItem} from '../AsideMenuItem'
 import {KTSVG} from '../../../../helpers'
+import {AsideMenuItemHyper} from '../AsideMenuItemhyper'
 
 export function Sponsor() {
   const intl = useIntl()
@@ -36,13 +37,13 @@ export function Sponsor() {
         fontIcon='bi-layers'
       />
 
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='/diasporas'
         icon='/media/icons/duotune/art/art003.svg'
         title='Diasporas'
         fontIcon='bi-app-indicator'
       />
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='/faqs'
         icon='/media/icons/duotune/art/art004.svg'
         title='FAQs'

@@ -4,6 +4,7 @@ import {useIntl} from 'react-intl'
 import {useSearchParams} from 'react-router-dom'
 import {AsideMenuItemWithSub} from '../AsideMenuItemWithSub'
 import {AsideMenuItem} from '../AsideMenuItem'
+import {AsideMenuItemHyper} from '../AsideMenuItemhyper'
 
 export function Enabler() {
   const intl = useIntl()
@@ -35,20 +36,20 @@ export function Enabler() {
         title='DIF Investment'
         fontIcon='bi-app-indicator'
       /> */}
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='remittance_resources'
         icon='/media/icons/duotune/art/art004.svg'
         title='Remittance'
         fontIcon='bi-layers'
       />
 
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='diasporas'
         icon='/media/icons/duotune/art/art006.svg'
         title='Diasporas'
         fontIcon='bi-app-indicator'
       />
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='faqs'
         icon='/media/icons/duotune/art/art007.svg'
         title='FAQs'

@@ -43,7 +43,7 @@ export function HeaderWrapper() {
               <img
                 alt='Logo'
                 src={toAbsoluteUrl('/media/logos/diasprex-logo.png')}
-                className='h-30px'
+                className='h-px'
               />
             </Link>
           </div>
