@@ -1,4 +1,6 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
+import {useDispatch, connect, ConnectedProps} from 'react-redux'
+import {useOktaAuth} from '@okta/okta-react'
 import {Tabs} from 'antd'
 import {SendOutlined, SaveOutlined, FileDoneOutlined, RetweetOutlined} from '@ant-design/icons'
 
@@ -6,56 +8,67 @@ import {Create} from './createOpportunitiesComponents/Create'
 
 import SponsorOpportunityCard from './SponsorsOpportunityCard'
 
-const CreateOpportunities = () => {
+import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
+import {RootState} from '../../../setup'
+import {Opps} from '../../modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+
+const mapState = (state: RootState) => ({opps: state.opps})
+const connector = connect(mapState, opps.actions)
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
+  const {authState} = useOktaAuth()
+  const dispatch = useDispatch()
+
+  const [draft, setDraft] = useState<Opps[]>([])
+  const [active, setActive] = useState<Opps[]>([])
+  const [submitted, setSubmitted] = useState<Opps[]>([])
+  const [completed, setCompleted] = useState<Opps[]>([])
+
+  useEffect(() => {
+    if (authState !== null) {
+      const query = {
+        sponsorUserId: authState?.accessToken?.claims.uid
+      }
+      dispatch(props.getAllOppsRequest(query))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (props.opps.opps.data) {
+      setDraft(
+        props.opps?.opps.data?.filter((obj: Opps) => {
+          return obj.status === 'draft'
+        })
+      )
+      setActive(
+        props.opps?.opps.data?.filter((obj: Opps) => {
+          return obj.status === 'active'
+        })
+      )
+      setSubmitted(
+        props.opps?.opps.data?.filter((obj: Opps) => {
+          return (
+            obj.status === 'new' ||
+            obj.status === 'pending' ||
+            obj.status === 'selected' ||
+            obj.status === 'declined' ||
+            obj.status === 'withdrawn'
+          )
+        })
+      )
+      setCompleted(
+        props.opps?.opps.data?.filter((obj: Opps) => {
+          return obj.status === 'completed'
+        })
+      )
+    }
+  }, [props.opps])
+
   const {TabPane} = Tabs
   const onChange = (key: string) => {
     console.log(key)
   }
-
-  const [saved] = useState([
-    {
-      category: 'Demo1',
-      dealtype: 'equity financing',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: 'https://loremflickr.com/g/320/240/things',
-    },
-    {
-      category: 'Demo2',
-      dealtype: 'debt financing',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: 'https://loremflickr.com/g/320/241/things',
-    },
-    {
-      category: 'Demo3',
-      dealtype: 'partnership',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: 'https://loremflickr.com/g/320/243/things',
-    },
-    {
-      category: 'Demo4',
-      dealtype: 'consulting',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: 'https://loremflickr.com/g/320/244/things',
-    },
-    {
-      category: 'Demo5',
-      dealtype: 'contract',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: 'https://loremflickr.com/g/320/245/things',
-    },
-    {
-      category: 'Demo6',
-      dealtype: 'Crowdfunding',
-      title: 'This is title',
-      details: 'this is detail, lorem ispum',
-      src: 'https://loremflickr.com/g/320/246/things',
-    },
-  ])
 
   return (
     <Tabs defaultActiveKey='1' onChange={onChange}>
@@ -68,7 +81,7 @@ const CreateOpportunities = () => {
         }
         key='1'
       >
-        <Create />
+        <Create sponsorUserId={authState?.accessToken?.claims.uid} />
       </TabPane>
       <TabPane
         tab={
@@ -89,15 +102,16 @@ const CreateOpportunities = () => {
 
             <div className='card-body p-2 overflow-auto' style={{height: '600px'}}>
               {/* <div className=' d-flex text-muted mb-5'>Draft Opportunities</div> */}
-              {saved.map((e) => (
+              {draft.map((e) => (
                 <SponsorOpportunityCard
                   category={e.category}
                   dealtype={e.dealtype}
                   title={e.title}
-                  summary={e.details}
+                  summary={e.summary}
                   badgeColor='gray-800'
                   status='draft'
-                  picSrc={e.src}
+                  picSrc={e.thumbnail}
+                  uuid={e.uuid}
                 />
               ))}
             </div>
@@ -122,15 +136,16 @@ const CreateOpportunities = () => {
             </div>
 
             <div className='card-body p-2 overflow-auto' style={{height: '600px'}}>
-              {saved.map((e) => (
+              {submitted.map((e) => (
                 <SponsorOpportunityCard
                   category={e.category}
                   dealtype={e.dealtype}
                   title={e.title}
-                  summary={e.details}
+                  summary={e.summary}
                   badgeColor='primary'
                   status='submission status'
-                  picSrc={e.src}
+                  picSrc={e.thumbnail}
+                  uuid={e.uuid}
                 />
               ))}
             </div>
@@ -155,15 +170,16 @@ const CreateOpportunities = () => {
             </div>
 
             <div className='card-body p-2 overflow-auto' style={{height: '600px'}}>
-              {saved.map((e) => (
+              {active.map((e) => (
                 <SponsorOpportunityCard
                   category={e.category}
                   dealtype={e.dealtype}
                   title={e.title}
-                  summary={e.details}
+                  summary={e.summary}
                   badgeColor='success'
                   status='active'
-                  picSrc={e.src}
+                  picSrc={e.thumbnail}
+                  uuid={e.uuid}
                 />
               ))}
             </div>
@@ -188,15 +204,16 @@ const CreateOpportunities = () => {
             </div>
 
             <div className='card-body p-2 overflow-auto' style={{height: '600px'}}>
-              {saved.map((e) => (
+              {completed.map((e) => (
                 <SponsorOpportunityCard
                   category={e.category}
                   dealtype={e.dealtype}
                   title={e.title}
-                  summary={e.details}
+                  summary={e.summary}
                   badgeColor='primary'
                   status='completed'
-                  picSrc={e.src}
+                  picSrc={e.thumbnail}
+                  uuid={e.uuid}
                 />
               ))}
             </div>
@@ -206,4 +223,4 @@ const CreateOpportunities = () => {
     </Tabs>
   )
 }
-export default CreateOpportunities
+export default connector(CreateOpportunities)

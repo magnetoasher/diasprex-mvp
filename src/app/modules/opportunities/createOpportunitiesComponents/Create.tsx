@@ -17,19 +17,35 @@ import axios from 'axios'
 import {getUniqueIdWithPrefix} from '../../../../_metronic/assets/ts/_utils'
 import {OppsCategory} from '../../../../_metronic/partials/content/selectionlists/oppscategory'
 import {DefaultDraftInlineStyle} from 'draft-js'
+import Swal from 'sweetalert2'
+import { CustomUserClaim } from '@okta/okta-auth-js'
 
-export const Create = () => {
+export const Create = (sponsorUserId: any) => {
   const {Option} = Select
   const {TextArea} = Input
   const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY']
   const [isOtherSelected, setIsOtherSelected] = useState(false)
+  const [status, setStatus] = useState('')
+  const initVals = {
+    title: '',
+    id: '',
+    thumbnail: '',
+    sponsor: '',
+    summary: '',
+    status: '',
+    datesubmitted: '',
+    duedate: '',
+    category: '',
+    following: [],
+    showedinterest: [],
+  }
 
   const onChange = (value) => {
     console.log(`selected ${value}`)
   }
 
   const formik = useFormik({
-    initialValues: initialOpps,
+    initialValues: initVals,
     // validationSchema: createOppsSchemas,
     validateOnChange: false,
     onSubmit: async (values, {setSubmitting}) => {
@@ -39,9 +55,9 @@ export const Create = () => {
         ...values,
         uuid: idNumber,
         id: idNumber,
-        sponsorUserId: nanoid(),
-        sponsorName: localStorage.getItem('userTypeFull'),
-        status: 'new',
+        sponsorUserId: sponsorUserId,
+        sponsor: localStorage.getItem('userTypeFull'),
+        status: status,
         open: false,
         datesubmitted: new Date(),
         duedate:
@@ -53,10 +69,17 @@ export const Create = () => {
         otherdealtype: !isOtherSelected ? null : values.otherdealtype,
       }
       try {
-        // console.log('CreateOpps', data)
         await axios
           .post(`${process.env.REACT_APP_DIASPREX_API_URL}/opportunities/create`, data)
-          .then((res) => console.log('onSubmit', res))
+          .then((res) => {
+            if (res.status === 200) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Successfully done!',
+              })
+            }
+          })
           .catch((error) => error)
       } catch (err) {
         console.log(formik.errors)
@@ -74,7 +97,7 @@ export const Create = () => {
         boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px',
       }}
     >
-      <form onSubmit={formik.handleSubmit}>
+      <form>
         <div className='row px-10'>
           <div className='d-flex flex-column text-center mb-10'>
             <h5>
@@ -857,11 +880,23 @@ export const Create = () => {
             type='button'
             className='btn btn-light-primary me-3'
             disabled={formik.isSubmitting}
+            onClick={() => {
+              setStatus('draft')
+              formik.handleSubmit()
+            }}
           >
             Save Draft
           </button>
 
-          <button type='submit' className='btn btn-primary' disabled={formik.isSubmitting}>
+          <button
+            type='button'
+            className='btn btn-primary'
+            disabled={formik.isSubmitting}
+            onClick={() => {
+              setStatus('new')
+              formik.handleSubmit()
+            }}
+          >
             <span className='indicator-label'>Submit</span>
             {/* {(formik.isSubmitting || isOppLoading) && (
                 <span className='indicator-progress'>
