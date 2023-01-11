@@ -108,7 +108,7 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
           <div className=' overflow-auto p-3'>
             <div className=' d-flex text-muted mb-5'>Supported Opportunities</div>
             {supportedOpp.length > 0 ? (
-              supportedOpp.map((e: Proposal) => <EnablerProposalCard2 prop={e} />)
+              supportedOpp.map((e: Proposal) => <EnablerOpportunityCard2 opp={e?.opportunityObject} />)
             ) : (
               <div className='d-flex flex-column'>
                 <p className='fs-2'>You currently have no supported opportunities</p>

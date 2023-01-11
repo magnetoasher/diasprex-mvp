@@ -14,4 +14,7 @@ const getProposalsAPI = (query?: IQuery) => axios.get(`${PROPS_URL}`, {params: q
 
 const getProposalAPI = (query?: IQuery) => axios.get(`${PROPS_URL}/${query?.opportunityUuid}/${query?.enablerUserId}`)
 
-export {getProposalsAPI, getProposalAPI}
+const changeProposalStatusAPI = (query?: IQuery) => {
+  return axios.put(`${PROPS_URL}/${query?.opportunityUuid}/${query?.enablerUserId}/status`, {status: query?.status})}
+
+export {getProposalsAPI, getProposalAPI, changeProposalStatusAPI}

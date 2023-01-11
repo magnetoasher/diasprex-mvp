@@ -3,15 +3,32 @@ import {FC} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {Proposal} from '../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
+import { IQuery } from '../redux/ProposalAPI'
+
 type Props = {
   prop?: Proposal
   dashboard?: boolean
+  changePropStatus: (statQuery: IQuery) => void
 }
 
-export const EnablerProposalCard2: FC<Props> = ({dashboard, prop}) => {
+export const EnablerProposalCard2: FC<Props> = ({dashboard, prop, changePropStatus}) => {
   const navigate = useNavigate()
-  const handleDeleteProp = () => {}
-  const handleWithdrawProp = () => {}
+  const withdrawQuery = {
+    enablerUserId: prop?.enablerUserId,
+    opportunityUuid: prop?.opportunityUuid,
+    status: 'withdrawn',
+  }
+  const deleteQuery = {
+    enablerUserId: prop?.enablerUserId,
+    opportunityUuid: prop?.opportunityUuid,
+    status: 'deleted',
+  }
+  const handleDeleteProp = () => {
+    changePropStatus(deleteQuery)
+  }
+  const handleWithdrawProp = () => {
+    changePropStatus(withdrawQuery)
+  }
   const badgeColor =
     prop?.status === 'new'
       ? 'info'

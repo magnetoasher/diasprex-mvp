@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {useDispatch, connect, ConnectedProps} from 'react-redux'
+import {useDispatch, connect, ConnectedProps, useSelector, shallowEqual} from 'react-redux'
 import {useOktaAuth} from '@okta/okta-react'
 import {PageTitle} from '../../../../_metronic/layout/core'
 
@@ -20,6 +20,8 @@ import {Proposal} from '../../apps/admin-mgt-apps/proposal-management/props-list
 
 import {Link} from 'react-router-dom'
 import {EnablerProposalCard2} from './EnablerProposalCard2'
+import { ListLoading } from '../../apps/admin-mgt-apps/core/loading/ListLoading'
+import { IQuery, changeProposalStatusAPI } from '../../proposals/redux/ProposalAPI'
 
 const mapState = (state: RootState) => ({proposals: state.proposals})
 const connector = connect(mapState, proposals.actions)
@@ -83,6 +85,14 @@ const MyProposal: React.FC<PropsFromRedux> = (props) => {
     console.log(key)
   }
 
+  const changeProposalStatus = (statQuery: IQuery) => {
+    changeProposalStatusAPI(statQuery).then((res) => {
+      if (res.status === 200) {
+        dispatch(props.getProposalsRequest(query))
+      }
+    })
+  }
+
   return (
     <>
       {userTypeFull === 'basic_enabler' ? (
@@ -103,7 +113,7 @@ const MyProposal: React.FC<PropsFromRedux> = (props) => {
             <div className=' overflow-auto p-3'>
               <div className=' d-flex text-muted mb-5'>Draft Proposals</div>
               {draftprop.length > 0 ? (
-                draftprop.map((e: Proposal) => <EnablerProposalCard2 prop={e} />)
+                draftprop.map((e: Proposal) => <EnablerProposalCard2 prop={e} changePropStatus={changeProposalStatus} />)
               ) : (
                 <div className='d-flex flex-column'>
                   <p className='fs-2'>You currently have no draft proposals</p>
@@ -130,7 +140,7 @@ const MyProposal: React.FC<PropsFromRedux> = (props) => {
             <div className=' overflow-auto p-3'>
               <div className=' d-flex text-muted mb-5'>Submitted Proposals</div>
               {submittedprop.length > 0 ? (
-                submittedprop.map((e: Proposal) => <EnablerProposalCard2 prop={e} />)
+                submittedprop.map((e: Proposal) => <EnablerProposalCard2 prop={e} changePropStatus={changeProposalStatus} />)
               ) : (
                 <div className='d-flex flex-column'>
                   <p className='fs-2'>You currently have no submitted proposals</p>
@@ -158,7 +168,7 @@ const MyProposal: React.FC<PropsFromRedux> = (props) => {
             <div className=' overflow-auto p-3'>
               <div className=' d-flex text-muted mb-5'>Active Proposals</div>
               {activeprop.length > 0 ? (
-                activeprop.map((e: Proposal) => <EnablerProposalCard2 prop={e} />)
+                activeprop.map((e: Proposal) => <EnablerProposalCard2 prop={e} changePropStatus={changeProposalStatus} />)
               ) : (
                 <div className='d-flex flex-column'>
                   <p className='fs-2'>You currently have no active proposals</p>
@@ -186,7 +196,7 @@ const MyProposal: React.FC<PropsFromRedux> = (props) => {
             <div className=' overflow-auto p-3'>
               <div className=' d-flex text-muted mb-5'>Completed Proposals</div>
               {completedprop.length > 0 ? (
-                completedprop.map((e: Proposal) => <EnablerProposalCard2 prop={e} />)
+                completedprop.map((e: Proposal) => <EnablerProposalCard2 prop={e} changePropStatus={changeProposalStatus} />)
               ) : (
                 <div className='d-flex flex-column'>
                   <p className='fs-2'>You currently have no completed proposals</p>

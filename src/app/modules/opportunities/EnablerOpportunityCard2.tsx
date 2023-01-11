@@ -98,14 +98,17 @@ const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp}) => {
                           data-kt-menu='true'
                         >
                           <div className='dropdown-item px-3'>
-                            <a href='#' className='menu-link px-3'>
+                            <a
+                              onClick={() => {
+                                history(`/opportunities_center/${opp.uuid}`)
+                              }}
+                              className='menu-link px-3'>
                               View
                             </a>
                           </div>
                           {followed ? (
                             <div className='dropdown-item px-3'>
                               <a
-                                href='#'
                                 className='menu-link px-3'
                                 onClick={() => {
                                   handleFollowedOpp()
@@ -117,7 +120,6 @@ const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp}) => {
                           ) : supported ? (
                             <div className='dropdown-item px-3'>
                               <a
-                                href='#'
                                 className='menu-link px-3'
                                 onClick={() => {
                                   handleSupportedOpp()
@@ -129,7 +131,6 @@ const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp}) => {
                           ) : (
                             <div className='dropdown-item px-3'>
                               <a
-                                href='#'
                                 className='menu-link px-3'
                                 onClick={() => {
                                   handleDeleteOpp()
