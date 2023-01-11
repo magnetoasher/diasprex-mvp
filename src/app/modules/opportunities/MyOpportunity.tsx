@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
-import {useDispatch, connect, ConnectedProps} from 'react-redux'
+import {useDispatch, connect, ConnectedProps, useSelector, shallowEqual} from 'react-redux'
 import {useOktaAuth} from '@okta/okta-react'
 import {PageTitle} from '../../../_metronic/layout/core'
 
