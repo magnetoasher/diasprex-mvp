@@ -1,17 +1,18 @@
 import React from 'react'
 import {Navigate, Route, Routes, Outlet} from 'react-router-dom'
 import {PageLink, PageTitle} from '../../../_metronic/layout/core'
+import {Loans} from './components/Loans/Loans'
+import {Statements} from './components/Statements'
 import {Overview} from './components/Overview'
 import {Settings} from './components/settings/Settings'
 import {ProfileHeader} from './ProfileHeader'
-import {Account} from './components/Account'
-import Billing from './Subscription'
+
 import Subscription from './Subscription'
 
 const profileBreadCrumbs: Array<PageLink> = [
   {
     title: 'Profile',
-    path: '/crafted/profile/overview',
+    path: '/profile/overview',
     isSeparator: false,
     isActive: false,
   },
@@ -67,6 +68,24 @@ const ProfilePage: React.FC = () => {
             <>
               <PageTitle breadcrumbs={profileBreadCrumbs}>Settings</PageTitle>
               <Settings />
+            </>
+          }
+        />
+        <Route
+          path='loans'
+          element={
+            <>
+              <PageTitle breadcrumbs={profileBreadCrumbs}>Loans</PageTitle>
+              <Loans />
+            </>
+          }
+        />
+        <Route
+          path='statements'
+          element={
+            <>
+              <PageTitle breadcrumbs={profileBreadCrumbs}>Statements</PageTitle>
+              <Statements />
             </>
           }
         />

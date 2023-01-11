@@ -254,28 +254,6 @@ const ProfileHeader: React.FC = () => {
                   Remittance Retainer
                 </Link>
               </li>
-              <li className='nav-item'>
-                <Link
-                  className={
-                    `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/remittance/loans' && 'active')
-                  }
-                  to='/remittance/loans'
-                >
-                  Loans
-                </Link>
-              </li>
-              <li className='nav-item'>
-                <Link
-                  className={
-                    `nav-link text-active-primary me-6 ` +
-                    (location.pathname === '/remittance/statements' && 'active')
-                  }
-                  to='/remittance/statements'
-                >
-                  Statements
-                </Link>
-              </li>
             </ul>
           </div>
         )}
@@ -316,6 +294,28 @@ const ProfileHeader: React.FC = () => {
                   to={`/profile/subscription?userType=${userType}`}
                 >
                   Subscription
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link
+                  className={
+                    `nav-link text-active-primary me-6 ` +
+                    (location.pathname === '/profile/loans' && 'active')
+                  }
+                  to='/profile/loans'
+                >
+                  Loans
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link
+                  className={
+                    `nav-link text-active-primary me-6 ` +
+                    (location.pathname === '/profile/statements' && 'active')
+                  }
+                  to='/profile/statements'
+                >
+                  Statements
                 </Link>
               </li>
 

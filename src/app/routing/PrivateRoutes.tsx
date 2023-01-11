@@ -13,6 +13,7 @@ import {ReferralsForm} from '../modules/profile/components/ReferralsForm'
 import CreateOpportunities from '../modules/opportunities/CreateOpportunities'
 import Proposals from '../modules/proposals/components/Proposals'
 import MyOpportunity from '../modules/opportunities/MyOpportunity'
+import MyProposal from '../modules/proposals/components/MyProposal'
 import GeneralOpportunityCard from '../modules/opportunities/GeneralOpportunityCard'
 import SponsorProposals from '../modules/proposals/components/SponsorProposals'
 import SendProposals from '../modules/proposals/components/SendProposals'
@@ -69,9 +70,13 @@ const PrivateRoutes = () => {
             {/* <Route path='sponsor_proposals' element={<SponsorProposals />} /> */}
             <Route path='sponsor/props_review/*' element={<SponsorPropsRevPage />} />
             <Route path='my_opportunities' element={<MyOpportunity />} />
+            <Route path='my_proposals' element={<MyProposal />} />
             <Route path='opportunities_center' element={<GeneralOpportunityCard />} />
             <Route path='opportunities_center/:oppid/send_proposals' element={<SendProposals />} />
-            <Route path='opportunities_center/:oppid/:enablerid/send_proposals' element={<SendProposals />} />
+            <Route
+              path='opportunities_center/:oppid/:enablerid/send_proposals'
+              element={<SendProposals />}
+            />
             <Route path='referrals' element={<ReferralsForm />} />
             <Route path='opportunities_center/:id' element={<ViewOpportunity />} />
             <Route path='table/users_management/*' element={<UsersMgtPage />} />

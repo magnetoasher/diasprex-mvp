@@ -6,6 +6,7 @@ import {Sponsor} from './MenuList/Sponsor'
 import {AdminMenu} from './MenuList/AdminMenu'
 import {Enabler} from './MenuList/Enabler'
 import {GenericMenu} from './MenuList/GenericMenu'
+import {BusinessMenu} from './MenuList/Business'
 
 export function AsideMenuMain() {
   const intl = useIntl()
@@ -29,8 +30,15 @@ export function AsideMenuMain() {
         <AdminMenu />
       ) : userType == 'sponsor' ? (
         <Sponsor />
-      ) : userType == 'enabler' && userTypeFull !== 'basic_enabler' ? (
+      ) : userType == 'enabler' &&
+        userTypeFull !== 'basic_enabler' &&
+        userTypeFull !== 'business_enabler' ? (
         <Enabler />
+      ) : userType == 'enabler' &&
+        userTypeFull !== 'basic_enabler' &&
+        userTypeFull !== 'standard_enabler' &&
+        userTypeFull !== 'super_enabler' ? (
+        <BusinessMenu />
       ) : (
         <GenericMenu />
       )}

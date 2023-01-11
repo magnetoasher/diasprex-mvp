@@ -5,7 +5,7 @@ import {useSearchParams} from 'react-router-dom'
 import {AsideMenuItemWithSub} from '../AsideMenuItemWithSub'
 import {AsideMenuItem} from '../AsideMenuItem'
 import {KTSVG} from '../../../../helpers'
-import {AsideMenuItemHyper} from '../AsideMenuItemhyper'
+import {AsideMenuItemHyper} from '../AsideMenuItemHyper'
 
 export function Sponsor() {
   const intl = useIntl()

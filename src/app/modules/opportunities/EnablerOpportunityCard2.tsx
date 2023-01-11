@@ -13,6 +13,9 @@ const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp}) => {
   const badgeColor =
     opp?.status === 'new' ? 'info' : opp?.status === 'published' ? 'success' : 'danger'
   const history = useNavigate()
+  const handleFollowedOpp = () => {}
+  const handleSupportedOpp = () => {}
+  const handleDeleteOpp = () => {}
   return (
     <div className='KTCard mb-5'>
       <div className='card shadow-sm mb-6 mb-xl-9'>
@@ -101,13 +104,37 @@ const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp}) => {
                           </div>
                           {followed ? (
                             <div className='dropdown-item px-3'>
-                              <a href='#' className='menu-link px-3'>
+                              <a
+                                href='#'
+                                className='menu-link px-3'
+                                onClick={() => {
+                                  handleFollowedOpp()
+                                }}
+                              >
                                 {followed ? 'Unfollow ' : 'Follow'}
+                              </a>
+                            </div>
+                          ) : supported ? (
+                            <div className='dropdown-item px-3'>
+                              <a
+                                href='#'
+                                className='menu-link px-3'
+                                onClick={() => {
+                                  handleSupportedOpp()
+                                }}
+                              >
+                                Unsupport
                               </a>
                             </div>
                           ) : (
                             <div className='dropdown-item px-3'>
-                              <a href='#' className='menu-link px-3'>
+                              <a
+                                href='#'
+                                className='menu-link px-3'
+                                onClick={() => {
+                                  handleDeleteOpp()
+                                }}
+                              >
                                 Delete
                               </a>
                             </div>

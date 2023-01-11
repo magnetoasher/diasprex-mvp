@@ -7,7 +7,7 @@ import {Row, Col, Button, Card, notification, Tooltip} from 'antd'
 import {StarOutlined, ShareAltOutlined} from '@ant-design/icons'
 import {useDispatch, connect, ConnectedProps} from 'react-redux'
 import {useNavigate, useParams} from 'react-router-dom'
-
+import {useOktaAuth} from '@okta/okta-react'
 import {OppsDA} from './component/oda'
 import {SubscriptionRequired} from './component/subscription-error-modal'
 import * as opps from './redux/OpportunityRedux'
@@ -29,7 +29,6 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   const [api, contextHolder] = notification.useNotification()
   const [isShowDetail, setIsShowDetail] = useState(false)
 
-  const userType = localStorage.getItem('userType')
   const userTypeFull = localStorage.getItem('userTypeFull')
 
   useEffect(() => {
@@ -70,6 +69,8 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     setModalOpen(false)
     setIsShowDetail(!isShowDetail)
   }
+
+  const handleFollowOpp = () => {}
 
   const badgeColor = oppData?.open ? 'success' : 'danger'
   const dealTypeLength = oppData?.dealtype?.length! - 1
@@ -131,7 +132,13 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                     {/* Click Support increases support parameter by +1  */}
 
                     {/* Click Follow increases following parameter by +1 text changed to unfollow if Enabler is already following */}
-                    <button type='button' className='btn btn-sm btn-success me-3'>
+                    <button
+                      type='button'
+                      className='btn btn-sm btn-success me-3'
+                      onClick={() => {
+                        handleFollowOpp()
+                      }}
+                    >
                       Follow
                     </button>
                   </div>
