@@ -5,8 +5,9 @@ import {useSearchParams} from 'react-router-dom'
 import {AsideMenuItemWithSub} from '../AsideMenuItemWithSub'
 import {AsideMenuItem} from '../AsideMenuItem'
 import {KTSVG} from '../../../../helpers'
+import {AsideMenuItemHyper} from '../AsideMenuItemHyper'
 
-export function Business() {
+export function BusinessMenu() {
   const intl = useIntl()
 
   return (
@@ -25,20 +26,20 @@ export function Business() {
         fontIcon='bi-app-indicator'
       />
 
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='/remittance_resources'
         icon='/media/icons/duotune/art/art005.svg'
         title='Remittance'
         fontIcon='bi-app-indicator'
       />
 
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='/diasporas'
         icon='/media/icons/duotune/art/art005.svg'
         title='Diasporas'
         fontIcon='bi-app-indicator'
       />
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='/faqs'
         icon='/media/icons/duotune/art/art006.svg'
         title='FAQs'
@@ -50,30 +51,33 @@ export function Business() {
         </div>
       </div>
 
+      <AsideMenuItem
+        to='my_opportunities'
+        icon='/media/icons/duotune/art/art002.svg'
+        title='My Opportunities'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='my_proposals'
+        icon='/media/icons/duotune/general/gen028.svg'
+        title='My Proposals'
+        fontIcon='bi-layers'
+      />
+
       <AsideMenuItemWithSub
         to='profile'
         icon='/media/icons/duotune/art/art008.svg'
-        title='My Profile'
+        title='My Account'
         fontIcon='bi-app-indicator'
       >
-        <AsideMenuItem
-          to='my_opportunities'
-          icon='/media/icons/duotune/art/art002.svg'
-          title='My Opportunities/Proposals'
-          fontIcon='bi-layers'
-        />
-        <AsideMenuItem to='profile/overview' title='Overview' hasBullet={true} />
+        <AsideMenuItem to='profile/overview' title='Profile Overview' hasBullet={true} />
         <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
         <AsideMenuItem to='profile/subscription' title='Subscription' hasBullet={true} />
+        <AsideMenuItem to='profile/loans' title='Loans' hasBullet={true} />
+        <AsideMenuItem to='profile/statements' title='Statements' hasBullet={true} />
         {/* <AsideMenuItem to='profile/account' title='Account' hasBullet={true} /> */}
       </AsideMenuItemWithSub>
 
-      <AsideMenuItem
-        to='/crafted/profile/settings'
-        icon='/media/icons/duotune/art/art004.svg'
-        title='Settings'
-        fontIcon='bi-layers'
-      />
       <AsideMenuItem
         to='/chat/private-chat'
         icon='/media/icons/duotune/art/art007.svg'

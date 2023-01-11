@@ -5,9 +5,6 @@ import {SendMoneyFormWrapper} from './Components/SendMoneyFormWrapper'
 import {Summary} from './Components/Summary'
 import {RemittanceRetainer} from './Components/remittanceretainer'
 import {Preferences} from './Components/Preferences/Preferences'
-import {Loans} from './Components/Loans/Loans'
-
-import {Statements} from './Components/Statements'
 
 const remittanceBreadCrumbs: Array<PageLink> = [
   {
@@ -70,24 +67,7 @@ const RemittancePage = () => (
           </>
         }
       />
-      <Route
-        path='loans'
-        element={
-          <>
-            <PageTitle breadcrumbs={remittanceBreadCrumbs}>Loans</PageTitle>
-            <Loans />
-          </>
-        }
-      />
-      <Route
-        path='statements'
-        element={
-          <>
-            <PageTitle breadcrumbs={remittanceBreadCrumbs}>Statements</PageTitle>
-            <Statements />
-          </>
-        }
-      />
+
       {/* <Route
         path='projects'
         element={

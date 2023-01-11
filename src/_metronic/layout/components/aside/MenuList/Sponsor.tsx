@@ -5,6 +5,7 @@ import {useSearchParams} from 'react-router-dom'
 import {AsideMenuItemWithSub} from '../AsideMenuItemWithSub'
 import {AsideMenuItem} from '../AsideMenuItem'
 import {KTSVG} from '../../../../helpers'
+import {AsideMenuItemHyper} from '../AsideMenuItemHyper'
 
 export function Sponsor() {
   const intl = useIntl()
@@ -24,7 +25,7 @@ export function Sponsor() {
         </div>
       </div>
       <AsideMenuItem
-        to='createopportunities'
+        to='/createopportunities'
         icon='/media/icons/duotune/art/art001.svg'
         title='My Opportunities'
         fontIcon='bi-app-indicator'
@@ -36,13 +37,13 @@ export function Sponsor() {
         fontIcon='bi-layers'
       />
 
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='/diasporas'
         icon='/media/icons/duotune/art/art003.svg'
         title='Diasporas'
         fontIcon='bi-app-indicator'
       />
-      <AsideMenuItem
+      <AsideMenuItemHyper
         to='/faqs'
         icon='/media/icons/duotune/art/art004.svg'
         title='FAQs'
@@ -61,7 +62,7 @@ export function Sponsor() {
         title='My Profile'
         fontIcon='bi-app-indicator'
       >
-        <AsideMenuItem to='profile/overview' title='Overview' hasBullet={true} />
+        <AsideMenuItem to='profile/overview' title='Profile Overview' hasBullet={true} />
         <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
         <AsideMenuItem to='profile/subscription' title='Subscription' hasBullet={true} />
         {/* <AsideMenuItem to='profile/account' title='Account' hasBullet={true} /> */}

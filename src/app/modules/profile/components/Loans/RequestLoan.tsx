@@ -3,7 +3,7 @@ import {toAbsoluteUrl} from '../../../../../_metronic/helpers'
 import {
   IRemittanceDetails,
   remittanceDetailsInitValues as initialValues,
-} from '../Preferences/PreferencesModel'
+} from '../../../Remittance/Components/Preferences/PreferencesModel'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 import {CountryList} from '../../../../../_metronic/partials/content/selectionlists'
