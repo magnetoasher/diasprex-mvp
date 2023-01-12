@@ -3,11 +3,8 @@ import {useDispatch, connect, ConnectedProps} from 'react-redux'
 import {useOktaAuth} from '@okta/okta-react'
 import {Tabs} from 'antd'
 import {SendOutlined, SaveOutlined, FileDoneOutlined, RetweetOutlined} from '@ant-design/icons'
-
 import {Create} from './createOpportunitiesComponents/Create'
-
 import SponsorOpportunityCard from './SponsorsOpportunityCard'
-
 import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
 import {RootState} from '../../../setup'
 import {Opps} from '../../modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
@@ -28,7 +25,7 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
   useEffect(() => {
     if (authState !== null) {
       const query = {
-        sponsorUserId: authState?.accessToken?.claims.uid
+        sponsorUserId: authState?.accessToken?.claims.uid,
       }
       dispatch(props.getAllOppsRequest(query))
     }
@@ -50,9 +47,10 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
         props.opps?.opps.data?.filter((obj: Opps) => {
           return (
             obj.status === 'new' ||
-            obj.status === 'pending' ||
-            obj.status === 'selected' ||
-            obj.status === 'declined' ||
+            obj.status === 'published' ||
+            obj.status === 'accepted' ||
+            obj.status === 'accepted with revision' ||
+            obj.status === 'not accepted' ||
             obj.status === 'withdrawn'
           )
         })

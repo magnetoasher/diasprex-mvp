@@ -40,11 +40,11 @@ const proposalsColumns: ReadonlyArray<Column<Proposal>> = [
   // Begine Date Submitted:: Column
   {
     Header: (props) => (
-      <PropCustomHeader tableProps={props} title='Date_Sumitted' className='min-w-125px' />
+      <PropCustomHeader tableProps={props} title='Date_Submitted' className='min-w-125px' />
     ),
     id: 'date_submitted',
     Cell: ({...props}) => (
-      <PropDateSubmittedCell date_submitted={props.data[props.row.index].last_login} />
+      <PropDateSubmittedCell date_submitted={props.data[props.row.index].date_submitted} />
     ),
   },
   // Begine Admin Screening:: Column

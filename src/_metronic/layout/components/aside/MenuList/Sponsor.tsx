@@ -59,7 +59,7 @@ export function Sponsor() {
       <AsideMenuItemWithSub
         to='profile'
         icon='/media/icons/duotune/art/art008.svg'
-        title='My Profile'
+        title='My Account'
         fontIcon='bi-app-indicator'
       >
         <AsideMenuItem to='profile/overview' title='Profile Overview' hasBullet={true} />

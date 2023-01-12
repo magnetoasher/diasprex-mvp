@@ -61,20 +61,6 @@ export function Enabler() {
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>User</span>
         </div>
       </div>
-
-      <AsideMenuItem
-        to='my_opportunities'
-        icon='/media/icons/duotune/art/art002.svg'
-        title='My Opportunities'
-        fontIcon='bi-layers'
-      />
-      <AsideMenuItem
-        to='my_proposals'
-        icon='/media/icons/duotune/general/gen028.svg'
-        title='My Proposals'
-        fontIcon='bi-layers'
-      />
-
       <AsideMenuItemWithSub
         to='profile'
         icon='/media/icons/duotune/art/art008.svg'
@@ -88,6 +74,19 @@ export function Enabler() {
         <AsideMenuItem to='profile/statements' title='Statements' hasBullet={true} />
         {/* <AsideMenuItem to='profile/account' title='Account' hasBullet={true} /> */}
       </AsideMenuItemWithSub>
+
+      <AsideMenuItem
+        to='my_opportunities'
+        icon='/media/icons/duotune/art/art002.svg'
+        title='My Opportunities'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='my_proposals'
+        icon='/media/icons/duotune/general/gen028.svg'
+        title='My Proposals'
+        fontIcon='bi-layers'
+      />
 
       <AsideMenuItemWithSub
         to='remittance'

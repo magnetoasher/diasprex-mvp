@@ -1,5 +1,7 @@
+import {useEffect, useState} from 'react'
 import {useQueryClient, useMutation} from 'react-query'
 import {QUERIES} from '../../../../../../../_metronic/helpers'
+import {ChangeStatus} from './changestatusmodal'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
 import {deleteSelectedProposals} from '../../core/_requests'
@@ -26,18 +28,25 @@ const PropsListGrouping = () => {
 
       <button
         type='button'
-        className='btn btn-danger'
+        className='btn btn-danger me-2'
         onClick={async () => await deleteSelectedItems.mutateAsync()}
       >
         Delete Selected
       </button>
       <button
         type='button'
-        className='btn btn-danger'
-        onClick={async () => await deleteSelectedItems.mutateAsync()}
+        className='btn btn-primary me-2'
+        data-bs-toggle='modal'
+        data-bs-target='#kt_modal_changepropstatus'
+        // onClick={async () => await changeSelectedItems.mutateAsync()}
       >
         Update Status
       </button>
+      <ChangeStatus
+        id='kt_modal_changepropstatus'
+        options={['selected', 'declined']}
+        title='Change Proposal Status'
+      />
     </div>
   )
 }
