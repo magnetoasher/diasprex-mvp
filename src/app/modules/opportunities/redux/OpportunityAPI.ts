@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {ID} from '../../../../_metronic/helpers'
-import { CustomUserClaim } from '@okta/okta-auth-js'
+import {CustomUserClaim} from '@okta/okta-auth-js'
+import {IQuery as IQuery2} from '../../proposals/redux/ProposalAPI'
 
 const API_URL = process.env.REACT_APP_DIASPREX_API_URL
 const OPPS_URL = `${API_URL}/opportunities`
@@ -17,4 +18,8 @@ const getAllOppsAPI = (query?: IQuery) => axios.get(`${OPPS_URL}`, {params: quer
 
 const getOppByIdAPI = (id: ID) => axios.get(`${OPPS_URL}/${id}`)
 
-export {getAllOppsAPI, getOppByIdAPI}
+const acknowledgeOdaAPI = (query?: IQuery2) => {
+  return axios.put(`${OPPS_URL}/${query?.opportunityUuid}/${query?.enablerUserId}/acknowledgeODA`)
+}
+
+export {getAllOppsAPI, getOppByIdAPI, acknowledgeOdaAPI}

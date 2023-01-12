@@ -28,7 +28,7 @@ export type Opps = {
   following?: string[]
   showedinterest?: string[]
   supporting?: string[]
-  isoda?: string[]
+  acknowledgedODA?: string[]
   attachment?: string
 }
 
