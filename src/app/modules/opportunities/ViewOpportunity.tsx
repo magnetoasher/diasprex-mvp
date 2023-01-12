@@ -199,6 +199,9 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                           <button
                             type='button'
                             className='btn btn-sm btn-success me-3'
+                            disabled={oppData?.showedinterest?.includes(
+                              authState?.accessToken?.claims.uid
+                            )}
                             onClick={() => {
                               handleFollowOpp()
                             }}
@@ -209,6 +212,9 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                           <button
                             type='button'
                             className='btn btn-sm btn-primary me-3'
+                            disabled={oppData?.showedinterest?.includes(
+                              authState?.accessToken?.claims.uid
+                            )}
                             onClick={() => {
                               handleUnfollowOpp()
                             }}
