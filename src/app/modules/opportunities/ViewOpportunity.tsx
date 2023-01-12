@@ -18,6 +18,8 @@ import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import Swal from 'sweetalert2'
 import {FeedbackModal} from '../../../_metronic/partials/modals/confirm-action/feedbackform'
 import {ListLoading} from '../apps/admin-mgt-apps/core/loading/ListLoading'
+import { acknowledgeOdaAPI } from './redux/OpportunityAPI'
+import { IQuery } from '../proposals/redux/ProposalAPI'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -31,7 +33,6 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   const [oppData, setOppData] = useState<Opps>({})
   const [api, contextHolder] = notification.useNotification()
   const [isShowDetail, setIsShowDetail] = useState(false)
-
   const userTypeFull = localStorage.getItem('userTypeFull')
 
   useEffect(() => {
@@ -65,6 +66,16 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
       openNotificationWarning('bottomRight', 'It requires paid subscription and ODA agreement')
     } else {
       setIsShowDetail(!isShowDetail)
+      if (!isShowDetail) {
+        acknowledgeOdaAPI({
+          enablerUserId: authState?.accessToken?.claims.uid,
+          opportunityUuid: id,
+        }).then((res) => {
+          if (res.status === 200) {
+            dispatch(props.getOppByIdRequest(id))
+          }
+        })
+      }
     }
   }
 
@@ -293,13 +304,16 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                       className='btn btn-primary'
                       data-bs-toggle='modal'
                       data-bs-target={
-                        oppData?.isoda?.includes(authState?.accessToken?.claims.uid)
+                        oppData?.acknowledgedODA?.includes(authState?.accessToken?.claims.uid)
                           ? ''
                           : userTypeFull == 'basic_enabler'
                           ? '#kt_subs_modal'
                           : '#kt_oda_modal'
                       }
                       data-bs-tooltips='Requires Enbaler subscription'
+                      onClick={() => {
+                        oppData?.acknowledgedODA?.includes(authState?.accessToken?.claims.uid) && setIsShowDetail(!isShowDetail)
+                      }}
                     >
                       View Opportunity Details
                     </button>
