@@ -20,6 +20,9 @@ import {Proposal} from '../../modules/apps/admin-mgt-apps/proposal-management/pr
 import EnablerOpportunityCard2 from './EnablerOpportunityCard2'
 import {Link} from 'react-router-dom'
 import {EnablerProposalCard2} from '../proposals/components/EnablerProposalCard2'
+import axios from 'axios'
+import { Opps } from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import Swal from 'sweetalert2'
 
 const mapState = (state: RootState) => ({proposals: state.proposals})
 const connector = connect(mapState, proposals.actions)
@@ -46,6 +49,11 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
 
   useEffect(() => {
     if (props.proposals.proposals.data) {
+      setFollowedOpp(
+        props.proposals?.proposals.data?.filter((obj: Proposal) => {
+          return obj.status === 'followed'
+        })
+      )
       setSupportedOpp(
         props.proposals?.proposals.data?.filter((obj: Proposal) => {
           return obj.status === 'supported'
@@ -53,6 +61,62 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
       )
     }
   }, [props.proposals])
+
+  const followOpp = async (opp: Opps) => {
+    const data = {
+      enablerUserId: authState?.accessToken?.claims.uid,
+      sponsorUserId: opp.sponsorUserId,
+      enablerName: 'Art Beyond Sight',
+      opportunityUuid: opp.uuid,
+      status: 'followed',
+      opportunityObject: opp,
+    }
+    try {
+      await axios
+        .post(`${process.env.REACT_APP_DIASPREX_API_URL}/proposals/create`, data)
+        .then((res) => {
+          if (res.status === 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Successfully done',
+            })
+            dispatch(props.getProposalsRequest(query))
+          }
+        })
+        .catch((error) => error)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const unfollowOpp = async (opp: Opps) => {
+    const data = {
+      enablerUserId: authState?.accessToken?.claims.uid,
+      sponsorUserId: opp.sponsorUserId,
+      enablerName: 'Art Beyond Sight',
+      opportunityUuid: opp.uuid,
+      status: 'unfollowed',
+      opportunityObject: opp,
+    }
+    try {
+      await axios
+        .post(`${process.env.REACT_APP_DIASPREX_API_URL}/proposals/create`, data)
+        .then((res) => {
+          if (res.status === 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Successfully done',
+            })
+            dispatch(props.getProposalsRequest(query))
+          }
+        })
+        .catch((error) => error)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const {TabPane} = Tabs
   const onChange = (key: string) => {
@@ -78,7 +142,7 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
 
           {followedOpp.length > 0 ? (
             followedOpp.map((e: Proposal) => (
-              <EnablerOpportunityCard2 opp={e?.opportunityObject} followed={true} />
+              <EnablerOpportunityCard2 opp={e?.opportunityObject} followed={e?.status} followOpp={followOpp} unfollowOpp={unfollowOpp} />
             ))
           ) : (
             <div className='d-flex flex-column'>

@@ -4,16 +4,21 @@ import {FC} from 'react'
 import {useNavigate, Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import {Opps} from '../../../app/modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+
 type Props = {
   opp?: Opps
-  followed?: boolean
+  followed?: string
   dashboard?: boolean
+  followOpp?: (opp: Opps) => void
+  unfollowOpp?: (opp: Opps) => void
 }
-const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp}) => {
+const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp, followOpp, unfollowOpp}) => {
   const badgeColor =
     opp?.status === 'new' ? 'info' : opp?.status === 'published' ? 'success' : 'danger'
   const history = useNavigate()
-  const handleFollowedOpp = () => {}
+  const handleFollowedOpp = (opp) => {
+    opp?.status === 'followed' ? followOpp(opp) : unfollowOpp(opp)
+  }
   const handleSupportedOpp = () => {}
   const handleDeleteOpp = () => {}
   return (
@@ -98,13 +103,13 @@ const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp}) => {
                           data-kt-menu='true'
                         >
                           <div className='dropdown-item px-3'>
-                            <a
+                            <button
                               onClick={() => {
                                 history(`/opportunities_center/${opp.uuid}`)
                               }}
                               className='menu-link px-3'>
                               View
-                            </a>
+                            </button>
                           </div>
                           {followed ? (
                             <div className='dropdown-item px-3'>
