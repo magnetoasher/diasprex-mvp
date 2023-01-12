@@ -22,6 +22,7 @@ const connector = connect(mapState, opps.actions)
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
+  const {authState} = useOktaAuth()
   const {id: id} = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -325,20 +326,22 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                     </Tooltip>
                   </button>
 
-                  <button
-                    type='button'
-                    className='btn btn-primary'
-                    onClick={() => {
-                      userTypeFull === 'basic_enabler'
-                        ? openNotificationWarning(
-                            'bottomRight',
-                            'It requires paid subscription and ODA agreement'
-                          )
-                        : navigate(`/opportunities_center/${oppData.uuid}/send_proposals`)
-                    }}
-                  >
-                    Submit Proposal
-                  </button>
+                  {!oppData.showedinterest?.includes(authState?.accessToken?.claims.uid) &&
+                    <button
+                      type='button'
+                      className='btn btn-primary'
+                      onClick={() => {
+                        userTypeFull === 'basic_enabler'
+                          ? openNotificationWarning(
+                              'bottomRight',
+                              'It requires paid subscription and ODA agreement'
+                            )
+                          : navigate(`/opportunities_center/${oppData.uuid}/send_proposals`)
+                      }}
+                    >
+                      Submit Proposal
+                    </button>
+                  }
                 </div>
               </div>
             )}
