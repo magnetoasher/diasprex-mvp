@@ -129,7 +129,7 @@ const ViewProposal: FC<PropsFromRedux> = (props) => {
                       <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                         <div className='d-flex align-items-center'>
                           <div className='fs-4 fw-bold'>
-                            {propData?.opportunityObject?.showedinterest}
+                            {propData?.opportunityObject?.showedinterest?.length}
                           </div>
                         </div>
 
@@ -138,7 +138,7 @@ const ViewProposal: FC<PropsFromRedux> = (props) => {
                       <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                         <div className='d-flex align-items-center'>
                           <div className='fs-4 fw-bold'>
-                            {propData?.opportunityObject?.following}
+                            {propData?.opportunityObject?.following?.length}
                           </div>
                         </div>
 
