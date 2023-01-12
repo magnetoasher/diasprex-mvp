@@ -112,13 +112,6 @@ export function AdminMenu() {
         </div>
       </div>
 
-      <AsideMenuItem
-        to='/my_opportunities'
-        icon='/media/icons/duotune/art/art002.svg'
-        title='My Opportunities/Proposals'
-        fontIcon='bi-layers'
-      />
-
       <AsideMenuItemWithSub
         to='profile'
         icon='/media/icons/duotune/art/art008.svg'
@@ -128,6 +121,13 @@ export function AdminMenu() {
         <AsideMenuItem to='profile/overview' title='Overview' hasBullet={true} />
         <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
       </AsideMenuItemWithSub>
+
+      <AsideMenuItem
+        to='/my_opportunities'
+        icon='/media/icons/duotune/art/art002.svg'
+        title='My Opportunities/Proposals'
+        fontIcon='bi-layers'
+      />
 
       <AsideMenuItemWithSub
         to='remittance'

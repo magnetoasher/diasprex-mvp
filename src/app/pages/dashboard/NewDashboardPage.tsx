@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
 import {useDispatch, connect, ConnectedProps} from 'react-redux'
+import {useOktaAuth} from '@okta/okta-react'
 import {Link} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
 import {ListsWidget6, ChartsWidget3} from '../dashboard/clientswidgets'
@@ -11,26 +12,25 @@ import EnablerOpportunityCard from '../../modules/opportunities/EnablerOpportuni
 import SponsorOpportunityCard from '../../modules/opportunities/SponsorsOpportunityCard'
 import {SponsorProposalCard} from '../../modules/proposals/components/SponsorProposalCard'
 import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
+import * as proposals from '../../modules/proposals/redux/ProposalRedux'
 import {RootState} from '../../../setup'
 import {Opps} from '../../modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {ListLoading} from '../../modules/apps/admin-mgt-apps/core/loading/ListLoading'
 import EnablerOpportunityCard2 from '../../modules/opportunities/EnablerOpportunityCard2'
+import { Proposal } from '../../modules/apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 
-const mapState = (state: RootState) => ({opps: state.opps})
-const connector = connect(mapState, opps.actions)
+const mapState = (state: RootState) => ({opps: state.opps, proposals: state.proposals})
+const connector = connect(mapState, {...opps.actions, ...proposals.actions})
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
+  const {authState} = useOktaAuth()
   const userType = localStorage.getItem('userType')
   const userTypeFull = localStorage.getItem('userTypeFull')
   const [userLabel, setUserLabel] = useState<any>(userTypeFull)
   const dispatch = useDispatch()
   const [recentOpps, setRecentOpps] = useState<Opps[]>([])
-  const query = {
-    items_per_page: 5,
-    page: 1,
-    status: 'published'
-  }
+  const [recentProps, setRecentProps] = useState<Proposal[]>([])
 
   const userColor = {
     enabler: {
@@ -56,43 +56,39 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
   }, [userTypeFull, userType])
 
   useEffect(() => {
-    dispatch(props.getAllOppsRequest(query))
+    if (authState !== null) {
+      const query = userType === 'sponsor' ? {
+        items_per_page: 5,
+        page: 1,
+        sponsorUserId: authState?.accessToken?.claims.uid,
+      } : {
+        items_per_page: 5,
+        page: 1,
+        status: 'published',
+      }
+      dispatch(props.getAllOppsRequest(query))
+    }
+  }, [])
+
+  useEffect(() => {
+    if (authState !== null) {
+      const params = {
+        items_per_page: 5,
+        page: 1,
+        sponsorUserId: authState?.accessToken?.claims.uid,
+        status: 'pending',
+      }
+      dispatch(props.getProposalsRequest(params))
+    }
   }, [])
 
   useEffect(() => {
     setRecentOpps(props.opps.opps?.data)
   }, [props.opps])
 
-  const [sponsoroppsdataObj] = useState([
-    {
-      category: 'Demo 1',
-      dealtype: 'Equity Financing',
-      title: 'This is title',
-      summary: 'this is detail, lorem ispum',
-      src: 'https://picsum.photos/192/140',
-    },
-    {
-      category: 'Demo 2',
-      dealtype: 'Debt Financing',
-      title: 'This is title',
-      summary: 'this is detail, lorem ispum',
-      src: 'https://picsum.photos/193/140',
-    },
-    {
-      category: 'Nigeria',
-      dealtype: 'Crowfunding',
-      title: 'This is title',
-      summary: 'this is detail, lorem ispum',
-      src: 'https://picsum.photos/194/140',
-    },
-    {
-      category: 'Demo 4',
-      dealtype: 'Partnership',
-      title: 'This is title',
-      summary: 'this is detail, lorem ispum',
-      src: 'https://picsum.photos/195/140',
-    },
-  ])
+  useEffect(() => {
+    setRecentProps(props.proposals.proposal?.data)
+  }, [props.proposals])
 
   const [propsdataObj] = useState([
     {
@@ -488,7 +484,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                 </div>
 
                 <div className='card-body p-2 overflow-auto' style={{height: '350px'}}>
-                  {sponsoroppsdataObj.map((e) => (
+                  {recentOpps?.map((e) => (
                     <SponsorOpportunityCard
                       category={e.category}
                       dealtype={e.dealtype}
@@ -497,7 +493,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                       dashboard={true}
                       badgeColor='info'
                       status='Publication Status'
-                      picSrc={e.src}
+                      picSrc={e.thumbnail}
                     />
                   ))}
                 </div>
@@ -513,16 +509,14 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                 </div>
 
                 <div className='card-body p-2 overflow-auto' style={{height: '350px'}}>
-                  {propsdataObj.map((e) => (
+                  {recentProps?.map((e) => (
                     <SponsorProposalCard
-                      propenabler={e.propenabler}
-                      propcountry={e.propcountry}
+                      propenabler='00u7rpizonlF5AZ9P5d7'
+                      propcountry='Uganda'
                       proptitle={e.title}
                       propsummary={e.summary}
-                      badgeColor='info'
-                      status='New'
                       dashboard={true}
-                      picSrc={e.src}
+                      picSrc={e.thumbnail}
                     />
                   ))}
                 </div>

@@ -13,12 +13,14 @@ import {
 import {getProposals} from './_requests'
 import {Proposal} from '../../../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 import {useQueryRequest} from './QueryRequestProvider'
-
+import {useOktaAuth} from '@okta/okta-react'
 const QueryResponseContext = createResponseContext<Proposal>(initialQueryResponse)
 const QueryResponseProvider: FC<WithChildren> = ({children}) => {
   const {state} = useQueryRequest()
   const [query, setQuery] = useState<string>(stringifyRequestQuery(state))
   const updatedQuery = useMemo(() => stringifyRequestQuery(state), [state])
+  const {authState} = useOktaAuth()
+  const sponsorUserId = authState !== null && authState?.accessToken?.claims.uid
 
   useEffect(() => {
     if (query !== updatedQuery) {
@@ -33,7 +35,7 @@ const QueryResponseProvider: FC<WithChildren> = ({children}) => {
   } = useQuery(
     `${QUERIES.PROPS_LIST}-${query}`,
     () => {
-      return getProposals(query)
+      return getProposals(`sponsorUserId=${sponsorUserId}&${query}`)
     },
     {cacheTime: 0, keepPreviousData: true, refetchOnWindowFocus: false}
   )

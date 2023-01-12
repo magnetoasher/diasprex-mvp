@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {ID} from '../../../../_metronic/helpers'
+import { CustomUserClaim } from '@okta/okta-auth-js'
 
 const API_URL = process.env.REACT_APP_DIASPREX_API_URL
 const OPPS_URL = `${API_URL}/opportunities`
@@ -9,6 +10,7 @@ export interface IQuery {
   page?: number
   status?: string
   featuredopp?: boolean
+  sponsorUserId?: CustomUserClaim | CustomUserClaim[]
 }
 
 const getAllOppsAPI = (query?: IQuery) => axios.get(`${OPPS_URL}`, {params: query})

@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
+import { useNavigate } from 'react-router-dom'
 
 const SponsorOpportunityCard = ({
   category,
@@ -10,7 +11,10 @@ const SponsorOpportunityCard = ({
   dashboard,
   badgeColor,
   picSrc,
+  uuid
 }: any) => {
+  const navigate = useNavigate()
+
   return (
     <div className='KTCard mb-5'>
       <div className=' mb-2 box-shadow-style'>
@@ -89,7 +93,11 @@ const SponsorOpportunityCard = ({
                   data-kt-menu='true'
                 >
                   <div className='dropdown-item px-3'>
-                    <a href='#' className='menu-link px-3'>
+                    <a
+                      onClick={() => {
+                        navigate(`/opportunities_center/${uuid}`)
+                      }}
+                      className='menu-link px-3'>
                       View
                     </a>
                   </div>
