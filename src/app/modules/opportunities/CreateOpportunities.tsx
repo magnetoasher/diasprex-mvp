@@ -16,6 +16,9 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
   const {authState} = useOktaAuth()
   const dispatch = useDispatch()
+  const query = {
+    sponsorUserId: authState?.accessToken?.claims.uid
+  }
 
   const [draft, setDraft] = useState<Opps[]>([])
   const [active, setActive] = useState<Opps[]>([])
@@ -24,9 +27,6 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
 
   useEffect(() => {
     if (authState !== null) {
-      const query = {
-        sponsorUserId: authState?.accessToken?.claims.uid,
-      }
       dispatch(props.getAllOppsRequest(query))
     }
   }, [])
@@ -63,6 +63,10 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
     }
   }, [props.opps])
 
+  const getOpps = () => {
+    dispatch(props.getAllOppsRequest(query))
+  }
+
   const {TabPane} = Tabs
   const onChange = (key: string) => {
     console.log(key)
@@ -79,7 +83,7 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
         }
         key='1'
       >
-        <Create sponsorUserId={authState?.accessToken?.claims.uid} />
+        <Create sponsorUserId={authState?.accessToken?.claims.uid} getOpps={getOpps} />
       </TabPane>
       <TabPane
         tab={

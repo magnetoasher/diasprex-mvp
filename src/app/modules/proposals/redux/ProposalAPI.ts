@@ -7,6 +7,7 @@ const PROPS_URL = `${API_URL}/proposals`
 export interface IQuery {
   opportunityUuid?: string
   enablerUserId?: CustomUserClaim | CustomUserClaim[] | string
+  sponsorUserId?: CustomUserClaim | CustomUserClaim[] | string
   status?: string
 }
 

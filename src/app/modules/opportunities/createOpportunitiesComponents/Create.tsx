@@ -1,6 +1,7 @@
 // @ts-nocheck comment
 import React, {useState, Component} from 'react'
 import {Tabs, Col, Row, Select, DatePicker, Button, Input, Card, Checkbox} from 'antd'
+import {useDispatch} from 'react-redux'
 import moment from 'moment'
 import {
   initialOpps,
@@ -18,9 +19,8 @@ import {getUniqueIdWithPrefix} from '../../../../_metronic/assets/ts/_utils'
 import {OppsCategory} from '../../../../_metronic/partials/content/selectionlists/oppscategory'
 import {DefaultDraftInlineStyle} from 'draft-js'
 import Swal from 'sweetalert2'
-import { CustomUserClaim } from '@okta/okta-auth-js'
 
-export const Create = (sponsorUserId: any) => {
+export const Create = ({sponsorUserId, getOpps}: any) => {
   const {Option} = Select
   const {TextArea} = Input
   const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY']
@@ -73,6 +73,7 @@ export const Create = (sponsorUserId: any) => {
           .post(`${process.env.REACT_APP_DIASPREX_API_URL}/opportunities/create`, data)
           .then((res) => {
             if (res.status === 200) {
+              getOpps()
               Swal.fire({
                 icon: 'success',
                 title: 'Success',
