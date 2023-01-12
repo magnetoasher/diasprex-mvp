@@ -37,20 +37,20 @@ export function Enabler() {
         fontIcon='bi-app-indicator'
       /> */}
       <AsideMenuItemHyper
-        to='remittance_resources'
+        to='/remittance_resources'
         icon='/media/icons/duotune/art/art004.svg'
         title='Remittance'
         fontIcon='bi-layers'
       />
 
       <AsideMenuItemHyper
-        to='diasporas'
+        to='/diasporas'
         icon='/media/icons/duotune/art/art006.svg'
         title='Diasporas'
         fontIcon='bi-app-indicator'
       />
       <AsideMenuItemHyper
-        to='faqs'
+        to='/faqs'
         icon='/media/icons/duotune/art/art007.svg'
         title='FAQs'
         fontIcon='bi-layers'
