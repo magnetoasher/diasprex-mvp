@@ -45,6 +45,7 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
     page: 1,
   }
   const [followedOpp, setFollowedOpp] = useState<Proposal[]>([])
+  const [showedInterest, setShowedInterest] = useState<Proposal[]>([])
   const [supportedOpp, setSupportedOpp] = useState<Opps[]>([])
 
   let user = localStorage.getItem('userTypeFull')
@@ -57,13 +58,20 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
     }
   }, [authState])
 
-  console.log('supported opps', props.opps.opp.data)
-
   useEffect(() => {
     if (props.proposals.proposals.data) {
       setFollowedOpp(
         props.proposals?.proposals.data?.filter((obj: Proposal) => {
           return obj.status === 'followed'
+        })
+      )
+      setShowedInterest(
+        props.proposals?.proposals.data?.filter((obj: Proposal) => {
+          return obj.status === 'new' ||
+            obj.status === 'pending' ||
+            obj.status === 'selected' ||
+            obj.status === 'declined' ||
+            obj.status === 'withdrawn'
         })
       )
     }
@@ -198,7 +206,42 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
           </div>
         )}
       </TabPane>
+
+      <TabPane
+        tab={
+          <span className='d-flex justify-content-center align-items-center'>
+            <EyeOutlined />
+            Submitted to
+          </span>
+        }
+        key='3'
+      >
+        <div className=' overflow-auto p-3'>
+          <div className=' d-flex text-muted mb-5'>Opporutinities submitted to</div>
+          {/* <button type='button' className='btn btn-sm btn-light-primary'>
+            Unfollow Selected
+          </button> */}
+
+          {showedInterest.length > 0 ? (
+            showedInterest.map((e: Proposal) => (
+              <EnablerOpportunityCard2 opp={e?.opportunityObject} followed={false} supported={false} />
+            ))
+          ) : (
+            <div className='d-flex flex-column'>
+              <p className='fs-2'>You haven't submitted proposals to any opporptunities</p>
+              <p className='text-muted fs-5'>
+                Review current opportunities at the
+                <Link to='/opportunities_center' className='px-2'>
+                  Opportunity Center{' '}
+                </Link>
+                and click follow
+              </p>
+            </div>
+          )}
+        </div>
+      </TabPane>
     </Tabs>
   )
 }
+
 export default connector(MyOpportunity)
