@@ -18,8 +18,6 @@ import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import Swal from 'sweetalert2'
 import {FeedbackModal} from '../../../_metronic/partials/modals/confirm-action/feedbackform'
 import {ListLoading} from '../apps/admin-mgt-apps/core/loading/ListLoading'
-import {acknowledgeOdaAPI} from './redux/OpportunityAPI'
-import {IQuery} from '../proposals/redux/ProposalAPI'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -33,6 +31,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   const [oppData, setOppData] = useState<Opps>({})
   const [api, contextHolder] = notification.useNotification()
   const [isShowDetail, setIsShowDetail] = useState(false)
+
   const userTypeFull = localStorage.getItem('userTypeFull')
 
   useEffect(() => {
@@ -66,16 +65,6 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
       openNotificationWarning('bottomRight', 'It requires paid subscription and ODA agreement')
     } else {
       setIsShowDetail(!isShowDetail)
-      if (!isShowDetail) {
-        acknowledgeOdaAPI({
-          enablerUserId: authState?.accessToken?.claims.uid,
-          opportunityUuid: id,
-        }).then((res) => {
-          if (res.status === 200) {
-            dispatch(props.getOppByIdRequest(id))
-          }
-        })
-      }
     }
   }
 
@@ -205,35 +194,6 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                           Title: {oppData?.title}
                         </div>
                       </div>
-                      <div className='d-flex mb-4'>
-                        {!oppData?.following?.includes(authState?.accessToken?.claims.uid) ? (
-                          <button
-                            type='button'
-                            className='btn btn-sm btn-success me-3'
-                            disabled={oppData?.showedinterest?.includes(
-                              authState?.accessToken?.claims.uid
-                            )}
-                            onClick={() => {
-                              handleFollowOpp()
-                            }}
-                          >
-                            Follow
-                          </button>
-                        ) : (
-                          <button
-                            type='button'
-                            className='btn btn-sm btn-primary me-3'
-                            disabled={oppData?.showedinterest?.includes(
-                              authState?.accessToken?.claims.uid
-                            )}
-                            onClick={() => {
-                              handleUnfollowOpp()
-                            }}
-                          >
-                            Unfollow
-                          </button>
-                        )}
-                      </div>
                     </div>
                     <div className='d-flex flex-wrap justify-content-start'>
                       <div className='d-flex flex-wrap'>
@@ -281,49 +241,6 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                 </div>
               </div>
             </div>
-
-            <Col xs={24} sm={24} md={24} lg={24}>
-              <div
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                }}
-              >
-                {isShowDetail && (
-                  <div className='actions'>
-                    <button type='button' className='btn btn-primary' onClick={handleDetails}>
-                      Hide Opportunity Details
-                    </button>
-                  </div>
-                )}
-
-                {!isShowDetail && (
-                  <div className='actions'>
-                    <button
-                      type='button'
-                      className='btn btn-primary'
-                      data-bs-toggle='modal'
-                      data-bs-target={
-                        oppData?.acknowledgedODA?.includes(authState?.accessToken?.claims.uid)
-                          ? ''
-                          : userTypeFull == 'basic_enabler'
-                          ? '#kt_subs_modal'
-                          : '#kt_oda_modal'
-                      }
-                      data-bs-tooltips='Requires Enbaler subscription'
-                      onClick={() => {
-                        oppData?.acknowledgedODA?.includes(authState?.accessToken?.claims.uid) &&
-                          setIsShowDetail(!isShowDetail)
-                      }}
-                    >
-                      View Opportunity Details
-                    </button>
-                  </div>
-                )}
-                {userTypeFull === 'basic_enabler' && <SubscriptionRequired />}
-                {userTypeFull !== 'basic_enabler' && <OppsDA OnDetails={handleDetails} />}
-              </div>
-            </Col>
           </div>
 
           <div class='card'>
@@ -396,60 +313,6 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                           {oppData?.summary}
                         </label>
                       </div>
-                    </div>
-
-                    <div className='text-center pt-15'>
-                      <button
-                        type='button'
-                        className='btn btn-light btn-active-primary me-3'
-                        data-bs-toggle='modal'
-                        data-bs-target='#kt_oppfeedback_modal'
-                        data-bs-tooltips='Provide Feedback'
-                      >
-                        Provide Feedback
-                      </button>
-                      <FeedbackModal
-                        id='kt_oppfeedback_modal'
-                        title1={`Provide a feedback for opportunity ${oppData?.id}`}
-                        title2='Type your feedback  (max of 700 characters)'
-                        confirm='Submit'
-                        classname='btn btn-primary'
-                        ConfirmHandler={() => {
-                          handleFeedbackSubmit()
-                        }}
-                      />
-                      <button
-                        type='button'
-                        className='btn btn btn-light btn-active-primary me-3'
-                        disabled={
-                          !oppData?.open ||
-                          oppData?.supporting?.includes(authState?.accessToken?.claims.uid)
-                        }
-                      >
-                        Support
-                        <Tooltip title='Support Opportunity'>
-                          <StarOutlined />
-                        </Tooltip>
-                      </button>
-
-                      <button
-                        type='button'
-                        className='btn btn-primary'
-                        disabled={
-                          !oppData?.open ||
-                          oppData?.showedinterest?.includes(authState?.accessToken?.claims.uid)
-                        }
-                        onClick={() => {
-                          userTypeFull === 'basic_enabler'
-                            ? openNotificationWarning(
-                                'bottomRight',
-                                'It requires paid subscription and ODA agreement'
-                              )
-                            : navigate(`/opportunities_center/${oppData.uuid}/send_proposals`)
-                        }}
-                      >
-                        Submit Proposal
-                      </button>
                     </div>
                   </div>
                 )}

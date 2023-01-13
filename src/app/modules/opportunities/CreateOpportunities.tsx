@@ -8,6 +8,7 @@ import SponsorOpportunityCard from './SponsorsOpportunityCard'
 import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
 import {RootState} from '../../../setup'
 import {Opps} from '../../modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import SponsorOpportunityCard2 from './SponsorOpportunityCard2'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -17,7 +18,7 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
   const {authState} = useOktaAuth()
   const dispatch = useDispatch()
   const query = {
-    sponsorUserId: authState?.accessToken?.claims.uid
+    sponsorUserId: authState?.accessToken?.claims.uid,
   }
 
   const [draft, setDraft] = useState<Opps[]>([])
@@ -105,16 +106,7 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
             <div className='card-body p-2 overflow-auto' style={{height: '600px'}}>
               {/* <div className=' d-flex text-muted mb-5'>Draft Opportunities</div> */}
               {draft.map((e) => (
-                <SponsorOpportunityCard
-                  category={e.category}
-                  dealtype={e.dealtype}
-                  title={e.title}
-                  summary={e.summary}
-                  badgeColor='gray-800'
-                  status='draft'
-                  picSrc={e.thumbnail}
-                  uuid={e.uuid}
-                />
+                <SponsorOpportunityCard2 opp={e} />
               ))}
             </div>
           </div>
@@ -139,16 +131,7 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
 
             <div className='card-body p-2 overflow-auto' style={{height: '600px'}}>
               {submitted.map((e) => (
-                <SponsorOpportunityCard
-                  category={e.category}
-                  dealtype={e.dealtype}
-                  title={e.title}
-                  summary={e.summary}
-                  badgeColor='primary'
-                  status='submission status'
-                  picSrc={e.thumbnail}
-                  uuid={e.uuid}
-                />
+                <SponsorOpportunityCard2 opp={e} />
               ))}
             </div>
           </div>
@@ -173,16 +156,7 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
 
             <div className='card-body p-2 overflow-auto' style={{height: '600px'}}>
               {active.map((e) => (
-                <SponsorOpportunityCard
-                  category={e.category}
-                  dealtype={e.dealtype}
-                  title={e.title}
-                  summary={e.summary}
-                  badgeColor='success'
-                  status='active'
-                  picSrc={e.thumbnail}
-                  uuid={e.uuid}
-                />
+                <SponsorOpportunityCard2 opp={e} />
               ))}
             </div>
           </div>
@@ -207,16 +181,7 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
 
             <div className='card-body p-2 overflow-auto' style={{height: '600px'}}>
               {completed.map((e) => (
-                <SponsorOpportunityCard
-                  category={e.category}
-                  dealtype={e.dealtype}
-                  title={e.title}
-                  summary={e.summary}
-                  badgeColor='primary'
-                  status='completed'
-                  picSrc={e.thumbnail}
-                  uuid={e.uuid}
-                />
+                <SponsorOpportunityCard2 opp={e} />
               ))}
             </div>
           </div>
