@@ -18,8 +18,7 @@ import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import Swal from 'sweetalert2'
 import {FeedbackModal} from '../../../_metronic/partials/modals/confirm-action/feedbackform'
 import {ListLoading} from '../apps/admin-mgt-apps/core/loading/ListLoading'
-import {acknowledgeOdaAPI} from './redux/OpportunityAPI'
-import {IQuery} from '../proposals/redux/ProposalAPI'
+import { acknowledgeOdaAPI, supportOppAPI } from './redux/OpportunityAPI'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -135,6 +134,27 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
           }
         })
         .catch((error) => error)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleSupportOpp = async () => {
+    try {
+      await supportOppAPI({
+        enablerUserId: authState?.accessToken?.claims.uid,
+        opportunityUuid: oppData.uuid
+      }).then((res) => {
+        if (res.status === 200) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'You have supported this opportunity',
+          })
+          dispatch(props.getOppByIdRequest(id))
+        }
+      })
+      .catch((error) => error)
     } catch (err) {
       console.log(err)
     }
@@ -425,6 +445,9 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                           !oppData?.open ||
                           oppData?.supporting?.includes(authState?.accessToken?.claims.uid)
                         }
+                        onClick={() => {
+                          handleSupportOpp()
+                        }}
                       >
                         Support
                         <Tooltip title='Support Opportunity'>

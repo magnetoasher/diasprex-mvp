@@ -12,14 +12,25 @@ export interface IQuery {
   status?: string
   featuredopp?: boolean
   sponsorUserId?: CustomUserClaim | CustomUserClaim[]
+  enablerUserId?: CustomUserClaim | CustomUserClaim[]
 }
 
 const getAllOppsAPI = (query?: IQuery) => axios.get(`${OPPS_URL}`, {params: query})
 
 const getOppByIdAPI = (id: ID) => axios.get(`${OPPS_URL}/${id}`)
 
+const getSupportedOppsAPI = (query?: IQuery) => axios.get(`${OPPS_URL}/supporting`, {params: query})
+
 const acknowledgeOdaAPI = (query?: IQuery2) => {
   return axios.put(`${OPPS_URL}/${query?.opportunityUuid}/${query?.enablerUserId}/acknowledgeODA`)
 }
 
-export {getAllOppsAPI, getOppByIdAPI, acknowledgeOdaAPI}
+const supportOppAPI = (query?: IQuery2) => {
+  return axios.put(`${OPPS_URL}/${query?.opportunityUuid}/${query?.enablerUserId}/support`)
+}
+
+const unsupportOppAPI = (query?: IQuery2) => {
+  return axios.put(`${OPPS_URL}/${query?.opportunityUuid}/${query?.enablerUserId}/unsupport`)
+}
+
+export {getAllOppsAPI, getOppByIdAPI, acknowledgeOdaAPI, supportOppAPI, unsupportOppAPI, getSupportedOppsAPI}
