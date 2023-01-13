@@ -30,6 +30,8 @@ const mapState = (state: RootState) => ({proposals: state.proposals, opps: state
 const connector = connect(mapState, {...proposals.actions, ...opps.actions})
 type PropsFromRedux = ConnectedProps<typeof connector>
 
+type SupportedOpps = Proposal
+
 const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
   const {authState} = useOktaAuth()
   const dispatch = useDispatch()
@@ -55,6 +57,8 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
     }
   }, [authState])
 
+  console.log('supported opps', props.opps.opp.data)
+
   useEffect(() => {
     if (props.proposals.proposals.data) {
       setFollowedOpp(
@@ -66,8 +70,8 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
   }, [props.proposals])
 
   useEffect(() => {
-    if (props.opps.opps.data) {
-      setSupportedOpp(props.opps?.opps.data)
+    if (props.opps.opp.data) {
+      setSupportedOpp(props.opps?.opp.data)
     }
   }, [props.opps])
 
@@ -174,7 +178,7 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
           <div className=' overflow-auto p-3'>
             <div className=' d-flex text-muted mb-5'>Supported Opportunities</div>
             {supportedOpp.length > 0 ? (
-              supportedOpp.map((e: Opps) => <EnablerOpportunityCard2 opp={e} supported={true} unsupportOpp={unsupportOpp} />)
+              supportedOpp.map((e: SupportedOpps) => <EnablerOpportunityCard2 opp={e?.opportunityObject} supported={true} unsupportOpp={unsupportOpp} />)
             ) : (
               <div className='d-flex flex-column'>
                 <p className='fs-2'>You currently have no supported opportunities</p>

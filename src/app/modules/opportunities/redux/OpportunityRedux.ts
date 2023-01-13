@@ -149,7 +149,7 @@ export function* saga() {
   yield takeLatest(actionTypes.GET_SUPPORTED_OPPS_REQUEST, function* getSupportedOppsSaga(action: IQueryAction) {
     try {
       const {data: data} = yield getSupportedOppsAPI(action.payload)
-      yield put(actions.getOppByIdSuccess(data.data))
+      yield put(actions.getOppByIdSuccess(data))
     } catch (error) {
       yield put(actions.getOppByIdFailed(error))
     }
