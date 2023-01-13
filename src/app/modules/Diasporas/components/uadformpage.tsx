@@ -5,7 +5,7 @@ import * as Yup from 'yup'
 import axios from 'axios'
 import {uadFormModel} from './core/_model'
 import PhoneInput from 'react-phone-number-input'
-// import PhoneInput from 'react-phone-input-2'
+
 import countryList from 'react-select-country-list'
 import {AfricanCountryList} from '../../../../_metronic/partials/content/selectionlists'
 import {UploadFile} from '../../../../_metronic/partials/modals/file-management/uploadfile'
@@ -14,8 +14,8 @@ import {useNavigate} from 'react-router-dom'
 import {OecdcountryList} from '../../../../_metronic/partials/content/selectionlists/oecdcountrylist'
 import 'react-phone-number-input/style.css'
 import Swal from 'sweetalert2'
-
-import CountryCodeList from '../../../../_metronic/partials/content/selectionlists/countries.json'
+import {CountriesCodeList} from '../../../../_metronic/partials/content/selectionlists'
+// import CountriesCodeList from '../../../../_metronic/partials/content/selectionlists/countries.json'
 const editUADSchema = Yup.object().shape({
   fName: Yup.string()
     .min(1, 'Minimum 3 symbols')
@@ -321,19 +321,11 @@ export const UadFormPage: FC = () => {
                     className='dropdown-menu menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-6 h=300px py-4 overflow-scroll'
                     data-kt-menu='true'
                   >
-                    <div
-                      className='d-flex flex-column scroll-y me-n7 pe-7'
-                      id='kt_selection_scroll'
-                      data-kt-scroll='true'
-                      data-kt-scroll-activate='{default: false, lg: true}'
-                      data-kt-scroll-max-height='auto'
-                      data-kt-scroll-dependencies='#kt_selection_header'
-                      data-kt-scroll-wrappers='#kt_modal_selection_scroll'
-                      data-kt-scroll-offset='125px'
-                    >
+                    <div className='scroll h-200px'>
                       <ul style={{listStyle: 'none'}}>
-                        {CountryCodeList.map((option) => (
+                        {CountriesCodeList.map((option, index) => (
                           <a
+                            key={index}
                             className='dropdown-item mb-2 h = 125px'
                             onClick={() => {
                               setPhoneCode(`+${option.phone}`)

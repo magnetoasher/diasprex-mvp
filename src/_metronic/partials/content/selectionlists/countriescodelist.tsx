@@ -1,5 +1,13 @@
-export const CountriesCodeList = [
-  {code: 'AD', label: 'Andorra', phone: '376'},
+export const CountriesCodeList: {
+  code: string
+  label: string
+  phone: string
+}[] = [
+  {
+    code: 'AD',
+    label: 'Andorra',
+    phone: '376',
+  },
   {code: 'AE', label: 'United Arab Emirates', phone: '971'},
   {code: 'AF', label: 'Afghanistan', phone: '93'},
   {code: 'AG', label: 'Antigua and Barbuda', phone: '1-268'},
@@ -11,7 +19,7 @@ export const CountriesCodeList = [
   {code: 'AR', label: 'Argentina', phone: '54'},
   {code: 'AS', label: 'American Samoa', phone: '1-684'},
   {code: 'AT', label: 'Austria', phone: '43'},
-  {code: 'AU', label: 'Australia', phone: '61', suggested: true},
+  {code: 'AU', label: 'Australia', phone: '61'},
   {code: 'AW', label: 'Aruba', phone: '297'},
   {code: 'AX', label: 'Alland Islands', phone: '358'},
   {code: 'AZ', label: 'Azerbaijan', phone: '994'},
@@ -35,7 +43,7 @@ export const CountriesCodeList = [
   {code: 'BW', label: 'Botswana', phone: '267'},
   {code: 'BY', label: 'Belarus', phone: '375'},
   {code: 'BZ', label: 'Belize', phone: '501'},
-  {code: 'CA', label: 'Canada', phone: '1', suggested: true},
+  {code: 'CA', label: 'Canada', phone: '1'},
   {code: 'CC', label: 'Cocos (Keeling) Islands', phone: '61'},
   {code: 'CD', label: 'Congo, Democratic Republic of the', phone: '243'},
   {code: 'CF', label: 'Central African Republic', phone: '236'},
@@ -54,7 +62,7 @@ export const CountriesCodeList = [
   {code: 'CX', label: 'Christmas Island', phone: '61'},
   {code: 'CY', label: 'Cyprus', phone: '357'},
   {code: 'CZ', label: 'Czech Republic', phone: '420'},
-  {code: 'DE', label: 'Germany', phone: '49', suggested: true},
+  {code: 'DE', label: 'Germany', phone: '49'},
   {code: 'DJ', label: 'Djibouti', phone: '253'},
   {code: 'DK', label: 'Denmark', phone: '45'},
   {code: 'DM', label: 'Dominica', phone: '1-767'},
@@ -72,7 +80,7 @@ export const CountriesCodeList = [
   {code: 'FK', label: 'Falkland Islands (Malvinas)', phone: '500'},
   {code: 'FM', label: 'Micronesia, Federated States of', phone: '691'},
   {code: 'FO', label: 'Faroe Islands', phone: '298'},
-  {code: 'FR', label: 'France', phone: '33', suggested: true},
+  {code: 'FR', label: 'France', phone: '33'},
   {code: 'GA', label: 'Gabon', phone: '241'},
   {code: 'GB', label: 'United Kingdom', phone: '44'},
   {code: 'GD', label: 'Grenada', phone: '1-473'},
@@ -115,7 +123,7 @@ export const CountriesCodeList = [
   {code: 'JE', label: 'Jersey', phone: '44'},
   {code: 'JM', label: 'Jamaica', phone: '1-876'},
   {code: 'JO', label: 'Jordan', phone: '962'},
-  {code: 'JP', label: 'Japan', phone: '81', suggested: true},
+  {code: 'JP', label: 'Japan', phone: '81'},
   {code: 'KE', label: 'Kenya', phone: '254'},
   {code: 'KG', label: 'Kyrgyzstan', phone: '996'},
   {code: 'KH', label: 'Cambodia', phone: '855'},
@@ -237,7 +245,7 @@ export const CountriesCodeList = [
   {code: 'TZ', label: 'United Republic of Tanzania', phone: '255'},
   {code: 'UA', label: 'Ukraine', phone: '380'},
   {code: 'UG', label: 'Uganda', phone: '256'},
-  {code: 'US', label: 'United States', phone: '1', suggested: true},
+  {code: 'US', label: 'United States', phone: '1'},
   {code: 'UY', label: 'Uruguay', phone: '598'},
   {code: 'UZ', label: 'Uzbekistan', phone: '998'},
   {code: 'VA', label: 'Holy See (Vatican City State)', phone: '379'},
