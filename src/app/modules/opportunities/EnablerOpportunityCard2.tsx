@@ -13,7 +13,14 @@ type Props = {
   unfollowOpp?: (opp: Opps) => void
   unsupportOpp?: (opp: Opps) => void
 }
-const EnablerOpportunityCard2: FC<Props> = ({followed, supported, dashboard, opp, unfollowOpp, unsupportOpp}) => {
+const EnablerOpportunityCard2: FC<Props> = ({
+  followed,
+  supported,
+  dashboard,
+  opp,
+  unfollowOpp,
+  unsupportOpp,
+}) => {
   const badgeColor =
     opp?.status === 'new' ? 'info' : opp?.status === 'published' ? 'success' : 'danger'
   const history = useNavigate()
@@ -52,91 +59,92 @@ const EnablerOpportunityCard2: FC<Props> = ({followed, supported, dashboard, opp
             <span className={`ribbon-inner bg-info`}></span>
           </div>
         </div>
-        <a
+        {/* <a
           onClick={() => {
             history(`/opportunities_center/${opp.uuid}`)
           }}
-        >
-          <div className='card-body pt-9 pb-0'>
-            <div className='d-flex flex-wrap flex-sm-nowrap mb-6'>
-              <div
-                className={`d-flex flex-center flex-shrink-0 bg-light-${badgeColor} rounded w-50px h-50px w-lg-100px h-lg-100px me-7 mb-4`}
-              >
-                {opp?.thumbnail === '' ? (
-                  <div
-                    className={clsx(
-                      'd-flex symbol-label mw-100 align-items-center justify-content-center fs-1 rounded',
-                      `bg-light-${badgeColor}`,
-                      ` text-capitalize text-${badgeColor}`
-                    )}
-                  >
-                    {opp?.country}
+        > */}
+        <div className='card-body pt-9 pb-0'>
+          <div className='d-flex flex-wrap flex-sm-nowrap mb-6'>
+            <div
+              className={`d-flex flex-center flex-shrink-0 bg-light-${badgeColor} rounded w-50px h-50px w-lg-100px h-lg-100px me-7 mb-4`}
+            >
+              {opp?.thumbnail === '' ? (
+                <div
+                  className={clsx(
+                    'd-flex symbol-label mw-100 align-items-center justify-content-center fs-1 rounded',
+                    `bg-light-${badgeColor}`,
+                    ` text-capitalize text-${badgeColor}`
+                  )}
+                >
+                  {opp?.country}
+                </div>
+              ) : (
+                <img className='d-block mw-100 rounded' src={opp?.thumbnail} alt='oppsthumb' />
+              )}
+            </div>
+            <div className='flex-grow-1'>
+              <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
+                <div className='d-flex flex-column'>
+                  <div className='d-flex flex-wrap fw-semibold mb-4 fs-5 text-dark'>
+                    TITLE: {opp?.title}
                   </div>
-                ) : (
-                  <img className='d-block mw-100 rounded' src={opp?.thumbnail} alt='oppsthumb' />
-                )}
-              </div>
-              <div className='flex-grow-1'>
-                <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
-                  <div className='d-flex flex-column'>
-                    <div className='d-flex flex-wrap fw-semibold mb-4 fs-5 text-dark'>
-                      TITLE: {opp?.title}
-                    </div>
-                  </div>
-                  <div className={`col-lg-3 d-flex align-items-start justify-content-end`}>
-                    {opp?.status !== 'new' && opp?.status !== 'completed' && !dashboard && (
-                      <>
-                        <button
-                          className='btn btn-sm btn-light btn-active-light-primary dropdown-toggle'
-                          type='button'
-                          data-bs-toggle='dropdown'
-                          aria-haspopup='true'
-                          aria-expanded='false'
-                        >
-                          Actions
-                        </button>
-                        <div
-                          className='dropdown-menu menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-6 w-125px py-4'
-                          data-kt-menu='true'
-                        >
-                          <div className='dropdown-item px-3'>
-                            <button
-                              onClick={() => {
-                                history(`/opportunities_center/${opp.uuid}`)
-                              }}
-                              className='menu-link px-3'>
-                              View
-                            </button>
-                          </div>
-                          {followed && 
-                            <div className='dropdown-item px-3'>
-                              <a
-                                className='menu-link px-3'
-                                onClick={() => {
-                                 unfollowOpp(opp)
-                                }}
-                              >
-                                Unfollow
-                              </a>
-                            </div>
-                          }
-                          {supported &&
-                            <div className='dropdown-item px-3'>
-                              <a
-                                className='menu-link px-3'
-                                onClick={() => {
-                                  unsupportOpp(opp)
-                                }}
-                              >
-                                Unsupport
-                              </a>
-                            </div>
-                          }
+                </div>
+                <div className={`col-lg-3 d-flex align-items-start justify-content-end`}>
+                  {opp?.status !== 'new' && opp?.status !== 'completed' && !dashboard && (
+                    <>
+                      <button
+                        className='btn btn-sm btn-light btn-active-light-primary dropdown-toggle'
+                        type='button'
+                        data-bs-toggle='dropdown'
+                        aria-haspopup='true'
+                        aria-expanded='false'
+                      >
+                        Actions
+                      </button>
+                      <div
+                        className='dropdown-menu menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-6 w-125px py-4'
+                        data-kt-menu='true'
+                      >
+                        <div className='dropdown-item px-3'>
+                          <a
+                            onClick={() => {
+                              history(`/opportunities_center/${opp.uuid}`)
+                            }}
+                            className='menu-link px-3'
+                          >
+                            View
+                          </a>
                         </div>
-                      </>
-                    )}
+                        {followed && (
+                          <div className='dropdown-item px-3'>
+                            <a
+                              className='menu-link px-3'
+                              onClick={() => {
+                                unfollowOpp(opp)
+                              }}
+                            >
+                              Unfollow
+                            </a>
+                          </div>
+                        )}
+                        {supported && (
+                          <div className='dropdown-item px-3'>
+                            <a
+                              className='menu-link px-3'
+                              onClick={() => {
+                                unsupportOpp(opp)
+                              }}
+                            >
+                              Unsupport
+                            </a>
+                          </div>
+                        )}
+                      </div>
+                    </>
+                  )}
 
-                    {/* <a
+                  {/* <a
               href='#'
               className=' btn btn-sm btn-light btn-active-light-primary'
               data-kt-menu-trigger='click'
@@ -164,15 +172,14 @@ const EnablerOpportunityCard2: FC<Props> = ({followed, supported, dashboard, opp
                 </a>
               </div>
             </div> */}
-                  </div>
                 </div>
-                <div className='d-flex flex-wrap justify-content-start'>
-                  <div className='d-flex flex-wrap'>SUMMARY: {opp?.summary?.slice(0, 100)}...</div>
-                </div>
+              </div>
+              <div className='d-flex flex-wrap justify-content-start'>
+                <div className='d-flex flex-wrap'>SUMMARY: {opp?.summary?.slice(0, 100)}...</div>
               </div>
             </div>
           </div>
-        </a>
+        </div>
       </div>
     </div>
   )
