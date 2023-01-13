@@ -7,20 +7,17 @@ import {Opps} from '../../../app/modules/apps/admin-mgt-apps/opp-management/opps
 
 type Props = {
   opp?: Opps
-  followed?: string
+  followed?: boolean
+  supported?: boolean
   dashboard?: boolean
-  followOpp?: (opp: Opps) => void
   unfollowOpp?: (opp: Opps) => void
+  unsupportOpp?: (opp: Opps) => void
 }
-const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp, followOpp, unfollowOpp}) => {
+const EnablerOpportunityCard2: FC<Props> = ({followed, supported, dashboard, opp, unfollowOpp, unsupportOpp}) => {
   const badgeColor =
     opp?.status === 'new' ? 'info' : opp?.status === 'published' ? 'success' : 'danger'
   const history = useNavigate()
-  const handleFollowedOpp = (opp) => {
-    opp?.status === 'followed' ? followOpp(opp) : unfollowOpp(opp)
-  }
-  const handleSupportedOpp = () => {}
-  const handleDeleteOpp = () => {}
+
   return (
     <div className='KTCard mb-5'>
       <div className='card shadow-sm mb-6 mb-xl-9'>
@@ -111,40 +108,30 @@ const EnablerOpportunityCard2: FC<Props> = ({followed, dashboard, opp, followOpp
                               View
                             </button>
                           </div>
-                          {followed ? (
+                          {followed && 
                             <div className='dropdown-item px-3'>
                               <a
                                 className='menu-link px-3'
                                 onClick={() => {
-                                  handleFollowedOpp()
+                                 unfollowOpp(opp)
                                 }}
                               >
-                                {followed ? 'Unfollow ' : 'Follow'}
+                                Unfollow
                               </a>
                             </div>
-                          ) : supported ? (
+                          }
+                          {supported &&
                             <div className='dropdown-item px-3'>
                               <a
                                 className='menu-link px-3'
                                 onClick={() => {
-                                  handleSupportedOpp()
+                                  unsupportOpp(opp)
                                 }}
                               >
                                 Unsupport
                               </a>
                             </div>
-                          ) : (
-                            <div className='dropdown-item px-3'>
-                              <a
-                                className='menu-link px-3'
-                                onClick={() => {
-                                  handleDeleteOpp()
-                                }}
-                              >
-                                Delete
-                              </a>
-                            </div>
-                          )}
+                          }
                         </div>
                       </>
                     )}
