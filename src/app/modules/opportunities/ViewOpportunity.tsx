@@ -18,8 +18,8 @@ import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import Swal from 'sweetalert2'
 import {FeedbackModal} from '../../../_metronic/partials/modals/confirm-action/feedbackform'
 import {ListLoading} from '../apps/admin-mgt-apps/core/loading/ListLoading'
-import { acknowledgeOdaAPI } from './redux/OpportunityAPI'
-import { IQuery } from '../proposals/redux/ProposalAPI'
+import {acknowledgeOdaAPI} from './redux/OpportunityAPI'
+import {IQuery} from '../proposals/redux/ProposalAPI'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -312,7 +312,8 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                       }
                       data-bs-tooltips='Requires Enbaler subscription'
                       onClick={() => {
-                        oppData?.acknowledgedODA?.includes(authState?.accessToken?.claims.uid) && setIsShowDetail(!isShowDetail)
+                        oppData?.acknowledgedODA?.includes(authState?.accessToken?.claims.uid) &&
+                          setIsShowDetail(!isShowDetail)
                       }}
                     >
                       View Opportunity Details

@@ -53,7 +53,7 @@ export const PublicNavBar: FC = () => {
                   </span>
                 </button>
 
-                <Link to='/'>
+                <a href='/'>
                   <img
                     alt='Logo'
                     src={toAbsoluteUrl('/media/logos/diasprexlogo-light.svg')}
@@ -64,7 +64,7 @@ export const PublicNavBar: FC = () => {
                     src={toAbsoluteUrl('/media/logos/diasprex-logo.png')}
                     className='logo-sticky h-25px h-lg-50px'
                   />
-                </Link>
+                </a>
               </div>
 
               <div className='d-lg-block' id='kt_header_nav_wrapper'>
