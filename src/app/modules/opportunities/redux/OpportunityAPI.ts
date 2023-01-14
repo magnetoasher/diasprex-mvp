@@ -33,4 +33,8 @@ const unsupportOppAPI = (query?: IQuery2) => {
   return axios.put(`${OPPS_URL}/${query?.opportunityUuid}/${query?.enablerUserId}/unsupport`)
 }
 
-export {getAllOppsAPI, getOppByIdAPI, acknowledgeOdaAPI, supportOppAPI, unsupportOppAPI, getSupportedOppsAPI}
+const changeOppStatusAPI = (query?: IQuery2) => {
+  return axios.put(`${OPPS_URL}/${query?.opportunityUuid}/status`, {status: query?.status})
+}
+
+export {getAllOppsAPI, getOppByIdAPI, acknowledgeOdaAPI, supportOppAPI, unsupportOppAPI, getSupportedOppsAPI, changeOppStatusAPI}
