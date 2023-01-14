@@ -9,6 +9,8 @@ import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
 import {RootState} from '../../../setup'
 import {Opps} from '../../modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import SponsorOpportunityCard2 from './SponsorOpportunityCard2'
+import { useParams } from 'react-router-dom'
+import { ListLoading } from '../apps/admin-mgt-apps/core/loading/ListLoading'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -16,6 +18,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>
 
 const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
   const {authState} = useOktaAuth()
+  const {oppid: oppId} = useParams()
   const dispatch = useDispatch()
   const query = {
     sponsorUserId: authState?.accessToken?.claims.uid,
@@ -25,12 +28,25 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
   const [active, setActive] = useState<Opps[]>([])
   const [submitted, setSubmitted] = useState<Opps[]>([])
   const [completed, setCompleted] = useState<Opps[]>([])
+  const [currentOpp, setCurrentOpp] = useState<Opps>({})
+  
+  useEffect(() => {
+    if (oppId) {
+      dispatch(props.getOppByIdRequest(oppId))
+    }
+  }, [oppId])
 
   useEffect(() => {
     if (authState !== null) {
       dispatch(props.getAllOppsRequest(query))
     }
   }, [])
+  
+  useEffect(() => {
+    if (props.opps.opp) {
+      setCurrentOpp(props.opps.opp[0])
+    }
+  }, [props.opps.opp])
 
   useEffect(() => {
     if (props.opps.opps.data) {
@@ -62,7 +78,7 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
         })
       )
     }
-  }, [props.opps])
+  }, [props.opps.opps])
 
   const getOpps = () => {
     dispatch(props.getAllOppsRequest(query))
@@ -84,7 +100,10 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
         }
         key='1'
       >
-        <Create sponsorUserId={authState?.accessToken?.claims.uid} getOpps={getOpps} />
+        {props.opps.isLoading ?
+          <ListLoading /> :
+          <Create sponsorUserId={authState?.accessToken?.claims.uid} currentOpp={currentOpp} getOpps={getOpps} />
+        }
       </TabPane>
       <TabPane
         tab={
