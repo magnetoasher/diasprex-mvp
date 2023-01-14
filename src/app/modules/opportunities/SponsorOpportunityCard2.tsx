@@ -2,8 +2,10 @@
 import clsx from 'clsx'
 import {FC} from 'react'
 import {useNavigate, Link} from 'react-router-dom'
-import {toAbsoluteUrl} from '../../../_metronic/helpers'
+import {ID, toAbsoluteUrl} from '../../../_metronic/helpers'
 import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import axios from 'axios'
+import { changeOppStatusAPI } from './redux/OpportunityAPI'
 
 type Props = {
   opp?: Opps
@@ -11,16 +13,38 @@ type Props = {
   dashboard?: boolean
   followOpp?: (opp: Opps) => void
   unfollowOpp?: (opp: Opps) => void
+  getOpps?: () => void
 }
-const SponsorOpportunityCard2: FC<Props> = ({dashboard, opp}) => {
+const SponsorOpportunityCard2: FC<Props> = ({dashboard, opp, getOpps}) => {
   const badgeColor =
     opp?.status === 'new' ? 'info' : opp?.status === 'published' ? 'success' : 'danger'
   const navigate = useNavigate()
   const handleFollowedOpp = (opp) => {
     opp?.status === 'followed' ? followOpp(opp) : unfollowOpp(opp)
   }
-  const handleSupportedOpp = () => {}
-  const handleDeleteOpp = () => {}
+  const handleWithdrawOpp = async (id: ID, status: string) => {
+    const query = {
+      opportunityUuid: id,
+      status: status
+    }
+    changeOppStatusAPI(query).then((res) => {
+      if (res.status === 200) {
+        getOpps()
+      }
+    })
+  }
+  const handleDeleteOpp = async (id: ID, status: string) => {
+    const query = {
+      opportunityUuid: id,
+      status: status
+    }
+    changeOppStatusAPI(query).then((res) => {
+      if (res.status === 200) {
+        getOpps()
+      }
+    })
+  }
+
   return (
     <div className='KTCard mb-5'>
       <div className='card shadow-sm mb-6 mb-xl-9'>
@@ -83,7 +107,7 @@ const SponsorOpportunityCard2: FC<Props> = ({dashboard, opp}) => {
                   </div>
                 </div>
                 <div className={`col-lg-3 d-flex align-items-start justify-content-end`}>
-                  {opp?.status !== 'new' && opp?.status !== 'completed' && !dashboard && (
+                  {opp?.status !== 'active' && opp?.status !== 'completed' && !dashboard && (
                     <>
                       <button
                         className='btn btn-sm btn-light btn-active-light-primary dropdown-toggle'
@@ -119,7 +143,7 @@ const SponsorOpportunityCard2: FC<Props> = ({dashboard, opp}) => {
                               className='menu-link px-3'
                               data-kt-customer-table-filter='delete_row'
                               onClick={() => {
-                                handleDeleteProp()
+                                handleDeleteOpp(opp?.uuid, 'deleted')
                               }}
                             >
                               Delete
@@ -131,7 +155,7 @@ const SponsorOpportunityCard2: FC<Props> = ({dashboard, opp}) => {
                             <a
                               className='menu-link px-3'
                               onClick={() => {
-                                handleWithdrawProp()
+                                handleWithdrawOpp(opp?.uuid, 'withdrawn')
                               }}
                             >
                               Withdraw

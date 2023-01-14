@@ -124,9 +124,12 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
 
             <div className='card-body p-2 overflow-auto' style={{height: '600px'}}>
               {/* <div className=' d-flex text-muted mb-5'>Draft Opportunities</div> */}
-              {draft.map((e) => (
-                <SponsorOpportunityCard2 opp={e} />
-              ))}
+              {props.opps.isLoading ?
+                <ListLoading /> :
+                draft.map((e) => (
+                  <SponsorOpportunityCard2 opp={e} getOpps={getOpps} />
+                ))
+              }
             </div>
           </div>
         </div>
@@ -150,7 +153,7 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
 
             <div className='card-body p-2 overflow-auto' style={{height: '600px'}}>
               {submitted.map((e) => (
-                <SponsorOpportunityCard2 opp={e} />
+                <SponsorOpportunityCard2 opp={e} getOpps={getOpps} />
               ))}
             </div>
           </div>
