@@ -484,18 +484,22 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                 </div>
 
                 <div className='card-body p-2 overflow-auto' style={{height: '350px'}}>
-                  {recentOpps?.map((e) => (
-                    <SponsorOpportunityCard
-                      category={e.category}
-                      dealtype={e.dealtype}
-                      title={e.title}
-                      summary={e.summary}
-                      dashboard={true}
-                      badgeColor='info'
-                      status='Publication Status'
-                      picSrc={e.thumbnail}
-                    />
-                  ))}
+                  {props.opps.isLoading ? (
+                    <ListLoading />
+                  ) : (
+                    recentOpps?.map((e) => (
+                      <SponsorOpportunityCard
+                        category={e.category}
+                        dealtype={e.dealtype}
+                        title={e.title}
+                        summary={e.summary}
+                        dashboard={true}
+                        badgeColor='info'
+                        status='Publication Status'
+                        picSrc={e.thumbnail}
+                      />
+                    )))
+                  }
                 </div>
               </div>
             </Card>
@@ -509,16 +513,20 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                 </div>
 
                 <div className='card-body p-2 overflow-auto' style={{height: '350px'}}>
-                  {recentProps?.map((e) => (
-                    <SponsorProposalCard
-                      propenabler='00u7rpizonlF5AZ9P5d7'
-                      propcountry='Uganda'
-                      proptitle={e.title}
-                      propsummary={e.summary}
-                      dashboard={true}
-                      picSrc={e.thumbnail}
-                    />
-                  ))}
+                  {props.proposals.isLoading ? (
+                    <ListLoading />
+                  ): (
+                    recentProps?.map((e) => (
+                      <SponsorProposalCard
+                        propenabler='00u7rpizonlF5AZ9P5d7'
+                        propcountry='Uganda'
+                        proptitle={e.title}
+                        propsummary={e.summary}
+                        dashboard={true}
+                        picSrc={e.thumbnail}
+                      />
+                    )))
+                  }
                 </div>
               </div>
             </Card>

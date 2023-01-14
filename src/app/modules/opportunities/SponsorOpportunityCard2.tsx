@@ -15,7 +15,7 @@ type Props = {
 const SponsorOpportunityCard2: FC<Props> = ({dashboard, opp}) => {
   const badgeColor =
     opp?.status === 'new' ? 'info' : opp?.status === 'published' ? 'success' : 'danger'
-  const history = useNavigate()
+  const navigate = useNavigate()
   const handleFollowedOpp = (opp) => {
     opp?.status === 'followed' ? followOpp(opp) : unfollowOpp(opp)
   }
@@ -27,7 +27,7 @@ const SponsorOpportunityCard2: FC<Props> = ({dashboard, opp}) => {
         <div className={`card-header ribbon bg-gray-400 ribbon-end ribbon-clip`}>
           <div className='d-flex align-items-center mb-1'>
             <Link
-              to={`/opportunities_center/${opp?.uuid}`}
+              to={`/opportunities/${opp?.uuid}`}
               className='text-gray-800 text-hover-primary fs-2 fw-bold me-3'
             >
               {opp?.sponsor}
@@ -104,9 +104,9 @@ const SponsorOpportunityCard2: FC<Props> = ({dashboard, opp}) => {
                             onClick={() => {
                               opp?.status === 'draft'
                                 ? navigate(
-                                    `/opportunities/${opp?.opportunityUuid}/createopportunities`
+                                    `/opportunities/${opp?.uuid}/createopportunities`
                                   )
-                                : navigate(`/opportunities/${opp?.opportunityUuid}`)
+                                : navigate(`/opportunities/${opp?.uuid}`)
                             }}
                           >
                             View
