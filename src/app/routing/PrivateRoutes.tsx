@@ -67,7 +67,10 @@ const PrivateRoutes = () => {
             {/* <Route path='builder' element={<BuilderPageWrapper />} /> */}
             <Route path='createopportunities' element={<CreateOpportunities />} />
             <Route path='opportunities/:id' element={<SponsorViewOpportunity />} />
-            <Route path='opportunities/:oppid/createopportunities' element={<CreateOpportunities />} />
+            <Route
+              path='opportunities/:oppid/createopportunities'
+              element={<CreateOpportunities />}
+            />
             <Route path='proposals' element={<Proposals />} />
             <Route path='proposals/:oppid/:enablerid' element={<ViewProposal />} />
             {/* <Route path='sponsor_proposals' element={<SponsorProposals />} /> */}

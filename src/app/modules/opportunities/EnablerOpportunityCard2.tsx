@@ -22,7 +22,21 @@ const EnablerOpportunityCard2: FC<Props> = ({
   unsupportOpp,
 }) => {
   const badgeColor =
-    opp?.status === 'new' ? 'info' : opp?.status === 'published' ? 'success' : 'danger'
+    opp?.status === 'new'
+      ? 'info'
+      : opp?.status === 'published'
+      ? 'success'
+      : opp?.status === 'draft'
+      ? 'gray-800'
+      : opp?.status === 'not accepted'
+      ? 'danger'
+      : opp?.status === 'pending'
+      ? 'gray-600'
+      : opp?.status === 'completed'
+      ? 'gray-800'
+      : opp?.status === 'active'
+      ? 'primary'
+      : 'warning'
   const history = useNavigate()
 
   return (
@@ -55,8 +69,8 @@ const EnablerOpportunityCard2: FC<Props> = ({
             </span>
           </div>
           <div className='ribbon-label text-capitalize'>
-            new
-            <span className={`ribbon-inner bg-info`}></span>
+            {opp?.status}
+            <span className={`ribbon-inner bg-${badgeColor}`}></span>
           </div>
         </div>
         {/* <a

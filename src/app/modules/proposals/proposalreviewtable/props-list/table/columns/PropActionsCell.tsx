@@ -85,7 +85,7 @@ const PropActionsCell: FC<Props> = ({id}) => {
             data-kt-users-table-filter='delete_row'
             onClick={async () => await deleteItem.mutateAsync()}
           >
-            Message Enabler
+            DM Admin
           </a>
         </div>
         {/* end::Menu item */}
