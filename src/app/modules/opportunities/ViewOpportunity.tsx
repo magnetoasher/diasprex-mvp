@@ -18,7 +18,7 @@ import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import Swal from 'sweetalert2'
 import {FeedbackModal} from '../../../_metronic/partials/modals/confirm-action/feedbackform'
 import {ListLoading} from '../apps/admin-mgt-apps/core/loading/ListLoading'
-import { acknowledgeOdaAPI, supportOppAPI } from './redux/OpportunityAPI'
+import {acknowledgeOdaAPI, supportOppAPI} from './redux/OpportunityAPI'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -143,18 +143,19 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     try {
       await supportOppAPI({
         enablerUserId: authState?.accessToken?.claims.uid,
-        opportunityUuid: oppData.uuid
-      }).then((res) => {
-        if (res.status === 200) {
-          Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: 'You have supported this opportunity',
-          })
-          dispatch(props.getOppByIdRequest(id))
-        }
+        opportunityUuid: oppData.uuid,
       })
-      .catch((error) => error)
+        .then((res) => {
+          if (res.status === 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'You have supported this opportunity',
+            })
+            dispatch(props.getOppByIdRequest(id))
+          }
+        })
+        .catch((error) => error)
     } catch (err) {
       console.log(err)
     }
@@ -414,6 +415,25 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                           }}
                         >
                           {oppData?.summary}
+                        </label>
+                      </div>
+                    </div>
+
+                    <div className='row'>
+                      <div className='col-xl-6 mt-10'>
+                        <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
+                          Feedbacks
+                        </label>
+                      </div>
+
+                      <div>
+                        <label
+                          style={{
+                            textAlign: 'justify',
+                            fontSize: '14px',
+                          }}
+                        >
+                          FEEDBACKS FROM THIS ENABLER FOR THIS OPP GOES HERE
                         </label>
                       </div>
                     </div>

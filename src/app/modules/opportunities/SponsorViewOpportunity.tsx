@@ -30,9 +30,6 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   const navigate = useNavigate()
   const [oppData, setOppData] = useState<Opps>({})
   const [api, contextHolder] = notification.useNotification()
-  const [isShowDetail, setIsShowDetail] = useState(false)
-
-  const userTypeFull = localStorage.getItem('userTypeFull')
 
   useEffect(() => {
     dispatch(props.getOppByIdRequest(id))
@@ -42,92 +39,9 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     setOppData(props.opps.opp[0])
   }, [props.opps])
 
-  const openNotification = (placement, message) => {
-    api.info({
-      message: `${message} !`,
-      description: <Context.Consumer>{({}) => `Project: ${oppData?.title}`}</Context.Consumer>,
-      placement,
-    })
-  }
-  const openNotificationWarning = (placement, message) => {
-    api.warning({
-      message: `${message} !`,
-      description: <Context.Consumer>{({}) => `Project: ${oppData?.title}`}</Context.Consumer>,
-      placement,
-    })
-  }
   const Context = React.createContext({
     name: 'Default',
   })
-
-  const handleDetails = () => {
-    if (userTypeFull === 'basic_enabler') {
-      openNotificationWarning('bottomRight', 'It requires paid subscription and ODA agreement')
-    } else {
-      setIsShowDetail(!isShowDetail)
-    }
-  }
-
-  const closeModalHandler = () => {
-    setModalOpen(false)
-    setIsShowDetail(!isShowDetail)
-  }
-
-  const handleFollowOpp = async () => {
-    const data = {
-      enablerUserId: authState?.accessToken?.claims.uid,
-      sponsorUserId: oppData.sponsorUserId,
-      enablerName: 'Art Beyond Sight',
-      opportunityUuid: oppData.uuid,
-      status: 'followed',
-      opportunityObject: oppData,
-    }
-    try {
-      await axios
-        .post(`${process.env.REACT_APP_DIASPREX_API_URL}/proposals/create`, data)
-        .then((res) => {
-          if (res.status === 200) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Success',
-              text: 'Successfully done',
-            })
-            dispatch(props.getOppByIdRequest(id))
-          }
-        })
-        .catch((error) => error)
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  const handleUnfollowOpp = async () => {
-    const data = {
-      enablerUserId: authState?.accessToken?.claims.uid,
-      sponsorUserId: oppData.sponsorUserId,
-      enablerName: 'Art Beyond Sight',
-      opportunityUuid: oppData.uuid,
-      status: 'unfollowed',
-      opportunityObject: oppData,
-    }
-    try {
-      await axios
-        .post(`${process.env.REACT_APP_DIASPREX_API_URL}/proposals/create`, data)
-        .then((res) => {
-          if (res.status === 200) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Success',
-              text: 'Successfully done',
-            })
-            dispatch(props.getOppByIdRequest(id))
-          }
-        })
-        .catch((error) => error)
-    } catch (err) {
-      console.log(err)
-    }
-  }
 
   const badgeColor = oppData?.open ? 'success' : 'danger'
   const dealTypeLength = oppData?.dealtype?.length! - 1
@@ -193,6 +107,13 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                         <div className='d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-400'>
                           Title: {oppData?.title}
                         </div>
+                      </div>
+                      <div className='d-flex mb-4'>
+                        <span
+                          className={`badge badge-${badgeColor} fs-4 text-uppercase me-3 py-3 px-3`}
+                        >
+                          {oppData?.status}
+                        </span>
                       </div>
                     </div>
                     <div className='d-flex flex-wrap justify-content-start'>
@@ -275,47 +196,63 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   </div>
                 </div>
 
-                {isShowDetail && (
-                  <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
-                    <div className='row'>
-                      <div className='col-xl-6'>
-                        <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
-                          Opportunity Details
-                        </label>
-                      </div>
-
-                      <div>
-                        <label
-                          style={{
-                            textAlign: 'justify',
-                            fontSize: '14px',
-                          }}
-                        >
-                          {oppData?.summary}
-                        </label>
-                      </div>
+                <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                  <div className='row'>
+                    <div className='col-xl-6'>
+                      <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
+                        Opportunity Details
+                      </label>
                     </div>
 
-                    <div className='row'>
-                      <div className='col-xl-6 mt-10'>
-                        <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
-                          Sponsor's Details
-                        </label>
-                      </div>
-
-                      <div>
-                        <label
-                          style={{
-                            textAlign: 'justify',
-                            fontSize: '14px',
-                          }}
-                        >
-                          {oppData?.summary}
-                        </label>
-                      </div>
+                    <div>
+                      <label
+                        style={{
+                          textAlign: 'justify',
+                          fontSize: '14px',
+                        }}
+                      >
+                        {oppData?.summary}
+                      </label>
                     </div>
                   </div>
-                )}
+
+                  <div className='row'>
+                    <div className='col-xl-6 mt-10'>
+                      <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
+                        Sponsor's Details
+                      </label>
+                    </div>
+
+                    <div>
+                      <label
+                        style={{
+                          textAlign: 'justify',
+                          fontSize: '14px',
+                        }}
+                      >
+                        {oppData?.summary}
+                      </label>
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col-xl-6 mt-10'>
+                      <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
+                        Feedbacks
+                      </label>
+                    </div>
+
+                    <div>
+                      <label
+                        style={{
+                          textAlign: 'justify',
+                          fontSize: '14px',
+                        }}
+                      >
+                        ALL APPROVED FEEDBACKS FOR THIS OPP GOES HERE
+                      </label>
+                    </div>
+                  </div>
+                </div>
               </Row>
             </div>
           </div>

@@ -19,6 +19,7 @@ import {ListLoading} from '../../modules/apps/admin-mgt-apps/core/loading/ListLo
 import EnablerOpportunityCard2 from '../../modules/opportunities/EnablerOpportunityCard2'
 import {Proposal} from '../../modules/apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 import SponsorOpportunityCard2 from '../../modules/opportunities/SponsorOpportunityCard2'
+import SponsorProposalCard2 from '../../modules/proposals/components/SponsorProposalCard2'
 
 const mapState = (state: RootState) => ({opps: state.opps, proposals: state.proposals})
 const connector = connect(mapState, {...opps.actions, ...proposals.actions})
@@ -93,7 +94,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
   useEffect(() => {
     setRecentProps(props.proposals.proposals?.data)
   }, [props.proposals])
-  
+
   return (
     <div className='row d-flex flex-column-fluid g-0'>
       <div className='col-sm-3'>
@@ -450,7 +451,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
           <>
             <Card className='shadow-sm mb-3'>
               <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>
-                <div className='card-header cursor-pointer'>
+                <div className='card-header'>
                   <div className='card-title m-0'>
                     <h3 className='fw-bolder m-0'>Your Recent Opportunity Posts</h3>
                   </div>
@@ -468,7 +469,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
 
             <Card className='shadow-sm mb-3'>
               <div className='card mb-2 mb-xl-10' id='kt_profile_details_view'>
-                <div className='card-header cursor-pointer'>
+                <div className='card-header '>
                   <div className='card-title m-0'>
                     <h3 className='fw-bolder m-0'>New Proposals</h3>
                   </div>
@@ -478,18 +479,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                   {props.proposals.isLoading ? (
                     <ListLoading />
                   ) : (
-                    recentProps?.map((e) => (
-                      <SponsorProposalCard
-                        propenabler={e?.enablerName}
-                        propcountry={e?.country}
-                        proptitle={e.title}
-                        propsummary={e.summary}
-                        enablerUserId={e?.enablerUserId}
-                        oppId={e?.opportunityUuid}
-                        dashboard={true}
-                        picSrc={e.thumbnail}
-                      />
-                    ))
+                    recentProps?.map((e) => <SponsorProposalCard2 proposal={e} dashboard={true} />)
                   )}
                 </div>
               </div>

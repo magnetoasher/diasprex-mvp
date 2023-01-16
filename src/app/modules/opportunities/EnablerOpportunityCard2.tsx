@@ -42,7 +42,7 @@ const EnablerOpportunityCard2: FC<Props> = ({
   return (
     <div className='KTCard mb-5'>
       <div className='card shadow-sm mb-6 mb-xl-9'>
-        <div className={`card-header ribbon bg-gray-400 ribbon-end ribbon-clip`}>
+        <div className='card-header ribbon bg-gray-400 ribbon-end ribbon-clip'>
           <div className='d-flex align-items-center mb-1'>
             <Link
               to={`/opportunities_center/${opp?.uuid}`}
@@ -120,38 +120,32 @@ const EnablerOpportunityCard2: FC<Props> = ({
                         className='dropdown-menu menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-6 w-125px py-4'
                         data-kt-menu='true'
                       >
-                        <div className='dropdown-item px-3'>
-                          <a
-                            onClick={() => {
-                              history(`/opportunities_center/${opp.uuid}`)
-                            }}
-                            className='menu-link px-3'
-                          >
-                            View
-                          </a>
+                        <div
+                          className='dropdown-item px-3 cursor-pointer'
+                          onClick={() => {
+                            history(`/opportunities_center/${opp.uuid}`)
+                          }}
+                        >
+                          <div className='menu-link px-3'>View</div>
                         </div>
                         {followed && (
-                          <div className='dropdown-item px-3'>
-                            <a
-                              className='menu-link px-3'
-                              onClick={() => {
-                                unfollowOpp(opp)
-                              }}
-                            >
-                              Unfollow
-                            </a>
+                          <div
+                            className='dropdown-item px-3 cursor-pointer'
+                            onClick={() => {
+                              unfollowOpp(opp)
+                            }}
+                          >
+                            <a className='menu-link px-3'>Unfollow</a>
                           </div>
                         )}
                         {supported && (
-                          <div className='dropdown-item px-3'>
-                            <a
-                              className='menu-link px-3'
-                              onClick={() => {
-                                unsupportOpp(opp)
-                              }}
-                            >
-                              Unsupport
-                            </a>
+                          <div
+                            className='dropdown-item px-3 cursor-pointer'
+                            onClick={() => {
+                              unsupportOpp(opp)
+                            }}
+                          >
+                            <a className='menu-link px-3'>Unsupport</a>
                           </div>
                         )}
                       </div>

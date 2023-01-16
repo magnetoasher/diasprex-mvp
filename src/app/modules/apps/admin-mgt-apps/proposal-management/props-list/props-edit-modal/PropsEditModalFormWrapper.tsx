@@ -9,7 +9,7 @@ const PropEditModalFormWrapper = () => {
   const enabledQuery: boolean = isNotEmpty(itemIdForUpdate)
   const {
     isLoading,
-    data: user,
+    data: proposal,
     error,
   } = useQuery(
     `${QUERIES.PROPS_LIST}-proposal-${itemIdForUpdate}`,
@@ -30,8 +30,8 @@ const PropEditModalFormWrapper = () => {
     return <PropEditModalForm isProposalLoading={isLoading} proposal={{id: undefined}} />
   }
 
-  if (!isLoading && !error && user) {
-    return <PropEditModalForm isProposalLoading={isLoading} proposal={user} />
+  if (!isLoading && !error && proposal) {
+    return <PropEditModalForm isProposalLoading={isLoading} proposal={proposal} />
   }
 
   return null
