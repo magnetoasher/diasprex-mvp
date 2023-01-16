@@ -21,7 +21,9 @@ const getProposalById = (id: ID): Promise<Proposal | undefined> => {
   return axios
     .get(`${PROP_URL}/${id}`)
     .then((response: AxiosResponse<Response<Proposal>>) => response.data)
-    .then((response: Response<Proposal>) => response.data)
+    .then((response: Response<Proposal>) => {
+      return response.data
+    })
 }
 
 const createProposal = (proposal: Proposal): Promise<Proposal | undefined> => {
