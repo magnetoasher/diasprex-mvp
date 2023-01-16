@@ -3,7 +3,7 @@ import {FC} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {Proposal} from '../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
-import { IQuery } from '../redux/ProposalAPI'
+import {IQuery} from '../redux/ProposalAPI'
 
 type Props = {
   prop?: Proposal
@@ -123,46 +123,39 @@ export const EnablerProposalCard2: FC<Props> = ({dashboard, prop, changePropStat
                       className='dropdown-menu menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-6 w-125px py-4'
                       data-kt-menu='true'
                     >
-                      <div className='dropdown-item px-3'>
-                        <a
-                          className='menu-link px-3'
-                          onClick={() => {
-                            prop?.status === 'draft'
-                              ? navigate(
-                                  `/opportunities_center/${prop?.opportunityUuid}/${prop?.enablerUserId}/send_proposals`
-                                )
-                              : navigate(
-                                  `/proposals/${prop?.opportunityUuid}/${prop?.enablerUserId}`
-                                )
-                          }}
-                        >
-                          View
-                        </a>
+                      <div
+                        className='dropdown-item px-3 cursor-pointer'
+                        onClick={() => {
+                          prop?.status === 'draft'
+                            ? navigate(
+                                `/opportunities_center/${prop?.opportunityUuid}/${prop?.enablerUserId}/send_proposals`
+                              )
+                            : navigate(`/proposals/${prop?.opportunityUuid}/${prop?.enablerUserId}`)
+                        }}
+                      >
+                        <a className='menu-link px-3'>View</a>
                       </div>
 
                       {prop?.status === 'draft' && (
-                        <div className='dropdown-item px-3'>
-                          <a
-                            className='menu-link px-3'
-                            data-kt-customer-table-filter='delete_row'
-                            onClick={() => {
-                              handleDeleteProp()
-                            }}
-                          >
+                        <div
+                          className='dropdown-item px-3 cursor-pointer'
+                          onClick={() => {
+                            handleDeleteProp()
+                          }}
+                        >
+                          <a className='menu-link px-3' data-kt-customer-table-filter='delete_row'>
                             Delete
                           </a>
                         </div>
                       )}
                       {(prop?.status === 'new' || prop?.status === 'pending') && (
-                        <div className='dropdown-item px-3'>
-                          <a
-                            className='menu-link px-3'
-                            onClick={() => {
-                              handleWithdrawProp()
-                            }}
-                          >
-                            Withdraw
-                          </a>
+                        <div
+                          className='dropdown-item px-3 cursor-pointer'
+                          onClick={() => {
+                            handleWithdrawProp()
+                          }}
+                        >
+                          <a className='menu-link px-3'>Withdraw</a>
                         </div>
                       )}
                     </div>

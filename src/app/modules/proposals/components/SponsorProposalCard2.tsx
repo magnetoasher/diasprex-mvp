@@ -105,17 +105,15 @@ const SponsorProposalCard2: FC<Props> = ({dashboard, proposal}) => {
                         className='dropdown-menu menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-6 w-125px py-4'
                         data-kt-menu='true'
                       >
-                        <div className='dropdown-item px-3'>
-                          <a
-                            className='menu-link px-3'
-                            onClick={() => {
-                              navigate(
-                                `/proposals/${proposal?.opportunityObject?.uuid}/${proposal?.enablerUserId}`
-                              )
-                            }}
-                          >
-                            View
-                          </a>
+                        <div
+                          className='dropdown-item px-3 cursor-pointer'
+                          onClick={() => {
+                            navigate(
+                              `/proposals/${proposal?.opportunityObject?.uuid}/${proposal?.enablerUserId}`
+                            )
+                          }}
+                        >
+                          <a className='menu-link px-3'>View</a>
                         </div>
 
                         {/* {(opp?.status === 'new' || opp?.status === 'pending') && (

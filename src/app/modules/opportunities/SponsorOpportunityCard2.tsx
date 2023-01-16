@@ -134,42 +134,40 @@ const SponsorOpportunityCard2: FC<Props> = ({dashboard, opp, getOpps}) => {
                         className='dropdown-menu menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-6 w-125px py-4'
                         data-kt-menu='true'
                       >
-                        <div className='dropdown-item px-3'>
-                          <a
-                            className='menu-link px-3'
-                            onClick={() => {
-                              opp?.status === 'draft'
-                                ? navigate(`/opportunities/${opp?.uuid}/createopportunities`)
-                                : navigate(`/opportunities/${opp?.uuid}`)
-                            }}
-                          >
-                            View
-                          </a>
+                        <div
+                          className='dropdown-item px-3 cursor-pointer'
+                          onClick={() => {
+                            opp?.status === 'draft'
+                              ? navigate(`/opportunities/${opp?.uuid}/createopportunities`)
+                              : navigate(`/opportunities/${opp?.uuid}`)
+                          }}
+                        >
+                          <a className='menu-link px-3'>View</a>
                         </div>
 
                         {opp?.status === 'draft' && (
-                          <div className='dropdown-item px-3'>
+                          <div
+                            className='dropdown-item px-3 cursor-pointer'
+                            onClick={() => {
+                              handleDeleteOpp(opp?.uuid, 'deleted')
+                            }}
+                          >
                             <a
                               className='menu-link px-3'
                               data-kt-customer-table-filter='delete_row'
-                              onClick={() => {
-                                handleDeleteOpp(opp?.uuid, 'deleted')
-                              }}
                             >
                               Delete
                             </a>
                           </div>
                         )}
                         {(opp?.status === 'new' || opp?.status === 'pending') && (
-                          <div className='dropdown-item px-3'>
-                            <a
-                              className='menu-link px-3'
-                              onClick={() => {
-                                handleWithdrawOpp(opp?.uuid, 'withdrawn')
-                              }}
-                            >
-                              Withdraw
-                            </a>
+                          <div
+                            className='dropdown-item px-3 cursor-pointer'
+                            onClick={() => {
+                              handleWithdrawOpp(opp?.uuid, 'withdrawn')
+                            }}
+                          >
+                            <a className='menu-link px-3'>Withdraw</a>
                           </div>
                         )}
                       </div>
