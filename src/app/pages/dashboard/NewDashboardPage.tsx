@@ -17,7 +17,8 @@ import {RootState} from '../../../setup'
 import {Opps} from '../../modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {ListLoading} from '../../modules/apps/admin-mgt-apps/core/loading/ListLoading'
 import EnablerOpportunityCard2 from '../../modules/opportunities/EnablerOpportunityCard2'
-import { Proposal } from '../../modules/apps/admin-mgt-apps/proposal-management/props-list/core/_models'
+import {Proposal} from '../../modules/apps/admin-mgt-apps/proposal-management/props-list/core/_models'
+import SponsorOpportunityCard2 from '../../modules/opportunities/SponsorOpportunityCard2'
 
 const mapState = (state: RootState) => ({opps: state.opps, proposals: state.proposals})
 const connector = connect(mapState, {...opps.actions, ...proposals.actions})
@@ -57,15 +58,18 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
 
   useEffect(() => {
     if (authState !== null) {
-      const query = userType === 'sponsor' ? {
-        items_per_page: 5,
-        page: 1,
-        sponsorUserId: authState?.accessToken?.claims.uid,
-      } : {
-        items_per_page: 5,
-        page: 1,
-        status: 'published',
-      }
+      const query =
+        userType === 'sponsor'
+          ? {
+              items_per_page: 5,
+              page: 1,
+              sponsorUserId: authState?.accessToken?.claims.uid,
+            }
+          : {
+              items_per_page: 5,
+              page: 1,
+              status: 'published',
+            }
       dispatch(props.getAllOppsRequest(query))
     }
   }, [])
@@ -76,7 +80,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
         items_per_page: 5,
         page: 1,
         sponsorUserId: authState?.accessToken?.claims.uid,
-        status: 'pending',
+        status: 'new',
       }
       dispatch(props.getProposalsRequest(params))
     }
@@ -89,38 +93,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
   useEffect(() => {
     setRecentProps(props.proposals.proposals?.data)
   }, [props.proposals])
-
-  const [propsdataObj] = useState([
-    {
-      propcountry: 'United States',
-      propenabler: 'Enabler 1',
-      title: 'This is title',
-      summary: 'this is detail, lorem ispum',
-      src: 'https://picsum.photos/192/140',
-    },
-    {
-      propcountry: 'France',
-      propenabler: 'Enabler 2',
-      title: 'This is title',
-      summary: 'this is detail, lorem ispum',
-      src: 'https://picsum.photos/193/140',
-    },
-    {
-      propcountry: 'United Kingdom',
-      propenabler: 'Enabler 3',
-      title: 'This is title',
-      summary: 'this is detail, lorem ispum',
-      src: 'https://picsum.photos/194/140',
-    },
-    {
-      propcountry: 'Canada',
-      propenabler: 'Enabler 4',
-      title: 'This is title',
-      summary: 'this is detail, lorem ispum',
-      src: 'https://picsum.photos/195/140',
-    },
-  ])
-
+  console.log('RecentProps', recentProps)
   return (
     <div className='row d-flex flex-column-fluid g-0'>
       <div className='col-sm-3'>
@@ -487,19 +460,8 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                   {props.opps.isLoading ? (
                     <ListLoading />
                   ) : (
-                    recentOpps?.map((e) => (
-                      <SponsorOpportunityCard
-                        category={e.category}
-                        dealtype={e.dealtype}
-                        title={e.title}
-                        summary={e.summary}
-                        dashboard={true}
-                        badgeColor='info'
-                        status='Publication Status'
-                        picSrc={e.thumbnail}
-                      />
-                    )))
-                  }
+                    recentOpps?.map((e) => <SponsorOpportunityCard2 opp={e} />)
+                  )}
                 </div>
               </div>
             </Card>
@@ -515,18 +477,18 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                 <div className='card-body p-2 overflow-auto' style={{height: '350px'}}>
                   {props.proposals.isLoading ? (
                     <ListLoading />
-                  ): (
+                  ) : (
                     recentProps?.map((e) => (
                       <SponsorProposalCard
-                        propenabler='00u7rpizonlF5AZ9P5d7'
-                        propcountry='Uganda'
+                        propenabler={e?.enablerName}
+                        propcountry={e?.country}
                         proptitle={e.title}
                         propsummary={e.summary}
                         dashboard={true}
                         picSrc={e.thumbnail}
                       />
-                    )))
-                  }
+                    ))
+                  )}
                 </div>
               </div>
             </Card>

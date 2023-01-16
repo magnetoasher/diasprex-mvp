@@ -5,7 +5,7 @@ import {useNavigate, Link} from 'react-router-dom'
 import {ID, toAbsoluteUrl} from '../../../_metronic/helpers'
 import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import axios from 'axios'
-import { changeOppStatusAPI } from './redux/OpportunityAPI'
+import {changeOppStatusAPI} from './redux/OpportunityAPI'
 
 type Props = {
   opp?: Opps
@@ -17,15 +17,27 @@ type Props = {
 }
 const SponsorOpportunityCard2: FC<Props> = ({dashboard, opp, getOpps}) => {
   const badgeColor =
-    opp?.status === 'new' ? 'info' : opp?.status === 'published' ? 'success' : 'danger'
+    opp?.status === 'new'
+      ? 'info'
+      : opp?.status === 'published'
+      ? 'success'
+      : opp?.status === 'draft'
+      ? 'gray-800'
+      : opp?.status === 'not accepted'
+      ? 'danger'
+      : opp?.status === 'pending'
+      ? 'gray-600'
+      : opp?.status === 'completed'
+      ? 'gray-800'
+      : opp?.status === 'active'
+      ? 'primary'
+      : 'warning'
   const navigate = useNavigate()
-  const handleFollowedOpp = (opp) => {
-    opp?.status === 'followed' ? followOpp(opp) : unfollowOpp(opp)
-  }
+
   const handleWithdrawOpp = async (id: ID, status: string) => {
     const query = {
       opportunityUuid: id,
-      status: status
+      status: status,
     }
     changeOppStatusAPI(query).then((res) => {
       if (res.status === 200) {
@@ -36,7 +48,7 @@ const SponsorOpportunityCard2: FC<Props> = ({dashboard, opp, getOpps}) => {
   const handleDeleteOpp = async (id: ID, status: string) => {
     const query = {
       opportunityUuid: id,
-      status: status
+      status: status,
     }
     changeOppStatusAPI(query).then((res) => {
       if (res.status === 200) {
@@ -76,7 +88,7 @@ const SponsorOpportunityCard2: FC<Props> = ({dashboard, opp, getOpps}) => {
           </div>
           <div className='ribbon-label text-capitalize'>
             {opp?.status}
-            <span className={`ribbon-inner bg-info`}></span>
+            <span className={`ribbon-inner bg-${badgeColor}`}></span>
           </div>
         </div>
 
@@ -127,9 +139,7 @@ const SponsorOpportunityCard2: FC<Props> = ({dashboard, opp, getOpps}) => {
                             className='menu-link px-3'
                             onClick={() => {
                               opp?.status === 'draft'
-                                ? navigate(
-                                    `/opportunities/${opp?.uuid}/createopportunities`
-                                  )
+                                ? navigate(`/opportunities/${opp?.uuid}/createopportunities`)
                                 : navigate(`/opportunities/${opp?.uuid}`)
                             }}
                           >

@@ -56,6 +56,14 @@ const PropActionsCell: FC<Props> = ({id}) => {
     },
   })
 
+  const newProp = useMutation(() => changePropsStatus(id, 'new'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.PROPS_LIST}-${query}`])
+    },
+  })
+
   return (
     <>
       <a
@@ -79,6 +87,13 @@ const PropActionsCell: FC<Props> = ({id}) => {
           </a>
         </div>
         {/* end::Menu item */}
+
+        {/* begin::Menu item */}
+        <div className='menu-item px-3'>
+          <a className='menu-link px-3' onClick={async () => await newProp.mutateAsync()}>
+            New
+          </a>
+        </div>
 
         {/* begin::Menu item */}
         <div className='menu-item px-3'>

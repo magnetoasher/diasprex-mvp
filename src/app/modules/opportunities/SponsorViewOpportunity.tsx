@@ -23,7 +23,7 @@ const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
+const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   const {authState} = useOktaAuth()
   const {id: id} = useParams()
   const dispatch = useDispatch()
@@ -326,4 +326,4 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   )
 }
 
-export default connector(ViewOpportunity)
+export default connector(SponsorViewOpportunity)

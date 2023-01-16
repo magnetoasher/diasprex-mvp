@@ -6,6 +6,7 @@ import moment from 'moment'
 import {
   initialOpps,
   createOppsSchemas,
+  Opps,
 } from '../../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {UploadOutlined} from '@ant-design/icons'
 import {Upload} from 'antd'
@@ -19,28 +20,30 @@ import {getUniqueIdWithPrefix} from '../../../../_metronic/assets/ts/_utils'
 import {OppsCategory} from '../../../../_metronic/partials/content/selectionlists/oppscategory'
 import {DefaultDraftInlineStyle} from 'draft-js'
 import Swal from 'sweetalert2'
-import { useLocation, useNavigate } from 'react-router-dom'
+import {useLocation, useNavigate} from 'react-router-dom'
 
 export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
-  const {Option} = Select
-  const {TextArea} = Input
   const navigate = useNavigate()
   const location = useLocation()
   const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY']
   const [isOtherSelected, setIsOtherSelected] = useState(false)
   const [status, setStatus] = useState('')
-  const initVals = {
-    title: location.pathname !== '/createopportunities' && currentOpp? currentOpp.title : '',
-    id: location.pathname !== '/createopportunities' && currentOpp? currentOpp.uuid : '',
-    thumbnail: location.pathname !== '/createopportunities' && currentOpp? currentOpp.thumbnail : '',
-    sponsor: location.pathname !== '/createopportunities' && currentOpp? currentOpp.sponsor : '',
-    summary: location.pathname !== '/createopportunities' && currentOpp? currentOpp.summary : '',
-    status: location.pathname !== '/createopportunities' && currentOpp? currentOpp.status : '',
-    datesubmitted: location.pathname !== '/createopportunities' && currentOpp? currentOpp.datesubmitted : '',
-    duedate: location.pathname !== '/createopportunities' && currentOpp? currentOpp.duedate : '',
-    category: location.pathname !== '/createopportunities' && currentOpp? currentOpp.category : '',
-    following: location.pathname !== '/createopportunities' && currentOpp? currentOpp.following : [],
-    showedinterest: location.pathname !== '/createopportunities' && currentOpp? currentOpp.showedinterest : [],
+  const initVals: Opps = {
+    title: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.title : '',
+    id: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.uuid : '',
+    thumbnail:
+      location.pathname !== '/createopportunities' && currentOpp ? currentOpp.thumbnail : '',
+    sponsor: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.sponsor : '',
+    summary: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.summary : '',
+    status: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.status : '',
+    datesubmitted:
+      location.pathname !== '/createopportunities' && currentOpp ? currentOpp.datesubmitted : '',
+    duedate: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.duedate : '',
+    category: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.category : '',
+    following:
+      location.pathname !== '/createopportunities' && currentOpp ? currentOpp.following : [],
+    showedinterest:
+      location.pathname !== '/createopportunities' && currentOpp ? currentOpp.showedinterest : [],
   }
 
   const onChange = (value) => {
@@ -55,43 +58,42 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
       const idNumber = nanoid()
-      const data = 
-        currentOpp
+      const data = currentOpp
         ? {
-          ...values,
-          id: currentOpp.uuid,
-          uuid: currentOpp.uuid,
-          sponsorUserId: sponsorUserId,
-          sponsor: localStorage.getItem('userTypeFull'),
-          status: status ? status : currentOpp.status,
-          open: currentOpp.open ? currentOpp.open : false,
-          datesubmitted: new Date(),
-          duedate:
-            values.duedate ?
-              values.duedate < moment(new Date()).add(90, 'days').toDate()
+            ...values,
+            id: currentOpp.uuid,
+            uuid: currentOpp.uuid,
+            sponsorUserId: sponsorUserId,
+            sponsor: localStorage.getItem('userTypeFull'),
+            status: status ? status : currentOpp.status,
+            open: currentOpp.open ? currentOpp.open : false,
+            datesubmitted: new Date(),
+            duedate: values.duedate
+              ? values.duedate < moment(new Date()).add(90, 'days').toDate()
                 ? moment(new Date()).add(90, 'days').toDate()
                 : values.duedate > moment(new Date()).add(6, 'months').toDate()
                 ? moment(new Date()).add(6, 'months').toDate()
                 : values.duedate
               : currentOpp.duedate,
-          otherdealtype: !isOtherSelected ? null : values.otherdealtype,
-        } : {
-          ...values,
-          uuid: idNumber,
-          id: idNumber,
-          sponsorUserId: sponsorUserId,
-          sponsor: localStorage.getItem('userTypeFull'),
-          status: status,
-          open: false,
-          datesubmitted: new Date(),
-          duedate:
-            values.duedate < moment(new Date()).add(90, 'days').toDate()
-              ? moment(new Date()).add(90, 'days').toDate()
-              : values.duedate > moment(new Date()).add(6, 'months').toDate()
-              ? moment(new Date()).add(6, 'months').toDate()
-              : values.duedate,
-          otherdealtype: !isOtherSelected ? null : values.otherdealtype,
-      }
+            otherdealtype: !isOtherSelected ? null : values.otherdealtype,
+          }
+        : {
+            ...values,
+            uuid: idNumber,
+            id: idNumber,
+            sponsorUserId: sponsorUserId,
+            sponsor: localStorage.getItem('userTypeFull'),
+            status: status,
+            open: false,
+            datesubmitted: new Date(),
+            duedate:
+              values.duedate < moment(new Date()).add(90, 'days').toDate()
+                ? moment(new Date()).add(90, 'days').toDate()
+                : values.duedate > moment(new Date()).add(6, 'months').toDate()
+                ? moment(new Date()).add(6, 'months').toDate()
+                : values.duedate,
+            otherdealtype: !isOtherSelected ? null : values.otherdealtype,
+          }
       try {
         await axios
           .post(`${process.env.REACT_APP_DIASPREX_API_URL}/opportunities/create`, data)
