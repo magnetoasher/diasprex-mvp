@@ -87,7 +87,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
   }, [props.opps])
 
   useEffect(() => {
-    setRecentProps(props.proposals.proposal?.data)
+    setRecentProps(props.proposals.proposals?.data)
   }, [props.proposals])
 
   const [propsdataObj] = useState([
