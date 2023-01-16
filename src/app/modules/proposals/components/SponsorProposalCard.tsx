@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../../_metronic/helpers'
 
 export const SponsorProposalCard = ({
@@ -5,11 +6,15 @@ export const SponsorProposalCard = ({
   propcountry,
   proptitle,
   propsummary,
+  enablerUserId,
+  oppId,
   badgeColor,
   status,
   dashboard,
   picSrc,
 }: any) => {
+  const navigate = useNavigate()
+
   return (
     <div className='KTCard mb-5'>
       <div className=' mb-2 box-shadow-style'>
@@ -44,7 +49,10 @@ export const SponsorProposalCard = ({
 
               <div className='d-flex flex-column'>
                 <div className='d-flex align-items-center mb-2'>
-                  <a href='#' className='text-gray-800 text-capitalize fs-3 fw-bolder '>
+                  <a
+                    href="#"
+                    className='text-gray-800 text-capitalize fs-3 fw-bolder '
+                  >
                     {propenabler}
                   </a>
                 </div>
@@ -60,7 +68,12 @@ export const SponsorProposalCard = ({
           <div className='col-lg-6'>
             <div className='d-flex flex-column'>
               <div className='d-flex align-items-center mb-2'>
-                <a href='#' className='text-gray-800  text-capitalize fs-2 fw-bolder me-1'>
+                <a
+                  onClick={() => {
+                    navigate(`/proposals/${oppId}/${enablerUserId}`)
+                  }}
+                  className='text-gray-800  text-capitalize fs-2 fw-bolder me-1'
+                >
                   {proptitle}
                 </a>
               </div>
@@ -89,7 +102,12 @@ export const SponsorProposalCard = ({
                   data-kt-menu='true'
                 >
                   <div className='dropdown-item px-3'>
-                    <a href='#' className='menu-link px-3'>
+                    <a
+                      onClick={() => {
+                        navigate(`/proposals/${oppId}/${enablerUserId}`)
+                      }}
+                      className='menu-link px-3'
+                    >
                       View
                     </a>
                   </div>
