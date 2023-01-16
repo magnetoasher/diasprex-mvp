@@ -93,7 +93,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
   useEffect(() => {
     setRecentProps(props.proposals.proposals?.data)
   }, [props.proposals])
-  console.log('RecentProps', recentProps)
+  
   return (
     <div className='row d-flex flex-column-fluid g-0'>
       <div className='col-sm-3'>
