@@ -2,12 +2,12 @@ export const OppsCategory = () => {
   return (
     <>
       <option value=''>Select Best Match</option>
-      <optgroup label='AGRICULTURE'>
-        <option value='Agriculture Insurance'>Insurance</option>
-        <option value='Agriculture Finance'>Finance</option>
-        <option value='Agriculture logistics'>Logistics</option>
-        <option value='Agriculture processing'>Processing</option>
-        <option value='Agriculture production'>Production</option>
+      <optgroup label='FOOD & AGRICULTURE'>
+        <option value='Food and Agriculture Insurance'>Insurance</option>
+        <option value='Food and Agriculture Finance'>Finance</option>
+        <option value='Food and Agriculture logistics'>Logistics</option>
+        <option value='Food and Agriculture processing'>Processing</option>
+        <option value='Agriculture and production'>Production</option>
       </optgroup>
       {/* <option value='Education'>Education</option> */}
       <optgroup label='HEALTHCARE'>

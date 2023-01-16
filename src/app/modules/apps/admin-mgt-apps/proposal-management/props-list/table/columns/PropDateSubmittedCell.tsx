@@ -1,12 +1,12 @@
 import {FC} from 'react'
 import moment from 'moment'
 type Props = {
-  date_submmitted?: string
+  date_submitted?: string
 }
 
-const PropDateSubmittedCell: FC<Props> = ({date_submmitted}) => (
+const PropDateSubmittedCell: FC<Props> = ({date_submitted}) => (
   <div className='badge badge-light fw-bolder'>
-    {moment(date_submmitted).format('MMMM Do YYYY, h:mm:ss a')}
+    {moment(date_submitted).format('MMMM Do YYYY, h:mm:ss a')}
   </div>
 )
 
