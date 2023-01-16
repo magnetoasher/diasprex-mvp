@@ -484,6 +484,8 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                         propcountry={e?.country}
                         proptitle={e.title}
                         propsummary={e.summary}
+                        enablerUserId={e?.enablerUserId}
+                        oppId={e?.opportunityUuid}
                         dashboard={true}
                         picSrc={e.thumbnail}
                       />
