@@ -122,11 +122,11 @@ const CreateAccount: FC = () => {
 
     loadStepper()
   }, [stepperRef])
+
   const onConfirm = () => {
     if (stepper.current.currentStepIndex == 6) {
       navigate({
-        pathname: '/dashboard',
-        search: `?userType=${userType}&setUserTypeFull=${userTypeFull}`,
+        pathname: '/',
       })
     } else {
       stepper.current.goNext()
@@ -148,7 +148,7 @@ const CreateAccount: FC = () => {
         className='stepper stepper-pills stepper-column   d-flex flex-column flex-xl-row flex-row-fluid'
         id='kt_create_account_stepper'
       >
-        {/* <SweetAlert
+        <SweetAlert
           type={alertType || ''}
           show={isShowAlert}
           showCancel={showCancelBtn}
@@ -162,7 +162,7 @@ const CreateAccount: FC = () => {
           cancelButtonClass='btn-danger'
         >
           {categoryQuestion}
-        </SweetAlert> */}
+        </SweetAlert>
 
         <div className='d-flex justify-content-center bg-white rounded justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px me-9'>
           <div className='px-6 px-lg-10 px-xxl-15 py-20 '>
