@@ -359,6 +359,7 @@ export const UadFormPage: FC = () => {
                             className='dropdown-item mb-2 h = 125px'
                             onClick={() => {
                               setPhoneCode(`+${option.phone}`)
+                              setIsValidPhone(false)
 
                               setSelectedCountry(option.label)
                             }}
@@ -405,8 +406,18 @@ export const UadFormPage: FC = () => {
                 </div>
               )}
             </div>
+            {!isValidPhone && (
+              <div
+                className='btn btn-primary btn-active-ligth-success'
+                onClick={async () =>
+                  await handlePhoneValidate(`${phoneCode}${formik.values.phone}`)
+                }
+              >
+                Continue
+              </div>
+            )}
 
-            <div className=' fv-row mb-10'>
+            {/* <div className=' fv-row mb-10'>
               {!isValidPhone && (
                 <div
                   className='btn btn-primary btn-active-ligth-success'
@@ -427,7 +438,7 @@ export const UadFormPage: FC = () => {
                   Verify
                 </div>
               )}
-            </div>
+            </div> */}
 
             <VerificationModal
               id='modal_phoneVerification'
@@ -437,7 +448,7 @@ export const UadFormPage: FC = () => {
               placeholder='Mobile number with country code...'
             />
 
-            {isPhoneConfirmed && (
+            {isValidPhone && (
               <>
                 <div className=' fv-row mb-10'>
                   <label className='form-label text-muted required fw-bold fs-6 mb-2'>
