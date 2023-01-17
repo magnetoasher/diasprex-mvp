@@ -109,11 +109,13 @@ const PhoneVerification: FC<Props> = ({userType}) => {
             </div>
           </div>
           <Field
+            type='text'
             name='phonenumber'
             className='form-control form-control-lg'
-            onChange={(e: any) => {
-              setPhoneNumber(e.target.value)
-            }}
+            placeholder='Enter your phone number'
+            // onChange={(e: any) => {
+            //   setPhoneNumber(e.target.value)
+            // }}
           />
         </span>
 

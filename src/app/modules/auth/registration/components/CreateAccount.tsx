@@ -75,26 +75,26 @@ const CreateAccount: FC = () => {
     setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1)
 
     if (stepper.current.currentStepIndex !== (userTypeFull === 'basic_enabler' ? 4 : 6)) {
-      if (stepper.current.currentStepIndex == 1) {
-        if (userTypeFull == 'basic_enabler' || 'super_enabler' || 'standard_enabler') {
-          setCategoryQuestion(questions.individual)
-          setIsShowAlert(true)
-        } else if (userType == 'business_enabler') {
-          setCategoryQuestion(questions.business)
-          setIsShowAlert(true)
-        } else if (userType == 'sponsor') {
-          setCategoryQuestion(questions.sponsor)
-          setIsShowAlert(true)
-        } else {
-          stepper.current.goNext()
-        }
-      } else {
-        // data capture here
-        actions.setSubmitting(true)
+      // if (stepper.current.currentStepIndex == 1) {
+      //   if (userTypeFull == 'basic_enabler' || 'super_enabler' || 'standard_enabler') {
+      //     setCategoryQuestion(questions.individual)
+      //     setIsShowAlert(true)
+      //   } else if (userType == 'business_enabler') {
+      //     setCategoryQuestion(questions.business)
+      //     setIsShowAlert(true)
+      //   } else if (userType == 'sponsor') {
+      //     setCategoryQuestion(questions.sponsor)
+      //     setIsShowAlert(true)
+      //   } else {
+      //     stepper.current.goNext()
+      //   }
+      // } else {
+      // data capture here
+      actions.setSubmitting(true)
 
-        console.log('FormValues', values)
-        stepper.current.goNext()
-      }
+      console.log('FormValues', values)
+      stepper.current.goNext()
+      // }
     } else {
       // stepper.current.goto(1)
       //
@@ -148,7 +148,7 @@ const CreateAccount: FC = () => {
         className='stepper stepper-pills stepper-column   d-flex flex-column flex-xl-row flex-row-fluid'
         id='kt_create_account_stepper'
       >
-        <SweetAlert
+        {/* <SweetAlert
           type={alertType || ''}
           show={isShowAlert}
           showCancel={showCancelBtn}
@@ -162,7 +162,7 @@ const CreateAccount: FC = () => {
           cancelButtonClass='btn-danger'
         >
           {categoryQuestion}
-        </SweetAlert>
+        </SweetAlert> */}
 
         <div className='d-flex justify-content-center bg-white rounded justify-content-xl-start flex-row-auto w-100 w-xl-300px w-xxl-400px me-9'>
           <div className='px-6 px-lg-10 px-xxl-15 py-20 '>
@@ -277,8 +277,8 @@ const CreateAccount: FC = () => {
         </div>
 
         <div className='d-flex flex-row-fluid flex-center bg-white rounded '>
-          {/* <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={submitStep}> */}
-          <Formik initialValues={initValues} onSubmit={submitStep}>
+          <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={submitStep}>
+            {/* <Formik initialValues={initValues} onSubmit={submitStep}> */}
             {({}) => (
               <Form
                 className={
