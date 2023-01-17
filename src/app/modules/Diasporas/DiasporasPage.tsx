@@ -17,6 +17,7 @@ import {Diasp, uadFormModel} from './components/core/_model'
 import {InviteUADFriends} from '../../../_metronic/partials'
 import {UadForm} from './components/uadform'
 import {useNavigate} from 'react-router-dom'
+import {CountryCards} from './components/countriescard'
 
 // 'http://localhost:3000/diasporas'
 
@@ -103,8 +104,7 @@ export const DiasporasPage: FC = () => {
         <div className='row g-5'>
           <div className='col-lg-8'>
             <h2 className='text-gray-800 fw-bolder mb-4'>UNFOUND AFRICAN DIASPORAS</h2>
-            {/* {profileList.length > 0 &&
-              profileList.map((profile, index) => ( */}
+            <CountryCards />
             <div id='year-accordion'>
               {/* <div className='card '> */}
               <div className='accordion-item  ' id='year-heading'>

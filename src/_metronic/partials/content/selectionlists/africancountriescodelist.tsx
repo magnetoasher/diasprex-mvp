@@ -1,4 +1,4 @@
-export const SponsorCountryList: {
+export const AfricanCountryCodes: {
   code: string
   label: string
   phone: string
@@ -98,8 +98,4 @@ export const SponsorCountryList: {
   {code: 'ZA', label: 'South Africa', phone: '27'},
   {code: 'ZM', label: 'Zambia', phone: '260'},
   {code: 'ZW', label: 'Zimbabwe', phone: '263'},
-
-  {code: 'CA', label: 'Canada', phone: '1'},
-  {code: 'US', label: 'United States', phone: '1'},
-  {code: 'GB', label: 'United Kingdom', phone: '44'},
 ]
