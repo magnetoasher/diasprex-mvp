@@ -4,7 +4,7 @@ import {useFormik} from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 import {uadFormModel} from './core/_model'
-import PhoneInput from 'react-phone-number-input'
+import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
 
 import countryList from 'react-select-country-list'
 import {AfricanCountryList} from '../../../../_metronic/partials/content/selectionlists'
@@ -15,6 +15,8 @@ import {OecdcountryList} from '../../../../_metronic/partials/content/selectionl
 import 'react-phone-number-input/style.css'
 import Swal from 'sweetalert2'
 import {CountriesCodeList} from '../../../../_metronic/partials/content/selectionlists'
+
+import {VerificationModal} from '../../auth/components/verificationmodal'
 // import CountriesCodeList from '../../../../_metronic/partials/content/selectionlists/countries.json'
 const editUADSchema = Yup.object().shape({
   fName: Yup.string()
@@ -65,7 +67,9 @@ export const UadFormPage: FC = () => {
   const countryOptions = useMemo(() => countryList().getData(), [])
   const [countryResLabel, setCountryResLabel] = useState('united states')
   const [countryOrigLabel, setCountryOrigLabel] = useState('algeria')
-  const [phoneIsConfirmed, setPhoneIsConfirmed] = useState(false)
+  const [isPhoneConfirmed, setIsPhoneConfirmed] = useState(false)
+  const [showVerifyPhone, setShowVerifyPhone] = useState(false)
+  const [isValidPhone, setIsValidPhone] = useState(false)
   const [avatarFile, setAvatarFile] = useState(null)
   const [phoneCode, setPhoneCode] = useState('+1')
   const [selectedCountry, setSelectedCountry] = useState('united states')
@@ -98,6 +102,37 @@ export const UadFormPage: FC = () => {
       }
     })
   }
+
+  const handlePhoneValidate = (value: any) => {
+    const isValid = isValidPhoneNumber(value)
+
+    if (isValid) {
+      setIsValidPhone(isValid)
+      Swal.fire({
+        text: 'Thank you, but we still need to verify your phone',
+        icon: 'success',
+        buttonsStyling: false,
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+        },
+      })
+    } else
+      Swal.fire({
+        text: 'Invalid phone number',
+        icon: 'warning',
+        buttonsStyling: false,
+        confirmButtonText: 'OK',
+        customClass: {
+          confirmButton: 'btn btn-primary',
+        },
+      })
+  }
+
+  useEffect(() => {
+    setShowVerifyPhone(true)
+  }, [isValidPhone])
+
   const handleFormSubmit = () => {
     formik.submitForm()
     Swal.fire({
@@ -150,6 +185,7 @@ export const UadFormPage: FC = () => {
     avatar: '',
   }
   const formik = useFormik({
+    validateOnChange: true,
     enableReinitialize: true,
     initialValues,
     onSubmit: async (values, {setSubmitting}) => {
@@ -205,8 +241,6 @@ export const UadFormPage: FC = () => {
       <div className='container'>
         <div className='card-body shadow-sm mx-5 mx-xl-18 pt-15 mb-15 pb-15'>
           <form>
-            {/* <!--begin::Input group--> */}
-
             <div className='fv-row mb-10'>
               <label className='form-label required text-muted fw-bold fs-6 mb-2'>
                 Enter your firstname
@@ -228,7 +262,6 @@ export const UadFormPage: FC = () => {
                 </div>
               )}
             </div>
-
             <div className='fv-row mb-10'>
               <label className='form-label required text-muted fw-bold fs-6 mb-2'>
                 Enter your lastname
@@ -250,7 +283,6 @@ export const UadFormPage: FC = () => {
                 </div>
               )}
             </div>
-
             <div className='fv-row mb-10'>
               <label className='form-label text-muted fw-bold fs-6 mb-2'>
                 Enter Diasprex ID if you are a member
@@ -272,7 +304,6 @@ export const UadFormPage: FC = () => {
                 </div>
               )}
             </div>
-
             <div className='fv-row mb-10'>
               <label className='form-label required text-muted fw-bold fs-6 mb-2'>
                 Enter a valid email
@@ -294,7 +325,6 @@ export const UadFormPage: FC = () => {
                 </div>
               )}
             </div>
-
             <div className='fv-row mb-10'>
               <label className='form-label required text-muted fw-bold fs-6 mb-2'>
                 Enter a valid phone number
@@ -358,6 +388,8 @@ export const UadFormPage: FC = () => {
                   autoComplete='off'
                   disabled={formik.isSubmitting}
                   onChange={(e) => {
+                    e.preventDefault()
+                    setIsValidPhone(false)
                     formik.handleChange({
                       target: {name: 'phone', value: e.target.value},
                     })
@@ -373,47 +405,62 @@ export const UadFormPage: FC = () => {
                 </div>
               )}
             </div>
+
             <div className=' fv-row mb-10'>
-              <button
-                className='btn btn-success btn-active-ligth-success'
-                disabled={phoneIsConfirmed}
-                onClick={() => {
-                  setPhoneIsConfirmed(true)
-                }}
-              >
-                Verify Phone Number
-              </button>
+              {!isValidPhone && (
+                <div
+                  className='btn btn-primary btn-active-ligth-success'
+                  onClick={async () =>
+                    await handlePhoneValidate(`${phoneCode}${formik.values.phone}`)
+                  }
+                >
+                  Continue
+                </div>
+              )}
+
+              {isValidPhone && (
+                <div
+                  className='btn btn-success btn-active-ligth-success'
+                  data-bs-target='#modal_phoneVerification'
+                  data-bs-toggle='modal'
+                >
+                  Verify
+                </div>
+              )}
             </div>
-            {phoneIsConfirmed && (
+
+            <VerificationModal
+              id='modal_phoneVerification'
+              headertext='Verify Your Phone Number'
+              title='Please enter the 6 digit code sent to your device'
+              labeltext='Enter your mobile phone number with country code'
+              placeholder='Mobile number with country code...'
+            />
+
+            {isPhoneConfirmed && (
               <>
                 <div className=' fv-row mb-10'>
                   <label className='form-label text-muted required fw-bold fs-6 mb-2'>
-                    Please select your country of residence
+                    Country of residence
                   </label>
                   <span className='d-flex flex-row'>
                     <div className='input-group-prepend'>
                       <div className='input-group' id='countryflag'>
                         <img
                           className='form-control mw-55px'
-                          src={toAbsoluteUrl(`/media/flags/${countryResLabel}.svg`)}
+                          src={toAbsoluteUrl(`/media/flags/${selectedCountry}.svg`)}
                         />
                       </div>
                     </div>
-                    <select
-                      className='form-select form-select-white'
+                    <input
+                      className='form-select form-select-white text-capitalize'
                       aria-label='countryRes'
                       {...formik.getFieldProps('countryRes')}
                       name='countryRes'
                       autoComplete='off'
                       disabled={formik.isSubmitting}
-                      onChange={(e) => {
-                        formik.handleChange({
-                          target: {name: 'countryRes', value: e.target.value},
-                        })
-                      }}
-                    >
-                      <OecdcountryList />
-                    </select>
+                      value={selectedCountry}
+                    />
                   </span>
                   {formik.touched.countryRes && formik.errors.countryRes && (
                     <div className='fv-plugins-message-container'>
@@ -768,7 +815,6 @@ export const UadFormPage: FC = () => {
                 </div>
               </>
             )}
-
             <div className='form-footer'>
               <div className='text-center pt-15'>
                 <button
