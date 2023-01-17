@@ -7,6 +7,7 @@ import {
   CountriesCodeList,
   SponsorCountryList,
 } from '../../../../../../_metronic/partials/content/selectionlists'
+import {VerificationModal} from '../../../components/verificationmodal'
 
 type Props = {
   userType?: any
@@ -46,7 +47,10 @@ const PhoneVerification: FC<Props> = ({userType}) => {
   return (
     <div className='w-100'>
       <div className='pb-10 pb-lg-15'>
-        <h2 className='fw-bolder text-dark'>Phone Verification</h2>
+        <h2 className='fw-bolder text-dark'>
+          Phone Verification (The country code is used to determine the country of residence and
+          geolocation)
+        </h2>
 
         <div className='text-gray-400 fw-bold fs-6'>
           Please enter your primary phone contact with country code
@@ -139,6 +143,14 @@ const PhoneVerification: FC<Props> = ({userType}) => {
           <ErrorMessage name='phone.phonenumber' />
         </div>
       </div> */}
+
+      <VerificationModal
+        id='modal_phoneVerification'
+        headertext='Verify Your Phone Number'
+        title='Please enter the 6 digit code sent to your device'
+        labeltext='Enter your mobile phone number with country code'
+        placeholder='Mobile number with country code...'
+      />
     </div>
   )
 }
