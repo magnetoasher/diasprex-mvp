@@ -1,28 +1,25 @@
 import React, {FC, useMemo, useState} from 'react'
 import {Field, ErrorMessage} from 'formik'
-
+import {
+  AfricanCountryList,
+  CountriesCodeList,
+} from '../../../../../../../_metronic/partials/content/selectionlists'
 // @ts-ignore
 import AsyncSelect from 'react-select'
 import countryList from 'react-select-country-list'
 import ReactCountryFlag from 'react-country-flag'
 import 'react-phone-number-input/style.css'
-import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
+
 import {getCountries, getCountryCallingCode} from 'react-phone-number-input/input'
 // import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+
 import {CountryList} from '../../../../../../../_metronic/partials/content/selectionlists'
 import {toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
 
 const Basic: FC = () => {
   const countryOptions = useMemo(() => countryList().getData(), [])
-
-  const [countryValue, setCountryValue] = useState({})
-  const [areaOfInterest, setAreaOfInterest] = useState([])
-  const [firstName, setFirstName] = useState('')
-  const [middleName, setMiddleName] = useState('')
-  const [lastName, setLastName] = useState('')
-  const [email, setEmail] = useState('')
-  const [phoneNumber, setPhoneNumber] = useState('')
+  const [selectedCountry, setSelectedCountry] = useState('united states')
 
   const areaOptions = [
     {value: 'acturarial', label: 'Acturarial'},
@@ -53,7 +50,6 @@ const Basic: FC = () => {
         <div className='text-gray-400 fw-bold fs-6'>
           If you need more info, please check out
           <a href='/faqs' className='link-primary fw-bolder'>
-            {' '}
             Help Page
           </a>
           .
@@ -110,72 +106,29 @@ const Basic: FC = () => {
             <ErrorMessage name='email' component='span' />
           </div>
         </div>
+
         <div className='fv-row mb-10'>
-          <label className='form-label required'>Primary Phone Number</label>
-          <div className='d-flex flex-row mw-100 form-control form-control-lg'>
-            <Field
-              type='text'
-              maxLength={5}
-              name='phone.code'
-              className='form-control mw-100px'
-              placeholder='Intl code'
-            />
-            <Field
-              type='text'
-              maxLength={9}
-              name='phone.phonenumber'
-              className='form-control'
-              placeholder='xxx-xxx-xxxx'
-            />
-          </div>
-          {/* <div className='d-flex flex-row mw-100 form-control form-control-lg form-control-solid'>
-            <PhoneInput
-              inputStyle={{maxWidth: '100'}}
-              international
-              defaultCountry='US'
-              placeholder='Enter phone number'
-              value={phoneNumber}
-              onChange={() => setPhoneNumber}
-            />
-          </div> */}
-          <div className='text-danger mt-2'>
-            <ErrorMessage name='phone.code' component='span' />
-          </div>
-          <div className='text-danger mt-2'>
-            <ErrorMessage name='phone.phonenumber' component='span' />
-          </div>
+          <label className='form-label required'>Country of Residence</label>
+          <Field
+            name='countryRes'
+            className='form-select form-select-lg text-capitalize'
+            value={selectedCountry}
+          />
         </div>
 
         <div className='fv-row mb-10'>
           <label className='form-label required'>Country of Origin</label>
-          <Field as='select' name='countryOrig' className='form-select form-select-lg'>
+
+          <Field component='select' name='countryOrig' className='form-select form-select-lg'>
             <option value=''>Select a country</option>
-            {countryOptions.map((option, index) => (
-              <option key={index} value={option.value}>
-                {option.label}
-              </option>
-            ))}
+            <AfricanCountryList />
           </Field>
 
           <div className='text-danger mt-2'>
             <ErrorMessage name='countryOrig' component='span' />
           </div>
         </div>
-        <div className='fv-row mb-10'>
-          <label className='form-label required'>Country of Residence</label>
-          <Field component='select' name='countryRes' className='form-select form-select-lg'>
-            <option value=''>Select a country</option>
-            {countryOptions.map((option, index) => (
-              <option key={index} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </Field>
 
-          <div className='text-danger mt-2'>
-            <ErrorMessage name='countryRes' component='span' />
-          </div>
-        </div>
         <div className='fv-row mb-10'>
           <label className='form-label'>Areas of Interest (Choose most related)</label>
 

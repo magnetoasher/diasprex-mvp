@@ -22,7 +22,7 @@ import EnablerOpportunityCard2 from './EnablerOpportunityCard2'
 import {Link} from 'react-router-dom'
 import {EnablerProposalCard2} from '../proposals/components/EnablerProposalCard2'
 import axios from 'axios'
-import { Opps } from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {unsupportOppAPI} from '../../modules/opportunities/redux/OpportunityAPI'
 import Swal from 'sweetalert2'
 
@@ -67,11 +67,13 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
       )
       setShowedInterest(
         props.proposals?.proposals.data?.filter((obj: Proposal) => {
-          return obj.status === 'new' ||
+          return (
+            obj.status === 'new' ||
             obj.status === 'pending' ||
             obj.status === 'selected' ||
             obj.status === 'declined' ||
             obj.status === 'withdrawn'
+          )
         })
       )
     }
@@ -116,7 +118,8 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
       await unsupportOppAPI({
         enablerUserId: authState?.accessToken?.claims.uid,
         opportunityUuid: opp.uuid,
-      }).then((res) => {
+      })
+        .then((res) => {
           if (res.status === 200) {
             Swal.fire({
               icon: 'success',
@@ -156,7 +159,11 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
 
           {followedOpp.length > 0 ? (
             followedOpp.map((e: Proposal) => (
-              <EnablerOpportunityCard2 opp={e?.opportunityObject} followed={true} unfollowOpp={unfollowOpp} />
+              <EnablerOpportunityCard2
+                opp={e?.opportunityObject}
+                followed={true}
+                unfollowOpp={unfollowOpp}
+              />
             ))
           ) : (
             <div className='d-flex flex-column'>
@@ -186,7 +193,13 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
           <div className=' overflow-auto p-3'>
             <div className=' d-flex text-muted mb-5'>Supported Opportunities</div>
             {supportedOpp.length > 0 ? (
-              supportedOpp.map((e: SupportedOpps) => <EnablerOpportunityCard2 opp={e?.opportunityObject} supported={true} unsupportOpp={unsupportOpp} />)
+              supportedOpp.map((e: SupportedOpps) => (
+                <EnablerOpportunityCard2
+                  opp={e?.opportunityObject}
+                  supported={true}
+                  unsupportOpp={unsupportOpp}
+                />
+              ))
             ) : (
               <div className='d-flex flex-column'>
                 <p className='fs-2'>You currently have no supported opportunities</p>
@@ -216,29 +229,39 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
         }
         key='3'
       >
-        <div className=' overflow-auto p-3'>
-          <div className=' d-flex text-muted mb-5'>Opporutinities submitted to</div>
-          {/* <button type='button' className='btn btn-sm btn-light-primary'>
+        {user !== 'basic_enabler' ? (
+          <div className=' overflow-auto p-3'>
+            <div className=' d-flex text-muted mb-5'>Opporutinities submitted to</div>
+            {/* <button type='button' className='btn btn-sm btn-light-primary'>
             Unfollow Selected
           </button> */}
 
-          {showedInterest.length > 0 ? (
-            showedInterest.map((e: Proposal) => (
-              <EnablerOpportunityCard2 opp={e?.opportunityObject} followed={false} supported={false} />
-            ))
-          ) : (
-            <div className='d-flex flex-column'>
-              <p className='fs-2'>You haven't submitted proposals to any opporptunities</p>
-              <p className='text-muted fs-5'>
-                Review current opportunities at the
-                <Link to='/opportunities_center' className='px-2'>
-                  Opportunity Center{' '}
-                </Link>
-                and click follow
-              </p>
-            </div>
-          )}
-        </div>
+            {showedInterest.length > 0 ? (
+              showedInterest.map((e: Proposal) => (
+                <EnablerOpportunityCard2
+                  opp={e?.opportunityObject}
+                  followed={false}
+                  supported={false}
+                />
+              ))
+            ) : (
+              <div className='d-flex flex-column'>
+                <p className='fs-2'>You haven't submitted proposals to any opporptunities</p>
+                <p className='text-muted fs-5'>
+                  Review current opportunities at the
+                  <Link to='/opportunities_center' className='px-2'>
+                    Opportunity Center{' '}
+                  </Link>
+                  and click follow
+                </p>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div>
+            <p>Not Available for Basic Accounts</p>
+          </div>
+        )}
       </TabPane>
     </Tabs>
   )

@@ -3,7 +3,7 @@ import React, {FC, useEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {KTSVG} from '../../../../../_metronic/helpers'
 import {Step1} from './steps/Step1'
-import {Step2} from './steps/Step2'
+import {PhoneVerification} from './steps/phoneverification'
 import {Step3} from './steps/Step3'
 import {Step4} from './steps/Step4'
 import {Step5} from './steps/Step5'
@@ -15,7 +15,6 @@ import {ICreateAccount, createAccountSchemas, inits} from './CreateAccountWizard
 import SweetAlert from 'react-bootstrap-sweetalert'
 // import SubscriptionPlans from './steps/SubscriptionPlans'
 import SubscriptionPlans3 from './SubscriptionComponet/SubscriptionPlans3'
-import SubscriptionPlans from './SubscriptionComponet/SubscriptionPlanColumn'
 
 const CreateAccount: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
@@ -75,7 +74,7 @@ const CreateAccount: FC = () => {
     setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex])
     setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1)
 
-    if (stepper.current.currentStepIndex !== (userTypeFull === 'basic_enabler' ? 3 : 5)) {
+    if (stepper.current.currentStepIndex !== (userTypeFull === 'basic_enabler' ? 4 : 6)) {
       if (stepper.current.currentStepIndex == 1) {
         if (userTypeFull == 'basic_enabler' || 'super_enabler' || 'standard_enabler') {
           setCategoryQuestion(questions.individual)
@@ -124,7 +123,7 @@ const CreateAccount: FC = () => {
     loadStepper()
   }, [stepperRef])
   const onConfirm = () => {
-    if (stepper.current.currentStepIndex == 5) {
+    if (stepper.current.currentStepIndex == 6) {
       navigate({
         pathname: '/dashboard',
         search: `?userType=${userType}&setUserTypeFull=${userTypeFull}`,
@@ -179,7 +178,7 @@ const CreateAccount: FC = () => {
                 <div className='stepper-label'>
                   <h3 className='stepper-title'>Account Type</h3>
 
-                  <div className='stepper-desc fw-bold'>Setup Your Account Details</div>
+                  <div className='stepper-desc fw-bold'>Select Your Subsription Type</div>
                 </div>
               </div>
 
@@ -192,16 +191,12 @@ const CreateAccount: FC = () => {
                 </div>
 
                 <div className='stepper-label'>
-                  <h3 className='stepper-title'>Account Info</h3>
-                  <div className='stepper-desc fw-bold'>Setup Your Account Info</div>
+                  <h3 className='stepper-title'>Phone Verification</h3>
+                  <div className='stepper-desc fw-bold'>Verify You are a Human</div>
                 </div>
               </div>
 
-              {/* {userType !== "basic" && ( */}
-              <div
-                className={`stepper-item ${hideShow ? 'class-hide' : ''}`}
-                data-kt-stepper-element='nav'
-              >
+              <div className='stepper-item' data-kt-stepper-element='nav'>
                 <div className='stepper-line w-40px'></div>
 
                 <div className='stepper-icon w-40px h-40px'>
@@ -210,13 +205,11 @@ const CreateAccount: FC = () => {
                 </div>
 
                 <div className='stepper-label'>
-                  <h3 className='stepper-title'>Billing Details</h3>
-                  <div className='stepper-desc fw-bold'>Set Your Payment Methods</div>
+                  <h3 className='stepper-title'>Account Info</h3>
+                  <div className='stepper-desc fw-bold'>Setup Your Account Info</div>
                 </div>
               </div>
-              {/* )} */}
 
-              {/* {userType !== "basic" && ( */}
               <div
                 className={`stepper-item ${hideShow ? 'class-hide' : ''}`}
                 data-kt-stepper-element='nav'
@@ -226,6 +219,23 @@ const CreateAccount: FC = () => {
                 <div className='stepper-icon w-40px h-40px'>
                   <i className='stepper-check fas fa-check'></i>
                   <span className='stepper-number'>4</span>
+                </div>
+
+                <div className='stepper-label'>
+                  <h3 className='stepper-title'>Billing Details</h3>
+                  <div className='stepper-desc fw-bold'>Set Your Payment Methods</div>
+                </div>
+              </div>
+
+              <div
+                className={`stepper-item ${hideShow ? 'class-hide' : ''}`}
+                data-kt-stepper-element='nav'
+              >
+                <div className='stepper-line w-40px'></div>
+
+                <div className='stepper-icon w-40px h-40px'>
+                  <i className='stepper-check fas fa-check'></i>
+                  <span className='stepper-number'>5</span>
                 </div>
 
                 <div className='stepper-label'>
@@ -240,7 +250,7 @@ const CreateAccount: FC = () => {
 
                 <div className='stepper-icon w-40px h-40px'>
                   <i className='stepper-check fas fa-check'></i>
-                  <span className='stepper-number'>{userTypeFull === 'basic_enabler' ? 3 : 5}</span>
+                  <span className='stepper-number'>{userTypeFull === 'basic_enabler' ? 4 : 6}</span>
                 </div>
 
                 <div className='stepper-label'>
@@ -267,7 +277,8 @@ const CreateAccount: FC = () => {
         </div>
 
         <div className='d-flex flex-row-fluid flex-center bg-white rounded '>
-          <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={submitStep}>
+          {/* <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={submitStep}> */}
+          <Formik initialValues={initValues} onSubmit={submitStep}>
             {({}) => (
               <Form
                 className={
@@ -291,9 +302,10 @@ const CreateAccount: FC = () => {
                   </div>
                 </div>
 
-                {/* <div data-kt-stepper-element='content'>
-                <Step2 />
-              </div> */}
+                <div data-kt-stepper-element='content' className='w-xl-800px'>
+                  <PhoneVerification userType={userType} />
+                </div>
+
                 <div data-kt-stepper-element='content' className='w-xl-800px'>
                   <Step3 userType={userType} userTypeFull={userTypeFull} />
                 </div>

@@ -1,21 +1,25 @@
 // @ts-ignore
 import React, {FC, useMemo, useState} from 'react'
-import {Field, ErrorMessage} from 'formik'
+import {Field, ErrorMessage, FormikValues} from 'formik'
 import countryList from 'react-select-country-list'
+import Swal from 'sweetalert2'
 import {
   AfricanCountryList,
   IndustryList,
 } from '../../../../../../../_metronic/partials/content/selectionlists'
 import {OecdcountryList} from '../../../../../../../_metronic/partials/content/selectionlists/oecdcountrylist'
-import Input, {getCountries, getCountryCallingCode} from 'react-phone-number-input'
+import Input, {
+  getCountries,
+  getCountryCallingCode,
+  isValidPhoneNumber,
+} from 'react-phone-number-input'
 import {toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
-import CountryCodeList from '../../../../../../../_metronic/partials/content/selectionlists/countries.json'
+import {CountriesCodeList} from '../../../../../../../_metronic/partials/content/selectionlists'
+import Meta from 'antd/lib/card/Meta'
 
 const Individual = () => {
   // const countryOptions = useMemo(() => countryList().getData(), [])
-  const [phoneIsConfirmed, setPhoneIsConfirmed] = useState()
-  const [phoneNumber, setPhoneNumber] = useState()
-  const [phoneCode, setPhoneCode] = useState('+1')
+
   const [selectedCountry, setSelectedCountry] = useState('united states')
 
   const areaOptions = [
@@ -88,100 +92,31 @@ const Individual = () => {
       </div>
 
       <div className='fv-row mb-10'>
-        <label className='form-label required'>Primary Phone Number</label>
-        <span className='d-flex me-2'>
-          <div className='me-1'>
-            <button
-              className='btn btn-outline btn-active-light-primary dropdown-toggle'
-              type='button'
-              data-bs-toggle='dropdown'
-              aria-haspopup='true'
-              aria-expanded='false'
-            >
-              <span className='flagstrap-icon mw-100'>
-                <img
-                  className='mw-15px m-0 me-2'
-                  src={toAbsoluteUrl(`/media/flags/${selectedCountry}.svg`)}
-                />
-                {phoneCode}
-              </span>
-            </button>
-
-            <div
-              className='dropdown-menu menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-6 h=300px py-4 overflow-scroll'
-              data-kt-menu='true'
-            >
-              <div
-                className='d-flex flex-column scroll-y me-n7 pe-7'
-                id='kt_selection_scroll'
-                data-kt-scroll='true'
-                data-kt-scroll-activate='{default: false, lg: true}'
-                data-kt-scroll-max-height='auto'
-                data-kt-scroll-dependencies='#kt_selection_header'
-                data-kt-scroll-wrappers='#kt_modal_selection_scroll'
-                data-kt-scroll-offset='125px'
-              >
-                <ul style={{listStyle: 'none'}}>
-                  {CountryCodeList.map((option) => (
-                    <a
-                      className='dropdown-item mb-2 h = 125px'
-                      onClick={() => {
-                        setPhoneCode(`+${option.phone}`)
-
-                        setSelectedCountry(option.label)
-                      }}
-                    >
-                      <li value={option.code} data-name={option.label}>
-                        <span className='flagstrap-icon'>
-                          <img
-                            className='mw-25px m-0 me-2'
-                            src={toAbsoluteUrl(`/media/flags/${option.label}.svg`)}
-                          />
-                        </span>
-                        {`${option.label} (+${option.phone})`}
-                      </li>
-                    </a>
-                  ))}
-                </ul>
-              </div>
+        <label className='form-label required'>Country of Residence</label>
+        <span className='d-flex flex-row'>
+          <div className='input-group-prepend'>
+            <div className='input-group' id='countryflag'>
+              <img
+                className='form-control mw-55px'
+                src={toAbsoluteUrl(`/media/flags/${selectedCountry}.svg`)}
+              />
             </div>
           </div>
-          {/* <Field
-            type='text'
-            maxLength={5}
-            name='phone.code'
-            className='form-control mw-100px'
-            placeholder='Intl code'
-          /> */}
           <Field
-            type='text'
-            maxLength={9}
-            name='phone.phonenumber'
-            className='form-control'
-            placeholder='xxx-xxx-xxxx'
+            name='countryRes'
+            className='form-select form-select-lg text-capitalize'
+            value={selectedCountry}
           />
-        </span>
 
-        {/* <div className='d-flex flex-row mw-100 form-control form-control-lg form-control'>
-          <Input
-            inputStyle={{}}
-            international
-            defaultCountry='US'
-            placeholder='Enter phone number'
-            value={phoneNumber}
-            onChange={() => setPhoneNumber}
-          />
-        </div> */}
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='phone.code' component='span' />
-        </div>
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='phone.phonenumber' component='span' />
-        </div>
+          <div className='text-danger mt-2'>
+            <ErrorMessage name='countryRes' component='span' />
+          </div>
+        </span>
       </div>
 
       <div className='fv-row mb-10'>
         <label className='form-label required'>Country of Origin</label>
+
         <Field component='select' name='countryOrig' className='form-select form-select-lg'>
           <option value=''>Select a country</option>
           <AfricanCountryList />
@@ -189,17 +124,6 @@ const Individual = () => {
 
         <div className='text-danger mt-2'>
           <ErrorMessage name='countryOrig' component='span' />
-        </div>
-      </div>
-
-      <div className='fv-row mb-10'>
-        <label className='form-label required'>Country of Residence</label>
-        <Field component='select' name='countryRes' className='form-select form-select-lg'>
-          <OecdcountryList />
-        </Field>
-
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='countryRes' component='span' />
         </div>
       </div>
 
