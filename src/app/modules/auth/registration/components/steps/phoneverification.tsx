@@ -122,14 +122,36 @@ const PhoneVerification: FC<Props> = ({userType}) => {
         </div>
       </div>
 
-      {/* {!isValidPhone && (
+      {!isValidPhone && (
         <div
-          className='btn btn-primary btn-active-ligth-success'
+          className='btn btn-light btn-active-ligth-success'
           onClick={async () => await handlePhoneValidate(`${phoneCode}${phoneNumber}`)}
         >
-          Continue
+          Verify Phone Number
         </div>
-      )} */}
+      )}
+      {/* <div className=' fv-row mb-10'>
+              {!isValidPhone && (
+                <div
+                  className='btn btn-primary btn-active-ligth-success'
+                  onClick={async () =>
+                    await handlePhoneValidate(`${phoneCode}${formik.values.phone}`)
+                  }
+                >
+                  Continue
+                </div>
+              )}
+
+              {isValidPhone && (
+                <div
+                  className='btn btn-success btn-active-ligth-success'
+                  data-bs-target='#modal_phoneVerification'
+                  data-bs-toggle='modal'
+                >
+                  Verify
+                </div>
+              )}
+            </div> */}
 
       {/* <div className='mb-10 fv-row'>
         <label className='form-label mb-3'>Phone Number</label>

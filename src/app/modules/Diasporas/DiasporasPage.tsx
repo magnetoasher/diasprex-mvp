@@ -127,10 +127,10 @@ export const DiasporasPage: FC = () => {
                 data-bs-parent='#year-accordion'
                 aria-labelledby='year-heading'
               >
-                <div className='card-body '>
+                <div className=' '>
                   <div id='month-accordion'>
                     <div className='card'>
-                      <div className='card-header' id='month-heading'>
+                      <div className='' id='month-heading'>
                         <h5 className='mb-0'>
                           <a
                             className='collapsed   fs-2'
@@ -152,13 +152,10 @@ export const DiasporasPage: FC = () => {
                             data-bs-parent='#month-accordion'
                             aria-labelledby='month-heading'
                           >
-                            <div className='card-body'>
+                            <div className=''>
                               <div id={`${profile.fName}${profile.lName}-accordion`}>
                                 {/* <div className='card'> */}
-                                <div
-                                  className='card-header'
-                                  id={`${profile.fName}${profile.lName}-heading`}
-                                >
+                                <div className='' id={`${profile.fName}${profile.lName}-heading`}>
                                   <h5 className='mb-0'>
                                     <a
                                       className='collapsed'
