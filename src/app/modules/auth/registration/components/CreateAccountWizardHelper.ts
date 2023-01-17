@@ -56,22 +56,22 @@ const createAccountSchemas = [
     phonenumber: Yup.string().required().label('Phone Number'),
   }),
   Yup.object().shape({
-    // fName: Yup.string()
-    //   .min(1, 'Minimum 1 symbols')
-    //   .max(50, 'Maximum 50 symbols')
-    //   .required()
-    //   .label('First name'),
-    // lName: Yup.string()
-    //   .min(1, 'Minimum 1 symbols')
-    //   .max(50, 'Maximum 50 symbols')
-    //   .required()
-    //   .label('Last name'),
-    // email: Yup.string()
-    //   .email('Wrong email format')
-    //   .min(3, 'Minimum 3 symbols')
-    //   .max(50, 'Maximum 50 symbols')
-    //   .required()
-    //   .label('Email'),
+    fName: Yup.string()
+      .min(1, 'Minimum 1 symbols')
+      .max(50, 'Maximum 50 symbols')
+      .required()
+      .label('First name'),
+    lName: Yup.string()
+      .min(1, 'Minimum 1 symbols')
+      .max(50, 'Maximum 50 symbols')
+      .required()
+      .label('Last name'),
+    email: Yup.string()
+      .email('Wrong email format')
+      .min(3, 'Minimum 3 symbols')
+      .max(50, 'Maximum 50 symbols')
+      .required()
+      .label('Email'),
     // phone: Yup.string()
     //   .min(3, 'Minimum 3 symbols')
     //   .max(50, 'Maximum 50 symbols')

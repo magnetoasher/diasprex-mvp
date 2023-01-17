@@ -64,6 +64,18 @@ export function GenericMenu() {
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>User</span>
         </div>
       </div>
+      <AsideMenuItemWithSub
+        to='profile'
+        icon='/media/icons/duotune/art/art008.svg'
+        title='My Account'
+        fontIcon='bi-app-indicator'
+      >
+        <AsideMenuItem to='profile/overview' title='Profile Overview' hasBullet={true} />
+        <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
+        <AsideMenuItem to='profile/subscription' title='Subscription' hasBullet={true} />
+        {/* <AsideMenuItem to='profile/loans' title='Loans' hasBullet={true} />
+        <AsideMenuItem to='profile/statements' title='Statements' hasBullet={true} /> */}
+      </AsideMenuItemWithSub>
 
       <AsideMenuItem
         to='my_opportunities'
@@ -77,19 +89,6 @@ export function GenericMenu() {
         title='My Proposals'
         fontIcon='bi-layers'
       />
-
-      <AsideMenuItemWithSub
-        to='profile'
-        icon='/media/icons/duotune/art/art008.svg'
-        title='My Account'
-        fontIcon='bi-app-indicator'
-      >
-        <AsideMenuItem to='profile/overview' title='Profile Overview' hasBullet={true} />
-        <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
-        <AsideMenuItem to='profile/subscription' title='Subscription' hasBullet={true} />
-        <AsideMenuItem to='profile/loans' title='Loans' hasBullet={true} />
-        <AsideMenuItem to='profile/statements' title='Statements' hasBullet={true} />
-      </AsideMenuItemWithSub>
 
       <AsideMenuItemWithSub
         to='remittance'

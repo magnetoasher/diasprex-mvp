@@ -70,8 +70,8 @@ export function Enabler() {
         <AsideMenuItem to='profile/overview' title='Profile Overview' hasBullet={true} />
         <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
         <AsideMenuItem to='profile/subscription' title='Subscription' hasBullet={true} />
-        <AsideMenuItem to='profile/loans' title='Loans' hasBullet={true} />
-        <AsideMenuItem to='profile/statements' title='Statements' hasBullet={true} />
+        {/* <AsideMenuItem to='profile/loans' title='Loans' hasBullet={true} />
+        <AsideMenuItem to='profile/statements' title='Statements' hasBullet={true} /> */}
         {/* <AsideMenuItem to='profile/account' title='Account' hasBullet={true} /> */}
       </AsideMenuItemWithSub>
 
