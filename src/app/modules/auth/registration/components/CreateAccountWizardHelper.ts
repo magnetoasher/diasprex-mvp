@@ -10,11 +10,8 @@ export interface ICreateAccount {
   countryOrig: string
   countryRes: string
   accountType: string
+  phonenumber: string
 
-  phone: {
-    code: string
-    phonenumber: string
-  }
   profession: string
   proffield: string
   degree?: string
@@ -55,6 +52,9 @@ const createAccountSchemas = [
   Yup.object({
     accountType: Yup.string().required().label('Account Type'),
   }),
+  Yup.object({
+    phonenumber: Yup.string().required().label('Phone Number'),
+  }),
   Yup.object().shape({
     fName: Yup.string()
       .min(1, 'Minimum 1 symbols')
@@ -78,7 +78,6 @@ const createAccountSchemas = [
     //   .matches(phoneRegExp, 'Phone number is not valid')
     //   .required()
     //   .label('Primary phone'),
-
     // countryRes: Yup.string().required().label('Country of Residence'),
     // countryOrig: Yup.string().required().label('Country of Origin'),
     // profession: Yup.string().required().label('Profession'),
@@ -97,9 +96,7 @@ const createAccountSchemas = [
     // orgRegState: Yup.string().required().label('Organization registration state'),
     // orgRole: Yup.string().required().label('Organization role'),
     // orgType: Yup.string().required().label('Organization type'),
-
     // industry: Yup.string().required().label('Industry'),
-
     // dpxterms: Yup.bool().oneOf([true], 'You need to accept the general terms and conditions'),
     // enablerterms: Yup.bool().oneOf([true], 'You need to accept the Enablers terms and conditions'),
     // sponsorterms: Yup.bool().oneOf([true], 'You need to accept the Sponsors terms and conditions'),
@@ -123,10 +120,8 @@ const inits: ICreateAccount = {
   lName: '',
   mInitial: '',
   email: '',
-  phone: {
-    code: '',
-    phonenumber: '',
-  },
+  phonenumber: '',
+
   countryOrig: '',
   countryRes: '',
   profession: '',

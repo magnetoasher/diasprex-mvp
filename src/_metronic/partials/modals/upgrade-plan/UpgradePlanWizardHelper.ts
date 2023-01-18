@@ -31,7 +31,7 @@ const upgradePlanSchemas = [
   }),
 
   Yup.object({
-    paymethod: Yup.string().required('Select a payment method'),
+    paymethod: Yup.string(),
     nameOnCard: Yup.string().when('paymethod', {
       is: 'credit',
       then: Yup.string().required().label('Name on Card'),
@@ -75,12 +75,12 @@ const inits: IUpgradePlan = {
   businessType: '1',
   businessDescription: '',
   businessEmail: 'corp@support.com',
-  nameOnCard: 'Max Doe',
-  cardNumber: '4111 1111 1111 1111',
-  cardExpiryMonth: '1',
-  cardExpiryYear: '2025',
-  cardCvv: '123',
-  saveCard: '1',
+  nameOnCard: '',
+  cardNumber: '',
+  cardExpiryMonth: '',
+  cardExpiryYear: '',
+  cardCvv: '',
+  saveCard: '',
 }
 
 export {upgradePlanSchemas, inits}

@@ -28,12 +28,14 @@ const UpgradePlanHorizontal: FC = () => {
       title: 'Credit',
 
       value1: 'credit',
+      default: true,
     },
 
     {
       title: 'Checking',
 
       value1: 'checking',
+      default: false,
     },
   ]
 
@@ -172,7 +174,7 @@ const UpgradePlanHorizontal: FC = () => {
                                       className='form-check-input-type'
                                       type='radio'
                                       name='paymethod'
-                                      value={type.value1}
+                                      value={payMethod}
                                       checked={payMethod === type.value1}
                                       // onChange={(e) => setCurrentState(e.target.value)}
                                     />

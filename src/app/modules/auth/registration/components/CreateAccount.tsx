@@ -75,26 +75,26 @@ const CreateAccount: FC = () => {
     setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1)
 
     if (stepper.current.currentStepIndex !== (userTypeFull === 'basic_enabler' ? 4 : 6)) {
-      if (stepper.current.currentStepIndex == 1) {
-        if (userTypeFull == 'basic_enabler' || 'super_enabler' || 'standard_enabler') {
-          setCategoryQuestion(questions.individual)
-          setIsShowAlert(true)
-        } else if (userType == 'business_enabler') {
-          setCategoryQuestion(questions.business)
-          setIsShowAlert(true)
-        } else if (userType == 'sponsor') {
-          setCategoryQuestion(questions.sponsor)
-          setIsShowAlert(true)
-        } else {
-          stepper.current.goNext()
-        }
-      } else {
-        // data capture here
-        actions.setSubmitting(true)
+      // if (stepper.current.currentStepIndex == 1) {
+      //   if (userTypeFull == 'basic_enabler' || 'super_enabler' || 'standard_enabler') {
+      //     setCategoryQuestion(questions.individual)
+      //     setIsShowAlert(true)
+      //   } else if (userType == 'business_enabler') {
+      //     setCategoryQuestion(questions.business)
+      //     setIsShowAlert(true)
+      //   } else if (userType == 'sponsor') {
+      //     setCategoryQuestion(questions.sponsor)
+      //     setIsShowAlert(true)
+      //   } else {
+      //     stepper.current.goNext()
+      //   }
+      // } else {
+      // data capture here
+      actions.setSubmitting(true)
 
-        console.log('FormValues', values)
-        stepper.current.goNext()
-      }
+      console.log('FormValues', values)
+      stepper.current.goNext()
+      // }
     } else {
       // stepper.current.goto(1)
       //
@@ -122,11 +122,11 @@ const CreateAccount: FC = () => {
 
     loadStepper()
   }, [stepperRef])
+
   const onConfirm = () => {
     if (stepper.current.currentStepIndex == 6) {
       navigate({
-        pathname: '/dashboard',
-        search: `?userType=${userType}&setUserTypeFull=${userTypeFull}`,
+        pathname: '/',
       })
     } else {
       stepper.current.goNext()
@@ -277,8 +277,8 @@ const CreateAccount: FC = () => {
         </div>
 
         <div className='d-flex flex-row-fluid flex-center bg-white rounded '>
-          {/* <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={submitStep}> */}
-          <Formik initialValues={initValues} onSubmit={submitStep}>
+          <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={submitStep}>
+            {/* <Formik initialValues={initValues} onSubmit={submitStep}> */}
             {({}) => (
               <Form
                 className={

@@ -120,6 +120,8 @@ export function AdminMenu() {
       >
         <AsideMenuItem to='profile/overview' title='Overview' hasBullet={true} />
         <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
+        {/* <AsideMenuItem to='profile/loans' title='Loans' hasBullet={true} />
+        <AsideMenuItem to='profile/statements' title='Statements' hasBullet={true} /> */}
       </AsideMenuItemWithSub>
 
       <AsideMenuItem
@@ -139,8 +141,6 @@ export function AdminMenu() {
         <AsideMenuItem to='remittance/preferences' title='Preferences' hasBullet={true} />
         <AsideMenuItem to='remittance/sendmoney' title='Send Money' hasBullet={true} />
         <AsideMenuItem to='remittance/retainer' title='Remittance Retainer' hasBullet={true} />
-        <AsideMenuItem to='remittance/loans' title='Loans' hasBullet={true} />
-        <AsideMenuItem to='remittance/statements' title='Statements' hasBullet={true} />
       </AsideMenuItemWithSub>
 
       <AsideMenuItem
