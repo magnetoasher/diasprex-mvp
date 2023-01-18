@@ -468,7 +468,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                     <FeedbackModal
                       id='kt_oppfeedback_modal'
                       title1={`Provide a feedback for opportunity ${oppData?.id}`}
-                      title2='Type your feedback  (max of 700 characters)'
+                      title2='Type your feedback  (max of 700 characters) New feedback will replace any previous one for this opportunity'
                       confirm='Submit'
                       classname='btn btn-primary'
                       oppId={oppData?.id}

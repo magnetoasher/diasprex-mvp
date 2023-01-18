@@ -1,6 +1,7 @@
-import { CustomUserClaim } from '@okta/okta-auth-js'
+import {CustomUserClaim} from '@okta/okta-auth-js'
 import {KTSVG} from '../../../helpers'
-import { useState } from 'react'
+import {useState} from 'react'
+import {Opps} from '../../../../app/modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 
 type Props = {
   id: string
@@ -14,26 +15,30 @@ type Props = {
 }
 
 type IComment = {
+  id: string
   opportunityUuid?: CustomUserClaim | CustomUserClaim[]
   enablerUserId?: CustomUserClaim | CustomUserClaim[]
   message?: string
+  status: string
 }
 
 export function FeedbackModal(props: Props) {
-  const [inputField , setInputField] = useState<IComment>({
-    message: ''
+  const [inputField, setInputField] = useState<Partial<IComment>>({
+    message: '',
   })
 
-  const inputsHandler = (e: any) =>{
+  const inputsHandler = (e: any) => {
     setInputField({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     })
   }
 
   const provideFeedback = (e: any) => {
     const data = {
+      id: `${props.oppId}/${props.userId}`,
       opportunityUuid: props.oppId,
       enablerUserId: props.userId,
+      status: 'new',
       ...inputField,
     }
     props.ConfirmHandler(data)
@@ -79,11 +84,7 @@ export function FeedbackModal(props: Props) {
               <button type='button' className='btn btn-light' data-bs-dismiss='modal'>
                 Cancel
               </button>
-              <button
-                type='submit'
-                className={props.classname}
-                data-bs-dismiss='modal'
-              >
+              <button type='submit' className={props.classname} data-bs-dismiss='modal'>
                 {props.confirm}
               </button>
             </div>

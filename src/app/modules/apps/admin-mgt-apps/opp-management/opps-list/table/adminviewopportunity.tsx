@@ -251,6 +251,13 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                           Title: {oppData?.title}
                         </div>
                       </div>
+                      <div className='d-flex mb-4'>
+                        <span
+                          className={`badge badge-${badgeColor} fs-4 text-uppercase me-3 py-3 px-3`}
+                        >
+                          {oppData?.status}
+                        </span>
+                      </div>
                     </div>
                     <div className='d-flex flex-wrap justify-content-start'>
                       <div className='d-flex flex-wrap'>
