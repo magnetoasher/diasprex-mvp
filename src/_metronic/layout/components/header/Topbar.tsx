@@ -8,6 +8,7 @@ import {
   Search,
   ThemeModeSwitcher,
 } from '../../../partials'
+import {AdminHeaderUserMenu} from '../../../partials/layout/header-menus/AdminHeaderUserMenu'
 import {useLayout} from '../../core'
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
@@ -103,7 +104,7 @@ const Topbar: FC = () => {
             alt='metronic'
           />
         </div>
-        <HeaderUserMenu />
+        {userType === 'admin' ? <AdminHeaderUserMenu /> : <HeaderUserMenu />}
 
         {/* end::Toggle */}
       </div>

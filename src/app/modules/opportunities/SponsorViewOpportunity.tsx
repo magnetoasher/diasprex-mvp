@@ -204,15 +204,77 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   </label>
                 </div>
 
-                <div>
-                  <label
-                    style={{
-                      textAlign: 'justify',
-                      fontSize: '14px',
-                    }}
-                  >
-                    {oppData?.summary}
-                  </label>
+                <div className=''>
+                  <ol>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Market Need / Problem</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.marketneed}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Market Size</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.marketsize}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Product and Services</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.productservices}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Developmental Impact</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.devimpact}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Business Model</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.businessmodel}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Value Proposition</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.valueprop}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Go-To-Market Strategy</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.gotomarket}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Market Size</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.competitor}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Competitive Landscape</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.complandscape}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Team and Expertise</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.companyteam}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Company</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.company}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Diaspora Engagement</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.diaspengagement}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Traction</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.traction}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Next Milestone</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.nextmilestone}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Asks</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.asks}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Exit Strategy</label>
+                    </li>
+                    <p className=''> {oppData?.oppdesc?.exit}</p>
+                    <li className='text-primary fw-bold fs-6'>
+                      <label className=''>Video Url</label>
+                    </li>
+                    <p className=''> {oppData?.videourl}</p>
+                  </ol>
                 </div>
               </div>
 

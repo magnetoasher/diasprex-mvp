@@ -101,7 +101,10 @@ const EnablerOpportunityCard2: FC<Props> = ({
               <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
                 <div className='d-flex flex-column'>
                   <div className='d-flex flex-wrap fw-semibold mb-4 fs-5 text-dark'>
-                    TITLE: {opp?.title}
+                    TITLE:{' '}
+                    <Link className='mx-3 text-dark text-muted' to={`/opportunities/${opp?.uuid}`}>
+                      {opp?.title}
+                    </Link>
                   </div>
                 </div>
                 <div className={`col-lg-3 d-flex align-items-start justify-content-end`}>

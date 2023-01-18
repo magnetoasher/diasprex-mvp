@@ -1,6 +1,7 @@
 import {ID, Response} from '../../../../../../../_metronic/helpers'
 export type User = {
   id?: ID
+  dpxid?: ID
   usertype?: string
   usertier?: string
   name?: string

@@ -19,10 +19,8 @@ const HeaderUserMenu: FC = () => {
     userType === 'sponsor' ? 'primary' : userType === 'admin' ? 'info' : 'success'
 
   useEffect(() => {
-    userType === 'admin'
-      ? setUserLabel('Admin') //Temporary placeholder for admin user type
-      : setUserLabel(userTypeFull)
-  }, [userTypeFull, userType])
+    setUserLabel(userTypeFull)
+  }, [userTypeFull])
 
   return (
     <div

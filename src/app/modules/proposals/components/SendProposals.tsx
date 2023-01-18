@@ -23,6 +23,8 @@ import Swal from 'sweetalert2'
 import {RootState} from '../../../../setup'
 import {ListLoading} from '../../apps/admin-mgt-apps/core/loading/ListLoading'
 
+import {getUniqueDPXId} from '../../../../_metronic/assets/ts/_utils'
+
 const mapState = (state: RootState) => ({opps: state.opps, proposal: state.proposals})
 const connector = connect(mapState, {...opps.actions, ...proposal.actions})
 type PropsFromRedux = ConnectedProps<typeof connector>
@@ -72,10 +74,12 @@ const SendProposals: React.FC<PropsFromRedux> = (props) => {
     validateOnChange: false,
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
+      const dpxNumber = getUniqueDPXId('DP')
       const data =
         status === 'pending'
           ? {
               ...values,
+              dpxid: dpxNumber,
               id: enablerId
                 ? `${propData.opportunityUuid}/${authState?.accessToken?.claims.uid}`
                 : `${oppData.uuid}/${authState?.accessToken?.claims.uid}`,
@@ -91,6 +95,7 @@ const SendProposals: React.FC<PropsFromRedux> = (props) => {
           : {
               ...values,
               id: `${oppData.uuid}/${authState?.accessToken?.claims.uid}`,
+              dpxid: dpxNumber,
               status: status,
               opportunityUuid: oppData.uuid,
               opportunityObject: oppData,

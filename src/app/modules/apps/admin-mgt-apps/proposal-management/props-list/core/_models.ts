@@ -3,6 +3,7 @@ import * as Yup from 'yup'
 import {Opps} from '../../../opp-management/opps-list/core/_models'
 export type Proposal = {
   id?: ID
+  dpxid?: ID
   title?: string
   thumbnail?: string
   enablerName?: string
