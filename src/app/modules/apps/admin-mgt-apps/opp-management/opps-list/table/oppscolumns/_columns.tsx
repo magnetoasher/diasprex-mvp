@@ -108,7 +108,7 @@ const OppsColumns: ReadonlyArray<Column<Opps>> = [
       <OppsCustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />
     ),
     id: 'actions',
-    Cell: ({...props}) => <OppsActionsCell id={props.data[props.row.index].id} />,
+    Cell: ({...props}) => <OppsActionsCell opp={props.data[props.row.index]} />,
   },
 ]
 

@@ -9,28 +9,34 @@ import {StarOutlined, ShareAltOutlined} from '@ant-design/icons'
 import {useDispatch, connect, ConnectedProps} from 'react-redux'
 import {useNavigate, useParams} from 'react-router-dom'
 import {useOktaAuth} from '@okta/okta-react'
-import {OppsDA} from './component/oda'
-import {SubscriptionRequired} from './component/subscription-error-modal'
-import * as opps from './redux/OpportunityRedux'
+import * as opps from '../../../../../opportunities/redux/OpportunityRedux'
 import {RootState} from '../../../setup'
 import {Opps, Feedback} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
-import {toAbsoluteUrl} from '../../../_metronic/helpers'
+import {toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
 import Swal from 'sweetalert2'
-import {FeedbackModal} from '../../../_metronic/partials/modals/confirm-action/feedbackform'
-import {ListLoading} from '../apps/admin-mgt-apps/core/loading/ListLoading'
-import {provideFeedbackAPI} from './redux/OpportunityAPI'
+import {ListLoading} from '../../../core/loading/ListLoading'
+import {
+  acknowledgeOdaAPI,
+  provideFeedbackAPI,
+  supportOppAPI,
+} from '../../../../../opportunities/redux/OpportunityAPI'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
+const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   const {authState} = useOktaAuth()
   const {id: id} = useParams()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [oppData, setOppData] = useState<Opps>({})
+  const [feedbacks, setFeedbacks] = useState<Feedback>([])
+  const [noFeedback, setNoFeedback] = useState(false)
   const [api, contextHolder] = notification.useNotification()
+  const [isShowDetail, setIsShowDetail] = useState(false)
+  const userTypeFull = localStorage.getItem('userTypeFull')
+  const userType = localStorage.getItem('userType')
 
   useEffect(() => {
     dispatch(props.getOppByIdRequest(id))
@@ -40,13 +46,149 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     setOppData(props.opps.opp[0])
   }, [props.opps])
 
+  useEffect(() => {
+    const params = {
+      opportunityUuid: id,
+      enablerUserId: authState?.accessToken?.claims.uid,
+      status: 'new',
+    }
+    dispatch(props.getFeedbacksRequest(params))
+  }, [])
+
+  useEffect(() => {
+    if (props.opps.feedbacks.length > 0) {
+      setFeedbacks(props.opps.feedbacks)
+    } else {
+      setNoFeedback(true)
+    }
+  }, [props.opps.feedbacks])
+  console.log('Feedback', noFeedback)
+
+  const openNotification = (placement, message) => {
+    api.info({
+      message: `${message} !`,
+      description: <Context.Consumer>{({}) => `Project: ${oppData?.title}`}</Context.Consumer>,
+      placement,
+    })
+  }
+  const openNotificationWarning = (placement, message) => {
+    api.warning({
+      message: `${message} !`,
+      description: <Context.Consumer>{({}) => `Project: ${oppData?.title}`}</Context.Consumer>,
+      placement,
+    })
+  }
   const Context = React.createContext({
     name: 'Default',
   })
 
+  const handleDetails = () => {
+    if (userTypeFull === 'basic_enabler') {
+      openNotificationWarning('bottomRight', 'It requires paid subscription and ODA agreement')
+    } else {
+      setIsShowDetail(!isShowDetail)
+      if (!isShowDetail) {
+        acknowledgeOdaAPI({
+          enablerUserId: authState?.accessToken?.claims.uid,
+          opportunityUuid: id,
+        }).then((res) => {
+          if (res.status === 200) {
+            dispatch(props.getOppByIdRequest(id))
+          }
+        })
+      }
+    }
+  }
+
+  const closeModalHandler = () => {
+    setModalOpen(false)
+    setIsShowDetail(!isShowDetail)
+  }
+
+  const handleFollowOpp = async () => {
+    const data = {
+      enablerUserId: authState?.accessToken?.claims.uid,
+      sponsorUserId: oppData.sponsorUserId,
+      enablerName: 'Art Beyond Sight',
+      opportunityUuid: oppData.uuid,
+      status: 'followed',
+      opportunityObject: oppData,
+    }
+    try {
+      await axios
+        .post(`${process.env.REACT_APP_DIASPREX_API_URL}/proposals/create`, data)
+        .then((res) => {
+          if (res.status === 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Successfully done',
+            })
+            dispatch(props.getOppByIdRequest(id))
+          }
+        })
+        .catch((error) => error)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleUnfollowOpp = async () => {
+    const data = {
+      enablerUserId: authState?.accessToken?.claims.uid,
+      sponsorUserId: oppData.sponsorUserId,
+      enablerName: 'Art Beyond Sight',
+      opportunityUuid: oppData.uuid,
+      status: 'unfollowed',
+      opportunityObject: oppData,
+    }
+    try {
+      await axios
+        .post(`${process.env.REACT_APP_DIASPREX_API_URL}/proposals/create`, data)
+        .then((res) => {
+          if (res.status === 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Successfully done',
+            })
+            dispatch(props.getOppByIdRequest(id))
+          }
+        })
+        .catch((error) => error)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleSupportOpp = async () => {
+    try {
+      await supportOppAPI({
+        enablerUserId: authState?.accessToken?.claims.uid,
+        opportunityUuid: oppData.uuid,
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'You have supported this opportunity',
+            })
+            dispatch(props.getOppByIdRequest(id))
+          }
+        })
+        .catch((error) => error)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   const badgeColor = oppData?.open ? 'success' : 'danger'
   const dealTypeLength = oppData?.dealtype?.length! - 1
-  const handleFeedbackSubmit = () => {}
+  const handleFeedbackSubmit = (data) => {
+    provideFeedbackAPI(data)
+  }
+
   return (
     <>
       {props.opps.isLoading ? (
@@ -109,13 +251,6 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                           Title: {oppData?.title}
                         </div>
                       </div>
-                      <div className='d-flex mb-4'>
-                        <span
-                          className={`badge badge-${badgeColor} fs-4 text-uppercase me-3 py-3 px-3`}
-                        >
-                          {oppData?.status}
-                        </span>
-                      </div>
                     </div>
                     <div className='d-flex flex-wrap justify-content-start'>
                       <div className='d-flex flex-wrap'>
@@ -163,6 +298,18 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                 </div>
               </div>
             </div>
+
+            <div className='actions d-flex justify-content-end'>
+              <button
+                type='button'
+                className='btn btn-light btn-active-light-primary'
+                onClick={() => {
+                  navigate('/table/opps_management/opportunities')
+                }}
+              >
+                Back To Table
+              </button>
+            </div>
           </div>
 
           <div class='card'>
@@ -179,7 +326,6 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   )}
                 </span>
               </div>
-
               <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                 <div>
                   <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Summary</label>
@@ -196,9 +342,8 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   </label>
                 </div>
               </div>
-
               <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
-                <div className='col-xl-6'>
+                <div className=''>
                   <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
                     Opportunity Details
                   </label>
@@ -215,9 +360,8 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   </label>
                 </div>
               </div>
-
               <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
-                <div className='col-xl-6 mt-10'>
+                <div className=''>
                   <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
                     Sponsor's Details
                   </label>
@@ -235,20 +379,60 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                 </div>
               </div>
               <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
-                <div className='col-xl-6 mt-10'>
+                <div className=''>
                   <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Feedbacks</label>
                 </div>
 
-                <div>
-                  <label
-                    style={{
-                      textAlign: 'justify',
-                      fontSize: '14px',
-                    }}
-                  >
-                    ALL APPROVED FEEDBACKS FOR THIS OPP GOES HERE
-                  </label>
-                </div>
+                {feedbacks?.map((feedback) => (
+                  <div className=''>
+                    <div
+                      key={`${feedback.opportunityUuid + feedback.enablerUserId}`}
+                      className='d-flex flex-column mb-2'
+                    >
+                      <div className=''>
+                        <a className='text-gray-800 fs-6 text-hover-primary me-3'>
+                          {feedback.enablerUserId}
+                        </a>
+
+                        <span
+                          className={`badge badge-light-${
+                            feedback.status === 'new'
+                              ? 'info'
+                              : feedback.status === 'approved'
+                              ? 'success'
+                              : 'danger'
+                          } text-uppercase`}
+                        >
+                          {feedback.status}
+                        </span>
+                      </div>
+                      <label>{feedback.message}</label>
+                    </div>
+
+                    <div className='d-flex justify-content-end'>
+                      <ul className='nav  mb-3'>
+                        <li>
+                          <a
+                            className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
+                            onClick={() => {}}
+                          >
+                            Approve
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
+                            onClick={() => {}}
+                          >
+                            Delete
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div className='separator separator-dashed'></div>
+                  </div>
+                ))}
+                {/* {noFeedback && <div className='d-flex text-end'>No Feedback</div>} */}
               </div>
             </div>
           </div>
@@ -259,4 +443,4 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   )
 }
 
-export default connector(SponsorViewOpportunity)
+export default connector(AdminViewOpportunity)

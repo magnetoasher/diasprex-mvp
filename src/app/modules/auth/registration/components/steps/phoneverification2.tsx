@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react'
+import React, {FC, useState, useEffect} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../../../../_metronic/helpers'
 import {Field, ErrorMessage} from 'formik'
 import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
@@ -8,17 +8,46 @@ import {
   SponsorCountryList,
 } from '../../../../../../_metronic/partials/content/selectionlists'
 import {VerificationModal} from '../../../components/verificationmodal'
+import Input, {getCountries, getCountryCallingCode} from 'react-phone-number-input/input'
+import en from 'react-phone-number-input/locale/en.json'
+import 'react-phone-number-input/style.css'
 
 type Props = {
   userType?: any
 }
-const PhoneVerification: FC<Props> = ({userType}) => {
+const PhoneVerification2: FC<Props> = ({userType}) => {
+  const [phoneNumber, setPhoneNumber] = useState()
+  const [country, setCountry] = useState()
   const [phoneIsConfirmed, setPhoneIsConfirmed] = useState()
-  const [phoneNumber, setPhoneNumber] = useState('')
+
   const [isValidPhone, setIsValidPhone] = useState(false)
   const [phoneCode, setPhoneCode] = useState('+1')
   const [selectedCountry, setSelectedCountry] = useState('united states')
   const CountriesList = userType === 'enabler' ? CountriesCodeList : SponsorCountryList
+
+  const handleNavigator = (pos: any) => {
+    const {latitude, longitude} = pos.coords
+    const userCountryCode = lookupCountry({latitude, longitude})
+    // setCountry(userCountryCode)
+  }
+
+  const lookupCountry = ({latitude, longitude}: any) => {
+    const URL = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.REACT_APP_DIASPREX_GOOGLE_MAP_API_KEY}`
+    const locationData = async () => await fetch(URL).then((res) => res.json())
+    console.log('Location', locationData)
+    // const [{address_components}] = locationData.results.filter(({types}:any) =>
+    //   types.includes('country')
+    // )
+    // const [{short_name}] = address_components
+    // return short_name
+  }
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(handleNavigator, () =>
+      console.warn('permission was rejected')
+    )
+  }, [])
+
   const handlePhoneValidate = (value: any) => {
     const isValid = isValidPhoneNumber(value)
 
@@ -44,6 +73,16 @@ const PhoneVerification: FC<Props> = ({userType}) => {
         },
       })
   }
+  const CountrySelect = ({value, onChange, labels, ...rest}: any) => (
+    <select {...rest} value={value} onChange={(event) => onChange(event.target.value || undefined)}>
+      <option value=''>{labels.ZZ}</option>
+      {getCountries().map((country) => (
+        <option key={country} value={country}>
+          {labels[country]} +{getCountryCallingCode(country)}
+        </option>
+      ))}
+    </select>
+  )
   return (
     <div className='w-100'>
       <div className='pb-10 pb-lg-15'>
@@ -60,70 +99,22 @@ const PhoneVerification: FC<Props> = ({userType}) => {
       <div className='fv-row mb-10'>
         <label className='form-label required'>Primary Phone Number</label>
         <div>
-          <span className='d-flex me-2'>
-            <div className='me-1'>
-              <button
-                className='btn btn-outline btn-active-light-primary dropdown-toggle'
-                type='button'
-                data-bs-toggle='dropdown'
-                aria-haspopup='true'
-                aria-expanded='false'
-              >
-                <span className='flagstrap-icon mw-100'>
-                  <img
-                    className='mw-15px m-0 me-2'
-                    src={toAbsoluteUrl(`/media/flags/${selectedCountry}.svg`)}
-                  />
-                  {phoneCode}
-                </span>
-              </button>
-
-              <div
-                className='dropdown-menu menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-6 h=300px py-4 overflow-scroll'
-                data-kt-menu='true'
-              >
-                <div className='scroll h-200px'>
-                  <ul style={{listStyle: 'none'}}>
-                    {CountriesList.map((option) => (
-                      <a
-                        className='dropdown-item mb-2 h = 125px'
-                        onClick={() => {
-                          setPhoneCode(`+${option.phone}`)
-                          setIsValidPhone(false)
-
-                          setSelectedCountry(option.label)
-                        }}
-                      >
-                        <li value={option.code} data-name={option.label}>
-                          <span className='flagstrap-icon'>
-                            <img
-                              className='mw-25px m-0 me-2'
-                              src={toAbsoluteUrl(`/media/flags/${option.label}.svg`)}
-                            />
-                          </span>
-                          {`${option.label} (+${option.phone})`}
-                        </li>
-                      </a>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <Field
-              type='text'
-              name='phonenumber'
-              className='form-control form-control-lg'
-              placeholder='Enter your phone number'
-              // onChange={(e: any) => {
-              //   setPhoneNumber(e.target.value)
-              // }}
-            />
-          </span>
+          <label htmlFor='countrySelect'>Country Select</label>
+          <CountrySelect labels={en} value={country} onChange={setCountry} name='countrySelect' />
         </div>
-
-        <div className='text-danger mt-2'>
+        <div>
+          <label htmlFor='phoneNumber'>Phone Number</label>
+          <Input
+            country={country}
+            value={phoneNumber}
+            onChange={() => {}}
+            placeholder='Enter phone number'
+            name='phoneNumber'
+          />
+        </div>
+        {/* <div className='text-danger mt-2'>
           <ErrorMessage name='phonenumber' component='span' />
-        </div>
+        </div> */}
       </div>
 
       {!isValidPhone && (
@@ -181,4 +172,4 @@ const PhoneVerification: FC<Props> = ({userType}) => {
   )
 }
 
-export {PhoneVerification}
+export {PhoneVerification2}

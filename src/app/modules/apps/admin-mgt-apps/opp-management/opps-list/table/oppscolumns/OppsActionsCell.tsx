@@ -1,27 +1,29 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC, useEffect} from 'react'
 import {useMutation, useQueryClient} from 'react-query'
+import {useNavigate} from 'react-router-dom'
 import {MenuComponent} from '../../../../../../../../_metronic/assets/ts/components'
 import {ID, KTSVG, QUERIES} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
+import {Opps} from '../../core/_models'
 import {deleteOpps, changeOppsStatus} from '../../core/_requests'
 
 type Props = {
-  id: ID
+  opp: Opps
 }
 
-const OppsActionsCell: FC<Props> = ({id}) => {
+const OppsActionsCell: FC<Props> = ({opp}) => {
   const {setItemIdForUpdate} = useListView()
   const {query} = useQueryResponse()
   const queryClient = useQueryClient()
-
+  const history = useNavigate()
   useEffect(() => {
     MenuComponent.reinitialization()
   }, [])
 
   const openEditModal = () => {
-    setItemIdForUpdate(id)
+    setItemIdForUpdate(opp.id)
   }
 
   // const deleteItem = useMutation(() => deleteOpps(id), {
@@ -32,21 +34,21 @@ const OppsActionsCell: FC<Props> = ({id}) => {
   //   },
   // })
 
-  const deleteOpp = useMutation(() => changeOppsStatus(id, 'deleted'), {
+  const deleteOpp = useMutation(() => changeOppsStatus(opp.id, 'deleted'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
       queryClient.invalidateQueries([`${QUERIES.OPPS_LIST}-${query}`])
     },
   })
-  const acceptOpp = useMutation(() => changeOppsStatus(id, 'accepted'), {
+  const acceptOpp = useMutation(() => changeOppsStatus(opp.id, 'accepted'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
       queryClient.invalidateQueries([`${QUERIES.OPPS_LIST}-${query}`])
     },
   })
-  const acceptOppwRevision = useMutation(() => changeOppsStatus(id, 'accepted with revision'), {
+  const acceptOppwRevision = useMutation(() => changeOppsStatus(opp.id, 'accepted with revision'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
@@ -54,14 +56,14 @@ const OppsActionsCell: FC<Props> = ({id}) => {
     },
   })
 
-  const publishOpp = useMutation(() => changeOppsStatus(id, 'published'), {
+  const publishOpp = useMutation(() => changeOppsStatus(opp.id, 'published'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
       queryClient.invalidateQueries([`${QUERIES.OPPS_LIST}-${query}`])
     },
   })
-  const rejectOpp = useMutation(() => changeOppsStatus(id, 'not accepted'), {
+  const rejectOpp = useMutation(() => changeOppsStatus(opp.id, 'not accepted'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
@@ -85,6 +87,16 @@ const OppsActionsCell: FC<Props> = ({id}) => {
         className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4'
         data-kt-menu='true'
       >
+        <div className='menu-item px-3'>
+          <a
+            className='menu-link px-3'
+            onClick={() => {
+              history(`/table/opps_management/viewopportunity/${opp.uuid}`)
+            }}
+          >
+            View
+          </a>
+        </div>
         {/* begin::Menu item */}
         <div className='menu-item px-3'>
           <a className='menu-link px-3' onClick={openEditModal}>

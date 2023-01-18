@@ -34,6 +34,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   const [api, contextHolder] = notification.useNotification()
   const [isShowDetail, setIsShowDetail] = useState(false)
   const userTypeFull = localStorage.getItem('userTypeFull')
+  const userType = localStorage.getItem('userType')
 
   useEffect(() => {
     dispatch(props.getOppByIdRequest(id))
@@ -330,7 +331,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                 {isShowDetail && (
                   <div className='actions'>
                     <button type='button' className='btn btn-primary' onClick={handleDetails}>
-                      Hide Opportunity Details
+                      Hide Details
                     </button>
                   </div>
                 )}
@@ -354,7 +355,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                           setIsShowDetail(!isShowDetail)
                       }}
                     >
-                      View Opportunity Details
+                      Show Details
                     </button>
                   </div>
                 )}
@@ -378,144 +379,140 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   )}
                 </span>
               </div>
-              <Row style={{display: 'flex', marginTop: '5px'}} gutter={[8, 16]}>
-                <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
-                  <div>
-                    <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Summary</label>
-                  </div>
 
-                  <div>
-                    <label
-                      style={{
-                        textAlign: 'justify',
-                        fontSize: '14px',
-                      }}
-                    >
-                      {oppData?.summary}
-                    </label>
-                  </div>
+              <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                <div>
+                  <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Summary</label>
                 </div>
 
-                {isShowDetail && (
+                <div>
+                  <label
+                    style={{
+                      textAlign: 'justify',
+                      fontSize: '14px',
+                    }}
+                  >
+                    {oppData?.summary}
+                  </label>
+                </div>
+              </div>
+
+              <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                <div className=''>
+                  <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
+                    Opportunity Details
+                  </label>
+                </div>
+
+                <div>
+                  <label
+                    style={{
+                      textAlign: 'justify',
+                      fontSize: '14px',
+                    }}
+                  >
+                    {oppData?.summary}
+                  </label>
+                </div>
+              </div>
+              {isShowDetail && (
+                <div>
                   <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
-                    <div className='row'>
-                      <div className='col-xl-6'>
-                        <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
-                          Opportunity Details
-                        </label>
-                      </div>
-
-                      <div>
-                        <label
-                          style={{
-                            textAlign: 'justify',
-                            fontSize: '14px',
-                          }}
-                        >
-                          {oppData?.summary}
-                        </label>
-                      </div>
+                    <div className=''>
+                      <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
+                        Sponsor's Details
+                      </label>
                     </div>
 
-                    <div className='row'>
-                      <div className='col-xl-6 mt-10'>
-                        <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
-                          Sponsor's Details
-                        </label>
-                      </div>
-
-                      <div>
-                        <label
-                          style={{
-                            textAlign: 'justify',
-                            fontSize: '14px',
-                          }}
-                        >
-                          {oppData?.summary}
-                        </label>
-                      </div>
-                    </div>
-
-                    <div className='row'>
-                      <div className='col-xl-6 mt-10'>
-                        <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
-                          Feedbacks
-                        </label>
-                      </div>
-
-                      {feedbacks?.map((feedback) => (
-                        <div key={`${feedback.opportunityUuid + feedback.enablerUserId}`}>
-                          <label
-                            style={{
-                              textAlign: 'justify',
-                              fontSize: '14px',
-                            }}
-                          >
-                            {feedback.message}
-                          </label>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className='text-center pt-15'>
-                      <button
-                        type='button'
-                        className='btn btn-light btn-active-primary me-3'
-                        data-bs-toggle='modal'
-                        data-bs-target='#kt_oppfeedback_modal'
-                        data-bs-tooltips='Provide Feedback'
-                      >
-                        Provide Feedback
-                      </button>
-                      <FeedbackModal
-                        id='kt_oppfeedback_modal'
-                        title1={`Provide a feedback for opportunity ${oppData?.id}`}
-                        title2='Type your feedback  (max of 700 characters)'
-                        confirm='Submit'
-                        classname='btn btn-primary'
-                        oppId={oppData?.id}
-                        userId={authState?.accessToken?.claims.uid}
-                        ConfirmHandler={handleFeedbackSubmit}
-                      />
-                      <button
-                        type='button'
-                        className='btn btn btn-light btn-active-primary me-3'
-                        disabled={
-                          !oppData?.open ||
-                          oppData?.supporting?.includes(authState?.accessToken?.claims.uid)
-                        }
-                        onClick={() => {
-                          handleSupportOpp()
+                    <div>
+                      <label
+                        style={{
+                          textAlign: 'justify',
+                          fontSize: '14px',
                         }}
                       >
-                        Support
-                        <Tooltip title='Support Opportunity'>
-                          <StarOutlined />
-                        </Tooltip>
-                      </button>
-
-                      <button
-                        type='button'
-                        className='btn btn-primary'
-                        disabled={
-                          !oppData?.open ||
-                          oppData?.showedinterest?.includes(authState?.accessToken?.claims.uid)
-                        }
-                        onClick={() => {
-                          userTypeFull === 'basic_enabler'
-                            ? openNotificationWarning(
-                                'bottomRight',
-                                'It requires paid subscription and ODA agreement'
-                              )
-                            : navigate(`/opportunities_center/${oppData.uuid}/send_proposals`)
-                        }}
-                      >
-                        Submit Proposal
-                      </button>
+                        {oppData?.summary}
+                      </label>
                     </div>
                   </div>
-                )}
-              </Row>
+
+                  <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                    <div className=''>
+                      <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
+                        Your Feedback
+                      </label>
+                    </div>
+
+                    {feedbacks?.map((feedback) => (
+                      <div className=''>
+                        <div
+                          key={`${feedback.opportunityUuid + feedback.enablerUserId}`}
+                          className='d-flex flex-column mb-2'
+                        >
+                          <label>{feedback.message}</label>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className='text-center pt-15'>
+                    <button
+                      type='button'
+                      className='btn btn-light btn-active-primary me-3'
+                      data-bs-toggle='modal'
+                      data-bs-target='#kt_oppfeedback_modal'
+                      data-bs-tooltips='Provide Feedback'
+                    >
+                      Provide Feedback
+                    </button>
+                    <FeedbackModal
+                      id='kt_oppfeedback_modal'
+                      title1={`Provide a feedback for opportunity ${oppData?.id}`}
+                      title2='Type your feedback  (max of 700 characters)'
+                      confirm='Submit'
+                      classname='btn btn-primary'
+                      oppId={oppData?.id}
+                      userId={authState?.accessToken?.claims.uid}
+                      ConfirmHandler={handleFeedbackSubmit}
+                    />
+                    <button
+                      type='button'
+                      className='btn btn btn-light btn-active-primary me-3'
+                      disabled={
+                        !oppData?.open ||
+                        oppData?.supporting?.includes(authState?.accessToken?.claims.uid)
+                      }
+                      onClick={() => {
+                        handleSupportOpp()
+                      }}
+                    >
+                      Support
+                      <Tooltip title='Support Opportunity'>
+                        <StarOutlined />
+                      </Tooltip>
+                    </button>
+
+                    <button
+                      type='button'
+                      className='btn btn-primary'
+                      disabled={
+                        !oppData?.open ||
+                        oppData?.showedinterest?.includes(authState?.accessToken?.claims.uid)
+                      }
+                      onClick={() => {
+                        userTypeFull === 'basic_enabler'
+                          ? openNotificationWarning(
+                              'bottomRight',
+                              'It requires paid subscription and ODA agreement'
+                            )
+                          : navigate(`/opportunities_center/${oppData.uuid}/send_proposals`)
+                      }}
+                    >
+                      Submit Proposal
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </>

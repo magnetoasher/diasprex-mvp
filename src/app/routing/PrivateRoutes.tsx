@@ -34,6 +34,7 @@ import {
 } from '../modules/apps/admin-mgt-apps/admin-tables'
 import {SponsorPropsRevPage} from '../modules/proposals/proposalreviewtable/ProposalReviewPage'
 import SponsorViewOpportunity from '../modules/opportunities/SponsorViewOpportunity'
+import AdminVewopportunity from '../modules/apps/admin-mgt-apps/opp-management/opps-list/table/adminviewopportunity'
 
 const PrivateRoutes = () => {
   const RemittancePage = lazy(() => import('./../modules/Remittance/RemittancePage'))
@@ -85,6 +86,10 @@ const PrivateRoutes = () => {
             />
             <Route path='referrals' element={<ReferralsForm />} />
             <Route path='opportunities_center/:id' element={<ViewOpportunity />} />
+            <Route
+              path='table/opps_management/viewopportunity/:id'
+              element={<AdminVewopportunity />}
+            />
             <Route path='table/users_management/*' element={<UsersMgtPage />} />
             <Route path='table/opps_management/*' element={<OppsMgtPage />} />
             <Route path='table/props_management/*' element={<ProposalMgtPage />} />

@@ -361,6 +361,16 @@ const OppEditModalForm: FC<Props> = ({opp, isOppLoading}) => {
                   </label>
                 </div>
 
+                {/* <div className='text-center pt-15'>
+                  <button
+                    type='reset'
+                    className='btn btn-light me-3'
+                    disabled={formik.isSubmitting || isOppLoading}
+                  >
+                    View Feedback
+                  </button>
+                </div> */}
+
                 {/* end::Input group */}
               </div>
               {/* end::Scroll */}
