@@ -18,7 +18,7 @@ import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import Swal from 'sweetalert2'
 import {FeedbackModal} from '../../../_metronic/partials/modals/confirm-action/feedbackform'
 import {ListLoading} from '../apps/admin-mgt-apps/core/loading/ListLoading'
-import {acknowledgeOdaAPI, supportOppAPI} from './redux/OpportunityAPI'
+import {acknowledgeOdaAPI, provideFeedbackAPI, supportOppAPI} from './redux/OpportunityAPI'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -163,7 +163,10 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
 
   const badgeColor = oppData?.open ? 'success' : 'danger'
   const dealTypeLength = oppData?.dealtype?.length! - 1
-  const handleFeedbackSubmit = () => {}
+  const handleFeedbackSubmit = (data) => {
+    provideFeedbackAPI(data)
+  }
+  
   return (
     <>
       {props.opps.isLoading ? (
@@ -454,9 +457,9 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                         title2='Type your feedback  (max of 700 characters)'
                         confirm='Submit'
                         classname='btn btn-primary'
-                        ConfirmHandler={() => {
-                          handleFeedbackSubmit()
-                        }}
+                        oppId={oppData?.id}
+                        userId={authState?.accessToken?.claims.uid}
+                        ConfirmHandler={handleFeedbackSubmit}
                       />
                       <button
                         type='button'
