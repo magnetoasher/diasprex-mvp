@@ -1,11 +1,13 @@
 import {Action, Reducer} from '@reduxjs/toolkit'
 import {put, takeLatest} from 'redux-saga/effects'
 import {
+  Feedback,
+  FeedbackQueryResponse,
   Opps,
   OppsQueryResponse,
 } from '../../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {ID} from '../../../../_metronic/helpers/crud-helper/models'
-import {getAllOppsAPI, getOppByIdAPI, getSupportedOppsAPI} from './OpportunityAPI'
+import {getAllOppsAPI, getFeedbacksAPI, getOppByIdAPI, getSupportedOppsAPI} from './OpportunityAPI'
 import {IQuery} from './OpportunityAPI'
 
 export interface ActionWithPayload<T> extends Action {
@@ -22,11 +24,15 @@ export const actionTypes = {
   GET_SUPPORTED_OPPS_REQUEST: '[GetSupportedOpps] Request',
   GET_SUPPORTED_OPPS_SUCCESS: '[GetSupportedOpps] Success',
   GET_SUPPORTED_OPPS_FAILED: '[GetSupportedOpps] Failed',
+  GET_FEEDBACKS_REQUEST: '[GetFeedbacks] Request',
+  GET_FEEDBACKS_SUCCESS: '[GetFeedbacks] Success',
+  GET_FEEDBACKS_FAILED: '[GetFeedbacks] Failed',
 }
 
 const initialState: IOppsState = {
   opps: [],
   opp: {},
+  feedbacks: [],
   isLoading: false,
   error: null,
 }
@@ -41,9 +47,15 @@ interface IQueryAction {
   payload: IQuery
 }
 
+interface IFeedbackAction {
+  type: string
+  payload: Feedback
+}
+
 export interface IOppsState {
   opps: Opps[]
   opp: Opps
+  feedbacks: Feedback[]
   isLoading: boolean
   error: string | null
 }
@@ -101,6 +113,23 @@ export const reducer: Reducer = (state = initialState, action: ActionWithPayload
         isLoading: false,
         error: action.payload,
       }
+    case actionTypes.GET_FEEDBACKS_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      }
+    case actionTypes.GET_FEEDBACKS_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        feedbacks: action.payload,
+      }
+    case actionTypes.GET_FEEDBACKS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload,
+      }
     default:
       return {
         ...state,
@@ -124,6 +153,12 @@ export const actions = {
     payload: data,
   }),
   getSupportedOppsFailed: (error: any) => ({type: actionTypes.GET_SUPPORTED_OPPS_FAILED, payload: error}),
+  getFeedbacksRequest: (params?: Feedback) => ({type: actionTypes.GET_FEEDBACKS_REQUEST, payload: params}),
+  getFeedbacksSuccess: (data: FeedbackQueryResponse) => ({
+    type: actionTypes.GET_FEEDBACKS_SUCCESS,
+    payload: data,
+  }),
+  getFeedbacksFailed: (error: any) => ({type: actionTypes.GET_FEEDBACKS_FAILED, payload: error}),
 }
 
 export function* saga() {
@@ -152,6 +187,14 @@ export function* saga() {
       yield put(actions.getOppByIdSuccess(data))
     } catch (error) {
       yield put(actions.getOppByIdFailed(error))
+    }
+  })
+  yield takeLatest(actionTypes.GET_FEEDBACKS_REQUEST, function* getFeedbacksSaga(action: IFeedbackAction) {
+    try {
+      const {data: data} = yield getFeedbacksAPI(action.payload)
+      yield put(actions.getFeedbacksSuccess(data.data))
+    } catch (error) {
+      yield put(actions.getFeedbacksFailed(error))
     }
   })
 }

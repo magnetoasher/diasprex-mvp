@@ -34,6 +34,15 @@ export type Opps = {
 
 export type OppsQueryResponse = Response<Array<Opps>>
 
+export type Feedback = {
+  opportunityUuid?: ID
+  enablerUserId?: ID
+  message?: string
+  status?: string
+}
+
+export type FeedbackQueryResponse = Response<Array<Feedback>>
+
 export const initialOpps: Opps = {
   title: '',
   id: '',

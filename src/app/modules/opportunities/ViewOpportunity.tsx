@@ -30,6 +30,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [oppData, setOppData] = useState<Opps>({})
+  const [feedbacks, setFeedbacks] = useState<Feedback>([])
   const [api, contextHolder] = notification.useNotification()
   const [isShowDetail, setIsShowDetail] = useState(false)
   const userTypeFull = localStorage.getItem('userTypeFull')
@@ -41,6 +42,19 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   useEffect(() => {
     setOppData(props.opps.opp[0])
   }, [props.opps])
+
+  useEffect(() => {
+    const params = {
+      opportunityUuid: id,
+      enablerUserId: authState?.accessToken?.claims.uid,
+      status: 'new',
+    }
+    dispatch(props.getFeedbacksRequest(params))
+  }, [])
+
+  useEffect(() => {
+    setFeedbacks(props.opps.feedbacks)
+  }, [props.opps.feedbacks])
 
   const openNotification = (placement, message) => {
     api.info({
@@ -166,7 +180,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   const handleFeedbackSubmit = (data) => {
     provideFeedbackAPI(data)
   }
-  
+
   return (
     <>
       {props.opps.isLoading ? (
@@ -429,16 +443,18 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                         </label>
                       </div>
 
-                      <div>
-                        <label
-                          style={{
-                            textAlign: 'justify',
-                            fontSize: '14px',
-                          }}
-                        >
-                          FEEDBACKS FROM THIS ENABLER FOR THIS OPP GOES HERE
-                        </label>
-                      </div>
+                      {feedbacks?.map((feedback) => (
+                        <div key={`${feedback.opportunityUuid + feedback.enablerUserId}`}>
+                          <label
+                            style={{
+                              textAlign: 'justify',
+                              fontSize: '14px',
+                            }}
+                          >
+                            {feedback.message}
+                          </label>
+                        </div>
+                      ))}
                     </div>
 
                     <div className='text-center pt-15'>
