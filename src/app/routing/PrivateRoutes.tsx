@@ -36,6 +36,7 @@ import {SponsorPropsRevPage} from '../modules/proposals/proposalreviewtable/Prop
 import SponsorViewOpportunity from '../modules/opportunities/SponsorViewOpportunity'
 import AdminVewopportunity from '../modules/apps/admin-mgt-apps/opp-management/opps-list/table/adminviewopportunity'
 import Adminviewproposal from '../modules/apps/admin-mgt-apps/proposal-management/props-list/table/adminviewproposal'
+import SponsorMyOpportunities from '../modules/opportunities/SponsorMyOpportunities'
 
 const PrivateRoutes = () => {
   const RemittancePage = lazy(() => import('./../modules/Remittance/RemittancePage'))
@@ -68,6 +69,7 @@ const PrivateRoutes = () => {
             <Route path='admindashboard' element={<AdminDashboardWrapper />} />
             {/* <Route path='builder' element={<BuilderPageWrapper />} /> */}
             <Route path='createopportunities' element={<CreateOpportunities />} />
+            <Route path='sponsor/my_opportunities' element={<SponsorMyOpportunities />} />
             <Route path='opportunities/:id' element={<SponsorViewOpportunity />} />
             <Route
               path='opportunities/:oppid/createopportunities'

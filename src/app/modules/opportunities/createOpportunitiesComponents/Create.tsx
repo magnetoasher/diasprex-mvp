@@ -11,12 +11,8 @@ import {
 import {UploadOutlined} from '@ant-design/icons'
 import {Upload} from 'antd'
 import {UserOutlined} from '@ant-design/icons'
-import {Editor} from 'react-draft-wysiwyg'
-import {
-  CountryList,
-  IndustryList,
-  SponsorCountryList,
-} from '../../../../_metronic/partials/content/selectionlists'
+
+import {SponsorCountryList} from '../../../../_metronic/partials/content/selectionlists'
 import {Formik, useFormik} from 'formik'
 import {nanoid} from '@reduxjs/toolkit'
 import axios from 'axios'
@@ -32,30 +28,11 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
   const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY']
   const [isOtherSelected, setIsOtherSelected] = useState(false)
   const [status, setStatus] = useState('')
-  const initVals: Opps = {
-    title: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.title : '',
-    id: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.uuid : '',
-    thumbnail:
-      location.pathname !== '/createopportunities' && currentOpp ? currentOpp.thumbnail : '',
-    sponsor: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.sponsor : '',
-    summary: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.summary : '',
-    status: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.status : '',
-    datesubmitted:
-      location.pathname !== '/createopportunities' && currentOpp ? currentOpp.datesubmitted : '',
-    duedate: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.duedate : '',
-    category: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.category : '',
-    following:
-      location.pathname !== '/createopportunities' && currentOpp ? currentOpp.following : [],
-    showedinterest:
-      location.pathname !== '/createopportunities' && currentOpp ? currentOpp.showedinterest : [],
-  }
-
-  const onChange = (value) => {
-    console.log(`selected ${value}`)
-  }
+  const initialOppObject: Opps =
+    location.pathname !== '/createopportunities' && currentOpp ? currentOpp : initialOpps
 
   const formik = useFormik({
-    initialValues: initVals,
+    initialValues: {...initialOppObject},
     enableReinitialize: true,
     // validationSchema: createOppsSchemas,
     validateOnChange: false,
