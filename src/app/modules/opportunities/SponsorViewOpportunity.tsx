@@ -12,7 +12,7 @@ import {useOktaAuth} from '@okta/okta-react'
 
 import * as opps from './redux/OpportunityRedux'
 import {RootState} from '../../../setup'
-import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {Feedback, Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 
 import {ListLoading} from '../apps/admin-mgt-apps/core/loading/ListLoading'
@@ -27,6 +27,7 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [oppData, setOppData] = useState<Opps>({})
+  const [feedbacks, setFeedbacks] = useState<Feedback>([])
   const [api, contextHolder] = notification.useNotification()
 
   useEffect(() => {
@@ -36,6 +37,19 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   useEffect(() => {
     setOppData(props.opps.opp[0])
   }, [props.opps])
+
+  useEffect(() => {
+    const params = {
+      opportunityUuid: id,
+      enablerUserId: authState?.accessToken?.claims.uid,
+      status: 'approved',
+    }
+    dispatch(props.getFeedbacksRequest(params))
+  }, [])
+
+  useEffect(() => {
+    setFeedbacks(props.opps.feedbacks)
+  }, [props.opps.feedbacks])
 
   const Context = React.createContext({
     name: 'Default',
@@ -515,16 +529,18 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                   <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Feedbacks</label>
                 </div>
 
-                <div>
-                  <label
-                    style={{
-                      textAlign: 'justify',
-                      fontSize: '14px',
-                    }}
-                  >
-                    ALL APPROVED FEEDBACKS FOR THIS OPP GOES HERE
-                  </label>
-                </div>
+                {feedbacks?.map((feedback) => (
+                  <div>
+                    <label
+                      style={{
+                        textAlign: 'justify',
+                        fontSize: '14px',
+                      }}
+                    >
+                      {feedback.message}
+                    </label>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
