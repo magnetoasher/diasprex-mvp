@@ -11,7 +11,7 @@ import {RegistrationStepsPage} from '../modules/auth/registration/RegistrationSt
 import {AuthPage} from '../modules/auth'
 import {ReferralsForm} from '../modules/profile/components/ReferralsForm'
 import CreateOpportunities from '../modules/opportunities/CreateOpportunities'
-import Proposals from '../modules/proposals/components/Proposals'
+// import Proposals from '../modules/proposals/components/Proposals'
 import MyOpportunity from '../modules/opportunities/MyOpportunity'
 import MyProposal from '../modules/proposals/components/MyProposal'
 import GeneralOpportunityCard from '../modules/opportunities/GeneralOpportunityCard'
@@ -73,7 +73,7 @@ const PrivateRoutes = () => {
               path='opportunities/:oppid/createopportunities'
               element={<CreateOpportunities />}
             />
-            <Route path='proposals' element={<Proposals />} />
+            {/* <Route path='proposals' element={<Proposals />} /> */}
             <Route path='proposals/:oppid/:enablerid' element={<ViewProposal />} />
             <Route path='proposals/admin/:oppid/:enablerid' element={<Adminviewproposal />} />
             {/* <Route path='sponsor_proposals' element={<SponsorProposals />} /> */}

@@ -10,7 +10,7 @@ import {
   CheckOutlined,
   DashboardOutlined,
 } from '@ant-design/icons'
-import Opportunity from './EnablerOpportunityCard'
+
 // import {MyOpportunityTable} from './MyOpportunityTable'
 import {Tabs} from 'antd'
 // import {followedopps, draft, submitted, active, completed} from '../proposals/components/models'
@@ -18,9 +18,9 @@ import * as proposals from '../proposals/redux/ProposalRedux'
 import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
 import {RootState} from '../../../setup'
 import {Proposal} from '../../modules/apps/admin-mgt-apps/proposal-management/props-list/core/_models'
-import EnablerOpportunityCard2 from './EnablerOpportunityCard2'
+import EnablerOpportunityCard from './EnablerOpportunityCard'
 import {Link} from 'react-router-dom'
-import {EnablerProposalCard2} from '../proposals/components/EnablerProposalCard2'
+
 import axios from 'axios'
 import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {unsupportOppAPI} from '../../modules/opportunities/redux/OpportunityAPI'
@@ -159,7 +159,7 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
 
           {followedOpp.length > 0 ? (
             followedOpp.map((e: Proposal) => (
-              <EnablerOpportunityCard2
+              <EnablerOpportunityCard
                 opp={e?.opportunityObject}
                 followed={true}
                 unfollowOpp={unfollowOpp}
@@ -194,7 +194,7 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
             <div className=' d-flex text-muted mb-5'>Supported Opportunities</div>
             {supportedOpp.length > 0 ? (
               supportedOpp.map((e: SupportedOpps) => (
-                <EnablerOpportunityCard2
+                <EnablerOpportunityCard
                   opp={e?.opportunityObject}
                   supported={true}
                   unsupportOpp={unsupportOpp}
@@ -238,7 +238,7 @@ const MyOpportunity: React.FC<PropsFromRedux> = (props) => {
 
             {showedInterest.length > 0 ? (
               showedInterest.map((e: Proposal) => (
-                <EnablerOpportunityCard2
+                <EnablerOpportunityCard
                   opp={e?.opportunityObject}
                   followed={false}
                   supported={false}

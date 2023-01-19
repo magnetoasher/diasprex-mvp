@@ -324,7 +324,7 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
               </button>
             </div> */}
           </div>
-          <div className='d-flex justify-content-end'>
+          <div className='d-flex justify-content-end mb-5'>
             <Link
               to='/table/opps_management/opportunities'
               className='btn btn-light btn-active-light-primary'
@@ -349,97 +349,314 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
               </div>
               <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                 <div>
+                  <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Title</label>
+                </div>
+
+                <div>
+                  <ul style={{listStyle: 'none'}}>
+                    <li>{oppData?.title}</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
+                <div>
                   <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Summary</label>
                 </div>
 
                 <div>
-                  <label
-                    style={{
-                      textAlign: 'justify',
-                      fontSize: '14px',
-                    }}
-                  >
-                    {oppData?.summary}
-                  </label>
+                  <ul style={{listStyle: 'none'}}>
+                    <li>{oppData?.summary}</li>
+                  </ul>
                 </div>
               </div>
               <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                 <div className=''>
-                  <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>
-                    Opportunity Details
-                  </label>
+                  <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Details</label>
                 </div>
 
                 <div className=''>
                   <ol>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Market Need / Problem</label>
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_marketneed'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_marketneed'
+                      >
+                        Market Need / Problem
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.marketneed}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Market Size</label>
+                    <div id='oppdesc_marketneed' className='collapse show'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.marketneed}</div>
+                      </div>
+                    </div>
+
+                    <li className='text-primary fw-bold fs-6 mt-2 '>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_marketsize'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_marketsize'
+                      >
+                        Market Size
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.marketsize}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Product and Services</label>
+                    <div id='oppdesc_marketsize' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.marketsize}</div>
+                      </div>
+                    </div>
+
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_productservices'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_productservices'
+                      >
+                        Product / Services
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.productservices}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Developmental Impact</label>
+                    <div id='oppdesc_productservices' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>
+                          {oppData?.oppdesc?.productservices}
+                        </div>
+                      </div>
+                    </div>
+
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_productservices'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_productservices'
+                      >
+                        Developmental Impact
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.devimpact}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Business Model</label>
+                    <div id='oppdesc_productservices' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.devimpact}</div>
+                      </div>
+                    </div>
+
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_busmodel'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_busmodel'
+                      >
+                        Business Model
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.businessmodel}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Value Proposition</label>
+                    <div id='oppdesc_busmodel' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.businessmodel}</div>
+                      </div>
+                    </div>
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_valueprop'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_valueprop'
+                      >
+                        Value Proposition
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.valueprop}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Go-To-Market Strategy</label>
+                    <div id='oppdesc_valueprop' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.valueprop}</div>
+                      </div>
+                    </div>
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_gotomarket'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_gotomarket'
+                      >
+                        Go-To-Market Strategy
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.gotomarket}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Market Size</label>
+                    <div id='oppdesc_gotomarket' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.gotomarket}</div>
+                      </div>
+                    </div>
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_competitor'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_competitor'
+                      >
+                        Competitor
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.competitor}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Competitive Landscape</label>
+                    <div id='oppdesc_competitor' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.competitor}</div>
+                      </div>
+                    </div>
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_complandscape'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_complandscape'
+                      >
+                        Competitive Landscape
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.complandscape}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Team and Expertise</label>
+                    <div id='oppdesc_complandscape' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.complandscape}</div>
+                      </div>
+                    </div>
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_companyteam'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_companyteam'
+                      >
+                        Team and Expertise
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.companyteam}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Company</label>
+                    <div id='oppdesc_companyteam' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.companyteam}</div>
+                      </div>
+                    </div>
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_company'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_company'
+                      >
+                        Developmental Impact
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.company}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Diaspora Engagement</label>
+                    <div id='oppdesc_company' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.company}</div>
+                      </div>
+                    </div>
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_diaspengagement'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_diaspengagement'
+                      >
+                        Diaspora Engagement
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.diaspengagement}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Traction</label>
+                    <div id='oppdesc_diaspengagement' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>
+                          {oppData?.oppdesc?.diaspengagement}
+                        </div>
+                      </div>
+                    </div>
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_traction'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_traction'
+                      >
+                        Traction
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.traction}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Next Milestone</label>
+                    <div id='oppdesc_traction' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.traction}</div>
+                      </div>
+                    </div>
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_nextmilestone'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_nextmilestone'
+                      >
+                        Next Milestone
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.nextmilestone}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Asks</label>
+                    <div id='oppdesc_nextmilestone' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.nextmilestone}</div>
+                      </div>
+                    </div>
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_asks'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_asks'
+                      >
+                        Asks
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.asks}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Exit Strategy</label>
+                    <div id='oppdesc_asks' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.asks}</div>
+                      </div>
+                    </div>
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_exit'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_exit'
+                      >
+                        Exit Strategy
+                      </label>
                     </li>
-                    <p className=''> {oppData?.oppdesc?.exit}</p>
-                    <li className='text-primary fw-bold fs-6'>
-                      <label className=''>Video Url</label>
+                    <div id='oppdesc_exit' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.exit}</div>
+                      </div>
+                    </div>
+                    <li className='text-primary fw-bold fs-6 mt-2'>
+                      <label
+                        className='cursor-pointer'
+                        data-bs-toggle='collapse'
+                        data-bs-target='#oppdesc_videourl'
+                        aria-expanded='true'
+                        aria-controls='oppdesc_videourl'
+                      >
+                        Video Url
+                      </label>
                     </li>
-                    <p className=''> {oppData?.videourl}</p>
+                    <div id='oppdesc_videourl' className='collapse'>
+                      <div className='d-flex align-items-center border border-dashed border-gray-300 rounded min-w-750px px-7 py-3 mb-5'>
+                        <div className='text-dark me-2 fs-7'>{oppData?.oppdesc?.videourl}</div>
+                      </div>
+                    </div>
                   </ol>
                 </div>
               </div>

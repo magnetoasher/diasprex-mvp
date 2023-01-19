@@ -82,7 +82,7 @@ const proposalsColumns: ReadonlyArray<Column<Proposal>> = [
       <PropCustomHeader tableProps={props} title='Actions' className='text-end min-w-100px' />
     ),
     id: 'actions',
-    Cell: ({...props}) => <PropActionsCell id={props.data[props.row.index].id} />,
+    Cell: ({...props}) => <PropActionsCell proposal={props.data[props.row.index]} />,
   },
 ]
 

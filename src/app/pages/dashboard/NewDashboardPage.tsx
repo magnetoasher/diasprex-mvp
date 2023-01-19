@@ -8,18 +8,16 @@ import {Card, Row} from 'antd'
 import {EditText, EditTextarea} from 'react-edit-text'
 import 'react-edit-text/dist/index.css'
 import {ITransArrayModel} from '../../modules/Remittance/Components/Preferences/PreferencesModel'
-import EnablerOpportunityCard from '../../modules/opportunities/EnablerOpportunityCard'
-import SponsorOpportunityCard from '../../modules/opportunities/SponsorsOpportunityCard'
-import {SponsorProposalCard} from '../../modules/proposals/components/SponsorProposalCard'
+
 import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
 import * as proposals from '../../modules/proposals/redux/ProposalRedux'
 import {RootState} from '../../../setup'
 import {Opps} from '../../modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {ListLoading} from '../../modules/apps/admin-mgt-apps/core/loading/ListLoading'
-import EnablerOpportunityCard2 from '../../modules/opportunities/EnablerOpportunityCard2'
+import EnablerOpportunityCard2 from '../../modules/opportunities/EnablerOpportunityCard'
 import {Proposal} from '../../modules/apps/admin-mgt-apps/proposal-management/props-list/core/_models'
-import SponsorOpportunityCard2 from '../../modules/opportunities/SponsorOpportunityCard2'
-import SponsorProposalCard2 from '../../modules/proposals/components/SponsorProposalCard2'
+import SponsorOpportunityCard from '../../modules/opportunities/SponsorOpportunityCard'
+import SponsorProposalCard from '../../modules/proposals/components/SponsorProposalCard'
 
 const mapState = (state: RootState) => ({opps: state.opps, proposals: state.proposals})
 const connector = connect(mapState, {...opps.actions, ...proposals.actions})
@@ -461,7 +459,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                   {props.opps.isLoading ? (
                     <ListLoading />
                   ) : (
-                    recentOpps?.map((e) => <SponsorOpportunityCard2 opp={e} />)
+                    recentOpps?.map((e) => <SponsorOpportunityCard opp={e} />)
                   )}
                 </div>
               </div>
@@ -479,7 +477,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                   {props.proposals.isLoading ? (
                     <ListLoading />
                   ) : (
-                    recentProps?.map((e) => <SponsorProposalCard2 proposal={e} dashboard={true} />)
+                    recentProps?.map((e) => <SponsorProposalCard proposal={e} dashboard={true} />)
                   )}
                 </div>
               </div>

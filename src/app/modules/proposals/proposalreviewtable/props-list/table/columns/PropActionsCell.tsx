@@ -1,17 +1,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC, useEffect} from 'react'
 import {useMutation, useQueryClient} from 'react-query'
+import {Link} from 'react-router-dom'
 import {MenuComponent} from '../../../../../../../_metronic/assets/ts/components'
 import {ID, KTSVG, QUERIES} from '../../../../../../../_metronic/helpers'
+import {Proposal} from '../../../../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
 import {deleteProposal} from '../../core/_requests'
 
 type Props = {
-  id: ID
+  proposal: Proposal
 }
 
-const PropActionsCell: FC<Props> = ({id}) => {
+const PropActionsCell: FC<Props> = ({proposal}) => {
   const {setItemIdForUpdate} = useListView()
   const {query} = useQueryResponse()
   const queryClient = useQueryClient()
@@ -21,10 +23,10 @@ const PropActionsCell: FC<Props> = ({id}) => {
   }, [])
 
   const openEditModal = () => {
-    setItemIdForUpdate(id)
+    setItemIdForUpdate(proposal.id)
   }
 
-  const deleteItem = useMutation(() => deleteProposal(id), {
+  const deleteItem = useMutation(() => deleteProposal(proposal.id), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
@@ -49,6 +51,14 @@ const PropActionsCell: FC<Props> = ({id}) => {
         data-kt-menu='true'
       >
         {/* begin::Menu item */}
+        <div className='menu-item px-3'>
+          <Link
+            to={`/proposals/${proposal?.opportunityObject?.uuid}/${proposal?.enablerUserId}`}
+            className='menu-link px-3'
+          >
+            View
+          </Link>
+        </div>
         <div className='menu-item px-3'>
           <a className='menu-link px-3' onClick={openEditModal}>
             Review

@@ -4,13 +4,13 @@ import {useOktaAuth} from '@okta/okta-react'
 import {Tabs} from 'antd'
 import {SendOutlined, SaveOutlined, FileDoneOutlined, RetweetOutlined} from '@ant-design/icons'
 import {Create} from './createOpportunitiesComponents/Create'
-import SponsorOpportunityCard from './SponsorsOpportunityCard'
+
 import * as opps from '../../modules/opportunities/redux/OpportunityRedux'
 import {RootState} from '../../../setup'
 import {Opps} from '../../modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
-import SponsorOpportunityCard2 from './SponsorOpportunityCard2'
-import { useParams } from 'react-router-dom'
-import { ListLoading } from '../apps/admin-mgt-apps/core/loading/ListLoading'
+import SponsorOpportunityCard2 from './SponsorOpportunityCard'
+import {useParams} from 'react-router-dom'
+import {ListLoading} from '../apps/admin-mgt-apps/core/loading/ListLoading'
 
 const mapState = (state: RootState) => ({opps: state.opps})
 const connector = connect(mapState, opps.actions)
@@ -29,7 +29,7 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
   const [submitted, setSubmitted] = useState<Opps[]>([])
   const [completed, setCompleted] = useState<Opps[]>([])
   const [currentOpp, setCurrentOpp] = useState<Opps>({})
-  
+
   useEffect(() => {
     if (oppId) {
       dispatch(props.getOppByIdRequest(oppId))
@@ -41,7 +41,7 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
       dispatch(props.getAllOppsRequest(query))
     }
   }, [])
-  
+
   useEffect(() => {
     if (props.opps.opp) {
       setCurrentOpp(props.opps.opp[0])
@@ -100,10 +100,15 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
         }
         key='1'
       >
-        {props.opps.isLoading ?
-          <ListLoading /> :
-          <Create sponsorUserId={authState?.accessToken?.claims.uid} currentOpp={currentOpp} getOpps={getOpps} />
-        }
+        {props.opps.isLoading ? (
+          <ListLoading />
+        ) : (
+          <Create
+            sponsorUserId={authState?.accessToken?.claims.uid}
+            currentOpp={currentOpp}
+            getOpps={getOpps}
+          />
+        )}
       </TabPane>
       <TabPane
         tab={
@@ -124,12 +129,11 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
 
             <div className='card-body p-2 overflow-auto' style={{height: '600px'}}>
               {/* <div className=' d-flex text-muted mb-5'>Draft Opportunities</div> */}
-              {props.opps.isLoading ?
-                <ListLoading /> :
-                draft.map((e) => (
-                  <SponsorOpportunityCard2 opp={e} getOpps={getOpps} />
-                ))
-              }
+              {props.opps.isLoading ? (
+                <ListLoading />
+              ) : (
+                draft.map((e) => <SponsorOpportunityCard2 opp={e} getOpps={getOpps} />)
+              )}
             </div>
           </div>
         </div>
