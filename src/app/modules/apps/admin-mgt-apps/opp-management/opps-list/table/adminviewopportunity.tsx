@@ -19,6 +19,7 @@ import {
   acknowledgeOdaAPI,
   provideFeedbackAPI,
   supportOppAPI,
+  changeFeedStatusAPI,
 } from '../../../../../opportunities/redux/OpportunityAPI'
 
 const mapState = (state: RootState) => ({opps: state.opps})
@@ -49,7 +50,6 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   useEffect(() => {
     const params = {
       opportunityUuid: id,
-      enablerUserId: authState?.accessToken?.claims.uid,
       status: 'new',
     }
     dispatch(props.getFeedbacksRequest(params))
@@ -62,7 +62,6 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
       setNoFeedback(true)
     }
   }, [props.opps.feedbacks])
-  console.log('Feedback', noFeedback)
 
   const openNotification = (placement, message) => {
     api.info({
@@ -187,6 +186,42 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   const dealTypeLength = oppData?.dealtype?.length! - 1
   const handleFeedbackSubmit = (data) => {
     provideFeedbackAPI(data)
+  }
+
+  const handleChangeFeedbackStatus = (query: Feedback) => {
+    if (query.status === 'deleted') {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          changeFeedStatusAPI(query).then((res) => {
+            if (res.status === 200) {
+              const params = {
+                opportunityUuid: id,
+                status: 'new',
+              }
+              dispatch(props.getFeedbacksRequest(params))
+            }
+          })
+        }
+      })
+    } else {
+      changeFeedStatusAPI(query).then((res) => {
+        if (res.status === 200) {
+          const params = {
+            opportunityUuid: id,
+            status: 'new',
+          }
+          dispatch(props.getFeedbacksRequest(params))
+        }
+      })
+    }
   }
 
   return (
@@ -711,22 +746,38 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
 
                     <div className='d-flex justify-content-end'>
                       <ul className='nav  mb-3'>
-                        <li>
-                          <a
-                            className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
-                            onClick={() => {}}
-                          >
-                            Approve
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
-                            onClick={() => {}}
-                          >
-                            Delete
-                          </a>
-                        </li>
+                        {feedback?.status !== 'approved' && (
+                          <li>
+                            <a
+                              className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
+                              onClick={() => {
+                                handleChangeFeedbackStatus({
+                                  enablerUserId: feedback.enablerUserId,
+                                  opportunityUuid: feedback.opportunityUuid,
+                                  status: 'approved',
+                                })
+                              }}
+                            >
+                              Approve
+                            </a>
+                          </li>
+                        )}
+                        {feedback?.status !== 'deleted' && (
+                          <li>
+                            <a
+                              className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
+                              onClick={() => {
+                                handleChangeFeedbackStatus({
+                                  enablerUserId: feedback.enablerUserId,
+                                  opportunityUuid: feedback.opportunityUuid,
+                                  status: 'deleted',
+                                })
+                              }}
+                            >
+                              Delete
+                            </a>
+                          </li>
+                        )}
                       </ul>
                     </div>
                     <div className='separator separator-dashed'></div>

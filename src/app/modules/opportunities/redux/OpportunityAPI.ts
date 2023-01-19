@@ -44,6 +44,10 @@ const provideFeedbackAPI = (data: Feedback) => {
 
 const getFeedbacksAPI = (params?: Feedback) => axios.get(`${API_URL}/feedback`, {params: params})
 
+const changeFeedStatusAPI = (query?: Feedback) => {
+  return axios.put(`${API_URL}/feedback/${query?.opportunityUuid}/${query?.enablerUserId}/status?status=${query?.status}`)
+}
+
 export {
   getAllOppsAPI,
   getOppByIdAPI,
@@ -54,4 +58,5 @@ export {
   changeOppStatusAPI,
   provideFeedbackAPI,
   getFeedbacksAPI,
+  changeFeedStatusAPI,
 }
