@@ -4,7 +4,7 @@ import {useState} from 'react'
 import {Opps} from '../../../../app/modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 
 type Props = {
-  dpxid: string
+  id: string
   title1: string
   title2: string
   confirm: string
@@ -45,7 +45,7 @@ export function FeedbackModal(props: Props) {
   }
 
   return (
-    <div className='modal fade' tabIndex={-1} id={props.dpxid}>
+    <div className='modal fade' tabIndex={-1} id={props.id}>
       <div className='modal-dialog'>
         <div className='modal-content'>
           <div className='modal-header'>
