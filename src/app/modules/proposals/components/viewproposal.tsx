@@ -199,7 +199,7 @@ const ViewProposal: FC<PropsFromRedux> = (props) => {
                       <img
                         className='d-block mw-100 rounded'
                         src={propData?.thumbnail}
-                        alt='oppsthumb'
+                        alt='propthumb'
                       />
                     )}
                   </div>
@@ -224,6 +224,14 @@ const ViewProposal: FC<PropsFromRedux> = (props) => {
                               title={propData?.opportunityObject?.country}
                               data-bs-placement='bottom'
                             />
+                          </span>
+                          <span>
+                            <Link
+                              to={`/proposals/${propData?.opportunityObject?.uuid}/${propData?.enablerUserId}`}
+                              className='text-muted text-hover-primary fs-4 '
+                            >
+                              {propData?.dpxid}
+                            </Link>
                           </span>
                         </div>
 

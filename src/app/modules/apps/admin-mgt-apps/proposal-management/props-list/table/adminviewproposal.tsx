@@ -99,6 +99,14 @@ const AdminViewProposal: FC<PropsFromRedux> = (props) => {
                             data-bs-placement='bottom'
                           />
                         </span>
+                        <span>
+                          <Link
+                            to={`/proposals/${propData?.opportunityObject?.uuid}/${propData?.enablerUserId}`}
+                            className='text-muted text-hover-primary fs-4 '
+                          >
+                            {propData?.dpxid}
+                          </Link>
+                        </span>
                       </div>
 
                       <div className='d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-400'>
