@@ -57,7 +57,7 @@ const OppsInfoCell: FC<Props> = ({opp}) => (
     </div>
     <div className='d-flex flex-column'>
       <a href='#' className='text-gray-800 text-hover-primary mb-1'>
-        {opp.oppdesc}
+        {opp.dpxid}
       </a>
       <span>{opp.category}</span>
     </div>

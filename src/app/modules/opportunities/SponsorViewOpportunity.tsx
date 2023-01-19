@@ -129,9 +129,13 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                               data-bs-placement='bottom'
                             />
                           </span>
-                          <span className={`badge badge-light-${openBadgeColor} me-auto`}>
-                            {oppData?.open ? 'Open' : 'Closed'}
-                          </span>
+                          {oppData?.status === 'published' ? (
+                            <span className={`badge badge-light-${openBadgeColor} me-auto`}>
+                              {oppData?.open ? 'Open' : 'Closed'}
+                            </span>
+                          ) : (
+                            <span className='badge badge-secondary me-auto'>Pending</span>
+                          )}
                         </div>
 
                         <div className='d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-400'>

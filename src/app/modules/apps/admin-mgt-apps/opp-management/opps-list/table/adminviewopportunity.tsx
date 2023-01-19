@@ -182,7 +182,6 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     }
   }
 
-  const badgeColor = oppData?.open ? 'success' : 'danger'
   const dealTypeLength = oppData?.dealtype?.length! - 1
   const handleFeedbackSubmit = (data) => {
     provideFeedbackAPI(data)
@@ -296,9 +295,13 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                               data-bs-placement='bottom'
                             />
                           </span>
-                          <span className={`badge badge-light-${openBadgeColor} me-auto`}>
-                            {oppData?.open ? 'Open' : 'Closed'}
-                          </span>
+                          {oppData?.status === 'published' ? (
+                            <span className={`badge badge-light-${openBadgeColor} me-auto`}>
+                              {oppData?.open ? 'Open' : 'Closed'}
+                            </span>
+                          ) : (
+                            <span className='badge badge-secondary me-auto'>Pending</span>
+                          )}
                         </div>
 
                         <div className='d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-400'>
@@ -313,7 +316,7 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                       </div>
                       <div className='d-flex mb-4'>
                         <span
-                          className={`badge badge-${badgeColor} fs-4 text-uppercase me-3 py-3 px-3`}
+                          className={`badge badge-${statusBadgeColor} fs-4 text-uppercase me-3 py-3 px-3`}
                         >
                           {oppData?.status}
                         </span>

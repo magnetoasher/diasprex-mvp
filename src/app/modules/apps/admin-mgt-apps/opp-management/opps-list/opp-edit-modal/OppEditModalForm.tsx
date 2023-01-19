@@ -99,7 +99,6 @@ const OppEditModalForm: FC<Props> = ({opp, isOppLoading}) => {
             sponsorUserId: nanoid(),
             sponsor: 'Sponsor Name',
             status: 'new',
-            open: false,
             datesubmitted: moment(new Date()).format('DD MMM YYYY'),
             // duedate: values.duedate === '' && moment(new Date()).add(90, 'days').toDate(),
             otherdealtype: !isOtherSelected ? undefined : values.otherdealtype,

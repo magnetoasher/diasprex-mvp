@@ -54,8 +54,8 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   }, [])
 
   useEffect(() => {
-    setFeedbacks(props.opps.feedbacks)
-  }, [props.opps.feedbacks])
+    setFeedbacks(props.opps?.feedbacks)
+  }, [props.opps?.feedbacks])
 
   const openNotification = (placement, message) => {
     api.info({
@@ -253,9 +253,13 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                               data-bs-placement='bottom'
                             />
                           </span>
-                          <span className={`badge badge-light-${openBadgeColor} me-auto`}>
-                            {oppData?.open ? 'Open' : 'Closed'}
-                          </span>
+                          {oppData?.status === 'published' ? (
+                            <span className={`badge badge-light-${openBadgeColor} me-auto`}>
+                              {oppData?.open ? 'Open' : 'Closed'}
+                            </span>
+                          ) : (
+                            <span className='badge badge-secondary me-auto'>Pending</span>
+                          )}
                         </div>
 
                         <div className='d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-400'>

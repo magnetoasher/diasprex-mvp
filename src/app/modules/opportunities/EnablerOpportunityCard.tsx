@@ -60,13 +60,17 @@ const EnablerOpportunityCard: FC<Props> = ({
                 data-bs-placement='bottom'
               />
             </span>
-            <span
-              className={`badge ${
-                opp?.open ? 'badge-light-success' : 'badge-light-danger'
-              } fw-bolder me-auto py-3`}
-            >
-              {opp?.open ? 'Open' : 'Closed'}
-            </span>
+            {opp?.status === 'published' ? (
+              <span
+                className={`badge ${
+                  opp?.open ? 'badge-light-success' : 'badge-light-danger'
+                } fw-bolder me-auto py-3`}
+              >
+                {opp?.open ? 'Open' : 'Closed'}
+              </span>
+            ) : (
+              <span className='badge badge-secondary me-auto'>Pending</span>
+            )}
           </div>
           <div className='ribbon-label text-capitalize'>
             {opp?.status}

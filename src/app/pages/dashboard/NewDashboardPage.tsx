@@ -74,7 +74,15 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
     }
   }, [])
   useEffect(() => {
-    setRecentOpps(props.opps?.opps.data)
+    if (userType === 'sponsor') {
+      const filteredRecentOpps = props.opps?.opps?.data?.filter((obj: Opps) => {
+        return obj.status !== 'draft' && obj.status !== 'deleted'
+      })
+      setRecentOpps(filteredRecentOpps)
+      console.log('RecentOpps', filteredRecentOpps)
+    } else {
+      setRecentOpps(props.opps?.opps.data)
+    }
   }, [props.opps])
 
   useEffect(() => {
