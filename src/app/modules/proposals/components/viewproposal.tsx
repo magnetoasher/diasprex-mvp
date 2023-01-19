@@ -223,7 +223,7 @@ const ViewProposal: FC<PropsFromRedux> = (props) => {
                           to='/sponsor/props_review/proposals'
                           className='btn btn-sm btn-secondary me-3'
                         >
-                          Proposal Table
+                          Back To Table
                         </Link>
                       </div>
                     </div>

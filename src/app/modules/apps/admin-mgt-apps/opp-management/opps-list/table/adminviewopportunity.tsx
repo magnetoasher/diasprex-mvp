@@ -312,7 +312,7 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
               </div>
             </div>
 
-            <div className='actions d-flex justify-content-end'>
+            {/* <div className='actions d-flex justify-content-end'>
               <button
                 type='button'
                 className='btn btn-light btn-active-light-primary'
@@ -322,7 +322,15 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
               >
                 Back To Table
               </button>
-            </div>
+            </div> */}
+          </div>
+          <div className='d-flex justify-content-end'>
+            <Link
+              to='/table/opps_management/opportunities'
+              className='btn btn-light btn-active-light-primary'
+            >
+              Back To Table
+            </Link>
           </div>
 
           <div class='card'>

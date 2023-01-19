@@ -104,7 +104,9 @@ const OppsActionsCell: FC<Props> = ({opp}) => {
           </a>
         </div>
         {/* end::Menu item */}
-
+        <div className='separator separator-content separator-dashed pt-5 mb-2'>
+          <span className='w-250px fw-bold'>STATUS</span>
+        </div>
         {/* begin::Menu item */}
         <div className='menu-item px-3'>
           <a

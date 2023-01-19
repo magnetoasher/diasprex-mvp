@@ -1,30 +1,33 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import {FC, useEffect} from 'react'
 import {useMutation, useQueryClient} from 'react-query'
+import {useNavigate} from 'react-router-dom'
 import {MenuComponent} from '../../../../../../../../_metronic/assets/ts/components'
 import {ID, KTSVG, QUERIES} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
 import {deleteProposal, changePropsStatus} from '../../core/_requests'
+import {Proposal} from '../../core/_models'
 
 type Props = {
-  id: ID
+  proposal: Proposal
 }
 
-const PropActionsCell: FC<Props> = ({id}) => {
+const PropActionsCell: FC<Props> = ({proposal}) => {
   const {setItemIdForUpdate} = useListView()
   const {query} = useQueryResponse()
   const queryClient = useQueryClient()
+  const history = useNavigate()
 
   useEffect(() => {
     MenuComponent.reinitialization()
   }, [])
 
   const openEditModal = () => {
-    setItemIdForUpdate(id)
+    setItemIdForUpdate(proposal.id)
   }
 
-  const deleteProp = useMutation(() => changePropsStatus(id, 'deleted'), {
+  const deleteProp = useMutation(() => changePropsStatus(proposal.id, 'deleted'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
@@ -32,7 +35,7 @@ const PropActionsCell: FC<Props> = ({id}) => {
     },
   })
 
-  const activeProp = useMutation(() => changePropsStatus(id, 'active'), {
+  const activeProp = useMutation(() => changePropsStatus(proposal.id, 'active'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
@@ -40,7 +43,7 @@ const PropActionsCell: FC<Props> = ({id}) => {
     },
   })
 
-  const completedProp = useMutation(() => changePropsStatus(id, 'completed'), {
+  const completedProp = useMutation(() => changePropsStatus(proposal.id, 'completed'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
@@ -48,7 +51,7 @@ const PropActionsCell: FC<Props> = ({id}) => {
     },
   })
 
-  const pendingProp = useMutation(() => changePropsStatus(id, 'pending'), {
+  const pendingProp = useMutation(() => changePropsStatus(proposal.id, 'pending'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
@@ -56,7 +59,7 @@ const PropActionsCell: FC<Props> = ({id}) => {
     },
   })
 
-  const newProp = useMutation(() => changePropsStatus(id, 'new'), {
+  const newProp = useMutation(() => changePropsStatus(proposal.id, 'new'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
@@ -80,6 +83,18 @@ const PropActionsCell: FC<Props> = ({id}) => {
         className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4'
         data-kt-menu='true'
       >
+        <div className='menu-item px-3'>
+          <a
+            className='menu-link px-3'
+            onClick={() => {
+              history(
+                `/proposals/admin/${proposal?.opportunityObject?.uuid}/${proposal?.enablerUserId}`
+              )
+            }}
+          >
+            View
+          </a>
+        </div>
         {/* begin::Menu item */}
         <div className='menu-item px-3'>
           <a className='menu-link px-3' onClick={openEditModal}>
@@ -87,7 +102,9 @@ const PropActionsCell: FC<Props> = ({id}) => {
           </a>
         </div>
         {/* end::Menu item */}
-
+        <div className='separator separator-content separator-dashed pt-5 mb-2'>
+          <span className='w-250px fw-bold'>STATUS</span>
+        </div>
         {/* begin::Menu item */}
         <div className='menu-item px-3'>
           <a className='menu-link px-3' onClick={async () => await newProp.mutateAsync()}>
