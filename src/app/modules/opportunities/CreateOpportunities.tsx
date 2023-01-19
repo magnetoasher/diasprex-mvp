@@ -24,10 +24,6 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
     sponsorUserId: authState?.accessToken?.claims.uid,
   }
 
-  const [draft, setDraft] = useState<Opps[]>([])
-  const [active, setActive] = useState<Opps[]>([])
-  const [submitted, setSubmitted] = useState<Opps[]>([])
-  const [completed, setCompleted] = useState<Opps[]>([])
   const [currentOpp, setCurrentOpp] = useState<Opps>({})
 
   useEffect(() => {
@@ -47,38 +43,6 @@ const CreateOpportunities: React.FC<PropsFromRedux> = (props) => {
       setCurrentOpp(props.opps.opp[0])
     }
   }, [props.opps.opp])
-
-  useEffect(() => {
-    if (props.opps.opps.data) {
-      setDraft(
-        props.opps?.opps.data?.filter((obj: Opps) => {
-          return obj.status === 'draft'
-        })
-      )
-      setActive(
-        props.opps?.opps.data?.filter((obj: Opps) => {
-          return obj.status === 'active'
-        })
-      )
-      setSubmitted(
-        props.opps?.opps.data?.filter((obj: Opps) => {
-          return (
-            obj.status === 'new' ||
-            obj.status === 'published' ||
-            obj.status === 'accepted' ||
-            obj.status === 'accepted with revision' ||
-            obj.status === 'not accepted' ||
-            obj.status === 'withdrawn'
-          )
-        })
-      )
-      setCompleted(
-        props.opps?.opps.data?.filter((obj: Opps) => {
-          return obj.status === 'completed'
-        })
-      )
-    }
-  }, [props.opps.opps])
 
   const getOpps = () => {
     dispatch(props.getAllOppsRequest(query))

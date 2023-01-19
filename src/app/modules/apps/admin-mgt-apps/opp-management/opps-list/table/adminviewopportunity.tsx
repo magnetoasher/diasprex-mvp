@@ -223,6 +223,25 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
       })
     }
   }
+  const openBadgeColor = oppData?.open ? 'success' : 'danger'
+  const statusBadgeColor =
+    oppData?.status === 'new'
+      ? 'info'
+      : oppData?.status === 'published'
+      ? 'success'
+      : oppData?.status === 'accepted'
+      ? 'primary'
+      : oppData?.status === 'draft'
+      ? 'gray-800'
+      : oppData?.status === 'not accepted'
+      ? 'danger'
+      : oppData?.status === 'pending'
+      ? 'gray-600'
+      : oppData?.status === 'completed'
+      ? 'gray-800'
+      : oppData?.status === 'active'
+      ? 'primary'
+      : 'warning'
 
   return (
     <>
@@ -235,14 +254,14 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
               <div className='card-body pt-9 pb-0'>
                 <div className='d-flex flex-wrap flex-sm-nowrap mb-6'>
                   <div
-                    className={`d-flex flex-center flex-shrink-0 bg-light-${badgeColor} rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4`}
+                    className={`d-flex flex-center flex-shrink-0 bg-light-${statusBadgeColor} rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4`}
                   >
                     {oppData?.thumbnail === '' ? (
                       <div
                         className={clsx(
                           'd-flex symbol-label mw-100 h-100px h-lg-150px align-items-center justify-content-center fs-1 rounded',
-                          `bg-light-${badgeColor}`,
-                          ` text-capitalize text-${badgeColor}`
+                          `bg-light-${statusBadgeColor}`,
+                          ` text-capitalize text-${statusBadgeColor}`
                         )}
                       >
                         {oppData?.country}
@@ -277,7 +296,7 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                               data-bs-placement='bottom'
                             />
                           </span>
-                          <span className={`badge badge-light-${badgeColor} me-auto`}>
+                          <span className={`badge badge-light-${openBadgeColor} me-auto`}>
                             {oppData?.open ? 'Open' : 'Closed'}
                           </span>
                         </div>

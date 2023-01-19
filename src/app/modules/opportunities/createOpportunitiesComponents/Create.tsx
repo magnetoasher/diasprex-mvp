@@ -91,6 +91,7 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 title: 'Success',
                 text: 'Successfully done!',
               })
+              navigate('/sponsor/my_opportunities')
             }
           })
           .catch((error) => error)

@@ -92,3 +92,23 @@ export const createOppsSchemas = [
     oppsdesc: Yup.string().required().label('Opportunity detail'),
   }),
 ]
+
+export const openBadgeColor = (oppData: Opps) => (oppData?.open ? 'success' : 'danger')
+export const statusBadgeColor = (status: string) =>
+  status === 'new'
+    ? 'info'
+    : status === 'published'
+    ? 'success'
+    : status === 'accepted'
+    ? 'primary'
+    : status === 'draft'
+    ? 'gray-800'
+    : status === 'not accepted'
+    ? 'danger'
+    : status === 'pending'
+    ? 'gray-600'
+    : status === 'completed'
+    ? 'gray-800'
+    : status === 'active'
+    ? 'primary'
+    : 'warning'

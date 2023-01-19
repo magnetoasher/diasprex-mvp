@@ -279,10 +279,10 @@ const ViewProposal: FC<PropsFromRedux> = (props) => {
                             <div className='bg-light text-uppercase py-3 px-3'>
                               <span className='fs-2 fw-bold me-3'>Opportunity:</span>
                               <Link
-                                to={`/opportunities/${propData?.opportunityObject?.dpxid}`}
+                                to={`/opportunities/${propData?.opportunityObject?.uuid}`}
                                 className='text-muted text-hover-primary fs-2 '
                               >
-                                {propData?.opportunityObject?.uuid}
+                                {propData?.opportunityObject?.dpxid}
                               </Link>
                             </div>
                           </div>

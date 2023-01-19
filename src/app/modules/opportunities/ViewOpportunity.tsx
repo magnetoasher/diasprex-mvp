@@ -13,7 +13,7 @@ import {OppsDA} from './component/oda'
 import {SubscriptionRequired} from './component/subscription-error-modal'
 import * as opps from './redux/OpportunityRedux'
 import {RootState} from '../../../setup'
-import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {Opps, statusBadgeColor} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
 import Swal from 'sweetalert2'
 import {FeedbackModal} from '../../../_metronic/partials/modals/confirm-action/feedbackform'
@@ -176,7 +176,25 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     }
   }
 
-  const badgeColor = oppData?.open ? 'success' : 'danger'
+  const openBadgeColor = oppData?.open ? 'success' : 'danger'
+  const statusBadgeColor =
+    oppData?.status === 'new'
+      ? 'info'
+      : oppData?.status === 'published'
+      ? 'success'
+      : oppData?.status === 'accepted'
+      ? 'primary'
+      : oppData?.status === 'draft'
+      ? 'gray-800'
+      : oppData?.status === 'not accepted'
+      ? 'danger'
+      : oppData?.status === 'pending'
+      ? 'gray-600'
+      : oppData?.status === 'completed'
+      ? 'gray-800'
+      : oppData?.status === 'active'
+      ? 'primary'
+      : 'warning'
   const dealTypeLength = oppData?.dealtype?.length! - 1
   const handleFeedbackSubmit = (data) => {
     provideFeedbackAPI(data)
@@ -193,14 +211,14 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
               <div className='card-body pt-9 pb-0'>
                 <div className='d-flex flex-wrap flex-sm-nowrap mb-6'>
                   <div
-                    className={`d-flex flex-center flex-shrink-0 bg-light-${badgeColor} rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4`}
+                    className={`d-flex flex-center flex-shrink-0 bg-light-${statusBadgeColor} rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4`}
                   >
                     {oppData?.thumbnail === '' ? (
                       <div
                         className={clsx(
                           'd-flex symbol-label mw-100 h-100px h-lg-150px align-items-center justify-content-center fs-1 rounded',
-                          `bg-light-${badgeColor}`,
-                          ` text-capitalize text-${badgeColor}`
+                          `bg-light-${statusBadgeColor}`,
+                          ` text-capitalize text-${statusBadgeColor}`
                         )}
                       >
                         {oppData?.country}
@@ -235,7 +253,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                               data-bs-placement='bottom'
                             />
                           </span>
-                          <span className={`badge badge-light-${badgeColor} me-auto`}>
+                          <span className={`badge badge-light-${openBadgeColor} me-auto`}>
                             {oppData?.open ? 'Open' : 'Closed'}
                           </span>
                         </div>
@@ -245,33 +263,11 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                         </div>
                       </div>
                       <div className='d-flex mb-4'>
-                        {!oppData?.following?.includes(authState?.accessToken?.claims.uid) ? (
-                          <button
-                            type='button'
-                            className='btn btn-sm btn-success me-3'
-                            disabled={oppData?.showedinterest?.includes(
-                              authState?.accessToken?.claims.uid
-                            )}
-                            onClick={() => {
-                              handleFollowOpp()
-                            }}
-                          >
-                            Follow
-                          </button>
-                        ) : (
-                          <button
-                            type='button'
-                            className='btn btn-sm btn-primary me-3'
-                            disabled={oppData?.showedinterest?.includes(
-                              authState?.accessToken?.claims.uid
-                            )}
-                            onClick={() => {
-                              handleUnfollowOpp()
-                            }}
-                          >
-                            Unfollow
-                          </button>
-                        )}
+                        <span
+                          className={`badge badge-${statusBadgeColor} fs-4 text-uppercase me-3 py-3 px-3`}
+                        >
+                          Status: {oppData?.status}
+                        </span>
                       </div>
                     </div>
                     <div className='d-flex flex-wrap justify-content-start'>
@@ -313,6 +309,35 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                           </div>
 
                           <div className='fw-semibold fs-6 text-gray-400'>Following</div>
+                        </div>
+                        <div className='d-flex mb-4'>
+                          {!oppData?.following?.includes(authState?.accessToken?.claims.uid) ? (
+                            <button
+                              type='button'
+                              className='btn btn-sm btn-primary me-3'
+                              disabled={oppData?.showedinterest?.includes(
+                                authState?.accessToken?.claims.uid
+                              )}
+                              onClick={() => {
+                                handleFollowOpp()
+                              }}
+                            >
+                              Follow
+                            </button>
+                          ) : (
+                            <button
+                              type='button'
+                              className='btn btn-sm btn-secondary me-3'
+                              disabled={oppData?.showedinterest?.includes(
+                                authState?.accessToken?.claims.uid
+                              )}
+                              onClick={() => {
+                                handleUnfollowOpp()
+                              }}
+                            >
+                              Unfollow
+                            </button>
+                          )}
                         </div>
                       </div>
                     </div>
