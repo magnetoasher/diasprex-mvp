@@ -16,7 +16,7 @@ const OppsThumbnailCell: FC<Props> = ({opp}) => (
       <a href='#'>
         {opp.thumbnail ? (
           <div className='symbol-label'>
-            <img src={toAbsoluteUrl(`/media/${opp.thumbnail}`)} alt={opp.oppdesc} className='w-100' />
+            <img src={toAbsoluteUrl(`/media/${opp.thumbnail}`)} alt={opp.title} className='w-100' />
           </div>
         ) : (
           <div

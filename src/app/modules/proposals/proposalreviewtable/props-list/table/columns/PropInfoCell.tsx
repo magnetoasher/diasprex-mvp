@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import clsx from 'clsx'
 import {FC} from 'react'
+import {Link} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
 import {Proposal} from '../../../../../apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 
@@ -63,9 +64,12 @@ const PropInfoCell: FC<Props> = ({proposal}) => (
       </a>
     </div>
     <div className='d-flex flex-column'>
-      <a href='#' className='text-gray-800 text-hover-primary mb-1'>
-        {proposal.id}
-      </a>
+      <Link
+        to={`/proposals/${proposal?.opportunityObject?.uuid}/${proposal?.enablerUserId}`}
+        className='text-gray-800 text-hover-primary mb-1'
+      >
+        {proposal.dpxid}
+      </Link>
       <span>{proposal.country}</span>
     </div>
   </div>

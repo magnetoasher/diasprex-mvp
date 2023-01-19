@@ -37,8 +37,60 @@ export function AdminMenu() {
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>Admin</span>
         </div>
       </div>
+      {/* <AsideMenuItemWithSub
+        to='users'
+        icon='/media/icons/duotune/art/art008.svg'
+        title='Users'
+        fontIcon='bi-app-indicator'
+      >
+        <AsideMenuItem to='users_management/enablers' title='Enablers' />
+        <AsideMenuItem to='users_management/sponsors' title='Sponsors' />
+      </AsideMenuItemWithSub> */}
 
-      <AsideMenuItemWithSub
+      <AsideMenuItem
+        to='table/users_management'
+        title='Users'
+        icon='/media/icons/duotune/art/art003.svg'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='table/opps_management'
+        title='Opportunities'
+        icon='/media/icons/duotune/art/art004.svg'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='table/props_management'
+        title='Proposals'
+        icon='/media/icons/duotune/art/art006.svg'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='table/rr_management'
+        title='Remittance Retainer'
+        icon='/media/icons/duotune/art/art007.svg'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='table/trans_management'
+        title='Transactions'
+        icon='/media/icons/duotune/art/art002.svg'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='table/paymethod_management'
+        title='Payment Methods'
+        icon='/media/icons/duotune/art/art001.svg'
+        fontIcon='bi-layers'
+      />
+      <AsideMenuItem
+        to='table/diaspora_management'
+        title='Diasporas'
+        icon='/media/icons/duotune/art/art008.svg'
+        fontIcon='bi-layers'
+      />
+
+      {/* <AsideMenuItemWithSub
         to='table'
         icon='/media/icons/duotune/art/art008.svg'
         title='Admin Tables'
@@ -51,7 +103,7 @@ export function AdminMenu() {
         <AsideMenuItem to='table/trans_management' title='Transactions' hasBullet={true} />
         <AsideMenuItem to='table/paymethod_management' title='Payment Methods' hasBullet={true} />
         <AsideMenuItem to='table/diaspora_management' title='Diasporas' hasBullet={true} />
-      </AsideMenuItemWithSub>
+      </AsideMenuItemWithSub> */}
 
       {/* <AsideMenuItem
         to='user_management'
@@ -106,13 +158,13 @@ export function AdminMenu() {
         fontIcon='bi-layers'
       /> */}
 
-      <div className='menu-item'>
+      {/* <div className='menu-item'>
         <div className='menu-content pt-8 pb-2'>
           <span className='menu-section text-muted text-uppercase fs-8 ls-1'>User</span>
         </div>
-      </div>
+      </div> */}
 
-      <AsideMenuItemWithSub
+      {/* <AsideMenuItemWithSub
         to='profile'
         icon='/media/icons/duotune/art/art008.svg'
         title='My Profile'
@@ -120,18 +172,18 @@ export function AdminMenu() {
       >
         <AsideMenuItem to='profile/overview' title='Overview' hasBullet={true} />
         <AsideMenuItem to='profile/settings' title='Settings' hasBullet={true} />
-        {/* <AsideMenuItem to='profile/loans' title='Loans' hasBullet={true} />
-        <AsideMenuItem to='profile/statements' title='Statements' hasBullet={true} /> */}
-      </AsideMenuItemWithSub>
+        <AsideMenuItem to='profile/loans' title='Loans' hasBullet={true} />
+        <AsideMenuItem to='profile/statements' title='Statements' hasBullet={true} />
+      </AsideMenuItemWithSub> */}
 
-      <AsideMenuItem
+      {/* <AsideMenuItem
         to='/my_opportunities'
         icon='/media/icons/duotune/art/art002.svg'
         title='My Opportunities/Proposals'
         fontIcon='bi-layers'
-      />
+      /> */}
 
-      <AsideMenuItemWithSub
+      {/* <AsideMenuItemWithSub
         to='remittance'
         icon='/media/icons/duotune/art/art003.svg'
         title='My Remittances'
@@ -141,14 +193,14 @@ export function AdminMenu() {
         <AsideMenuItem to='remittance/preferences' title='Preferences' hasBullet={true} />
         <AsideMenuItem to='remittance/sendmoney' title='Send Money' hasBullet={true} />
         <AsideMenuItem to='remittance/retainer' title='Remittance Retainer' hasBullet={true} />
-      </AsideMenuItemWithSub>
+      </AsideMenuItemWithSub> */}
 
-      <AsideMenuItem
+      {/* <AsideMenuItem
         to='/referrals'
         icon='/media/icons/duotune/general/gen019.svg'
         title='Referrals'
         fontIcon='bi-layers'
-      />
+      /> */}
       <AsideMenuItem
         to='/chat/private-chat'
         icon='/media/icons/duotune/art/art002.svg'

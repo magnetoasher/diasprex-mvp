@@ -9,6 +9,7 @@ const GeneralOpportunityCard = (props: Opps) => {
   const blankImg = toAbsoluteUrl('/media/svg/avatars/blank.svg')
   const badgeColor = props.open ? 'success' : 'danger'
   const dealTypeLength = props.dealtype?.length! - 1
+  const userType = localStorage.getItem('userType')
   return (
     // <Link to='/view_opportunity'>
     <div className='card shadow-sm border border-2 border-gray-300 border-hover p-3'>
@@ -96,7 +97,7 @@ const GeneralOpportunityCard = (props: Opps) => {
                 </label>
             </div> */}
       <div className='col-md py-1 px-3 mb-3'>
-        <div className='d-flex justify-content-center flex-wrap mb-5'>
+        <div className='d-flex flex-column justify-content-center flex-wrap mb-5'>
           <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3'>
             <div className='fs-6 text-gray-800 fw-bold'>
               {Moment(props.duedate).format('DD MMM, YYYY')}
@@ -234,7 +235,9 @@ const GeneralOpportunityCard = (props: Opps) => {
             borderRadius: '6px',
           }}
           onClick={() => {
-            history(`/opportunities_center/${props.uuid}`)
+            userType === 'enabler' && history(`/opportunities_center/${props.uuid}`)
+
+            userType === 'admin' && history(`/table/opps_management/viewopportunity/${props.uuid}`)
           }}
         >
           View Opportunity

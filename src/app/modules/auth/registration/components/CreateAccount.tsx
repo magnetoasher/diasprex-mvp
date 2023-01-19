@@ -15,6 +15,7 @@ import {ICreateAccount, createAccountSchemas, inits} from './CreateAccountWizard
 import SweetAlert from 'react-bootstrap-sweetalert'
 // import SubscriptionPlans from './steps/SubscriptionPlans'
 import SubscriptionPlans3 from './SubscriptionComponet/SubscriptionPlans3'
+import {PhoneVerification2} from './steps/phoneverification2'
 
 const CreateAccount: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)

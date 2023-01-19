@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 function getObjectPropertyValueByKey(obj: any, key: string): any | undefined {
   const map = new Map(Object.entries(obj))
   if (obj.hasOwnProperty(key) && map) {
@@ -12,6 +14,19 @@ function getObjectPropertyValueByKey(obj: any, key: string): any | undefined {
  */
 function getUniqueIdWithPrefix(prefix: string | undefined): string {
   const result = Math.floor(Math.random() * new Date().getTime()).toString()
+  if (!prefix) {
+    return result
+  }
+
+  return `${prefix}${result}`
+}
+
+function getUniqueDPXId(prefix: string | undefined): string {
+  const code = Math.floor(Math.random() * new Date().getTime())
+    .toString()
+    .slice(0, 6)
+  const codeyear = moment(new Date(), 'DD/MM/YY').format('YY')
+  const result = `${codeyear}-${code}`
   if (!prefix) {
     return result
   }
@@ -51,4 +66,10 @@ function toJSON(value: string | JSON): JSON | undefined {
   }
 }
 
-export {getObjectPropertyValueByKey, getUniqueIdWithPrefix, stringSnakeToCamel, toJSON}
+export {
+  getObjectPropertyValueByKey,
+  getUniqueIdWithPrefix,
+  getUniqueDPXId,
+  stringSnakeToCamel,
+  toJSON,
+}

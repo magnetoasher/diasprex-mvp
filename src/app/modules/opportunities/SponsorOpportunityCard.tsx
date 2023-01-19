@@ -2,25 +2,20 @@
 import clsx from 'clsx'
 import {FC} from 'react'
 import {useNavigate, Link} from 'react-router-dom'
-import {toAbsoluteUrl} from '../../../_metronic/helpers'
-import {Opps} from '../../../app/modules/apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {ID, toAbsoluteUrl} from '../../../_metronic/helpers'
+import {Opps} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import axios from 'axios'
+import {changeOppStatusAPI} from './redux/OpportunityAPI'
 
 type Props = {
   opp?: Opps
-  followed?: boolean
-  supported?: boolean
+  followed?: string
   dashboard?: boolean
+  followOpp?: (opp: Opps) => void
   unfollowOpp?: (opp: Opps) => void
-  unsupportOpp?: (opp: Opps) => void
+  getOpps?: () => void
 }
-const EnablerOpportunityCard2: FC<Props> = ({
-  followed,
-  supported,
-  dashboard,
-  opp,
-  unfollowOpp,
-  unsupportOpp,
-}) => {
+const SponsorOpportunityCard: FC<Props> = ({dashboard, opp, getOpps}) => {
   const badgeColor =
     opp?.status === 'new'
       ? 'info'
@@ -37,15 +32,38 @@ const EnablerOpportunityCard2: FC<Props> = ({
       : opp?.status === 'active'
       ? 'primary'
       : 'warning'
-  const history = useNavigate()
+  const navigate = useNavigate()
+
+  const handleWithdrawOpp = async (id: ID, status: string) => {
+    const query = {
+      opportunityUuid: id,
+      status: status,
+    }
+    changeOppStatusAPI(query).then((res) => {
+      if (res.status === 200) {
+        getOpps()
+      }
+    })
+  }
+  const handleDeleteOpp = async (id: ID, status: string) => {
+    const query = {
+      opportunityUuid: id,
+      status: status,
+    }
+    changeOppStatusAPI(query).then((res) => {
+      if (res.status === 200) {
+        getOpps()
+      }
+    })
+  }
 
   return (
     <div className='KTCard mb-5'>
       <div className='card shadow-sm mb-6 mb-xl-9'>
-        <div className='card-header ribbon bg-gray-400 ribbon-end ribbon-clip'>
+        <div className={`card-header ribbon bg-gray-400 ribbon-end ribbon-clip`}>
           <div className='d-flex align-items-center mb-1'>
             <Link
-              to={`/opportunities_center/${opp?.uuid}`}
+              to={`/opportunities/${opp?.uuid}`}
               className='text-gray-800 text-hover-primary fs-2 fw-bold me-3'
             >
               {opp?.sponsor}
@@ -73,11 +91,7 @@ const EnablerOpportunityCard2: FC<Props> = ({
             <span className={`ribbon-inner bg-${badgeColor}`}></span>
           </div>
         </div>
-        {/* <a
-          onClick={() => {
-            history(`/opportunities_center/${opp.uuid}`)
-          }}
-        > */}
+
         <div className='card-body pt-9 pb-0'>
           <div className='d-flex flex-wrap flex-sm-nowrap mb-6'>
             <div
@@ -101,11 +115,14 @@ const EnablerOpportunityCard2: FC<Props> = ({
               <div className='d-flex justify-content-between align-items-start flex-wrap mb-2'>
                 <div className='d-flex flex-column'>
                   <div className='d-flex flex-wrap fw-semibold mb-4 fs-5 text-dark'>
-                    TITLE: {opp?.title}
+                    TITLE:
+                    <Link className='mx-3 text-dark text-muted' to={`/opportunities/${opp?.uuid}`}>
+                      {opp?.title}
+                    </Link>
                   </div>
                 </div>
                 <div className={`col-lg-3 d-flex align-items-start justify-content-end`}>
-                  {opp?.status !== 'new' && opp?.status !== 'completed' && !dashboard && (
+                  {opp?.status !== 'active' && opp?.status !== 'completed' && !dashboard && (
                     <>
                       <button
                         className='btn btn-sm btn-light btn-active-light-primary dropdown-toggle'
@@ -123,63 +140,42 @@ const EnablerOpportunityCard2: FC<Props> = ({
                         <div
                           className='dropdown-item px-3 cursor-pointer'
                           onClick={() => {
-                            history(`/opportunities_center/${opp.uuid}`)
+                            opp?.status === 'draft'
+                              ? navigate(`/opportunities/${opp?.uuid}/createopportunities`)
+                              : navigate(`/opportunities/${opp?.uuid}`)
                           }}
                         >
-                          <div className='menu-link px-3'>View</div>
+                          <a className='menu-link px-3'>View</a>
                         </div>
-                        {followed && (
+
+                        {opp?.status === 'draft' && (
                           <div
                             className='dropdown-item px-3 cursor-pointer'
                             onClick={() => {
-                              unfollowOpp(opp)
+                              handleDeleteOpp(opp?.uuid, 'deleted')
                             }}
                           >
-                            <a className='menu-link px-3'>Unfollow</a>
+                            <a
+                              className='menu-link px-3'
+                              data-kt-customer-table-filter='delete_row'
+                            >
+                              Delete
+                            </a>
                           </div>
                         )}
-                        {supported && (
+                        {(opp?.status === 'new' || opp?.status === 'pending') && (
                           <div
                             className='dropdown-item px-3 cursor-pointer'
                             onClick={() => {
-                              unsupportOpp(opp)
+                              handleWithdrawOpp(opp?.uuid, 'withdrawn')
                             }}
                           >
-                            <a className='menu-link px-3'>Unsupport</a>
+                            <a className='menu-link px-3'>Withdraw</a>
                           </div>
                         )}
                       </div>
                     </>
                   )}
-
-                  {/* <a
-              href='#'
-              className=' btn btn-sm btn-light btn-active-light-primary'
-              data-kt-menu-trigger='click'
-              data-kt-menu-placement='bottom-end'
-            >
-              Actions
-              <span className='svg-icon svg-icon-5 m-0'>
-                <KTSVG path='/media/icons/duotune/arrows/arr072.svg' className='svg-icon-5 m-0' />
-              </span>
-            </a>
-
-            <div
-              className='menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4'
-              data-kt-menu='true'
-            >
-              <div className='menu-item px-3'>
-                <a href='#' className='menu-link px-3'>
-                  View
-                </a>
-              </div>
-
-              <div className='menu-item px-3'>
-                <a href='#' className='menu-link px-3' data-kt-customer-table-filter='delete_row'>
-                  Delete
-                </a>
-              </div>
-            </div> */}
                 </div>
               </div>
               <div className='d-flex flex-wrap justify-content-start'>
@@ -192,4 +188,4 @@ const EnablerOpportunityCard2: FC<Props> = ({
     </div>
   )
 }
-export default EnablerOpportunityCard2
+export default SponsorOpportunityCard

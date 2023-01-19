@@ -36,7 +36,7 @@ export const OtherServices = () => {
                     Diaspora Business Development
                   </a>
                 </li>
-                <li className='nav-item'>
+                {/* <li className='nav-item'>
                   <a
                     className='nav-link text-gray-500 text-active-primary px-3 px-lg-6'
                     href='#'
@@ -45,7 +45,7 @@ export const OtherServices = () => {
                   >
                     Investments
                   </a>
-                </li>
+                </li> */}
                 <li className='nav-item'>
                   <a
                     className='nav-link text-gray-500 text-active-primary px-3 px-lg-6'
@@ -56,7 +56,7 @@ export const OtherServices = () => {
                     Consulting
                   </a>
                 </li>
-                <li className='nav-item'>
+                {/* <li className='nav-item'>
                   <a
                     className='nav-link text-gray-500 text-active-primary px-3 px-lg-6'
                     href='#'
@@ -65,7 +65,7 @@ export const OtherServices = () => {
                   >
                     Diaspora Investment Fund (DIF)
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
 
@@ -251,7 +251,7 @@ export const OtherServices = () => {
                 </div>
               </div>
 
-              <div className='tab-pane fade' id='kt_services_investments'>
+              {/* <div className='tab-pane fade' id='kt_services_investments'>
                 <div className='row g-10'>
                   <div className='col-lg-6'>
                     <div className='row g-10 mb-10'>
@@ -339,7 +339,7 @@ export const OtherServices = () => {
                     </a>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div className='tab-pane fade' id='kt_consulting'>
                 <div className='row g-10'>
@@ -430,97 +430,11 @@ export const OtherServices = () => {
                   </div>
                 </div>
               </div>
-              <div className='tab-pane fade' id='kt_dif'>
+              {/* <div className='tab-pane fade' id='kt_dif'>
                 <div className='row g-10'>
                   <ComingSoon />
-
-                  {/* <div className='col-lg-6'>
-                    <a
-                      className='d-block card-rounded overlay h-lg-100'
-                      data-fslightbox='lightbox-projects'
-                      href='assets/media/stock/600x600/img-15.jpg'
-                    >
-                      <div
-                        className='overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100 min-h-250px'
-                        style={{
-                          backgroundImage: `url(${toAbsoluteUrl(
-                            '/media/stock/600x600/img-15.jpg'
-                          )})`,
-                        }}
-                      ></div>
-
-                      <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
-                        <i className='bi bi-eye-fill fs-3x text-white'></i>
-                      </div>
-                    </a>
-                  </div> */}
-
-                  {/* <div className='col-lg-6'>
-                    <div className='row g-10 mb-10'>
-                      <div className='col-lg-6'>
-                        <a
-                          className='d-block card-rounded overlay'
-                          data-fslightbox='lightbox-projects'
-                          href='assets/media/stock/600x600/img-22.jpg'
-                        >
-                          <div
-                            className='overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px'
-                            style={{
-                              backgroundImage: `url(${toAbsoluteUrl(
-                                '/media/stock/600x600/img-22.jpg'
-                              )})`,
-                            }}
-                          ></div>
-
-                          <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
-                            <i className='bi bi-eye-fill fs-3x text-white'></i>
-                          </div>
-                        </a>
-                      </div>
-
-                      <div className='col-lg-6'>
-                        <a
-                          className='d-block card-rounded overlay'
-                          data-fslightbox='lightbox-projects'
-                          href='assets/media/stock/600x600/img-21.jpg'
-                        >
-                          <div
-                            className='overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px'
-                            style={{
-                              backgroundImage: `url(${toAbsoluteUrl(
-                                '/media/stock/600x600/img-21.jpg'
-                              )})`,
-                            }}
-                          ></div>
-
-                          <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
-                            <i className='bi bi-eye-fill fs-3x text-white'></i>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-
-                    <a
-                      className='d-block card-rounded overlay'
-                      data-fslightbox='lightbox-projects'
-                      href='assets/media/stock/600x400/img-14.jpg'
-                    >
-                      <div
-                        className='overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px'
-                        style={{
-                          backgroundImage: `url(${toAbsoluteUrl(
-                            '/media/stock/600x600/img-14.jpg'
-                          )})`,
-                        }}
-                      ></div>
-
-                      <div className='overlay-layer card-rounded bg-dark bg-opacity-10'>
-                        <i className='bi bi-eye-fill fs-3x text-white'></i>
-                      </div>
-                    </a>
-                  </div> */}
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

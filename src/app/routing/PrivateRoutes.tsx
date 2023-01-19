@@ -11,7 +11,7 @@ import {RegistrationStepsPage} from '../modules/auth/registration/RegistrationSt
 import {AuthPage} from '../modules/auth'
 import {ReferralsForm} from '../modules/profile/components/ReferralsForm'
 import CreateOpportunities from '../modules/opportunities/CreateOpportunities'
-import Proposals from '../modules/proposals/components/Proposals'
+// import Proposals from '../modules/proposals/components/Proposals'
 import MyOpportunity from '../modules/opportunities/MyOpportunity'
 import MyProposal from '../modules/proposals/components/MyProposal'
 import GeneralOpportunityCard from '../modules/opportunities/GeneralOpportunityCard'
@@ -34,6 +34,9 @@ import {
 } from '../modules/apps/admin-mgt-apps/admin-tables'
 import {SponsorPropsRevPage} from '../modules/proposals/proposalreviewtable/ProposalReviewPage'
 import SponsorViewOpportunity from '../modules/opportunities/SponsorViewOpportunity'
+import AdminVewopportunity from '../modules/apps/admin-mgt-apps/opp-management/opps-list/table/adminviewopportunity'
+import Adminviewproposal from '../modules/apps/admin-mgt-apps/proposal-management/props-list/table/adminviewproposal'
+import SponsorMyOpportunities from '../modules/opportunities/SponsorMyOpportunities'
 
 const PrivateRoutes = () => {
   const RemittancePage = lazy(() => import('./../modules/Remittance/RemittancePage'))
@@ -66,13 +69,15 @@ const PrivateRoutes = () => {
             <Route path='admindashboard' element={<AdminDashboardWrapper />} />
             {/* <Route path='builder' element={<BuilderPageWrapper />} /> */}
             <Route path='createopportunities' element={<CreateOpportunities />} />
+            <Route path='sponsor/my_opportunities' element={<SponsorMyOpportunities />} />
             <Route path='opportunities/:id' element={<SponsorViewOpportunity />} />
             <Route
               path='opportunities/:oppid/createopportunities'
               element={<CreateOpportunities />}
             />
-            <Route path='proposals' element={<Proposals />} />
+            {/* <Route path='proposals' element={<Proposals />} /> */}
             <Route path='proposals/:oppid/:enablerid' element={<ViewProposal />} />
+            <Route path='proposals/admin/:oppid/:enablerid' element={<Adminviewproposal />} />
             {/* <Route path='sponsor_proposals' element={<SponsorProposals />} /> */}
             <Route path='sponsor/props_review/*' element={<SponsorPropsRevPage />} />
             <Route path='my_opportunities' element={<MyOpportunity />} />
@@ -85,6 +90,10 @@ const PrivateRoutes = () => {
             />
             <Route path='referrals' element={<ReferralsForm />} />
             <Route path='opportunities_center/:id' element={<ViewOpportunity />} />
+            <Route
+              path='table/opps_management/viewopportunity/:id'
+              element={<AdminVewopportunity />}
+            />
             <Route path='table/users_management/*' element={<UsersMgtPage />} />
             <Route path='table/opps_management/*' element={<OppsMgtPage />} />
             <Route path='table/props_management/*' element={<ProposalMgtPage />} />

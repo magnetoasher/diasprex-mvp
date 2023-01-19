@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 export type Opps = {
   uuid?: ID
   id?: ID
+  dpxid?: ID
   title?: string
   thumbnail?: string
   sponsorName?: string
@@ -12,7 +13,25 @@ export type Opps = {
   sponsorThumbnail?: string
   category?: string
   summary?: string
-  oppdesc?: string
+  oppdesc?: {
+    marketneed?: string
+    marketsize?: string
+    productservices?: string
+    devimpact?: string
+    businessmodel?: string
+    valueprop?: string
+    gotomarket?: string
+    competitor?: string
+    complandscape?: string
+    company?: string
+    companyteam?: string
+    diaspengagement?: string
+    traction?: string
+    nextmilestone?: string
+    asks?: string
+    exit?: string
+  }
+
   country?: string
   datesubmitted?: string
   status?: string
@@ -20,6 +39,7 @@ export type Opps = {
   open?: boolean
   dealtype?: string[]
   otherdealtype?: string
+  videourl?: string
   featuredopp?: boolean
   initials?: {
     label: string
@@ -33,6 +53,15 @@ export type Opps = {
 }
 
 export type OppsQueryResponse = Response<Array<Opps>>
+
+export type Feedback = {
+  opportunityUuid?: ID
+  enablerUserId?: ID
+  message?: string
+  status?: string
+}
+
+export type FeedbackQueryResponse = Response<Array<Feedback>>
 
 export const initialOpps: Opps = {
   title: '',

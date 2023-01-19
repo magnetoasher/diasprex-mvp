@@ -8,7 +8,6 @@ import {DefaultTitle} from '../header/page-title/DefaultTitle'
 const Toolbar1: FC = () => {
   const {classes} = useLayout()
   const userType = localStorage.getItem('userType')
-  const [showAddFundModal, setAddFundAppModal] = useState<boolean>(false)
 
   return (
     <div className='toolbar' id='kt_toolbar'>

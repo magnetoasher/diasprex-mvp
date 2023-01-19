@@ -19,7 +19,7 @@ const FeaturedOpportunities: React.FC<PropsFromRedux> = (props) => {
   const [featuredOpps, setFeaturedOpps] = useState<Opps[]>([])
   const query = {
     status: 'published',
-    featuredopp: true,
+    filter_featuredopp: true,
   }
 
   useEffect(() => {
@@ -46,7 +46,7 @@ const FeaturedOpportunities: React.FC<PropsFromRedux> = (props) => {
 
         <Carousel>
           <Carousel.Item>
-            <div className='d-flex flex-center justify-content-between'>
+            <div className='d-flex flex-center '>
               {featuredOpps?.slice(0, 3).map((element) => (
                 <GeneralCardComponent
                   id={element.id}
@@ -67,7 +67,7 @@ const FeaturedOpportunities: React.FC<PropsFromRedux> = (props) => {
           </Carousel.Item>
 
           <Carousel.Item>
-            <div className='d-flex flex-center justify-content-between'>
+            <div className='d-flex flex-center '>
               {featuredOpps?.slice(3, 7).map((element) => (
                 <GeneralCardComponent
                   id={element.id}

@@ -19,10 +19,8 @@ const HeaderUserMenu: FC = () => {
     userType === 'sponsor' ? 'primary' : userType === 'admin' ? 'info' : 'success'
 
   useEffect(() => {
-    userType === 'admin'
-      ? setUserLabel('Admin') //Temporary placeholder for admin user type
-      : setUserLabel(userTypeFull)
-  }, [userTypeFull, userType])
+    setUserLabel(userTypeFull)
+  }, [userTypeFull])
 
   return (
     <div
@@ -211,6 +209,36 @@ const HeaderUserMenu: FC = () => {
             </Link>
           </div>
         </>
+      )}
+      {userType === 'sponsor' && (
+        <div
+          className='menu-item px-5'
+          data-kt-menu-trigger='hover'
+          data-kt-menu-placement='left-start'
+          data-kt-menu-flip='bottom'
+        >
+          <a href='#' className='menu-link px-5'>
+            <span className='menu-title'>Opportunity</span>
+            <span className='menu-arrow'></span>
+          </a>
+          <div className='menu-sub menu-sub-dropdown py-4'>
+            <div className='menu-item px-5'>
+              <Link to={'/createopportunities'} className='menu-link px-5'>
+                Create Opportunity
+              </Link>
+            </div>
+            <div className='menu-item px-5'>
+              <Link to={'/sponsor/my_opportunities'} className='menu-link px-5'>
+                My Opportunities
+              </Link>
+            </div>
+            <div className='menu-item px-5'>
+              <Link to={'/sponsor/props_review/proposals'} className='menu-link px-5'>
+                Proposals
+              </Link>
+            </div>
+          </div>
+        </div>
       )}
       <div className='menu-item px-5 my-1'>
         <Link to='/chat/private-chat' className='menu-link px-5'>

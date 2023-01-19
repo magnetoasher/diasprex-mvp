@@ -11,12 +11,12 @@ import {
 import {UploadOutlined} from '@ant-design/icons'
 import {Upload} from 'antd'
 import {UserOutlined} from '@ant-design/icons'
-import {Editor} from 'react-draft-wysiwyg'
-import {CountryList, IndustryList} from '../../../../_metronic/partials/content/selectionlists'
+
+import {SponsorCountryList} from '../../../../_metronic/partials/content/selectionlists'
 import {Formik, useFormik} from 'formik'
 import {nanoid} from '@reduxjs/toolkit'
 import axios from 'axios'
-import {getUniqueIdWithPrefix} from '../../../../_metronic/assets/ts/_utils'
+import {getUniqueIdWithPrefix, getUniqueDPXId} from '../../../../_metronic/assets/ts/_utils'
 import {OppsCategory} from '../../../../_metronic/partials/content/selectionlists/oppscategory'
 import {DefaultDraftInlineStyle} from 'draft-js'
 import Swal from 'sweetalert2'
@@ -28,36 +28,18 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
   const dateFormatList = ['DD/MM/YYYY', 'DD/MM/YY']
   const [isOtherSelected, setIsOtherSelected] = useState(false)
   const [status, setStatus] = useState('')
-  const initVals: Opps = {
-    title: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.title : '',
-    id: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.uuid : '',
-    thumbnail:
-      location.pathname !== '/createopportunities' && currentOpp ? currentOpp.thumbnail : '',
-    sponsor: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.sponsor : '',
-    summary: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.summary : '',
-    status: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.status : '',
-    datesubmitted:
-      location.pathname !== '/createopportunities' && currentOpp ? currentOpp.datesubmitted : '',
-    duedate: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.duedate : '',
-    category: location.pathname !== '/createopportunities' && currentOpp ? currentOpp.category : '',
-    following:
-      location.pathname !== '/createopportunities' && currentOpp ? currentOpp.following : [],
-    showedinterest:
-      location.pathname !== '/createopportunities' && currentOpp ? currentOpp.showedinterest : [],
-  }
-
-  const onChange = (value) => {
-    console.log(`selected ${value}`)
-  }
+  const initialOppObject: Opps =
+    location.pathname !== '/createopportunities' && currentOpp ? currentOpp : initialOpps
 
   const formik = useFormik({
-    initialValues: initVals,
+    initialValues: {...initialOppObject},
     enableReinitialize: true,
     // validationSchema: createOppsSchemas,
     validateOnChange: false,
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
       const idNumber = nanoid()
+      const dpxNumber = getUniqueDPXId('DO')
       const data = currentOpp
         ? {
             ...values,
@@ -81,6 +63,7 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
             ...values,
             uuid: idNumber,
             id: idNumber,
+            dpxid: dpxNumber,
             sponsorUserId: sponsorUserId,
             sponsor: localStorage.getItem('userTypeFull'),
             status: status,
@@ -115,6 +98,7 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
         console.log(formik.errors)
       } finally {
         formik.resetForm()
+        console.log('Data', data)
       }
     },
   })
@@ -135,7 +119,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 Opportunity submission form
               </b>
             </h5>
-            <p className='fs-6 text-mute'>Please complete this form to submit your opportunity.</p>
+            <p className='fs-4 text-dark fw-bold'>
+              Please complete this form to submit your opportunity
+              <br />
+              DO NOT INCLUDE ANY PROPRIETARY INFORMATION IN THE FORM BODY
+            </p>
+            <p className='fs-6 test-mute'>
+              <a className='text-primary'>Contact us</a> if your opportunity is not a traditional
+              business opportunity
+            </p>
           </div>
         </div>
         <div class='separator separator-content separator-dashed my-15'>
@@ -179,7 +171,12 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               >
-                <CountryList />
+                <option value=''>Select Country</option>
+                {SponsorCountryList.map((country, index) => (
+                  <option key={index} value={country.label}>
+                    {country.label}
+                  </option>
+                ))}
               </select>
               {formik.touched.country && formik.errors.country && (
                 <div className='fv-plugins-message-container'>
@@ -196,11 +193,10 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
               </h5>
 
               <DatePicker
-                defaultValue={moment('06/01/2023', dateFormatList[0])}
+                defaultValue={moment(new Date(), dateFormatList[0])}
                 format={dateFormatList}
                 onChange={(date, dateString) => {
                   formik.handleChange({target: {name: 'duedate', value: date}})
-                  console.log('Date', moment(date).format('DD MMM YYYY'), dateString)
                 }}
               />
               {/* {formik.touched.duedate && formik.errors.duedate && (
@@ -368,15 +364,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 className='form-control mb-2'
                 rows={5}
                 placeholder='Market need/problems  (max of 700 characters)'
-                {...formik.getFieldProps('marketneed')}
-                name='marketneed'
+                {...formik.getFieldProps('oppdesc.marketneed')}
+                name='oppdesc.marketneed'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.marketneed && formik.errors.marketneed && (
+              {/* {formik.touched.oppdesc.marketneed && formik.errors.oppdesc.marketneed && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.marketneed}</span>
+                      <span role='alert'>{formik.errors.oppdesc.marketneed}</span>
                     </div>
                   </div>
                 )} */}
@@ -394,15 +390,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 maxLength={700}
                 rows={5}
                 placeholder='Type the summary of your opportunity  (max of 500 characters)'
-                {...formik.getFieldProps('marketsize')}
-                name='marketsize'
+                {...formik.getFieldProps('oppdesc.marketsize')}
+                name='oppdesc.marketsize'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.marketsize && formik.errors.marketsize && (
+              {/* {formik.touched.oppdesc.marketsize && formik.errors.oppdesc.marketsize && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.marketsize}</span>
+                      <span role='alert'>{formik.errors.oppdesc.marketsize}</span>
                     </div>
                   </div>
                 )} */}
@@ -473,15 +469,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
               className='form-control mb-2'
               rows={10}
               placeholder='Product and/or services (max of 1400 characters)'
-              {...formik.getFieldProps('productservices')}
-              name='productservices'
+              {...formik.getFieldProps('oppdesc.productservices')}
+              name='oppdesc.productservices'
               autoComplete='off'
               disabled={formik.isSubmitting}
             ></textarea>
-            {/* {formik.touched.productservices && formik.errors.productservices && (
+            {/* {formik.touched.oppdesc.productservices && formik.errors.oppdesc.productservices && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.productservices}</span>
+                      <span role='alert'>{formik.errors.oppdesc.productservices}</span>
                     </div>
                   </div>
                 )} */}
@@ -498,15 +494,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
               className='form-control mb-2'
               rows={10}
               placeholder='Broader impact of your business (max of 1400 characters)'
-              {...formik.getFieldProps('devimpact')}
-              name='devimpact'
+              {...formik.getFieldProps('oppdesc.devimpact')}
+              name='oppdesc.devimpact'
               autoComplete='off'
               disabled={formik.isSubmitting}
             ></textarea>
-            {/* {formik.touched.devimpact && formik.errors.devimpact && (
+            {/* {formik.touched.oppdesc.devimpact && formik.errors.oppdesc.devimpact && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.devimpact}</span>
+                      <span role='alert'>{formik.errors.oppdesc.devimpact}</span>
                     </div>
                   </div>
                 )} */}
@@ -528,15 +524,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 className='form-control mb-2'
                 rows={5}
                 placeholder='Business model (max of 700 characters)'
-                {...formik.getFieldProps('businessmodel')}
-                name='businessmodel'
+                {...formik.getFieldProps('oppdesc.businessmodel')}
+                name='oppdesc.businessmodel'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.businessmodel && formik.errors.businessmodel && (
+              {/* {formik.touched.oppdesc.businessmodel && formik.errors.oppdesc.businessmodel && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.businessmodel}</span>
+                      <span role='alert'>{formik.errors.oppdesc.businessmodel}</span>
                     </div>
                   </div>
                 )} */}
@@ -553,15 +549,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 maxLength={700}
                 rows={5}
                 placeholder='Market need/problems  (max of 700 characters)'
-                {...formik.getFieldProps('valueprop')}
-                name='valueprop'
+                {...formik.getFieldProps('oppdesc.valueprop')}
+                name='oppdesc.valueprop'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.valueprop && formik.errors.valueprop && (
+              {/* {formik.touched.oppdesc.valueprop && formik.errors.oppdesc.valueprop && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.valueprop}</span>
+                      <span role='alert'>{formik.errors.oppdesc.valueprop}</span>
                     </div>
                   </div>
                 )} */}
@@ -579,15 +575,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 maxLength={1400}
                 rows={5}
                 placeholder='Go to market strategy  (max of 1400 characters)'
-                {...formik.getFieldProps('gotomarket')}
-                name='gotomarket'
+                {...formik.getFieldProps('oppdesc.gotomarket')}
+                name='oppdesc.gotomarket'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.gotomarket && formik.errors.gotomarket && (
+              {/* {formik.touched.oppdesc.gotomarket && formik.errors.oppdesc.gotomarket && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.gotomarket}</span>
+                      <span role='alert'>{formik.errors.oppdesc.gotomarket}</span>
                     </div>
                   </div>
                 )} */}
@@ -613,15 +609,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 maxLength={700}
                 rows={5}
                 placeholder='Market need/problems  (max of 700 characters)'
-                {...formik.getFieldProps('competitor')}
-                name='competitor'
+                {...formik.getFieldProps('oppdesc.competitor')}
+                name='oppdesc.competitor'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.competitor && formik.errors.competitor && (
+              {/* {formik.touched.oppdesc.competitor && formik.errors.oppdesc.competitor && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.competitor}</span>
+                      <span role='alert'>{formik.errors.oppdesc.competitor}</span>
                     </div>
                   </div>
                 )} */}
@@ -640,15 +636,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 maxLength={700}
                 rows={5}
                 placeholder='Market need/problems  (max of 700 characters)'
-                {...formik.getFieldProps('complandscape')}
-                name='complandscape'
+                {...formik.getFieldProps('oppdesc.complandscape')}
+                name='oppdesc.complandscape'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.complandscape && formik.errors.complandscape && (
+              {/* {formik.touched.oppdesc.complandscape && formik.errors.oppdesc.complandscape && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.complandscape}</span>
+                      <span role='alert'>{formik.errors.oppdesc.complandscape}</span>
                     </div>
                   </div>
                 )} */}
@@ -674,15 +670,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 maxLength={700}
                 rows={5}
                 placeholder='Market need/problems  (max of 700 characters)'
-                {...formik.getFieldProps('companyteam')}
-                name='companyteam'
+                {...formik.getFieldProps('oppdesc.companyteam')}
+                name='oppdesc.companyteam'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.companyteam && formik.errors.companyteam && (
+              {/* {formik.touched.oppdesc.companyteam && formik.errors.oppdesc.companyteam && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.companyteam}</span>
+                      <span role='alert'>{formik.errors.oppdesc.companyteam}</span>
                     </div>
                   </div>
                 )} */}
@@ -697,15 +693,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 maxLength={700}
                 rows={5}
                 placeholder='About your company  (max of 1400 characters)'
-                {...formik.getFieldProps('company')}
-                name='company'
+                {...formik.getFieldProps('oppdesc.company')}
+                name='oppdesc.company'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.company && formik.errors.company && (
+              {/* {formik.touched.oppdesc.company && formik.errors.oppdesc.company && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.company}</span>
+                      <span role='alert'>{formik.errors.oppdesc.company}</span>
                     </div>
                   </div>
                 )} */}
@@ -723,15 +719,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 maxLength={700}
                 rows={5}
                 placeholder='Diaspora engagement  (max of 700 characters)'
-                {...formik.getFieldProps('diaspengagement')}
-                name='diaspengagement'
+                {...formik.getFieldProps('oppdesc.diaspengagement')}
+                name='oppdesc.diaspengagement'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.diaspengagement && formik.errors.diaspengagement && (
+              {/* {formik.touched.oppdesc.diaspengagement && formik.errors.oppdesc.diaspengagement && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.diaspengagement}</span>
+                      <span role='alert'>{formik.errors.oppdesc.diaspengagement}</span>
                     </div>
                   </div>
                 )} */}
@@ -757,15 +753,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 maxLength={700}
                 rows={5}
                 placeholder='Recent tractions  (max of 700 characters)'
-                {...formik.getFieldProps('traction')}
-                name='traction'
+                {...formik.getFieldProps('oppdesc.traction')}
+                name='oppdesc.traction'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.traction && formik.errors.traction && (
+              {/* {formik.touched.oppdesc.traction && formik.errors.oppdesc.traction && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.traction}</span>
+                      <span role='alert'>{formik.errors.oppdesc.traction}</span>
                     </div>
                   </div>
                 )} */}
@@ -783,15 +779,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 maxLength={700}
                 rows={5}
                 placeholder='Recent tractions  (max of 700 characters)'
-                {...formik.getFieldProps('traction')}
-                name='traction'
+                {...formik.getFieldProps('oppdesc.nextmilestone')}
+                name='oppdesc.nextmilestone'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.traction && formik.errors.traction && (
+              {/* {formik.touched.oppdesc.nextmilestone && formik.errors.oppdesc.nextmilestone && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.traction}</span>
+                      <span role='alert'>{formik.errors.oppdesc.nextmilestone}</span>
                     </div>
                   </div>
                 )} */}
@@ -800,7 +796,7 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
         </div>
 
         <div class='separator separator-content separator-dashed my-15'>
-          <span class='w-250px fw-bold'>Ask</span>
+          <span class='w-250px fw-bold'>Ask and Exit Strategy</span>
         </div>
 
         <div className='row g-6 g-xl-9'>
@@ -813,15 +809,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 maxLength={700}
                 rows={5}
                 placeholder='Your asks (max of 700 characters)'
-                {...formik.getFieldProps('asks')}
-                name='asks'
+                {...formik.getFieldProps('oppdesc.asks')}
+                name='oppdesc.asks'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.asks && formik.errors.asks && (
+              {/* {formik.touched.oppdesc.asks && formik.errors.oppdesc.asks && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.asks}</span>
+                      <span role='alert'>{formik.errors.oppdesc.asks}</span>
                     </div>
                   </div>
                 )} */}
@@ -839,15 +835,15 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 maxLength={700}
                 rows={5}
                 placeholder='Your exit strategy (max of 700 characters)'
-                {...formik.getFieldProps('exit')}
-                name='exit'
+                {...formik.getFieldProps('oppdesc.exit')}
+                name='oppdesc.exit'
                 autoComplete='off'
                 disabled={formik.isSubmitting}
               ></textarea>
-              {/* {formik.touched.exit && formik.errors.exit && (
+              {/* {formik.touched.oppdesc.exit && formik.errors.oppdesc.exit && (
                   <div className='fv-plugins-message-container'>
                     <div className='fv-help-block text-danger'>
-                      <span role='alert'>{formik.errors.exit}</span>
+                      <span role='alert'>{formik.errors.oppdesc.exit}</span>
                     </div>
                   </div>
                 )} */}
@@ -855,7 +851,7 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
           </div>
         </div>
 
-        <div className='row g-6 g-xl-9'>
+        <div className='row g-6 g-xl-9 mb-5'>
           <div style={{marginRight: '10px'}}>
             <Upload>
               <Button
@@ -865,6 +861,10 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 Upload File
               </Button>
             </Upload>
+            <span className='text-muted'>
+              Upload additional materials such as your business pitch and company profile as a
+              single PDF
+            </span>
           </div>
           <div>
             <Upload>
@@ -875,9 +875,24 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 Upload Thumbnail
               </Button>
             </Upload>
+            <span className='text-muted'>
+              Upload a thumbnail (300p x 300 pixel, jpg, png )for your opportunity
+            </span>
           </div>
         </div>
-
+        <div className='row g-6 g-xl-9'>
+          <div className='d-flex flex-column mb-10 fv-row'>
+            <label className='required fs-6 fw-bold mb-2' htmlFor='videourl'>
+              Video Url
+            </label>
+            <input
+              className='form-control'
+              placeholder='include the url (e.g Youtube, Vimeo) of your company and business if available'
+              {...formik.getFieldProps('videourl')}
+              name='videourl'
+            />
+          </div>
+        </div>
         <div className='d-flex flex-column fv-row py-10'>
           <div className='form-check form-check d-flex justify-content-start align-items-center mb-3'>
             <input

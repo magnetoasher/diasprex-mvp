@@ -27,6 +27,12 @@ export function Sponsor() {
       <AsideMenuItem
         to='/createopportunities'
         icon='/media/icons/duotune/art/art001.svg'
+        title='Create Opportunity'
+        fontIcon='bi-app-indicator'
+      />
+      <AsideMenuItem
+        to='/sponsor/my_opportunities'
+        icon='/media/icons/duotune/art/art001.svg'
         title='My Opportunities'
         fontIcon='bi-app-indicator'
       />
