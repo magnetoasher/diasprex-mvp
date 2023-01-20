@@ -1,4 +1,5 @@
 import {FC} from 'react'
+import {Opps} from '../../core/_models'
 
 type Props = {
   yes?: boolean

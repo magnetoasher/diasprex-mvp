@@ -25,7 +25,8 @@ function getUniqueDPXId(prefix: string | undefined): string {
   const code = Math.floor(Math.random() * new Date().getTime())
     .toString()
     .slice(0, 6)
-  const codeyear = moment(new Date(), 'DD/MM/YY').format('YY')
+  const codeyear = moment(new Date(), 'DD/MM/YY').format('YYMM')
+
   const result = `${codeyear}-${code}`
   if (!prefix) {
     return result

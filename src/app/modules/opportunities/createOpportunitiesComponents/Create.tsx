@@ -48,7 +48,7 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
             sponsorUserId: sponsorUserId,
             sponsor: localStorage.getItem('userTypeFull'),
             status: status ? status : currentOpp.status,
-            open: currentOpp.open ? currentOpp.open : false,
+            open: currentOpp.open ? currentOpp.open : 'pending',
             datesubmitted: new Date(),
             duedate: values.duedate
               ? values.duedate < moment(new Date()).add(90, 'days').toDate()
@@ -67,7 +67,7 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
             sponsorUserId: sponsorUserId,
             sponsor: localStorage.getItem('userTypeFull'),
             status: status,
-            open: false,
+
             datesubmitted: new Date(),
             duedate:
               values.duedate < moment(new Date()).add(90, 'days').toDate()
@@ -91,6 +91,7 @@ export const Create = ({sponsorUserId, getOpps, currentOpp}: any) => {
                 title: 'Success',
                 text: 'Successfully done!',
               })
+              navigate('/sponsor/my_opportunities')
             }
           })
           .catch((error) => error)

@@ -11,7 +11,7 @@ import {Link, useNavigate, useParams} from 'react-router-dom'
 import {useOktaAuth} from '@okta/okta-react'
 import * as opps from '../../../../../opportunities/redux/OpportunityRedux'
 import {RootState} from '../../../setup'
-import {Opps, Feedback} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {Opps, Feedback} from '../core/_models'
 import {toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
 import Swal from 'sweetalert2'
 import {ListLoading} from '../../../core/loading/ListLoading'
@@ -50,14 +50,14 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   useEffect(() => {
     const params = {
       opportunityUuid: id,
-      status: 'new',
     }
     dispatch(props.getFeedbacksRequest(params))
   }, [])
 
+  console.log('Feedback', props.opps?.feedbacks)
   useEffect(() => {
-    if (props.opps.feedbacks.length > 0) {
-      setFeedbacks(props.opps.feedbacks)
+    if (props.opps.feedbacks.feedback?.length > 0) {
+      setFeedbacks(props.opps?.feedbacks?.feedback)
     } else {
       setNoFeedback(true)
     }
@@ -182,7 +182,6 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     }
   }
 
-  const badgeColor = oppData?.open ? 'success' : 'danger'
   const dealTypeLength = oppData?.dealtype?.length! - 1
   const handleFeedbackSubmit = (data) => {
     provideFeedbackAPI(data)
@@ -223,6 +222,25 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
       })
     }
   }
+  const openBadgeColor = oppData?.open ? 'success' : 'danger'
+  const statusBadgeColor =
+    oppData?.status === 'new'
+      ? 'info'
+      : oppData?.status === 'published'
+      ? 'success'
+      : oppData?.status === 'accepted'
+      ? 'primary'
+      : oppData?.status === 'draft'
+      ? 'gray-800'
+      : oppData?.status === 'not accepted'
+      ? 'danger'
+      : oppData?.status === 'pending'
+      ? 'gray-600'
+      : oppData?.status === 'completed'
+      ? 'gray-800'
+      : oppData?.status === 'active'
+      ? 'primary'
+      : 'warning'
 
   return (
     <>
@@ -235,14 +253,14 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
               <div className='card-body pt-9 pb-0'>
                 <div className='d-flex flex-wrap flex-sm-nowrap mb-6'>
                   <div
-                    className={`d-flex flex-center flex-shrink-0 bg-light-${badgeColor} rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4`}
+                    className={`d-flex flex-center flex-shrink-0 bg-light-${statusBadgeColor} rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4`}
                   >
                     {oppData?.thumbnail === '' ? (
                       <div
                         className={clsx(
                           'd-flex symbol-label mw-100 h-100px h-lg-150px align-items-center justify-content-center fs-1 rounded',
-                          `bg-light-${badgeColor}`,
-                          ` text-capitalize text-${badgeColor}`
+                          `bg-light-${statusBadgeColor}`,
+                          ` text-capitalize text-${statusBadgeColor}`
                         )}
                       >
                         {oppData?.country}
@@ -277,9 +295,13 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                               data-bs-placement='bottom'
                             />
                           </span>
-                          <span className={`badge badge-light-${badgeColor} me-auto`}>
-                            {oppData?.open ? 'Open' : 'Closed'}
-                          </span>
+                          {oppData?.status === 'published' ? (
+                            <span className={`badge badge-light-${openBadgeColor} me-auto`}>
+                              {oppData?.open ? 'Open' : 'Closed'}
+                            </span>
+                          ) : (
+                            <span className='badge badge-secondary me-auto'>Pending</span>
+                          )}
                         </div>
 
                         <div className='d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-400'>
@@ -294,7 +316,7 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                       </div>
                       <div className='d-flex mb-4'>
                         <span
-                          className={`badge badge-${badgeColor} fs-4 text-uppercase me-3 py-3 px-3`}
+                          className={`badge badge-${statusBadgeColor} fs-4 text-uppercase me-3 py-3 px-3`}
                         >
                           {oppData?.status}
                         </span>
@@ -717,72 +739,75 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                 <div className=''>
                   <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Feedbacks</label>
                 </div>
-
-                {feedbacks?.map((feedback) => (
-                  <div className=''>
-                    <div
-                      key={`${feedback.opportunityUuid + feedback.enablerUserId}`}
-                      className='d-flex flex-column mb-2'
-                    >
-                      <div className=''>
-                        <a className='text-gray-800 fs-6 text-hover-primary me-3'>
-                          {feedback.enablerUserId}
-                        </a>
-
-                        <span
-                          className={`badge badge-light-${
-                            feedback.status === 'new'
-                              ? 'info'
-                              : feedback.status === 'approved'
-                              ? 'success'
-                              : 'danger'
-                          } text-uppercase`}
+                <ol>
+                  {feedbacks?.map((feedback) => (
+                    <div className=''>
+                      <li>
+                        <div
+                          key={`${feedback.opportunityUuid + feedback.enablerUserId}`}
+                          className='d-flex flex-column mb-2'
                         >
-                          {feedback.status}
-                        </span>
-                      </div>
-                      <label>{feedback.message}</label>
-                    </div>
+                          <div className=''>
+                            <a className='text-gray-800 fs-6 text-hover-primary me-3'>
+                              {feedback.enablerUserId}
+                            </a>
 
-                    <div className='d-flex justify-content-end'>
-                      <ul className='nav  mb-3'>
-                        {feedback?.status !== 'approved' && (
-                          <li>
-                            <a
-                              className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
-                              onClick={() => {
-                                handleChangeFeedbackStatus({
-                                  enablerUserId: feedback.enablerUserId,
-                                  opportunityUuid: feedback.opportunityUuid,
-                                  status: 'approved',
-                                })
-                              }}
+                            <span
+                              className={`badge badge-light-${
+                                feedback.status === 'new'
+                                  ? 'info'
+                                  : feedback.status === 'approved'
+                                  ? 'success'
+                                  : 'danger'
+                              } text-uppercase`}
                             >
-                              Approve
-                            </a>
-                          </li>
-                        )}
-                        {feedback?.status !== 'deleted' && (
-                          <li>
-                            <a
-                              className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
-                              onClick={() => {
-                                handleChangeFeedbackStatus({
-                                  enablerUserId: feedback.enablerUserId,
-                                  opportunityUuid: feedback.opportunityUuid,
-                                  status: 'deleted',
-                                })
-                              }}
-                            >
-                              Delete
-                            </a>
-                          </li>
-                        )}
-                      </ul>
+                              {feedback.status}
+                            </span>
+                          </div>
+                          <label>{feedback.message}</label>
+                        </div>
+                      </li>
+
+                      <div className='d-flex justify-content-end'>
+                        <ul className='nav  mb-3'>
+                          {feedback?.status !== 'approved' && (
+                            <li>
+                              <a
+                                className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
+                                onClick={() => {
+                                  handleChangeFeedbackStatus({
+                                    enablerUserId: feedback.enablerUserId,
+                                    opportunityUuid: feedback.opportunityUuid,
+                                    status: 'approved',
+                                  })
+                                }}
+                              >
+                                Approve
+                              </a>
+                            </li>
+                          )}
+                          {feedback?.status !== 'deleted' && (
+                            <li>
+                              <a
+                                className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
+                                onClick={() => {
+                                  handleChangeFeedbackStatus({
+                                    enablerUserId: feedback.enablerUserId,
+                                    opportunityUuid: feedback.opportunityUuid,
+                                    status: 'deleted',
+                                  })
+                                }}
+                              >
+                                Delete
+                              </a>
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                      <div className='separator separator-dashed'></div>
                     </div>
-                    <div className='separator separator-dashed'></div>
-                  </div>
-                ))}
+                  ))}
+                </ol>
                 {/* {noFeedback && <div className='d-flex text-end'>No Feedback</div>} */}
               </div>
             </div>

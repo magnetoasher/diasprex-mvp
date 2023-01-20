@@ -2,7 +2,7 @@
 // @ts-nocheck
 import React, {useEffect, useState} from 'react'
 import clsx from 'clsx'
-import Moment from 'moment'
+import moment from 'moment'
 import axios from 'axios'
 import {Row, Col, Button, Card, notification, Tooltip} from 'antd'
 import {StarOutlined, ShareAltOutlined} from '@ant-design/icons'
@@ -38,26 +38,42 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     setOppData(props.opps.opp[0])
   }, [props.opps])
 
-  useEffect(() => {
-    const params = {
-      opportunityUuid: id,
-      enablerUserId: authState?.accessToken?.claims.uid,
-      status: 'approved',
-    }
-    dispatch(props.getFeedbacksRequest(params))
-  }, [])
+  // useEffect(() => {
+  //   const params = {
+  //     opportunityUuid: oppData?.uuid,
+  //   }
+  //   dispatch(props.getFeedbacksRequest(params))
+  // }, [])
 
   useEffect(() => {
-    setFeedbacks(props.opps.feedbacks)
-  }, [props.opps.feedbacks])
+    setFeedbacks(oppData?.feedback)
+  }, [oppData])
 
   const Context = React.createContext({
     name: 'Default',
   })
 
-  const badgeColor = oppData?.open ? 'success' : 'danger'
+  const openBadgeColor = oppData?.open ? 'success' : 'danger'
+  const statusBadgeColor =
+    oppData?.status === 'new'
+      ? 'info'
+      : oppData?.status === 'published'
+      ? 'success'
+      : oppData?.status === 'accepted'
+      ? 'primary'
+      : oppData?.status === 'draft'
+      ? 'gray-800'
+      : oppData?.status === 'not accepted'
+      ? 'danger'
+      : oppData?.status === 'pending'
+      ? 'gray-600'
+      : oppData?.status === 'completed'
+      ? 'gray-800'
+      : oppData?.status === 'active'
+      ? 'primary'
+      : 'warning'
   const dealTypeLength = oppData?.dealtype?.length! - 1
-  const handleFeedbackSubmit = () => {}
+
   return (
     <>
       {props.opps.isLoading ? (
@@ -69,14 +85,14 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
               <div className='card-body pt-9 pb-0'>
                 <div className='d-flex flex-wrap flex-sm-nowrap mb-6'>
                   <div
-                    className={`d-flex flex-center flex-shrink-0 bg-light-${badgeColor} rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4`}
+                    className={`d-flex flex-center flex-shrink-0 bg-light-${statusBadgeColor} rounded w-100px h-100px w-lg-150px h-lg-150px me-7 mb-4`}
                   >
                     {oppData?.thumbnail === '' ? (
                       <div
                         className={clsx(
                           'd-flex symbol-label mw-100 h-100px h-lg-150px align-items-center justify-content-center fs-1 rounded',
-                          `bg-light-${badgeColor}`,
-                          ` text-capitalize text-${badgeColor}`
+                          `bg-light-${statusBadgeColor}`,
+                          ` text-capitalize text-${statusBadgeColor}`
                         )}
                       >
                         {oppData?.country}
@@ -111,9 +127,13 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                               data-bs-placement='bottom'
                             />
                           </span>
-                          <span className={`badge badge-light-${badgeColor} me-auto`}>
-                            {oppData?.open ? 'Open' : 'Closed'}
-                          </span>
+                          {oppData?.status === 'published' ? (
+                            <span className={`badge badge-light-${openBadgeColor} me-auto`}>
+                              {oppData?.open ? 'Open' : 'Closed'}
+                            </span>
+                          ) : (
+                            <span className='badge badge-secondary me-auto'>Pending</span>
+                          )}
                         </div>
 
                         <div className='d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-400'>
@@ -122,7 +142,7 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                       </div>
                       <div className='d-flex mb-4'>
                         <span
-                          className={`badge badge-${badgeColor} fs-4 text-uppercase me-3 py-3 px-3`}
+                          className={`badge badge-${statusBadgeColor} fs-4 text-uppercase me-3 py-3 px-3`}
                         >
                           {oppData?.status}
                         </span>
@@ -133,7 +153,7 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                         <div className='border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3'>
                           <div className='d-flex align-items-center'>
                             <div className='fs-4 fw-bold'>
-                              {Moment(oppData?.duedate).format('MMM Do, YYYY')}
+                              {moment(oppData?.duedate).format('MMM Do, YYYY')}
                             </div>
                           </div>
 
@@ -528,19 +548,22 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                 <div className='col-xl-6 mt-10'>
                   <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Feedbacks</label>
                 </div>
-
-                {feedbacks?.map((feedback) => (
-                  <div>
-                    <label
-                      style={{
-                        textAlign: 'justify',
-                        fontSize: '14px',
-                      }}
-                    >
-                      {feedback.message}
-                    </label>
-                  </div>
-                ))}
+                <ol>
+                  {feedbacks?.map((feedback) => (
+                    <div className='mt-2'>
+                      <li>
+                        <label
+                          style={{
+                            textAlign: 'justify',
+                            fontSize: '14px',
+                          }}
+                        >
+                          {feedback.message}
+                        </label>
+                      </li>
+                    </div>
+                  ))}
+                </ol>
               </div>
             </div>
           </div>

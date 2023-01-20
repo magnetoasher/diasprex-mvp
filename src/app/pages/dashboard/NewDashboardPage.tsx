@@ -18,6 +18,7 @@ import EnablerOpportunityCard2 from '../../modules/opportunities/EnablerOpportun
 import {Proposal} from '../../modules/apps/admin-mgt-apps/proposal-management/props-list/core/_models'
 import SponsorOpportunityCard from '../../modules/opportunities/SponsorOpportunityCard'
 import SponsorProposalCard from '../../modules/proposals/components/SponsorProposalCard'
+import EnablerOpportunityCard from '../../modules/opportunities/EnablerOpportunityCard'
 
 const mapState = (state: RootState) => ({opps: state.opps, proposals: state.proposals})
 const connector = connect(mapState, {...opps.actions, ...proposals.actions})
@@ -60,18 +61,29 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
       const query =
         userType === 'sponsor'
           ? {
+              sponsorUserId: authState?.accessToken?.claims.uid,
               items_per_page: 5,
               page: 1,
-              sponsorUserId: authState?.accessToken?.claims.uid,
             }
           : {
+              status: 'published',
               items_per_page: 5,
               page: 1,
-              status: 'published',
             }
       dispatch(props.getAllOppsRequest(query))
     }
   }, [])
+  useEffect(() => {
+    if (userType === 'sponsor') {
+      const filteredRecentOpps = props.opps?.opps?.data?.filter((obj: Opps) => {
+        return obj.status !== 'draft' && obj.status !== 'deleted'
+      })
+      setRecentOpps(filteredRecentOpps)
+      console.log('RecentOpps', filteredRecentOpps)
+    } else {
+      setRecentOpps(props.opps?.opps.data)
+    }
+  }, [props.opps])
 
   useEffect(() => {
     if (authState !== null) {
@@ -400,7 +412,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                     <ListLoading />
                   ) : (
                     recentOpps?.map((oppObject) => (
-                      <EnablerOpportunityCard2 opp={oppObject} dashboard={true} />
+                      <EnablerOpportunityCard opp={oppObject} dashboard={true} />
                     ))
                   )}
                 </div>
@@ -455,7 +467,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
                   {props.opps.isLoading ? (
                     <ListLoading />
                   ) : (
-                    recentOpps?.map((e) => <SponsorOpportunityCard opp={e} />)
+                    recentOpps?.map((e) => <SponsorOpportunityCard opp={e} dashboard={true} />)
                   )}
                 </div>
               </div>

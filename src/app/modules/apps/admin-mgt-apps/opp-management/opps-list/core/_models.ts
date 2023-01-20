@@ -49,6 +49,10 @@ export type Opps = {
   showedinterest?: string[]
   supporting?: string[]
   acknowledgedODA?: string[]
+  feedback?: {
+    message: string
+    enablerUserId: string
+  }[]
   attachment?: string
 }
 

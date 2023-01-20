@@ -3,7 +3,6 @@ import {useDispatch, connect, ConnectedProps} from 'react-redux'
 import {useOktaAuth} from '@okta/okta-react'
 import {Tabs} from 'antd'
 import {SendOutlined, SaveOutlined, FileDoneOutlined, RetweetOutlined} from '@ant-design/icons'
-import {Create} from './createOpportunitiesComponents/Create'
 
 import * as opps from './redux/OpportunityRedux'
 import {RootState} from '../../../setup'
@@ -41,7 +40,7 @@ const SponsorMyOpportunities: React.FC<PropsFromRedux> = (props) => {
       dispatch(props.getAllOppsRequest(query))
     }
   }, [])
-
+  console.log('MyOpps', props.opps.opp)
   useEffect(() => {
     if (props.opps.opp) {
       setCurrentOpp(props.opps.opp[0])
@@ -85,9 +84,7 @@ const SponsorMyOpportunities: React.FC<PropsFromRedux> = (props) => {
   }
 
   const {TabPane} = Tabs
-  const onChange = (key: string) => {
-    console.log(key)
-  }
+  const onChange = (key: string) => {}
 
   return (
     <Tabs defaultActiveKey='1' onChange={onChange}>

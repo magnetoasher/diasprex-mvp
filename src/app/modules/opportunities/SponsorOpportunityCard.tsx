@@ -78,13 +78,17 @@ const SponsorOpportunityCard: FC<Props> = ({dashboard, opp, getOpps}) => {
                 data-bs-placement='bottom'
               />
             </span>
-            <span
-              className={`badge ${
-                opp?.open ? 'badge-light-success' : 'badge-light-danger'
-              } fw-bolder me-auto py-3`}
-            >
-              {opp?.open ? 'Open' : 'Closed'}
-            </span>
+            {opp?.status === 'published' ? (
+              <span
+                className={`badge ${
+                  opp?.open ? 'badge-light-success' : 'badge-light-danger'
+                } fw-bolder me-auto py-3`}
+              >
+                {opp?.open ? 'Open' : 'Closed'}
+              </span>
+            ) : (
+              <span className='badge badge-secondary me-auto'>Pending</span>
+            )}
           </div>
           <div className='ribbon-label text-capitalize'>
             {opp?.status}
@@ -116,7 +120,14 @@ const SponsorOpportunityCard: FC<Props> = ({dashboard, opp, getOpps}) => {
                 <div className='d-flex flex-column'>
                   <div className='d-flex flex-wrap fw-semibold mb-4 fs-5 text-dark'>
                     TITLE:
-                    <Link className='mx-3 text-dark text-muted' to={`/opportunities/${opp?.uuid}`}>
+                    <Link
+                      className='mx-3 text-dark text-muted'
+                      to={
+                        opp?.status == 'draft'
+                          ? `/opportunities/${opp?.uuid}/createopportunities`
+                          : `/opportunities/${opp?.uuid}`
+                      }
+                    >
                       {opp?.title}
                     </Link>
                   </div>
