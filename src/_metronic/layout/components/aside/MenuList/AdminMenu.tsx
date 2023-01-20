@@ -8,6 +8,7 @@ import {KTSVG} from '../../../../helpers'
 
 export function AdminMenu() {
   const intl = useIntl()
+  const userType = localStorage.getItem('userType')
 
   return (
     <>
@@ -21,7 +22,7 @@ export function AdminMenu() {
       <AsideMenuItem
         to='opportunities_center'
         icon='/media/icons/duotune/general/gen008.svg'
-        title='Opportunities'
+        title='Published Opportunities'
         fontIcon='bi-app-indicator'
       />
 

@@ -45,7 +45,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
     name: user.name || initialUser.name,
     email: user.email || initialUser.email,
     phone: user.phone || initialUser.phone,
-    status: user.status || initialUser.status,
+    accountstatus: user.accountstatus || initialUser.accountstatus,
   })
   console.log('User', userForEdit)
   const cancel = (withRefresh?: boolean) => {
@@ -370,7 +370,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                     <label className='col-lg-6 fw-bold text-muted'>Status:</label>
 
                     <div className='col-lg-6 fv-row'>
-                      <span className='fw-bold fs-6'>{userForEdit.status || 'Pending'}</span>
+                      <span className='fw-bold fs-6'>{userForEdit.accountstatus || 'Pending'}</span>
                     </div>
                   </div>
 
@@ -378,7 +378,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                     <label className='col-lg-6 fw-bold text-muted'>Remittance Retainer:</label>
 
                     <div className='col-lg-6 fv-row'>
-                      <span className='fw-bold fs-6'>{userForEdit.remiton || 'Pending'}</span>
+                      <span className='fw-bold fs-6'>{userForEdit.remit_on || 'Pending'}</span>
                     </div>
                   </div>
                   {/* end::Input */}
@@ -705,15 +705,15 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                     <select
                       className={clsx(
                         'form-select form-select-solid mb-3 mb-lg-0',
-                        {'is-invalid': formik.touched.status && formik.errors.status},
+                        {'is-invalid': formik.touched.accountstatus && formik.errors.accountstatus},
                         {
-                          'is-valid': formik.touched.status && !formik.errors.status,
+                          'is-valid': formik.touched.accountstatus && !formik.errors.accountstatus,
                         }
                       )}
                       data-kt-select2='true'
                       data-placeholder='Update Status'
                       data-allow-clear='true'
-                      defaultValue={userForEdit.status || 'Choose Status'}
+                      defaultValue={userForEdit.accountstatus || 'Choose Status'}
                       autoComplete='off'
                       disabled={formik.isSubmitting || isUserLoading || !editUserDetails}
                     >
