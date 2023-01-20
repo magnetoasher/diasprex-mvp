@@ -38,18 +38,16 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     setOppData(props.opps.opp[0])
   }, [props.opps])
 
-  useEffect(() => {
-    const params = {
-      opportunityUuid: id,
-      enablerUserId: authState?.accessToken?.claims.uid,
-      status: 'approved',
-    }
-    dispatch(props.getFeedbacksRequest(params))
-  }, [])
+  // useEffect(() => {
+  //   const params = {
+  //     opportunityUuid: oppData?.uuid,
+  //   }
+  //   dispatch(props.getFeedbacksRequest(params))
+  // }, [])
 
   useEffect(() => {
-    setFeedbacks(props.opps.feedbacks)
-  }, [props.opps.feedbacks])
+    setFeedbacks(oppData?.feedback)
+  }, [oppData])
 
   const Context = React.createContext({
     name: 'Default',
@@ -550,19 +548,22 @@ const SponsorViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                 <div className='col-xl-6 mt-10'>
                   <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Feedbacks</label>
                 </div>
-
-                {feedbacks?.map((feedback) => (
-                  <div>
-                    <label
-                      style={{
-                        textAlign: 'justify',
-                        fontSize: '14px',
-                      }}
-                    >
-                      {feedback.message}
-                    </label>
-                  </div>
-                ))}
+                <ol>
+                  {feedbacks?.map((feedback) => (
+                    <div className='mt-2'>
+                      <li>
+                        <label
+                          style={{
+                            textAlign: 'justify',
+                            fontSize: '14px',
+                          }}
+                        >
+                          {feedback.message}
+                        </label>
+                      </li>
+                    </div>
+                  ))}
+                </ol>
               </div>
             </div>
           </div>

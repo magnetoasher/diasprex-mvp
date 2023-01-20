@@ -48,13 +48,12 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     const params = {
       opportunityUuid: id,
       enablerUserId: authState?.accessToken?.claims.uid,
-      status: 'new',
     }
     dispatch(props.getFeedbacksRequest(params))
   }, [])
 
   useEffect(() => {
-    setFeedbacks(props.opps?.feedbacks)
+    setFeedbacks(props.opps?.feedbacks?.feedback)
   }, [props.opps?.feedbacks])
 
   const openNotification = (placement, message) => {
@@ -270,7 +269,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                         <span
                           className={`badge badge-${statusBadgeColor} fs-4 text-uppercase me-3 py-3 px-3`}
                         >
-                          Status: {oppData?.status}
+                          {oppData?.status}
                         </span>
                       </div>
                     </div>
@@ -776,7 +775,18 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                             key={`${feedback.opportunityUuid + feedback.enablerUserId}`}
                             className='d-flex flex-column mb-2'
                           >
-                            <label>{feedback.message}</label>
+                            <ol>
+                              <li>
+                                <label
+                                  style={{
+                                    textAlign: 'justify',
+                                    fontSize: '14px',
+                                  }}
+                                >
+                                  {feedback.message}
+                                </label>
+                              </li>
+                            </ol>
                           </div>
                         </div>
                       ))}

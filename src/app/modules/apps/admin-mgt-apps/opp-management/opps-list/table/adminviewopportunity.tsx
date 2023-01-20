@@ -11,7 +11,7 @@ import {Link, useNavigate, useParams} from 'react-router-dom'
 import {useOktaAuth} from '@okta/okta-react'
 import * as opps from '../../../../../opportunities/redux/OpportunityRedux'
 import {RootState} from '../../../setup'
-import {Opps, Feedback} from '../apps/admin-mgt-apps/opp-management/opps-list/core/_models'
+import {Opps, Feedback} from '../core/_models'
 import {toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
 import Swal from 'sweetalert2'
 import {ListLoading} from '../../../core/loading/ListLoading'
@@ -50,14 +50,14 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   useEffect(() => {
     const params = {
       opportunityUuid: id,
-      status: 'new',
     }
     dispatch(props.getFeedbacksRequest(params))
   }, [])
 
+  console.log('Feedback', props.opps?.feedbacks)
   useEffect(() => {
-    if (props.opps.feedbacks.length > 0) {
-      setFeedbacks(props.opps.feedbacks)
+    if (props.opps.feedbacks.feedback?.length > 0) {
+      setFeedbacks(props.opps?.feedbacks?.feedback)
     } else {
       setNoFeedback(true)
     }
@@ -739,72 +739,75 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
                 <div className=''>
                   <label className='fw-bolder fs-4 text-dark text-uppercase me-3'>Feedbacks</label>
                 </div>
-
-                {feedbacks?.map((feedback) => (
-                  <div className=''>
-                    <div
-                      key={`${feedback.opportunityUuid + feedback.enablerUserId}`}
-                      className='d-flex flex-column mb-2'
-                    >
-                      <div className=''>
-                        <a className='text-gray-800 fs-6 text-hover-primary me-3'>
-                          {feedback.enablerUserId}
-                        </a>
-
-                        <span
-                          className={`badge badge-light-${
-                            feedback.status === 'new'
-                              ? 'info'
-                              : feedback.status === 'approved'
-                              ? 'success'
-                              : 'danger'
-                          } text-uppercase`}
+                <ol>
+                  {feedbacks?.map((feedback) => (
+                    <div className=''>
+                      <li>
+                        <div
+                          key={`${feedback.opportunityUuid + feedback.enablerUserId}`}
+                          className='d-flex flex-column mb-2'
                         >
-                          {feedback.status}
-                        </span>
-                      </div>
-                      <label>{feedback.message}</label>
-                    </div>
+                          <div className=''>
+                            <a className='text-gray-800 fs-6 text-hover-primary me-3'>
+                              {feedback.enablerUserId}
+                            </a>
 
-                    <div className='d-flex justify-content-end'>
-                      <ul className='nav  mb-3'>
-                        {feedback?.status !== 'approved' && (
-                          <li>
-                            <a
-                              className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
-                              onClick={() => {
-                                handleChangeFeedbackStatus({
-                                  enablerUserId: feedback.enablerUserId,
-                                  opportunityUuid: feedback.opportunityUuid,
-                                  status: 'approved',
-                                })
-                              }}
+                            <span
+                              className={`badge badge-light-${
+                                feedback.status === 'new'
+                                  ? 'info'
+                                  : feedback.status === 'approved'
+                                  ? 'success'
+                                  : 'danger'
+                              } text-uppercase`}
                             >
-                              Approve
-                            </a>
-                          </li>
-                        )}
-                        {feedback?.status !== 'deleted' && (
-                          <li>
-                            <a
-                              className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
-                              onClick={() => {
-                                handleChangeFeedbackStatus({
-                                  enablerUserId: feedback.enablerUserId,
-                                  opportunityUuid: feedback.opportunityUuid,
-                                  status: 'deleted',
-                                })
-                              }}
-                            >
-                              Delete
-                            </a>
-                          </li>
-                        )}
-                      </ul>
+                              {feedback.status}
+                            </span>
+                          </div>
+                          <label>{feedback.message}</label>
+                        </div>
+                      </li>
+
+                      <div className='d-flex justify-content-end'>
+                        <ul className='nav  mb-3'>
+                          {feedback?.status !== 'approved' && (
+                            <li>
+                              <a
+                                className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
+                                onClick={() => {
+                                  handleChangeFeedbackStatus({
+                                    enablerUserId: feedback.enablerUserId,
+                                    opportunityUuid: feedback.opportunityUuid,
+                                    status: 'approved',
+                                  })
+                                }}
+                              >
+                                Approve
+                              </a>
+                            </li>
+                          )}
+                          {feedback?.status !== 'deleted' && (
+                            <li>
+                              <a
+                                className='text-primary text-hover-light-primary fs-6 fw-bold me-3'
+                                onClick={() => {
+                                  handleChangeFeedbackStatus({
+                                    enablerUserId: feedback.enablerUserId,
+                                    opportunityUuid: feedback.opportunityUuid,
+                                    status: 'deleted',
+                                  })
+                                }}
+                              >
+                                Delete
+                              </a>
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                      <div className='separator separator-dashed'></div>
                     </div>
-                    <div className='separator separator-dashed'></div>
-                  </div>
-                ))}
+                  ))}
+                </ol>
                 {/* {noFeedback && <div className='d-flex text-end'>No Feedback</div>} */}
               </div>
             </div>
