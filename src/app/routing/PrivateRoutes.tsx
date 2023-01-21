@@ -54,7 +54,7 @@ const PrivateRoutes = () => {
 
   // const RemitPage = lazy(() => import('../modules/apps/admin-mgt-apps/remittance-management/RemitPage'))
   const {authState} = useOktaAuth()
-
+  const userType = localStorage.getItem('userType')
   if (authState !== null) {
     if (authState.isAuthenticated) {
       console.log('****AUTH STATE OBJECT****:', authState)
@@ -66,22 +66,37 @@ const PrivateRoutes = () => {
             <Route path='auth/*' element={<Navigate to='/account/create' />} />
             {/* Pages */}
             <Route path='dashboard' element={<DashboardWrapper />} />
-            <Route path='admindashboard' element={<AdminDashboardWrapper />} />
-            {/* <Route path='builder' element={<BuilderPageWrapper />} /> */}
-            <Route path='createopportunities' element={<CreateOpportunities />} />
-            <Route path='sponsor/my_opportunities' element={<SponsorMyOpportunities />} />
-            <Route path='opportunities/:id' element={<SponsorViewOpportunity />} />
-            <Route
-              path='opportunities/:oppid/createopportunities'
-              element={<CreateOpportunities />}
-            />
-            {/* <Route path='proposals' element={<Proposals />} /> */}
+
+            {userType === 'enabler' && (
+              <>
+                <Route path='my_opportunities' element={<MyOpportunity />} />
+                <Route path='my_proposals' element={<MyProposal />} />
+                <Route
+                  path='remittance/*'
+                  element={
+                    <SuspensedView>
+                      <RemittancePage />
+                    </SuspensedView>
+                  }
+                />
+              </>
+            )}
+
+            {userType === 'sponsor' && (
+              <>
+                <Route path='createopportunities' element={<CreateOpportunities />} />
+                <Route path='sponsor/my_opportunities' element={<SponsorMyOpportunities />} />
+                <Route
+                  path='opportunities/:oppid/createopportunities'
+                  element={<CreateOpportunities />}
+                />
+                <Route path='opportunities/:id' element={<SponsorViewOpportunity />} />
+                <Route path='sponsor/props_review/*' element={<SponsorPropsRevPage />} />
+              </>
+            )}
+
             <Route path='proposals/:oppid/:enablerid' element={<ViewProposal />} />
-            <Route path='proposals/admin/:oppid/:enablerid' element={<Adminviewproposal />} />
-            {/* <Route path='sponsor_proposals' element={<SponsorProposals />} /> */}
-            <Route path='sponsor/props_review/*' element={<SponsorPropsRevPage />} />
-            <Route path='my_opportunities' element={<MyOpportunity />} />
-            <Route path='my_proposals' element={<MyProposal />} />
+
             <Route path='opportunities_center' element={<GeneralOpportunityCard />} />
             <Route path='opportunities_center/:oppid/send_proposals' element={<SendProposals />} />
             <Route
@@ -90,46 +105,26 @@ const PrivateRoutes = () => {
             />
             <Route path='referrals' element={<ReferralsForm />} />
             <Route path='opportunities_center/:id' element={<ViewOpportunity />} />
-            <Route
-              path='table/opps_management/viewopportunity/:id'
-              element={<AdminVewopportunity />}
-            />
-            <Route path='table/users_management/*' element={<UsersMgtPage />} />
-            <Route path='table/opps_management/*' element={<OppsMgtPage />} />
-            <Route path='table/props_management/*' element={<ProposalMgtPage />} />
-            <Route path='table/diaspora_management/*' element={<DiasporasMgtPage />} />
-            <Route path='admin/*' element={<AdminSettings />} />
-            <Route path='table/rr_management/*' element={<RemitMgtPage />} />
-            <Route path='table/trans_management/*' element={<TransMgtPage />} />
-            <Route path='table/paymethod_management/*' element={<PayMethodMgtPage />} />
 
-            {/* <Route path='chat' element={<ChatPage />}/> */}
+            {userType === 'admin' && (
+              <>
+                <Route path='admindashboard' element={<AdminDashboardWrapper />} />
+                <Route path='table/users_management/*' element={<UsersMgtPage />} />
+                <Route path='table/opps_management/*' element={<OppsMgtPage />} />
+                <Route path='table/props_management/*' element={<ProposalMgtPage />} />
+                <Route path='table/diaspora_management/*' element={<DiasporasMgtPage />} />
+                <Route path='admin/*' element={<AdminSettings />} />
+                <Route path='table/rr_management/*' element={<RemitMgtPage />} />
+                <Route path='table/trans_management/*' element={<TransMgtPage />} />
+                <Route path='table/paymethod_management/*' element={<PayMethodMgtPage />} />
+                <Route
+                  path='table/opps_management/viewopportunity/:id'
+                  element={<AdminVewopportunity />}
+                />
+                <Route path='proposals/admin/:oppid/:enablerid' element={<Adminviewproposal />} />
+              </>
+            )}
 
-            {/* Lazy Modules */}
-            {/* <Route
-              path='crafted/pages/profile/*'
-              element={
-                <SuspensedView>
-                  <ProfilePage />
-                </SuspensedView>
-              }
-            /> */}
-            {/* <Route
-              path='account/*'
-              element={
-                <SuspensedView>
-                  <RegistrationStepsPage />
-                </SuspensedView>
-              }
-            /> */}
-            <Route
-              path='crafted/widgets/*'
-              element={
-                <SuspensedView>
-                  <WidgetsPage />
-                </SuspensedView>
-              }
-            />
             <Route
               path='profile/*'
               element={
@@ -140,14 +135,6 @@ const PrivateRoutes = () => {
             />
 
             <Route
-              path='remittance/*'
-              element={
-                <SuspensedView>
-                  <RemittancePage />
-                </SuspensedView>
-              }
-            />
-            <Route
               path='chat/*'
               element={
                 <SuspensedView>
@@ -155,15 +142,7 @@ const PrivateRoutes = () => {
                 </SuspensedView>
               }
             />
-            {/* <Route
 
-              path='/user-management/*'
-              element={
-                <SuspensedView>
-                  <UsersPage />
-                </SuspensedView>
-              }
-            /> */}
             {/* Page Not Found */}
             <Route path='*' element={<Navigate to='/error/404' />} />
           </Route>

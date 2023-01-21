@@ -3,19 +3,22 @@ export type User = {
   id?: ID
   dpxid?: ID
   usertype?: string
-  usertier?: string
+  subscriptionTier?: string
+  fName?: string
+  mName?: string
+  lName?: string
   name?: string
   avatar?: string
   email?: string
   city?: string
   state?: string
-  rcountry?: string
-  afcountry?: string
-  remiton?: boolean
+  countryRes?: string
+  countryOrig?: string
+  remit_on?: boolean
   position?: string
   role?: string
   tier?: string
-  status?: string
+  accountstatus?: string
   billing?: string
   last_login?: string
   verification?: boolean
@@ -23,6 +26,7 @@ export type User = {
   joined_day?: string
   online?: boolean
   phone?: string
+  mobilephone?: string
   initials?: {
     label: string
     state: string
