@@ -44,17 +44,10 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     setOppData(props.opps.opp[0])
   }, [props.opps])
 
-  useEffect(() => {
-    const params = {
-      opportunityUuid: id,
-      enablerUserId: authState?.accessToken?.claims.uid,
-    }
-    dispatch(props.getFeedbacksRequest(params))
-  }, [])
 
   useEffect(() => {
-    setFeedbacks(props.opps?.feedbacks?.feedback)
-  }, [props.opps?.feedbacks])
+    setFeedbacks(oppData?.feedback)
+  }, [oppData])
 
   const openNotification = (placement, message) => {
     api.info({
@@ -196,7 +189,11 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
       : 'warning'
   const dealTypeLength = oppData?.dealtype?.length! - 1
   const handleFeedbackSubmit = (data) => {
-    provideFeedbackAPI(data)
+    provideFeedbackAPI(data).then((res) => {
+      if (res.status === 200) {
+        dispatch(props.getOppByIdRequest(id))
+      }
+    })
   }
 
   return (
