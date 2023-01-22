@@ -71,6 +71,7 @@ const PrivateRoutes = () => {
               <>
                 <Route path='my_opportunities' element={<MyOpportunity />} />
                 <Route path='my_proposals' element={<MyProposal />} />
+                <Route path='opportunities_center/:id' element={<ViewOpportunity />} />
                 <Route
                   path='remittance/*'
                   element={
@@ -104,7 +105,6 @@ const PrivateRoutes = () => {
               element={<SendProposals />}
             />
             <Route path='referrals' element={<ReferralsForm />} />
-            <Route path='opportunities_center/:id' element={<ViewOpportunity />} />
 
             {userType === 'admin' && (
               <>
