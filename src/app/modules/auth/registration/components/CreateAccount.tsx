@@ -305,6 +305,7 @@ const CreateAccount: FC = () => {
 
                 <div data-kt-stepper-element='content' className='w-xl-800px'>
                   <PhoneVerification userType={userType} />
+                  <PhoneVerification2 />
                 </div>
 
                 <div data-kt-stepper-element='content' className='w-xl-800px'>

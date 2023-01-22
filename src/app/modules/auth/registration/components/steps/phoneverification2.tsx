@@ -1,6 +1,7 @@
 import React, {FC, useState, useEffect} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../../../../_metronic/helpers'
 import {Field, ErrorMessage} from 'formik'
+import axios, {AxiosPromise, AxiosResponse} from 'axios'
 import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
 import Swal from 'sweetalert2'
 import {
@@ -11,9 +12,22 @@ import {VerificationModal} from '../../../components/verificationmodal'
 import Input, {getCountries, getCountryCallingCode} from 'react-phone-number-input/input'
 import en from 'react-phone-number-input/locale/en.json'
 import 'react-phone-number-input/style.css'
+import {useIsFetching, useQuery} from 'react-query'
 
 type Props = {
   userType?: any
+}
+
+type GeoData = {
+  address_components: {
+    long_name: string
+    short_name: string
+    types: string
+  }[]
+  formatted_address: string
+  geometry: {}
+  place_id: string
+  types: string[]
 }
 const PhoneVerification2: FC<Props> = ({userType}) => {
   const [phoneNumber, setPhoneNumber] = useState()
@@ -24,22 +38,25 @@ const PhoneVerification2: FC<Props> = ({userType}) => {
   const [phoneCode, setPhoneCode] = useState('+1')
   const [selectedCountry, setSelectedCountry] = useState('united states')
   const CountriesList = userType === 'enabler' ? CountriesCodeList : SponsorCountryList
+  const [locationData, setLocationData] = useState<GeoData>()
 
   const handleNavigator = (pos: any) => {
     const {latitude, longitude} = pos.coords
-    const userCountryCode = lookupCountry({latitude, longitude})
+    const userCountryCode = LookupCountry({latitude, longitude})
+    console.log('CountryCode', userCountryCode)
     // setCountry(userCountryCode)
   }
 
-  const lookupCountry = ({latitude, longitude}: any) => {
-    const URL = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.REACT_APP_DIASPREX_GOOGLE_MAP_API_KEY}`
-    const locationData = async () => await fetch(URL).then((res) => res.json())
-    console.log('Location', locationData)
-    // const [{address_components}] = locationData.results.filter(({types}:any) =>
-    //   types.includes('country')
-    // )
-    // const [{short_name}] = address_components
-    // return short_name
+  const LookupCountry = ({latitude, longitude}: any) => {
+    const URL = `${process.env.REACT_APP_GOOGLE_GEOCODING_API_URL}?latlng=${latitude},${longitude}&key=${process.env.REACT_APP_DIASPREX_GOOGLE_MAP_API_KEY}`
+    const getLocationData = () => {
+      return axios.get(URL).then((d: AxiosResponse) => {
+        setLocationData(d.data.results.filter(({types}: any) => types.includes('country'))[0])
+        console.log('GeoData', d.data.results)
+        return d.data
+      })
+    }
+    getLocationData()
   }
 
   useEffect(() => {
@@ -47,6 +64,10 @@ const PhoneVerification2: FC<Props> = ({userType}) => {
       console.warn('permission was rejected')
     )
   }, [])
+
+  const short_name = locationData?.address_components[0].short_name
+
+  console.log('Shortname', short_name)
 
   const handlePhoneValidate = (value: any) => {
     const isValid = isValidPhoneNumber(value)

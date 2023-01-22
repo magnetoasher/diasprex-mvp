@@ -1,17 +1,27 @@
 import * as Yup from 'yup'
-import {phoneRegExp} from '../../../../../_metronic/helpers'
+import {ID, phoneRegExp} from '../../../../../_metronic/helpers'
+
+interface address {
+  addressLine: string
+  city: string
+  state: string
+  postCode: string
+}
 
 export interface ICreateAccount {
+  id?: ID
+  dpxid?: ID
+  usertype?: string
+  subscriptionTier?: string
   fName: string
   lName: string
   mInitial: string
   email: string
-
   countryOrig: string
   countryRes: string
   accountType: string
   phonenumber: string
-
+  mobilephone: string
   profession: string
   proffield: string
   degree?: string
@@ -20,8 +30,8 @@ export interface ICreateAccount {
   accountName: string
   accountPlan: string
   orgName?: string
-  orgAddress?: string
-  orgMailingAddress?: string
+  orgAddress?: address
+  orgMailingAddress?: address
   orgRegistered?: string
   orgRegNumber?: string
   orgRegYear?: string
@@ -37,15 +47,75 @@ export interface ICreateAccount {
   saveCard?: string
   accountNumber?: string
   routingNumber?: string
-  dpxterms: boolean
-  enablerterms: boolean
+  acknowledgeDPXterms: boolean
   emailcommunicate: boolean
   online?: boolean
-  status?: 'active' | 'suspended' | 'pending' | 'disabled' | ''
+  status?: string
   verified: boolean
   twostepauth: boolean
   remittanceretainer: boolean
   datejoined: string
+}
+
+export interface IIndividualProfile {
+  id?: ID
+  dpxid?: ID
+  usertype?: string
+  subscriptionTier?: string
+  fName?: string
+  mName?: string
+  lName?: string
+  avatar?: string
+  email?: string
+  address: address
+  countryRes?: string
+  countryOrig?: string
+  remit_on?: boolean
+  accountstatus?: string
+  billing?: string
+  last_login?: string
+  verification?: boolean
+  two_step?: boolean
+  joined_day?: string
+  online?: boolean
+  phone?: string
+  mobilephone?: string
+  initials?: {
+    label: string
+    state: string
+  }
+}
+
+export interface ICreateBusinessAccount {
+  id?: ID
+  dpxid?: ID
+  usertype?: string
+  subscriptionTier?: string
+  avatar: string
+  contactfName: string
+  contactmInitial?: string
+  contactlName: string
+  email: string
+  company?: string
+  contactOrgRole?: string
+  contactPhone: string
+  orgCountry: string
+  orgName?: string
+  orgType?: string
+  orgPhysicalAddress?: string
+  orgMailAddress?: string
+  orgIndustry?: string
+  orgRegNumber?: string
+  orgRegCountry?: string
+  orgRegState?: string
+  contactProfession?: string
+  contactDegree?: string
+  communications: {
+    email: boolean
+    phone: boolean
+  }
+  allowMarketing: boolean
+  acknowledgeDPXTerms?: boolean
 }
 
 const createAccountSchemas = [
@@ -121,7 +191,7 @@ const inits: ICreateAccount = {
   mInitial: '',
   email: '',
   phonenumber: '',
-
+  mobilephone: '',
   countryOrig: '',
   countryRes: '',
   profession: '',
@@ -133,8 +203,6 @@ const inits: ICreateAccount = {
   accountName: '',
   accountPlan: '1',
   orgName: '',
-  orgAddress: '',
-  orgMailingAddress: '',
   orgRegistered: '',
   orgRegNumber: '',
   orgRegYear: '',
@@ -150,8 +218,7 @@ const inits: ICreateAccount = {
   saveCard: '1',
   accountNumber: '000123456789',
   routingNumber: '110000000',
-  dpxterms: false,
-  enablerterms: false,
+  acknowledgeDPXterms: false,
   emailcommunicate: false,
   online: false,
   status: 'active',
