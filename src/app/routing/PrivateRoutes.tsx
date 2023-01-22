@@ -67,34 +67,30 @@ const PrivateRoutes = () => {
             {/* Pages */}
             <Route path='dashboard' element={<DashboardWrapper />} />
 
-            {userType === 'enabler' && (
-              <>
-                <Route path='my_opportunities' element={<MyOpportunity />} />
-                <Route path='my_proposals' element={<MyProposal />} />
-                <Route path='opportunities_center/:id' element={<ViewOpportunity />} />
-                <Route
-                  path='remittance/*'
-                  element={
-                    <SuspensedView>
-                      <RemittancePage />
-                    </SuspensedView>
-                  }
-                />
-              </>
-            )}
+            <>
+              <Route path='my_opportunities' element={<MyOpportunity />} />
+              <Route path='my_proposals' element={<MyProposal />} />
+              <Route path='opportunities_center/:id' element={<ViewOpportunity />} />
+              <Route
+                path='remittance/*'
+                element={
+                  <SuspensedView>
+                    <RemittancePage />
+                  </SuspensedView>
+                }
+              />
+            </>
 
-            {userType === 'sponsor' && (
-              <>
-                <Route path='createopportunities' element={<CreateOpportunities />} />
-                <Route path='sponsor/my_opportunities' element={<SponsorMyOpportunities />} />
-                <Route
-                  path='opportunities/:oppid/createopportunities'
-                  element={<CreateOpportunities />}
-                />
-                <Route path='opportunities/:id' element={<SponsorViewOpportunity />} />
-                <Route path='sponsor/props_review/*' element={<SponsorPropsRevPage />} />
-              </>
-            )}
+            <>
+              <Route path='createopportunities' element={<CreateOpportunities />} />
+              <Route path='sponsor/my_opportunities' element={<SponsorMyOpportunities />} />
+              <Route
+                path='opportunities/:oppid/createopportunities'
+                element={<CreateOpportunities />}
+              />
+              <Route path='opportunities/:id' element={<SponsorViewOpportunity />} />
+              <Route path='sponsor/props_review/*' element={<SponsorPropsRevPage />} />
+            </>
 
             <Route path='proposals/:oppid/:enablerid' element={<ViewProposal />} />
 
@@ -106,24 +102,22 @@ const PrivateRoutes = () => {
             />
             <Route path='referrals' element={<ReferralsForm />} />
 
-            {userType === 'admin' && (
-              <>
-                <Route path='admindashboard' element={<AdminDashboardWrapper />} />
-                <Route path='table/users_management/*' element={<UsersMgtPage />} />
-                <Route path='table/opps_management/*' element={<OppsMgtPage />} />
-                <Route path='table/props_management/*' element={<ProposalMgtPage />} />
-                <Route path='table/diaspora_management/*' element={<DiasporasMgtPage />} />
-                <Route path='admin/*' element={<AdminSettings />} />
-                <Route path='table/rr_management/*' element={<RemitMgtPage />} />
-                <Route path='table/trans_management/*' element={<TransMgtPage />} />
-                <Route path='table/paymethod_management/*' element={<PayMethodMgtPage />} />
-                <Route
-                  path='table/opps_management/viewopportunity/:id'
-                  element={<AdminVewopportunity />}
-                />
-                <Route path='proposals/admin/:oppid/:enablerid' element={<Adminviewproposal />} />
-              </>
-            )}
+            <>
+              <Route path='admindashboard' element={<AdminDashboardWrapper />} />
+              <Route path='table/users_management/*' element={<UsersMgtPage />} />
+              <Route path='table/opps_management/*' element={<OppsMgtPage />} />
+              <Route path='table/props_management/*' element={<ProposalMgtPage />} />
+              <Route path='table/diaspora_management/*' element={<DiasporasMgtPage />} />
+              <Route path='admin/*' element={<AdminSettings />} />
+              <Route path='table/rr_management/*' element={<RemitMgtPage />} />
+              <Route path='table/trans_management/*' element={<TransMgtPage />} />
+              <Route path='table/paymethod_management/*' element={<PayMethodMgtPage />} />
+              <Route
+                path='table/opps_management/viewopportunity/:id'
+                element={<AdminVewopportunity />}
+              />
+              <Route path='proposals/admin/:oppid/:enablerid' element={<Adminviewproposal />} />
+            </>
 
             <Route
               path='profile/*'
