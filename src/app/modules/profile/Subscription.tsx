@@ -1,9 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 // @ts-nocheck comment
 
+import {FC} from 'react'
 import 'react-best-tabs/dist/index.css'
+import {ICreateAccount} from '../auth/registration/components/CreateAccountWizardHelper'
 
-const Subscription = () => {
+type Props = {
+  profile?: ICreateAccount
+}
+const Subscription: FC<Props> = ({profile}) => {
   const userType = localStorage.getItem('userType')
   const userTypeFull = localStorage.getItem('userTypeFull')
   const packagePrice = localStorage.getItem('packagePrice')
