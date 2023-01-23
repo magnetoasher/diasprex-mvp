@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, FC} from 'react'
 import {Link} from 'react-router-dom'
 import {KTSVG} from '../../../../_metronic/helpers'
 import {
@@ -13,8 +13,13 @@ import {profileDetailsInitValues} from './settings/SettingsModel'
 import {connect, ConnectedProps, useDispatch} from 'react-redux'
 import {User} from '../../apps/user-management-ignore/users-list/core/_models'
 import {ListLoading} from '../../apps/admin-mgt-apps/core/loading/ListLoading'
+import {ICreateAccount} from '../../auth/registration/components/CreateAccountWizardHelper'
 
-function Overview({profile, isLoading}: any) {
+type Props = {
+  profile?: ICreateAccount
+  isLoading: boolean
+}
+const Overview: FC<Props> = ({profile, isLoading}) => {
   const [searchParams, setSearchParams] = useSearchParams()
   let userTypeFull = localStorage.getItem('userTypeFull')
 
@@ -119,7 +124,7 @@ function Overview({profile, isLoading}: any) {
                 </label>
 
                 <div className='col-lg-8'>
-                  <span className='fw-bolder fs-6 text-dark'>{profile?.countryRes}</span>
+                  <span className='fw-bolder fs-6 text-dark'>{profile?.countryres}</span>
                 </div>
               </div>
 

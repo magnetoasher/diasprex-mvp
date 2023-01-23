@@ -51,7 +51,11 @@ const areaOptions = [
   {value: 'other', label: 'Other'},
 ]
 
-const ProfileDetails: FC = () => {
+type Props = {
+  profile?: ICreateAccount
+}
+
+const ProfileDetails: FC<Props> = ({profile}) => {
   const [data, setData] = useState<IProfileDetails>(initialValues)
   const updateData = (fieldsToUpdate: Partial<IProfileDetails>): void => {
     const updatedData = Object.assign(data, fieldsToUpdate)
