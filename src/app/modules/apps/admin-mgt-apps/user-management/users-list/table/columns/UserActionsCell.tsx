@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useEffect} from 'react'
+import {FC, useEffect, useState} from 'react'
 import {useMutation, useQueryClient} from 'react-query'
 import {MenuComponent} from '../../../../../../../../_metronic/assets/ts/components'
 import {ID, KTSVG, QUERIES} from '../../../../../../../../_metronic/helpers'
 import {useListView} from '../../core/ListViewProvider'
 import {useQueryResponse} from '../../core/QueryResponseProvider'
-import {deleteUser} from '../../core/_requests'
+import {deleteUser, changeUserStatus} from '../../core/_requests'
 // import { ChatPage } from '../../../../chat/ChatPage'
 
 type Props = {
@@ -16,6 +16,7 @@ const UserActionsCell: FC<Props> = ({id}) => {
   const {setItemIdForUpdate} = useListView()
   const {query} = useQueryResponse()
   const queryClient = useQueryClient()
+  const [status, setStatus] = useState('')
 
   useEffect(() => {
     MenuComponent.reinitialization()
@@ -25,7 +26,45 @@ const UserActionsCell: FC<Props> = ({id}) => {
     setItemIdForUpdate(id)
   }
 
-  const deleteItem = useMutation(() => deleteUser(id), {
+  // const deleteItem = useMutation(() => deleteUser(id), {
+  //   // 💡 response of the mutation is passed to onSuccess
+  //   onSuccess: () => {
+  //     // ✅ update detail view directly
+  //     queryClient.invalidateQueries([`${QUERIES.USERS_LIST}-${query}`])
+  //   },
+  // })
+
+  const activateItem = useMutation(() => changeUserStatus(id, 'active'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.USERS_LIST}-${query}`])
+    },
+  })
+
+  const suspendItem = useMutation(() => changeUserStatus(id, 'suspended'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.USERS_LIST}-${query}`])
+    },
+  })
+  const deleteItem = useMutation(() => changeUserStatus(id, 'deleted'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.USERS_LIST}-${query}`])
+    },
+  })
+  const pendingItem = useMutation(() => changeUserStatus(id, 'pending'), {
+    // 💡 response of the mutation is passed to onSuccess
+    onSuccess: () => {
+      // ✅ update detail view directly
+      queryClient.invalidateQueries([`${QUERIES.USERS_LIST}-${query}`])
+    },
+  })
+
+  const unsuspendItem = useMutation(() => changeUserStatus(id, 'unsuspend'), {
     // 💡 response of the mutation is passed to onSuccess
     onSuccess: () => {
       // ✅ update detail view directly
@@ -56,6 +95,47 @@ const UserActionsCell: FC<Props> = ({id}) => {
           </a>
         </div>
         {/* end::Menu item */}
+        <div className='separator separator-content separator-dashed pt-5 mb-2'>
+          <span className='w-250px fw-bold'>STATUS</span>
+        </div>
+
+        <div className='menu-item px-3'>
+          <a
+            className='menu-link px-3'
+            // data-kt-users-table-filter='disable_row'
+            onClick={async () => await pendingItem.mutateAsync()}
+          >
+            Pending
+          </a>
+        </div>
+        <div className='menu-item px-3'>
+          <a
+            className='menu-link px-3'
+            // data-kt-users-table-filter='disable_row'
+            onClick={async () => await activateItem.mutateAsync()}
+          >
+            Activate
+          </a>
+        </div>
+
+        <div className='menu-item px-3'>
+          <a
+            className='menu-link px-3'
+            // data-kt-users-table-filter='disable_row'
+            onClick={async () => await suspendItem.mutateAsync()}
+          >
+            Suspend
+          </a>
+        </div>
+        <div className='menu-item px-3'>
+          <a
+            className='menu-link px-3'
+            // data-kt-users-table-filter='disable_row'
+            onClick={async () => await unsuspendItem.mutateAsync()}
+          >
+            Unsuspend
+          </a>
+        </div>
 
         {/* begin::Menu item */}
         <div className='menu-item px-3'>
@@ -64,11 +144,10 @@ const UserActionsCell: FC<Props> = ({id}) => {
             // data-kt-users-table-filter='disable_row'
             onClick={async () => await deleteItem.mutateAsync()}
           >
-            Disable
+            Delete
           </a>
         </div>
         {/* end::Menu item */}
-
         {/* begin::Menu item */}
         {/* <div className='menu-item px-3'>
           <a
@@ -80,7 +159,6 @@ const UserActionsCell: FC<Props> = ({id}) => {
           </a>
         </div> */}
         {/* end::Menu item */}
-
         {/* begin::Menu item */}
         <div className='menu-item px-3' id='kt_drawer_chat_toggle'>
           {/* <div className='menu-item px-3'> */}

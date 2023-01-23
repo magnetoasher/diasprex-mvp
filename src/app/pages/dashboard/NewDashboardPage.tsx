@@ -19,6 +19,7 @@ import {Proposal} from '../../modules/apps/admin-mgt-apps/proposal-management/pr
 import SponsorOpportunityCard from '../../modules/opportunities/SponsorOpportunityCard'
 import SponsorProposalCard from '../../modules/proposals/components/SponsorProposalCard'
 import EnablerOpportunityCard from '../../modules/opportunities/EnablerOpportunityCard'
+import {ICreateAccount} from '../../modules/auth/registration/components/CreateAccountWizardHelper'
 
 const mapState = (state: RootState) => ({opps: state.opps, proposals: state.proposals})
 const connector = connect(mapState, {...opps.actions, ...proposals.actions})
@@ -32,6 +33,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
   const dispatch = useDispatch()
   const [recentOpps, setRecentOpps] = useState<Opps[]>([])
   const [recentProps, setRecentProps] = useState<Proposal[]>([])
+  const [userProfile, setUserProfile] = useState<ICreateAccount>()
 
   const userColor = {
     enabler: {

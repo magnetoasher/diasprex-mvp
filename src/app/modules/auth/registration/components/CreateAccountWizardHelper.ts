@@ -12,13 +12,14 @@ export interface ICreateAccount {
   id?: ID
   dpxid?: ID
   usertype?: string
-  subscriptionTier?: string
+  subscriptiontier?: string
   fName: string
   lName: string
   mInitial: string
+  avatar?: string
   email: string
-  countryOrig: string
-  countryRes: string
+  countryorig: string
+  countryres: string
   accountType: string
   phonenumber: string
   mobilephone: string
@@ -192,8 +193,8 @@ const inits: ICreateAccount = {
   email: '',
   phonenumber: '',
   mobilephone: '',
-  countryOrig: '',
-  countryRes: '',
+  countryorig: '',
+  countryres: '',
   profession: '',
   proffield: '',
   degree: '',
