@@ -1,13 +1,18 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Navigate, Route, Routes, Outlet} from 'react-router-dom'
+import {connect, ConnectedProps, useDispatch} from 'react-redux'
+import {useOktaAuth} from '@okta/okta-react'
 import {PageLink, PageTitle} from '../../../_metronic/layout/core'
 import {Loans} from './components/Loans/Loans'
 import {Statements} from './components/Statements'
-import {Overview} from './components/Overview'
+import Overview from './components/Overview'
 import {Settings} from './components/settings/Settings'
 import {ProfileHeader} from './ProfileHeader'
 
 import Subscription from './Subscription'
+import {ICreateAccount} from '../auth/registration/components/CreateAccountWizardHelper'
+import {RootState} from '../../../setup'
+import * as profile from './redux/ProfileRedux'
 
 const profileBreadCrumbs: Array<PageLink> = [
   {
@@ -24,7 +29,25 @@ const profileBreadCrumbs: Array<PageLink> = [
   },
 ]
 
-const ProfilePage: React.FC = () => {
+const mapState = (state: RootState) => ({profile: state.profile})
+const connector = connect(mapState, profile.actions)
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+const ProfilePage: React.FC<PropsFromRedux> = (props) => {
+  const [profile, setProfile] = useState<ICreateAccount>()
+  const {authState} = useOktaAuth()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (authState !== null) {
+      dispatch(props.getProfileRequest({id: authState.accessToken?.claims.uid}))
+    }
+  }, [])
+
+  useEffect(() => {
+    setProfile(props.profile.userProfile[0])
+  }, [props.profile.userProfile])
+
   return (
     <Routes>
       <Route
@@ -40,7 +63,7 @@ const ProfilePage: React.FC = () => {
           element={
             <>
               <PageTitle breadcrumbs={profileBreadCrumbs}>Overview</PageTitle>
-              <Overview />
+              <Overview profile={profile} isLoading={props.profile.isLoading} />
             </>
           }
         />
@@ -105,4 +128,4 @@ const ProfilePage: React.FC = () => {
   )
 }
 
-export default ProfilePage
+export default connector(ProfilePage)
