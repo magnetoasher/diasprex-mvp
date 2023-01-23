@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 import {
   AfricanCountryList,
   IndustryList,
+  CountryList,
 } from '../../../../../../../_metronic/partials/content/selectionlists'
 import {OecdcountryList} from '../../../../../../../_metronic/partials/content/selectionlists/oecdcountrylist'
 import Input, {
@@ -17,10 +18,14 @@ import {toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
 import {CountriesCodeList} from '../../../../../../../_metronic/partials/content/selectionlists'
 import Meta from 'antd/lib/card/Meta'
 
-const Individual = () => {
+const Individual = (props: any) => {
   // const countryOptions = useMemo(() => countryList().getData(), [])
 
   const [selectedCountry, setSelectedCountry] = useState('united states')
+  const handleCountryChange = (e: any) => {
+    setSelectedCountry(e)
+    props.setFieldValue('countryRes', e)
+  }
 
   const areaOptions = [
     {value: 'management', label: 'Management'},
@@ -103,10 +108,16 @@ const Individual = () => {
             </div>
           </div>
           <Field
+            component='select'
             name='countryRes'
             className='form-select form-select-lg text-capitalize'
-            value={selectedCountry}
-          />
+            onChange={(e: any) => {
+              handleCountryChange(e.target.value)
+            }}
+          >
+            <option value=''>Select a country</option>
+            <CountryList />
+          </Field>
 
           <div className='text-danger mt-2'>
             <ErrorMessage name='countryRes' component='span' />

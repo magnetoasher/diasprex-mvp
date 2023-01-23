@@ -541,7 +541,7 @@ const SubscriptionPlans3 = ({userType, setUserType, setUserTypeFull, userTypeFul
     localStorage.setItem('userTypeFull', userTypeFull)
     localStorage.setItem('packageDuration', currentState)
     localStorage.setItem('packagePrice', packagePrice)
-  }, [userType, userTypeFull, currentState])
+  }, [userType, userTypeFull, currentState, packagePrice])
 
   // console.log(userType, userTypeFull, currentState, packagePrice)
 
@@ -801,6 +801,11 @@ const SubscriptionPlans3 = ({userType, setUserType, setUserTypeFull, userTypeFul
                         setUserTypeFull(plan.valueType)
                         setSelectedSponsor(plan.valueType)
                         setSelectedIndex(index)
+                        {
+                          currentState === 'month'
+                            ? setPackagePrice(plan.priceMonth)
+                            : setPackagePrice(plan.priceAnnual)
+                        }
                       }}
                       className={
                         `nav-link btn btn-outline btn-outline-dashed btn-color-dark d-flex flex-stack text-start p-6 ` +

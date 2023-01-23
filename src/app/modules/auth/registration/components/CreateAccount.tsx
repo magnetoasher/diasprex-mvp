@@ -16,10 +16,14 @@ import SweetAlert from 'react-bootstrap-sweetalert'
 // import SubscriptionPlans from './steps/SubscriptionPlans'
 import SubscriptionPlans3 from './SubscriptionComponet/SubscriptionPlans3'
 import {PhoneVerification2} from './steps/phoneverification2'
+import moment from 'moment'
+import {useOktaAuth} from '@okta/okta-react'
+import {createUserProfileAPI} from '../../../profile/redux/ProfileAPI'
 
 const CreateAccount: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
+  const {authState} = useOktaAuth()
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
   const [userType, setUserType] = useState<string>('enabler')
   const [userTypeFull, setUserTypeFull] = useState('basic_enabler')
@@ -32,6 +36,7 @@ const CreateAccount: FC = () => {
   const [titleText, setTitleText] = useState('')
   const [confirmBtnText, setConfirmBtnText] = useState('Yes')
   const [hideShow, setHideShow] = useState(true)
+  const [formValues, setFormValues] = useState<ICreateAccount>({})
 
   useEffect(() => {
     if (userTypeFull !== 'basic_enabler' || userType === 'sponsor') {
@@ -92,27 +97,44 @@ const CreateAccount: FC = () => {
       // } else {
       // data capture here
       actions.setSubmitting(true)
-
-      console.log('FormValues', values)
+      setFormValues({
+        ...values,
+        id: authState?.accessToken?.claims.uid,
+        usertype: userType,
+        countryRes: values.countryRes ? values.countryRes : 'United States',
+        accountType: userTypeFull,
+        subscriptionTier: userTypeFull.split('_')[0],
+        status: 'new',
+        datejoined: moment(new Date()).format('DD MMM YYYY'),
+      })
       stepper.current.goNext()
       // }
     } else {
       // stepper.current.goto(1)
       //
-
-      if (userType == 'sponsor') {
-        setConfirmBtnText('Ok')
-        setShowCancelBtn(false)
-        setTitleText('Congratulations')
-        setCategoryQuestion(sponsorAlert)
-        setAlertType('success')
-        setIsShowAlert(true)
-      } else
-        navigate({
-          pathname: '/dashboard',
-          search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
-        })
-      actions.resetForm()
+      createUserProfileAPI(formValues).then((res) => {
+        if (res.status === 200) {
+          if (userType == 'sponsor') {
+            setConfirmBtnText('Ok')
+            setShowCancelBtn(false)
+            setTitleText('Congratulations')
+            setCategoryQuestion(sponsorAlert)
+            setAlertType('success')
+            setIsShowAlert(true)
+          } else
+            navigate({
+              pathname: '/dashboard',
+              search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
+            })
+          actions.resetForm()
+        } else {
+          navigate({
+            pathname: '/dashboard',
+            search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
+          })
+          actions.resetForm()
+        }
+      })
     }
   }
 
@@ -280,7 +302,7 @@ const CreateAccount: FC = () => {
         <div className='d-flex flex-row-fluid flex-center bg-white rounded '>
           <Formik validationSchema={currentSchema} initialValues={initValues} onSubmit={submitStep}>
             {/* <Formik initialValues={initValues} onSubmit={submitStep}> */}
-            {({}) => (
+            {({setFieldValue}) => (
               <Form
                 className={
                   'py-20 w-100  px-9' +
@@ -309,7 +331,11 @@ const CreateAccount: FC = () => {
                 </div>
 
                 <div data-kt-stepper-element='content' className='w-xl-800px'>
-                  <Step3 userType={userType} userTypeFull={userTypeFull} />
+                  <Step3
+                    userType={userType}
+                    userTypeFull={userTypeFull}
+                    setFieldValue={setFieldValue}
+                  />
                 </div>
 
                 {userTypeFull !== 'basic_enabler' && (
@@ -320,7 +346,7 @@ const CreateAccount: FC = () => {
 
                 {userTypeFull !== 'basic_enabler' && (
                   <div data-kt-stepper-element='content' className='w-xl-800px'>
-                    <AccountVerification />
+                    <AccountVerification userInfo={formValues} />
                   </div>
                 )}
 
