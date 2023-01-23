@@ -12,25 +12,27 @@ interface address {
 export interface IProfile {
   id?: ID
   dpxid?: ID
-  usertype?: string
-  subscriptiontier?: string
+  usertype: string
+  subscriptiontier: string
+  packagePrice?: string
+  packageDuration?: string
   fName: string
   lName: string
-  mInitial: string
+  mInitial?: string
   avatar?: string
   email: string
-  countryorig: string
+  countryorig?: string
   countryres: string
-  accountType: string
-  phonenumber: string
+  accountType?: string
+  phonenumber?: string
   mobilephone: string
-  profession: string
-  proffield: string
+  profession?: string
+  proffield?: string
   degree?: string
   interest?: string[]
-  accountTeamSize: string
-  accountName: string
-  accountPlan: string
+  accountTeamSize?: string
+  accountName?: string
+  accountPlan?: string
   orgName?: string
   orgAddress?: address
   orgMailingAddress?: string
@@ -39,8 +41,8 @@ export interface IProfile {
   orgRegYear?: string
   orgRegCountry?: string
   orgRegState?: string
-  orgRole: string
-  orgIndustry: string
+  orgRole?: string
+  orgIndustry?: string
   nameOnCard?: string
   cardNumber?: string
   cardExpiryMonth?: string
@@ -50,13 +52,17 @@ export interface IProfile {
   accountNumber?: string
   routingNumber?: string
   acknowledgeDPXterms: boolean
-  emailcommunicate: boolean
+  emailcommunicate?: boolean
   online?: boolean
   status?: string
   verified: boolean
-  twostepauth: boolean
+  twostepauth?: boolean
   remittanceretainer: boolean
   datejoined: string
+  billing?: {
+    packagePrice: string
+    packageDuration: string
+  }
 }
 
 const createAccountSchemas = [
@@ -130,6 +136,8 @@ const inits: IProfile = {
   fName: '',
   lName: '',
   mInitial: '',
+  usertype: '',
+  subscriptiontier: '',
   email: '',
   phonenumber: '',
   mobilephone: '',
@@ -167,6 +175,10 @@ const inits: IProfile = {
   twostepauth: false,
   remittanceretainer: false,
   datejoined: '02 Nov 2022',
+  billing: {
+    packagePrice: '0.00',
+    packageDuration: 'month',
+  },
 }
 
 export {createAccountSchemas, inits}

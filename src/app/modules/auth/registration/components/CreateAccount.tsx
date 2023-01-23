@@ -28,6 +28,8 @@ const CreateAccount: FC = () => {
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
   const [userType, setUserType] = useState<string>('enabler')
   const [userTypeFull, setUserTypeFull] = useState('basic_enabler')
+  const [packagePrice, setPackagePrice] = useState('0.00')
+  const [packageDuration, setPackageDuration] = useState<'month' | 'annual'>('month')
   const [initValues] = useState<IProfile>(inits)
   const [isSubmitButton, setSubmitButton] = useState(false)
   const [isShowAlert, setIsShowAlert] = useState(false)
@@ -104,11 +106,12 @@ const CreateAccount: FC = () => {
         id: authState?.accessToken?.claims.uid,
         dpxid: dpxNumber,
         usertype: userType,
-        countryRes: values.countryRes ? values.countryRes : 'United States',
+        countryres: values.countryRes ? values.countryRes : 'United States',
         accountType: userTypeFull,
-        subscriptionTier: userTypeFull.split('_')[0],
+        subscriptiontier: userTypeFull,
+        packageprice: '',
         status:
-          values.subscriptionTier === 'basic_enabler' || values.subscriptionTier === 'super_enabler'
+          values.subscriptiontier === 'basic_enabler' || values.subscriptiontier === 'super_enabler'
             ? 'active'
             : 'new',
         datejoined: moment(new Date()).format('DD MMM YYYY'),
@@ -327,6 +330,10 @@ const CreateAccount: FC = () => {
                       submitStep={submitStep}
                       setUserTypeFull={setUserTypeFull}
                       userTypeFull={userTypeFull}
+                      packagePrice={packagePrice}
+                      setPackagePrice={setPackagePrice}
+                      packageDuration={packageDuration}
+                      setPackageDuration={setPackageDuration}
                     />
                   </div>
                 </div>
