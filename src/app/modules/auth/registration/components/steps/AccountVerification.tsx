@@ -1,10 +1,10 @@
 import React from 'react'
 
-const AccountVerification = () => {
-  var userType = localStorage.getItem('userType')
-  var userTypeFull = localStorage.getItem('userTypeFull')
-  var currentState = localStorage.getItem('packageDuration')
-  var packagePrice = localStorage.getItem('packagePrice)')
+const AccountVerification = (props: any) => {
+  const userType = window.localStorage.getItem('userType')
+  const userTypeFull = window.localStorage.getItem('userTypeFull')
+  const currentState = window.localStorage.getItem('packageDuration')
+  const packagePrice = window.localStorage.getItem('packagePrice')
 
   return (
     <>
@@ -29,26 +29,26 @@ const AccountVerification = () => {
                         href='../../demo1/dist/pages/apps/customers/view.html'
                         className='text-gray-800 text-hover-primary'
                       >
-                        corp@support.com
+                        {props.userInfo.email}
                       </a>
                     </td>
                   </tr>
 
                   <tr>
                     <td className='text-gray-400'>Customer Name:</td>
-                    <td className='text-gray-800'>Max Doe</td>
-                  </tr>
-
-                  <tr>
-                    <td className='text-gray-400'>Address:</td>
                     <td className='text-gray-800'>
-                      Floor 10, 101 Avenue of the Light Square, New York, NY, 10050.
+                      {props.userInfo.fName + ' ' + props.userInfo.lName}
                     </td>
                   </tr>
 
                   <tr>
+                    <td className='text-gray-400'>Address:</td>
+                    <td className='text-gray-800'>{props.userInfo.orgAddress}</td>
+                  </tr>
+
+                  <tr>
                     <td className='text-gray-400'>Phone:</td>
-                    <td className='text-gray-800'>(555) 555-1234</td>
+                    <td className='text-gray-800'>{props.userInfo.phonenumber}</td>
                   </tr>
                 </table>
               </div>
@@ -67,7 +67,7 @@ const AccountVerification = () => {
 
                   <tr>
                     <td className='text-gray-400'>Subscription Fees:</td>
-                    <td className='text-gray-800 text-capitalize'>{`$149.99 / ${currentState}`}</td>
+                    <td className='text-gray-800 text-capitalize'>{`$${packagePrice} / ${currentState}`}</td>
                   </tr>
 
                   <tr>
@@ -111,7 +111,7 @@ const AccountVerification = () => {
                     <td>
                       <span className='badge badge-light-danger'>sub_4567_8765</span>
                     </td>
-                    <td className='text-capitalize'>{`$149.99 / ${currentState}`}</td>
+                    <td className='text-capitalize'>{`$${packagePrice} / ${currentState}`}</td>
                   </tr>
                 </tbody>
               </table>

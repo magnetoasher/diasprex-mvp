@@ -7,7 +7,7 @@ import AsyncSelect from 'react-select'
 import countryList from 'react-select-country-list'
 import {StateListUS} from '../../../../../../../_metronic/partials/content/selectionlists'
 
-const Sponsor = () => {
+const Sponsor = (props: any) => {
   const [countryValue, setCountryValue] = useState({})
   const countryOptions = useMemo(() => countryList().getData(), [])
   const [dataObj, setDataObj] = useState({
@@ -22,6 +22,7 @@ const Sponsor = () => {
   }
   const handleCountryChange = (e: any) => {
     setCountryValue(e)
+    props.setFieldValue('orgRegCountry', e)
   }
   const areaOptions = [
     {value: '', label: 'Select the closest'},
@@ -138,7 +139,9 @@ const Sponsor = () => {
           component='select'
           name='orgRegCountry'
           className='form-select form-select-lg'
-          onChange={(e: any) => handleCountryChange(e.target.value)}
+          onChange={(e: any) => {
+            handleCountryChange(e.target.value)
+          }}
         >
           <option value=''>Select a country</option>
           {countryOptions.map((option, index) => (
@@ -233,7 +236,7 @@ const Sponsor = () => {
           />
           <Field
             type='text'
-            maxLength={9}
+            maxLength={10}
             name='phone.phonenumber'
             className='form-control form-control-lg'
             placeholder='xxx-xxx-xxxx'

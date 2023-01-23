@@ -11,13 +11,13 @@ const Step3: FC = (props: any) => {
   return (
     <>
       {props.userTypeFull === 'standard_enabler' ? (
-        <Individual />
+        <Individual setFieldValue={props.setFieldValue} />
       ) : props.userTypeFull === 'super_enabler' ? (
-        <Individual />
+        <Individual setFieldValue={props.setFieldValue} />
       ) : props.userTypeFull === 'business_enabler' ? (
-        <Business />
+        <Business setFieldValue={props.setFieldValue} />
       ) : props.userType === 'sponsor' ? (
-        <Sponsor />
+        <Sponsor setFieldValue={props.setFieldValue} />
       ) : (
         <Basic />
       )}

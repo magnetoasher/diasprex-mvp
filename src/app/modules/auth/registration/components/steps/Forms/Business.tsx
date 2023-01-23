@@ -6,7 +6,7 @@ import countryList from 'react-select-country-list'
 import {StateListUS} from '../../../../../../../_metronic/partials/content/selectionlists'
 import {object} from 'yup'
 
-const Business = () => {
+const Business = (props: any) => {
   const countryOptions = useMemo(() => countryList().getData(), [])
   const [countryValue, setCountryValue] = useState({})
   const [dataObj, setDataObj] = useState({

@@ -17,10 +17,14 @@ import 'react-phone-input-2/lib/style.css'
 import {CountryList} from '../../../../../../../_metronic/partials/content/selectionlists'
 import {toAbsoluteUrl} from '../../../../../../../_metronic/helpers'
 
-const Basic: FC = () => {
+const Basic: FC = (props: any) => {
   const countryOptions = useMemo(() => countryList().getData(), [])
   const [selectedCountry, setSelectedCountry] = useState('united states')
-
+  const handleCountryChange = (e: any) => {
+    setSelectedCountry(e)
+    props.setFieldValue('countryRes', e)
+  }
+  
   const areaOptions = [
     {value: 'acturarial', label: 'Acturarial'},
     {value: 'analytics & research', label: 'Analytics & Research'},
@@ -110,10 +114,16 @@ const Basic: FC = () => {
         <div className='fv-row mb-10'>
           <label className='form-label required'>Country of Residence</label>
           <Field
+            component='select'
             name='countryRes'
             className='form-select form-select-lg text-capitalize'
-            value={selectedCountry}
-          />
+            onChange={(e: any) => {
+              handleCountryChange(e.target.value)
+            }}
+          >
+            <option value=''>Select a country</option>
+            <CountryList />
+          </Field>
         </div>
 
         <div className='fv-row mb-10'>
