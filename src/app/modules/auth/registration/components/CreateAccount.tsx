@@ -97,7 +97,7 @@ const CreateAccount: FC = () => {
     setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex - 1])
   }
 
-  const submitStep = (values: ICreateAccount, actions: FormikActions<FormikValues>) => {
+  const submitStep = (values: IProfile, actions: FormikActions<FormikValues>) => {
     const dpxNumber = getUniqueDPXId('DPX')
     if (!stepper.current) {
       return
