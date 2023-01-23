@@ -11,7 +11,7 @@ import AccountVerification from './steps/AccountVerification'
 import {StepperComponent} from '../../../../../_metronic/assets/ts/components'
 import {Formik, Form, FormikActions, FormikValues, useFormik} from 'formik'
 import './hide-stepper.css'
-import {ICreateAccount, createAccountSchemas, inits} from './CreateAccountWizardHelper'
+import {IProfile, createAccountSchemas, inits} from './CreateAccountWizardHelper'
 import SweetAlert from 'react-bootstrap-sweetalert'
 // import SubscriptionPlans from './steps/SubscriptionPlans'
 import SubscriptionPlans3 from './SubscriptionComponet/SubscriptionPlans3'
@@ -23,7 +23,7 @@ const CreateAccount: FC = () => {
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
   const [userType, setUserType] = useState<string>('enabler')
   const [userTypeFull, setUserTypeFull] = useState('basic_enabler')
-  const [initialValues] = useState<ICreateAccount>(inits)
+  const [initialValues] = useState<IProfile>(inits)
 
   const [isShowAlert, setIsShowAlert] = useState(false)
   const [categoryQuestion, setCategoryQuestion] = useState('')
@@ -72,7 +72,7 @@ const CreateAccount: FC = () => {
     initialValues: initialValues,
     validationSchema: currentSchema,
 
-    onSubmit = (values: ICreateAccount, actions: FormikActions<FormikValues>) => {
+    onSubmit = (values: IProfile, actions: FormikActions<FormikValues>) => {
       if (!stepper.current) {
         return
       }

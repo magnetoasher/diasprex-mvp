@@ -11,7 +11,7 @@ import AccountVerification from './steps/AccountVerification'
 import {StepperComponent} from '../../../../../_metronic/assets/ts/components'
 import {Formik, Form, FormikActions, FormikValues} from 'formik'
 import './hide-stepper.css'
-import {ICreateAccount, createAccountSchemas, inits} from './CreateAccountWizardHelper'
+import {IProfile, createAccountSchemas, inits} from './CreateAccountWizardHelper'
 import SweetAlert from 'react-bootstrap-sweetalert'
 // import SubscriptionPlans from './steps/SubscriptionPlans'
 import SubscriptionPlans3 from './SubscriptionComponet/SubscriptionPlans3'
@@ -29,7 +29,7 @@ const CreateAccount: FC = () => {
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
   const [userType, setUserType] = useState<string>('enabler')
   const [userTypeFull, setUserTypeFull] = useState('basic_enabler')
-  const [initValues] = useState<ICreateAccount>(inits)
+  const [initValues] = useState<IProfile>(inits)
   const [isSubmitButton, setSubmitButton] = useState(false)
   const [isShowAlert, setIsShowAlert] = useState(false)
   const [categoryQuestion, setCategoryQuestion] = useState('')
@@ -38,7 +38,7 @@ const CreateAccount: FC = () => {
   const [titleText, setTitleText] = useState('')
   const [confirmBtnText, setConfirmBtnText] = useState('Yes')
   const [hideShow, setHideShow] = useState(true)
-  const [formValues, setFormValues] = useState<ICreateAccount>({})
+  const [formValues, setFormValues] = useState<IProfile>({})
 
   useEffect(() => {
     if (authState !== null) {
@@ -87,7 +87,7 @@ const CreateAccount: FC = () => {
     setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex - 1])
   }
 
-  const submitStep = (values: ICreateAccount, actions: FormikActions<FormikValues>) => {
+  const submitStep = (values: IProfile, actions: FormikActions<FormikValues>) => {
     const dpxNumber = getUniqueDPXUserId('DPX')
     if (!stepper.current) {
       return

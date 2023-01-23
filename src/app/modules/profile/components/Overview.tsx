@@ -64,7 +64,7 @@ function Overview({profile, isLoading}: any) {
 
               <div className='row mb-7'>
                 <label className='col-lg-4 fw-bold text-muted'>
-                  Contact Phone
+                  Mobile Phone
                   <i
                     className='fas fa-exclamation-circle ms-1 fs-7'
                     data-bs-toggle='tooltip'
@@ -74,13 +74,31 @@ function Overview({profile, isLoading}: any) {
 
                 <div className='col-lg-8 d-flex align-items-center'>
                   <span className='fw-bolder fs-6 me-2'>{profile?.mobilephone}</span>
-
-                  <span className='badge badge-success'>Verified</span>
+                  {profile?.verified ? (
+                    <span className='badge badge-success'>Verified</span>
+                  ) : (
+                    <span className='badge badge-light'>Not Verified</span>
+                  )}
                 </div>
               </div>
 
               <div className='row mb-7'>
-                <label className='col-lg-4 fw-bold text-muted'>Company</label>
+                <label className='col-lg-4 fw-bold text-muted'>
+                  Primary Phone
+                  <i
+                    className='fas fa-exclamation-circle ms-1 fs-7'
+                    data-bs-toggle='tooltip'
+                    title='Phone number must be active'
+                  ></i>
+                </label>
+
+                <div className='col-lg-8 d-flex align-items-center'>
+                  <span className='fw-bolder fs-6 me-2'>{profile?.phonenumber}</span>
+                </div>
+              </div>
+
+              <div className='row mb-7'>
+                <label className='col-lg-4 fw-bold text-muted'>Organization</label>
 
                 <div className='col-lg-8 fv-row'>
                   <span className='fw-bold fs-6'>{profile?.orgName}</span>
@@ -88,7 +106,7 @@ function Overview({profile, isLoading}: any) {
               </div>
 
               <div className='row mb-7'>
-                <label className='col-lg-4 fw-bold text-muted'>Company Site</label>
+                <label className='col-lg-4 fw-bold text-muted'>Organization Industry</label>
 
                 <div className='col-lg-8'>
                   <a href='#' className='fw-bolder fs-6 text-dark'>
@@ -101,7 +119,10 @@ function Overview({profile, isLoading}: any) {
 
                 <div className='col-lg-8'>
                   <a href='#' className='fw-bolder fs-6 text-dark'>
-                    {profile?.orgAddress}
+                    {profile?.orgAddress?.addressline1} <br />
+                    {profile?.orgAddress?.addressline2} <br />
+                    {profile?.orgAddress?.city} <br />
+                    {profile?.orgAddress?.state}
                   </a>
                 </div>
               </div>
@@ -112,12 +133,12 @@ function Overview({profile, isLoading}: any) {
                   <i
                     className='fas fa-exclamation-circle ms-1 fs-7'
                     data-bs-toggle='tooltip'
-                    title='Country of origination'
+                    title='Country of origin'
                   ></i>
                 </label>
 
                 <div className='col-lg-8'>
-                  <span className='fw-bolder fs-6 text-dark'>{profile?.countryOrig}</span>
+                  <span className='fw-bolder fs-6 text-dark'>{profile?.countryorig}</span>
                 </div>
               </div>
 
@@ -126,7 +147,8 @@ function Overview({profile, isLoading}: any) {
 
                 <div className='col-lg-8'>
                   <span className='fw-bolder fs-6 text-dark'>
-                    {profile?.email && 'Email'} {', '} {profile?.phonenumber && 'Phone'}
+                    {profile?.emailcommunication && 'Email'} <br />
+                    {profile?.phonenumber && 'Phone'}
                   </span>
                 </div>
               </div>

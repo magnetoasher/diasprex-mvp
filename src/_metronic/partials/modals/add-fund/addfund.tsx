@@ -6,7 +6,7 @@ import * as Yup from 'yup'
 import {StepperComponent} from '../../../assets/ts/components'
 import {CheckingAccount, CreditCard, PaypalAcc} from '../../content/paymentcards'
 
-interface ICreateAccount {
+interface IPaymentAccount {
   amount: string
   fundsource: string
   routingNumber: string
@@ -20,7 +20,7 @@ interface ICreateAccount {
   saveAccount: string
 }
 
-const inits: ICreateAccount = {
+const inits: IPaymentAccount = {
   amount: '',
   fundsource: '1',
   routingNumber: '',
@@ -64,7 +64,7 @@ const AddFund: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createAppSchema[0])
-  const [initValues] = useState<ICreateAccount>(inits)
+  const [initValues] = useState<IPaymentAccount>(inits)
   const [fundSourceValue, setFundSourceValue] = useState('')
   const [isSubmitButton, setSubmitButton] = useState(false)
 
@@ -83,7 +83,7 @@ const AddFund: FC = () => {
     setCurrentSchema(createAppSchema[stepper.current.currentStepIndex - 1])
   }
 
-  const submitStep = (values: ICreateAccount, actions: FormikValues) => {
+  const submitStep = (values: IPaymentAccount, actions: FormikValues) => {
     if (!stepper.current) {
       return
     }

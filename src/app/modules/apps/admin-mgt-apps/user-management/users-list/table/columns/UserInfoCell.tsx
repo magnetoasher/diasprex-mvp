@@ -3,10 +3,10 @@ import clsx from 'clsx'
 import {FC} from 'react'
 import {toAbsoluteUrl} from '../../../../../../../../_metronic/helpers'
 import {User} from '../../core/_models'
-import {ICreateAccount} from '../../../../../../auth/registration/components/CreateAccountWizardHelper'
+import {IProfile} from '../../../../../../auth/registration/components/CreateAccountWizardHelper'
 
 type Props = {
-  user: ICreateAccount
+  user: IProfile
 }
 
 const UserInfoCell: FC<Props> = ({user}) => (
