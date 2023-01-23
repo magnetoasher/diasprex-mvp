@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useEffect, useState, FC} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {KTSVG} from '../../../../_metronic/helpers'
 import {
@@ -13,13 +13,8 @@ import {profileDetailsInitValues} from './settings/SettingsModel'
 import {connect, ConnectedProps, useDispatch} from 'react-redux'
 import {User} from '../../apps/user-management-ignore/users-list/core/_models'
 import {ListLoading} from '../../apps/admin-mgt-apps/core/loading/ListLoading'
-import {ICreateAccount} from '../../auth/registration/components/CreateAccountWizardHelper'
 
-type Props = {
-  profile?: ICreateAccount
-  isLoading: boolean
-}
-const Overview: FC<Props> = ({profile, isLoading}) => {
+function Overview({profile, isLoading}: any) {
   const [searchParams, setSearchParams] = useSearchParams()
   let userTypeFull = localStorage.getItem('userTypeFull')
 
@@ -47,9 +42,7 @@ const Overview: FC<Props> = ({profile, isLoading}) => {
 
                 <div className='col-lg-8'>
                   <span className='fw-bolder fs-6 text-dark'>
-                    {`${profile?.fName} ${profile?.mInitial}${profile?.mInitial && '.'} ${
-                      profile?.lName
-                    }`}
+                    {profile?.fName} {profile?.mInitial}. {profile?.lName}
                   </span>
                 </div>
               </div>
@@ -124,7 +117,7 @@ const Overview: FC<Props> = ({profile, isLoading}) => {
                 </label>
 
                 <div className='col-lg-8'>
-                  <span className='fw-bolder fs-6 text-dark'>{profile?.countryres}</span>
+                  <span className='fw-bolder fs-6 text-dark'>{profile?.countryOrig}</span>
                 </div>
               </div>
 
@@ -133,8 +126,7 @@ const Overview: FC<Props> = ({profile, isLoading}) => {
 
                 <div className='col-lg-8'>
                   <span className='fw-bolder fs-6 text-dark'>
-                    {profile?.email && 'Email'}
-                    {profile?.phonenumber && 'Phone'}
+                    {profile?.email && 'Email'} {', '} {profile?.phonenumber && 'Phone'}
                   </span>
                 </div>
               </div>

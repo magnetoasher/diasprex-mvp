@@ -5,15 +5,12 @@ import {IDeactivateProfile, deactivateProfile} from '../SettingsModel'
 import SweetAlert from 'react-bootstrap-sweetalert'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
-import {ICreateAccount} from '../../../../auth/registration/components/CreateAccountWizardHelper'
 
 const deactivateProfileSchema = Yup.object().shape({
   confirm: Yup.boolean().oneOf([true], 'Please check the box to deactivate your profile'),
 })
-type Props = {
-  profile?: ICreateAccount
-}
-const DeactivateProfile: React.FC<Props> = ({profile}) => {
+
+const DeactivateProfile: React.FC<any> = (profile, isLoading) => {
   const [loading, setLoading] = useState(false)
   const [accountType, setAccountType] = useState(localStorage.getItem('userTypeFull'))
   const [openSweetAlert, setOpenSweetAlert] = useState(false)

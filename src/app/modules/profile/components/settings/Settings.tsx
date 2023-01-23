@@ -6,15 +6,15 @@ import {EmailPreferences} from './cards/EmailPreferences'
 import {Notifications} from './cards/Notifications'
 import {DeactivateProfile} from './cards/DeactivateAccount'
 
-export function Settings() {
+export function Settings({profile, isLoading, getProfile}: any) {
   return (
     <>
-      <ProfileDetails />
+      <ProfileDetails profile={profile} isLoading={isLoading} getProfile={getProfile} />
       <SignInMethod />
       {/* <ConnectedProfiles /> */}
       {/* <EmailPreferences /> */}
       {/* <Notifications /> */}
-      <DeactivateProfile />
+      <DeactivateProfile profile={profile} isLoading={isLoading} getProfile={getProfile} />
     </>
   )
 }
