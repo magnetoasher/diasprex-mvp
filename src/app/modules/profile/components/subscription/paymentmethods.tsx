@@ -3,7 +3,7 @@ import {Formik, Form, FormikValues} from 'formik'
 import BillingCardComponent from '../../BillingCardComponent'
 import CheckingAccount from '../../../auth/registration/components/steps/CheckingAccount'
 import {
-  ICreateAccount,
+  IProfile,
   createAccountSchemas,
   inits,
 } from '../../../auth/registration/components/CreateAccountWizardHelper'
@@ -15,8 +15,8 @@ export const PaymentMethods = () => {
   const [userTypeFull, setUserTypeFull] = useState(localStorage.getItem('userTypeFull'))
   const [paymentMethod, setPaymentMethod] = useState('credit')
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
-  const [initValues] = useState<ICreateAccount>(inits)
-  const submitStep = (values: ICreateAccount, actions: FormikValues) => {}
+  const [initValues] = useState<IProfile>(inits)
+  const submitStep = (values: IProfile, actions: FormikValues) => {}
   return (
     <div>
       {userTypeFull !== 'basic_enabler' && (

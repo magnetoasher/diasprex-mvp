@@ -5,7 +5,7 @@ import {Formik, Form, FormikValues, Field, ErrorMessage} from 'formik'
 import * as Yup from 'yup'
 import {StepperComponent} from '../../../assets/ts/components'
 
-interface ICreateAccount {
+interface IPaymentAccount {
   appName: string
   category: string
   framework: string
@@ -19,7 +19,7 @@ interface ICreateAccount {
   saveCard: string
 }
 
-const inits: ICreateAccount = {
+const inits: IPaymentAccount = {
   appName: '',
   category: '1',
   framework: '1',
@@ -58,7 +58,7 @@ const Main: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createAppSchema[0])
-  const [initValues] = useState<ICreateAccount>(inits)
+  const [initValues] = useState<IPaymentAccount>(inits)
 
   const loadStepper = () => {
     stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement)
@@ -74,7 +74,7 @@ const Main: FC = () => {
     setCurrentSchema(createAppSchema[stepper.current.currentStepIndex - 1])
   }
 
-  const submitStep = (values: ICreateAccount, actions: FormikValues) => {
+  const submitStep = (values: IPaymentAccount, actions: FormikValues) => {
     if (!stepper.current) {
       return
     }
