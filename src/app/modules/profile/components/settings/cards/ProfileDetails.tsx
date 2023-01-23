@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import {toAbsoluteUrl} from '../../../../../../_metronic/helpers'
-import {IProfileDetails, profileDetailsInitValues as initialValues} from '../SettingsModel'
+// import { IProfileDetails, profileDetailsInitValues as initialValues } from '../SettingsModel'
+import {
+  IProfile,
+  inits as initialValues,
+} from '../../../../auth/registration/components/CreateAccountWizardHelper'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 import axios from 'axios'
@@ -11,23 +15,18 @@ import {
   StateListUS,
 } from '../../../../../../_metronic/partials/content/selectionlists'
 import {Field, ErrorMessage} from 'formik'
-import {Select} from 'antd'
-import {ICreateAccount} from '../../../../auth/registration/components/CreateAccountWizardHelper'
+
 import {ListLoading} from '../../../../apps/admin-mgt-apps/core/loading/ListLoading'
 
 const profileDetailsSchema = Yup.object().shape({
   fName: Yup.string().required('First name is required'),
   lName: Yup.string().required('Last name is required'),
   email: Yup.string().email('Wrong email format'),
-  company: Yup.string().required('Company name is required'),
-  contactPhone: Yup.string().required('Contact phone is required'),
-  companySite: Yup.string().required('Company site is required'),
-  country: Yup.string().required('Country is required'),
-  language: Yup.string().required('Language is required'),
-  timeZone: Yup.string().required('Time zone is required'),
-  currency: Yup.string().required('Currency is required'),
-  role: Yup.string().required('Role is required'),
-  oecd: Yup.string().required('OECD host country is required'),
+  orgName: Yup.string().required('Organization name is required'),
+  mobilePhone: Yup.string().required('Mobile phone is required'),
+  phonenumber: Yup.string().required('Primary phone is required'),
+  countryres: Yup.string().required('Country is required'),
+  orgRole: Yup.string().required('Role is required'),
   address: Yup.string().required('Address is required'),
   profession: Yup.string().required('Profession is required'),
   degree: Yup.string().required('Degree is required'),
@@ -55,7 +54,7 @@ const areaOptions = [
 ]
 const ProfileDetails: React.FC<any> = (profile, isLoading) => {
   const {authState} = useOktaAuth()
-  const [data, setData] = useState<IProfileDetails>(initialValues)
+  const [data, setData] = useState<IProfile>(initialValues)
 
   useEffect(() => {
     if (authState !== null || undefined) {
@@ -71,14 +70,14 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
     }
   }, [])
 
-  const updateData = (fieldsToUpdate: Partial<IProfileDetails>): void => {
+  const updateData = (fieldsToUpdate: Partial<IProfile>): void => {
     const updatedData = Object.assign(data, fieldsToUpdate)
     setData(updatedData)
   }
   const [areaOfInterest, setAreaOfInterest] = useState([])
 
   const [loading, setLoading] = useState(false)
-  const formik = useFormik<IProfileDetails>({
+  const formik = useFormik<IProfile>({
     initialValues: data,
     validationSchema: profileDetailsSchema,
     onSubmit: (values) => {
@@ -91,7 +90,7 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
     },
   })
 
-  let user = localStorage.getItem('userTypeFull')
+  let subscriptiontier = localStorage.getItem('userTypeFull')
   let usertype = localStorage.getItem('userType')
   console.log('details', profile)
 
@@ -123,23 +122,13 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                     <div
                       className='image-input image-input-outline'
                       data-kt-image-input='true'
-                      style={{backgroundImage: `url(${toAbsoluteUrl('/media/avatars/blank.png')})`}}
+                      style={{backgroundImage: `url(${toAbsoluteUrl(profile.avatar)})`}}
                     >
                       <div
                         className='image-input-wrapper w-125px h-125px'
-                        style={
-                          usertype !== 'sponsor'
-                            ? {
-                                backgroundImage: `url(${toAbsoluteUrl(
-                                  '/media/logos/megold-logo.png'
-                                )})`,
-                              }
-                            : {
-                                backgroundImage: `url(${toAbsoluteUrl(
-                                  '/media/logos/megold-logo.png'
-                                )})`,
-                              }
-                        }
+                        style={{
+                          backgroundImage: `url(${toAbsoluteUrl('/media/logos/megold-logo.png')})`,
+                        }}
                       ></div>
                       {/* end::Preview existing avatar */}
 
@@ -278,6 +267,27 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                   </div>
                 </div>
 
+                <div className='row mb-6'>
+                  <label className='col-lg-4 col-form-label fw-bold fs-6'>
+                    <span className='required'>Mobile Phone Number</span>
+                  </label>
+
+                  <div className='col-lg-8 fv-row'>
+                    <input
+                      type='tel'
+                      className='form-control form-control-lg form-control'
+                      placeholder='Mobile phone number'
+                      {...formik.getFieldProps('mobilephone')}
+                      name='mobilephone'
+                    />
+                    {formik.touched.mobilephone && formik.errors.mobilephone && (
+                      <div className='fv-plugins-message-container'>
+                        <div className='fv-help-block'>{formik.errors.mobilephone}</div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
                 {usertype !== 'sponsor' && (
                   <>
                     <div className='row mb-6'>
@@ -288,14 +298,14 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                       <div className='col-lg-8 fv-row'>
                         <select
                           className='form-select form-select form-select-lg fw-bold'
-                          {...formik.getFieldProps('countryOrig')}
-                          name='countryOrig'
+                          {...formik.getFieldProps('countryorig')}
+                          name='countryorig'
                         >
                           <CountryList />
                         </select>
-                        {formik.touched.countryOrig && formik.errors.countryOrig && (
+                        {formik.touched.countryorig && formik.errors.countryorig && (
                           <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.countryOrig}</div>
+                            <div className='fv-help-block'>{formik.errors.countryorig}</div>
                           </div>
                         )}
                       </div>
@@ -308,14 +318,14 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                       <div className='col-lg-8 fv-row'>
                         <select
                           className='form-select form-select form-select-lg fw-bold'
-                          {...formik.getFieldProps('countryRes')}
-                          name='countryRes'
+                          {...formik.getFieldProps('countryres')}
+                          name='countryres'
                         >
                           <CountryList />
                         </select>
-                        {formik.touched.countryRes && formik.errors.countryRes && (
+                        {formik.touched.countryres && formik.errors.countryres && (
                           <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.countryRes}</div>
+                            <div className='fv-help-block'>{formik.errors.countryres}</div>
                           </div>
                         )}
                       </div>
@@ -331,12 +341,14 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                           {...formik.getFieldProps('')}
                         >
                           {areaOfInterest.map((e, index) => (
-                            <option value={e}>{e}</option>
+                            <option key={index} value={e}>
+                              {e}
+                            </option>
                           ))}
                         </select>
-                        {formik.touched.countryRes && formik.errors.countryRes && (
+                        {formik.touched.countryres && formik.errors.countryres && (
                           <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.countryRes}</div>
+                            <div className='fv-help-block'>{formik.errors.countryres}</div>
                           </div>
                         )}
                       </div>
@@ -344,7 +356,7 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                   </>
                 )}
 
-                {usertype !== 'sponsor' && user === 'business_enabler' && (
+                {usertype !== 'sponsor' && subscriptiontier === 'business_enabler' && (
                   <>
                     <div className='row mb-6'>
                       <label className='col-lg-4 col-form-label required fw-bold fs-6'>
@@ -415,12 +427,12 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                           type='text'
                           className='form-control form-control-lg form-control'
                           placeholder='Business Mailing Address'
-                          {...formik.getFieldProps('email')}
-                          name='email'
+                          {...formik.getFieldProps('orgMailingAddress')}
+                          name='orgMailingAddress'
                         />
-                        {formik.touched.email && formik.errors.email && (
+                        {formik.touched.orgMailingAddress && formik.errors.orgMailingAddress && (
                           <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.email}</div>
+                            <div className='fv-help-block'>{formik.errors.orgMailingAddress}</div>
                           </div>
                         )}
                       </div>
@@ -433,24 +445,24 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                       <div className='col-lg-8 fv-row'>
                         <select
                           className='form-select form-select form-select-lg fw-bold'
-                          {...formik.getFieldProps('orgType')}
-                          name='orgType'
+                          {...formik.getFieldProps('orgIndustry')}
+                          name='orgIndustry'
                         >
                           <option value=''>Select Closest to Your Industry...</option>
                           <option value='AF'>Agriculture</option>
-                          <option value='AX'>Manufacturing</option>
+                          {/* <option value='AX'>Manufacturing</option>
                           <option value='AL'>Education</option>
                           <option value='DZ'>Transportation</option>
                           <option value='AS'>Biotechnology</option>
-                          <option value='AD'>Aviation</option>
+                          <option value='AD'>Aviation</option> */}
                           <option value='AD'>Healthcare</option>
-                          <option value='AD'>Hospitality</option>
-                          <option value='AD'>Tourism</option>
+                          {/* <option value='AD'>Hospitality</option>
+                          <option value='AD'>Tourism</option> */}
                         </select>
 
-                        {formik.touched.orgType && formik.errors.orgType && (
+                        {formik.touched.orgIndustry && formik.errors.orgIndustry && (
                           <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.orgType}</div>
+                            <div className='fv-help-block'>{formik.errors.orgIndustry}</div>
                           </div>
                         )}
                       </div>
@@ -482,14 +494,14 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                       <div className='col-lg-8 fv-row'>
                         <select
                           className='form-select form-select form-select-lg fw-bold'
-                          {...formik.getFieldProps('orgType')}
-                          name='orgType'
+                          {...formik.getFieldProps('orgRegYear')}
+                          name='orgRegYear'
                         >
                           <YearList />
                         </select>
-                        {formik.touched.orgType && formik.errors.orgType && (
+                        {formik.touched.orgRegYear && formik.errors.orgRegYear && (
                           <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.orgType}</div>
+                            <div className='fv-help-block'>{formik.errors.orgRegYear}</div>
                           </div>
                         )}
                       </div>
@@ -522,12 +534,12 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                       <div className='col-lg-8 fv-row'>
                         <select
                           className='form-select form-select form-select-lg fw-bold'
-                          {...formik.getFieldProps('orgRegCountry')}
-                          name='orgRegCountry'
+                          {...formik.getFieldProps('orgRegState')}
+                          name='orgRegState'
                         >
                           <StateListUS />
                         </select>
-                        {formik.touched.orgRegCountry && formik.errors.orgRegCountry && (
+                        {formik.touched.orgRegState && formik.errors.orgRegState && (
                           <div className='fv-plugins-message-container'>
                             <div className='fv-help-block'>{formik.errors.orgRegCountry}</div>
                           </div>
@@ -537,8 +549,28 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                   </>
                 )}
 
-                {usertype !== 'sponsor' && user !== 'basic_enabler' && (
+                {usertype !== 'sponsor' && subscriptiontier !== 'basic_enabler' && (
                   <>
+                    <div className='row mb-6'>
+                      <label className='col-lg-4 col-form-label fw-bold fs-6'>
+                        <span className='required'>Highest Degree</span>
+                      </label>
+
+                      <div className='col-lg-8 fv-row'>
+                        <input
+                          type='tel'
+                          className='form-control form-control-lg form-control-solid'
+                          placeholder='Highest degree'
+                          {...formik.getFieldProps('degree')}
+                          name='degree'
+                        />
+                        {formik.touched.degree && formik.errors.degree && (
+                          <div className='fv-plugins-message-container'>
+                            <div className='fv-help-block'>{formik.errors.degree}</div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                     <div className='row mb-6'>
                       <label className='col-lg-4 col-form-label fw-bold fs-6'>
                         <span className='required'>Profession</span>
@@ -562,26 +594,6 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
 
                     <div className='row mb-6'>
                       <label className='col-lg-4 col-form-label fw-bold fs-6'>
-                        <span className='required'>Highest Degree</span>
-                      </label>
-
-                      <div className='col-lg-8 fv-row'>
-                        <input
-                          type='tel'
-                          className='form-control form-control-lg form-control-solid'
-                          placeholder='Phone number'
-                          {...formik.getFieldProps('degree')}
-                          name='degree'
-                        />
-                        {formik.touched.degree && formik.errors.degree && (
-                          <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.degree}</div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label fw-bold fs-6'>
                         <span className='required'>Professional Field</span>
                       </label>
 
@@ -589,13 +601,13 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                         <input
                           type='tel'
                           className='form-control form-control-lg form-control-solid'
-                          placeholder='Phone number'
-                          {...formik.getFieldProps('degree')}
-                          name='degree'
+                          placeholder='Professional field'
+                          {...formik.getFieldProps('proffield')}
+                          name='proffield'
                         />
-                        {formik.touched.degree && formik.errors.degree && (
+                        {formik.touched.proffield && formik.errors.proffield && (
                           <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.degree}</div>
+                            <div className='fv-help-block'>{formik.errors.proffield}</div>
                           </div>
                         )}
                       </div>
@@ -610,13 +622,13 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                         <input
                           type='tel'
                           className='form-control form-control-lg form-control-solid'
-                          placeholder='Phone number'
-                          {...formik.getFieldProps('degree')}
-                          name='degree'
+                          placeholder='Professional interest'
+                          {...formik.getFieldProps('interest')}
+                          name='interest'
                         />
-                        {formik.touched.degree && formik.errors.degree && (
+                        {formik.touched.interest && formik.errors.interest && (
                           <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.degree}</div>
+                            <div className='fv-help-block'>{formik.errors.interest}</div>
                           </div>
                         )}
                       </div>
@@ -629,14 +641,14 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                       <div className='col-lg-8 fv-row'>
                         <select
                           className='form-select form-select-solid form-select-lg fw-bold'
-                          {...formik.getFieldProps('countryOrig')}
-                          name='countryOrig'
+                          {...formik.getFieldProps('countryorig')}
+                          name='countryorig'
                         >
                           <CountryList />
                         </select>
-                        {formik.touched.countryOrig && formik.errors.countryOrig && (
+                        {formik.touched.countryorig && formik.errors.countryorig && (
                           <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.countryOrig}</div>
+                            <div className='fv-help-block'>{formik.errors.countryorig}</div>
                           </div>
                         )}
                       </div>
@@ -649,14 +661,14 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                       <div className='col-lg-8 fv-row'>
                         <select
                           className='form-select form-select-solid form-select-lg fw-bold'
-                          {...formik.getFieldProps('countryRes')}
-                          name='countryRes'
+                          {...formik.getFieldProps('countryres')}
+                          name='countryres'
                         >
                           <CountryList />
                         </select>
-                        {formik.touched.countryRes && formik.errors.countryRes && (
+                        {formik.touched.countryres && formik.errors.countryres && (
                           <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.countryRes}</div>
+                            <div className='fv-help-block'>{formik.errors.countryres}</div>
                           </div>
                         )}
                       </div>
@@ -674,7 +686,7 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                         <input
                           type='text'
                           className='form-control form-control-lg form-control'
-                          placeholder='Company name'
+                          placeholder='Role in your organization'
                           {...formik.getFieldProps('orgRole')}
                           name='orgRole'
                         />
@@ -693,7 +705,7 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                         <input
                           type='text'
                           className='form-control form-control-lg form-control'
-                          placeholder='Company name'
+                          placeholder='Organization name'
                           {...formik.getFieldProps('orgName')}
                           name='orgName'
                         />
@@ -731,13 +743,13 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                         <input
                           type='text'
                           className='form-control form-control-lg form-control'
-                          placeholder='Organization Mailing Address'
-                          {...formik.getFieldProps('email')}
-                          name='email'
+                          placeholder='Organization mailing address'
+                          {...formik.getFieldProps('orgMailingAddress')}
+                          name='orgMailingAddress'
                         />
-                        {formik.touched.email && formik.errors.email && (
+                        {formik.touched.orgMailingAddress && formik.errors.orgMailingAddress && (
                           <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.email}</div>
+                            <div className='fv-help-block'>{formik.errors.orgMailingAddress}</div>
                           </div>
                         )}
                       </div>

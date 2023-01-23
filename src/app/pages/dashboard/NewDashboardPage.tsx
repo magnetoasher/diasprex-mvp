@@ -19,13 +19,13 @@ import {Proposal} from '../../modules/apps/admin-mgt-apps/proposal-management/pr
 import SponsorOpportunityCard from '../../modules/opportunities/SponsorOpportunityCard'
 import SponsorProposalCard from '../../modules/proposals/components/SponsorProposalCard'
 import EnablerOpportunityCard from '../../modules/opportunities/EnablerOpportunityCard'
-import {ICreateAccount} from '../../modules/auth/registration/components/CreateAccountWizardHelper'
+import {IProfile} from '../../modules/auth/registration/components/CreateAccountWizardHelper'
 
 const mapState = (state: RootState) => ({opps: state.opps, proposals: state.proposals})
 const connector = connect(mapState, {...opps.actions, ...proposals.actions})
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
+const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
   const {authState} = useOktaAuth()
   const userType = localStorage.getItem('userType')
   const userTypeFull = localStorage.getItem('userTypeFull')
@@ -33,7 +33,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
   const dispatch = useDispatch()
   const [recentOpps, setRecentOpps] = useState<Opps[]>([])
   const [recentProps, setRecentProps] = useState<Proposal[]>([])
-  const [userProfile, setUserProfile] = useState<ICreateAccount>()
+  const [userProfile, setUserProfile] = useState<IProfile>()
 
   const userColor = {
     enabler: {
@@ -111,11 +111,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
             <div className='col-xs-1 d-flex align-items-center justify-content-center g-3 px-5'>
               <div className='d-flex mw-75 image-input-wrapper image-input-outline'>
                 <img
-                  src={
-                    userType !== 'sponsor'
-                      ? toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')
-                      : toAbsoluteUrl('/media/logos/megold-logo.png')
-                  }
+                  src={toAbsoluteUrl(profile?.avatar)}
                   className='rounded mw-100'
                   alt='Diaspreex'
                 />
@@ -126,10 +122,17 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
               <div className='justify-content-center'>
                 <div className='d-flex mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary fs-4 fw-bolder me-1'>
-                    {userType !== 'sponsor' ? 'Max Smith' : 'MeGOLD Technology'}
+                    {userType !== 'sponsor'
+                      ? `${profile?.fName} ${profile?.mInitial && '.'} ${profile?.lName} `
+                      : profile?.orgName}
                   </a>
                   {userTypeFull !== 'basic_enabler' && (
-                    <a href='#' data-toggle='tooltip' data-placement='top' title='Verified'>
+                    <a
+                      href='#'
+                      data-toggle='tooltip'
+                      data-placement='top'
+                      title={profile?.verified}
+                    >
                       <KTSVG
                         path='/media/icons/duotune/general/gen026.svg'
                         className='svg-icon-1 svg-icon-success'
@@ -346,7 +349,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props) => {
               <div>
                 <div className='row mb-2'>
                   <label className='col-lg-5 fw-bolder '>
-                    Phone
+                    Primary Phone
                     <i
                       className='fas fa-exclamation-circle ms-1 fs-7'
                       data-bs-toggle='tooltip'
