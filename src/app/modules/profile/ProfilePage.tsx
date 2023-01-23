@@ -48,6 +48,10 @@ const ProfilePage: React.FC<PropsFromRedux> = (props) => {
     setProfile(props.profile.userProfile[0])
   }, [props.profile.userProfile])
 
+  const getProfile = () => {
+    dispatch(props.getProfileRequest({id: authState?.accessToken?.claims.uid}))
+  }
+
   return (
     <Routes>
       <Route
@@ -81,7 +85,11 @@ const ProfilePage: React.FC<PropsFromRedux> = (props) => {
           element={
             <>
               <PageTitle breadcrumbs={profileBreadCrumbs}>Subscription</PageTitle>
-              <Subscription />
+              <Subscription
+                profile={profile}
+                isLoading={props.profile.isLoading}
+                getProfile={getProfile}
+              />
             </>
           }
         />
@@ -90,7 +98,11 @@ const ProfilePage: React.FC<PropsFromRedux> = (props) => {
           element={
             <>
               <PageTitle breadcrumbs={profileBreadCrumbs}>Settings</PageTitle>
-              <Settings />
+              <Settings
+                profile={profile}
+                isLoading={props.profile.isLoading}
+                getProfile={getProfile}
+              />
             </>
           }
         />

@@ -117,7 +117,7 @@ function Overview({profile, isLoading}: any) {
                 </label>
 
                 <div className='col-lg-8'>
-                  <span className='fw-bolder fs-6 text-dark'>{profile?.countryRes}</span>
+                  <span className='fw-bolder fs-6 text-dark'>{profile?.countryOrig}</span>
                 </div>
               </div>
 
@@ -126,8 +126,7 @@ function Overview({profile, isLoading}: any) {
 
                 <div className='col-lg-8'>
                   <span className='fw-bolder fs-6 text-dark'>
-                    {profile?.email && 'Email'}
-                    {profile?.phonenumber && 'Phone'}
+                    {profile?.email && 'Email'} {', '} {profile?.phonenumber && 'Phone'}
                   </span>
                 </div>
               </div>
