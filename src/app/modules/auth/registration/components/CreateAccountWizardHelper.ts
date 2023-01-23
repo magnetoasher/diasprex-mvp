@@ -2,13 +2,14 @@ import * as Yup from 'yup'
 import {ID, phoneRegExp} from '../../../../../_metronic/helpers'
 
 interface address {
-  addressLine: string
+  addressLine1: string
+  addressLine2: string
   city: string
   state: string
   postCode: string
 }
 
-export interface ICreateAccount {
+export interface IProfile {
   id?: ID
   dpxid?: ID
   usertype?: string
@@ -32,14 +33,14 @@ export interface ICreateAccount {
   accountPlan: string
   orgName?: string
   orgAddress?: address
-  orgMailingAddress?: address
+  orgMailingAddress?: string
   orgRegistered?: string
   orgRegNumber?: string
   orgRegYear?: string
   orgRegCountry?: string
   orgRegState?: string
   orgRole: string
-  orgType: string
+  orgIndustry: string
   nameOnCard?: string
   cardNumber?: string
   cardExpiryMonth?: string
@@ -56,67 +57,6 @@ export interface ICreateAccount {
   twostepauth: boolean
   remittanceretainer: boolean
   datejoined: string
-}
-
-export interface IIndividualProfile {
-  id?: ID
-  dpxid?: ID
-  usertype?: string
-  subscriptionTier?: string
-  fName?: string
-  mName?: string
-  lName?: string
-  avatar?: string
-  email?: string
-  address: address
-  countryRes?: string
-  countryOrig?: string
-  remit_on?: boolean
-  accountstatus?: string
-  billing?: string
-  last_login?: string
-  verification?: boolean
-  two_step?: boolean
-  joined_day?: string
-  online?: boolean
-  phone?: string
-  mobilephone?: string
-  initials?: {
-    label: string
-    state: string
-  }
-}
-
-export interface ICreateBusinessAccount {
-  id?: ID
-  dpxid?: ID
-  usertype?: string
-  subscriptionTier?: string
-  avatar: string
-  contactfName: string
-  contactmInitial?: string
-  contactlName: string
-  email: string
-  company?: string
-  contactOrgRole?: string
-  contactPhone: string
-  orgCountry: string
-  orgName?: string
-  orgType?: string
-  orgPhysicalAddress?: string
-  orgMailAddress?: string
-  orgIndustry?: string
-  orgRegNumber?: string
-  orgRegCountry?: string
-  orgRegState?: string
-  contactProfession?: string
-  contactDegree?: string
-  communications: {
-    email: boolean
-    phone: boolean
-  }
-  allowMarketing: boolean
-  acknowledgeDPXTerms?: boolean
 }
 
 const createAccountSchemas = [
@@ -186,7 +126,7 @@ const createAccountSchemas = [
   // }),
 ]
 
-const inits: ICreateAccount = {
+const inits: IProfile = {
   fName: '',
   lName: '',
   mInitial: '',
@@ -210,7 +150,7 @@ const inits: ICreateAccount = {
   orgRegCountry: '',
   orgRegState: '',
   orgRole: '',
-  orgType: '',
+  orgIndustry: '',
   nameOnCard: 'Max Doe',
   cardNumber: '',
   cardExpiryMonth: '',

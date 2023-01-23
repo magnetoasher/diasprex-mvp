@@ -7,13 +7,13 @@ import {Step5} from './steps/Step5'
 import {KTSVG} from '../../../../../_metronic/helpers'
 import {StepperComponent} from '../../../../../_metronic/assets/ts/components'
 import {Formik, Form, FormikValues} from 'formik'
-import {createAccountSchemas, ICreateAccount, inits} from './CreateAccountWizardHelper'
+import {createAccountSchemas, IProfile, inits} from './CreateAccountWizardHelper'
 
 const Horizontal: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
-  const [initValues] = useState<ICreateAccount>(inits)
+  const [initValues] = useState<IProfile>(inits)
   const [isSubmitButton, setSubmitButton] = useState(false)
   const [userType, setUserType] = useState<string>('basic')
 
@@ -33,7 +33,7 @@ const Horizontal: FC = () => {
     setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex - 1])
   }
 
-  const submitStep = (values: ICreateAccount, actions: FormikValues) => {
+  const submitStep = (values: IProfile, actions: FormikValues) => {
     if (!stepper.current) {
       return
     }

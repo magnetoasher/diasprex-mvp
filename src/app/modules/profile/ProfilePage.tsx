@@ -10,7 +10,7 @@ import {Settings} from './components/settings/Settings'
 import {ProfileHeader} from './ProfileHeader'
 
 import Subscription from './Subscription'
-import {ICreateAccount} from '../auth/registration/components/CreateAccountWizardHelper'
+import {IProfile} from '../auth/registration/components/CreateAccountWizardHelper'
 import {RootState} from '../../../setup'
 import * as profile from './redux/ProfileRedux'
 
@@ -34,7 +34,7 @@ const connector = connect(mapState, profile.actions)
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 const ProfilePage: React.FC<PropsFromRedux> = (props) => {
-  const [profile, setProfile] = useState<ICreateAccount>()
+  const [profile, setProfile] = useState<IProfile>()
   const {authState} = useOktaAuth()
   const dispatch = useDispatch()
 
