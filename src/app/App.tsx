@@ -5,16 +5,19 @@ import { LayoutProvider, LayoutSplashScreen } from '../_metronic/layout/core'
 import { MasterInit } from '../_metronic/layout/MasterInit'
 import "antd/dist/antd.css";
 import AuthInit from './modules/auth/redux/AuthInit'
+import ProfileProvider from './context/profile'
 
 const App = () => {
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
       <I18nProvider>
         <LayoutProvider>
-          <AuthInit>
-            <Outlet />
-            <MasterInit />
-          </AuthInit>
+          <ProfileProvider>
+            <AuthInit>
+              <Outlet />
+              <MasterInit />
+            </AuthInit>
+          </ProfileProvider>
         </LayoutProvider>
       </I18nProvider>
     </Suspense>

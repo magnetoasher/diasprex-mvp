@@ -13,8 +13,14 @@ import {profileDetailsInitValues} from './settings/SettingsModel'
 import {connect, ConnectedProps, useDispatch} from 'react-redux'
 import {User} from '../../apps/user-management-ignore/users-list/core/_models'
 import {ListLoading} from '../../apps/admin-mgt-apps/core/loading/ListLoading'
+import { IProfile } from '../../auth/registration/components/CreateAccountWizardHelper'
 
-function Overview({profile, isLoading}: any) {
+interface OverviewProps {
+  profile?: IProfile;
+  isLoading: boolean;
+}
+
+function Overview({profile, isLoading}: OverviewProps) {
   const [searchParams, setSearchParams] = useSearchParams()
   let userTypeFull = localStorage.getItem('userTypeFull')
 
@@ -110,7 +116,7 @@ function Overview({profile, isLoading}: any) {
 
                 <div className='col-lg-8'>
                   <a href='#' className='fw-bolder fs-6 text-dark'>
-                    {profile?.orgType}
+                    {profile?.orgIndustry}
                   </a>
                 </div>
               </div>
@@ -119,8 +125,8 @@ function Overview({profile, isLoading}: any) {
 
                 <div className='col-lg-8'>
                   <a href='#' className='fw-bolder fs-6 text-dark'>
-                    {profile?.orgAddress?.addressline1} <br />
-                    {profile?.orgAddress?.addressline2} <br />
+                    {profile?.orgAddress?.addressLine1} <br />
+                    {profile?.orgAddress?.addressLine2} <br />
                     {profile?.orgAddress?.city} <br />
                     {profile?.orgAddress?.state}
                   </a>
@@ -147,7 +153,7 @@ function Overview({profile, isLoading}: any) {
 
                 <div className='col-lg-8'>
                   <span className='fw-bolder fs-6 text-dark'>
-                    {profile?.emailcommunication && 'Email'} <br />
+                    {profile?.emailcommunicate && 'Email'} <br />
                     {profile?.phonenumber && 'Phone'}
                   </span>
                 </div>
