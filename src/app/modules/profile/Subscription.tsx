@@ -3,7 +3,7 @@
 
 import 'react-best-tabs/dist/index.css'
 
-const Subscription = () => {
+const Subscription = (props: any) => {
   const userType = localStorage.getItem('userType')
   const userTypeFull = localStorage.getItem('userTypeFull')
   const packagePrice = localStorage.getItem('packagePrice')

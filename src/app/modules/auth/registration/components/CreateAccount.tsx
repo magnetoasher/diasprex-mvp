@@ -19,6 +19,7 @@ import {PhoneVerification2} from './steps/phoneverification2'
 import moment from 'moment'
 import {useOktaAuth} from '@okta/okta-react'
 import {createUserProfileAPI} from '../../../profile/redux/ProfileAPI'
+import {getUniqueDPXId} from '../../../../../_metronic/assets/ts/_utils'
 
 const CreateAccount: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
@@ -74,6 +75,7 @@ const CreateAccount: FC = () => {
   }
 
   const submitStep = (values: ICreateAccount, actions: FormikActions<FormikValues>) => {
+    const dpxNumber = getUniqueDPXUserId('DPX')
     if (!stepper.current) {
       return
     }
@@ -100,11 +102,15 @@ const CreateAccount: FC = () => {
       setFormValues({
         ...values,
         id: authState?.accessToken?.claims.uid,
+        dpxid: dpxNumber,
         usertype: userType,
         countryRes: values.countryRes ? values.countryRes : 'United States',
         accountType: userTypeFull,
         subscriptionTier: userTypeFull.split('_')[0],
-        status: 'new',
+        status:
+          values.subscriptionTier === 'basic_enabler' || values.subscriptionTier === 'super_enabler'
+            ? 'active'
+            : 'new',
         datejoined: moment(new Date()).format('DD MMM YYYY'),
       })
       stepper.current.goNext()

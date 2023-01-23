@@ -54,7 +54,6 @@ const AdminViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     dispatch(props.getFeedbacksRequest(params))
   }, [])
 
-  console.log('Feedback', props.opps?.feedbacks)
   useEffect(() => {
     if (props.opps.feedbacks.feedback?.length > 0) {
       setFeedbacks(props.opps?.feedbacks?.feedback)

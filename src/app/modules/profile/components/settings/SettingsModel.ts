@@ -10,7 +10,9 @@ export interface IProfileDetails {
   orgRole?: string
   contactPhone: string
   companySite?: string
-  country: string
+  country?: string
+  countryRes: string
+  countryOrig?: string
   language?: string
   timeZone?: string
   organization?: string
@@ -19,6 +21,8 @@ export interface IProfileDetails {
   orgIndustry?: string
   orgRegNumber?: string
   orgRegCountry?: string
+  orgType?: string
+  orgName?: string
   oecd?: string
   address: string
   profession?: string
@@ -28,6 +32,9 @@ export interface IProfileDetails {
     phone: boolean
   }
   allowMarketing: boolean
+  usertype?: string
+  status?: string
+  phonenumber?: string
 }
 
 export interface IUpdateEmail {
@@ -93,7 +100,7 @@ export const profileDetailsInitValues: IProfileDetails = {
   company: 'Julius Berger PLC',
   contactPhone: '044 3276 454 935',
   companySite: 'keenthemes.com',
-  country: 'South Africa',
+  countryRes: 'South Africa',
   language: '',
   timeZone: '',
   orgRole: 'President and CEO',
@@ -101,6 +108,10 @@ export const profileDetailsInitValues: IProfileDetails = {
   orgIndustry: 'Advertisement',
   orgRegNumber: 'NGN0004874653',
   orgRegCountry: 'South Africa',
+  orgName: 'Organization',
+  orgType: 'Org',
+  countryOrig: 'South Africa',
+  phonenumber: '1234567',
   oecd: '',
   address: '1750 Gemsbok St',
   orgAddress: '7868 Wamco Rd, Ikeja Lagos, Nigeria',
@@ -112,6 +123,8 @@ export const profileDetailsInitValues: IProfileDetails = {
     phone: false,
   },
   allowMarketing: false,
+  usertype: 'super',
+  status: 'active',
 }
 
 export const updateEmail: IUpdateEmail = {

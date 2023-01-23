@@ -2,9 +2,10 @@ import axios, {AxiosResponse} from 'axios'
 import {ID, Response} from '../../../../../../../_metronic/helpers'
 import {User, UsersQueryResponse} from './_models'
 
-const API_URL = process.env.REACT_APP_THEME_API_URL
-const USER_URL = `${API_URL}/user`
-const GET_USERS_URL = `${API_URL}/users/query`
+// const API_URL = process.env.REACT_APP_THEME_API_URL
+const API_URL = process.env.REACT_APP_DIASPREX_API_URL
+const USER_URL = `${API_URL}/profile`
+const GET_USERS_URL = `${API_URL}/profile`
 // const GET_USERS_URL = 'http://localhost:3000/users'
 // const USER_URL = 'http://localhost:3000/users'
 
@@ -50,9 +51,26 @@ const deleteUser = (userId: ID): Promise<void> => {
   return axios.delete(`${USER_URL}/${userId}`).then(() => {})
 }
 
+// const deleteSelectedUsers = (userIds: Array<ID>): Promise<void> => {
+//   const requests = userIds.map((id) => axios.delete(`${USER_URL}/${id}`))
+//   return axios.all(requests).then(() => {})
+// }
+
 const deleteSelectedUsers = (userIds: Array<ID>): Promise<void> => {
-  const requests = userIds.map((id) => axios.delete(`${USER_URL}/${id}`))
+  const requests = userIds.map((id) => changeUserStatus(id, 'deleted'))
   return axios.all(requests).then(() => {})
 }
 
-export {getUsers, deleteUser, deleteSelectedUsers, getUserById, createUser, updateUser}
+const changeUserStatus = (id: ID, status: string): Promise<void> => {
+  return axios.put(`${USER_URL}/${id}/status?status=${status}`).then(() => {})
+}
+
+export {
+  getUsers,
+  deleteUser,
+  deleteSelectedUsers,
+  getUserById,
+  createUser,
+  updateUser,
+  changeUserStatus,
+}
