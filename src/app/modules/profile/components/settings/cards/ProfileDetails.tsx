@@ -80,6 +80,7 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
   const [loading, setLoading] = useState(false)
   const formik = useFormik<IProfileDetails>({
     initialValues: data,
+    enableReinitialize: true,
     validationSchema: profileDetailsSchema,
     onSubmit: (values) => {
       setLoading(true)

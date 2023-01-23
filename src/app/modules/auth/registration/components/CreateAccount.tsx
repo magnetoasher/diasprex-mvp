@@ -20,6 +20,7 @@ import moment from 'moment'
 import {useOktaAuth} from '@okta/okta-react'
 import {createUserProfileAPI} from '../../../profile/redux/ProfileAPI'
 import {getUniqueDPXId} from '../../../../../_metronic/assets/ts/_utils'
+import axios from 'axios'
 
 const CreateAccount: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
@@ -38,6 +39,18 @@ const CreateAccount: FC = () => {
   const [confirmBtnText, setConfirmBtnText] = useState('Yes')
   const [hideShow, setHideShow] = useState(true)
   const [formValues, setFormValues] = useState<ICreateAccount>({})
+
+  useEffect(() => {
+    if (authState !== null) {
+      axios
+        .get(
+          `${process.env.REACT_APP_DIASPREX_API_URL}/profile/${authState.accessToken?.claims.uid}`
+        )
+        .then((res) => {
+          console.error('profile', res)
+        })
+    }
+  }, [])
 
   useEffect(() => {
     if (userTypeFull !== 'basic_enabler' || userType === 'sponsor') {
