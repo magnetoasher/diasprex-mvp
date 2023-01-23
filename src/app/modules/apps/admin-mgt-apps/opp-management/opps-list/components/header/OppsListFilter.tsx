@@ -21,7 +21,7 @@ const OppsListFilter = () => {
 
   const filterData = () => {
     updateState({
-      filter: {status, category: category},
+      filter: {status, category},
       ...initialQueryState,
     })
   }

@@ -2,15 +2,17 @@
 import {Column} from 'react-table'
 import {UserInfoCell} from './UserInfoCell'
 import {UserLastLoginCell} from './UserLastLoginCell'
-import { UserBillingCell } from './UserBillingCell'
-import { UserBooleanCell } from './UserBooleanCell'
+import {UserBillingCell} from './UserBillingCell'
+import {UserBooleanCell} from './UserBooleanCell'
 import {UserActionsCell} from './UserActionsCell'
 import {UserSelectionCell} from './UserSelectionCell'
 import {UserCustomHeader} from './UserCustomHeader'
-import { UserSelectionHeader } from './UserSelectionHeader'
-import { UserVerificationCell } from './UserVerificationCell'
-import { UserStatusCell } from './UsersStatusCell'
+import {UserSelectionHeader} from './UserSelectionHeader'
+import {UserVerificationCell} from './UserVerificationCell'
+import {UserStatusCell} from './UsersStatusCell'
 import {User} from '../../core/_models'
+import {SubscriptionTierCell} from './subscriptionTypeCell'
+import {UserTypeCell} from './UserTypeCell'
 
 const usersColumns: ReadonlyArray<Column<User>> = [
   {
@@ -24,31 +26,38 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     Cell: ({...props}) => <UserInfoCell user={props.data[props.row.index]} />,
   },
   {
-    Header: (props) => <UserCustomHeader tableProps={props} title='Role' className='min-w-125px' />,
-    accessor: 'role',
+    Header: (props) => (
+      <UserCustomHeader tableProps={props} title='User Type' className='min-w-125px' />
+    ),
+    id: 'usertype',
+    Cell: ({...props}) => <UserTypeCell usertype={props.data[props.row.index].usertype} />,
   },
   {
     Header: (props) => (
-      <UserCustomHeader tableProps={props} title='User Tier' className='min-w-125px' />
+      <UserCustomHeader tableProps={props} title='Sub.Tier' className='min-w-125px' />
     ),
-    id: 'tier',
-    Cell: ({...props}) => <UserLastLoginCell last_login={props.data[props.row.index].tier} />,
+    id: 'subscriptionTier',
+    Cell: ({...props}) => (
+      <SubscriptionTierCell subscriptionTier={props.data[props.row.index].subscriptionTier} />
+    ),
   },
-     {
+  {
     Header: (props) => (
       <UserCustomHeader tableProps={props} title='Status' className='min-w-125px' />
     ),
     id: 'status',
     Cell: ({...props}) => <UserStatusCell status={props.data[props.row.index].status} />,
   },
-       {
+  {
     Header: (props) => (
       <UserCustomHeader tableProps={props} title='Verification' className='min-w-125px' />
     ),
     id: 'verification',
-    Cell: ({...props}) => <UserVerificationCell status={props.data[props.row.index].verification} />,
+    Cell: ({...props}) => (
+      <UserVerificationCell verification={props.data[props.row.index].verification} />
+    ),
   },
-     {
+  {
     Header: (props) => (
       <UserCustomHeader tableProps={props} title='billing' className='min-w-125px' />
     ),

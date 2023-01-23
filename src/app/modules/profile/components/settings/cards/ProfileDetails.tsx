@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, FC} from 'react'
 import {toAbsoluteUrl} from '../../../../../../_metronic/helpers'
 import {IProfileDetails, profileDetailsInitValues as initialValues} from '../SettingsModel'
 import * as Yup from 'yup'
@@ -10,6 +10,8 @@ import {
 } from '../../../../../../_metronic/partials/content/selectionlists'
 import {Field, ErrorMessage} from 'formik'
 import {Select} from 'antd'
+import {ICreateAccount} from '../../../../auth/registration/components/CreateAccountWizardHelper'
+
 const profileDetailsSchema = Yup.object().shape({
   fName: Yup.string().required('First name is required'),
   lName: Yup.string().required('Last name is required'),
@@ -48,7 +50,8 @@ const areaOptions = [
   {value: 'underwriting', label: 'Underwriting'},
   {value: 'other', label: 'Other'},
 ]
-const ProfileDetails: React.FC = () => {
+
+const ProfileDetails: FC = () => {
   const [data, setData] = useState<IProfileDetails>(initialValues)
   const updateData = (fieldsToUpdate: Partial<IProfileDetails>): void => {
     const updatedData = Object.assign(data, fieldsToUpdate)

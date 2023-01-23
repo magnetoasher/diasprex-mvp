@@ -62,13 +62,13 @@ const useQueryResponsePagination = () => {
     links: [],
     ...initialQueryState,
   }
-  const {state} = useQueryRequest()
+
   const {response} = useQueryResponse()
   if (!response || !response.payload || !response.payload.pagination) {
     return defaultPaginationState
   }
-  return PayloadProvider(state.page, state.items_per_page, response.data?.length)
-  // return response.payload.pagination
+
+  return response.payload.pagination
 }
 
 const useQueryResponseLoading = (): boolean => {

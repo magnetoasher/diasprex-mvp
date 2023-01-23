@@ -3,9 +3,10 @@ import clsx from 'clsx'
 import {FC} from 'react'
 import {toAbsoluteUrl} from '../../../../../../../../_metronic/helpers'
 import {User} from '../../core/_models'
+import {ICreateAccount} from '../../../../../../auth/registration/components/CreateAccountWizardHelper'
 
 type Props = {
-  user: User
+  user: ICreateAccount
 }
 
 const UserInfoCell: FC<Props> = ({user}) => (
@@ -15,24 +16,44 @@ const UserInfoCell: FC<Props> = ({user}) => (
       <a href='#'>
         {user.avatar ? (
           <div className='symbol-label'>
-            <img src={toAbsoluteUrl(`/media/${user.avatar}`)} alt={user.name} className='w-100' />
+            <img src={toAbsoluteUrl(`/media/${user.avatar}`)} alt={user.fName} className='w-100' />
           </div>
         ) : (
           <div
             className={clsx(
               'symbol-label fs-3',
-              `bg-light-${user.initials?.state}`,
-              `text-${user.initials?.state}`
+              `bg-light-${
+                user.status === 'new'
+                  ? 'info'
+                  : user.status === 'active'
+                  ? 'success'
+                  : user.status === 'pending'
+                  ? 'primary'
+                  : user.status === 'suspended'
+                  ? 'warning'
+                  : 'danger'
+              }`,
+              `text-${
+                user.status === 'new'
+                  ? 'info'
+                  : user.status === 'active'
+                  ? 'success'
+                  : user.status === 'pending'
+                  ? 'primary'
+                  : user.status === 'suspended'
+                  ? 'warning'
+                  : 'danger'
+              }`
             )}
           >
-            {user.initials?.label}
+            {`${user.fName?.slice(0, 1)}${user.lName?.slice(0, 1)}`}
           </div>
         )}
       </a>
     </div>
     <div className='d-flex flex-column'>
       <a href='#' className='text-gray-800 text-hover-primary mb-1'>
-        {user.name}
+        {`${user?.fName} ${user?.mInitial}${user?.mInitial && '.'} ${user.lName}`}
       </a>
       <span>{user.email}</span>
     </div>

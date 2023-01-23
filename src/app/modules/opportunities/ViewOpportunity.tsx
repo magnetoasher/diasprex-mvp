@@ -35,6 +35,7 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
   const [isShowDetail, setIsShowDetail] = useState(false)
   const userTypeFull = localStorage.getItem('userTypeFull')
   const userType = localStorage.getItem('userType')
+  const [noFeedback, setNoFeedback] = useState(false)
 
   useEffect(() => {
     dispatch(props.getOppByIdRequest(id))
@@ -44,10 +45,23 @@ const ViewOpportunity: React.FC<PropsFromRedux> = (props) => {
     setOppData(props.opps.opp[0])
   }, [props.opps])
 
+  useEffect(() => {
+    const params = {
+      opportunityUuid: id,
+      enablerUserId: authState?.accessToken?.claims.uid,
+    }
+    dispatch(props.getFeedbacksRequest(params))
+  }, [])
 
   useEffect(() => {
-    setFeedbacks(oppData?.feedback)
-  }, [oppData])
+    if (props.opps.feedbacks) {
+      setFeedbacks(props.opps?.feedbacks?.feedback)
+    } else {
+      setNoFeedback(true)
+    }
+  }, [props.opps.feedbacks])
+
+  console.log('Feedback', props.opps.feedbacks.feedback)
 
   const openNotification = (placement, message) => {
     api.info({

@@ -9,6 +9,7 @@ const UsersListFilter = () => {
   const {isLoading} = useQueryResponse()
   const [userType, setUserType] = useState<string | undefined>()
   const [status, setStatus] = useState<string | undefined>()
+  const [subscriptionTier, setSubscriptionTier] = useState<string | undefined>()
 
   useEffect(() => {
     MenuComponent.reinitialization()
@@ -20,7 +21,7 @@ const UsersListFilter = () => {
 
   const filterData = () => {
     updateState({
-      filter: {usertype: userType, status: status},
+      filter: {userType, status},
       ...initialQueryState,
     })
   }
@@ -67,9 +68,9 @@ const UsersListFilter = () => {
               value={userType}
             >
               <option value=''></option>
-              <option value='Administrator'>Admin</option>
-              <option value='Developer'>Enabler</option>
-              <option value='Support'>Sponsor</option>
+              <option value='admin'>Admin</option>
+              <option value='enabler'>Enabler</option>
+              <option value='sponsor'>Sponsor</option>
             </select>
           </div>
           {/* end::Input group */}
@@ -88,10 +89,44 @@ const UsersListFilter = () => {
               value={status}
             >
               <option value=''></option>
+              <option value='new'>New</option>
               <option value='active'>Active</option>
-              <option value='suspended'>Suspended</option>
               <option value='pending'>Pending</option>
-              {/* <option value='2 days ago'>Other</option> */}
+              <option value='suspended'>Suspended</option>
+              <option value='deleted'>Deleted</option>
+            </select>
+          </div>
+          {/* end::Input group */}
+          {/* begin::Input group */}
+          <div className='mb-10'>
+            <label className='form-label fs-6 fw-bold'>Subscription:</label>
+            <select
+              className='form-select form-select-solid fw-bolder'
+              data-kt-select2='true'
+              data-placeholder='Select option'
+              data-allow-clear='true'
+              data-kt-user-table-filter='subscriptionTier'
+              data-hide-search='true'
+              onChange={(e) => setSubscriptionTier(e.target.value)}
+              value={subscriptionTier}
+            >
+              <option value=''></option>
+              {userType === 'enabler' && (
+                <>
+                  <option value='basic'>Basic Enabler</option>
+                  <option value='standard'>Standard Enabler</option>
+                  <option value='super'>Super Enabler</option>
+                  <option value='business'>Business Enabler</option>
+                </>
+              )}
+              {userType === 'sponsor' && (
+                <>
+                  <option value='basic'>Basic Sponsor</option>
+                  <option value='silver'>Silver Sponsor</option>
+                  <option value='gold'>Gold Sponsor</option>
+                  <option value='diamond'>Diamond</option>
+                </>
+              )}
             </select>
           </div>
           {/* end::Input group */}

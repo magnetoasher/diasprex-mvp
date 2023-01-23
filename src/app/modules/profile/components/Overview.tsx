@@ -42,7 +42,9 @@ function Overview({profile, isLoading}: any) {
 
                 <div className='col-lg-8'>
                   <span className='fw-bolder fs-6 text-dark'>
-                    {profile?.fName} {profile?.mInitial}. {profile?.lName}
+                    {`${profile?.fName} ${profile?.mInitial}${profile?.mInitial && '.'} ${
+                      profile?.lName
+                    }`}
                   </span>
                 </div>
               </div>

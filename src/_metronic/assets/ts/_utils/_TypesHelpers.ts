@@ -35,6 +35,20 @@ function getUniqueDPXId(prefix: string | undefined): string {
   return `${prefix}${result}`
 }
 
+function getUniqueDPXUserId(prefix: string | undefined): string {
+  const code = Math.floor(Math.random() * new Date().getTime())
+    .toString()
+    .slice(0, 6)
+  const codeyear = moment(new Date(), 'DD/MM/YY').format('YYMM')
+
+  const result = `${codeyear}-${code}`
+  if (!prefix) {
+    return result
+  }
+
+  return `${prefix}${result}`
+}
+
 /* eslint-disable no-useless-escape */
 function stringSnakeToCamel(str: string): string {
   return str.replace(/(\-\w)/g, function (m) {
@@ -71,6 +85,7 @@ export {
   getObjectPropertyValueByKey,
   getUniqueIdWithPrefix,
   getUniqueDPXId,
+  getUniqueDPXUserId,
   stringSnakeToCamel,
   toJSON,
 }

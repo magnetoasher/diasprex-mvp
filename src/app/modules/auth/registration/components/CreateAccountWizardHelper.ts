@@ -16,6 +16,7 @@ export interface ICreateAccount {
   fName: string
   lName: string
   mInitial: string
+  avatar?: string
   email: string
   countryOrig: string
   countryRes: string
