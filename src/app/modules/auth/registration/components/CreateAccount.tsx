@@ -109,7 +109,10 @@ const CreateAccount: FC = () => {
         countryres: values.countryRes ? values.countryRes : 'United States',
         accountType: userTypeFull,
         subscriptiontier: userTypeFull,
-        packageprice: '',
+        billing: {
+          packagePrice,
+          packageDuration,
+        },
         status:
           values.subscriptiontier === 'basic_enabler' || values.subscriptiontier === 'super_enabler'
             ? 'active'
@@ -133,13 +136,13 @@ const CreateAccount: FC = () => {
           } else
             navigate({
               pathname: '/dashboard',
-              search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
+              search: `?user=${dpxid}&userType=${userType}&userTypeFull=${userTypeFull}`,
             })
           actions.resetForm()
         } else {
           navigate({
             pathname: '/dashboard',
-            search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
+            search: `?user=${dpxid}&userType=${userType}&userTypeFull=${userTypeFull}`,
           })
           actions.resetForm()
         }
