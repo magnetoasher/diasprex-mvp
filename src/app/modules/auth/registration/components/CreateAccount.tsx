@@ -11,8 +11,14 @@ import AccountVerification from './steps/AccountVerification'
 import {StepperComponent} from '../../../../../_metronic/assets/ts/components'
 import {Formik, Form, FormikActions, FormikValues} from 'formik'
 import './hide-stepper.css'
-import {IProfile, createAccountSchemas, inits} from './CreateAccountWizardHelper'
+import {
+  IProfile,
+  createAccountSchemas,
+  inits,
+  SubscriptionPackage,
+} from './CreateAccountWizardHelper'
 import SweetAlert from 'react-bootstrap-sweetalert'
+import {useSelector} from 'react-redux'
 // import SubscriptionPlans from './steps/SubscriptionPlans'
 import SubscriptionPlans3 from './SubscriptionComponet/SubscriptionPlans3'
 import {PhoneVerification2} from './steps/phoneverification2'
@@ -21,7 +27,7 @@ import {useOktaAuth} from '@okta/okta-react'
 import {createUserProfileAPI} from '../../../profile/redux/ProfileAPI'
 import {getUniqueDPXId} from '../../../../../_metronic/assets/ts/_utils'
 import axios from 'axios'
-import { profileContext } from '../../../../context/profile'
+import {profileContext} from '../../../../context/profile'
 
 const CreateAccount: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
@@ -30,6 +36,8 @@ const CreateAccount: FC = () => {
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
   const [userType, setUserType] = useState<string>('enabler')
   const [userTypeFull, setUserTypeFull] = useState('basic_enabler')
+  const [packagePrice, setPackagePrice] = useState('0.00')
+  const [packageDuration, setPackageDuration] = useState<'month' | 'annual'>('month')
   const [initValues] = useState<IProfile>(inits)
   const [isSubmitButton, setSubmitButton] = useState(false)
   const [isShowAlert, setIsShowAlert] = useState(false)
@@ -40,7 +48,7 @@ const CreateAccount: FC = () => {
   const [confirmBtnText, setConfirmBtnText] = useState('Yes')
   const [hideShow, setHideShow] = useState(true)
   const [formValues, setFormValues] = useState<IProfile>({})
-  const { profile, setProfile, loaded, setLoaded } = useContext(profileContext);
+  const {profile, setProfile, loaded, setLoaded} = useContext(profileContext)
 
   useEffect(() => {
     if (authState !== null && profile?.id !== authState.accessToken?.claims.uid && !loaded) {
@@ -49,9 +57,9 @@ const CreateAccount: FC = () => {
           `${process.env.REACT_APP_DIASPREX_API_URL}/profile/${authState.accessToken?.claims.uid}`
         )
         .then((res) => {
-          const newProfile = res.data.data[0];
-          setProfile(newProfile);
-          setLoaded(true);
+          const newProfile = res.data.data[0]
+          setProfile(newProfile)
+          setLoaded(true)
           if (newProfile.status === 'active') {
             navigate({
               pathname: '/dashboard',
@@ -61,6 +69,8 @@ const CreateAccount: FC = () => {
         })
     }
   }, [authState, profile, setProfile, loaded, setLoaded])
+
+  const subscriptionpackage: SubscriptionPackage = useSelector((state) => state.subscriptionpackage)
 
   useEffect(() => {
     if (userTypeFull !== 'basic_enabler' || userType === 'sponsor') {
@@ -125,22 +135,31 @@ const CreateAccount: FC = () => {
       setFormValues({
         ...values,
         id: authState?.accessToken?.claims.uid,
-        dpxid: dpxNumber,
-        usertype: userType,
-        countryRes: values.countryRes ? values.countryRes : 'United States',
-        accountType: userTypeFull,
-        subscriptionTier: userTypeFull.split('_')[0],
+        dpxid: getUniqueDPXUserId('DPX'),
+        datejoined: moment(new Date()).format('DD MMM YYYY'),
+        usertype: localStorage.getItem('userType'),
+        countryres: values.countryres,
+        accountType: subscriptionpackage.userType,
+        subscriptiontier: subscriptionpackage.userTypeFull,
+        billing: {
+          packagePrice: subscriptionpackage.packagePrice,
+          packageDuration: subscriptionpackage.packageDuration,
+        },
         status:
-          values.subscriptionTier === 'basic_enabler' || values.subscriptionTier === 'super_enabler'
+          formValues.subscriptiontier === 'basic_enabler' ||
+          formValues.subscriptiontier === 'super_enabler'
             ? 'active'
             : 'new',
-        datejoined: moment(new Date()).format('DD MMM YYYY'),
       })
       stepper.current.goNext()
+      console.log('ReduxProfileData', formValues)
+
       // }
     } else {
       // stepper.current.goto(1)
       //
+
+      console.log('CreateProfile', formValues)
       createUserProfileAPI(formValues).then((res) => {
         if (res.status === 200) {
           if (userType == 'sponsor') {
@@ -153,13 +172,13 @@ const CreateAccount: FC = () => {
           } else
             navigate({
               pathname: '/dashboard',
-              search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
+              search: `?user=${dpxid}&userType=${userType}&userTypeFull=${userTypeFull}`,
             })
           actions.resetForm()
         } else {
           navigate({
             pathname: '/dashboard',
-            search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
+            search: `?user=${dpxid}&userType=${userType}&userTypeFull=${userTypeFull}`,
           })
           actions.resetForm()
         }
@@ -318,12 +337,10 @@ const CreateAccount: FC = () => {
 
               {/*<div className='stepper-item' data-kt-stepper-element='nav'>
               <div className='stepper-line w-40px'></div>
-
               <div className='stepper-icon w-40px h-40px'>
                 <i className='stepper-check fas fa-check'></i>
                 <span className='stepper-number'>5</span>
               </div>
-
               <div className='stepper-label'>
                 <h3 className='stepper-title'>Completed</h3>
                 <div className='stepper-desc fw-bold'>Woah, we are here</div>
@@ -355,6 +372,10 @@ const CreateAccount: FC = () => {
                       submitStep={submitStep}
                       setUserTypeFull={setUserTypeFull}
                       userTypeFull={userTypeFull}
+                      packagePrice={packagePrice}
+                      setPackagePrice={setPackagePrice}
+                      packageDuration={packageDuration}
+                      setPackageDuration={setPackageDuration}
                     />
                   </div>
                 </div>

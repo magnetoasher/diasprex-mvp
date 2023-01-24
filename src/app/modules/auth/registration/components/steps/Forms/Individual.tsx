@@ -24,7 +24,7 @@ const Individual = (props: any) => {
   const [selectedCountry, setSelectedCountry] = useState('united states')
   const handleCountryChange = (e: any) => {
     setSelectedCountry(e)
-    props.setFieldValue('countryRes', e)
+    props.setFieldValue('countryres', e)
   }
 
   const areaOptions = [
@@ -109,7 +109,7 @@ const Individual = (props: any) => {
           </div>
           <Field
             component='select'
-            name='countryRes'
+            name='countryres'
             className='form-select form-select-lg text-capitalize'
             onChange={(e: any) => {
               handleCountryChange(e.target.value)
@@ -120,7 +120,7 @@ const Individual = (props: any) => {
           </Field>
 
           <div className='text-danger mt-2'>
-            <ErrorMessage name='countryRes' component='span' />
+            <ErrorMessage name='countryres' component='span' />
           </div>
         </span>
       </div>
@@ -128,13 +128,13 @@ const Individual = (props: any) => {
       <div className='fv-row mb-10'>
         <label className='form-label required'>Country of Origin</label>
 
-        <Field component='select' name='countryOrig' className='form-select form-select-lg'>
+        <Field component='select' name='countryorig' className='form-select form-select-lg'>
           <option value=''>Select a country</option>
           <AfricanCountryList />
         </Field>
 
         <div className='text-danger mt-2'>
-          <ErrorMessage name='countryOrig' component='span' />
+          <ErrorMessage name='countryorig' component='span' />
         </div>
       </div>
 
@@ -183,7 +183,7 @@ const Individual = (props: any) => {
           <option value='BS'> B.S</option>
           <option value='BA'> B.A</option>
           <option value='HND'> HND</option>
-          <option value='PHD'> Ph.D</option>
+          <option value='PhD'> Ph.D</option>
           <option value='MS'> MS</option>
           <option value='MD'> MD</option>
           <option value='JD'> J.D</option>
@@ -231,11 +231,11 @@ const Individual = (props: any) => {
       <div className='fv-row fw-bold mb-10'>Terms &amp; Conditions:</div>
       <div className='fv-row mb-10'>
         <label>
-          <Field type='checkbox' name='dpxterms' className='me-3' />I agree to the Terms &amp;
-          Conditions of DIASPREX INC.
+          <Field type='checkbox' name='acknowledgeDPXterms' className='me-3' />I agree to the Terms
+          &amp; Conditions of DIASPREX INC.
         </label>
         <div className='text-danger mt-2'>
-          <ErrorMessage name='dpxterms' component='span' />
+          <ErrorMessage name='acknowledgeDPXterms' component='span' />
         </div>
       </div>
 

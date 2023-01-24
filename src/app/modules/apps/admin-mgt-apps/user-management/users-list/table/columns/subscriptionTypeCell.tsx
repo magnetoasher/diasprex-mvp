@@ -1,14 +1,14 @@
 import {FC} from 'react'
 
 type Props = {
-  subscriptionTier: string
+  subscriptiontier: string
 }
 
-const SubscriptionTierCell: FC<Props> = ({subscriptionTier}) => (
+const SubscriptionTierCell: FC<Props> = ({subscriptiontier}) => (
   <>
     {' '}
-    {subscriptionTier && (
-      <div className='badge badge-light text-capitalize fw-bolder'>{subscriptionTier}</div>
+    {subscriptiontier && (
+      <div className='badge badge-light text-capitalize fw-bolder'>{subscriptiontier}</div>
     )}
   </>
 )

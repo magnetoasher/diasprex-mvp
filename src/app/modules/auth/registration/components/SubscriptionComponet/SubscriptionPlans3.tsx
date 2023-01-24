@@ -9,14 +9,29 @@ import Tabs, {Tab} from 'react-best-tabs'
 import 'react-best-tabs/dist/index.css'
 import {HeaderNotificationsMenu, QuickLinks, Search} from '../../../../../../_metronic/partials'
 import clsx from 'clsx'
+import {useDispatch} from 'react-redux'
+import {
+  userTypeSet,
+  userTypeFullSet,
+  packagePriceSet,
+  packageDurationSet,
+} from '../../../../profile/redux/SubscriptionPackageSlice'
 
-const SubscriptionPlans3 = ({userType, setUserType, setUserTypeFull, userTypeFull}) => {
-  const [currentState, setCurrentState] = useState<'month' | 'annual'>('month')
+const SubscriptionPlans3 = ({
+  userType,
+  setUserType,
+  setUserTypeFull,
+  userTypeFull,
+  packagePrice,
+  setPackagePrice,
+  packageDuration,
+  setPackageDuration,
+}) => {
   const [selectedEnabler, setSelectedEnabler] = useState('basic_enabler')
   const [selectedSponsor, setSelectedSponsor] = useState('basic_sponsor')
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
-  const [packagePrice, setPackagePrice] = useState()
-  const [packageDuration, setPackageDuration] = useState()
+
+  const dispatch = useDispatch()
 
   const titles = [
     {
@@ -50,8 +65,8 @@ const SubscriptionPlans3 = ({userType, setUserType, setUserTypeFull, userTypeFul
       titleid: 'enabler1',
       subTitle: 'Ideal for any individuals',
       setupFee: '',
-      priceMonth: '0',
-      priceAnnual: '0',
+      priceMonth: '0.00',
+      priceAnnual: '0.00',
       label: '',
       default: true,
       custom: false,
@@ -310,8 +325,8 @@ const SubscriptionPlans3 = ({userType, setUserType, setUserTypeFull, userTypeFul
       titleid: 'sponsor1',
       subTitle: 'Best for individuals',
       setupFee: '$50 One Time Setup Fee',
-      priceMonth: '0',
-      priceAnnual: '0',
+      priceMonth: '0.00',
+      priceAnnual: '0.00',
       label: '',
       default: true,
       value1: 'sponsor',
@@ -537,13 +552,17 @@ const SubscriptionPlans3 = ({userType, setUserType, setUserTypeFull, userTypeFul
     }
   }
   useEffect(() => {
-    localStorage.setItem('userType', userType)
-    localStorage.setItem('userTypeFull', userTypeFull)
-    localStorage.setItem('packageDuration', currentState)
-    localStorage.setItem('packagePrice', packagePrice)
-  }, [userType, userTypeFull, currentState, packagePrice])
+    // localStorage.setItem('userType', userType)
+    // localStorage.setItem('userTypeFull', userTypeFull)
+    // localStorage.setItem('packageDuration', packageDuration)
+    // localStorage.setItem('packagePrice', packagePrice)
+    dispatch(userTypeSet(userType))
+    dispatch(userTypeFullSet(userTypeFull))
+    dispatch(packageDurationSet(packageDuration))
+    dispatch(packagePriceSet(packagePrice))
+  }, [userType, userTypeFull, packageDuration, packagePrice])
 
-  // console.log(userType, userTypeFull, currentState, packagePrice)
+  console.log('Subscription Package', userType, userTypeFull, packageDuration, packagePrice)
 
   const tabPaneColorScheme =
     selectedIndex === 1
@@ -615,7 +634,8 @@ const SubscriptionPlans3 = ({userType, setUserType, setUserTypeFull, userTypeFul
               return (
                 <div
                   onClick={() => {
-                    setCurrentState(type.value1)
+                    setPackageDuration(type.value1)
+
                     setPackageDuration(type.title)
                   }}
                   className={`cnav-link  d-flex flex-stack text-start p-6  col-lg-4` + 'mb-6 '}
@@ -629,8 +649,8 @@ const SubscriptionPlans3 = ({userType, setUserType, setUserTypeFull, userTypeFul
                         type='radio'
                         name='type'
                         value={type.value1}
-                        checked={currentState === type.value1}
-                        onChange={(e) => setCurrentState(e.target.value)}
+                        checked={packageDuration === type.value1}
+                        onChange={(e) => setPackageDuration(e.target.value)}
                       />
                     </div>
 
@@ -655,7 +675,7 @@ const SubscriptionPlans3 = ({userType, setUserType, setUserTypeFull, userTypeFul
                         setUserTypeFull(plan.valueType)
 
                         {
-                          currentState === 'month'
+                          packageDuration === 'month'
                             ? setPackagePrice(plan.priceMonth)
                             : setPackagePrice(plan.priceAnnual)
                         }
@@ -709,13 +729,13 @@ const SubscriptionPlans3 = ({userType, setUserType, setUserTypeFull, userTypeFul
                             <span className='mb-2'>$</span>
 
                             <span className='fs-3x fw-bolder'>
-                              {currentState === 'month' ? plan.priceMonth : plan.priceAnnual}
+                              {packageDuration === 'month' ? plan.priceMonth : plan.priceAnnual}
                             </span>
 
                             <span className='fs-7 opacity-50'>
                               /
                               <span data-kt-element='period'>
-                                {currentState === 'month' ? 'Month' : 'Year'}
+                                {packageDuration === 'month' ? 'Month' : 'Year'}
                               </span>
                             </span>
 
@@ -802,7 +822,7 @@ const SubscriptionPlans3 = ({userType, setUserType, setUserTypeFull, userTypeFul
                         setSelectedSponsor(plan.valueType)
                         setSelectedIndex(index)
                         {
-                          currentState === 'month'
+                          packageDuration === 'month'
                             ? setPackagePrice(plan.priceMonth)
                             : setPackagePrice(plan.priceAnnual)
                         }
@@ -854,13 +874,13 @@ const SubscriptionPlans3 = ({userType, setUserType, setUserTypeFull, userTypeFul
                             <span className='mb-2'>$</span>
 
                             <span className='fs-3x fw-bolder'>
-                              {currentState === 'month' ? plan.priceMonth : plan.priceAnnual}
+                              {packageDuration === 'month' ? plan.priceMonth : plan.priceAnnual}
                             </span>
 
                             <span className='fs-7 opacity-50'>
                               /
                               <span data-kt-element='period'>
-                                {currentState === 'month' ? 'Month' : 'Year'}
+                                {packageDuration === 'month' ? 'Month' : 'Year'}
                               </span>
                             </span>
                             <div className='fw-bold opacity-75'>{plan.setupFee}</div>
