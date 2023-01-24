@@ -1,12 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react'
+import React, { useContext } from 'react'
 import { KTSVG, toAbsoluteUrl } from '../../../_metronic/helpers'
 import { Link } from 'react-router-dom'
 import { Dropdown1 } from '../../../_metronic/partials'
 import { useLocation } from 'react-router-dom'
+import { profileContext } from '../../context/profile'
 
 const ProfileHeader: React.FC = () => {
   const location = useLocation()
+  const { profile } = useContext(profileContext);
 
   return (
     <div className='card mb-5 mb-xl-10'>
@@ -24,7 +26,7 @@ const ProfileHeader: React.FC = () => {
               <div className='d-flex flex-column'>
                 <div className='d-flex align-items-center mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
-                    Max Smith
+                    {profile?.fName} {profile?.lName}
                   </a>
                   <a href='#'>
                     <KTSVG
@@ -43,7 +45,7 @@ const ProfileHeader: React.FC = () => {
                       path='/media/icons/duotune/communication/com006.svg'
                       className='svg-icon-4 me-1'
                     />
-                    Sponsor
+                    {profile?.usertype}
                   </a>
                   {/* <a
                     href='#'
@@ -63,7 +65,7 @@ const ProfileHeader: React.FC = () => {
                       path='/media/icons/duotune/communication/com011.svg'
                       className='svg-icon-4 me-1'
                     />
-                    max@kt.com
+                    {profile?.email}
                   </a>
                 </div>
               </div>
@@ -74,7 +76,6 @@ const ProfileHeader: React.FC = () => {
                     path='/media/icons/duotune/arrows/arr012.svg'
                     className='svg-icon-3 d-none'
                   />
-
                   <span className='indicator-label'>Follow</span>
                   <span className='indicator-progress'>
                     Please wait...
@@ -114,7 +115,6 @@ const ProfileHeader: React.FC = () => {
                       />
                       <div className='fs-2 fw-bolder'>4500$</div>
                     </div>
-
                     <div className='fw-bold fs-6 text-gray-400'>Earnings</div>
                   </div> */}
 
@@ -126,7 +126,6 @@ const ProfileHeader: React.FC = () => {
                       />
                       <div className='fs-2 fw-bolder'>75</div>
                     </div>
-
                     <div className='fw-bold fs-6 text-gray-400'>Projects</div>
                   </div> */}
 
@@ -138,7 +137,6 @@ const ProfileHeader: React.FC = () => {
                       />
                       <div className='fs-2 fw-bolder'>60%</div>
                     </div>
-
                     <div className='fw-bold fs-6 text-gray-400'>Success Rate</div>
                   </div> */}
                 </div>

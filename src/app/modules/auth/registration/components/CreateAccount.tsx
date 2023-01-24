@@ -25,11 +25,12 @@ import {PhoneVerification2} from './steps/phoneverification2'
 import moment from 'moment'
 import {useOktaAuth} from '@okta/okta-react'
 import {createUserProfileAPI} from '../../../profile/redux/ProfileAPI'
-import {getUniqueDPXUserId} from '../../../../../_metronic/assets/ts/_utils'
+import {getUniqueDPXId} from '../../../../../_metronic/assets/ts/_utils'
 import axios from 'axios'
 import {profileContext} from '../../../../context/profile'
 
 const CreateAccount: FC = () => {
+  const navigate = useNavigate()
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
   const {authState} = useOktaAuth()
@@ -48,27 +49,16 @@ const CreateAccount: FC = () => {
   const [confirmBtnText, setConfirmBtnText] = useState('Yes')
   const [hideShow, setHideShow] = useState(true)
   const [formValues, setFormValues] = useState<IProfile>({})
-  const {profile, setProfile, loaded, setLoaded} = useContext(profileContext)
+  const { profile, loaded } = useContext(profileContext);
 
   useEffect(() => {
-    if (authState !== null && profile?.id !== authState.accessToken?.claims.uid && !loaded) {
-      axios
-        .get(
-          `${process.env.REACT_APP_DIASPREX_API_URL}/profile/${authState.accessToken?.claims.uid}`
-        )
-        .then((res) => {
-          const newProfile = res.data.data[0]
-          setProfile(newProfile)
-          setLoaded(true)
-          if (newProfile.status === 'active') {
-            navigate({
-              pathname: '/dashboard',
-              search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
-            })
-          }
-        })
+    if (loaded === true && profile.status === 'active') {
+      navigate({
+        pathname: '/dashboard',
+        search: `?userType=${profile.usertype}&userTypeFull=${profile.accountType}`,
+      });
     }
-  }, [authState, profile, setProfile, loaded, setLoaded])
+  }, [profile, loaded, navigate]);
 
   const subscriptionpackage: SubscriptionPackage = useSelector((state) => state.subscriptionpackage)
 
@@ -90,8 +80,6 @@ const CreateAccount: FC = () => {
         information, proof of physical location, evidence of  current operation, history of tax filing, banking information, 2 - 3 references of  customers or partners, and others.Please be prepared to provide or assist in obtaining  some of these information upon request'
   )
 
-  const navigate = useNavigate()
-
   const loadStepper = () => {
     stepper.current = StepperComponent.createInsance(stepperRef.current as HTMLDivElement)
   }
@@ -108,6 +96,7 @@ const CreateAccount: FC = () => {
   }
 
   const submitStep = (values: IProfile, actions: FormikActions<FormikValues>) => {
+    const dpxNumber = getUniqueDPXId('DPX')
     if (!stepper.current) {
       return
     }

@@ -1,13 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useState, useEffect} from 'react'
+import {FC, useState, useEffect, useContext} from 'react'
 import {Link} from 'react-router-dom'
 import {useOktaAuth} from '@okta/okta-react'
 import {toAbsoluteUrl} from '../../../helpers'
+import { profileContext } from '../../../../app/context/profile'
 
 const HeaderUserMenu: FC = () => {
   var userTypeFull = localStorage.getItem('userTypeFull')
   var userType = localStorage.getItem('userType')
   const [userLabel, setUserLabel] = useState<any>(userTypeFull)
+  const { profile } = useContext(profileContext);
 
   const {oktaAuth} = useOktaAuth()
 
@@ -33,7 +35,7 @@ const HeaderUserMenu: FC = () => {
             <img
               alt='Logo'
               src={
-                userType !== 'sponsor'
+                profile?.accountType !== 'sponsor'
                   ? toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')
                   : toAbsoluteUrl('/media/logos/megold-logo.png')
               }
@@ -42,8 +44,7 @@ const HeaderUserMenu: FC = () => {
 
           <div className='d-flex flex-column'>
             <div className='fw-bolder d-flex align-items-center fs-5'>
-              {/* {user.first_name} {user.first_name} */}
-              Max Smith
+              {profile?.fName} {profile?.lName}
               <span
                 className={`badge badge-light-${userBadgeColor} fw-bolder fs-8 px-2 py-1 ms-2 text-capitalize`}
               >
@@ -51,8 +52,7 @@ const HeaderUserMenu: FC = () => {
               </span>
             </div>
             <a href='#' className='fw-bold text-muted text-hover-primary fs-7'>
-              {/* {user.email} */}
-              admin@dasprex.com
+              {profile?.email}
             </a>
           </div>
         </div>
@@ -266,7 +266,6 @@ export {HeaderUserMenu}
   </span>
 </a>
 </div>
-
 <div
 className='menu-item px-5'
 data-kt-menu-trigger='hover'
@@ -277,26 +276,22 @@ data-kt-menu-flip='bottom'
   <span className='menu-title'>My Subscription</span>
   <span className='menu-arrow'></span>
 </a>
-
 <div className='menu-sub menu-sub-dropdown w-175px py-4'>
   <div className='menu-item px-3'>
     <a href='#' className='menu-link px-5'>
       Referrals
     </a>
   </div>
-
   <div className='menu-item px-3'>
     <a href='#' className='menu-link px-5'>
       Billing
     </a>
   </div>
-
   <div className='menu-item px-3'>
     <a href='#' className='menu-link px-5'>
       Payments
     </a>
   </div>
-
   <div className='menu-item px-3'>
     <a href='#' className='menu-link d-flex flex-stack px-5'>
       Statements
@@ -307,9 +302,7 @@ data-kt-menu-flip='bottom'
       ></i>
     </a>
   </div>
-
   <div className='separator my-2'></div>
-
   <div className='menu-item px-3'>
     <div className='menu-content px-3'>
       <label className='form-check form-switch form-check-custom form-check-solid'>
@@ -326,14 +319,11 @@ data-kt-menu-flip='bottom'
   </div>
 </div>
 </div>
-
 <div className='menu-item px-5'>
 <a href='#' className='menu-link px-5'>
   My Statements
 </a>
 </div>
-
 <div className='separator my-2'></div>
-
 <Languages /> */
 }
