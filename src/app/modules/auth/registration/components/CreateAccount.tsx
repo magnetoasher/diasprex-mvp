@@ -1,5 +1,5 @@
 // @ts-nocheck comment
-import React, {FC, useEffect, useRef, useState} from 'react'
+import React, {FC, useContext, useEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {KTSVG} from '../../../../../_metronic/helpers'
 import {Step1} from './steps/Step1'
@@ -20,6 +20,8 @@ import moment from 'moment'
 import {useOktaAuth} from '@okta/okta-react'
 import {createUserProfileAPI} from '../../../profile/redux/ProfileAPI'
 import {getUniqueDPXId} from '../../../../../_metronic/assets/ts/_utils'
+import axios from 'axios'
+import { profileContext } from '../../../../context/profile'
 
 const CreateAccount: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
@@ -38,6 +40,27 @@ const CreateAccount: FC = () => {
   const [confirmBtnText, setConfirmBtnText] = useState('Yes')
   const [hideShow, setHideShow] = useState(true)
   const [formValues, setFormValues] = useState<IProfile>({})
+  const { profile, setProfile, loaded, setLoaded } = useContext(profileContext);
+
+  useEffect(() => {
+    if (authState !== null && profile?.id !== authState.accessToken?.claims.uid && !loaded) {
+      axios
+        .get(
+          `${process.env.REACT_APP_DIASPREX_API_URL}/profile/${authState.accessToken?.claims.uid}`
+        )
+        .then((res) => {
+          const newProfile = res.data.data[0];
+          setProfile(newProfile);
+          setLoaded(true);
+          if (newProfile.status === 'active') {
+            navigate({
+              pathname: '/dashboard',
+              search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
+            })
+          }
+        })
+    }
+  }, [authState, profile, setProfile, loaded, setLoaded])
 
   useEffect(() => {
     if (userTypeFull !== 'basic_enabler' || userType === 'sponsor') {
@@ -75,7 +98,7 @@ const CreateAccount: FC = () => {
   }
 
   const submitStep = (values: IProfile, actions: FormikActions<FormikValues>) => {
-    const dpxNumber = getUniqueDPXUserId('DPX')
+    const dpxNumber = getUniqueDPXId('DPX')
     if (!stepper.current) {
       return
     }
@@ -172,6 +195,11 @@ const CreateAccount: FC = () => {
   // console.log('total', stepper.current && stepper.current.totatStepsNumber)
   return (
     <div>
+      {!loaded && (
+        <div className='d-flex position-absolute w-100 h-100 justify-content-center align-items-center bg-white z-index-2'>
+          Loading...
+        </div>
+      )}
       <div
         ref={stepperRef}
         className='stepper stepper-pills stepper-column   d-flex flex-column flex-xl-row flex-row-fluid'
@@ -290,12 +318,10 @@ const CreateAccount: FC = () => {
 
               {/*<div className='stepper-item' data-kt-stepper-element='nav'>
               <div className='stepper-line w-40px'></div>
-
               <div className='stepper-icon w-40px h-40px'>
                 <i className='stepper-check fas fa-check'></i>
                 <span className='stepper-number'>5</span>
               </div>
-
               <div className='stepper-label'>
                 <h3 className='stepper-title'>Completed</h3>
                 <div className='stepper-desc fw-bold'>Woah, we are here</div>
