@@ -3,6 +3,7 @@ import {Route, Link, Routes, Outlet} from 'react-router-dom'
 import {Error500} from './components/Error500'
 import {Error404} from './components/Error404'
 import {toAbsoluteUrl} from '../../../_metronic/helpers'
+import {InactiveAccount} from './components/InactiveAccount'
 
 const ErrorsLayout = () => {
   return (
@@ -12,7 +13,7 @@ const ErrorsLayout = () => {
         style={{backgroundImage: `url('${toAbsoluteUrl('/media/illustrations/progress-hd.png')}')`}}
       >
         <div className='d-flex flex-column flex-column-fluid text-center p-10 py-lg-20'>
-          <a href='/dashboard' className='mb-10 pt-lg-20'>
+          <a href='/' className='mb-10 pt-lg-20'>
             <img
               alt='Logo'
               src={toAbsoluteUrl('/media/logos/diasprex-logo.png')}
@@ -22,9 +23,9 @@ const ErrorsLayout = () => {
           <div className='pt-lg-10 mb-10'>
             <Outlet />
             <div className='text-center'>
-              <Link to='/' className='btn btn-lg btn-primary fw-bolder'>
-                Go to homepage
-              </Link>
+              <a href='/' className='btn btn-lg btn-primary fw-bolder'>
+                Return Home
+              </a>
             </div>
           </div>
           <div
@@ -45,13 +46,13 @@ const ErrorsLayout = () => {
 
         <div className='d-flex flex-center flex-column-auto p-10'>
           <div className='d-flex align-items-center fw-bold fs-6'>
-            <a href='https://keenthemes.com' className='text-muted text-hover-primary px-2'>
+            <a href='/about' className='text-muted text-hover-primary px-2'>
               About
             </a>
-            <a href='mailto:support@keenthemes.com' className='text-muted text-hover-primary px-2'>
+            <a href='/contactus' className='text-muted text-hover-primary px-2'>
               Contact
             </a>
-            <a href='https://1.envato.market/EA4JP' className='text-muted text-hover-primary px-2'>
+            <a href='/contactus' className='text-muted text-hover-primary px-2'>
               Contact Us
             </a>
           </div>
@@ -66,6 +67,7 @@ const ErrorsPage = () => (
     <Route element={<ErrorsLayout />}>
       <Route path='404' element={<Error404 />} />
       <Route path='500' element={<Error500 />} />
+      <Route path='inactiveaccount' element={<InactiveAccount />} />
       <Route index element={<Error404 />} />
     </Route>
   </Routes>

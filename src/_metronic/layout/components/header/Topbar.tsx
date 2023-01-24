@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React, {FC} from 'react'
+import React, {FC, useContext} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {
   HeaderNotificationsMenu,
@@ -10,6 +10,7 @@ import {
 } from '../../../partials'
 import {AdminHeaderUserMenu} from '../../../partials/layout/header-menus/AdminHeaderUserMenu'
 import {useLayout} from '../../core'
+import {profileContext} from '../../../../app/context/profile'
 
 const toolbarButtonMarginClass = 'ms-1 ms-lg-3',
   toolbarButtonHeightClass = 'w-30px h-30px w-md-40px h-md-40px',
@@ -21,8 +22,11 @@ const btnClass =
 const btnIconClass = 'svg-icon-1'
 const Topbar: FC = () => {
   const {config} = useLayout()
-  var userTypeFull = localStorage.getItem('userTypeFull')
-  var userType = localStorage.getItem('userType')
+
+  const {profile} = useContext(profileContext)
+
+  const blankImg = '/media/avatars/blank.png'
+
   return (
     <div className='d-flex align-items-stretch flex-shrink-0'>
       <div className='d-flex align-items-stretch flex-shrink-0'>
@@ -95,16 +99,9 @@ const Topbar: FC = () => {
           data-kt-menu-placement='bottom-end'
           data-kt-menu-flip='bottom'
         >
-          <img
-            src={
-              userType !== 'sponsor'
-                ? toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')
-                : toAbsoluteUrl('/media/logos/megold-logo.png')
-            }
-            alt='metronic'
-          />
+          <img src={toAbsoluteUrl(profile?.avatar || blankImg)} alt='metronic' />
         </div>
-        {userType === 'admin' ? <AdminHeaderUserMenu /> : <HeaderUserMenu />}
+        {profile?.usertype === 'admin' ? <AdminHeaderUserMenu /> : <HeaderUserMenu />}
 
         {/* end::Toggle */}
       </div>
