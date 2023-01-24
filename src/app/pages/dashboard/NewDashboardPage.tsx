@@ -150,7 +150,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
                 <div className='d-flex justify-content-center align-items-center mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary  me-1 '>
                     <span className={`badge badge-light-${userBadgeColor} text-capitalize`}>
-                      {userLabel?.replace('_', ' ') || ''}
+                      {userProfile?.accountType?.replace('_', ' ') || ''}
                     </span>
                   </a>
                 </div>
