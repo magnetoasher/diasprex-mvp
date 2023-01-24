@@ -1,24 +1,37 @@
-import { createContext, Dispatch, SetStateAction, useState } from 'react';
+import { useOktaAuth } from '@okta/okta-react'
+import axios from 'axios'
+import { createContext, useEffect, useState } from 'react';
 import { IProfile } from '../modules/auth/registration/components/CreateAccountWizardHelper'
 
 export const profileContext = createContext<{
   loaded: boolean;
-  setLoaded: Dispatch<SetStateAction<boolean>>;
   profile: IProfile | null;
-  setProfile: Dispatch<SetStateAction<IProfile | null>>;
 }>({
   loaded: false,
-  setLoaded: () => {},
   profile: null,
-  setProfile: () => {}
 })
 
 const ProfileProvider: React.FC = ({ children }) => {
   const [loaded, setLoaded] = useState(false);
   const [profile, setProfile] = useState<IProfile | null>(null);
+  const { authState } = useOktaAuth();
+
+  useEffect(() => {
+    if (authState !== null && profile?.id !== authState.accessToken?.claims.uid && !loaded) {
+      axios
+        .get(
+          `${process.env.REACT_APP_DIASPREX_API_URL}/profile/${authState.accessToken?.claims.uid}`
+        )
+        .then((res) => {
+          const newProfile = res.data.data[0];
+          setProfile(newProfile);
+          setLoaded(true);
+        });
+    }
+  }, [authState, profile, setProfile, loaded, setLoaded]);
 
   return (
-    <profileContext.Provider value={{loaded, setLoaded, profile, setProfile}}>
+    <profileContext.Provider value={{loaded, profile}}>
       {children}
     </profileContext.Provider>
   );

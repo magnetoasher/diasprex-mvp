@@ -1,14 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {useEffect, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
 import {Link} from 'react-router-dom'
 import {useLocation} from 'react-router-dom'
+import { profileContext } from '../../context/profile'
 
 const ProfileHeader: React.FC = () => {
   const location = useLocation()
   const userType = localStorage.getItem('userType')
   const userTypeFull = localStorage.getItem('userTypeFull')
   const [userLabel, setUserLabel] = useState<any>(userTypeFull)
+  const { profile } = useContext(profileContext);
 
   useEffect(() => {
     userType === 'admin'
@@ -42,7 +44,7 @@ const ProfileHeader: React.FC = () => {
               <div className='d-flex flex-column'>
                 <div className='d-flex align-items-center mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
-                    Max Smith
+                    {profile?.fName} {profile?.lName}
                   </a>
                   {userTypeFull !== 'basic_enabler' && (
                     <a href='#' data-toggle='tooltip' data-placement='top' title='Verified account'>
@@ -75,7 +77,7 @@ const ProfileHeader: React.FC = () => {
                       path='/media/icons/duotune/general/gen018.svg'
                       className='svg-icon-4 me-1'
                     />
-                    Seattle, WA
+                    {profile?.countryres}
                   </a>
                   <a
                     href='#'
@@ -85,7 +87,7 @@ const ProfileHeader: React.FC = () => {
                       path='/media/icons/duotune/communication/com011.svg'
                       className='svg-icon-4 me-1'
                     />
-                    m.smith@diasprex.com
+                    {profile?.email}
                   </a>
                 </div>
               </div>
