@@ -27,7 +27,7 @@ import {useOktaAuth} from '@okta/okta-react'
 import {createUserProfileAPI} from '../../../profile/redux/ProfileAPI'
 import {getUniqueDPXId} from '../../../../../_metronic/assets/ts/_utils'
 import axios from 'axios'
-import { profileContext } from '../../../../context/profile'
+import {profileContext} from '../../../../context/profile'
 
 const CreateAccount: FC = () => {
   const navigate = useNavigate()
