@@ -12,10 +12,6 @@ const App = () => {
     <Suspense fallback={<LayoutSplashScreen />}>
       <I18nProvider>
         <LayoutProvider>
-          <AuthInit>
-            <Outlet />
-            <MasterInit />
-          </AuthInit>
           <ProfileProvider>
             <AuthInit>
               <Outlet />
