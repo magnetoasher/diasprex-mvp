@@ -36,9 +36,9 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     Header: (props) => (
       <UserCustomHeader tableProps={props} title='Sub.Tier' className='min-w-125px' />
     ),
-    id: 'subscriptionTier',
+    id: 'subscriptiontier',
     Cell: ({...props}) => (
-      <SubscriptionTierCell subscriptionTier={props.data[props.row.index].subscriptionTier} />
+      <SubscriptionTierCell subscriptiontier={props.data[props.row.index].subscriptionTier} />
     ),
   },
   {
@@ -52,38 +52,41 @@ const usersColumns: ReadonlyArray<Column<User>> = [
     Header: (props) => (
       <UserCustomHeader tableProps={props} title='Verification' className='min-w-125px' />
     ),
-    id: 'verification',
+    id: 'verified',
     Cell: ({...props}) => (
-      <UserVerificationCell verification={props.data[props.row.index].verification} />
+      <UserVerificationCell verification={props.data[props.row.index].verified} />
     ),
   },
   {
     Header: (props) => (
-      <UserCustomHeader tableProps={props} title='billing' className='min-w-125px' />
+      <UserCustomHeader tableProps={props} title='Billing' className='min-w-125px' />
     ),
     id: 'billing',
     Cell: ({...props}) => <UserBillingCell billing={props.data[props.row.index].billing} />,
   },
+
   {
     Header: (props) => (
       <UserCustomHeader tableProps={props} title='Two-Steps' className='min-w-125px' />
     ),
-    id: 'two_steps',
-    Cell: ({...props}) => <UserBooleanCell condition={props.data[props.row.index].two_steps} />,
+    id: 'twostepauth',
+    Cell: ({...props}) => <UserBooleanCell condition={props.data[props.row.index].twostepauth} />,
   },
   {
     Header: (props) => (
       <UserCustomHeader tableProps={props} title='Remit-Retainer' className='min-w-125px' />
     ),
-    id: 'remit',
-    Cell: ({...props}) => <UserBooleanCell condition={props.data[props.row.index].remit} />,
+    id: 'remittanceretainer',
+    Cell: ({...props}) => (
+      <UserBooleanCell condition={props.data[props.row.index].remittanceretainer} />
+    ),
   },
 
   {
     Header: (props) => (
       <UserCustomHeader tableProps={props} title='Joined day' className='min-w-125px' />
     ),
-    accessor: 'joined_day',
+    accessor: 'datejoined',
   },
   {
     Header: (props) => (

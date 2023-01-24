@@ -4,9 +4,15 @@ type Props = {
   verification?: boolean
 }
 
-const UserVerificationCell: FC<Props> = ({ verification }) => (
-  <> {verification && <div className='badge badge-light-success fw-bolder'>Verified</div>}</>
-
+const UserVerificationCell: FC<Props> = ({verification}) => (
+  <>
+    {' '}
+    {verification ? (
+      <div className='badge badge-light-success fw-bolder'>Verified</div>
+    ) : (
+      <div className='badge badge-light fw-bolder'>Not Verified</div>
+    )}
+  </>
 )
 
 export {UserVerificationCell}

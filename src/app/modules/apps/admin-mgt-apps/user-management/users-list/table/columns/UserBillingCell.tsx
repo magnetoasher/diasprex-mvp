@@ -1,11 +1,24 @@
 import {FC} from 'react'
 
 type Props = {
-  billing: 'Monthly'| 'Annual'
+  billing: {
+    packagePrice: string
+    packageDuration: string
+  }
 }
 
-const UserBillingCell: FC<Props> = ({billing}) => (
-  <> {billing && <div className='badge badge-light-success fw-bolder'>{billing}</div>}</>
-)
+const UserBillingCell: FC<Props> = ({billing}) => {
+  return (
+    <>
+      {billing ? (
+        <div className='badge badge-light text-capitalize fw-bolder'>
+          {`$${billing.packagePrice}/${billing.packageDuration === 'annual' ? 'Year' : 'Month'}`}
+        </div>
+      ) : (
+        <div className='badge badge-light text-capitalize fw-bolder'>NA</div>
+      )}
+    </>
+  )
+}
 
 export {UserBillingCell}

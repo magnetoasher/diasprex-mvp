@@ -305,11 +305,11 @@ const Sponsor = (props: any) => {
       <div className='fv-row mb-10'>Terms &amp; Conditions:</div>
       <div className='fv-row mb-10'>
         <label>
-          <Field type='checkbox' name='dpxterms' className='me-3' />I agree to the Terms &amp;
-          Conditions of DIASPREX INC.
+          <Field type='checkbox' name='acknowledgeDPXterms' className='me-3' />I agree to the Terms
+          &amp; Conditions of DIASPREX INC.
         </label>
         <div className='text-danger mt-2'>
-          <ErrorMessage name='dpxterms' component='span' />
+          <ErrorMessage name='acknowledgeDPXterms' component='span' />
         </div>
       </div>
 
