@@ -59,7 +59,6 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
   const { authState } = useOktaAuth()
   const [data, setData] = useState<IProfile>(initialValues)
   const { profile: fetchedProfile } = useContext(profileContext)
-  console.log('profile context', fetchedProfile)
 
   useEffect(() => {
     axios
