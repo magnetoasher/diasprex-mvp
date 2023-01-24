@@ -63,13 +63,13 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
 
   useEffect(() => {
     axios
-        .get(
-          `${process.env.REACT_APP_DIASPREX_API_URL}/profile/${fetchedProfile?.id}`
-        )
-        .then((res) => {
-          const newProfile = res.data.data[0]
-          formik.setValues(newProfile)
-        });
+      .get(
+        `${process.env.REACT_APP_DIASPREX_API_URL}/profile/${fetchedProfile?.id}`
+      )
+      .then((res) => {
+        const newProfile = res.data.data[0]
+        formik.setValues(newProfile)
+      });
   }, [])
 
   const updateData = (fieldsToUpdate: Partial<IProfile>): void => {
