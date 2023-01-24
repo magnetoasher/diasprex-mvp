@@ -3,20 +3,22 @@ import {useContext, useEffect, useState} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../_metronic/helpers'
 import {Link} from 'react-router-dom'
 import {useLocation} from 'react-router-dom'
-import { profileContext } from '../../context/profile'
+import {profileContext} from '../../context/profile'
 
 const ProfileHeader: React.FC = () => {
   const location = useLocation()
   const userType = localStorage.getItem('userType')
   const userTypeFull = localStorage.getItem('userTypeFull')
   const [userLabel, setUserLabel] = useState<any>(userTypeFull)
-  const { profile } = useContext(profileContext);
+  const {profile} = useContext(profileContext)
 
   useEffect(() => {
     profile?.usertype === 'admin'
       ? setUserLabel('Admin') //Temporary placeholder for admin user type
       : setUserLabel(profile?.subscriptiontier)
   }, [profile])
+
+  const blankImg = '/media/avatars/blank.png'
 
   const userBadgeColor =
     profile?.usertype === 'sponsor' ? 'primary' : profile?.usertype === 'admin' ? 'info' : 'success'
@@ -28,12 +30,8 @@ const ProfileHeader: React.FC = () => {
           <div className='me-7 mb-4'>
             <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
               <img
-                src={
-                  profile?.usertype !== 'sponsor'
-                    ? toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')
-                    : toAbsoluteUrl('/media/logos/megold-logo.png')
-                }
-                alt='Diasprex'
+                src={toAbsoluteUrl(profile?.avatar || blankImg)}
+                alt={`${profile?.fName.slice(0, 1)}${profile?.lName.slice(0, 1)}`}
               />
               <div className='position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px'></div>
             </div>
@@ -44,9 +42,11 @@ const ProfileHeader: React.FC = () => {
               <div className='d-flex flex-column'>
                 <div className='d-flex align-items-center mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
-                    {profile?.fName} {profile?.lName}
+                    {`${profile?.fName} ${profile?.mInitial && `${profile?.mInitial}.`} ${
+                      profile?.lName
+                    }`}
                   </a>
-                  {profile?.subscriptiontier!== 'basic_enabler' && (
+                  {profile?.subscriptiontier !== 'basic_enabler' && (
                     <a href='#' data-toggle='tooltip' data-placement='top' title='Verified account'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen026.svg'
