@@ -9,6 +9,13 @@ import Tabs, {Tab} from 'react-best-tabs'
 import 'react-best-tabs/dist/index.css'
 import {HeaderNotificationsMenu, QuickLinks, Search} from '../../../../../../_metronic/partials'
 import clsx from 'clsx'
+import {useDispatch} from 'react-redux'
+import {
+  userTypeSet,
+  userTypeFullSet,
+  packagePriceSet,
+  packageDurationSet,
+} from '../../../../profile/redux/SubscriptionPackageSlice'
 
 const SubscriptionPlans3 = ({
   userType,
@@ -20,12 +27,11 @@ const SubscriptionPlans3 = ({
   packageDuration,
   setPackageDuration,
 }) => {
-  // const [currentState, setCurrentState] = useState(packageDuration)
   const [selectedEnabler, setSelectedEnabler] = useState('basic_enabler')
   const [selectedSponsor, setSelectedSponsor] = useState('basic_sponsor')
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
-  // const [packagePrice, setPackagePrice] = useState()
-  // const [packageDuration, setPackageDuration] = useState()
+
+  const dispatch = useDispatch()
 
   const titles = [
     {
@@ -546,13 +552,17 @@ const SubscriptionPlans3 = ({
     }
   }
   useEffect(() => {
-    localStorage.setItem('userType', userType)
-    localStorage.setItem('userTypeFull', userTypeFull)
-    localStorage.setItem('packageDuration', packageDuration)
-    localStorage.setItem('packagePrice', packagePrice)
+    // localStorage.setItem('userType', userType)
+    // localStorage.setItem('userTypeFull', userTypeFull)
+    // localStorage.setItem('packageDuration', packageDuration)
+    // localStorage.setItem('packagePrice', packagePrice)
+    dispatch(userTypeSet(userType))
+    dispatch(userTypeFullSet(userTypeFull))
+    dispatch(packageDurationSet(packageDuration))
+    dispatch(packagePriceSet(packagePrice))
   }, [userType, userTypeFull, packageDuration, packagePrice])
 
-  // console.log(userType, userTypeFull, currentState, packagePrice)
+  console.log('Subscription Package', userType, userTypeFull, packageDuration, packagePrice)
 
   const tabPaneColorScheme =
     selectedIndex === 1
@@ -625,7 +635,7 @@ const SubscriptionPlans3 = ({
                 <div
                   onClick={() => {
                     setPackageDuration(type.value1)
-                    // setCurrentState(type.value1)
+
                     setPackageDuration(type.title)
                   }}
                   className={`cnav-link  d-flex flex-stack text-start p-6  col-lg-4` + 'mb-6 '}

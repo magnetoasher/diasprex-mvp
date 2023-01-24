@@ -11,7 +11,12 @@ import AccountVerification from './steps/AccountVerification'
 import {StepperComponent} from '../../../../../_metronic/assets/ts/components'
 import {Formik, Form, FormikActions, FormikValues} from 'formik'
 import './hide-stepper.css'
-import {IProfile, createAccountSchemas, inits} from './CreateAccountWizardHelper'
+import {
+  IProfile,
+  createAccountSchemas,
+  inits,
+  SubscriptionPackage,
+} from './CreateAccountWizardHelper'
 import SweetAlert from 'react-bootstrap-sweetalert'
 // import SubscriptionPlans from './steps/SubscriptionPlans'
 import SubscriptionPlans3 from './SubscriptionComponet/SubscriptionPlans3'
@@ -19,7 +24,8 @@ import {PhoneVerification2} from './steps/phoneverification2'
 import moment from 'moment'
 import {useOktaAuth} from '@okta/okta-react'
 import {createUserProfileAPI} from '../../../profile/redux/ProfileAPI'
-import {getUniqueDPXId} from '../../../../../_metronic/assets/ts/_utils'
+import {getUniqueDPXUserId} from '../../../../../_metronic/assets/ts/_utils'
+import {useSelector} from 'react-redux'
 
 const CreateAccount: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
@@ -40,6 +46,8 @@ const CreateAccount: FC = () => {
   const [confirmBtnText, setConfirmBtnText] = useState('Yes')
   const [hideShow, setHideShow] = useState(true)
   const [formValues, setFormValues] = useState<IProfile>({})
+
+  const subscriptionpackage: SubscriptionPackage = useSelector((state) => state.subscriptionpackage)
 
   useEffect(() => {
     if (userTypeFull !== 'basic_enabler' || userType === 'sponsor') {
@@ -77,7 +85,6 @@ const CreateAccount: FC = () => {
   }
 
   const submitStep = (values: IProfile, actions: FormikActions<FormikValues>) => {
-    const dpxNumber = getUniqueDPXUserId('DPX')
     if (!stepper.current) {
       return
     }
@@ -104,26 +111,31 @@ const CreateAccount: FC = () => {
       setFormValues({
         ...values,
         id: authState?.accessToken?.claims.uid,
-        dpxid: dpxNumber,
-        usertype: userType,
-        countryres: values.countryRes ? values.countryRes : 'United States',
-        accountType: userTypeFull,
-        subscriptiontier: userTypeFull,
+        dpxid: getUniqueDPXUserId('DPX'),
+        datejoined: moment(new Date()).format('DD MMM YYYY'),
+        usertype: localStorage.getItem('userType'),
+        countryres: values.countryres,
+        accountType: subscriptionpackage.userType,
+        subscriptiontier: subscriptionpackage.userTypeFull,
         billing: {
-          packagePrice,
-          packageDuration,
+          packagePrice: subscriptionpackage.packagePrice,
+          packageDuration: subscriptionpackage.packageDuration,
         },
         status:
-          values.subscriptiontier === 'basic_enabler' || values.subscriptiontier === 'super_enabler'
+          formValues.subscriptiontier === 'basic_enabler' ||
+          formValues.subscriptiontier === 'super_enabler'
             ? 'active'
             : 'new',
-        datejoined: moment(new Date()).format('DD MMM YYYY'),
       })
       stepper.current.goNext()
+      console.log('ReduxProfileData', formValues)
+
       // }
     } else {
       // stepper.current.goto(1)
       //
+
+      console.log('CreateProfile', formValues)
       createUserProfileAPI(formValues).then((res) => {
         if (res.status === 200) {
           if (userType == 'sponsor') {

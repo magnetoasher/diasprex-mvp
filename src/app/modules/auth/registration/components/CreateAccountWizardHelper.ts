@@ -65,6 +65,13 @@ export interface IProfile {
   }
 }
 
+export interface SubscriptionPackage {
+  userType: string
+  userTypeFull: string
+  packagePrice: string
+  packageDuration: string
+}
+
 const createAccountSchemas = [
   Yup.object({
     accountType: Yup.string().required().label('Account Type'),

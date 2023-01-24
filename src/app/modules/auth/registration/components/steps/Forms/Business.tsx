@@ -218,14 +218,14 @@ const Business = (props: any) => {
           <Field
             type='text'
             maxLength={5}
-            name='phone.code'
+            name='phonecode'
             className='form-control mw-100px'
             placeholder='Intl code'
           />
           <Field
             type='text'
             maxLength={9}
-            name='phone.phonenumber'
+            name='phonenumber'
             className='form-control form-control-lg'
             placeholder='xxx-xxx-xxxx'
           />
@@ -244,7 +244,7 @@ const Business = (props: any) => {
           <ErrorMessage name='phone.code' component='span' />
         </div>
         <div className='text-danger mt-2'>
-          <ErrorMessage name='phone.phonenumber' component='span' />
+          <ErrorMessage name='phonenumber' component='span' />
         </div>
       </div>
       <div className='fv-row mb-10'>
@@ -293,11 +293,11 @@ const Business = (props: any) => {
       <div className='fv-row mb-10'>Terms &amp; Conditions:</div>
       <div className='fv-row mb-10'>
         <label>
-          <Field type='checkbox' name='dpxterms' className='me-3' />I agree to the Terms &amp;
-          Conditions of DIASPREX INC.
+          <Field type='checkbox' name='acknowledgeDPXterms' className='me-3' />I agree to the Terms
+          &amp; Conditions of DIASPREX INC.
         </label>
         <div className='text-danger mt-2'>
-          <ErrorMessage name='dpxterms' component='span' />
+          <ErrorMessage name='acknowledgeDPXterms' component='span' />
         </div>
       </div>
 
