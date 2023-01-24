@@ -5,7 +5,14 @@ type Props = {
 }
 
 const UserBooleanCell: FC<Props> = ({condition}) => (
-  <> {condition && <div className='badge badge-light-success fw-bolder'>Enabled</div>}</>
+  <>
+    {' '}
+    {condition ? (
+      <div className='badge badge-light-info fw-bolder'>Enabled</div>
+    ) : (
+      <div className='badge badge-light fw-bolder'>Disabled</div>
+    )}
+  </>
 )
 
 export {UserBooleanCell}
