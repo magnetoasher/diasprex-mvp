@@ -28,7 +28,7 @@ const AdminHeaderUserMenu: FC = () => {
             <img
               alt='Logo'
               src={
-                userType !== 'sponsor'
+                profile?.usertype !== 'sponsor'
                   ? toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')
                   : toAbsoluteUrl('/media/logos/megold-logo.png')
               }

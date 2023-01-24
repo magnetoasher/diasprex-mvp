@@ -21,8 +21,8 @@ const HeaderUserMenu: FC = () => {
     userType === 'sponsor' ? 'primary' : userType === 'admin' ? 'info' : 'success'
 
   useEffect(() => {
-    setUserLabel(userTypeFull)
-  }, [userTypeFull])
+    setUserLabel(profile?.subscriptiontier)
+  }, [profile])
 
   return (
     <div

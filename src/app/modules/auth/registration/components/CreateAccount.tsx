@@ -25,7 +25,7 @@ import {PhoneVerification2} from './steps/phoneverification2'
 import moment from 'moment'
 import {useOktaAuth} from '@okta/okta-react'
 import {createUserProfileAPI} from '../../../profile/redux/ProfileAPI'
-import {getUniqueDPXId} from '../../../../../_metronic/assets/ts/_utils'
+import {getUniqueDPXId, getUniqueDPXUserId} from '../../../../../_metronic/assets/ts/_utils'
 import axios from 'axios'
 import {profileContext} from '../../../../context/profile'
 
@@ -125,10 +125,10 @@ const CreateAccount: FC = () => {
         id: authState?.accessToken?.claims.uid,
         dpxid: getUniqueDPXUserId('DPX'),
         datejoined: moment(new Date()).format('DD MMM YYYY'),
-        usertype: localStorage.getItem('userType'),
+        usertype: userType,
         countryres: values.countryres,
-        accountType: subscriptionpackage.userType,
-        subscriptiontier: subscriptionpackage.userTypeFull,
+        accountType: userTypeFull,
+        subscriptiontier: userTypeFull,
         billing: {
           packagePrice: subscriptionpackage.packagePrice,
           packageDuration: subscriptionpackage.packageDuration,
@@ -140,7 +140,7 @@ const CreateAccount: FC = () => {
             : 'new',
       })
       stepper.current.goNext()
-      console.log('ReduxProfileData', formValues)
+      console.log('ReduxProfileData', formValues, subscriptionpackage, userType, userTypeFull)
 
       // }
     } else {
@@ -389,7 +389,7 @@ const CreateAccount: FC = () => {
 
                 {userTypeFull !== 'basic_enabler' && (
                   <div data-kt-stepper-element='content' className='w-xl-800px'>
-                    <AccountVerification userInfo={formValues} />
+                    <AccountVerification userInfo={formValues} subscriptionPackage={subscriptionpackage} />
                   </div>
                 )}
 

@@ -13,13 +13,13 @@ const ProfileHeader: React.FC = () => {
   const { profile } = useContext(profileContext);
 
   useEffect(() => {
-    userType === 'admin'
+    profile?.usertype === 'admin'
       ? setUserLabel('Admin') //Temporary placeholder for admin user type
-      : setUserLabel(userTypeFull)
-  }, [userTypeFull, userType])
+      : setUserLabel(profile?.subscriptiontier)
+  }, [profile])
 
   const userBadgeColor =
-    userType === 'sponsor' ? 'primary' : userType === 'admin' ? 'info' : 'success'
+    profile?.usertype === 'sponsor' ? 'primary' : profile?.usertype === 'admin' ? 'info' : 'success'
 
   return (
     <div className='card mb-5 mb-xl-10'>
@@ -29,7 +29,7 @@ const ProfileHeader: React.FC = () => {
             <div className='symbol symbol-100px symbol-lg-160px symbol-fixed position-relative'>
               <img
                 src={
-                  userType !== 'sponsor'
+                  profile?.usertype !== 'sponsor'
                     ? toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')
                     : toAbsoluteUrl('/media/logos/megold-logo.png')
                 }
@@ -46,7 +46,7 @@ const ProfileHeader: React.FC = () => {
                   <a href='#' className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'>
                     {profile?.fName} {profile?.lName}
                   </a>
-                  {userTypeFull !== 'basic_enabler' && (
+                  {profile?.subscriptiontier!== 'basic_enabler' && (
                     <a href='#' data-toggle='tooltip' data-placement='top' title='Verified account'>
                       <KTSVG
                         path='/media/icons/duotune/general/gen026.svg'
