@@ -25,9 +25,9 @@ import {PhoneVerification2} from './steps/phoneverification2'
 import moment from 'moment'
 import {useOktaAuth} from '@okta/okta-react'
 import {createUserProfileAPI} from '../../../profile/redux/ProfileAPI'
-import {getUniqueDPXId} from '../../../../../_metronic/assets/ts/_utils'
+import {getUniqueDPXUserId} from '../../../../../_metronic/assets/ts/_utils'
 import axios from 'axios'
-import { profileContext } from '../../../../context/profile'
+import {profileContext} from '../../../../context/profile'
 
 const CreateAccount: FC = () => {
   const stepperRef = useRef<HTMLDivElement | null>(null)
@@ -48,7 +48,7 @@ const CreateAccount: FC = () => {
   const [confirmBtnText, setConfirmBtnText] = useState('Yes')
   const [hideShow, setHideShow] = useState(true)
   const [formValues, setFormValues] = useState<IProfile>({})
-  const { profile, setProfile, loaded, setLoaded } = useContext(profileContext);
+  const {profile, setProfile, loaded, setLoaded} = useContext(profileContext)
 
   useEffect(() => {
     if (authState !== null && profile?.id !== authState.accessToken?.claims.uid && !loaded) {
@@ -57,9 +57,9 @@ const CreateAccount: FC = () => {
           `${process.env.REACT_APP_DIASPREX_API_URL}/profile/${authState.accessToken?.claims.uid}`
         )
         .then((res) => {
-          const newProfile = res.data.data[0];
-          setProfile(newProfile);
-          setLoaded(true);
+          const newProfile = res.data.data[0]
+          setProfile(newProfile)
+          setLoaded(true)
           if (newProfile.status === 'active') {
             navigate({
               pathname: '/dashboard',
@@ -108,7 +108,6 @@ const CreateAccount: FC = () => {
   }
 
   const submitStep = (values: IProfile, actions: FormikActions<FormikValues>) => {
-    const dpxNumber = getUniqueDPXId('DPX')
     if (!stepper.current) {
       return
     }

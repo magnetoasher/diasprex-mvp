@@ -13,11 +13,11 @@ import {profileDetailsInitValues} from './settings/SettingsModel'
 import {connect, ConnectedProps, useDispatch} from 'react-redux'
 import {User} from '../../apps/user-management-ignore/users-list/core/_models'
 import {ListLoading} from '../../apps/admin-mgt-apps/core/loading/ListLoading'
-import { IProfile } from '../../auth/registration/components/CreateAccountWizardHelper'
+import {IProfile} from '../../auth/registration/components/CreateAccountWizardHelper'
 
 interface OverviewProps {
-  profile?: IProfile;
-  isLoading: boolean;
+  profile?: IProfile
+  isLoading: boolean
 }
 
 function Overview({profile, isLoading}: OverviewProps) {

@@ -543,12 +543,14 @@ const SubscriptionPlans3 = ({
       tempUser = stringValue[1]
       setUserTypeFull(stringValue[0])
       localStorage.setItem('userTypeFull', stringValue[0])
+      dispatch(userTypeFullSet(userTypeFull))
     } else {
       tempUser = e
     }
     if (tempUser !== 'month' && tempUser !== 'annual') {
       setUserType(tempUser)
       localStorage.setItem('userType', tempUser)
+      dispatch(userTypeSet(userType))
     }
   }
   useEffect(() => {
@@ -556,31 +558,30 @@ const SubscriptionPlans3 = ({
     // localStorage.setItem('userTypeFull', userTypeFull)
     // localStorage.setItem('packageDuration', packageDuration)
     // localStorage.setItem('packagePrice', packagePrice)
-    dispatch(userTypeSet(userType))
-    dispatch(userTypeFullSet(userTypeFull))
+
     dispatch(packageDurationSet(packageDuration))
     dispatch(packagePriceSet(packagePrice))
   }, [userType, userTypeFull, packageDuration, packagePrice])
 
-  console.log('Subscription Package', userType, userTypeFull, packageDuration, packagePrice)
+  // console.log('Subscription Package', userType, userTypeFull, packageDuration, packagePrice)
 
-  const tabPaneColorScheme =
-    selectedIndex === 1
-      ? 'light'
-      : selectedIndex === 2
-      ? 'success bg-opacity-10'
-      : selectedIndex === 3
-      ? 'info bg-opacity-10'
-      : 'primary bg-opacity-10'
+  // const tabPaneColorScheme =
+  //   selectedIndex === 1
+  //     ? 'light'
+  //     : selectedIndex === 2
+  //     ? 'success bg-opacity-10'
+  //     : selectedIndex === 3
+  //     ? 'info bg-opacity-10'
+  //     : 'primary bg-opacity-10'
 
-  const borderColorScheme =
-    selectedIndex === 1
-      ? 'light'
-      : selectedIndex === 2
-      ? 'success'
-      : selectedIndex === 3
-      ? 'info'
-      : 'primary'
+  // const borderColorScheme =
+  //   selectedIndex === 1
+  //     ? 'light'
+  //     : selectedIndex === 2
+  //     ? 'success'
+  //     : selectedIndex === 3
+  //     ? 'info'
+  //     : 'primary'
   return (
     <>
       <form onChange={(e) => handleFormSubmit(e)}>
