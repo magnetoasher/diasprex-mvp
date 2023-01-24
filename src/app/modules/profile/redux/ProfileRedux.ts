@@ -1,8 +1,8 @@
 import {Action, Reducer} from '@reduxjs/toolkit'
 import {put, takeLatest} from 'redux-saga/effects'
 import {ID} from '../../../../_metronic/helpers/crud-helper/models'
-import { IUserID, getUserProfileAPI } from './ProfileAPI'
-import { User } from '../../apps/user-management-ignore/users-list/core/_models'
+import {IUserID, getUserProfileAPI} from './ProfileAPI'
+import {User, initialUser} from '../../apps/admin-mgt-apps/user-management/users-list/core/_models'
 
 export interface ActionWithPayload<T> extends Action {
   payload?: T
@@ -15,7 +15,7 @@ export const actionTypes = {
 }
 
 const initialState: IPropsState = {
-  userProfile: {},
+  userProfile: initialUser,
   isLoading: false,
   error: null,
 }
@@ -68,15 +68,12 @@ export const actions = {
 }
 
 export function* saga() {
-  yield takeLatest(
-    actionTypes.GET_PROFILE_REQUEST,
-    function* getUserProfile(action: IAction) {
-      try {
-        const {data: data} = yield getUserProfileAPI(action.payload)
-        yield put(actions.getProfileSuccess(data.data))
-      } catch (error) {
-        yield put(actions.getProfileFailed(error))
-      }
+  yield takeLatest(actionTypes.GET_PROFILE_REQUEST, function* getUserProfile(action: IAction) {
+    try {
+      const {data: data} = yield getUserProfileAPI(action.payload)
+      yield put(actions.getProfileSuccess(data.data))
+    } catch (error) {
+      yield put(actions.getProfileFailed(error))
     }
-  )
+  })
 }
