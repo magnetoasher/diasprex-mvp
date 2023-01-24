@@ -1,9 +1,9 @@
-import { Suspense } from 'react'
-import { Outlet } from 'react-router-dom'
-import { I18nProvider } from '../_metronic/i18n/i18nProvider'
-import { LayoutProvider, LayoutSplashScreen } from '../_metronic/layout/core'
-import { MasterInit } from '../_metronic/layout/MasterInit'
-import "antd/dist/antd.css";
+import {Suspense} from 'react'
+import {Outlet} from 'react-router-dom'
+import {I18nProvider} from '../_metronic/i18n/i18nProvider'
+import {LayoutProvider, LayoutSplashScreen} from '../_metronic/layout/core'
+import {MasterInit} from '../_metronic/layout/MasterInit'
+import 'antd/dist/antd.css'
 import AuthInit from './modules/auth/redux/AuthInit'
 import ProfileProvider from './context/profile'
 
@@ -24,4 +24,4 @@ const App = () => {
   )
 }
 
-export { App }
+export {App}
