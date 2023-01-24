@@ -6,6 +6,8 @@ import * as opps from '../../app/modules/opportunities/redux/OpportunityRedux'
 import * as proposals from '../../app/modules/proposals/redux/ProposalRedux'
 import * as profile from '../../app/modules/profile/redux/ProfileRedux'
 import diasporaReducer from '../../app/modules/apps/admin-mgt-apps/redux/diasporas/diasporaslice'
+import profiledataReducer from '../../app/modules/profile/redux/ProfileDataSlice'
+import subscriptionpackageReducer from '../../app/modules/profile/redux/SubscriptionPackageSlice'
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -13,6 +15,8 @@ export const rootReducer = combineReducers({
   profile: profile.reducer,
   proposals: proposals.reducer,
   diasporas: diasporaReducer,
+  profiledata: profiledataReducer,
+  subscriptionpackage: subscriptionpackageReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

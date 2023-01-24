@@ -40,12 +40,13 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
   const [userForEdit] = useState<User>({
     ...user,
     avatar: user.avatar || initialUser.avatar,
-    role: user.role || initialUser.role,
-    position: user.position || initialUser.position,
-    name: user.name || initialUser.name,
+    usertype: user.usertype || initialUser.usertype,
+    subscriptiontier: user.subscriptiontier || initialUser.subscriptiontier,
+    fName: user.fName || initialUser.fName,
     email: user.email || initialUser.email,
-    phone: user.phone || initialUser.phone,
-    accountstatus: user.accountstatus || initialUser.accountstatus,
+    phonenumber: user.phonenumber || initialUser.phonenumber,
+    countryorig: user.countryorig || initialUser.countryorig,
+    status: user.status || initialUser.status,
   })
   console.log('User', userForEdit)
   const cancel = (withRefresh?: boolean) => {
@@ -183,7 +184,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                               href='#'
                               className='text-gray-800 text-hover-primary fs-2 fw-bolder me-1'
                             >
-                              {userForEdit.name}
+                              {userForEdit.fName}
                             </a>
                             <a href='#'>
                               <KTSVG
@@ -202,7 +203,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                                 path='/media/icons/duotune/communication/com006.svg'
                                 className='svg-icon-4 me-1'
                               />
-                              {userForEdit.role}
+                              {userForEdit.usertype}
                             </a>
                             <a
                               href='#'
@@ -212,7 +213,8 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                                 path='/media/icons/duotune/general/gen018.svg'
                                 className='svg-icon-4 me-1'
                               />
-                              {userForEdit.city || 'Seattle'}, {userForEdit.state || 'WA'}
+                              {userForEdit.orgAddress?.city || 'Seattle'},{' '}
+                              {userForEdit.orgAddress?.state || 'WA'}
                             </a>
                             <a
                               href='#'
@@ -289,7 +291,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                   <div className='row mb-7'>
                     {/* begin::Span */}
                     <div className='col-6 mb-3'>
-                      <span className='badge badge-info fs-4'> {userForEdit.role}</span>
+                      <span className='badge badge-info fs-4'> {userForEdit.usertype}</span>
                     </div>
                     <div className='col-6 mb-3 text-start'>
                       <span className='fs-6'> $99.99/ Year</span>
@@ -362,7 +364,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                     <label className='col-lg-6 fw-bold text-muted'>Date Joined:</label>
 
                     <div className='col-lg-6 fv-row'>
-                      <span className='fw-bold fs-6'>{userForEdit.joined_day}</span>
+                      <span className='fw-bold fs-6'>{userForEdit.datejoined}</span>
                     </div>
                   </div>
 
@@ -370,7 +372,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                     <label className='col-lg-6 fw-bold text-muted'>Status:</label>
 
                     <div className='col-lg-6 fv-row'>
-                      <span className='fw-bold fs-6'>{userForEdit.accountstatus || 'Pending'}</span>
+                      <span className='fw-bold fs-6'>{userForEdit.status || 'Pending'}</span>
                     </div>
                   </div>
 
@@ -378,7 +380,9 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                     <label className='col-lg-6 fw-bold text-muted'>Remittance Retainer:</label>
 
                     <div className='col-lg-6 fv-row'>
-                      <span className='fw-bold fs-6'>{userForEdit.remit_on || 'Pending'}</span>
+                      <span className='fw-bold fs-6'>
+                        {userForEdit.remittanceretainer || 'Pending'}
+                      </span>
                     </div>
                   </div>
                   {/* end::Input */}
@@ -416,18 +420,18 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                       name='name'
                       className={clsx(
                         'form-control form-control-solid mb-3 mb-lg-0',
-                        {'is-invalid': formik.touched.name && formik.errors.name},
+                        {'is-invalid': formik.touched.fName && formik.errors.fName},
                         {
-                          'is-valid': formik.touched.name && !formik.errors.name,
+                          'is-valid': formik.touched.fName && !formik.errors.fName,
                         }
                       )}
                       autoComplete='off'
                       disabled={formik.isSubmitting || isUserLoading || !editUserDetails}
                     />
-                    {formik.touched.name && formik.errors.name && (
+                    {formik.touched.fName && formik.errors.fName && (
                       <div className='fv-plugins-message-container'>
                         <div className='fv-help-block'>
-                          <span role='alert'>{formik.errors.name}</span>
+                          <span role='alert'>{formik.errors.fName}</span>
                         </div>
                       </div>
                     )}
@@ -480,18 +484,18 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                       name='phone'
                       className={clsx(
                         'form-control form-control-solid mb-3 mb-lg-0',
-                        {'is-invalid': formik.touched.phone && formik.errors.phone},
+                        {'is-invalid': formik.touched.phonenumber && formik.errors.phonenumber},
                         {
-                          'is-valid': formik.touched.phone && !formik.errors.phone,
+                          'is-valid': formik.touched.phonenumber && !formik.errors.phonenumber,
                         }
                       )}
                       autoComplete='off'
                       disabled={formik.isSubmitting || isUserLoading || !editUserDetails}
                     />
-                    {formik.touched.phone && formik.errors.phone && (
+                    {formik.touched.phonenumber && formik.errors.phonenumber && (
                       <div className='fv-plugins-message-container'>
                         <div className='fv-help-block'>
-                          <span role='alert'>{formik.errors.phone}</span>
+                          <span role='alert'>{formik.errors.phonenumber}</span>
                         </div>
                       </div>
                     )}
@@ -516,7 +520,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                           type='radio'
                           value='superadmin'
                           id='kt_modal_update_role_option_0'
-                          checked={formik.values.role === 'superadmin'}
+                          checked={formik.values.usertype === 'superadmin'}
                           disabled={formik.isSubmitting || isUserLoading || !editUserDetails}
                         />
 
@@ -547,7 +551,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                           type='radio'
                           value='administrator'
                           id='kt_modal_update_role_option_1'
-                          checked={formik.values.role === 'administrator'}
+                          checked={formik.values.usertype === 'administrator'}
                           disabled={formik.isSubmitting || isUserLoading || !editUserDetails}
                         />
                         {/* end::Input */}
@@ -572,12 +576,12 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                         {/* begin::Input */}
                         <input
                           className='form-check-input me-3'
-                          {...formik.getFieldProps('role')}
+                          {...formik.getFieldProps('usertype')}
                           name='role'
                           type='radio'
                           value='enabler'
                           id='kt_modal_update_role_option_2'
-                          checked={formik.values.role === 'enabler'}
+                          checked={formik.values.usertype === 'enabler'}
                           disabled={formik.isSubmitting || isUserLoading || !editUserDetails}
                         />
 
@@ -590,7 +594,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                         {/* end::Label */}
                       </div>
                       {/* end::Radio */}
-                      {formik.values.role == 'enabler' && (
+                      {formik.values.usertype == 'enabler' && (
                         <div className='col d-flex fv-row text-end'>
                           <EnablerTiers />
                         </div>
@@ -611,7 +615,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                           type='radio'
                           value='sponsor'
                           id='kt_modal_update_role_option_3'
-                          checked={formik.values.role === 'sponsor'}
+                          checked={formik.values.usertype === 'sponsor'}
                           disabled={formik.isSubmitting || isUserLoading || !editUserDetails}
                         />
                         {/* end::Input */}
@@ -624,7 +628,7 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                       </div>
                       {/* end::Radio */}
                     </div>
-                    {formik.values.role == 'sponsor' && (
+                    {formik.values.usertype == 'sponsor' && (
                       <div className='row d-flex fv-row text-end'>
                         <SponsorTiers />
                       </div>
@@ -671,12 +675,12 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                       {/* begin::Input */}
                       <input
                         className='form-check-input me-3'
-                        {...formik.getFieldProps('role')}
-                        name='role'
+                        {...formik.getFieldProps('usertype')}
+                        name='usertype'
                         type='radio'
                         value='generic'
                         id='kt_modal_update_role_option_4'
-                        checked={formik.values.role === 'generic'}
+                        checked={formik.values.usertype === 'generic'}
                         disabled={formik.isSubmitting || isUserLoading || !editUserDetails}
                       />
                       {/* end::Input */}
@@ -705,15 +709,15 @@ const UserEditModalForm: FC<Props> = ({user, isUserLoading}) => {
                     <select
                       className={clsx(
                         'form-select form-select-solid mb-3 mb-lg-0',
-                        {'is-invalid': formik.touched.accountstatus && formik.errors.accountstatus},
+                        {'is-invalid': formik.touched.status && formik.errors.status},
                         {
-                          'is-valid': formik.touched.accountstatus && !formik.errors.accountstatus,
+                          'is-valid': formik.touched.status && !formik.errors.status,
                         }
                       )}
                       data-kt-select2='true'
                       data-placeholder='Update Status'
                       data-allow-clear='true'
-                      defaultValue={userForEdit.accountstatus || 'Choose Status'}
+                      defaultValue={userForEdit.status || 'Choose Status'}
                       autoComplete='off'
                       disabled={formik.isSubmitting || isUserLoading || !editUserDetails}
                     >
