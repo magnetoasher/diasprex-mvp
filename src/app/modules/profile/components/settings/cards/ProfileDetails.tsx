@@ -22,17 +22,17 @@ import { createUserProfileAPI } from '../../../redux/ProfileAPI'
 import Swal from 'sweetalert2'
 
 const profileDetailsSchema = Yup.object().shape({
-  fName: Yup.string().required('First name is required'),
-  lName: Yup.string().required('Last name is required'),
-  email: Yup.string().email('Wrong email format'),
-  orgName: Yup.string().required('Organization name is required'),
-  mobilePhone: Yup.string().required('Mobile phone is required'),
-  phonenumber: Yup.string().required('Primary phone is required'),
-  countryres: Yup.string().required('Country is required'),
-  orgRole: Yup.string().required('Role is required'),
-  address: Yup.string().required('Address is required'),
-  profession: Yup.string().required('Profession is required'),
-  degree: Yup.string().required('Degree is required'),
+  // fName: Yup.string().required('First name is required'),
+  // lName: Yup.string().required('Last name is required'),
+  // email: Yup.string().email('Wrong email format'),
+  // // orgName: Yup.string().required('Organization name is required'),
+  // mobilePhone: Yup.string().required('Mobile phone is required'),
+  // phonenumber: Yup.string().required('Primary phone is required'),
+  // countryres: Yup.string().required('Country is required'),
+  // orgRole: Yup.string().required('Role is required'),
+  // address: Yup.string().required('Address is required'),
+  // profession: Yup.string().required('Profession is required'),
+  // degree: Yup.string().required('Degree is required'),
 })
 const areaOptions = [
   { value: 'acturarial', label: 'Acturarial' },
@@ -59,20 +59,18 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
   const { authState } = useOktaAuth()
   const [data, setData] = useState<IProfile>(initialValues)
   const { profile: fetchedProfile } = useContext(profileContext)
+  console.log('profile context', fetchedProfile)
 
-  // useEffect(() => {
-  //   if (authState !== null || undefined) {
-  //     axios
-  //       .get(
-  //         `${process.env.REACT_APP_DIASPREX_API_URL}/profile/${authState?.accessToken?.claims.uid}`
-  //       )
-  //       .then((res) => {
-  //         if (res.data?.data) {
-  //           setData(res.data.data)
-  //         }
-  //       })
-  //   }
-  // }, [])
+  useEffect(() => {
+    axios
+        .get(
+          `${process.env.REACT_APP_DIASPREX_API_URL}/profile/${fetchedProfile?.id}`
+        )
+        .then((res) => {
+          const newProfile = res.data.data[0]
+          formik.setValues(newProfile)
+        });
+  }, [])
 
   const updateData = (fieldsToUpdate: Partial<IProfile>): void => {
     const updatedData = Object.assign(data, fieldsToUpdate)
@@ -86,9 +84,15 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
     enableReinitialize: true,
     validationSchema: profileDetailsSchema,
     onSubmit: (values) => {
-      console.log({values})
       setLoading(true)
-      createUserProfileAPI(values).then((res) => {
+      createUserProfileAPI({
+        ...values,
+        id: fetchedProfile?.id ?? '',
+        usertype: fetchedProfile?.usertype ?? '',
+        countryres: fetchedProfile?.countryres ?? '',
+        subscriptiontier: fetchedProfile?.subscriptiontier ?? '',
+        status: fetchedProfile?.status ?? ''
+      }).then((res) => {
         if (res.status === 200) {
           Swal.fire({
             icon: 'success',
@@ -104,19 +108,13 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
         }
       })
       setData(values)
+      formik.setValues(values)
       setLoading(false)
     },
   })
 
-  useEffect(() => {
-    if (fetchedProfile) {
-      formik.setValues(fetchedProfile)
-    }
-  }, [fetchedProfile])
-
   let subscriptiontier = localStorage.getItem('userTypeFull')
   let usertype = localStorage.getItem('userType')
-  console.log('details', profile)
 
   return (
     <>
@@ -138,7 +136,7 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
           </div>
 
           <div id='kt_profile_profile_details' className='collapse show'>
-            <form onSubmit={() => {console.log('onSubmit');return formik.handleSubmit}} noValidate className='form'>
+            <form onSubmit={formik.handleSubmit} noValidate className='form'>
               <div className='card-body border-top p-9'>
                 <div className='row mb-6'>
                   <label className='col-lg-4 col-form-label fw-bold fs-6'>Avatar</label>

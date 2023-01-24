@@ -15,7 +15,7 @@ const ProfileHeader: React.FC = () => {
   useEffect(() => {
     profile?.usertype === 'admin'
       ? setUserLabel('Admin') //Temporary placeholder for admin user type
-      : setUserLabel(profile?.subscriptiontier)
+      : setUserLabel(profile?.accountType)
   }, [profile])
 
   const userBadgeColor =
