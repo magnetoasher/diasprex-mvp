@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import {useDispatch, connect, ConnectedProps} from 'react-redux'
 import {useOktaAuth} from '@okta/okta-react'
 import {Link} from 'react-router-dom'
@@ -20,11 +20,12 @@ import SponsorOpportunityCard from '../../modules/opportunities/SponsorOpportuni
 import SponsorProposalCard from '../../modules/proposals/components/SponsorProposalCard'
 import EnablerOpportunityCard from '../../modules/opportunities/EnablerOpportunityCard'
 import {IProfile} from '../../modules/auth/registration/components/CreateAccountWizardHelper'
+import { profileContext } from '../../context/profile'
 
 const mapState = (state: RootState) => ({opps: state.opps, proposals: state.proposals})
 const connector = connect(mapState, {...opps.actions, ...proposals.actions})
 type PropsFromRedux = ConnectedProps<typeof connector>
-
+ 
 const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
   const {authState} = useOktaAuth()
   const userType = localStorage.getItem('userType')
@@ -33,6 +34,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
   const dispatch = useDispatch()
   const [recentOpps, setRecentOpps] = useState<Opps[]>([])
   const [recentProps, setRecentProps] = useState<Proposal[]>([])
+  const { profile: fetchedProfile } = useContext(profileContext);
   const [userProfile, setUserProfile] = useState<IProfile>()
 
   const userColor = {
@@ -57,6 +59,10 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
       ? setUserLabel('Admin') //Temporary placeholder for admin user type
       : setUserLabel(userTypeFull)
   }, [userTypeFull, userType])
+
+  useEffect(() => {
+    setUserProfile(fetchedProfile || undefined);
+  }, [fetchedProfile]);
 
   useEffect(() => {
     if (authState !== null) {
@@ -111,7 +117,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
             <div className='col-xs-1 d-flex align-items-center justify-content-center g-3 px-5'>
               <div className='d-flex mw-75 image-input-wrapper image-input-outline'>
                 <img
-                  src={toAbsoluteUrl(profile?.avatar)}
+                  src={toAbsoluteUrl(userProfile?.avatar || '')}
                   className='rounded mw-100'
                   alt='Diaspreex'
                 />
@@ -122,16 +128,16 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
               <div className='justify-content-center'>
                 <div className='d-flex mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary fs-4 fw-bolder me-1'>
-                    {userType !== 'sponsor'
-                      ? `${profile?.fName} ${profile?.mInitial && '.'} ${profile?.lName} `
-                      : profile?.orgName}
+                    {userProfile?.usertype !== 'sponsor'
+                      ? `${userProfile?.fName} ${userProfile?.mInitial && '.'} ${userProfile?.lName} `
+                      : userProfile?.orgName}
                   </a>
-                  {userTypeFull !== 'basic_enabler' && (
+                  {userProfile?.accountType !== 'basic_enabler' && (
                     <a
                       href='#'
                       data-toggle='tooltip'
                       data-placement='top'
-                      title={profile?.verified}
+                      title={userProfile?.verified ? 'verified' : 'not verified'}
                     >
                       <KTSVG
                         path='/media/icons/duotune/general/gen026.svg'
@@ -144,7 +150,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
                 <div className='d-flex justify-content-center align-items-center mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary  me-1 '>
                     <span className={`badge badge-light-${userBadgeColor} text-capitalize`}>
-                      {userLabel?.replace('_', ' ') || ''}
+                      {userProfile?.accountType?.replace('_', ' ') || ''}
                     </span>
                   </a>
                 </div>
@@ -318,14 +324,14 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
                   </label>
 
                   <div className='col-lg-7'>
-                    <EditText defaultValue='Computer Software' />
+                    <EditText value={userProfile?.orgIndustry} />
                   </div>
                 </div>
                 <div className='row mb-2 d-flex align-items-center'>
                   <label className='col-lg-5 fw-bolder '>Interests</label>
 
                   <div className='col-lg-7'>
-                    <EditText defaultValue='Web Development' />
+                    <EditText value={userProfile?.interest?.join(', ')} />
                   </div>
                 </div>
               </div>
@@ -336,7 +342,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
             <label className='col-lg-12 fw-bolder  '>About</label>
             <EditTextarea
               rows={5}
-              defaultValue="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book"
+              value={userProfile?.mInitial}
             />
           </div>
 
@@ -358,7 +364,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
                   </label>
 
                   <div className='col-lg-7 d-flex align-items-center'>
-                    <span className='fs-6 me-2 text-muted'>044 3276 454 935</span>
+                    <span className='fs-6 me-2 text-muted'>{userProfile?.phonenumber}</span>
                   </div>
                 </div>
                 <div className='row mb-2'>
@@ -366,7 +372,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
 
                   <div className='col-lg-7'>
                     <a href='#' className='fs-6 text-muted'>
-                      2777 Vera Cruz Ln N
+                      {userProfile?.countryres}
                     </a>
                   </div>
                 </div>
@@ -382,7 +388,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
 
                   <div className='col-lg-7'>
                     <a href='#' className='fs-6 text-muted'>
-                      admin@dasprex.com
+                      {userProfile?.email}
                     </a>
                   </div>
                 </div>

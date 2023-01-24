@@ -1,13 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import {FC, useState, useEffect} from 'react'
+import {FC, useState, useEffect, useContext} from 'react'
 import {Link} from 'react-router-dom'
 import {useOktaAuth} from '@okta/okta-react'
 import {toAbsoluteUrl} from '../../../helpers'
+import { profileContext } from '../../../../app/context/profile'
 
 const AdminHeaderUserMenu: FC = () => {
   var userTypeFull = localStorage.getItem('userTypeFull')
   var userType = localStorage.getItem('userType')
   const [userLabel, setUserLabel] = useState<any>(userTypeFull)
+  const { profile } = useContext(profileContext);
 
   const {oktaAuth} = useOktaAuth()
 
@@ -35,8 +37,7 @@ const AdminHeaderUserMenu: FC = () => {
 
           <div className='d-flex flex-column'>
             <div className='fw-bolder d-flex align-items-center fs-5'>
-              {/* {user.first_name} {user.first_name} */}
-              Max Smith
+              {profile?.fName} {profile?.lName}
               <span
                 className={`badge badge-light-info fw-bolder fs-8 px-2 py-1 ms-2 text-capitalize`}
               >
@@ -44,8 +45,7 @@ const AdminHeaderUserMenu: FC = () => {
               </span>
             </div>
             <a href='#' className='fw-bold text-muted text-hover-primary fs-7'>
-              {/* {user.email} */}
-              admin@dasprex.com
+              {profile?.email}
             </a>
           </div>
         </div>
