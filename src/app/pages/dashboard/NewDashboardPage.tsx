@@ -20,12 +20,12 @@ import SponsorOpportunityCard from '../../modules/opportunities/SponsorOpportuni
 import SponsorProposalCard from '../../modules/proposals/components/SponsorProposalCard'
 import EnablerOpportunityCard from '../../modules/opportunities/EnablerOpportunityCard'
 import {IProfile} from '../../modules/auth/registration/components/CreateAccountWizardHelper'
-import { profileContext } from '../../context/profile'
+import {profileContext} from '../../context/profile'
 
 const mapState = (state: RootState) => ({opps: state.opps, proposals: state.proposals})
 const connector = connect(mapState, {...opps.actions, ...proposals.actions})
 type PropsFromRedux = ConnectedProps<typeof connector>
- 
+
 const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
   const {authState} = useOktaAuth()
   const userType = localStorage.getItem('userType')
@@ -34,7 +34,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
   const dispatch = useDispatch()
   const [recentOpps, setRecentOpps] = useState<Opps[]>([])
   const [recentProps, setRecentProps] = useState<Proposal[]>([])
-  const { profile: fetchedProfile } = useContext(profileContext);
+  const {profile: fetchedProfile} = useContext(profileContext)
   const [userProfile, setUserProfile] = useState<IProfile>()
 
   const userColor = {
@@ -61,8 +61,8 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
   }, [userTypeFull, userType])
 
   useEffect(() => {
-    setUserProfile(fetchedProfile || undefined);
-  }, [fetchedProfile]);
+    setUserProfile(fetchedProfile || undefined)
+  }, [fetchedProfile])
 
   useEffect(() => {
     if (authState !== null) {
@@ -109,6 +109,9 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
     setRecentProps(props.proposals.proposals?.data)
   }, [props.proposals])
 
+  const blankImg = toAbsoluteUrl('/media/avatars/blank.png')
+  const avatarImg = toAbsoluteUrl(profile?.avatar)
+
   return (
     <div className='row d-flex flex-column-fluid g-0'>
       <div className='col-sm-3'>
@@ -117,9 +120,9 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
             <div className='col-xs-1 d-flex align-items-center justify-content-center g-3 px-5'>
               <div className='d-flex mw-75 image-input-wrapper image-input-outline'>
                 <img
-                  src={toAbsoluteUrl(userProfile?.avatar || '')}
+                  src={toAbsoluteUrl(userProfile?.avatar || blankImg)}
                   className='rounded mw-100'
-                  alt='Diaspreex'
+                  alt={`${userProfile?.fName.slice(0, 1)}${userProfile?.lName.slice(0, 1)}`}
                 />
               </div>
             </div>
@@ -129,7 +132,9 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
                 <div className='d-flex mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary fs-4 fw-bolder me-1'>
                     {userProfile?.usertype !== 'sponsor'
-                      ? `${userProfile?.fName} ${userProfile?.mInitial && '.'} ${userProfile?.lName} `
+                      ? `${userProfile?.fName} ${userProfile?.mInitial && '.'} ${
+                          userProfile?.lName
+                        } `
                       : userProfile?.orgName}
                   </a>
                   {userProfile?.accountType !== 'basic_enabler' && (
@@ -340,10 +345,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
 
           <div className='row gy-3 py-3'>
             <label className='col-lg-12 fw-bolder  '>About</label>
-            <EditTextarea
-              rows={5}
-              value={userProfile?.mInitial}
-            />
+            <EditTextarea rows={5} value={userProfile?.mInitial} />
           </div>
 
           <div className='row gy-3 py-3'>

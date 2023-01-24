@@ -61,13 +61,13 @@ const AccountVerification = (props: any) => {
                       <a
                         href='#'
                         className='text-gray-800 text-hover-primary text-capitalize'
-                      >{` ${userTypeFull?.replace('_', ' ')} bundle`}</a>
+                      >{` ${props.userInfo.accountType?.replace('_', ' ')} bundle`}</a>
                     </td>
                   </tr>
 
                   <tr>
                     <td className='text-gray-400'>Subscription Fees:</td>
-                    <td className='text-gray-800 text-capitalize'>{`$${packagePrice} / ${currentState}`}</td>
+                    <td className='text-gray-800 text-capitalize'>{`$${props.subscriptionPackage.packagePrice} / ${props.subscriptionPackage.packageDuration}`}</td>
                   </tr>
 
                   <tr>
@@ -102,8 +102,8 @@ const AccountVerification = (props: any) => {
                 <tbody className='fw-bold text-gray-800'>
                   <tr>
                     <td>
-                      <label className='w-150px text-capitalize'>{`${userType} Bundle`}</label>
-                      <div className='fw-normal text-gray-600'>{` ${userTypeFull?.replace(
+                      <label className='w-150px text-capitalize'>{`${props.userInfo.usertype} Bundle`}</label>
+                      <div className='fw-normal text-gray-600'>{` ${props.userInfo.accountType?.replace(
                         '_',
                         ' '
                       )} bundle`}</div>
@@ -111,7 +111,7 @@ const AccountVerification = (props: any) => {
                     <td>
                       <span className='badge badge-light-danger'>sub_4567_8765</span>
                     </td>
-                    <td className='text-capitalize'>{`$${packagePrice} / ${currentState}`}</td>
+                    <td className='text-capitalize'>{`$${props.subscriptionPackage.packagePrice} / ${props.subscriptionPackage.packageDuration}`}</td>
                   </tr>
                 </tbody>
               </table>

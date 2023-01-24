@@ -3,13 +3,13 @@ import {FC, useState, useEffect, useContext} from 'react'
 import {Link} from 'react-router-dom'
 import {useOktaAuth} from '@okta/okta-react'
 import {toAbsoluteUrl} from '../../../helpers'
-import { profileContext } from '../../../../app/context/profile'
+import {profileContext} from '../../../../app/context/profile'
 
 const HeaderUserMenu: FC = () => {
   var userTypeFull = localStorage.getItem('userTypeFull')
   var userType = localStorage.getItem('userType')
   const [userLabel, setUserLabel] = useState<any>(userTypeFull)
-  const { profile } = useContext(profileContext);
+  const {profile} = useContext(profileContext)
 
   const {oktaAuth} = useOktaAuth()
 
@@ -21,8 +21,10 @@ const HeaderUserMenu: FC = () => {
     userType === 'sponsor' ? 'primary' : userType === 'admin' ? 'info' : 'success'
 
   useEffect(() => {
-    setUserLabel(userTypeFull)
-  }, [userTypeFull])
+    setUserLabel(profile?.accountType)
+  }, [profile])
+
+  const blankImg = '/media/avatars/blank.png'
 
   return (
     <div
@@ -32,14 +34,7 @@ const HeaderUserMenu: FC = () => {
       <div className='menu-item px-3'>
         <div className='menu-content d-flex align-items-center px-3'>
           <div className='symbol symbol-50px me-5'>
-            <img
-              alt='Logo'
-              src={
-                profile?.accountType !== 'sponsor'
-                  ? toAbsoluteUrl('/media/avatars/diasprex/dxp-6.jpg')
-                  : toAbsoluteUrl('/media/logos/megold-logo.png')
-              }
-            />
+            <img alt='Logo' src={toAbsoluteUrl(profile?.avatar || blankImg)} />
           </div>
 
           <div className='d-flex flex-column'>
