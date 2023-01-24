@@ -1,20 +1,25 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {KTSVG} from '../../../../../../_metronic/helpers'
 import {IDeactivateProfile, deactivateProfile} from '../SettingsModel'
 import SweetAlert from 'react-bootstrap-sweetalert'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
+import {profileContext} from '../../../../../context/profile'
+import {deactivateProfileAPI} from '../../../redux/ProfileAPI'
 
 const deactivateProfileSchema = Yup.object().shape({
   confirm: Yup.boolean().oneOf([true], 'Please check the box to deactivate your profile'),
 })
 
 const DeactivateProfile: React.FC<any> = (profile, isLoading) => {
+  const {profile: fetchedProfile} = useContext(profileContext)
   const [loading, setLoading] = useState(false)
   const [accountType, setAccountType] = useState(localStorage.getItem('userTypeFull'))
   const [openSweetAlert, setOpenSweetAlert] = useState(false)
-  const onConfirm = () => {}
+  const onConfirm = () => {
+    deactivateProfileAPI({id: fetchedProfile?.id, status: 'suspended'})
+  }
   const onCancel = () => {
     setOpenSweetAlert(false)
   }

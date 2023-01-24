@@ -1,28 +1,68 @@
 import * as Yup from 'yup'
+import { ID } from '../../../helpers'
+
+interface address {
+  addressLine1: string
+  addressLine2: string
+  city: string
+  state: string
+  postCode: string
+}
 
 export interface IUpgradePlan {
+  id?: ID
+  dpxid?: ID
   usertype?: string
-  userTypeFull?: string
-  packageDuration?: string
+  subscriptiontier?: string
   packagePrice?: string
-  accountType: string
-  accountTeamSize: string
-  accountName: string
-  accountPlan: string
-  businessName: string
-  businessDescriptor: string
-  businessType: string
-  businessDescription: string
-  businessEmail: string
-  paymethod?: string
-  nameOnCard: string
-  cardNumber: string
-  cardExpiryMonth: string
-  cardExpiryYear: string
-  cardCvv: string
-  saveCard: string
-  accountnumber?: string
-  routingnumber?: string
+  packageDuration?: string
+  fName?: string
+  lName?: string
+  mInitial?: string
+  avatar?: string
+  email?: string
+  countryorig?: string
+  countryres?: string
+  accountType?: string
+  phonenumber?: string
+  mobilephone?: string
+  profession?: string
+  proffield?: string
+  degree?: string
+  interest?: string[]
+  accountTeamSize?: string
+  accountName?: string
+  accountPlan?: string
+  orgName?: string
+  orgAddress?: address
+  orgMailingAddress?: string
+  orgRegistered?: string
+  orgRegNumber?: string
+  orgRegYear?: string
+  orgRegCountry?: string
+  orgRegState?: string
+  orgRole?: string
+  orgIndustry?: string
+  nameOnCard?: string
+  cardNumber?: string
+  cardExpiryMonth?: string
+  cardExpiryYear?: string
+  cardCvv?: string
+  saveCard?: string
+  accountNumber?: string
+  routingNumber?: string
+  acknowledgeDPXterms?: boolean
+  emailcommunicate?: boolean
+  online?: boolean
+  status?: string
+  verified?: boolean
+  twostepauth?: boolean
+  remittanceretainer?: boolean
+  datejoined?: string
+  billing?: {
+    packagePrice?: string
+    packageDuration?: string
+  }
 }
 
 const upgradePlanSchemas = [
@@ -70,11 +110,7 @@ const inits: IUpgradePlan = {
   accountTeamSize: '50+',
   accountName: '',
   accountPlan: '1',
-  businessName: 'Keenthemes Inc.',
-  businessDescriptor: 'KEENTHEMES',
-  businessType: '1',
-  businessDescription: '',
-  businessEmail: 'corp@support.com',
+  email: 'corp@support.com',
   nameOnCard: '',
   cardNumber: '',
   cardExpiryMonth: '',

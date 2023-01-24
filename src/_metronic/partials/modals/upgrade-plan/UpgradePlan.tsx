@@ -3,15 +3,21 @@
 import React, {FC, useEffect, useState} from 'react'
 import {KTSVG} from '../../../helpers'
 
-const UpgradePlan: FC = () => {
-  const [selectedIndex, setSelectedIndex] = useState<number>(0)
-  const [packagePrice, setPackagePrice] = useState(localStorage.getItem('packagePrice'))
-  const [packageDuration, setPackageDuration] = useState(localStorage.getItem('packageDuration'))
-  const [userTypeFull, setUserTypeFull] = useState(localStorage.getItem('userTypeFull'))
-  const [userType] = useState(localStorage.getItem('userType'))
-  const [selectedEnabler, setSelectedEnabler] = useState(userTypeFull)
-  const [selectedSponsor, setSelectedSponsor] = useState(userTypeFull)
-
+const UpgradePlan: FC = ({
+  userType,
+  userTypeFull,
+  packagePrice,
+  packageDuration,
+  selectedEnabler,
+  selectedSponsor,
+  selectedIndex,
+  setUserTypeFull,
+  setPackagePrice,
+  setPackageDuration,
+  setSelectedEnabler,
+  setSelectedSponsor,
+  setSelectedIndex,
+}: any) => {
   console.log('userTypeFull', userTypeFull)
 
   const types = [
