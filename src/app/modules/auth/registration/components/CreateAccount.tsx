@@ -33,7 +33,7 @@ const CreateAccount: FC = () => {
   const navigate = useNavigate()
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
-  const {authState} = useOktaAuth()
+  const {authState, oktaAuth} = useOktaAuth()
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
   const [userType, setUserType] = useState<string>('enabler')
   const [userTypeFull, setUserTypeFull] = useState('basic_enabler')
@@ -57,6 +57,11 @@ const CreateAccount: FC = () => {
         pathname: '/dashboard',
         search: `?userType=${profile.usertype}&userTypeFull=${profile.accountType}`,
       })
+    } else if (['new', 'pending'].includes(profile?.status)) {
+      navigate({
+        pathname: '/error/inactiveaccount',
+      })
+      // oktaAuth.signOut()
     }
   }, [profile, loaded, navigate])
 
