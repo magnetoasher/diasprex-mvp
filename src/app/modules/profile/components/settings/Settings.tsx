@@ -6,7 +6,11 @@ import {EmailPreferences} from './cards/EmailPreferences'
 import {Notifications} from './cards/Notifications'
 import {DeactivateProfile} from './cards/DeactivateAccount'
 
-export function Settings(isLoading: boolean) {
+interface Props {
+  isLoading: boolean
+}
+
+export function Settings({isLoading}: Props) {
   return (
     <>
       <ProfileDetails isLoading={isLoading} />

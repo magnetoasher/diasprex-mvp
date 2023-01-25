@@ -101,7 +101,11 @@ const Topbar: FC = () => {
         >
           <img src={toAbsoluteUrl(profile?.avatar || blankImg)} alt='metronic' />
         </div>
-        {profile?.usertype === 'admin' ? <AdminHeaderUserMenu /> : <HeaderUserMenu />}
+        {localStorage.getItem('userType') === 'admin' ? (
+          <AdminHeaderUserMenu />
+        ) : (
+          <HeaderUserMenu />
+        )}
 
         {/* end::Toggle */}
       </div>
