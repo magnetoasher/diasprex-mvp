@@ -355,11 +355,11 @@ const ProfileDetails: React.FC<any> = (isLoading) => {
                       <div className='col-lg-8 fv-row'>
                         <select
                           className='form-select form-select form-select-lg fw-bold'
-                          {...formik.getFieldProps('')}
+                          {...formik.getFieldProps('interest')}
                         >
-                          {areaOfInterest.map((e, index) => (
-                            <option key={index} value={e}>
-                              {e}
+                          {areaOptions.map((e, index) => (
+                            <option key={index} value={e.value}>
+                              {e.label}
                             </option>
                           ))}
                         </select>

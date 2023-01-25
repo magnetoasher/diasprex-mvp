@@ -27,6 +27,8 @@ export interface IProfile {
   accountType?: string
   phonenumber?: string
   mobilephone: string
+  address?: address
+  about?: string
   profession?: string
   proffield?: string
   degree?: string
@@ -60,6 +62,7 @@ export interface IProfile {
   twostepauth?: boolean
   remittanceretainer: boolean
   datejoined: string
+  website?: string
   billing?: {
     packagePrice: string
     packageDuration: string

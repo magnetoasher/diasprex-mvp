@@ -10,9 +10,12 @@ import {CheckingAccount, CreditCard} from '../../content/paymentcards'
 import {profileContext} from '../../../../app/context/profile'
 import {createUserProfileAPI} from '../../../../app/modules/profile/redux/ProfileAPI'
 import Swal from 'sweetalert2'
+import {SubscriptionPackage} from '../../../../app/modules/auth/registration/components/CreateAccountWizardHelper'
+import {useSelector} from 'react-redux'
 
 const UpgradePlanHorizontal: FC = () => {
   const {profile} = useContext(profileContext)
+  const subscriptionPackage: SubscriptionPackage = useSelector((state) => state.subscriptionpackage)
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(upgradePlanSchemas[0])
@@ -20,9 +23,9 @@ const UpgradePlanHorizontal: FC = () => {
   const [isSubmitButton, setSubmitButton] = useState(false)
   const [billingCycle, setBillingCycle] = useState<'month' | 'annual'>('month')
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
-  const [packagePrice, setPackagePrice] = useState(localStorage.getItem('packagePrice'))
-  const [packageDuration, setPackageDuration] = useState(localStorage.getItem('packageDuration'))
-  const [userTypeFull, setUserTypeFull] = useState(localStorage.getItem('userTypeFull'))
+  const [packagePrice, setPackagePrice] = useState(subscriptionPackage.packagePrice)
+  const [packageDuration, setPackageDuration] = useState(subscriptionPackage.packageDuration)
+  const [userTypeFull, setUserTypeFull] = useState(subscriptionPackage.userTypeFull)
   const [userType] = useState(profile?.usertype)
   const [selectedEnabler, setSelectedEnabler] = useState(userTypeFull)
   const [selectedSponsor, setSelectedSponsor] = useState(userTypeFull)
