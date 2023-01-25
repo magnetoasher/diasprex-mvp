@@ -12,13 +12,16 @@ const deactivateProfileSchema = Yup.object().shape({
   confirm: Yup.boolean().oneOf([true], 'Please check the box to deactivate your profile'),
 })
 
-const DeactivateProfile: React.FC<any> = (profile, isLoading) => {
-  const {profile: fetchedProfile} = useContext(profileContext)
+const DeactivateProfile: React.FC<any> = (isLoading) => {
+  const {profile} = useContext(profileContext)
   const [loading, setLoading] = useState(false)
-  const [accountType, setAccountType] = useState(localStorage.getItem('userTypeFull'))
   const [openSweetAlert, setOpenSweetAlert] = useState(false)
   const onConfirm = () => {
-    deactivateProfileAPI({id: fetchedProfile?.id, status: 'suspended'})
+    if (profile?.accountType === 'basic_enabler') {
+      deactivateProfileAPI({id: profile?.id, status: 'suspended'})
+    } else {
+      setOpenSweetAlert(false)
+    }
   }
   const onCancel = () => {
     setOpenSweetAlert(false)
@@ -108,7 +111,7 @@ const DeactivateProfile: React.FC<any> = (profile, isLoading) => {
             show={openSweetAlert}
           >
             <div>
-              {accountType !== 'basic_enabler' ? (
+              {profile?.accountType !== 'basic_enabler' ? (
                 <h3>
                   Please contact the admin at{' '}
                   <a className='btn btn-link' href='#'>
