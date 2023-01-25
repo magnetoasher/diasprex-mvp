@@ -1,20 +1,20 @@
-import { useOktaAuth } from '@okta/okta-react'
+import {useOktaAuth} from '@okta/okta-react'
 import axios from 'axios'
-import { createContext, useEffect, useState } from 'react'
-import { IProfile } from '../modules/auth/registration/components/CreateAccountWizardHelper'
+import {createContext, useEffect, useState} from 'react'
+import {IProfile} from '../modules/auth/registration/components/CreateAccountWizardHelper'
 
 export const profileContext = createContext<{
-  loaded: boolean;
-  profile: IProfile | null;
+  loaded: boolean
+  profile: IProfile | null
 }>({
   loaded: false,
   profile: null,
 })
 
-const ProfileProvider: React.FC = ({ children }) => {
+const ProfileProvider: React.FC = ({children}) => {
   const [loaded, setLoaded] = useState(false)
   const [profile, setProfile] = useState<IProfile | null>(null)
-  const { authState } = useOktaAuth()
+  const {authState} = useOktaAuth()
 
   useEffect(() => {
     if (authState !== null && profile?.id !== authState.accessToken?.claims.uid && !loaded) {
@@ -24,17 +24,14 @@ const ProfileProvider: React.FC = ({ children }) => {
         )
         .then((res) => {
           const newProfile = res.data.data[0]
+          console.log('NewProfile', newProfile)
           setProfile(newProfile)
           setLoaded(true)
-        });
+        })
     }
   }, [authState, profile, setProfile, loaded, setLoaded])
 
-  return (
-    <profileContext.Provider value={{loaded, profile}}>
-      {children}
-    </profileContext.Provider>
-  )
+  return <profileContext.Provider value={{loaded, profile}}>{children}</profileContext.Provider>
 }
 
 export default ProfileProvider

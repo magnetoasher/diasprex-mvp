@@ -67,7 +67,7 @@ const PhoneVerification2: FC<Props> = ({userType}) => {
 
   const short_name = locationData?.address_components[0].short_name
 
-  console.log('Shortname', short_name)
+  // console.log('Shortname', short_name)
 
   const handlePhoneValidate = (value: any) => {
     const isValid = isValidPhoneNumber(value)

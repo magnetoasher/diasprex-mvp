@@ -1,5 +1,5 @@
 // @ts-nocheck comment
-import React, {FC, useContext, useEffect, useRef, useState} from 'react'
+import React, {FC, useContext, useEffect, useLayoutEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {KTSVG} from '../../../../../_metronic/helpers'
 import {Step1} from './steps/Step1'
@@ -49,16 +49,20 @@ const CreateAccount: FC = () => {
   const [confirmBtnText, setConfirmBtnText] = useState('Yes')
   const [hideShow, setHideShow] = useState(true)
   const [formValues, setFormValues] = useState<IProfile>({})
-  const { profile, loaded } = useContext(profileContext);
+  const {profile, loaded} = useContext(profileContext)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (loaded === true && profile.status === 'active') {
       navigate({
         pathname: '/dashboard',
         search: `?userType=${profile.usertype}&userTypeFull=${profile.accountType}`,
-      });
+      })
+    } else if (loaded === true && ['new', 'pending'].includes(profile.status)) {
+      navigate({
+        pathname: '/error/inactiveaccount',
+      })
     }
-  }, [profile, loaded, navigate]);
+  }, [profile, loaded, navigate])
 
   const subscriptionpackage: SubscriptionPackage = useSelector((state) => state.subscriptionpackage)
 
@@ -96,7 +100,6 @@ const CreateAccount: FC = () => {
   }
 
   const submitStep = (values: IProfile, actions: FormikActions<FormikValues>) => {
-    const dpxNumber = getUniqueDPXId('DPX')
     if (!stepper.current) {
       return
     }
@@ -133,11 +136,11 @@ const CreateAccount: FC = () => {
           packagePrice: subscriptionpackage.packagePrice,
           packageDuration: subscriptionpackage.packageDuration,
         },
-        status:
-          formValues.subscriptiontier === 'basic_enabler' ||
-          formValues.subscriptiontier === 'super_enabler'
-            ? 'active'
-            : 'new',
+        status: ['basic_enabler', 'standard_enabler', 'super_enabler'].includes(
+          formValues.subscriptiontier
+        )
+          ? 'active'
+          : 'new',
       })
       stepper.current.goNext()
       console.log('ReduxProfileData', formValues, subscriptionpackage, userType, userTypeFull)
@@ -183,7 +186,7 @@ const CreateAccount: FC = () => {
   }, [stepperRef])
 
   const onConfirm = () => {
-    if (stepper.current.currentStepIndex == 6) {
+    if (stepper.current.currentStepIndex === 6) {
       navigate({
         pathname: '/',
       })
@@ -207,6 +210,8 @@ const CreateAccount: FC = () => {
           Loading...
         </div>
       )}
+
+      {/* {loaded && !profile.status && ( */}
       <div
         ref={stepperRef}
         className='stepper stepper-pills stepper-column   d-flex flex-column flex-xl-row flex-row-fluid'
@@ -389,7 +394,10 @@ const CreateAccount: FC = () => {
 
                 {userTypeFull !== 'basic_enabler' && (
                   <div data-kt-stepper-element='content' className='w-xl-800px'>
-                    <AccountVerification userInfo={formValues} subscriptionPackage={subscriptionpackage} />
+                    <AccountVerification
+                      userInfo={formValues}
+                      subscriptionPackage={subscriptionpackage}
+                    />
                   </div>
                 )}
 
@@ -431,6 +439,7 @@ const CreateAccount: FC = () => {
           </Formik>
         </div>
       </div>
+      {/* )} */}
     </div>
   )
 }
