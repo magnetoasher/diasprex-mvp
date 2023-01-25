@@ -1,5 +1,5 @@
 // @ts-nocheck comment
-import {FC, useEffect, useRef, useState} from 'react'
+import {FC, useContext, useEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {KTSVG, toAbsoluteUrl} from '../../../helpers'
 import {StepperComponent} from '../../../assets/ts/components'
@@ -7,16 +7,25 @@ import {Formik, Form, Field, FormikValues} from 'formik'
 import {upgradePlanSchemas, IUpgradePlan, inits} from './UpgradePlanWizardHelper'
 import {UpgradePlan} from './UpgradePlan'
 import {CheckingAccount, CreditCard} from '../../content/paymentcards'
+import {profileContext} from '../../../../app/context/profile'
+import {createUserProfileAPI} from '../../../../app/modules/profile/redux/ProfileAPI'
+import Swal from 'sweetalert2'
 
 const UpgradePlanHorizontal: FC = () => {
+  const {profile} = useContext(profileContext)
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
   const [currentSchema, setCurrentSchema] = useState(upgradePlanSchemas[0])
   const [initValues] = useState<IUpgradePlan>(inits)
   const [isSubmitButton, setSubmitButton] = useState(false)
-  const [userTypeFull, setUserTypeFull] = useState(localStorage.getItem('userTypeFull'))
   const [billingCycle, setBillingCycle] = useState<'month' | 'annual'>('month')
-  const userType = localStorage.getItem('userType')
+  const [selectedIndex, setSelectedIndex] = useState<number>(0)
+  const [packagePrice, setPackagePrice] = useState(localStorage.getItem('packagePrice'))
+  const [packageDuration, setPackageDuration] = useState(localStorage.getItem('packageDuration'))
+  const [userTypeFull, setUserTypeFull] = useState(localStorage.getItem('userTypeFull'))
+  const [userType] = useState(profile?.usertype)
+  const [selectedEnabler, setSelectedEnabler] = useState(userTypeFull)
+  const [selectedSponsor, setSelectedSponsor] = useState(userTypeFull)
 
   const [upgradePackage, setUpgradePackage] = useState()
   const [payMethod, setPayMethod] = useState('credit')
@@ -67,18 +76,34 @@ const UpgradePlanHorizontal: FC = () => {
 
     if (stepper.current.currentStepIndex !== stepper.current.totatStepsNumber) {
       stepper.current.goNext()
+      console.log('upgrade', values)
     } else {
       try {
         const data: IUpgradePlan = {
           ...values,
-          userType: localStorage.getItem('userType'),
-          userTypeFull: localStorage.getItem('userTypeFull'),
-          packageDuration: localStorage.getItem('packageDuration'),
-          packagePrice: localStorage.getItem('packagePrice'),
+          email: profile?.email,
+          userType: userType,
+          userTypeFull: userTypeFull,
+          packageDuration: packageDuration,
+          packagePrice: packagePrice,
         }
-        setUpgradePackage(data)
+        createUserProfileAPI(data).then((res) => {
+          if (res.status === 200) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Successfully done',
+            })
+            setUpgradePackage(data)
+          }
+        })
         console.log(data)
       } catch (errors) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Something went wrong',
+        })
         console.log(errors)
       } finally {
         // navigate({
@@ -152,7 +177,21 @@ const UpgradePlanHorizontal: FC = () => {
                   <Form className='mx-auto w-100 pt-15 pb-10' id='kt_upgrade_plan_form'>
                     <div className='d-flex justify-content-center'>
                       <div className='current ' data-kt-stepper-element='content'>
-                        <UpgradePlan userType={userType} />
+                        <UpgradePlan
+                          userType={userType}
+                          userTypeFull={userTypeFull}
+                          packagePrice={packagePrice}
+                          packageDuration={packageDuration}
+                          selectedEnabler={selectedEnabler}
+                          selectedSponsor={selectedSponsor}
+                          selectedIndex={selectedIndex}
+                          setUserTypeFull={setUserTypeFull}
+                          setPackagePrice={setPackagePrice}
+                          setPackageDuration={setPackageDuration}
+                          setSelectedEnabler={setSelectedEnabler}
+                          setSelectedSponsor={setSelectedSponsor}
+                          setSelectedIndex={setSelectedIndex}
+                        />
                       </div>
 
                       <div data-kt-stepper-element='content'>
@@ -234,27 +273,26 @@ const UpgradePlanHorizontal: FC = () => {
                                           href='../../demo1/dist/pages/apps/customers/view.html'
                                           className='text-gray-800 text-hover-primary'
                                         >
-                                          corp@support.com
+                                          {profile?.email}
                                         </a>
                                       </td>
                                     </tr>
 
                                     <tr>
                                       <td className='text-gray-400'>Customer Name:</td>
-                                      <td className='text-gray-800'>Max Doe</td>
-                                    </tr>
-
-                                    <tr>
-                                      <td className='text-gray-400'>Address:</td>
                                       <td className='text-gray-800'>
-                                        Floor 10, 101 Avenue of the Light Square, New York, NY,
-                                        10050.
+                                        {profile?.fName + ' ' + profile?.lName}
                                       </td>
                                     </tr>
 
                                     <tr>
+                                      <td className='text-gray-400'>Address:</td>
+                                      <td className='text-gray-800'>{profile?.orgAddress}</td>
+                                    </tr>
+
+                                    <tr>
                                       <td className='text-gray-400'>Phone:</td>
-                                      <td className='text-gray-800'>(555) 555-1234</td>
+                                      <td className='text-gray-800'>{profile?.phonenumber}</td>
                                     </tr>
                                   </table>
                                 </div>
@@ -275,14 +313,12 @@ const UpgradePlanHorizontal: FC = () => {
 
                                     <tr>
                                       <td className='text-gray-400'>Subscription Fees:</td>
-                                      <td className='text-gray-800 text-capitalize'>{`$149.99 / ${billingCycle}`}</td>
+                                      <td className='text-gray-800 text-capitalize'>{`$${packagePrice} / ${packageDuration}`}</td>
                                     </tr>
 
                                     <tr>
                                       <td className='text-gray-400'>Billing method:</td>
-                                      <td className='text-gray-800'>
-                                        {billingCycle == 'month' ? 'Monthly' : 'Annually'}
-                                      </td>
+                                      <td className='text-gray-800'>{packageDuration}</td>
                                     </tr>
 
                                     <tr>
@@ -308,8 +344,8 @@ const UpgradePlanHorizontal: FC = () => {
                                       <tbody className='fw-bold text-gray-800'>
                                         <tr>
                                           <td>
-                                            <label className='w-150px text-capitalize'>{`${userType} Bundle`}</label>
-                                            <div className='fw-normal text-gray-600'>{` ${userTypeFull?.replace(
+                                            <label className='w-150px text-capitalize'>{`${profile?.usertype} Bundle`}</label>
+                                            <div className='fw-normal text-gray-600'>{` ${profile?.accountType?.replace(
                                               '_',
                                               ' '
                                             )} bundle`}</div>
@@ -319,7 +355,7 @@ const UpgradePlanHorizontal: FC = () => {
                                               sub_4567_8765
                                             </span>
                                           </td>
-                                          <td className='text-capitalize'>{`$149.99 / ${billingCycle}`}</td>
+                                          <td className='text-capitalize'>{`$${packagePrice} / ${packageDuration}`}</td>
                                         </tr>
                                       </tbody>
                                     </table>

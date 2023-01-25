@@ -8,6 +8,7 @@ const PROFILE_URL = `${API_URL}/profile`
 
 export interface IUserID {
   id: CustomUserClaim | CustomUserClaim[] | ID
+  status?: string
 }
 
 const createUserProfileAPI = (data: IProfile) => {
@@ -16,4 +17,8 @@ const createUserProfileAPI = (data: IProfile) => {
 
 const getUserProfileAPI = (query: IUserID) => axios.get(`${PROFILE_URL}/${query.id}`)
 
-export {createUserProfileAPI, getUserProfileAPI}
+const deactivateProfileAPI = (query: IUserID) => {
+  return axios.put(`${PROFILE_URL}/${query.id}/status?status=${query.status}`,)
+}
+
+export {createUserProfileAPI, getUserProfileAPI, deactivateProfileAPI}

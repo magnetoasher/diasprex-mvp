@@ -8,8 +8,6 @@ import {Link, useNavigate} from 'react-router-dom'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {PasswordMeterComponent} from '../../../../_metronic/assets/ts/components'
 import {VerifyCode} from './VerifyCode'
-import {Groups} from '../../../../enums/groups'
-import {Roles} from '../../../../enums/roles'
 
 const initialValues = {
   firstname: '',
@@ -60,7 +58,7 @@ export function Registration() {
   const completeRegistration = (setStatus, setSubmitting, setLoading) => {
     setLoading(true)
     setTimeout(() => {
-      register(email, firtName, lastName, password, [Groups.BASIC], Roles.BASIC)
+      register(email, firtName, lastName, password)
         .then((data) => {
           setLoading(false)
           navigate('/auth')
