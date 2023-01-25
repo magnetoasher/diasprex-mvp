@@ -55,19 +55,17 @@ const areaOptions = [
   {value: 'underwriting', label: 'Underwriting'},
   {value: 'other', label: 'Other'},
 ]
-const ProfileDetails: React.FC<any> = (profile, isLoading) => {
+const ProfileDetails: React.FC<any> = (isLoading) => {
   const {authState} = useOktaAuth()
   const [data, setData] = useState<IProfile>(initialValues)
-  const {profile: fetchedProfile} = useContext(profileContext)
+  const {profile} = useContext(profileContext)
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_DIASPREX_API_URL}/profile/${fetchedProfile?.id}`)
-      .then((res) => {
-        const newProfile = res.data.data[0]
-        formik.setValues(newProfile)
-      })
-  }, [])
+    axios.get(`${process.env.REACT_APP_DIASPREX_API_URL}/profile/${profile?.id}`).then((res) => {
+      const newProfile = res.data.data[0]
+      formik.setValues(newProfile)
+    })
+  }, [profile])
 
   const updateData = (fieldsToUpdate: Partial<IProfile>): void => {
     const updatedData = Object.assign(data, fieldsToUpdate)
@@ -84,11 +82,11 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
       setLoading(true)
       createUserProfileAPI({
         ...values,
-        id: fetchedProfile?.id ?? '',
-        usertype: fetchedProfile?.usertype ?? '',
-        countryres: fetchedProfile?.countryres ?? '',
-        subscriptiontier: fetchedProfile?.subscriptiontier ?? '',
-        status: fetchedProfile?.status ?? '',
+        id: profile?.id ?? '',
+        usertype: profile?.usertype ?? '',
+        countryres: profile?.countryres ?? '',
+        subscriptiontier: profile?.subscriptiontier ?? '',
+        status: profile?.status ?? '',
       }).then((res) => {
         if (res.status === 200) {
           Swal.fire({
@@ -115,7 +113,7 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
 
   return (
     <>
-      {!profile.profile ? (
+      {!profile ? (
         <ListLoading />
       ) : (
         <div className='card mb-5 mb-xl-10'>
