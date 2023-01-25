@@ -18,10 +18,14 @@ const HeaderUserMenu: FC = () => {
   }
 
   const userBadgeColor =
-    userType === 'sponsor' ? 'primary' : userType === 'admin' ? 'info' : 'success'
+    profile?.usertype === 'sponsor'
+      ? 'primary'
+      : profile?.usertype === 'enabler'
+      ? 'success'
+      : 'info'
 
   useEffect(() => {
-    setUserLabel(profile?.accountType)
+    setUserLabel(profile?.subscriptiontier)
   }, [profile])
 
   const blankImg = '/media/avatars/blank.png'
@@ -90,7 +94,7 @@ const HeaderUserMenu: FC = () => {
               Subscription
             </Link>
           </div>
-          {userType !== 'sponsor' && (
+          {profile?.usertype !== 'sponsor' && (
             <>
               {/* <div className='menu-item px-5'>
                 <Link to={'my_investments'} className='menu-link px-5'>
@@ -98,7 +102,7 @@ const HeaderUserMenu: FC = () => {
                 </Link>
               </div> */}
 
-              <div className='menu-item px-5 my-1'>
+              {/* <div className='menu-item px-5 my-1'>
                 <Link to='/profile/loans' className='menu-link px-5'>
                   Loans
                 </Link>
@@ -107,7 +111,7 @@ const HeaderUserMenu: FC = () => {
                 <Link to='/profile/statements' className='menu-link px-5'>
                   Statements
                 </Link>
-              </div>
+              </div> */}
             </>
           )}
         </div>
@@ -115,7 +119,7 @@ const HeaderUserMenu: FC = () => {
 
       <div className='separator my-2'></div>
 
-      {userType !== 'sponsor' && (
+      {profile?.usertype !== 'sponsor' && (
         <>
           <div
             className='menu-item px-5'
@@ -141,28 +145,7 @@ const HeaderUserMenu: FC = () => {
             </div>
           </div>
 
-          {/* {userTypeFull === 'basic_enabler' && (
-            <div
-              className='menu-item px-5'
-              data-kt-menu-trigger='hover'
-              data-kt-menu-placement='left-start'
-              data-kt-menu-flip='bottom'
-            >
-              <a href='#' className='menu-link px-5'>
-                <span className='menu-title'>Opportunity</span>
-                <span className='menu-arrow'></span>
-              </a>
-              <div className='menu-sub menu-sub-dropdown py-4'>
-                <div className='menu-item px-5'>
-                  <Link to={'my_opportunities'} className='menu-link px-5'>
-                    My Opportunities
-                  </Link>
-                </div>
-              </div>
-            </div>
-          )} */}
-
-          {userTypeFull !== 'business_enabler' && (
+          {profile?.subscriptiontier !== 'business_enabler' && (
             <>
               <div className='separator my-2'></div>
               <div
@@ -205,7 +188,7 @@ const HeaderUserMenu: FC = () => {
           </div>
         </>
       )}
-      {userType === 'sponsor' && (
+      {profile?.usertype === 'sponsor' && (
         <div
           className='menu-item px-5'
           data-kt-menu-trigger='hover'

@@ -18,7 +18,7 @@ import {CountriesCodeList} from '../../../../_metronic/partials/content/selectio
 
 import {VerificationModal} from '../../auth/components/verificationmodal'
 import {PhoneVerificationModal} from '../../auth/components/PhoneVerificationModal'
-// import CountriesCodeList from '../../../../_metronic/partials/content/selectionlists/countries.json'
+
 const editUADSchema = Yup.object().shape({
   fName: Yup.string()
     .min(1, 'Minimum 3 symbols')
@@ -34,8 +34,6 @@ const editUADSchema = Yup.object().shape({
   //   .max(50, 'Maximum 50 symbols')
   //   .required('Email is required'),
   // phone: Yup.string()
-  //   .min(3, 'Minimum 3 symbols')
-  //   .max(50, 'Maximum 50 symbols')
   //   .matches(phoneRegExp, 'Phone number is not valid')
   //   .required('Primary Phone is required'),
   // countryRes: Yup.string().required('Country of Residence is required'),
@@ -75,6 +73,7 @@ export const UadFormPage: FC = () => {
   const [phoneCode, setPhoneCode] = useState('+1')
   const [selectedCountry, setSelectedCountry] = useState('united states')
   const navigate = useNavigate()
+
   const handleFormConfirm = () => {
     Swal.fire({
       text: 'Are you sure all information are entered correctly?',
@@ -105,8 +104,9 @@ export const UadFormPage: FC = () => {
   }
 
   const handlePhoneValidate = (value: any) => {
+    console.log('Button Clicked')
     const isValid = isValidPhoneNumber(value)
-    const PHONEAPI_URL = 'https://...'
+    // const PHONEAPI_URL = 'https://...'
     if (!isValid) {
       Swal.fire({
         text: 'Invalid phone number',
@@ -118,43 +118,9 @@ export const UadFormPage: FC = () => {
         },
       })
     } else {
-      // setIsValidPhone(isValid)
-      // Swal.fire({
-      //   title: 'Enter the 6 digits code sent to (***)-***-****',
-      //   input: 'text',
-      //   inputAttributes: {
-      //     autocapitalize: 'off',
-      //   },
-      //   showCancelButton: true,
-      //   confirmButtonText: 'ok',
-      //   showLoaderOnConfirm: true,
-      //   preConfirm: (login) => {
-      //     return fetch(PHONEAPI_URL)
-      //       .then((response) => {
-      //         if (!response.ok) {
-      //           throw new Error(response.statusText)
-      //         }
-      //         return response.json()
-      //       })
-      //       .catch((error) => {
-      //         Swal.showValidationMessage(`Invalid Code: ${error}`)
-      //       })
-      //   },
-      //   allowOutsideClick: () => !Swal.isLoading(),
-      // }).then((result) => {
-      //   if (result.isConfirmed) {
-      //     Swal.fire({
-      //       title: `${result.value.login}'s avatar`,
-      //       imageUrl: result.value.avatar_url,
-      //     })
-      //   }
-      // })
+      setShowVerifyPhone(isValid)
     }
   }
-
-  useEffect(() => {
-    setShowVerifyPhone(true)
-  }, [isValidPhone])
 
   const handleFormSubmit = () => {
     formik.submitForm()
@@ -429,59 +395,28 @@ export const UadFormPage: FC = () => {
                 </div>
               )}
             </div>
-            {!isValidPhone && (
+            {!isPhoneConfirmed && !isValidPhone && (
               <div
                 className='btn btn-primary btn-active-ligth-success'
-                data-bs-toggle='modal'
-                data-bs-target='#modal_phoneVerification'
-                // onClick={async () =>
-                //   await handlePhoneValidate(`${phoneCode}${formik.values.phone}`)
-                // }
+                onClick={async () =>
+                  await handlePhoneValidate(`${phoneCode}${formik.values.phone}`)
+                }
               >
                 Continue
               </div>
             )}
 
-            {/* <div className=' fv-row mb-10'>
-              {!isValidPhone && (
-                <div
-                  className='btn btn-primary btn-active-ligth-success'
-                  onClick={async () =>
-                    await handlePhoneValidate(`${phoneCode}${formik.values.phone}`)
-                  }
-                >
-                  Continue
-                </div>
-              )}
-
-              {isValidPhone && (
-                <div
-                  className='btn btn-success btn-active-ligth-success'
-                  data-bs-target='#modal_phoneVerification'
-                  data-bs-toggle='modal'
-                >
-                  Verify
-                </div>
-              )}
-            </div> */}
-
-            <VerificationModal
-              id='modal_phoneVerification'
-              headertext='Verify Your Phone Number'
-              title='Please enter the 6 digit code sent to your device'
-              labeltext='Enter your mobile phone number with country code'
-              placeholder='Mobile number with country code...'
-            />
-
-            {/* <PhoneVerificationModal
+            <PhoneVerificationModal
+              showVerifyPhone={showVerifyPhone}
+              setShowVerifyPhone={setShowVerifyPhone}
               id='modal_phoneVerification'
               headertext='Verify Your Phone Number'
               title='Please enter the 6 digit code sent to your device'
               labeltext='Enter your mobile phone number with country code'
               placeholder='Enter the code sent to (xxx)-XXX-XXXX'
-            /> */}
+            />
 
-            {isValidPhone && (
+            {isPhoneConfirmed && isValidPhone && (
               <>
                 <div className=' fv-row mb-10'>
                   <label className='form-label text-muted required fw-bold fs-6 mb-2'>

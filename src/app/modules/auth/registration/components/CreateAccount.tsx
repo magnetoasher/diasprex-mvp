@@ -61,7 +61,7 @@ const CreateAccount: FC = () => {
       navigate({
         pathname: '/error/inactiveaccount',
       })
-      // oktaAuth.signOut()
+      oktaAuth.signOut()
     }
   }, [profile, loaded, navigate])
 

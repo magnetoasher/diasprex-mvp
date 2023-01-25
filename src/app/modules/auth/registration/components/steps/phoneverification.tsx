@@ -8,6 +8,7 @@ import {
   SponsorCountryList,
 } from '../../../../../../_metronic/partials/content/selectionlists'
 import {VerificationModal} from '../../../components/verificationmodal'
+import {PhoneVerificationModal} from '../../../components/PhoneVerificationModal'
 
 type Props = {
   userType?: any
@@ -19,21 +20,13 @@ const PhoneVerification: FC<Props> = ({userType}) => {
   const [phoneCode, setPhoneCode] = useState('+1')
   const [selectedCountry, setSelectedCountry] = useState('united states')
   const CountriesList = userType === 'enabler' ? CountriesCodeList : SponsorCountryList
+  const [showVerifyPhone, setShowVerifyPhone] = useState(false)
+  const [isPhoneConfirmed, setIsPhoneConfirmed] = useState(false)
   const handlePhoneValidate = (value: any) => {
+    console.log('Button Clicked')
     const isValid = isValidPhoneNumber(value)
-
-    if (isValid) {
-      setIsValidPhone(isValid)
-      Swal.fire({
-        text: 'Thank you, but we still need to verify your phone',
-        icon: 'success',
-        buttonsStyling: false,
-        confirmButtonText: 'OK',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-      })
-    } else
+    // const PHONEAPI_URL = 'https://...'
+    if (!isValid) {
       Swal.fire({
         text: 'Invalid phone number',
         icon: 'warning',
@@ -43,6 +36,9 @@ const PhoneVerification: FC<Props> = ({userType}) => {
           confirmButton: 'btn btn-primary',
         },
       })
+    } else {
+      setShowVerifyPhone(isValid)
+    }
   }
   return (
     <div className='w-100'>
@@ -109,14 +105,14 @@ const PhoneVerification: FC<Props> = ({userType}) => {
                 </div>
               </div>
             </div>
-            <Field
+            <input
               type='text'
               name='phonenumber'
               className='form-control form-control-lg'
               placeholder='Enter your phone number'
-              // onChange={(e: any) => {
-              //   setPhoneNumber(e.target.value)
-              // }}
+              onChange={(e: any) => {
+                setPhoneNumber(e.target.value)
+              }}
             />
           </span>
         </div>
@@ -126,36 +122,24 @@ const PhoneVerification: FC<Props> = ({userType}) => {
         </div>
       </div>
 
-      {!isValidPhone && (
+      {!isPhoneConfirmed && !isValidPhone && (
         <div
-          className='btn btn-light btn-active-ligth-success'
+          className='btn btn-primary btn-active-ligth-success'
           onClick={async () => await handlePhoneValidate(`${phoneCode}${phoneNumber}`)}
         >
-          Verify Phone Number
+          Verify Phone
         </div>
       )}
-      {/* <div className=' fv-row mb-10'>
-              {!isValidPhone && (
-                <div
-                  className='btn btn-primary btn-active-ligth-success'
-                  onClick={async () =>
-                    await handlePhoneValidate(`${phoneCode}${formik.values.phone}`)
-                  }
-                >
-                  Continue
-                </div>
-              )}
 
-              {isValidPhone && (
-                <div
-                  className='btn btn-success btn-active-ligth-success'
-                  data-bs-target='#modal_phoneVerification'
-                  data-bs-toggle='modal'
-                >
-                  Verify
-                </div>
-              )}
-            </div> */}
+      <PhoneVerificationModal
+        showVerifyPhone={showVerifyPhone}
+        setShowVerifyPhone={setShowVerifyPhone}
+        id='modal_phoneVerification'
+        headertext='Verify Your Phone Number'
+        title='Please enter the 6 digit code sent to your device'
+        labeltext='Enter your mobile phone number with country code'
+        placeholder='Enter the code sent to (xxx)-XXX-XXXX'
+      />
 
       {/* <div className='mb-10 fv-row'>
         <label className='form-label mb-3'>Phone Number</label>
