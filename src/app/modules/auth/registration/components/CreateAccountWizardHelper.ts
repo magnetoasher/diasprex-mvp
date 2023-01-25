@@ -27,7 +27,7 @@ export interface IProfile {
   accountType?: string
   phonenumber?: string
   mobilephone: string
-  address?: string
+  address?: address
   about?: string
   profession?: string
   proffield?: string

@@ -146,7 +146,9 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
                     >
                       <KTSVG
                         path='/media/icons/duotune/general/gen026.svg'
-                        className='svg-icon-1 svg-icon-success'
+                        className={`svg-icon-1 svg-icon-${
+                          userProfile?.verified ? 'success' : 'gray-400'
+                        }`}
                       />
                     </a>
                   )}
@@ -162,22 +164,26 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
                 <div className='d-flex justify-content-center align-items-center'>
                   <span className='symbol symbol-30px w-30px bg-light me-2'>
                     <img
-                      src={toAbsoluteUrl('/media/flags/ghana.svg')}
+                      src={toAbsoluteUrl(
+                        `/media/flags/${userProfile?.countryorig?.toLowerCase()}.svg`
+                      )}
                       className='fs-6 fw-bold'
-                      alt='ghana'
+                      alt={userProfile?.countryorig?.toLowerCase()}
                       data-toggle='tooltips'
-                      title='Ghana'
+                      title={userProfile?.countryorig?.toUpperCase()}
                       data-bs-placement='bottom'
                     />
                   </span>
-                  {userType !== 'sponsor' && (
+                  {userProfile?.usertype !== 'sponsor' && (
                     <span className='symbol symbol-30px w-30px bg-light me-2'>
                       <img
-                        src={toAbsoluteUrl('/media/flags/united states.svg')}
+                        src={toAbsoluteUrl(
+                          `/media/flags/${userProfile?.countryres.toLowerCase()}.svg`
+                        )}
                         className='fs-6 fw-bold'
-                        alt='united states'
+                        alt={userProfile?.countryres.toLowerCase()}
                         data-toggle='tooltips'
-                        title='United States'
+                        title={userProfile?.countryres.toUpperCase()}
                         data-bs-placement='bottom'
                       />
                     </span>
@@ -187,7 +193,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
             </div>
           </div>
 
-          {userType === 'sponsor' ? (
+          {userProfile?.usertype === 'sponsor' ? (
             <>
               <div className=' row d-flex g-5'>
                 <div className='separator me-0 mb-3'></div>
@@ -345,7 +351,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
 
           <div className='row gy-3 py-3'>
             <label className='col-lg-12 fw-bolder  '>About</label>
-            <EditTextarea rows={5} value={userProfile?.mInitial} />
+            <EditTextarea rows={5} value={userProfile?.about} />
           </div>
 
           <div className='row gy-3 py-3'>
@@ -374,7 +380,42 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
 
                   <div className='col-lg-7'>
                     <a href='#' className='fs-6 text-muted'>
-                      {userProfile?.orgAddress}
+                      {userProfile?.accountType &&
+                      ['basic_enabler', 'standard_enabler', 'super_enabler'].includes(
+                        userProfile?.accountType
+                      ) ? (
+                        <ul style={{listStyle: 'none'}}>
+                          <li>{userProfile?.address?.addressLine1}</li>
+                          {userProfile?.address?.addressLine2 && (
+                            <li>{userProfile?.address?.addressLine2}</li>
+                          )}
+                          <li>
+                            <li>
+                              {userProfile?.address?.city}{' '}
+                              <li>
+                                {userProfile?.address?.state},{' '}
+                                <li>{userProfile?.address?.postCode}</li>
+                              </li>
+                            </li>
+                          </li>
+                        </ul>
+                      ) : (
+                        <ul style={{listStyle: 'none'}}>
+                          <li>{userProfile?.orgAddress?.addressLine1}</li>
+                          {userProfile?.orgAddress?.addressLine2 && (
+                            <li>{userProfile?.orgAddress?.addressLine2}</li>
+                          )}
+                          <li>
+                            <li>
+                              {userProfile?.orgAddress?.city}{' '}
+                              <li>
+                                {userProfile?.orgAddress?.state},{' '}
+                                <li>{userProfile?.orgAddress?.postCode}</li>
+                              </li>
+                            </li>
+                          </li>
+                        </ul>
+                      )}
                     </a>
                   </div>
                 </div>
@@ -395,11 +436,11 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
                   </div>
                 </div>
                 <div className='row mb-2'>
-                  <label className='col-lg-5 fw-bolder '>Diasprex</label>
+                  <label className='col-lg-5 fw-bolder '>Diasprex ID:</label>
 
                   <div className='col-lg-7'>
                     <a href='#' className='fs-6 text-muted'>
-                      diasprex.com
+                      {userProfile?.dpxid}
                     </a>
                   </div>
                 </div>
