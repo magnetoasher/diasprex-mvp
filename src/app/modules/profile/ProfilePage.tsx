@@ -99,9 +99,7 @@ const ProfilePage: React.FC<PropsFromRedux> = (props) => {
             <>
               <PageTitle breadcrumbs={profileBreadCrumbs}>Settings</PageTitle>
               <Settings
-                profile={profile}
                 isLoading={props.profile.isLoading}
-                getProfile={getProfile}
               />
             </>
           }

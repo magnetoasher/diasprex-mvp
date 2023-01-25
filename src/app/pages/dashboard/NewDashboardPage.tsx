@@ -329,7 +329,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
                   </label>
 
                   <div className='col-lg-7'>
-                    <EditText value={userProfile?.orgIndustry} />
+                    <EditText value={userProfile?.industry} />
                   </div>
                 </div>
                 <div className='row mb-2 d-flex align-items-center'>
@@ -374,7 +374,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
 
                   <div className='col-lg-7'>
                     <a href='#' className='fs-6 text-muted'>
-                      {userProfile?.countryres}
+                      {userProfile?.orgAddress}
                     </a>
                   </div>
                 </div>

@@ -1,24 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { toAbsoluteUrl } from '../../../../../../_metronic/helpers'
+import React, {useContext, useEffect, useState} from 'react'
+import {toAbsoluteUrl} from '../../../../../../_metronic/helpers'
 // import { IProfileDetails, profileDetailsInitValues as initialValues } from '../SettingsModel'
 import {
   IProfile,
   inits as initialValues,
 } from '../../../../auth/registration/components/CreateAccountWizardHelper'
 import * as Yup from 'yup'
-import { useFormik } from 'formik'
+import {useFormik} from 'formik'
 import axios from 'axios'
-import { useOktaAuth } from '@okta/okta-react'
+import {useOktaAuth} from '@okta/okta-react'
 import {
   CountryList,
   YearList,
   StateListUS,
 } from '../../../../../../_metronic/partials/content/selectionlists'
-import { Field, ErrorMessage } from 'formik'
+import {Field, ErrorMessage} from 'formik'
 
-import { ListLoading } from '../../../../apps/admin-mgt-apps/core/loading/ListLoading'
-import { profileContext } from '../../../../../context/profile'
-import { createUserProfileAPI } from '../../../redux/ProfileAPI'
+import {ListLoading} from '../../../../apps/admin-mgt-apps/core/loading/ListLoading'
+import {profileContext} from '../../../../../context/profile'
+import {createUserProfileAPI} from '../../../redux/ProfileAPI'
 import Swal from 'sweetalert2'
 
 const profileDetailsSchema = Yup.object().shape({
@@ -35,41 +35,39 @@ const profileDetailsSchema = Yup.object().shape({
   // degree: Yup.string().required('Degree is required'),
 })
 const areaOptions = [
-  { value: 'acturarial', label: 'Acturarial' },
-  { value: 'analytics & research', label: 'Analytics & Research' },
-  { value: 'administrative/clerical', label: 'Administrative/Clerical' },
-  { value: 'business intellegence & marketing', label: 'Business Intellegence & Marketing' },
-  { value: 'claim', label: 'Claims' },
-  { value: 'communications', label: 'Communications' },
-  { value: 'customer service', label: 'Customer Service' },
-  { value: 'corporate service', label: 'Corporate Service' },
-  { value: 'human resources', label: 'Human Resources' },
-  { value: 'legal', label: 'legal' },
-  { value: 'finance and accounting', label: 'Finance and Accounting' },
-  { value: 'nurse', label: 'Nursing' },
-  { value: 'marketing', label: 'Marketing' },
-  { value: 'project management', label: 'Project Management' },
-  { value: 'operations', label: 'Operations' },
-  { value: 'sales', label: 'Sales' },
-  { value: 'technology', label: 'Technology' },
-  { value: 'underwriting', label: 'Underwriting' },
-  { value: 'other', label: 'Other' },
+  {value: 'acturarial', label: 'Acturarial'},
+  {value: 'analytics & research', label: 'Analytics & Research'},
+  {value: 'administrative/clerical', label: 'Administrative/Clerical'},
+  {value: 'business intellegence & marketing', label: 'Business Intellegence & Marketing'},
+  {value: 'claim', label: 'Claims'},
+  {value: 'communications', label: 'Communications'},
+  {value: 'customer service', label: 'Customer Service'},
+  {value: 'corporate service', label: 'Corporate Service'},
+  {value: 'human resources', label: 'Human Resources'},
+  {value: 'legal', label: 'legal'},
+  {value: 'finance and accounting', label: 'Finance and Accounting'},
+  {value: 'nurse', label: 'Nursing'},
+  {value: 'marketing', label: 'Marketing'},
+  {value: 'project management', label: 'Project Management'},
+  {value: 'operations', label: 'Operations'},
+  {value: 'sales', label: 'Sales'},
+  {value: 'technology', label: 'Technology'},
+  {value: 'underwriting', label: 'Underwriting'},
+  {value: 'other', label: 'Other'},
 ]
-const ProfileDetails: React.FC<any> = (profile, isLoading) => {
-  const { authState } = useOktaAuth()
+const ProfileDetails: React.FC<any> = (isLoading) => {
+  const {authState} = useOktaAuth()
   const [data, setData] = useState<IProfile>(initialValues)
-  const { profile: fetchedProfile } = useContext(profileContext)
+  const {profile} = useContext(profileContext)
 
   useEffect(() => {
     axios
-      .get(
-        `${process.env.REACT_APP_DIASPREX_API_URL}/profile/${fetchedProfile?.id}`
-      )
+      .get(`${process.env.REACT_APP_DIASPREX_API_URL}/profile/${profile?.id}`)
       .then((res) => {
         const newProfile = res.data.data[0]
         formik.setValues(newProfile)
-      });
-  }, [])
+      })
+  }, [profile])
 
   const updateData = (fieldsToUpdate: Partial<IProfile>): void => {
     const updatedData = Object.assign(data, fieldsToUpdate)
@@ -86,24 +84,24 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
       setLoading(true)
       createUserProfileAPI({
         ...values,
-        id: fetchedProfile?.id ?? '',
-        usertype: fetchedProfile?.usertype ?? '',
-        countryres: fetchedProfile?.countryres ?? '',
-        subscriptiontier: fetchedProfile?.subscriptiontier ?? '',
-        status: fetchedProfile?.status ?? ''
+        id: profile?.id ?? '',
+        usertype: profile?.usertype ?? '',
+        countryres: profile?.countryres ?? '',
+        subscriptiontier: profile?.subscriptiontier ?? '',
+        status: profile?.status ?? '',
       }).then((res) => {
         if (res.status === 200) {
           Swal.fire({
             icon: 'success',
             title: 'Success',
             text: 'Successfully done',
-          });
+          })
         } else {
           Swal.fire({
             icon: 'error',
             title: 'Error',
             text: 'Something went wrong',
-          });
+          })
         }
       })
       setData(values)
@@ -117,7 +115,7 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
 
   return (
     <>
-      {!profile.profile ? (
+      {!profile ? (
         <ListLoading />
       ) : (
         <div className='card mb-5 mb-xl-10'>
@@ -143,7 +141,7 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                     <div
                       className='image-input image-input-outline'
                       data-kt-image-input='true'
-                      style={{ backgroundImage: `url(${toAbsoluteUrl(profile.avatar)})` }}
+                      style={{backgroundImage: `url(${toAbsoluteUrl(profile.avatar)})`}}
                     >
                       <div
                         className='image-input-wrapper w-125px h-125px'
@@ -805,7 +803,7 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
                 <button type='submit' className='btn btn-primary' disabled={loading}>
                   {!loading && 'Save Changes'}
                   {loading && (
-                    <span className='indicator-progress' style={{ display: 'block' }}>
+                    <span className='indicator-progress' style={{display: 'block'}}>
                       Please wait...{' '}
                       <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
                     </span>
@@ -820,4 +818,4 @@ const ProfileDetails: React.FC<any> = (profile, isLoading) => {
   )
 }
 
-export { ProfileDetails }
+export {ProfileDetails}

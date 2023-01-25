@@ -21,6 +21,7 @@ export interface IProfile {
   mInitial?: string
   avatar?: string
   email: string
+  industry?: string
   countryorig?: string
   countryres: string
   accountType?: string
