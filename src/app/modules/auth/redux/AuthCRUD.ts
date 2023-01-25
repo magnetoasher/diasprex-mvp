@@ -9,7 +9,7 @@ export const REQUEST_PASSWORD_URL = `${API_URL}/forgot_password`
 
 
 // Server should return AuthModel
-export function register(email: string, firstName: string, lastName: string, password: string, groups: string[], role: string) {
+export function register(email: string, firstName: string, lastName: string, password: string) {
   const axiosOptions = {
     url: "/users/create",
     baseURL: Constants.API_BASE_URL,
@@ -21,11 +21,6 @@ export function register(email: string, firstName: string, lastName: string, pas
       firstName,
       lastName,
       email,
-      phone: '',
-      address: '',
-      industry: '',
-      groups,
-      role,
       password,
     },
   };
