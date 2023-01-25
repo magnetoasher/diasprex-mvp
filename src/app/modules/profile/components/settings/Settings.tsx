@@ -6,15 +6,15 @@ import {EmailPreferences} from './cards/EmailPreferences'
 import {Notifications} from './cards/Notifications'
 import {DeactivateProfile} from './cards/DeactivateAccount'
 
-export function Settings(isLoading: boolean) {
+export function Settings(props: any) {
   return (
     <>
-      <ProfileDetails isLoading={isLoading} />
+      <ProfileDetails isLoading={props.isLoading} />
       <SignInMethod />
       {/* <ConnectedProfiles /> */}
       {/* <EmailPreferences /> */}
       {/* <Notifications /> */}
-      <DeactivateProfile isLoading={isLoading} />
+      <DeactivateProfile isLoading={props.isLoading} />
     </>
   )
 }

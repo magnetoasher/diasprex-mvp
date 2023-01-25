@@ -61,12 +61,10 @@ const ProfileDetails: React.FC<any> = (isLoading) => {
   const {profile} = useContext(profileContext)
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_DIASPREX_API_URL}/profile/${profile?.id}`)
-      .then((res) => {
-        const newProfile = res.data.data[0]
-        formik.setValues(newProfile)
-      })
+    axios.get(`${process.env.REACT_APP_DIASPREX_API_URL}/profile/${profile?.id}`).then((res) => {
+      const newProfile = res.data.data[0]
+      formik.setValues(newProfile)
+    })
   }, [profile])
 
   const updateData = (fieldsToUpdate: Partial<IProfile>): void => {
@@ -357,11 +355,11 @@ const ProfileDetails: React.FC<any> = (isLoading) => {
                       <div className='col-lg-8 fv-row'>
                         <select
                           className='form-select form-select form-select-lg fw-bold'
-                          {...formik.getFieldProps('')}
+                          {...formik.getFieldProps('interest')}
                         >
-                          {areaOfInterest.map((e, index) => (
-                            <option key={index} value={e}>
-                              {e}
+                          {areaOptions.map((e, index) => (
+                            <option key={index} value={e.value}>
+                              {e.label}
                             </option>
                           ))}
                         </select>

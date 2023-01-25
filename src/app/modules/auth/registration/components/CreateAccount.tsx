@@ -49,16 +49,16 @@ const CreateAccount: FC = () => {
   const [confirmBtnText, setConfirmBtnText] = useState('Yes')
   const [hideShow, setHideShow] = useState(true)
   const [formValues, setFormValues] = useState<IProfile>({})
-  const { profile, loaded } = useContext(profileContext);
+  const {profile, loaded} = useContext(profileContext)
 
   useEffect(() => {
     if (loaded === true && profile.status === 'active') {
       navigate({
         pathname: '/dashboard',
         search: `?userType=${profile.usertype}&userTypeFull=${profile.accountType}`,
-      });
+      })
     }
-  }, [profile, loaded, navigate]);
+  }, [profile, loaded, navigate])
 
   const subscriptionpackage: SubscriptionPackage = useSelector((state) => state.subscriptionpackage)
 
@@ -160,13 +160,13 @@ const CreateAccount: FC = () => {
           } else
             navigate({
               pathname: '/dashboard',
-              search: `?user=${dpxid}&userType=${userType}&userTypeFull=${userTypeFull}`,
+              search: `?user=${formValues.dpxid}&userType=${userType}&userTypeFull=${userTypeFull}`,
             })
           actions.resetForm()
         } else {
           navigate({
             pathname: '/dashboard',
-            search: `?user=${dpxid}&userType=${userType}&userTypeFull=${userTypeFull}`,
+            search: `?user=${formValues.dpxid}&userType=${userType}&userTypeFull=${userTypeFull}`,
           })
           actions.resetForm()
         }
@@ -389,7 +389,10 @@ const CreateAccount: FC = () => {
 
                 {userTypeFull !== 'basic_enabler' && (
                   <div data-kt-stepper-element='content' className='w-xl-800px'>
-                    <AccountVerification userInfo={formValues} subscriptionPackage={subscriptionpackage} />
+                    <AccountVerification
+                      userInfo={formValues}
+                      subscriptionPackage={subscriptionpackage}
+                    />
                   </div>
                 )}
 
