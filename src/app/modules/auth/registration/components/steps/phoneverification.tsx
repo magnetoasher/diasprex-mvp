@@ -19,21 +19,13 @@ const PhoneVerification: FC<Props> = ({userType}) => {
   const [phoneCode, setPhoneCode] = useState('+1')
   const [selectedCountry, setSelectedCountry] = useState('united states')
   const CountriesList = userType === 'enabler' ? CountriesCodeList : SponsorCountryList
+  const [showVerifyPhone, setShowVerifyPhone] = useState(false)
+  const [isPhoneConfirmed, setIsPhoneConfirmed] = useState(false)
   const handlePhoneValidate = (value: any) => {
+    console.log('Button Clicked')
     const isValid = isValidPhoneNumber(value)
-
-    if (isValid) {
-      setIsValidPhone(isValid)
-      Swal.fire({
-        text: 'Thank you, but we still need to verify your phone',
-        icon: 'success',
-        buttonsStyling: false,
-        confirmButtonText: 'OK',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-      })
-    } else
+    // const PHONEAPI_URL = 'https://...'
+    if (!isValid) {
       Swal.fire({
         text: 'Invalid phone number',
         icon: 'warning',
@@ -43,6 +35,9 @@ const PhoneVerification: FC<Props> = ({userType}) => {
           confirmButton: 'btn btn-primary',
         },
       })
+    } else {
+      setShowVerifyPhone(isValid)
+    }
   }
   return (
     <div className='w-100'>
@@ -109,14 +104,14 @@ const PhoneVerification: FC<Props> = ({userType}) => {
                 </div>
               </div>
             </div>
-            <Field
+            <input
               type='text'
               name='phonenumber'
               className='form-control form-control-lg'
               placeholder='Enter your phone number'
-              // onChange={(e: any) => {
-              //   setPhoneNumber(e.target.value)
-              // }}
+              onChange={(e: any) => {
+                setPhoneNumber(e.target.value)
+              }}
             />
           </span>
         </div>
@@ -126,12 +121,12 @@ const PhoneVerification: FC<Props> = ({userType}) => {
         </div>
       </div>
 
-      {!isValidPhone && (
+      {!isPhoneConfirmed && !isValidPhone && (
         <div
-          className='btn btn-light btn-active-ligth-success'
+          className='btn btn-primary btn-active-ligth-success'
           onClick={async () => await handlePhoneValidate(`${phoneCode}${phoneNumber}`)}
         >
-          Verify Phone Number
+          Verify Phone
         </div>
       )}
       {/* <div className=' fv-row mb-10'>
