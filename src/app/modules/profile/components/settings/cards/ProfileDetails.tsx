@@ -71,7 +71,6 @@ const ProfileDetails: React.FC<any> = (isLoading) => {
     const updatedData = Object.assign(data, fieldsToUpdate)
     setData(updatedData)
   }
-  const [areaOfInterest, setAreaOfInterest] = useState(['Web', 'App', 'Mobile'])
 
   const [loading, setLoading] = useState(false)
   const formik = useFormik<IProfile>({
@@ -107,9 +106,6 @@ const ProfileDetails: React.FC<any> = (isLoading) => {
       setLoading(false)
     },
   })
-
-  let subscriptiontier = localStorage.getItem('userTypeFull')
-  let usertype = localStorage.getItem('userType')
 
   return (
     <>
@@ -305,7 +301,7 @@ const ProfileDetails: React.FC<any> = (isLoading) => {
                   </div>
                 </div>
 
-                {usertype !== 'sponsor' && (
+                {profile?.usertype !== 'sponsor' && (
                   <>
                     <div className='row mb-6'>
                       <label className='col-lg-4 col-form-label required fw-bold fs-6'>
@@ -373,200 +369,201 @@ const ProfileDetails: React.FC<any> = (isLoading) => {
                   </>
                 )}
 
-                {usertype !== 'sponsor' && subscriptiontier === 'business_enabler' && (
-                  <>
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label required fw-bold fs-6'>
-                        Name of Business
-                      </label>
-                      <div className='col-lg-8 fv-row'>
-                        <input
-                          type='text'
-                          className='form-control form-control-lg form-control'
-                          placeholder='Company name'
-                          {...formik.getFieldProps('orgName')}
-                          name='orgName'
-                        />
-                        {formik.touched.orgName && formik.errors.orgName && (
-                          <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.orgName}</div>
-                          </div>
-                        )}
+                {profile?.usertype !== 'sponsor' &&
+                  profile?.subscriptiontier === 'business_enabler' && (
+                    <>
+                      <div className='row mb-6'>
+                        <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                          Name of Business
+                        </label>
+                        <div className='col-lg-8 fv-row'>
+                          <input
+                            type='text'
+                            className='form-control form-control-lg form-control'
+                            placeholder='Company name'
+                            {...formik.getFieldProps('orgName')}
+                            name='orgName'
+                          />
+                          {formik.touched.orgName && formik.errors.orgName && (
+                            <div className='fv-plugins-message-container'>
+                              <div className='fv-help-block'>{formik.errors.orgName}</div>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
 
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label required fw-bold fs-6'>
-                        Role at the Organization
-                      </label>
-                      <div className='col-lg-8 fv-row'>
-                        <input
-                          type='text'
-                          className='form-control form-control-lg form-control'
-                          placeholder='Company name'
-                          {...formik.getFieldProps('orgRole')}
-                          name='orgRole'
-                        />
-                        {formik.touched.orgRole && formik.errors.orgRole && (
-                          <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.orgRole}</div>
-                          </div>
-                        )}
+                      <div className='row mb-6'>
+                        <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                          Role at the Organization
+                        </label>
+                        <div className='col-lg-8 fv-row'>
+                          <input
+                            type='text'
+                            className='form-control form-control-lg form-control'
+                            placeholder='Company name'
+                            {...formik.getFieldProps('orgRole')}
+                            name='orgRole'
+                          />
+                          {formik.touched.orgRole && formik.errors.orgRole && (
+                            <div className='fv-plugins-message-container'>
+                              <div className='fv-help-block'>{formik.errors.orgRole}</div>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
 
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label required fw-bold fs-6'>
-                        Business Physical Address
-                      </label>
-                      <div className='col-lg-8 fv-row'>
-                        <input
-                          type='text'
-                          className='form-control form-control-lg form-control'
-                          placeholder='Business Physical Address'
-                          {...formik.getFieldProps('orgAddress')}
-                          name='orgAddress'
-                        />
-                        {formik.touched.orgAddress && formik.errors.orgAddress && (
-                          <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.orgAddress}</div>
-                          </div>
-                        )}
+                      <div className='row mb-6'>
+                        <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                          Business Physical Address
+                        </label>
+                        <div className='col-lg-8 fv-row'>
+                          <input
+                            type='text'
+                            className='form-control form-control-lg form-control'
+                            placeholder='Business Physical Address'
+                            {...formik.getFieldProps('orgAddress')}
+                            name='orgAddress'
+                          />
+                          {formik.touched.orgAddress && formik.errors.orgAddress && (
+                            <div className='fv-plugins-message-container'>
+                              <div className='fv-help-block'>{formik.errors.orgAddress}</div>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label required fw-bold fs-6'>
-                        {' '}
-                        Business Mailing address
-                      </label>
-                      <div className='col-lg-8 fv-row'>
-                        <input
-                          type='text'
-                          className='form-control form-control-lg form-control'
-                          placeholder='Business Mailing Address'
-                          {...formik.getFieldProps('orgMailingAddress')}
-                          name='orgMailingAddress'
-                        />
-                        {formik.touched.orgMailingAddress && formik.errors.orgMailingAddress && (
-                          <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.orgMailingAddress}</div>
-                          </div>
-                        )}
+                      <div className='row mb-6'>
+                        <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                          {' '}
+                          Business Mailing address
+                        </label>
+                        <div className='col-lg-8 fv-row'>
+                          <input
+                            type='text'
+                            className='form-control form-control-lg form-control'
+                            placeholder='Business Mailing Address'
+                            {...formik.getFieldProps('orgMailingAddress')}
+                            name='orgMailingAddress'
+                          />
+                          {formik.touched.orgMailingAddress && formik.errors.orgMailingAddress && (
+                            <div className='fv-plugins-message-container'>
+                              <div className='fv-help-block'>{formik.errors.orgMailingAddress}</div>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
 
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label required fw-bold fs-6'>
-                        Industry
-                      </label>
-                      <div className='col-lg-8 fv-row'>
-                        <select
-                          className='form-select form-select form-select-lg fw-bold'
-                          {...formik.getFieldProps('orgIndustry')}
-                          name='orgIndustry'
-                        >
-                          <option value=''>Select Closest to Your Industry...</option>
-                          <option value='AF'>Agriculture</option>
-                          {/* <option value='AX'>Manufacturing</option>
+                      <div className='row mb-6'>
+                        <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                          Industry
+                        </label>
+                        <div className='col-lg-8 fv-row'>
+                          <select
+                            className='form-select form-select form-select-lg fw-bold'
+                            {...formik.getFieldProps('orgIndustry')}
+                            name='orgIndustry'
+                          >
+                            <option value=''>Select Closest to Your Industry...</option>
+                            <option value='AF'>Agriculture</option>
+                            {/* <option value='AX'>Manufacturing</option>
                           <option value='AL'>Education</option>
                           <option value='DZ'>Transportation</option>
                           <option value='AS'>Biotechnology</option>
                           <option value='AD'>Aviation</option> */}
-                          <option value='AD'>Healthcare</option>
-                          {/* <option value='AD'>Hospitality</option>
+                            <option value='AD'>Healthcare</option>
+                            {/* <option value='AD'>Hospitality</option>
                           <option value='AD'>Tourism</option> */}
-                        </select>
+                          </select>
 
-                        {formik.touched.orgIndustry && formik.errors.orgIndustry && (
-                          <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.orgIndustry}</div>
-                          </div>
-                        )}
+                          {formik.touched.orgIndustry && formik.errors.orgIndustry && (
+                            <div className='fv-plugins-message-container'>
+                              <div className='fv-help-block'>{formik.errors.orgIndustry}</div>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
 
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label required fw-bold fs-6'>
-                        Business registration number
-                      </label>
-                      <div className='col-lg-8 fv-row'>
-                        <input
-                          type='text'
-                          className='form-control form-control-lg form-control'
-                          placeholder='Business Registration Number'
-                          {...formik.getFieldProps('orgRegNumber')}
-                          name='orgRegNumber'
-                        />
-                        {formik.touched.orgRegNumber && formik.errors.orgRegNumber && (
-                          <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.orgRegNumber}</div>
-                          </div>
-                        )}
+                      <div className='row mb-6'>
+                        <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                          Business registration number
+                        </label>
+                        <div className='col-lg-8 fv-row'>
+                          <input
+                            type='text'
+                            className='form-control form-control-lg form-control'
+                            placeholder='Business Registration Number'
+                            {...formik.getFieldProps('orgRegNumber')}
+                            name='orgRegNumber'
+                          />
+                          {formik.touched.orgRegNumber && formik.errors.orgRegNumber && (
+                            <div className='fv-plugins-message-container'>
+                              <div className='fv-help-block'>{formik.errors.orgRegNumber}</div>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label required fw-bold fs-6'>
-                        Year business registered or incorporated
-                      </label>
-                      <div className='col-lg-8 fv-row'>
-                        <select
-                          className='form-select form-select form-select-lg fw-bold'
-                          {...formik.getFieldProps('orgRegYear')}
-                          name='orgRegYear'
-                        >
-                          <YearList />
-                        </select>
-                        {formik.touched.orgRegYear && formik.errors.orgRegYear && (
-                          <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.orgRegYear}</div>
-                          </div>
-                        )}
+                      <div className='row mb-6'>
+                        <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                          Year business registered or incorporated
+                        </label>
+                        <div className='col-lg-8 fv-row'>
+                          <select
+                            className='form-select form-select form-select-lg fw-bold'
+                            {...formik.getFieldProps('orgRegYear')}
+                            name='orgRegYear'
+                          >
+                            <YearList />
+                          </select>
+                          {formik.touched.orgRegYear && formik.errors.orgRegYear && (
+                            <div className='fv-plugins-message-container'>
+                              <div className='fv-help-block'>{formik.errors.orgRegYear}</div>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label required fw-bold fs-6'>
-                        Country business registered or incorporated
-                      </label>
+                      <div className='row mb-6'>
+                        <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                          Country business registered or incorporated
+                        </label>
 
-                      <div className='col-lg-8 fv-row'>
-                        <select
-                          className='form-select form-select form-select-lg fw-bold'
-                          {...formik.getFieldProps('orgRegCountry')}
-                          name='orgRegCountry'
-                        >
-                          <CountryList />
-                        </select>
-                        {formik.touched.orgRegCountry && formik.errors.orgRegCountry && (
-                          <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.orgRegCountry}</div>
-                          </div>
-                        )}
+                        <div className='col-lg-8 fv-row'>
+                          <select
+                            className='form-select form-select form-select-lg fw-bold'
+                            {...formik.getFieldProps('orgRegCountry')}
+                            name='orgRegCountry'
+                          >
+                            <CountryList />
+                          </select>
+                          {formik.touched.orgRegCountry && formik.errors.orgRegCountry && (
+                            <div className='fv-plugins-message-container'>
+                              <div className='fv-help-block'>{formik.errors.orgRegCountry}</div>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <div className='row mb-6'>
-                      <label className='col-lg-4 col-form-label required fw-bold fs-6'>
-                        State/Province business registered or Incorporated
-                      </label>
+                      <div className='row mb-6'>
+                        <label className='col-lg-4 col-form-label required fw-bold fs-6'>
+                          State/Province business registered or Incorporated
+                        </label>
 
-                      <div className='col-lg-8 fv-row'>
-                        <select
-                          className='form-select form-select form-select-lg fw-bold'
-                          {...formik.getFieldProps('orgRegState')}
-                          name='orgRegState'
-                        >
-                          <StateListUS />
-                        </select>
-                        {formik.touched.orgRegState && formik.errors.orgRegState && (
-                          <div className='fv-plugins-message-container'>
-                            <div className='fv-help-block'>{formik.errors.orgRegCountry}</div>
-                          </div>
-                        )}
+                        <div className='col-lg-8 fv-row'>
+                          <select
+                            className='form-select form-select form-select-lg fw-bold'
+                            {...formik.getFieldProps('orgRegState')}
+                            name='orgRegState'
+                          >
+                            <StateListUS />
+                          </select>
+                          {formik.touched.orgRegState && formik.errors.orgRegState && (
+                            <div className='fv-plugins-message-container'>
+                              <div className='fv-help-block'>{formik.errors.orgRegCountry}</div>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  </>
-                )}
+                    </>
+                  )}
 
-                {usertype !== 'sponsor' && subscriptiontier !== 'basic_enabler' && (
+                {profile?.usertype !== 'sponsor' && profile?.subscriptiontier !== 'basic_enabler' && (
                   <>
                     <div className='row mb-6'>
                       <label className='col-lg-4 col-form-label fw-bold fs-6'>
@@ -693,7 +690,7 @@ const ProfileDetails: React.FC<any> = (isLoading) => {
                   </>
                 )}
 
-                {usertype === 'sponsor' && (
+                {profile?.usertype === 'sponsor' && (
                   <>
                     <div className='row mb-6'>
                       <label className='col-lg-4 col-form-label required fw-bold fs-6'>

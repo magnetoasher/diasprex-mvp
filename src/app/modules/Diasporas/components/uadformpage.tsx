@@ -406,37 +406,6 @@ export const UadFormPage: FC = () => {
               </div>
             )}
 
-            {/* <div className=' fv-row mb-10'>
-              {!isValidPhone && (
-                <div
-                  className='btn btn-primary btn-active-ligth-success'
-                  onClick={async () =>
-                    await handlePhoneValidate(`${phoneCode}${formik.values.phone}`)
-                  }
-                >
-                  Continue
-                </div>
-              )}
-
-              {isValidPhone && (
-                <div
-                  className='btn btn-success btn-active-ligth-success'
-                  data-bs-target='#modal_phoneVerification'
-                  data-bs-toggle='modal'
-                >
-                  Verify
-                </div>
-              )}
-            </div> */}
-
-            {/* <VerificationModal
-              id='modal_phoneVerification'
-              headertext='Verify Your Phone Number'
-              title='Please enter the 6 digit code sent to your device'
-              labeltext='Enter your mobile phone number with country code'
-              placeholder='Mobile number with country code...'
-            /> */}
-
             <PhoneVerificationModal
               showVerifyPhone={showVerifyPhone}
               setShowVerifyPhone={setShowVerifyPhone}

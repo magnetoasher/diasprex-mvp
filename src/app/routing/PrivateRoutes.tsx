@@ -58,6 +58,21 @@ const PrivateRoutes = () => {
   if (authState !== null) {
     if (authState.isAuthenticated) {
       console.log('****AUTH STATE OBJECT****:', authState)
+
+      //  useLayoutEffect(() => {
+      //    if (loaded === true && profile.status === 'active') {
+      //      navigate({
+      //        pathname: '/dashboard',
+      //        search: `?userType=${profile.usertype}&userTypeFull=${profile.accountType}`,
+      //      })
+      //    } else if (['new', 'pending'].includes(profile?.status)) {
+      //      navigate({
+      //        pathname: '/error/inactiveaccount',
+      //      })
+      //      oktaAuth.signOut()
+      //    }
+      //  }, [profile, loaded, navigate])
+
       return (
         <Routes>
           <Route path='account/*' element={<RegistrationStepsPage />} />

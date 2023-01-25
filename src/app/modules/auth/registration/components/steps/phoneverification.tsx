@@ -8,6 +8,7 @@ import {
   SponsorCountryList,
 } from '../../../../../../_metronic/partials/content/selectionlists'
 import {VerificationModal} from '../../../components/verificationmodal'
+import {PhoneVerificationModal} from '../../../components/PhoneVerificationModal'
 
 type Props = {
   userType?: any
@@ -129,28 +130,16 @@ const PhoneVerification: FC<Props> = ({userType}) => {
           Verify Phone
         </div>
       )}
-      {/* <div className=' fv-row mb-10'>
-              {!isValidPhone && (
-                <div
-                  className='btn btn-primary btn-active-ligth-success'
-                  onClick={async () =>
-                    await handlePhoneValidate(`${phoneCode}${formik.values.phone}`)
-                  }
-                >
-                  Continue
-                </div>
-              )}
 
-              {isValidPhone && (
-                <div
-                  className='btn btn-success btn-active-ligth-success'
-                  data-bs-target='#modal_phoneVerification'
-                  data-bs-toggle='modal'
-                >
-                  Verify
-                </div>
-              )}
-            </div> */}
+      <PhoneVerificationModal
+        showVerifyPhone={showVerifyPhone}
+        setShowVerifyPhone={setShowVerifyPhone}
+        id='modal_phoneVerification'
+        headertext='Verify Your Phone Number'
+        title='Please enter the 6 digit code sent to your device'
+        labeltext='Enter your mobile phone number with country code'
+        placeholder='Enter the code sent to (xxx)-XXX-XXXX'
+      />
 
       {/* <div className='mb-10 fv-row'>
         <label className='form-label mb-3'>Phone Number</label>
