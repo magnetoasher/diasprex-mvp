@@ -17,6 +17,7 @@ import Swal from 'sweetalert2'
 import {CountriesCodeList} from '../../../../_metronic/partials/content/selectionlists'
 
 import {VerificationModal} from '../../auth/components/verificationmodal'
+import {PhoneVerificationModal} from '../../auth/components/PhoneVerificationModal'
 // import CountriesCodeList from '../../../../_metronic/partials/content/selectionlists/countries.json'
 const editUADSchema = Yup.object().shape({
   fName: Yup.string()
@@ -105,19 +106,8 @@ export const UadFormPage: FC = () => {
 
   const handlePhoneValidate = (value: any) => {
     const isValid = isValidPhoneNumber(value)
-
-    if (isValid) {
-      setIsValidPhone(isValid)
-      Swal.fire({
-        text: 'Thank you, but we still need to verify your phone',
-        icon: 'success',
-        buttonsStyling: false,
-        confirmButtonText: 'OK',
-        customClass: {
-          confirmButton: 'btn btn-primary',
-        },
-      })
-    } else
+    const PHONEAPI_URL = 'https://...'
+    if (!isValid) {
       Swal.fire({
         text: 'Invalid phone number',
         icon: 'warning',
@@ -127,6 +117,39 @@ export const UadFormPage: FC = () => {
           confirmButton: 'btn btn-primary',
         },
       })
+    } else {
+      // setIsValidPhone(isValid)
+      // Swal.fire({
+      //   title: 'Enter the 6 digits code sent to (***)-***-****',
+      //   input: 'text',
+      //   inputAttributes: {
+      //     autocapitalize: 'off',
+      //   },
+      //   showCancelButton: true,
+      //   confirmButtonText: 'ok',
+      //   showLoaderOnConfirm: true,
+      //   preConfirm: (login) => {
+      //     return fetch(PHONEAPI_URL)
+      //       .then((response) => {
+      //         if (!response.ok) {
+      //           throw new Error(response.statusText)
+      //         }
+      //         return response.json()
+      //       })
+      //       .catch((error) => {
+      //         Swal.showValidationMessage(`Invalid Code: ${error}`)
+      //       })
+      //   },
+      //   allowOutsideClick: () => !Swal.isLoading(),
+      // }).then((result) => {
+      //   if (result.isConfirmed) {
+      //     Swal.fire({
+      //       title: `${result.value.login}'s avatar`,
+      //       imageUrl: result.value.avatar_url,
+      //     })
+      //   }
+      // })
+    }
   }
 
   useEffect(() => {
@@ -409,9 +432,11 @@ export const UadFormPage: FC = () => {
             {!isValidPhone && (
               <div
                 className='btn btn-primary btn-active-ligth-success'
-                onClick={async () =>
-                  await handlePhoneValidate(`${phoneCode}${formik.values.phone}`)
-                }
+                data-bs-toggle='modal'
+                data-bs-target='#modal_phoneVerification'
+                // onClick={async () =>
+                //   await handlePhoneValidate(`${phoneCode}${formik.values.phone}`)
+                // }
               >
                 Continue
               </div>
@@ -447,6 +472,14 @@ export const UadFormPage: FC = () => {
               labeltext='Enter your mobile phone number with country code'
               placeholder='Mobile number with country code...'
             />
+
+            {/* <PhoneVerificationModal
+              id='modal_phoneVerification'
+              headertext='Verify Your Phone Number'
+              title='Please enter the 6 digit code sent to your device'
+              labeltext='Enter your mobile phone number with country code'
+              placeholder='Enter the code sent to (xxx)-XXX-XXXX'
+            /> */}
 
             {isValidPhone && (
               <>

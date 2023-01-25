@@ -40,7 +40,7 @@ export const VerificationModal: FC<Props> = ({headertext, id, title, labeltext, 
                 </div>
 
                 <div className='d-flex flex-center'>
-                  <button type='reset' className='btn btn-light me-3'>
+                  <button type='reset' className='btn btn-light me-3' data-bs-dismiss='modal'>
                     Cancel
                   </button>
                   <button type='submit' className='btn btn-primary'>

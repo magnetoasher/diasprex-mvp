@@ -1,5 +1,5 @@
 // @ts-nocheck comment
-import React, {FC, useContext, useEffect, useRef, useState} from 'react'
+import React, {FC, useContext, useEffect, useLayoutEffect, useRef, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {KTSVG} from '../../../../../_metronic/helpers'
 import {Step1} from './steps/Step1'
@@ -33,7 +33,7 @@ const CreateAccount: FC = () => {
   const navigate = useNavigate()
   const stepperRef = useRef<HTMLDivElement | null>(null)
   const stepper = useRef<StepperComponent | null>(null)
-  const {authState} = useOktaAuth()
+  const {authState, oktaAuth} = useOktaAuth()
   const [currentSchema, setCurrentSchema] = useState(createAccountSchemas[0])
   const [userType, setUserType] = useState<string>('enabler')
   const [userTypeFull, setUserTypeFull] = useState('basic_enabler')
@@ -51,12 +51,17 @@ const CreateAccount: FC = () => {
   const [formValues, setFormValues] = useState<IProfile>({})
   const {profile, loaded} = useContext(profileContext)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (loaded === true && profile.status === 'active') {
       navigate({
         pathname: '/dashboard',
         search: `?userType=${profile.usertype}&userTypeFull=${profile.accountType}`,
       })
+    } else if (['new', 'pending'].includes(profile?.status)) {
+      navigate({
+        pathname: '/error/inactiveaccount',
+      })
+      // oktaAuth.signOut()
     }
   }, [profile, loaded, navigate])
 
