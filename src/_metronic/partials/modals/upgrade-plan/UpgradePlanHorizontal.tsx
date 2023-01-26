@@ -92,6 +92,7 @@ const UpgradePlanHorizontal: FC = () => {
       const data: IUpgradePlan = {
         ...values,
         id: profile?.id,
+        email: profile?.email,
         usertype: userType,
         subscriptiontier: userTypeFull,
         packageDuration: packageDuration,
