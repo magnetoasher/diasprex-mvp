@@ -3,7 +3,7 @@ import React, {FC, useContext, useEffect, useLayoutEffect, useRef, useState} fro
 import {useNavigate} from 'react-router-dom'
 import {KTSVG} from '../../../../../_metronic/helpers'
 import {Step1} from './steps/Step1'
-import {PhoneVerification} from './steps/phoneverification'
+import {PhoneVerificationStep} from './steps/phoneverificationstep'
 import {Step3} from './steps/Step3'
 import {Step4} from './steps/Step4'
 import {Step5} from './steps/Step5'
@@ -15,18 +15,18 @@ import {
   IProfile,
   createAccountSchemas,
   inits,
-  SubscriptionPackage,
+  ISubscriptionPackage,
 } from './CreateAccountWizardHelper'
 import SweetAlert from 'react-bootstrap-sweetalert'
 import {useSelector} from 'react-redux'
-// import SubscriptionPlans from './steps/SubscriptionPlans'
+
 import SubscriptionPlans3 from './SubscriptionComponet/SubscriptionPlans3'
-import {PhoneVerification2} from './steps/phoneverification2'
+
 import moment from 'moment'
 import {useOktaAuth} from '@okta/okta-react'
 import {createUserProfileAPI} from '../../../profile/redux/ProfileAPI'
 import {getUniqueDPXId, getUniqueDPXUserId} from '../../../../../_metronic/assets/ts/_utils'
-import axios from 'axios'
+
 import {profileContext} from '../../../../context/profile'
 
 const CreateAccount: FC = () => {
@@ -58,14 +58,20 @@ const CreateAccount: FC = () => {
         search: `?userType=${profile.usertype}&userTypeFull=${profile.accountType}`,
       })
     } else if (['new', 'pending'].includes(profile?.status)) {
-      navigate({
-        pathname: '/error/inactiveaccount',
-      })
-      oktaAuth.signOut()
+      setTimeout(
+        navigate({
+          pathname: '/error/inactiveaccount',
+        }),
+        5000
+      )
+      // oktaAuth.signOut()
     }
   }, [profile, loaded, navigate])
 
-  const subscriptionpackage: SubscriptionPackage = useSelector((state) => state.subscriptionpackage)
+  const subscriptionpackage: ISubscriptionPackage = useSelector(
+    (state) => state.subscriptionpackage
+  )
+  const phoneVerificationData: IPhoneVerification = useSelector((state) => state.phoneverification)
 
   useEffect(() => {
     if (userTypeFull !== 'basic_enabler' || userType === 'sponsor') {
@@ -74,12 +80,12 @@ const CreateAccount: FC = () => {
       setHideShow(true)
     }
   }, [userTypeFull, userType])
-  const questions = {
-    individual: 'Are you a citizen  or a resident of a country in the OECD regions?',
-    business: 'Is your business  located and registered in a country in the OECD region',
-    sponsor:
-      'Is your business located in  Africa and registered with the appropriate local government?',
-  }
+  // const questions = {
+  //   individual: 'Are you a citizen  or a resident of a country in the OECD regions?',
+  //   business: 'Is your business  located and registered in a country in the OECD region',
+  //   sponsor:
+  //     'Is your business located in  Africa and registered with the appropriate local government?',
+  // }
   const [sponsorAlert, setSponsorAlert] = useState(
     'Your registration request for Diasprex\
         information, proof of physical location, evidence of  current operation, history of tax filing, banking information, 2 - 3 references of  customers or partners, and others.Please be prepared to provide or assist in obtaining  some of these information upon request'
@@ -374,25 +380,24 @@ const CreateAccount: FC = () => {
                 </div>
 
                 <div data-kt-stepper-element='content' className='w-xl-800px'>
-                  <PhoneVerification userType={userType} />
-                  <PhoneVerification2 />
+                  <PhoneVerificationStep userType={subscriptionpackage.userType} />
                 </div>
 
                 <div data-kt-stepper-element='content' className='w-xl-800px'>
                   <Step3
-                    userType={userType}
-                    userTypeFull={userTypeFull}
+                    userType={subscriptionpackage.userType}
+                    userTypeFull={subscriptionpackage.userTypeFull}
                     setFieldValue={setFieldValue}
                   />
                 </div>
 
-                {userTypeFull !== 'basic_enabler' && (
+                {subscriptionpackage.userTypeFull !== 'basic_enabler' && (
                   <div data-kt-stepper-element='content' className='w-xl-800px'>
                     <Step4 />
                   </div>
                 )}
 
-                {userTypeFull !== 'basic_enabler' && (
+                {subscriptionpackage.userTypeFull !== 'basic_enabler' && (
                   <div data-kt-stepper-element='content' className='w-xl-800px'>
                     <AccountVerification
                       userInfo={formValues}

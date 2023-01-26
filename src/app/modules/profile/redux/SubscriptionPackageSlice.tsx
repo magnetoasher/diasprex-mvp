@@ -1,8 +1,8 @@
 //@ts-nocheck
 import {createSlice} from '@reduxjs/toolkit'
-import {SubscriptionPackage} from '../../auth/registration/components/CreateAccountWizardHelper'
+import {ISubscriptionPackage} from '../../auth/registration/components/CreateAccountWizardHelper'
 
-const initialState: SubscriptionPackage = {
+const initialState: ISubscriptionPackage = {
   userType: '',
   userTypeFull: '',
   packagePrice: '0.00',
