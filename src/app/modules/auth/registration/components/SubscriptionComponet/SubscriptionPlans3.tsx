@@ -1,14 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 // @ts-nocheck comment
 
-import React, {FC, useState, useEffect} from 'react'
-import {Link} from 'react-router-dom'
-import {Field, ErrorMessage} from 'formik'
+import {FC, useState, useEffect} from 'react'
+
 import {KTSVG} from '../../../../../../_metronic/helpers'
-import Tabs, {Tab} from 'react-best-tabs'
+
 import 'react-best-tabs/dist/index.css'
 import {HeaderNotificationsMenu, QuickLinks, Search} from '../../../../../../_metronic/partials'
-import clsx from 'clsx'
+
 import {useDispatch} from 'react-redux'
 import {
   userTypeSet,

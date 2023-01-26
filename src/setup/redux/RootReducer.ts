@@ -8,6 +8,7 @@ import * as profile from '../../app/modules/profile/redux/ProfileRedux'
 import diasporaReducer from '../../app/modules/apps/admin-mgt-apps/redux/diasporas/diasporaslice'
 import profiledataReducer from '../../app/modules/profile/redux/ProfileDataSlice'
 import subscriptionpackageReducer from '../../app/modules/profile/redux/SubscriptionPackageSlice'
+import phoneverificationReducer from '../../app/modules/profile/redux/PhoneVerificationSlice'
 
 export const rootReducer = combineReducers({
   auth: auth.reducer,
@@ -17,6 +18,7 @@ export const rootReducer = combineReducers({
   diasporas: diasporaReducer,
   profiledata: profiledataReducer,
   subscriptionpackage: subscriptionpackageReducer,
+  phoneverification: phoneverificationReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

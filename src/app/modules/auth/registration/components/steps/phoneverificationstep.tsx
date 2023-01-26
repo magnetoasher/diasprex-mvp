@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../../../../_metronic/helpers'
 import {Field, ErrorMessage} from 'formik'
 import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
@@ -9,12 +9,22 @@ import {
 } from '../../../../../../_metronic/partials/content/selectionlists'
 import {VerificationModal} from '../../../components/verificationmodal'
 import {PhoneVerificationModal} from '../../../components/PhoneVerificationModal'
+import {
+  countryCodeSet,
+  countrySet,
+  phoneNumberSet,
+  verifiedSet,
+} from '../../../../profile/redux/PhoneVerificationSlice'
+import axios, {AxiosPromise, AxiosResponse} from 'axios'
+import {useDispatch} from 'react-redux'
+import {IGeoData} from '../CreateAccountWizardHelper'
+import {IPhoneVerification} from '../CreateAccountWizardHelper'
 
 type Props = {
   userType?: any
 }
-const PhoneVerification: FC<Props> = ({userType}) => {
-  const [phoneIsConfirmed, setPhoneIsConfirmed] = useState()
+
+const PhoneVerificationStep: FC<Props> = ({userType}) => {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [isValidPhone, setIsValidPhone] = useState(false)
   const [phoneCode, setPhoneCode] = useState('+1')
@@ -22,6 +32,15 @@ const PhoneVerification: FC<Props> = ({userType}) => {
   const CountriesList = userType === 'enabler' ? CountriesCodeList : SponsorCountryList
   const [showVerifyPhone, setShowVerifyPhone] = useState(false)
   const [isPhoneConfirmed, setIsPhoneConfirmed] = useState(false)
+  const [locationData, setLocationData] = useState<IGeoData>()
+
+  const handleNavigator = (pos: any) => {
+    const {latitude, longitude} = pos.coords
+    const userCountryCode = LookupCountry({latitude, longitude})
+    console.log('CountryCode', userCountryCode)
+    // setCountry(userCountryCode)
+  }
+
   const handlePhoneValidate = (value: any) => {
     console.log('Button Clicked')
     const isValid = isValidPhoneNumber(value)
@@ -40,6 +59,34 @@ const PhoneVerification: FC<Props> = ({userType}) => {
       setShowVerifyPhone(isValid)
     }
   }
+
+  const LookupCountry = ({latitude, longitude}: any) => {
+    const URL = `${process.env.REACT_APP_GOOGLE_GEOCODING_API_URL}?latlng=${latitude},${longitude}&key=${process.env.REACT_APP_DIASPREX_GOOGLE_MAP_API_KEY}`
+    const getLocationData = () => {
+      return axios.get(URL).then((d: AxiosResponse) => {
+        setLocationData(d.data.results.filter(({types}: any) => types.includes('country'))[0])
+        // console.log('GeoData', d.data.results)
+        return d.data
+      })
+    }
+    getLocationData()
+  }
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(handleNavigator, () =>
+      console.warn('permission was rejected')
+    )
+  }, [])
+
+  const short_name = locationData?.address_components[0].short_name
+  const long_name = locationData?.address_components[0].long_name
+  const countryLocation = {short: short_name, label: long_name}
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(countrySet(countryLocation))
+  }, [short_name, long_name])
+
   return (
     <div className='w-100'>
       <div className='pb-10 pb-lg-15'>
@@ -134,6 +181,8 @@ const PhoneVerification: FC<Props> = ({userType}) => {
       <PhoneVerificationModal
         showVerifyPhone={showVerifyPhone}
         setShowVerifyPhone={setShowVerifyPhone}
+        phoneCode={phoneCode}
+        phoneNumber={phoneNumber}
         id='modal_phoneVerification'
         headertext='Verify Your Phone Number'
         title='Please enter the 6 digit code sent to your device'
@@ -141,28 +190,16 @@ const PhoneVerification: FC<Props> = ({userType}) => {
         placeholder='Enter the code sent to (xxx)-XXX-XXXX'
       />
 
-      {/* <div className='mb-10 fv-row'>
-        <label className='form-label mb-3'>Phone Number</label>
-
-        <Field
-          type='text'
-          className='form-control form-control-lg form-control-solid'
-          name='phone.phonenumber'
-        />
-        <div className='text-danger mt-2'>
-          <ErrorMessage name='phone.phonenumber' />
-        </div>
-      </div> */}
-
-      <VerificationModal
+      {/* <VerificationModal
         id='modal_phoneVerification'
         headertext='Verify Your Phone Number'
         title='Please enter the 6 digit code sent to your device'
         labeltext='Enter your mobile phone number with country code'
         placeholder='Mobile number with country code...'
-      />
+        showVerifyPhone={showVerifyPhone}
+      /> */}
     </div>
   )
 }
 
-export {PhoneVerification}
+export {PhoneVerificationStep}

@@ -69,11 +69,33 @@ export interface IProfile {
   }
 }
 
-export interface SubscriptionPackage {
+export interface ISubscriptionPackage {
   userType: string
   userTypeFull: string
   packagePrice: string
   packageDuration: string
+}
+
+export interface IPhoneVerification {
+  countrylocation: {
+    short?: string
+    label?: string
+  }
+  countrycode: string
+  phonenumber: string
+  verified: boolean
+}
+
+export interface IGeoData {
+  address_components: {
+    long_name: string
+    short_name: string
+    types: string
+  }[]
+  formatted_address: string
+  geometry: {}
+  place_id: string
+  types: string[]
 }
 
 const createAccountSchemas = [
