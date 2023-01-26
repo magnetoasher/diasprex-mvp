@@ -137,7 +137,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
                         } `
                       : userProfile?.orgName}
                   </a>
-                  {userProfile?.accountType !== 'basic_enabler' && (
+                  {userProfile?.subscriptiontier !== 'basic_enabler' && (
                     <a
                       href='#'
                       data-toggle='tooltip'
@@ -157,7 +157,7 @@ const NewDashboardPage: React.FC<PropsFromRedux> = (props, profile) => {
                 <div className='d-flex justify-content-center align-items-center mb-2'>
                   <a href='#' className='text-gray-800 text-hover-primary  me-1 '>
                     <span className={`badge badge-light-${userBadgeColor} text-capitalize`}>
-                      {userProfile?.accountType?.replace('_', ' ') || ''}
+                      {userProfile?.subscriptiontier?.replace('_', ' ') || ''}
                     </span>
                   </a>
                 </div>

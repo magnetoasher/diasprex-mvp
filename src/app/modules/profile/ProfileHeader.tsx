@@ -15,7 +15,7 @@ const ProfileHeader: React.FC = () => {
   useEffect(() => {
     profile?.usertype === 'admin'
       ? setUserLabel('Admin') //Temporary placeholder for admin user type
-      : setUserLabel(profile?.accountType)
+      : setUserLabel(profile?.subscriptiontier)
   }, [profile])
 
   const blankImg = '/media/avatars/blank.png'
