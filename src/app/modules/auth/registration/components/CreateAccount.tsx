@@ -28,6 +28,7 @@ import {createUserProfileAPI} from '../../../profile/redux/ProfileAPI'
 import {getUniqueDPXId, getUniqueDPXUserId} from '../../../../../_metronic/assets/ts/_utils'
 
 import {profileContext} from '../../../../context/profile'
+import {PhoneNumber} from 'libphonenumber-js/types'
 
 const CreateAccount: FC = () => {
   const navigate = useNavigate()
@@ -50,6 +51,7 @@ const CreateAccount: FC = () => {
   const [hideShow, setHideShow] = useState(true)
   const [formValues, setFormValues] = useState<IProfile>({})
   const {profile, loaded} = useContext(profileContext)
+  const [isDisabled, setIsDisabled] = useState(false)
 
   useLayoutEffect(() => {
     if (loaded === true && profile.status === 'active') {
@@ -68,10 +70,11 @@ const CreateAccount: FC = () => {
     }
   }, [profile, loaded, navigate])
 
+  const phoneVerificationData: IPhoneVerification = useSelector((state) => state.phoneverification)
+
   const subscriptionpackage: ISubscriptionPackage = useSelector(
     (state) => state.subscriptionpackage
   )
-  const phoneVerificationData: IPhoneVerification = useSelector((state) => state.phoneverification)
 
   useEffect(() => {
     if (userTypeFull !== 'basic_enabler' || userType === 'sponsor') {
@@ -80,6 +83,7 @@ const CreateAccount: FC = () => {
       setHideShow(true)
     }
   }, [userTypeFull, userType])
+
   // const questions = {
   //   individual: 'Are you a citizen  or a resident of a country in the OECD regions?',
   //   business: 'Is your business  located and registered in a country in the OECD region',
@@ -107,12 +111,12 @@ const CreateAccount: FC = () => {
   }
 
   const submitStep = (values: IProfile, actions: FormikActions<FormikValues>) => {
-    const dpxNumber = getUniqueDPXId('DPX')
     if (!stepper.current) {
       return
     }
     setCurrentSchema(createAccountSchemas[stepper.current.currentStepIndex])
     setSubmitButton(stepper.current.currentStepIndex === stepper.current.totatStepsNumber! - 1)
+    // setIsDisabled(stepper.current?.currentStepIndex === 1 && !phoneVerificationData.verified)
 
     if (stepper.current.currentStepIndex !== (userTypeFull === 'basic_enabler' ? 4 : 6)) {
       // if (stepper.current.currentStepIndex == 1) {
@@ -151,7 +155,7 @@ const CreateAccount: FC = () => {
             : 'new',
       })
       stepper.current.goNext()
-      console.log('ReduxProfileData', formValues, subscriptionpackage, userType, userTypeFull)
+      console.log('PhoneNumber', values.phonenumber)
 
       // }
     } else {
@@ -380,7 +384,10 @@ const CreateAccount: FC = () => {
                 </div>
 
                 <div data-kt-stepper-element='content' className='w-xl-800px'>
-                  <PhoneVerificationStep userType={subscriptionpackage.userType} />
+                  <PhoneVerificationStep
+                    userType={subscriptionpackage.userType}
+                    setFieldValue={setFieldValue}
+                  />
                 </div>
 
                 <div data-kt-stepper-element='content' className='w-xl-800px'>
@@ -427,7 +434,11 @@ const CreateAccount: FC = () => {
                   </div>
 
                   <div>
-                    <button type='submit' className='btn btn-lg btn-primary me-3'>
+                    <button
+                      type='submit'
+                      className='btn btn-lg btn-primary me-3'
+                      disabled={isDisabled}
+                    >
                       <span className='indicator-label'>
                         {!isSubmitButton && 'Continue'}
                         {isSubmitButton && 'Submit'}

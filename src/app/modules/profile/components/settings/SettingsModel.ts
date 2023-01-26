@@ -38,8 +38,8 @@ export interface IProfileDetails {
 }
 
 export interface IUpdateEmail {
-  newEmail: string
-  confirmPassword: string
+  email: string
+  confirmPassword?: string
 }
 
 export interface IUpdatePassword {
@@ -128,7 +128,7 @@ export const profileDetailsInitValues: IProfileDetails = {
 }
 
 export const updateEmail: IUpdateEmail = {
-  newEmail: 'support@keenthemes.com',
+  email: 'support@keenthemes.com',
   confirmPassword: '',
 }
 

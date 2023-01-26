@@ -1,4 +1,5 @@
-import React, {FC, useEffect, useState} from 'react'
+//@ts-nocheck
+import React, {FC, useEffect, useLayoutEffect, useState} from 'react'
 import {KTSVG, toAbsoluteUrl} from '../../../../../../_metronic/helpers'
 import {Field, ErrorMessage} from 'formik'
 import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
@@ -7,32 +8,39 @@ import {
   CountriesCodeList,
   SponsorCountryList,
 } from '../../../../../../_metronic/partials/content/selectionlists'
-import {VerificationModal} from '../../../components/verificationmodal'
+
 import {PhoneVerificationModal} from '../../../components/PhoneVerificationModal'
-import {
-  countryCodeSet,
-  countrySet,
-  phoneNumberSet,
-  verifiedSet,
-} from '../../../../profile/redux/PhoneVerificationSlice'
+import {countrySet} from '../../../../profile/redux/PhoneVerificationSlice'
 import axios, {AxiosPromise, AxiosResponse} from 'axios'
 import {useDispatch} from 'react-redux'
 import {IGeoData} from '../CreateAccountWizardHelper'
 import {IPhoneVerification} from '../CreateAccountWizardHelper'
+import {useSelector} from 'react-redux'
+// type Props = {
+//   props: any
+// }
 
-type Props = {
-  userType?: any
-}
-
-const PhoneVerificationStep: FC<Props> = ({userType}) => {
+const PhoneVerificationStep: FC = (props: any) => {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [isValidPhone, setIsValidPhone] = useState(false)
   const [phoneCode, setPhoneCode] = useState('+1')
   const [selectedCountry, setSelectedCountry] = useState('united states')
-  const CountriesList = userType === 'enabler' ? CountriesCodeList : SponsorCountryList
+  const CountriesList = props.userType === 'enabler' ? CountriesCodeList : SponsorCountryList
   const [showVerifyPhone, setShowVerifyPhone] = useState(false)
   const [isPhoneConfirmed, setIsPhoneConfirmed] = useState(false)
   const [locationData, setLocationData] = useState<IGeoData>()
+  const phoneVerificationData: IPhoneVerification = useSelector((state) => state.phoneverification)
+
+  const handlePhoneFieldValue = (e) => {
+    if (isPhoneConfirmed) {
+      props.setFieldValue('phonenumber', `${phoneCode}${e.target.value}`)
+    }
+  }
+  useEffect(() => {
+    setIsPhoneConfirmed(phoneVerificationData.verified)
+    // handlePhoneFieldValue()
+    console.log('PhoneConfirmed', isPhoneConfirmed)
+  }, [phoneCode, phoneNumber, phoneVerificationData.verified])
 
   const handleNavigator = (pos: any) => {
     const {latitude, longitude} = pos.coords
@@ -42,7 +50,6 @@ const PhoneVerificationStep: FC<Props> = ({userType}) => {
   }
 
   const handlePhoneValidate = (value: any) => {
-    console.log('Button Clicked')
     const isValid = isValidPhoneNumber(value)
     // const PHONEAPI_URL = 'https://...'
     if (!isValid) {
@@ -57,20 +64,21 @@ const PhoneVerificationStep: FC<Props> = ({userType}) => {
       })
     } else {
       setShowVerifyPhone(isValid)
+      setIsValidPhone(isValid)
     }
   }
 
-  const LookupCountry = ({latitude, longitude}: any) => {
-    const URL = `${process.env.REACT_APP_GOOGLE_GEOCODING_API_URL}?latlng=${latitude},${longitude}&key=${process.env.REACT_APP_DIASPREX_GOOGLE_MAP_API_KEY}`
-    const getLocationData = () => {
-      return axios.get(URL).then((d: AxiosResponse) => {
-        setLocationData(d.data.results.filter(({types}: any) => types.includes('country'))[0])
-        // console.log('GeoData', d.data.results)
-        return d.data
-      })
-    }
-    getLocationData()
-  }
+  // const LookupCountry = ({latitude, longitude}: any) => {
+  //   const URL = `${process.env.REACT_APP_GOOGLE_GEOCODING_API_URL}?latlng=${latitude},${longitude}&key=${process.env.REACT_APP_DIASPREX_GOOGLE_MAP_API_KEY}`
+  //   const getLocationData = () => {
+  //     return axios.get(URL).then((d: AxiosResponse) => {
+  //       setLocationData(d.data.results.filter(({types}: any) => types.includes('country'))[0])
+  //       // console.log('GeoData', d.data.results)
+  //       return d.data
+  //     })
+  //   }
+  //   getLocationData()
+  // }
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(handleNavigator, () =>
@@ -158,6 +166,9 @@ const PhoneVerificationStep: FC<Props> = ({userType}) => {
               className='form-control form-control-lg'
               placeholder='Enter your phone number'
               onChange={(e: any) => {
+                e.preventDefault()
+                handlePhoneFieldValue()
+                setIsValidPhone(false)
                 setPhoneNumber(e.target.value)
               }}
             />
@@ -169,7 +180,7 @@ const PhoneVerificationStep: FC<Props> = ({userType}) => {
         </div>
       </div>
 
-      {!isPhoneConfirmed && !isValidPhone && (
+      {!isPhoneConfirmed && (
         <div
           className='btn btn-primary btn-active-ligth-success'
           onClick={async () => await handlePhoneValidate(`${phoneCode}${phoneNumber}`)}
@@ -179,6 +190,7 @@ const PhoneVerificationStep: FC<Props> = ({userType}) => {
       )}
 
       <PhoneVerificationModal
+        setPhoneFiledValue={props.setFieldValue}
         showVerifyPhone={showVerifyPhone}
         setShowVerifyPhone={setShowVerifyPhone}
         phoneCode={phoneCode}
