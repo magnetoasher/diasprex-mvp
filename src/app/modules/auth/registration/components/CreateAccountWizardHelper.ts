@@ -103,7 +103,7 @@ const createAccountSchemas = [
     accountType: Yup.string().required().label('Account Type'),
   }),
   Yup.object({
-    phonenumber: Yup.string().required().label('Phone Number'),
+    // phonenumber: Yup.string().required().label('Phone Number'),
   }),
   Yup.object().shape({
     fName: Yup.string()
