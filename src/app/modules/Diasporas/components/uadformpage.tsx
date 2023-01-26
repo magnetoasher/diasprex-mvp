@@ -8,7 +8,7 @@ import PhoneInput, {isValidPhoneNumber} from 'react-phone-number-input'
 
 import countryList from 'react-select-country-list'
 import {AfricanCountryList} from '../../../../_metronic/partials/content/selectionlists'
-import {UploadFile} from '../../../../_metronic/partials/modals/file-management/uploadfile'
+
 import {phoneRegExp, toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useNavigate} from 'react-router-dom'
 import {OecdcountryList} from '../../../../_metronic/partials/content/selectionlists/oecdcountrylist'
@@ -16,8 +16,9 @@ import 'react-phone-number-input/style.css'
 import Swal from 'sweetalert2'
 import {CountriesCodeList} from '../../../../_metronic/partials/content/selectionlists'
 
-import {VerificationModal} from '../../auth/components/verificationmodal'
 import {PhoneVerificationModal} from '../../auth/components/PhoneVerificationModal'
+import {IPhoneVerification} from '../../auth/registration/components/CreateAccountWizardHelper'
+import {useSelector} from 'react-redux'
 
 const editUADSchema = Yup.object().shape({
   fName: Yup.string()
@@ -62,7 +63,6 @@ const editUADSchema = Yup.object().shape({
 })
 
 export const UadFormPage: FC = () => {
-  const [phoneValue, setPhoneValue] = useState('')
   const countryOptions = useMemo(() => countryList().getData(), [])
   const [countryResLabel, setCountryResLabel] = useState('united states')
   const [countryOrigLabel, setCountryOrigLabel] = useState('algeria')
@@ -71,8 +71,10 @@ export const UadFormPage: FC = () => {
   const [isValidPhone, setIsValidPhone] = useState(false)
   const [avatarFile, setAvatarFile] = useState(null)
   const [phoneCode, setPhoneCode] = useState('+1')
+  const [phoneNumber, setPhoneNumber] = useState('')
   const [selectedCountry, setSelectedCountry] = useState('united states')
   const navigate = useNavigate()
+  // const phoneVerificationData: IPhoneVerification= useSelector((state) => state.phoneverification)
 
   const handleFormConfirm = () => {
     Swal.fire({
@@ -380,6 +382,7 @@ export const UadFormPage: FC = () => {
                   onChange={(e) => {
                     e.preventDefault()
                     setIsValidPhone(false)
+                    setPhoneNumber(e.target.value)
                     formik.handleChange({
                       target: {name: 'phone', value: e.target.value},
                     })
@@ -409,6 +412,8 @@ export const UadFormPage: FC = () => {
             <PhoneVerificationModal
               showVerifyPhone={showVerifyPhone}
               setShowVerifyPhone={setShowVerifyPhone}
+              phoneCode={phoneCode}
+              phoneNumber={phoneNumber}
               id='modal_phoneVerification'
               headertext='Verify Your Phone Number'
               title='Please enter the 6 digit code sent to your device'

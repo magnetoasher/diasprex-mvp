@@ -8,7 +8,7 @@ import {upgradePlanSchemas, IUpgradePlan, inits} from './UpgradePlanWizardHelper
 import {UpgradePlan} from './UpgradePlan'
 import {CheckingAccount, CreditCard} from '../../content/paymentcards'
 import {profileContext} from '../../../../app/context/profile'
-import {createUserProfileAPI} from '../../../../app/modules/profile/redux/ProfileAPI'
+import {updateProfileAPI} from '../../../../app/modules/profile/redux/ProfileAPI'
 import Swal from 'sweetalert2'
 import {SubscriptionPackage} from '../../../../app/modules/auth/registration/components/CreateAccountWizardHelper'
 import {useSelector} from 'react-redux'
@@ -23,12 +23,21 @@ const UpgradePlanHorizontal: FC = () => {
   const [isSubmitButton, setSubmitButton] = useState(false)
   const [billingCycle, setBillingCycle] = useState<'month' | 'annual'>('month')
   const [selectedIndex, setSelectedIndex] = useState<number>(0)
-  const [packagePrice, setPackagePrice] = useState(subscriptionPackage.packagePrice)
-  const [packageDuration, setPackageDuration] = useState(subscriptionPackage.packageDuration)
-  const [userTypeFull, setUserTypeFull] = useState(subscriptionPackage.userTypeFull)
-  const [userType] = useState(profile?.usertype)
+  const [packagePrice, setPackagePrice] = useState(profile?.packagePrice)
+  const [packageDuration, setPackageDuration] = useState(profile?.packageDuration)
+  const [userTypeFull, setUserTypeFull] = useState(profile?.subscriptiontier)
+  const [userType, setUserType] = useState(profile?.usertype)
   const [selectedEnabler, setSelectedEnabler] = useState(userTypeFull)
   const [selectedSponsor, setSelectedSponsor] = useState(userTypeFull)
+
+  useEffect(() => {
+    if (profile) {
+      setPackageDuration(profile.packageDuration)
+      setPackagePrice(profile.packagePrice)
+      setUserType(profile.usertype)
+      setUserTypeFull(profile.subscriptiontier)
+    }
+  }, [profile])
 
   const [upgradePackage, setUpgradePackage] = useState()
   const [payMethod, setPayMethod] = useState('credit')
@@ -79,43 +88,61 @@ const UpgradePlanHorizontal: FC = () => {
 
     if (stepper.current.currentStepIndex !== stepper.current.totatStepsNumber) {
       stepper.current.goNext()
-      console.log('upgrade', values)
     } else {
-      try {
-        const data: IUpgradePlan = {
-          ...values,
-          email: profile?.email,
-          userType: userType,
-          userTypeFull: userTypeFull,
-          packageDuration: packageDuration,
-          packagePrice: packagePrice,
-        }
-        createUserProfileAPI(data).then((res) => {
-          if (res.status === 200) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Success',
-              text: 'Successfully done',
-            })
-            setUpgradePackage(data)
-          }
-        })
-        console.log(data)
-      } catch (errors) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Something went wrong',
-        })
-        console.log(errors)
-      } finally {
-        // navigate({
-        //   pathname: '/dashboard',
-        //   search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
-        // })
-        actions.resetForm()
-        window.location.reload()
+      const data: IUpgradePlan = {
+        ...values,
+        id: profile?.id,
+        usertype: userType,
+        subscriptiontier: userTypeFull,
+        packageDuration: packageDuration,
+        packagePrice: packagePrice,
       }
+      updateProfileAPI(data).then((res) => {
+        if (res.status === 200) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Successfully done',
+          })
+          window.location.reload()
+        }
+      })
+      // try {
+      //   const data: IUpgradePlan = {
+      //     ...values,
+      //     email: profile?.email,
+      //     userType: userType,
+      //     userTypeFull: userTypeFull,
+      //     packageDuration: packageDuration,
+      //     packagePrice: packagePrice,
+      //   }
+      //   createUserProfileAPI(data).then((res) => {
+      //     console.log('here')
+      //     if (res.status === 200) {
+      //       Swal.fire({
+      //         icon: 'success',
+      //         title: 'Success',
+      //         text: 'Successfully done',
+      //       })
+      //       setUpgradePackage(data)
+      //     }
+      //   })
+      //   console.log(data)
+      // } catch (errors) {
+      //   Swal.fire({
+      //     icon: 'error',
+      //     title: 'Error',
+      //     text: 'Something went wrong',
+      //   })
+      //   console.log(errors)
+      // } finally {
+      //   // navigate({
+      //   //   pathname: '/dashboard',
+      //   //   search: `?userType=${userType}&userTypeFull=${userTypeFull}`,
+      //   // })
+      //   actions.resetForm()
+      //   window.location.reload()
+      // }
 
       // stepper.current.goto(1)
     }

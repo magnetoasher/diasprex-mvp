@@ -13,22 +13,12 @@ import Input, {getCountries, getCountryCallingCode} from 'react-phone-number-inp
 import en from 'react-phone-number-input/locale/en.json'
 import 'react-phone-number-input/style.css'
 import {useIsFetching, useQuery} from 'react-query'
+import {IGeoData} from '../CreateAccountWizardHelper'
 
 type Props = {
   userType?: any
 }
 
-type GeoData = {
-  address_components: {
-    long_name: string
-    short_name: string
-    types: string
-  }[]
-  formatted_address: string
-  geometry: {}
-  place_id: string
-  types: string[]
-}
 const PhoneVerification2: FC<Props> = ({userType}) => {
   const [phoneNumber, setPhoneNumber] = useState()
   const [country, setCountry] = useState()
@@ -38,8 +28,8 @@ const PhoneVerification2: FC<Props> = ({userType}) => {
   const [phoneCode, setPhoneCode] = useState('+1')
   const [selectedCountry, setSelectedCountry] = useState('united states')
   const CountriesList = userType === 'enabler' ? CountriesCodeList : SponsorCountryList
-  const [locationData, setLocationData] = useState<GeoData>()
-
+  const [locationData, setLocationData] = useState<IGeoData>()
+  const [showVerifyPhone, setShowVerifyPhone] = useState(false)
   const handleNavigator = (pos: any) => {
     const {latitude, longitude} = pos.coords
     const userCountryCode = LookupCountry({latitude, longitude})
@@ -188,6 +178,7 @@ const PhoneVerification2: FC<Props> = ({userType}) => {
         title='Please enter the 6 digit code sent to your device'
         labeltext='Enter your mobile phone number with country code'
         placeholder='Mobile number with country code...'
+        showVerifyPhone={showVerifyPhone}
       />
     </div>
   )

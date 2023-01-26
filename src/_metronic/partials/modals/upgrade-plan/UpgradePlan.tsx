@@ -18,8 +18,6 @@ const UpgradePlan: FC = ({
   setSelectedSponsor,
   setSelectedIndex,
 }: any) => {
-  console.log('userTypeFull', userTypeFull)
-
   const types = [
     {
       title: 'Monthly',

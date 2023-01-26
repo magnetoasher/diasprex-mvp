@@ -1,5 +1,5 @@
-import {lazy, FC, Suspense} from 'react'
-import {Route, Routes, Navigate} from 'react-router-dom'
+import {lazy, FC, useContext, useLayoutEffect, Suspense} from 'react'
+import {Route, Routes, Navigate, useNavigate} from 'react-router-dom'
 import {useOktaAuth} from '@okta/okta-react'
 import {MasterLayout} from '../../_metronic/layout/MasterLayout'
 import TopBarProgress from 'react-topbar-progress-indicator'
@@ -37,6 +37,7 @@ import SponsorViewOpportunity from '../modules/opportunities/SponsorViewOpportun
 import AdminVewopportunity from '../modules/apps/admin-mgt-apps/opp-management/opps-list/table/adminviewopportunity'
 import Adminviewproposal from '../modules/apps/admin-mgt-apps/proposal-management/props-list/table/adminviewproposal'
 import SponsorMyOpportunities from '../modules/opportunities/SponsorMyOpportunities'
+import {profileContext} from '../context/profile'
 
 const PrivateRoutes = () => {
   const RemittancePage = lazy(() => import('./../modules/Remittance/RemittancePage'))
@@ -51,27 +52,29 @@ const PrivateRoutes = () => {
   // const ProposalPage = lazy(
   //   () => import('../modules/apps/admin-mgt-apps/proposal-management/ProposalPage')
   // )
+  const navigate = useNavigate()
+  const {profile, loaded} = useContext(profileContext)
 
   // const RemitPage = lazy(() => import('../modules/apps/admin-mgt-apps/remittance-management/RemitPage'))
-  const {authState} = useOktaAuth()
+  const {authState, oktaAuth} = useOktaAuth()
   const userType = localStorage.getItem('userType')
+
+  // useLayoutEffect(() => {
+  //   if (authState !== null) {
+  //     if (authState.isAuthenticated) {
+  //       if (['new', 'pending', undefined].includes(profile?.status)) {
+  //         navigate({
+  //           pathname: '/error/inactiveaccount',
+  //         })
+  //         // oktaAuth.signOut()
+  //       }
+  //     }
+  //   }
+  // }, [profile, loaded, navigate])
+
   if (authState !== null) {
     if (authState.isAuthenticated) {
-      console.log('****AUTH STATE OBJECT****:', authState)
-
-      //  useLayoutEffect(() => {
-      //    if (loaded === true && profile.status === 'active') {
-      //      navigate({
-      //        pathname: '/dashboard',
-      //        search: `?userType=${profile.usertype}&userTypeFull=${profile.accountType}`,
-      //      })
-      //    } else if (['new', 'pending'].includes(profile?.status)) {
-      //      navigate({
-      //        pathname: '/error/inactiveaccount',
-      //      })
-      //      oktaAuth.signOut()
-      //    }
-      //  }, [profile, loaded, navigate])
+      // console.log('****AUTH STATE OBJECT****:', authState)
 
       return (
         <Routes>

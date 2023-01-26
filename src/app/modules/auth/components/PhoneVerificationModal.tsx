@@ -5,6 +5,15 @@ import {isError} from 'react-query'
 import * as Yup from 'yup'
 import {KTSVG} from '../../../../_metronic/helpers'
 import {Modal} from 'react-bootstrap'
+import {useDispatch, useSelector} from 'react-redux'
+import {
+  countryCodeSet,
+  phoneNumberSet,
+  verifiedSet,
+} from '../../profile/redux/PhoneVerificationSlice'
+import {IPhoneVerification} from '../registration/components/CreateAccountWizardHelper'
+import {CountryCodeList} from '../../../../_metronic/partials/content/selectionlists'
+
 type Props = {
   id: string
   headertext: string
@@ -13,6 +22,8 @@ type Props = {
   placeholder: string
   showVerifyPhone: boolean
   setShowVerifyPhone: any
+  phoneCode: string
+  phoneNumber: string
 }
 
 const inits = {
@@ -30,8 +41,13 @@ export const PhoneVerificationModal: FC<Props> = ({
   placeholder,
   showVerifyPhone,
   setShowVerifyPhone,
+  phoneCode,
+  phoneNumber,
 }) => {
   const handleClose = () => setShowVerifyPhone(false)
+  const handleShowTimer = () => {}
+  const [isPhoneConfirmed, setIsPhoneConfirmed] = useState(false)
+  // const phoneVerificationData: IPhoneVerification = useSelector((state) => state.phoneverification)
 
   const formik = useFormik({
     initialValues: inits,
@@ -39,16 +55,9 @@ export const PhoneVerificationModal: FC<Props> = ({
     validationSchema: phoneValidationSchema,
 
     onSubmit: async (values, {setSubmitting}) => {
-      // setSubmitting(true)
-      const errors = {token: ''}
-      if (values.smscode.length < 5) {
-        errors.token = 'Invalid code. Too short.'
-      } else {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2))
-          setSubmitting(false)
-        }, 1000)
-      }
+      setSubmitting(true)
+
+      setIsPhoneConfirmed(true)
     },
   })
 
@@ -66,8 +75,16 @@ export const PhoneVerificationModal: FC<Props> = ({
     return null
   }
   // console.log('ShowModal', showVerifyPhone)
+
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(phoneNumberSet(phoneNumber))
+    dispatch(countryCodeSet(phoneCode))
+    dispatch(verifiedSet(isPhoneConfirmed))
+  }, [phoneCode, phoneNumber, isPhoneConfirmed])
+
   return (
-    <Modal show={showVerifyPhone} onHide={handleClose}>
+    <Modal show={showVerifyPhone} onHide={handleClose} onShow={handleShowTimer} id={id}>
       {/* <div className='modal fade' id={id} tabIndex={-1} aria-hidden='true'> */}
       <Modal.Header>
         <Modal.Title>{headertext}</Modal.Title>
