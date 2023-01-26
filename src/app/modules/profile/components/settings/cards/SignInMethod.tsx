@@ -1,20 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, {useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import {KTSVG} from '../../../../../../_metronic/helpers'
 import * as Yup from 'yup'
 import {useFormik} from 'formik'
 import {IUpdatePassword, IUpdateEmail, updatePassword, updateEmail} from '../SettingsModel'
+import {profileContext} from '../../../../../context/profile'
+import {updateEmailPasswordAPI} from '../../../redux/ProfileAPI'
+import Swal from 'sweetalert2'
 
 const emailFormValidationSchema = Yup.object().shape({
-  newEmail: Yup.string()
+  email: Yup.string()
     .email('Wrong email format')
     .min(3, 'Minimum 3 symbols')
     .max(50, 'Maximum 50 symbols')
     .required('Email is required'),
-  confirmPassword: Yup.string()
-    .min(3, 'Minimum 3 symbols')
-    .max(50, 'Maximum 50 symbols')
-    .required('Password is required'),
+  // confirmPassword: Yup.string()
+  //   .min(3, 'Minimum 3 symbols')
+  //   .max(50, 'Maximum 50 symbols')
+  //   .required('Password is required'),
 })
 
 const passwordFormValidationSchema = Yup.object().shape({
@@ -34,6 +37,7 @@ const passwordFormValidationSchema = Yup.object().shape({
 })
 
 const SignInMethod: React.FC = () => {
+  const {profile} = useContext(profileContext)
   const [emailUpdateData, setEmailUpdateData] = useState<IUpdateEmail>(updateEmail)
   const [passwordUpdateData, setPasswordUpdateData] = useState<IUpdatePassword>(updatePassword)
 
@@ -42,6 +46,12 @@ const SignInMethod: React.FC = () => {
 
   const [loading1, setLoading1] = useState(false)
 
+  useEffect(() => {
+    if (profile) {
+      formik1.setValues({email: profile.email})
+    }
+  }, [profile])
+
   const formik1 = useFormik<IUpdateEmail>({
     initialValues: {
       ...emailUpdateData,
@@ -49,11 +59,25 @@ const SignInMethod: React.FC = () => {
     validationSchema: emailFormValidationSchema,
     onSubmit: (values) => {
       setLoading1(true)
-      setTimeout((values) => {
-        setEmailUpdateData(values)
-        setLoading1(false)
-        setShowEmailForm(false)
-      }, 1000)
+      updateEmailPasswordAPI({
+        id: profile?.id,
+        email: values.email,
+      }).then((res) => {
+        if (res.status === 200) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Successfully done',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.reload()
+            }
+          })
+          setEmailUpdateData(values)
+          setLoading1(false)
+          setShowEmailForm(false)
+        }
+      })
     },
   })
 
@@ -64,13 +88,33 @@ const SignInMethod: React.FC = () => {
       ...passwordUpdateData,
     },
     validationSchema: passwordFormValidationSchema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       setLoading2(true)
-      setTimeout((values) => {
-        setPasswordUpdateData(values)
+      try {
+        const result = await updateEmailPasswordAPI({
+          id: profile?.id,
+          oldPassword: values.currentPassword,
+          newPassword: values.newPassword,
+        })
+        if (result.status === 200) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Successfully done',
+          })
+          setPasswordUpdateData(values)
+          setLoading2(false)
+          setShowEmailForm(false)
+        }
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Something went wrong!',
+        })
         setLoading2(false)
-        setPasswordForm(false)
-      }, 1000)
+        setShowEmailForm(false)
+      }
     },
   })
 
@@ -92,7 +136,7 @@ const SignInMethod: React.FC = () => {
           <div className='d-flex flex-wrap align-items-center'>
             <div id='kt_signin_email' className={' ' + (showEmailForm && 'd-none')}>
               <div className='fs-6 fw-bolder mb-1'>Email Address</div>
-              <div className='fw-bold text-gray-600'>support@keenthemes.com</div>
+              <div className='fw-bold text-gray-600'>{profile?.email}</div>
             </div>
 
             <div
@@ -116,11 +160,11 @@ const SignInMethod: React.FC = () => {
                         className='form-control form-control-lg form-control-solid'
                         id='emailaddress'
                         placeholder='Email Address'
-                        {...formik1.getFieldProps('newEmail')}
+                        {...formik1.getFieldProps('email')}
                       />
-                      {formik1.touched.newEmail && formik1.errors.newEmail && (
+                      {formik1.touched.email && formik1.errors.email && (
                         <div className='fv-plugins-message-container'>
-                          <div className='fv-help-block'>{formik1.errors.newEmail}</div>
+                          <div className='fv-help-block'>{formik1.errors.email}</div>
                         </div>
                       )}
                     </div>
