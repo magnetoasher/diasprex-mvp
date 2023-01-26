@@ -17,8 +17,8 @@ export const rootReducer = combineReducers({
   proposals: proposals.reducer,
   diasporas: diasporaReducer,
   profiledata: profiledataReducer,
-  subscriptionpackage: subscriptionpackageReducer,
   phoneverification: phoneverificationReducer,
+  subscriptionpackage: subscriptionpackageReducer,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

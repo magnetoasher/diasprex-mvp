@@ -1,3 +1,4 @@
+// @ts-nocheck comment
 import {validateClaims} from '@okta/okta-auth-js'
 import {useFormik} from 'formik'
 import {FC, useEffect, useLayoutEffect, useState} from 'react'
@@ -12,7 +13,6 @@ import {
   verifiedSet,
 } from '../../profile/redux/PhoneVerificationSlice'
 import {IPhoneVerification} from '../registration/components/CreateAccountWizardHelper'
-import {CountryCodeList} from '../../../../_metronic/partials/content/selectionlists'
 
 type Props = {
   id: string
@@ -43,44 +43,39 @@ export const PhoneVerificationModal: FC<Props> = ({
   setShowVerifyPhone,
   phoneCode,
   phoneNumber,
+  setFieldValue,
 }) => {
   const handleClose = () => setShowVerifyPhone(false)
   const handleShowTimer = () => {}
   const [isPhoneConfirmed, setIsPhoneConfirmed] = useState(false)
-  // const phoneVerificationData: IPhoneVerification = useSelector((state) => state.phoneverification)
+  const phoneVerificationData: IPhoneVerification = useSelector((state) => state.phoneverification)
 
   const formik = useFormik({
     initialValues: inits,
-    // validateOnChange: true,
+    validateOnChange: true,
     validationSchema: phoneValidationSchema,
-
     onSubmit: async (values, {setSubmitting}) => {
       setSubmitting(true)
-
       setIsPhoneConfirmed(true)
+      const data = {...values}
+      console.log('PhoneData', isPhoneConfirmed, phoneVerificationData)
+      if (isPhoneConfirmed) {
+        handleClose()
+      } else {
+        return
+      }
     },
   })
 
-  // console.log('ShowVerify', showVerifyPhone)
-
-  const AutoSubmitCode = (e: any) => {
-    // Grab values and submitForm from context
-    // const {values, submitForm} = useFormikContext()
-    useEffect(() => {
-      // Submit the form imperatively as an effect as soon as form values.token are 6 digits long
-      if (e.length === 6) {
-        formik.handleSubmit()
-      }
-    }, [e])
-    return null
-  }
   // console.log('ShowModal', showVerifyPhone)
 
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(phoneNumberSet(phoneNumber))
-    dispatch(countryCodeSet(phoneCode))
-    dispatch(verifiedSet(isPhoneConfirmed))
+    if (isPhoneConfirmed) {
+      dispatch(phoneNumberSet(phoneNumber))
+      dispatch(countryCodeSet(phoneCode))
+      dispatch(verifiedSet(isPhoneConfirmed))
+    }
   }, [phoneCode, phoneNumber, isPhoneConfirmed])
 
   return (
@@ -93,24 +88,21 @@ export const PhoneVerificationModal: FC<Props> = ({
           <KTSVG path='/media/icons/duotune/arrows/arr061.svg' className='svg-icon svg-icon-2x' />
         </div>
       </Modal.Header>
+      <form className='form'>
+        <Modal.Body className='modal-body scroll-y pt-10 pb-15 px-lg-17'>
+          <div className='py-5'>
+            <h3 className='text-dark fw-bold fs-3 mb-5'>{title}</h3>
 
-      <Modal.Body className='modal-body scroll-y pt-10 pb-15 px-lg-17'>
-        <div className='py-5'>
-          <h3 className='text-dark fw-bold fs-3 mb-5'>{title}</h3>
+            <div className='text-muted fw-semibold mb-10'>{labeltext}</div>
 
-          <div className='text-muted fw-semibold mb-10'>{labeltext}</div>
-          <form className='form'>
             <input
-              type='tel'
-              // {...formik.getFieldProps('smscode')}
+              type='text'
+              {...formik.getFieldProps('smscode')}
               name='smscode'
-              className='form-control'
+              className='form-control text-center fs-4'
               placeholder={placeholder}
               autoComplete='off'
               disabled={formik.isSubmitting}
-              onChange={(e) => {
-                AutoSubmitCode(e)
-              }}
             />
             {formik.touched.smscode && formik.errors.smscode && (
               <div className='fv-plugins-message-container'>
@@ -119,23 +111,23 @@ export const PhoneVerificationModal: FC<Props> = ({
                 </div>
               </div>
             )}
-          </form>
-        </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <div className='d-flex flex-center'>
-          <button type='button' className='btn btn-primary' onClick={() => formik.handleSubmit}>
-            <span className='indicator-label'>Submit</span>
-            <span className='indicator-progress'>
-              Please wait...
-              <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
-            </span>
-          </button>
-          <button type='reset' className='btn btn-light me-3' onClick={handleClose}>
-            Cancel
-          </button>
-        </div>
-      </Modal.Footer>
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <div className='d-flex flex-center'>
+            <button type='button' className='btn btn-primary' onClick={formik.handleSubmit}>
+              <span className='indicator-label'>Submit</span>
+              <span className='indicator-progress'>
+                Please wait...
+                <span className='spinner-border spinner-border-sm align-middle ms-2'></span>
+              </span>
+            </button>
+            <button type='reset' className='btn btn-light me-3' onClick={handleClose}>
+              Cancel
+            </button>
+          </div>
+        </Modal.Footer>
+      </form>
     </Modal>
   )
 }

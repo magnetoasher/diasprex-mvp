@@ -247,6 +247,7 @@ const ProfileDetails: React.FC<any> = (isLoading) => {
                   <div className='col-lg-8 fv-row'>
                     <input
                       type='text'
+                      disabled={true}
                       className='form-control form-control-lg form-control'
                       placeholder='Email address'
                       {...formik.getFieldProps('email')}
@@ -288,16 +289,17 @@ const ProfileDetails: React.FC<any> = (isLoading) => {
                   <div className='col-lg-8 fv-row'>
                     <input
                       type='tel'
+                      disabled={true}
                       className='form-control form-control-lg form-control'
                       placeholder='Mobile phone number'
                       {...formik.getFieldProps('mobilephone')}
                       name='mobilephone'
                     />
-                    {formik.touched.mobilephone && formik.errors.mobilephone && (
+                    {/* {formik.touched.mobilephone && formik.errors.mobilephone && (
                       <div className='fv-plugins-message-container'>
                         <div className='fv-help-block'>{formik.errors.mobilephone}</div>
                       </div>
-                    )}
+                    )} */}
                   </div>
                 </div>
 
@@ -330,6 +332,7 @@ const ProfileDetails: React.FC<any> = (isLoading) => {
 
                       <div className='col-lg-8 fv-row'>
                         <select
+                          disabled={true}
                           className='form-select form-select form-select-lg fw-bold'
                           {...formik.getFieldProps('countryres')}
                           name='countryres'
